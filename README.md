@@ -1,5 +1,7 @@
 # tlmbht
-Transmission-line Modeling Method applied to BioHeat Transfer Problems
+Transmission-line Modeling Method applied to BioHeat Transfer Problems. Version 0.1
+
+Acknowledgment: Brazilian National Counsel of Technological and Scientific Development (Proc. 203312/2014-7) for scholarship to HFMM
 
 This is scientific code used to solve the bioheat equation (BHE; Pennes, 1948) in 2D and 3D problems. The solver is the TLM method and more information is provided below. The language is MATLAB and it does not have graphical interface (yet).
 
