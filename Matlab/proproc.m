@@ -4,7 +4,9 @@ function [M, E, TM, TE, Vi0, positions, ...
     dt, mediumtags, ro, cp, k, Ti, wb, pb, cb, Tb, ... % problem's information
     Qmet, boundarytags, boundarytype, boundaryvalues) % problem's information
 % This file is part of TLMBHT. See details of this function below.
-% Copyright (C) 2016 Hugo Fernando Maia Milan
+% Version 0.1. Copyright © 2015 to 2016 by Cornell University.
+% Written by Hugo Fernando Maia Milan (hugofernando@gmail.com).
+% All Rights Reserved. Refer to the license file for details.
 %
 % Acknowledgment: Brazilian National Counsel of Technological and Scientific
 % Development (Proc. 203312/2014-7) for scholarship to HFMM
