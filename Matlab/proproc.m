@@ -5,7 +5,7 @@ function [M, E, TM, TE, Vi0, positions, ...
     Qmet, boundarytags, boundarytype, boundaryvalues) % problem's information
 % This file is part of TLMBHT. See details of this function below.
 % Version 0.1. Copyright © 2015 to 2016 by Cornell University.
-% Written by Hugo Fernando Maia Milan (hugofernando@gmail.com).
+% Written by Hugo Fernando Maia Milan.
 % All Rights Reserved. Refer to the license file for details.
 %
 % Acknowledgment: Brazilian National Counsel of Technological and Scientific
