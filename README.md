@@ -1,7 +1,7 @@
 # tlmbht
 Transmission-line Modeling Method applied to BioHeat Transfer Problems. Version 0.1
 
-Acknowledgment: Brazilian National Counsel of Technological and Scientific Development (Proc. 203312/2014-7) for scholarship to HFMM
+
 
 This is scientific code used to solve the bioheat equation (BHE; Pennes, 1948) in 2D and 3D problems. The solver is the TLM method and more information is provided below. The language is MATLAB and it does not have graphical interface (yet).
 
@@ -11,6 +11,10 @@ I started developing the TLMBHT in Matlab but I intend to code it in another lan
 
 Please, fell free to use the software for educational and research purposes. You can modify it and your modifications can be (if you want to) included into this project. The limitation is that it cannot be used for profitable purposes (due to Cornell License constrains; please, read the license for more information).
 
+<b>Acknowledgment</b>
+
+Brazilian National Counsel of Technological and Scientific Development (Proc. 203312/2014-7) for scholarship to HFMM
+
 <b>References</b>
 
 Pennes HH. Analysis of tissue and arterial blood temperature in the resting human forearm. J. Appl. Phys. 1:93-122, 1948.
@@ -18,3 +22,5 @@ Pennes HH. Analysis of tissue and arterial blood temperature in the resting huma
 Milan HFM, Gebremedhin KG. Triangular node for transmission-line modeling (TLM) applied to bioheat transfer. Submitted to J Therm Biol, 2016a.
 
 Milan HFM, Gebremedhin KG. Tetrahedral node for transmission-line modeling (TLM) applied to bioheat transfer. Submitted to J Therm Biol, 2016b.
+
+
