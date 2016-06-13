@@ -14,9 +14,9 @@ Maia ASC, Milan HFM, Gebremedhin KG. Analytical and numerical modeling of skin s
 
 Milan, H.F.M., Carvalho Jr., C.A.T., Maia, A.S.C., Gebremedhin, K.G., 2014. Graded meshes in bio-thermal problems with transmission-line modeling method. J. Therm. Biol. 45,43-53.
 
-Milan, H.F.M., Gebremedhin, K.G., 2016a. Triangular node for transmission-line modeling (TLM) applied to bio-heat transfer. J. Therm. Biol..
+Milan, H.F.M., Gebremedhin, K.G., 2016a. Triangular node for transmission-line modeling (TLM) applied to bio-heat transfer. Submitted to J Therm Biol.
 
-Milan, H.F.M., Gebremedhin, K.G., 2016a. Tetrahedral node for transmission-line modeling (TLM) applied to bioheat transfer. Submitted to J Therm Biol, 2016b.
+Milan, H.F.M., Gebremedhin, K.G., 2016b. Tetrahedral node for transmission-line modeling (TLM) applied to bioheat transfer. Submitted to J Therm Biol.
 
 Minkowycz, W.J., Sparrow, E.M. (Eds.), 2009. Advances in Numerical Heat Transfer. volume 3. CRC Press.
 
