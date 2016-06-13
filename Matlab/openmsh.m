@@ -1,7 +1,9 @@
 function [errormsg, nN, vertexmat, ntags, nEm1, ...
     nEm2, nEm3, nEm4, nEm5, nEm6, nEm7, nEm15] = openmsh()
 % This file is part of TLMBHT. See details of this function below.
-% Copyright (C) 2016 Hugo Fernando Maia Milan
+% Version 0.1. Copyright © 2015 to 2016 by Cornell University.
+% Written by Hugo Fernando Maia Milan (hugofernando@gmail.com).
+% All Rights Reserved.
 %
 % Acknowledgment: Brazilian National Counsel of Technological and Scientific
 % Development (Proc. 203312/2014-7) for scholarship to HFMM
