@@ -6,6 +6,8 @@ This folder contains:
 
 &bull; D2_BHE_f.m - Solve the 2D analytical problem showed in (Milan and Gebremedhin, 2016a).
 
+&bull; D3_BHE_f.m - Solve the 3D analytical problem showed in (Milan and Gebremedhin, 2016b).
+
 &bull; plate_4BC.geo - contains the geometry code for creating the meshes using Gmsh. The 2D mesh created using Gmsh were refined and optimized.
   
 &bull; plate_4BC_40e.msh - mesh1 file from Gmsh.
@@ -29,11 +31,4 @@ Files for solving the mesh using the triangular node:
         and convert the data in format suitable to TLMBHT
     proproc.m - calculate the matrix for the TLM matrix equation
 
-<b>Acknowledgment</b>
-
-Brazilian National Counsel of Technological and Scientific Development (Proc. 203312/2014-7) for scholarship to HFMM
-
-<b>References</b>
-Milan HFM, Gebremedhin KG. Triangular node for transmission-line modeling (TLM) applied to bioheat transfer. Submitted to J Therm Biol, 2016a.
-
-Milan HFM, Gebremedhin KG. Tetrahedral node for transmission-line modeling (TLM) applied to bioheat transfer. Submitted to J Therm Biol, 2016b.
+<b>References and Acknoledgements:</b> Please, refer to these files in the root.
