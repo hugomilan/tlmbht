@@ -11,11 +11,15 @@ tic
 
 
 %% input variables
-nameToOpen = 'plate_6BC_24e.tms.mat';
-% nameToOpen = 'plate_6BC_206e.tms.mat';
-% nameToOpen = 'plate_6BC_1368e.tms.mat';
-% nameToOpen = 'plate_6BC_9618e.tms.mat';
-% nameToOpen = 'plate_6BC_69941e.tms.mat';
+%nameToOpen: Opens the selected stored file. See variables loadNow and readNow.
+% nameToOpen = 'plate_4BC_40e.tms.mat'; % 2D
+% nameToOpen = 'plate_4BC_682e.tms.mat'; % 2D
+% nameToOpen = 'plate_4BC_10766e.tms.mat'; % 2D
+nameToOpen = 'plate_6BC_24e.tms.mat'; % 3D
+% nameToOpen = 'plate_6BC_206e.tms.mat'; % 3D
+% nameToOpen = 'plate_6BC_1368e.tms.mat'; % 3D
+% nameToOpen = 'plate_6BC_9618e.tms.mat'; % 3D
+% nameToOpen = 'plate_6BC_69941e.tms.mat'; % 3D
 
 % 1: will load into the workspace the data contained in the nameToOpen
 % otherwise: do nothing
