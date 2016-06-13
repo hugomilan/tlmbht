@@ -1,7 +1,7 @@
 % This file is part of TLMBHT. See details of this function below.
 % Version 0.1. Copyright © 2015 to 2016 by Cornell University.
 % Written by Hugo Fernando Maia Milan (hugofernando@gmail.com).
-% All Rights Reserved.
+% All Rights Reserved. Refer to the license file for details.
 %
 % Acknowledgment: Brazilian National Counsel of Technological and Scientific
 % Development (Proc. 203312/2014-7) for scholarship to HFMM
