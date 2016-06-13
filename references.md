@@ -1,5 +1,3 @@
-This file contains the references cited throught this algorithm and also useful ones.
-
 <b>References</b>
 
 da Silva, R.G., Maia, A.S.C., 2013. Principles of Animal Biometeorology. Springer.
