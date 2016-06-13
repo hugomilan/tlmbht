@@ -5,7 +5,7 @@ function [T, qx, qy, qz, phi_a, qy_phi_a, YTau, qy_YTau, ...
     qmet, minf, ninf, pinf, flagMorV)
 % This file is part of TLMBHT. See details of this function below.
 % Version 0.1. Copyright © 2015 to 2016 by Cornell University.
-% Written by Hugo Fernando Maia Milan (hugofernando@gmail.com).
+% Written by Hugo Fernando Maia Milan.
 % All Rights Reserved. Refer to the license file for details.
 %
 % Acknowledgment: Brazilian National Counsel of Technological and Scientific
