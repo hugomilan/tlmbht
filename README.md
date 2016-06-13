@@ -10,6 +10,6 @@ I hope you will find it useful for learning/use the Transmission-line Modeling (
 
 I started developing the TLMBHT in Matlab but I intend to code it in another language. Accompaning the code, follows a code for solving the BHE in 2D and 3D analyticaly for simplified geometries. The geometries are rectangular and cubic. I will discuss them after the papers get published (e-mail me if you need them though).
 
-Please, fell free to use the software for educational and research purposes. You can modify it and your modifications can be (if you want to) included into this project. The limitation is that it cannot be used for profitable purposes (due to Cornell License constrains; please, read the license file for more information).
+Please, fell free to use the software for educational, research and non-profit purposes. You can modify it and your modifications can be (if you want to) included into this project. For profitable purpose, please contact the Center for Technology Licensing at Cornell University (see the LICENSE file for more information).
 
 <b>References and Acknoledgements:</b> Please, refer to these files in the root.
