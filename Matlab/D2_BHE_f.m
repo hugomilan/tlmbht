@@ -3,17 +3,16 @@ function [T, qx, qy, phi_a, qy_phi_a, YTau, qy_YTau, ...
     D2_BHE_f(x, y, L, H, time, qflux, Ts, Tc, k, p, cp, wb, pb, cb, Ta, ...
     qmet, minf, ninf, flagMorV)
 % This file is part of TLMBHT. See details of this function below.
-% Copyright (C) 2016 Hugo Fernando Maia Milan
+% Version 0.1. Copyright © 2015 to 2016 by Cornell University.
+% Written by Hugo Fernando Maia Milan (hugofernando@gmail.com).
+% All Rights Reserved.
 %
 % Acknowledgment: Brazilian National Counsel of Technological and Scientific
 % Development (Proc. 203312/2014-7) for scholarship to HFMM
 %
 %
 %
-% This function solves the analytical problem presented in our paper:
-% Milan HFM, Gebremedhin KG. Transmission-line modeling (TLM) triangular
-% node for bioheat transfer, 2016. The correct reference will be added here
-% when the paper is published.
+% This function solves the analytical problem presented in (Milan and Gebremedhin, 2016a)
 % 
 % The inputs to this function are:
 % x (vector with the positions in x to get outputs, m). Vector column.
