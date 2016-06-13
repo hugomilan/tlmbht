@@ -1,6 +1,6 @@
 # tlmbht
 Transmission-line Modeling Method applied to BioHeat Transfer Problems. Version 0.1.
-Copyright © 2015 to 2016 by Cornell University. Written by Hugo Fernando Maia Milan (hugofernando@gmail.com). All Rights Reserved.
+Copyright © 2015 to 2016 by Cornell University. Written by Hugo Fernando Maia Milan. All Rights Reserved.
 
 
 
