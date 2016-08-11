@@ -173,11 +173,11 @@ if SteadyState ~= 1
         %         is developed
         %
         %         hold on
-%         pause(0.01)
+         pause(0.01)
         %
         %         temperature
-        %         plot(positions(:,1),T,'*')
-%         plot(positions(:,2),T,'*')
+%                 plot(positions(:,1),T,'*')
+         plot(positions(:,2),T,'*')
         %         plot(positions(:,3),T,'*')
         %
         %         heat flux
@@ -193,20 +193,20 @@ if SteadyState ~= 1
         
         %        These are commands used in the TLM validation. Only uncomment them
         %        if you want to repeat the validation
-        [Ttemp, qxAnatemp, qyAnatemp, qzAnatemp] = D3_BHE_f(positions(:,1),  ...
-            positions(:,2), positions(:,3), 1e-3, 0.75e-3, 0.5e-3, kt*dt*intervalForCalculationTempAndHeat, ...
-            qfluxX, qfluxZ, Ts, Tc, k, ro, cp, wb, pb, cb, Tb, Qmet, 50, 50, 50, 2);
-        
-        qLTAna = qxAnatemp((end - size(qLT,1) + 1):end).*projec(:,1) + ...
-            qyAnatemp((end - size(qLT,1) + 1):end).*projec(:,2) + ...
-            qzAnatemp((end - size(qLT,1) + 1):end).*projec(:,3);
+%        [Ttemp, qxAnatemp, qyAnatemp, qzAnatemp] = D3_BHE_f(positions(:,1),  ...
+%            positions(:,2), positions(:,3), 1e-3, 0.75e-3, 0.5e-3, kt*dt*intervalForCalculationTempAndHeat, ...
+%            qfluxX, qfluxZ, Ts, Tc, k, ro, cp, wb, pb, cb, Tb, Qmet, 50, 50, 50, 2);
+%        
+%        qLTAna = qxAnatemp((end - size(qLT,1) + 1):end).*projec(:,1) + ...
+%            qyAnatemp((end - size(qLT,1) + 1):end).*projec(:,2) + ...
+%            qzAnatemp((end - size(qLT,1) + 1):end).*projec(:,3);
         
         %
 %         hold on
         
         %         plot(positions(:,1),Ttemp,'*')
         %         plot(positions(:,1),(T - Ttemp)./Ttemp*100,'*')
-        errorTLM(1,kt) = mean(abs(T - Ttemp)./Ttemp*100);
+%        errorTLM(1,kt) = mean(abs(T - Ttemp)./Ttemp*100);
 %         errorTLM(1,kt)
 %         plot(positions(:,2),Ttemp,'*')
         %         plot(positions(:,3),Ttemp,'*')
@@ -215,13 +215,13 @@ if SteadyState ~= 1
         %         plot(positions((end - size(qLT,1) + 1):end,1),(qLT - qLTAna),'*')
         %         plot(positions((end - size(qLT,1) + 1):end,2),qLTAna,'*')
         %         plot(positions((end - size(qLT,1) + 1):end,3),qLTAna,'*')
-        errorTLM(2,kt) =  mean(abs(qLT - qLTAna));
+%        errorTLM(2,kt) =  mean(abs(qLT - qLTAna));
 %         errorTLM(2,kt)
         
 %         hold off
         
         disp(['Time: ', num2str(kt*dt*intervalForCalculationTempAndHeat), ' s; Mesh: ' nameToOpen '. dt = ' num2str(dt) ' s.'])
-        
+        fflush(stdout);
         %         pause
         
         
