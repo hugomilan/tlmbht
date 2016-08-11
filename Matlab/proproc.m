@@ -583,11 +583,13 @@ for varE2 = 0:(size(nEm2,1)-1)
     end
     
     % verifying if this element is boundary
+    if medium ~= 1
     for tagsfor = 1:size(boundarytags,2)
         if tag_phy == boundarytags(tagsfor)
             medium = 0;
             break
         end
+    end
     end
     % The element is a medium.
     if medium == 1
@@ -991,7 +993,7 @@ for varnE1 = 0:(size(nEm1,1)-1)
                 
                 
                 % Is there any intersection point allocated here?
-                IPt = IPm(vertext1, vertext2, 1); % intersection point being tested
+                IPt = IPm(vertext1, vertext2); % intersection point being tested
                 if IPt ~= 0 % yes
                     IPnPorts(IPt,3:5) = [BCtype, BCv1, BCv2];
                     % BCtype: tells what boundary type it is
@@ -999,7 +1001,7 @@ for varnE1 = 0:(size(nEm1,1)-1)
                     % BCv2: gives the second pertinent value for this BCtype
                     
                 else
-                    IPm(vertext1, vertext2, 1) = IP; % call this the number of the variable IP
+                    IPm(vertext1, vertext2) = IP; % call this the number of the variable IP
                     IPnPorts(IP,3:5) = [BCtype, BCv1, BCv2];
                     
                     IP = IP + 1; % increase the intersection point by 1
@@ -1186,4 +1188,3 @@ end
 % making the matrixes sparse
 qLTM = sparse(qLTM);
 qLTE = sparse(qLTE);
-end
