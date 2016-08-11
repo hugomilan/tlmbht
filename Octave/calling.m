@@ -12,10 +12,10 @@ tic
 
 %% input variables
 % nameToOpen: Opens the selected stored file. See variables loadNow and readNow.
- nameToOpen = 'plate_4BC_40e.tms.msh'; % 2D
+% nameToOpen = 'plate_4BC_40e.tms.msh'; % 2D
 % nameToOpen = 'plate_4BC_40e.tms.mat'; % 2D
-% nameToOpen = 'plate_4BC_682e.tms.mat'; % 2D
-% nameToOpen = 'plate_4BC_10766e.tms.mat'; % 2D
+ nameToOpen = 'plate_4BC_682e.tms.mat'; % 2D
+%nameToOpen = 'plate_4BC_10766e.tms.mat'; % 2D
 % nameToOpen = 'plate_6BC_206e.tms.mat'; % 3D
 % nameToOpen = 'plate_6BC_1368e.tms.mat'; % 3D
 % nameToOpen = 'plate_6BC_69941e.tms.mat'; % 3D
@@ -46,7 +46,7 @@ dt = 0.01; % time-step (s)
 % the final time for the simulation (s)
 tend = 4; % final time for the simulation
 
-SolveSteadyStateAfter = 1; % will solve for steady state after it has solved
+SolveSteadyStateAfter = 0; % will solve for steady state after it has solved
 % for the time-domain problem
 
 
