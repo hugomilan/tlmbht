@@ -4,7 +4,7 @@ Copyright © 2015 to 2016 by Cornell University. Written by Hugo Fernando Maia M
 
 
 
-This is scientific code used to solve the bioheat equation (BHE; Pennes, 1948; Minkowycz and Sparrow, 2009; Xu et al., 2011) in 2D and 3D problems. The solver is the TLM method and more information is provided below. The language is MATLAB (or Octave) and it does not have graphical interface (yet).
+This is an Open-Source scientific code used to solve the bioheat equation (BHE; Pennes, 1948; Minkowycz and Sparrow, 2009; Xu et al., 2011) in 2D and 3D problems. The solver is the TLM method and more information is provided below. The language is MATLAB (or Octave) and it does not have graphical interface (yet).
 
 I hope you will find it useful for learning/use the Transmission-line Modeling (TLM) method applied to solve the Bioheat transfer problems. The code developed herein is based in two new nodes that I recently developed for solving the bioheat equation. The nodes are triangular for 2-D problems (Milan and Gebremedhin, 2016a) and tetrahedron for 3-D problems (Milan and Gebremedhin, 2016b). I will provide some theory when the papers get published.
 
