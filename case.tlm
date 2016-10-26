@@ -1,0 +1,407 @@
+// This is going to be my standard for input files
+// future implementations: time changes of the parameters. Change of the parameters
+// accordingly to values of other variables (e.g. temperature). Time for turn on/off
+// certain sources/boundaries.
+// use only "//" for comments. The "/**/" is not allowed.
+
+
+// Simulation and Mesh can appear just once. The others can be repeated.
+// the standard is:
+// Configuration //Simulation, Mesh, Material, Boundary, or Source (case insensitive)
+// {
+//      commands here...
+// }
+
+// Here I show the SI units. You can use others if you like but you must be consistent with
+// the main equations. The algorithm will not check it for you.
+
+Simulation  //This will enclose the standard for the simulations
+{
+
+    library = eigen;// not required. This will set up the library to be used in the
+    // calculations. The options are:
+    // fool: fool implementation designed for debug (default)
+    // eigen: uses the eigen library
+    // cuda: uses the cuda library. Future implementation
+
+    // benchmark = run; // not required. Options:
+    // dont: do not run benchmark (default)
+    // run: run the most complete benchmark and exit. 
+    // run and solve: run the most complete benchmark and solve the problem (not recommended). Future implementation
+    // run fast: run a simplified benchmark. Future implementation
+    // run fast and solve: run a simplified benchmark and solve the problem. Future implementation
+
+    OpenMP cores = max; // Set the number of cores to use in parts of the code
+    // parallelized using OpenMP. If not set, will use the 
+    // number of cores available by the system at run time. 
+    // Options:
+    // max: use the maximum number of cores available.
+    // 1: use one core
+    // 2: use two cores
+    // ...
+    // n: use n cores
+
+    type = pennes; // required. pennes = bioheat transfer (Pennes' equation); heat = heat transfer
+// em = electromagnetism; cfd = computational fluid dynamics
+
+    dimensions = 3; // required. 1 = one-dimensional problem. 2 = two-dimensional problem.
+// 3 = three-dimensional problem
+
+    method = tlm; // required. tlm = transmission-line modeling;
+// fdtd = finite difference time-domain; fem = finite element method;
+// ana = analytical solution (for specific types of problems).
+
+    adjust method = node1; // special variable for adjustment for specific methods. Future implementation
+
+    Solve = dynamic;// required. steady = steady state solution; dynamic = dynamic simulation
+
+    time-step = 1e-3; // (s) time-step in seconds. Required if solve = dynamic
+
+    time-jump = 1000;// not required. Must be an integer greater than zero. If greater
+// than 1, the algorithm will group the amount of time-steps and solve them at once.
+// For example, if time-jump = 11 and time-step = 0.01 s, the matrix equations for time evolution will be grouped
+// to represent 11*0.01 (time-jump*time-step) = 0.11 s. This is, internally each time-step
+// is solved for 0.01 s but the output will only be available for each 0.11 s. This
+// has the possibility to speed up the calculation in case the output of some time-steps
+// are not necessary.
+
+    final time = 4; // (s) end time for simulation in seconds. Required if solve = dynamic
+
+    save = temperature; // indicates what to save. This field can be repeated to include
+// other options.
+//
+// For Pennes and TLM, the options are:
+// 
+//      temperature: save the temperature at the center of the node.
+//
+//      temperature between: save the temperature between nodes.
+//
+//      heat flux: save the calculated heat flux at the direction perpendicular
+// to the element's boundary.
+
+    save = temperature between;
+    save = heat flux;
+
+    Absolute zero = - 273.15; // (oC) not required. Only use it if you want to change
+// the relationship between Kelvin and Celcius. Celcius = Kelvin - 273.15 (Absolute zero)
+
+    Stefan-Boltzmann constant = 5.6704e-8; // (W/(K4-m2)) not required. Only use it
+// if you want to change the value of the Stefan-Boltzmann constant
+
+    print additional = true; // not required. When true, will print additional information while processing.
+// when false, will only print essential information. If it is not defined, will take the value false.
+
+    // FUTURE IMPLEMENTATION.
+    // UNDER THE FOLLOWING VARIABLES
+    //  char *nameOfInputCaseFile;
+    //  char *nameOfOutputFile;
+
+    // output name = --case; // name of the output file.
+    // --mesh: the same name as the name of the mesh input.
+    // --case: the same name as the name of the case input file. (default)
+
+    // output extension = m; // extension of the output file.
+    // tmo: native tlmbht extension output. (default)
+    // m: native Matlab/Octave file type. The data written is exactly the same as tmo.
+
+}
+
+
+Mesh
+{
+    file name = parallelepiped_6BC_69941e; // required. The name of the file without the extension.
+// This is, if the name of your file is "problem.tbn", then you should input only
+// "problem". The extension is defined on the "input format" variable below.
+// 2D meshes for testing: plate_4BC_10766e; plate_4BC_60e;
+// 3D meshes for testing: parallelepiped_6BC_1368e; parallelepiped_6BC_69941e; parallelepiped_6BC_611000e
+
+    input format = tlmtbn; // required. Available formats:
+// tlmtbn: .tbn. This is the native tlmbht input file. If you choose a different input
+// format, the software will convert it to .tbn.
+//
+//
+// when converting from any of the following formats to .tbn, if, in the folder
+// that the calling was made, a file with the name "file name.tbn" already exists,
+// the software will overwrite this file with the data from the new conversion.
+//
+// gmsh: .msh from Gmsh software (MeshFormat = 2.2).
+// Observations for Gmsh: The elements read by tlmbht are: 1 - 2 nodes line;
+// 2 - 2 nodes triangle; 4 - 4 nodes tetrahedron; 15 - 1 node point.
+// The software reads only the tag for the physical entity to which
+// the element belongs (i.e., the first tag in the .msh file). The others tags
+// are just ignored.
+//
+// IMPORTANT: We assume that the positions in the gmsh format are in millimeters
+// then, the points positions divided by 1000 to convert them to meters.
+}
+
+
+
+Material
+{
+    number =  33; // this is the tag number of the medium. These numbers
+// shall be natural numbers greater than 0.
+// It can be a vector (like [33 55 11]). If it is a vector, the parameters here
+// will be assigned to all the numbers.
+// future implementation: allow the use of comma as well as blank spaces
+
+    density = 1200; // (kg/m3) required for pennes, heat, em (?), cfd (?)
+    specific heat = 3200; // (J/(K-kg)) required for pennes, heat, em (?), cfd (?)
+    thermal conductivity = 0.3; // (W/(K-m)) required for pennes, heat, em (?), cfd (?)
+    initial temperature = 37; // (oC) required for pennes and heat in dynamic problems only.
+
+// future implementation: reload previous calculated data
+
+    // these variables are used only for pennes. If not initialized, they will be
+    // assumed as 0.
+    blood perfusion = 1e-4; // (m3/(m3-s)) only used for pennes
+    blood density = 1052; // (kg/m3) only used for pennes
+    blood specific heat = 3600; // (J/(K-kg)) only used for pennes
+    blood temperature = 37; // (oC) only used for pennes
+
+    internal heat generation = 500; // (W/m3) can be used in pennes, heat, em (?), cfd (?)
+
+// materials for em (?) and cfd (?)
+}
+
+
+Boundary
+{
+    number = 18; // this is the tag number of the boundary.
+// It can be a vector (like [33 55 11]). If it is a vector, the parameters here
+// will be assigned to all the numbers.
+
+// if nothing is assigned (or if a number is not specified), it will be considered
+// as adiabatic in pennes and heat, free space in em, and solid boundary in cfd
+
+// The available boundary types are:
+//      pennes and heat:
+//           adiabatic = true; // if adiabatic is true, all the other boundary
+// conditions will not be considered. It does not need to be defined to be false.
+//
+//
+//
+//
+//
+//           Temperature = 37; // (oC). This assumes a constant temperature at the
+// boundary. It cannot be used in conjunction with heat flux, convection, or radiation.
+//
+//
+//
+//
+// The next boundary conditions can be used altogether. If more than one of the 
+// below boundary conditions is defined, then the software will assume superposition
+// between them. Thing through your problem and, if needed, take advantage of this
+// flexibility.
+//
+           Heat flux = 2.5e4; // (W/m2). This assumes a constant heat flux flowing at the boundary.
+//
+//
+// Convection is modeled as the Newton's law of cooling. Not implemented yet
+//           Convection Temperature = 20; // (oC) required if Convection = true.
+// This is assumed to be the environment temperature.
+//           Convection coefficient = 10; // (W/(K-m2)) required if Convection = true.
+// heat transfer coefficient
+//
+//
+// Not implemented yet
+//           Radiation Temperature = 22; // (oC) required if Radiation = true.
+// This is assumed to be the mean radiation temperature, which is usually similar
+// or slight higher than ambient air temperature.
+//           Radiation Emissivity = 0.5; // emissivity coefficient of the object.
+// Value between 0 and 1.
+//
+//
+//
+//      em:
+//           Define (?)
+//
+//
+//
+//      cfd:
+//           Define (?)
+}
+
+
+// convection and radiation were not implemented yet
+Boundary
+{
+    number = 24; // this is the tag number of the boundary.
+// It can be a vector (like [33 55 11]). If it is a vector, the parameters here
+// will be assigned to all the numbers.
+
+// if nothing is assigned, it will be considered as adiabatic in pennes and heat,
+// free space in em, and solid boundary in cfd
+
+// The available boundary types are:
+//      pennes and heat:
+//           adiabatic = true; // if adiabatic is true, all the other boundary
+// conditions will not be considered. It does not need to be defined to be false.
+//
+//
+//
+//
+//
+//           Temperature = 150; // (oC). This assumes a constant temperature at the
+// boundary. It cannot be used in conjunction with heat flux, convection, or radiation.
+//
+//
+//
+//
+// The next boundary conditions can be used altogether. If more than one of the 
+// below boundary conditions is defined, then the software will assume superposition
+// between them. Thing through your problem and, if needed, take advantage of this
+// flexibility.
+//
+           Heat flux = 5e5; // (W/m2). This assumes a constant heat flux flowing at the boundary.
+//
+//
+// Convection is modeled as the Newton's law of cooling. Not implemented yet
+//           Convection Temperature = 20; // (oC) required if Convection = true.
+// This is assumed to be the environment temperature.
+//           Convection coefficient = 10; // (W/(K-m2)) required if Convection = true.
+// heat transfer coefficient
+//
+//
+// Not implemented yet
+//           Radiation Temperature = 22; // (oC) required if Radiation = true.
+// This is assumed to be the mean radiation temperature, which is usually similar
+// or slight higher than ambient air temperature.
+//           Radiation Emissivity = 0.5; // emissivity coefficient of the object.
+// Value between 0 and 1.
+//
+//
+//
+//      em:
+//           Define (?)
+//
+//
+//
+//      cfd:
+//           Define (?)
+}
+
+
+Boundary
+{
+    number = 27; // this is the tag number of the boundary.
+// It can be a vector (like [33 55 11]). If it is a vector, the parameters here
+// will be assigned to all the numbers.
+
+// if nothing is assigned, it will be considered as adiabatic in pennes and heat,
+// free space in em, and solid boundary in cfd
+
+// The available boundary types are:
+//      pennes and heat:
+//           adiabatic = true; // if adiabatic is true, all the other boundary
+// conditions will not be considered. It does not need to be defined to be false.
+//
+//
+//
+//
+//
+           Temperature = 37; // (oC). This assumes a constant temperature at the
+// boundary. It cannot be used in conjunction with heat flux, convection, or radiation.
+//
+//
+//
+//
+// The next boundary conditions can be used altogether. If more than one of the 
+// below boundary conditions is defined, then the software will assume superposition
+// between them. Thing through your problem and, if needed, take advantage of this
+// flexibility.
+//
+//           Heat flux = 1e5; // (W/m2). This assumes a constant heat flux flowing at the boundary.
+//
+//
+// Convection is modeled as the Newton's law of cooling. Not implemented yet
+//           Convection Temperature = 20; // (oC) required if Convection = true.
+// This is assumed to be the environment temperature.
+//           Convection coefficient = 10; // (W/(K-m2)) required if Convection = true.
+// heat transfer coefficient
+//
+//
+// Not implemented yet
+//           Radiation Temperature = 22; // (oC) required if Radiation = true.
+// This is assumed to be the mean radiation temperature, which is usually similar
+// or slight higher than ambient air temperature.
+//           Radiation Emissivity = 0.5; // emissivity coefficient of the object.
+// Value between 0 and 1.
+//
+//
+//
+//      em:
+//           Define (?)
+//
+//
+//
+//      cfd:
+//           Define (?)
+}
+
+
+
+Boundary
+{
+    number = 30; // this is the tag number of the boundary.
+// It can be a vector (like [33 55 11]). If it is a vector, the parameters here
+// will be assigned to all the numbers.
+
+// if nothing is assigned, it will be considered as adiabatic in pennes and heat,
+// free space in em, and solid boundary in cfd
+
+// The available boundary types are:
+//      pennes and heat:
+//           adiabatic = true; // if adiabatic is true, all the other boundary
+// conditions will not be considered. It does not need to be defined to be false.
+//
+//
+//
+//
+//
+           Temperature = 150; // (oC). This assumes a constant temperature at the
+// boundary. It cannot be used in conjunction with heat flux, convection, or radiation.
+//
+//
+//
+//
+// The next boundary conditions can be used altogether. If more than one of the 
+// below boundary conditions is defined, then the software will assume superposition
+// between them. Thing through your problem and, if needed, take advantage of this
+// flexibility.
+//
+//           Heat flux = 1e5; // (W/m2). This assumes a constant heat flux flowing at the boundary.
+//
+//
+// Convection is modeled as the Newton's law of cooling. Not implemented yet
+//           Convection Temperature = 20; // (oC) required if Convection = true.
+// This is assumed to be the environment temperature.
+//           Convection coefficient = 10; // (W/(K-m2)) required if Convection = true.
+// heat transfer coefficient
+//
+//
+// Not implemented yet
+//           Radiation Temperature = 22; // (oC) required if Radiation = true.
+// This is assumed to be the mean radiation temperature, which is usually similar
+// or slight higher than ambient air temperature.
+//           Radiation Emissivity = 0.5; // emissivity coefficient of the object.
+// Value between 0 and 1.
+//
+//
+//
+//      em:
+//           Define (?)
+//
+//
+//
+//      cfd:
+//           Define (?)
+}
+
+
+
+Sources  // sources of energy not defined in the material or in the boundary. Not implemented yet
+{
+}
+
+
