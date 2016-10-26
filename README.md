@@ -6,6 +6,8 @@ Copyright © 2015 to 2016 by Cornell University. Written by Hugo Fernando Maia M
 
 This is an Open-Source scientific code used to solve the bioheat equation (BHE; Pennes, 1948; Minkowycz and Sparrow, 2009; Xu et al., 2011) in 2D and 3D problems. The solver is the TLM method and more information is provided below. The language is C/C++ using the Eigen Library for matrix calculations (or Octave/Matlab, which are old files that will not be updated) and it does not have graphical interface (yet).
 
+I binary, which works in Linux (tested in Ubuntu 16.04) is available at https://github.com/hugomilan/tlmbht/releases/tag/v0.1. I plan to release binaries for Windows and Mac too (when?). You can compile the source code to your system if you prefer.
+
 I hope you will find it useful for learning/use the Transmission-line Modeling (TLM) method applied to solve the Bioheat transfer problems. The code developed herein is based in two new nodes that I recently developed for solving the bioheat equation. The nodes are triangular for 2-D problems (Milan and Gebremedhin, 2016a) and tetrahedron for 3-D problems (Milan and Gebremedhin, 2016b). I will provide some theory when the papers get published.
 
 I started developing the TLMBHT in Matlab but I intend to code it in another language. Accompaning the code, follows a code for solving the BHE in 2D and 3D analyticaly for simplified geometries. The geometries are rectangular and cubic. I will discuss them after the papers get published (e-mail me if you need them though).
