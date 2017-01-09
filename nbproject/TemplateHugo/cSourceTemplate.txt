@@ -1,0 +1,29 @@
+<#assign licenseFirst = "/*">
+<#assign licensePrefix = " * ">
+<#assign licenseLast = " */">
+<#include "${project.licensePath}">
+
+/* 
+ * File:   ${NAME}.${EXTENSION}
+ * Author: Hugo Fernando Maia Milan
+ * Email:  hugofernando@gmail.com
+ *
+ * Created on ${DATE}.
+ *
+ *
+ *
+ * Revision history:
+ * 
+ * Date: 
+ * Who: 
+ * Description: 
+ *
+ */
+ 
+ /*
+ * Description of this file:
+ * 
+ *
+ */
+ 
+ 

@@ -405,14 +405,6 @@
       </logicalFolder>
       <itemPath>include/readme.txt</itemPath>
     </logicalFolder>
-    <logicalFolder name="ResourceFiles"
-                   displayName="Resource Files"
-                   projectFiles="true">
-      <itemPath>LICENSE.md</itemPath>
-      <itemPath>README.md</itemPath>
-      <itemPath>acknowledgment.md</itemPath>
-      <itemPath>references.md</itemPath>
-    </logicalFolder>
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
@@ -503,9 +495,15 @@
                    displayName="Important Files"
                    projectFiles="false"
                    kind="IMPORTANT_FILES_FOLDER">
+      <itemPath>.gitignore</itemPath>
+      <itemPath>LICENSE.md</itemPath>
       <itemPath>Makefile</itemPath>
+      <itemPath>README.md</itemPath>
+      <itemPath>acknowledgment.md</itemPath>
       <itemPath>case.tlm</itemPath>
       <itemPath>src/octave</itemPath>
+      <itemPath>validation/readme.txt</itemPath>
+      <itemPath>references.md</itemPath>
       <itemPath>validation</itemPath>
     </logicalFolder>
   </logicalFolder>
@@ -534,12 +532,6 @@
           <developmentMode>0</developmentMode>
         </fortranCompilerTool>
       </compileType>
-      <item path="LICENSE.md" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="README.md" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="acknowledgment.md" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="include/Eigen/CMakeLists.txt" ex="false" tool="3" flavor2="0">
       </item>
       <item path="include/Eigen/Cholesky" ex="false" tool="3" flavor2="0">
@@ -1832,8 +1824,6 @@
       <item path="include/readme.txt" ex="false" tool="3" flavor2="0">
       </item>
       <item path="main.c" ex="false" tool="0" flavor2="0">
-      </item>
-      <item path="references.md" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/configs/libboundconfig.c" ex="false" tool="0" flavor2="0">
       </item>
@@ -2058,12 +2048,6 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
-      <item path="LICENSE.md" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="README.md" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="acknowledgment.md" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="include/Eigen/CMakeLists.txt" ex="false" tool="3" flavor2="0">
       </item>
       <item path="include/Eigen/Cholesky" ex="false" tool="3" flavor2="0">
@@ -3356,8 +3340,6 @@
       <item path="include/readme.txt" ex="false" tool="3" flavor2="0">
       </item>
       <item path="main.c" ex="false" tool="0" flavor2="0">
-      </item>
-      <item path="references.md" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/configs/libboundconfig.c" ex="false" tool="0" flavor2="0">
       </item>

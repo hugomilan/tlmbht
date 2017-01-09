@@ -1,0 +1,45 @@
+<#assign licenseFirst = "/*">
+<#assign licensePrefix = " * ">
+<#assign licenseLast = " */">
+<#include "${project.licensePath}">
+
+/* 
+ * File:   ${NAME}.${EXTENSION}
+ * Author: Hugo Fernando Maia Milan
+ * Email:  hugofernando@gmail.com
+ *
+ * Created on ${DATE}.
+ *
+ *
+ *
+ * Revision history:
+ * 
+ * Date: 
+ * Who: 
+ * Description: 
+ *
+ */
+ 
+ /*
+ * Description of this file:
+ * 
+ *
+ */
+
+#ifndef ${GUARD_NAME}
+#define	${GUARD_NAME}
+
+#ifdef	__cplusplus
+extern "C" {
+#endif
+
+
+
+
+#ifdef	__cplusplus
+}
+#endif
+
+#endif	/* ${GUARD_NAME} */
+
+

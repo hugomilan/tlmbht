@@ -1,0 +1,14 @@
+<#if licenseFirst??>
+${licenseFirst}
+</#if>
+${licensePrefix}TLMBHT - Transmission-line Modeling Method applied to BioHeat Transfer Problems.
+${licensePrefix}
+${licensePrefix}Copyright (C) 2015 to 2017 by Cornell University. All Rights Reserved.
+${licensePrefix}
+${licensePrefix}Written by Hugo Fernando Maia Milan.
+${licensePrefix}
+${licensePrefix}Free for educational, research and non-profit purposes.
+${licensePrefix}Refer to the license file for details.
+<#if licenseLast??>
+${licenseLast}
+</#if>
