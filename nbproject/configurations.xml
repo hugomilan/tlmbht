@@ -1,0 +1,3916 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurationDescriptor version="100">
+  <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
+    <logicalFolder name="HeaderFiles"
+                   displayName="Header Files"
+                   projectFiles="true">
+      <logicalFolder name="Eigen" displayName="Eigen" projectFiles="true">
+        <logicalFolder name="src" displayName="src" projectFiles="true">
+          <logicalFolder name="Cholesky" displayName="Cholesky" projectFiles="true">
+            <itemPath>include/Eigen/src/Cholesky/LDLT.h</itemPath>
+            <itemPath>include/Eigen/src/Cholesky/LLT.h</itemPath>
+            <itemPath>include/Eigen/src/Cholesky/LLT_LAPACKE.h</itemPath>
+          </logicalFolder>
+          <logicalFolder name="CholmodSupport"
+                         displayName="CholmodSupport"
+                         projectFiles="true">
+            <itemPath>include/Eigen/src/CholmodSupport/CholmodSupport.h</itemPath>
+          </logicalFolder>
+          <logicalFolder name="Core" displayName="Core" projectFiles="true">
+            <logicalFolder name="arch" displayName="arch" projectFiles="true">
+              <logicalFolder name="AltiVec" displayName="AltiVec" projectFiles="true">
+                <itemPath>include/Eigen/src/Core/arch/AltiVec/Complex.h</itemPath>
+                <itemPath>include/Eigen/src/Core/arch/AltiVec/MathFunctions.h</itemPath>
+                <itemPath>include/Eigen/src/Core/arch/AltiVec/PacketMath.h</itemPath>
+              </logicalFolder>
+              <logicalFolder name="AVX" displayName="AVX" projectFiles="true">
+                <itemPath>include/Eigen/src/Core/arch/AVX/Complex.h</itemPath>
+                <itemPath>include/Eigen/src/Core/arch/AVX/MathFunctions.h</itemPath>
+                <itemPath>include/Eigen/src/Core/arch/AVX/PacketMath.h</itemPath>
+                <itemPath>include/Eigen/src/Core/arch/AVX/TypeCasting.h</itemPath>
+              </logicalFolder>
+              <logicalFolder name="AVX512" displayName="AVX512" projectFiles="true">
+                <itemPath>include/Eigen/src/Core/arch/AVX512/MathFunctions.h</itemPath>
+                <itemPath>include/Eigen/src/Core/arch/AVX512/PacketMath.h</itemPath>
+              </logicalFolder>
+              <logicalFolder name="CUDA" displayName="CUDA" projectFiles="true">
+                <itemPath>include/Eigen/src/Core/arch/CUDA/Complex.h</itemPath>
+                <itemPath>include/Eigen/src/Core/arch/CUDA/Half.h</itemPath>
+                <itemPath>include/Eigen/src/Core/arch/CUDA/MathFunctions.h</itemPath>
+                <itemPath>include/Eigen/src/Core/arch/CUDA/PacketMath.h</itemPath>
+                <itemPath>include/Eigen/src/Core/arch/CUDA/PacketMathHalf.h</itemPath>
+                <itemPath>include/Eigen/src/Core/arch/CUDA/TypeCasting.h</itemPath>
+              </logicalFolder>
+              <logicalFolder name="Default" displayName="Default" projectFiles="true">
+                <itemPath>include/Eigen/src/Core/arch/Default/Settings.h</itemPath>
+              </logicalFolder>
+              <logicalFolder name="NEON" displayName="NEON" projectFiles="true">
+                <itemPath>include/Eigen/src/Core/arch/NEON/Complex.h</itemPath>
+                <itemPath>include/Eigen/src/Core/arch/NEON/MathFunctions.h</itemPath>
+                <itemPath>include/Eigen/src/Core/arch/NEON/PacketMath.h</itemPath>
+              </logicalFolder>
+              <logicalFolder name="SSE" displayName="SSE" projectFiles="true">
+                <itemPath>include/Eigen/src/Core/arch/SSE/Complex.h</itemPath>
+                <itemPath>include/Eigen/src/Core/arch/SSE/MathFunctions.h</itemPath>
+                <itemPath>include/Eigen/src/Core/arch/SSE/PacketMath.h</itemPath>
+                <itemPath>include/Eigen/src/Core/arch/SSE/TypeCasting.h</itemPath>
+              </logicalFolder>
+              <logicalFolder name="ZVector" displayName="ZVector" projectFiles="true">
+                <itemPath>include/Eigen/src/Core/arch/ZVector/Complex.h</itemPath>
+                <itemPath>include/Eigen/src/Core/arch/ZVector/MathFunctions.h</itemPath>
+                <itemPath>include/Eigen/src/Core/arch/ZVector/PacketMath.h</itemPath>
+              </logicalFolder>
+            </logicalFolder>
+            <logicalFolder name="functors" displayName="functors" projectFiles="true">
+              <itemPath>include/Eigen/src/Core/functors/AssignmentFunctors.h</itemPath>
+              <itemPath>include/Eigen/src/Core/functors/BinaryFunctors.h</itemPath>
+              <itemPath>include/Eigen/src/Core/functors/NullaryFunctors.h</itemPath>
+              <itemPath>include/Eigen/src/Core/functors/StlFunctors.h</itemPath>
+              <itemPath>include/Eigen/src/Core/functors/TernaryFunctors.h</itemPath>
+              <itemPath>include/Eigen/src/Core/functors/UnaryFunctors.h</itemPath>
+            </logicalFolder>
+            <logicalFolder name="products" displayName="products" projectFiles="true">
+              <itemPath>include/Eigen/src/Core/products/GeneralBlockPanelKernel.h</itemPath>
+              <itemPath>include/Eigen/src/Core/products/GeneralMatrixMatrix.h</itemPath>
+              <itemPath>include/Eigen/src/Core/products/GeneralMatrixMatrixTriangular.h</itemPath>
+              <itemPath>include/Eigen/src/Core/products/GeneralMatrixMatrixTriangular_BLAS.h</itemPath>
+              <itemPath>include/Eigen/src/Core/products/GeneralMatrixMatrix_BLAS.h</itemPath>
+              <itemPath>include/Eigen/src/Core/products/GeneralMatrixVector.h</itemPath>
+              <itemPath>include/Eigen/src/Core/products/GeneralMatrixVector_BLAS.h</itemPath>
+              <itemPath>include/Eigen/src/Core/products/Parallelizer.h</itemPath>
+              <itemPath>include/Eigen/src/Core/products/SelfadjointMatrixMatrix.h</itemPath>
+              <itemPath>include/Eigen/src/Core/products/SelfadjointMatrixMatrix_BLAS.h</itemPath>
+              <itemPath>include/Eigen/src/Core/products/SelfadjointMatrixVector.h</itemPath>
+              <itemPath>include/Eigen/src/Core/products/SelfadjointMatrixVector_BLAS.h</itemPath>
+              <itemPath>include/Eigen/src/Core/products/SelfadjointProduct.h</itemPath>
+              <itemPath>include/Eigen/src/Core/products/SelfadjointRank2Update.h</itemPath>
+              <itemPath>include/Eigen/src/Core/products/TriangularMatrixMatrix.h</itemPath>
+              <itemPath>include/Eigen/src/Core/products/TriangularMatrixMatrix_BLAS.h</itemPath>
+              <itemPath>include/Eigen/src/Core/products/TriangularMatrixVector.h</itemPath>
+              <itemPath>include/Eigen/src/Core/products/TriangularMatrixVector_BLAS.h</itemPath>
+              <itemPath>include/Eigen/src/Core/products/TriangularSolverMatrix.h</itemPath>
+              <itemPath>include/Eigen/src/Core/products/TriangularSolverMatrix_BLAS.h</itemPath>
+              <itemPath>include/Eigen/src/Core/products/TriangularSolverVector.h</itemPath>
+            </logicalFolder>
+            <logicalFolder name="util" displayName="util" projectFiles="true">
+              <itemPath>include/Eigen/src/Core/util/BlasUtil.h</itemPath>
+              <itemPath>include/Eigen/src/Core/util/Constants.h</itemPath>
+              <itemPath>include/Eigen/src/Core/util/DisableStupidWarnings.h</itemPath>
+              <itemPath>include/Eigen/src/Core/util/ForwardDeclarations.h</itemPath>
+              <itemPath>include/Eigen/src/Core/util/MKL_support.h</itemPath>
+              <itemPath>include/Eigen/src/Core/util/Macros.h</itemPath>
+              <itemPath>include/Eigen/src/Core/util/Memory.h</itemPath>
+              <itemPath>include/Eigen/src/Core/util/Meta.h</itemPath>
+              <itemPath>include/Eigen/src/Core/util/NonMPL2.h</itemPath>
+              <itemPath>include/Eigen/src/Core/util/ReenableStupidWarnings.h</itemPath>
+              <itemPath>include/Eigen/src/Core/util/StaticAssert.h</itemPath>
+              <itemPath>include/Eigen/src/Core/util/XprHelper.h</itemPath>
+            </logicalFolder>
+            <itemPath>include/Eigen/src/Core/Array.h</itemPath>
+            <itemPath>include/Eigen/src/Core/ArrayBase.h</itemPath>
+            <itemPath>include/Eigen/src/Core/ArrayWrapper.h</itemPath>
+            <itemPath>include/Eigen/src/Core/Assign.h</itemPath>
+            <itemPath>include/Eigen/src/Core/AssignEvaluator.h</itemPath>
+            <itemPath>include/Eigen/src/Core/Assign_MKL.h</itemPath>
+            <itemPath>include/Eigen/src/Core/BandMatrix.h</itemPath>
+            <itemPath>include/Eigen/src/Core/Block.h</itemPath>
+            <itemPath>include/Eigen/src/Core/BooleanRedux.h</itemPath>
+            <itemPath>include/Eigen/src/Core/CommaInitializer.h</itemPath>
+            <itemPath>include/Eigen/src/Core/ConditionEstimator.h</itemPath>
+            <itemPath>include/Eigen/src/Core/CoreEvaluators.h</itemPath>
+            <itemPath>include/Eigen/src/Core/CoreIterators.h</itemPath>
+            <itemPath>include/Eigen/src/Core/CwiseBinaryOp.h</itemPath>
+            <itemPath>include/Eigen/src/Core/CwiseNullaryOp.h</itemPath>
+            <itemPath>include/Eigen/src/Core/CwiseTernaryOp.h</itemPath>
+            <itemPath>include/Eigen/src/Core/CwiseUnaryOp.h</itemPath>
+            <itemPath>include/Eigen/src/Core/CwiseUnaryView.h</itemPath>
+            <itemPath>include/Eigen/src/Core/DenseBase.h</itemPath>
+            <itemPath>include/Eigen/src/Core/DenseCoeffsBase.h</itemPath>
+            <itemPath>include/Eigen/src/Core/DenseStorage.h</itemPath>
+            <itemPath>include/Eigen/src/Core/Diagonal.h</itemPath>
+            <itemPath>include/Eigen/src/Core/DiagonalMatrix.h</itemPath>
+            <itemPath>include/Eigen/src/Core/DiagonalProduct.h</itemPath>
+            <itemPath>include/Eigen/src/Core/Dot.h</itemPath>
+            <itemPath>include/Eigen/src/Core/EigenBase.h</itemPath>
+            <itemPath>include/Eigen/src/Core/ForceAlignedAccess.h</itemPath>
+            <itemPath>include/Eigen/src/Core/Fuzzy.h</itemPath>
+            <itemPath>include/Eigen/src/Core/GeneralProduct.h</itemPath>
+            <itemPath>include/Eigen/src/Core/GenericPacketMath.h</itemPath>
+            <itemPath>include/Eigen/src/Core/GlobalFunctions.h</itemPath>
+            <itemPath>include/Eigen/src/Core/IO.h</itemPath>
+            <itemPath>include/Eigen/src/Core/Inverse.h</itemPath>
+            <itemPath>include/Eigen/src/Core/Map.h</itemPath>
+            <itemPath>include/Eigen/src/Core/MapBase.h</itemPath>
+            <itemPath>include/Eigen/src/Core/MathFunctions.h</itemPath>
+            <itemPath>include/Eigen/src/Core/MathFunctionsImpl.h</itemPath>
+            <itemPath>include/Eigen/src/Core/Matrix.h</itemPath>
+            <itemPath>include/Eigen/src/Core/MatrixBase.h</itemPath>
+            <itemPath>include/Eigen/src/Core/NestByValue.h</itemPath>
+            <itemPath>include/Eigen/src/Core/NoAlias.h</itemPath>
+            <itemPath>include/Eigen/src/Core/NumTraits.h</itemPath>
+            <itemPath>include/Eigen/src/Core/PermutationMatrix.h</itemPath>
+            <itemPath>include/Eigen/src/Core/PlainObjectBase.h</itemPath>
+            <itemPath>include/Eigen/src/Core/Product.h</itemPath>
+            <itemPath>include/Eigen/src/Core/ProductEvaluators.h</itemPath>
+            <itemPath>include/Eigen/src/Core/Random.h</itemPath>
+            <itemPath>include/Eigen/src/Core/Redux.h</itemPath>
+            <itemPath>include/Eigen/src/Core/Ref.h</itemPath>
+            <itemPath>include/Eigen/src/Core/Replicate.h</itemPath>
+            <itemPath>include/Eigen/src/Core/ReturnByValue.h</itemPath>
+            <itemPath>include/Eigen/src/Core/Reverse.h</itemPath>
+            <itemPath>include/Eigen/src/Core/Select.h</itemPath>
+            <itemPath>include/Eigen/src/Core/SelfAdjointView.h</itemPath>
+            <itemPath>include/Eigen/src/Core/SelfCwiseBinaryOp.h</itemPath>
+            <itemPath>include/Eigen/src/Core/Solve.h</itemPath>
+            <itemPath>include/Eigen/src/Core/SolveTriangular.h</itemPath>
+            <itemPath>include/Eigen/src/Core/SolverBase.h</itemPath>
+            <itemPath>include/Eigen/src/Core/StableNorm.h</itemPath>
+            <itemPath>include/Eigen/src/Core/Stride.h</itemPath>
+            <itemPath>include/Eigen/src/Core/Swap.h</itemPath>
+            <itemPath>include/Eigen/src/Core/Transpose.h</itemPath>
+            <itemPath>include/Eigen/src/Core/Transpositions.h</itemPath>
+            <itemPath>include/Eigen/src/Core/TriangularMatrix.h</itemPath>
+            <itemPath>include/Eigen/src/Core/VectorBlock.h</itemPath>
+            <itemPath>include/Eigen/src/Core/VectorwiseOp.h</itemPath>
+            <itemPath>include/Eigen/src/Core/Visitor.h</itemPath>
+          </logicalFolder>
+          <logicalFolder name="Eigenvalues" displayName="Eigenvalues" projectFiles="true">
+            <itemPath>include/Eigen/src/Eigenvalues/ComplexEigenSolver.h</itemPath>
+            <itemPath>include/Eigen/src/Eigenvalues/ComplexSchur.h</itemPath>
+            <itemPath>include/Eigen/src/Eigenvalues/ComplexSchur_LAPACKE.h</itemPath>
+            <itemPath>include/Eigen/src/Eigenvalues/EigenSolver.h</itemPath>
+            <itemPath>include/Eigen/src/Eigenvalues/GeneralizedEigenSolver.h</itemPath>
+            <itemPath>include/Eigen/src/Eigenvalues/GeneralizedSelfAdjointEigenSolver.h</itemPath>
+            <itemPath>include/Eigen/src/Eigenvalues/HessenbergDecomposition.h</itemPath>
+            <itemPath>include/Eigen/src/Eigenvalues/MatrixBaseEigenvalues.h</itemPath>
+            <itemPath>include/Eigen/src/Eigenvalues/RealQZ.h</itemPath>
+            <itemPath>include/Eigen/src/Eigenvalues/RealSchur.h</itemPath>
+            <itemPath>include/Eigen/src/Eigenvalues/RealSchur_LAPACKE.h</itemPath>
+            <itemPath>include/Eigen/src/Eigenvalues/SelfAdjointEigenSolver.h</itemPath>
+            <itemPath>include/Eigen/src/Eigenvalues/SelfAdjointEigenSolver_LAPACKE.h</itemPath>
+            <itemPath>include/Eigen/src/Eigenvalues/Tridiagonalization.h</itemPath>
+          </logicalFolder>
+          <logicalFolder name="Geometry" displayName="Geometry" projectFiles="true">
+            <logicalFolder name="arch" displayName="arch" projectFiles="true">
+              <itemPath>include/Eigen/src/Geometry/arch/Geometry_SSE.h</itemPath>
+            </logicalFolder>
+            <itemPath>include/Eigen/src/Geometry/AlignedBox.h</itemPath>
+            <itemPath>include/Eigen/src/Geometry/AngleAxis.h</itemPath>
+            <itemPath>include/Eigen/src/Geometry/EulerAngles.h</itemPath>
+            <itemPath>include/Eigen/src/Geometry/Homogeneous.h</itemPath>
+            <itemPath>include/Eigen/src/Geometry/Hyperplane.h</itemPath>
+            <itemPath>include/Eigen/src/Geometry/OrthoMethods.h</itemPath>
+            <itemPath>include/Eigen/src/Geometry/ParametrizedLine.h</itemPath>
+            <itemPath>include/Eigen/src/Geometry/Quaternion.h</itemPath>
+            <itemPath>include/Eigen/src/Geometry/Rotation2D.h</itemPath>
+            <itemPath>include/Eigen/src/Geometry/RotationBase.h</itemPath>
+            <itemPath>include/Eigen/src/Geometry/Scaling.h</itemPath>
+            <itemPath>include/Eigen/src/Geometry/Transform.h</itemPath>
+            <itemPath>include/Eigen/src/Geometry/Translation.h</itemPath>
+            <itemPath>include/Eigen/src/Geometry/Umeyama.h</itemPath>
+          </logicalFolder>
+          <logicalFolder name="Householder" displayName="Householder" projectFiles="true">
+            <itemPath>include/Eigen/src/Householder/BlockHouseholder.h</itemPath>
+            <itemPath>include/Eigen/src/Householder/Householder.h</itemPath>
+            <itemPath>include/Eigen/src/Householder/HouseholderSequence.h</itemPath>
+          </logicalFolder>
+          <logicalFolder name="IterativeLinearSolvers"
+                         displayName="IterativeLinearSolvers"
+                         projectFiles="true">
+            <itemPath>include/Eigen/src/IterativeLinearSolvers/BasicPreconditioners.h</itemPath>
+            <itemPath>include/Eigen/src/IterativeLinearSolvers/BiCGSTAB.h</itemPath>
+            <itemPath>include/Eigen/src/IterativeLinearSolvers/ConjugateGradient.h</itemPath>
+            <itemPath>include/Eigen/src/IterativeLinearSolvers/IncompleteCholesky.h</itemPath>
+            <itemPath>include/Eigen/src/IterativeLinearSolvers/IncompleteLUT.h</itemPath>
+            <itemPath>include/Eigen/src/IterativeLinearSolvers/IterativeSolverBase.h</itemPath>
+            <itemPath>include/Eigen/src/IterativeLinearSolvers/LeastSquareConjugateGradient.h</itemPath>
+            <itemPath>include/Eigen/src/IterativeLinearSolvers/SolveWithGuess.h</itemPath>
+          </logicalFolder>
+          <logicalFolder name="Jacobi" displayName="Jacobi" projectFiles="true">
+            <itemPath>include/Eigen/src/Jacobi/Jacobi.h</itemPath>
+          </logicalFolder>
+          <logicalFolder name="LU" displayName="LU" projectFiles="true">
+            <logicalFolder name="arch" displayName="arch" projectFiles="true">
+              <itemPath>include/Eigen/src/LU/arch/Inverse_SSE.h</itemPath>
+            </logicalFolder>
+            <itemPath>include/Eigen/src/LU/Determinant.h</itemPath>
+            <itemPath>include/Eigen/src/LU/FullPivLU.h</itemPath>
+            <itemPath>include/Eigen/src/LU/InverseImpl.h</itemPath>
+            <itemPath>include/Eigen/src/LU/PartialPivLU.h</itemPath>
+            <itemPath>include/Eigen/src/LU/PartialPivLU_LAPACKE.h</itemPath>
+          </logicalFolder>
+          <logicalFolder name="MetisSupport"
+                         displayName="MetisSupport"
+                         projectFiles="true">
+            <itemPath>include/Eigen/src/MetisSupport/MetisSupport.h</itemPath>
+          </logicalFolder>
+          <logicalFolder name="misc" displayName="misc" projectFiles="true">
+            <itemPath>include/Eigen/src/misc/Image.h</itemPath>
+            <itemPath>include/Eigen/src/misc/Kernel.h</itemPath>
+            <itemPath>include/Eigen/src/misc/RealSvd2x2.h</itemPath>
+            <itemPath>include/Eigen/src/misc/blas.h</itemPath>
+            <itemPath>include/Eigen/src/misc/lapack.h</itemPath>
+            <itemPath>include/Eigen/src/misc/lapacke.h</itemPath>
+            <itemPath>include/Eigen/src/misc/lapacke_mangling.h</itemPath>
+          </logicalFolder>
+          <logicalFolder name="OrderingMethods"
+                         displayName="OrderingMethods"
+                         projectFiles="true">
+            <itemPath>include/Eigen/src/OrderingMethods/Amd.h</itemPath>
+            <itemPath>include/Eigen/src/OrderingMethods/Eigen_Colamd.h</itemPath>
+            <itemPath>include/Eigen/src/OrderingMethods/Ordering.h</itemPath>
+          </logicalFolder>
+          <logicalFolder name="PardisoSupport"
+                         displayName="PardisoSupport"
+                         projectFiles="true">
+            <itemPath>include/Eigen/src/PardisoSupport/PardisoSupport.h</itemPath>
+          </logicalFolder>
+          <logicalFolder name="PaStiXSupport"
+                         displayName="PaStiXSupport"
+                         projectFiles="true">
+            <itemPath>include/Eigen/src/PaStiXSupport/PaStiXSupport.h</itemPath>
+          </logicalFolder>
+          <logicalFolder name="plugins" displayName="plugins" projectFiles="true">
+            <itemPath>include/Eigen/src/plugins/ArrayCwiseBinaryOps.h</itemPath>
+            <itemPath>include/Eigen/src/plugins/ArrayCwiseUnaryOps.h</itemPath>
+            <itemPath>include/Eigen/src/plugins/BlockMethods.h</itemPath>
+            <itemPath>include/Eigen/src/plugins/CommonCwiseBinaryOps.h</itemPath>
+            <itemPath>include/Eigen/src/plugins/CommonCwiseUnaryOps.h</itemPath>
+            <itemPath>include/Eigen/src/plugins/MatrixCwiseBinaryOps.h</itemPath>
+            <itemPath>include/Eigen/src/plugins/MatrixCwiseUnaryOps.h</itemPath>
+          </logicalFolder>
+          <logicalFolder name="QR" displayName="QR" projectFiles="true">
+            <itemPath>include/Eigen/src/QR/ColPivHouseholderQR.h</itemPath>
+            <itemPath>include/Eigen/src/QR/ColPivHouseholderQR_LAPACKE.h</itemPath>
+            <itemPath>include/Eigen/src/QR/CompleteOrthogonalDecomposition.h</itemPath>
+            <itemPath>include/Eigen/src/QR/FullPivHouseholderQR.h</itemPath>
+            <itemPath>include/Eigen/src/QR/HouseholderQR.h</itemPath>
+            <itemPath>include/Eigen/src/QR/HouseholderQR_LAPACKE.h</itemPath>
+          </logicalFolder>
+          <logicalFolder name="SparseCholesky"
+                         displayName="SparseCholesky"
+                         projectFiles="true">
+            <itemPath>include/Eigen/src/SparseCholesky/SimplicialCholesky.h</itemPath>
+            <itemPath>include/Eigen/src/SparseCholesky/SimplicialCholesky_impl.h</itemPath>
+          </logicalFolder>
+          <logicalFolder name="SparseCore" displayName="SparseCore" projectFiles="true">
+            <itemPath>include/Eigen/src/SparseCore/AmbiVector.h</itemPath>
+            <itemPath>include/Eigen/src/SparseCore/CompressedStorage.h</itemPath>
+            <itemPath>include/Eigen/src/SparseCore/ConservativeSparseSparseProduct.h</itemPath>
+            <itemPath>include/Eigen/src/SparseCore/MappedSparseMatrix.h</itemPath>
+            <itemPath>include/Eigen/src/SparseCore/SparseAssign.h</itemPath>
+            <itemPath>include/Eigen/src/SparseCore/SparseBlock.h</itemPath>
+            <itemPath>include/Eigen/src/SparseCore/SparseColEtree.h</itemPath>
+            <itemPath>include/Eigen/src/SparseCore/SparseCompressedBase.h</itemPath>
+            <itemPath>include/Eigen/src/SparseCore/SparseCwiseBinaryOp.h</itemPath>
+            <itemPath>include/Eigen/src/SparseCore/SparseCwiseUnaryOp.h</itemPath>
+            <itemPath>include/Eigen/src/SparseCore/SparseDenseProduct.h</itemPath>
+            <itemPath>include/Eigen/src/SparseCore/SparseDiagonalProduct.h</itemPath>
+            <itemPath>include/Eigen/src/SparseCore/SparseDot.h</itemPath>
+            <itemPath>include/Eigen/src/SparseCore/SparseFuzzy.h</itemPath>
+            <itemPath>include/Eigen/src/SparseCore/SparseMap.h</itemPath>
+            <itemPath>include/Eigen/src/SparseCore/SparseMatrix.h</itemPath>
+            <itemPath>include/Eigen/src/SparseCore/SparseMatrixBase.h</itemPath>
+            <itemPath>include/Eigen/src/SparseCore/SparsePermutation.h</itemPath>
+            <itemPath>include/Eigen/src/SparseCore/SparseProduct.h</itemPath>
+            <itemPath>include/Eigen/src/SparseCore/SparseRedux.h</itemPath>
+            <itemPath>include/Eigen/src/SparseCore/SparseRef.h</itemPath>
+            <itemPath>include/Eigen/src/SparseCore/SparseSelfAdjointView.h</itemPath>
+            <itemPath>include/Eigen/src/SparseCore/SparseSolverBase.h</itemPath>
+            <itemPath>include/Eigen/src/SparseCore/SparseSparseProductWithPruning.h</itemPath>
+            <itemPath>include/Eigen/src/SparseCore/SparseTranspose.h</itemPath>
+            <itemPath>include/Eigen/src/SparseCore/SparseTriangularView.h</itemPath>
+            <itemPath>include/Eigen/src/SparseCore/SparseUtil.h</itemPath>
+            <itemPath>include/Eigen/src/SparseCore/SparseVector.h</itemPath>
+            <itemPath>include/Eigen/src/SparseCore/SparseView.h</itemPath>
+            <itemPath>include/Eigen/src/SparseCore/TriangularSolver.h</itemPath>
+          </logicalFolder>
+          <logicalFolder name="SparseLU" displayName="SparseLU" projectFiles="true">
+            <itemPath>include/Eigen/src/SparseLU/SparseLU.h</itemPath>
+            <itemPath>include/Eigen/src/SparseLU/SparseLUImpl.h</itemPath>
+            <itemPath>include/Eigen/src/SparseLU/SparseLU_Memory.h</itemPath>
+            <itemPath>include/Eigen/src/SparseLU/SparseLU_Structs.h</itemPath>
+            <itemPath>include/Eigen/src/SparseLU/SparseLU_SupernodalMatrix.h</itemPath>
+            <itemPath>include/Eigen/src/SparseLU/SparseLU_Utils.h</itemPath>
+            <itemPath>include/Eigen/src/SparseLU/SparseLU_column_bmod.h</itemPath>
+            <itemPath>include/Eigen/src/SparseLU/SparseLU_column_dfs.h</itemPath>
+            <itemPath>include/Eigen/src/SparseLU/SparseLU_copy_to_ucol.h</itemPath>
+            <itemPath>include/Eigen/src/SparseLU/SparseLU_gemm_kernel.h</itemPath>
+            <itemPath>include/Eigen/src/SparseLU/SparseLU_heap_relax_snode.h</itemPath>
+            <itemPath>include/Eigen/src/SparseLU/SparseLU_kernel_bmod.h</itemPath>
+            <itemPath>include/Eigen/src/SparseLU/SparseLU_panel_bmod.h</itemPath>
+            <itemPath>include/Eigen/src/SparseLU/SparseLU_panel_dfs.h</itemPath>
+            <itemPath>include/Eigen/src/SparseLU/SparseLU_pivotL.h</itemPath>
+            <itemPath>include/Eigen/src/SparseLU/SparseLU_pruneL.h</itemPath>
+            <itemPath>include/Eigen/src/SparseLU/SparseLU_relax_snode.h</itemPath>
+          </logicalFolder>
+          <logicalFolder name="SparseQR" displayName="SparseQR" projectFiles="true">
+            <itemPath>include/Eigen/src/SparseQR/SparseQR.h</itemPath>
+          </logicalFolder>
+          <logicalFolder name="SPQRSupport" displayName="SPQRSupport" projectFiles="true">
+            <itemPath>include/Eigen/src/SPQRSupport/SuiteSparseQRSupport.h</itemPath>
+          </logicalFolder>
+          <logicalFolder name="StlSupport" displayName="StlSupport" projectFiles="true">
+            <itemPath>include/Eigen/src/StlSupport/StdDeque.h</itemPath>
+            <itemPath>include/Eigen/src/StlSupport/StdList.h</itemPath>
+            <itemPath>include/Eigen/src/StlSupport/StdVector.h</itemPath>
+            <itemPath>include/Eigen/src/StlSupport/details.h</itemPath>
+          </logicalFolder>
+          <logicalFolder name="SuperLUSupport"
+                         displayName="SuperLUSupport"
+                         projectFiles="true">
+            <itemPath>include/Eigen/src/SuperLUSupport/SuperLUSupport.h</itemPath>
+          </logicalFolder>
+          <logicalFolder name="SVD" displayName="SVD" projectFiles="true">
+            <itemPath>include/Eigen/src/SVD/BDCSVD.h</itemPath>
+            <itemPath>include/Eigen/src/SVD/JacobiSVD.h</itemPath>
+            <itemPath>include/Eigen/src/SVD/JacobiSVD_LAPACKE.h</itemPath>
+            <itemPath>include/Eigen/src/SVD/SVDBase.h</itemPath>
+            <itemPath>include/Eigen/src/SVD/UpperBidiagonalization.h</itemPath>
+          </logicalFolder>
+          <logicalFolder name="UmfPackSupport"
+                         displayName="UmfPackSupport"
+                         projectFiles="true">
+            <itemPath>include/Eigen/src/UmfPackSupport/UmfPackSupport.h</itemPath>
+          </logicalFolder>
+        </logicalFolder>
+        <itemPath>include/Eigen/CMakeLists.txt</itemPath>
+        <itemPath>include/Eigen/Cholesky</itemPath>
+        <itemPath>include/Eigen/CholmodSupport</itemPath>
+        <itemPath>include/Eigen/Core</itemPath>
+        <itemPath>include/Eigen/Dense</itemPath>
+        <itemPath>include/Eigen/Eigen</itemPath>
+        <itemPath>include/Eigen/Eigenvalues</itemPath>
+        <itemPath>include/Eigen/Geometry</itemPath>
+        <itemPath>include/Eigen/Householder</itemPath>
+        <itemPath>include/Eigen/IterativeLinearSolvers</itemPath>
+        <itemPath>include/Eigen/Jacobi</itemPath>
+        <itemPath>include/Eigen/LU</itemPath>
+        <itemPath>include/Eigen/MetisSupport</itemPath>
+        <itemPath>include/Eigen/OrderingMethods</itemPath>
+        <itemPath>include/Eigen/PaStiXSupport</itemPath>
+        <itemPath>include/Eigen/PardisoSupport</itemPath>
+        <itemPath>include/Eigen/QR</itemPath>
+        <itemPath>include/Eigen/QtAlignedMalloc</itemPath>
+        <itemPath>include/Eigen/SPQRSupport</itemPath>
+        <itemPath>include/Eigen/SVD</itemPath>
+        <itemPath>include/Eigen/Sparse</itemPath>
+        <itemPath>include/Eigen/SparseCholesky</itemPath>
+        <itemPath>include/Eigen/SparseCore</itemPath>
+        <itemPath>include/Eigen/SparseLU</itemPath>
+        <itemPath>include/Eigen/SparseQR</itemPath>
+        <itemPath>include/Eigen/StdDeque</itemPath>
+        <itemPath>include/Eigen/StdList</itemPath>
+        <itemPath>include/Eigen/StdVector</itemPath>
+        <itemPath>include/Eigen/SuperLUSupport</itemPath>
+        <itemPath>include/Eigen/UmfPackSupport</itemPath>
+      </logicalFolder>
+    </logicalFolder>
+    <logicalFolder name="ResourceFiles"
+                   displayName="Resource Files"
+                   projectFiles="true">
+      <itemPath>LICENSE.md</itemPath>
+      <itemPath>README.md</itemPath>
+      <itemPath>acknowledgment.md</itemPath>
+      <itemPath>references.md</itemPath>
+    </logicalFolder>
+    <logicalFolder name="SourceFiles"
+                   displayName="Source Files"
+                   projectFiles="true">
+      <logicalFolder name="configs" displayName="configs" projectFiles="true">
+        <itemPath>src/configs/libboundconfig.c</itemPath>
+        <itemPath>src/configs/libboundconfig.h</itemPath>
+        <itemPath>src/configs/libconfig.c</itemPath>
+        <itemPath>src/configs/libconfig.h</itemPath>
+        <itemPath>src/configs/libmatconfig.c</itemPath>
+        <itemPath>src/configs/libmatconfig.h</itemPath>
+        <itemPath>src/configs/libmeshconfig.c</itemPath>
+        <itemPath>src/configs/libmeshconfig.h</itemPath>
+        <itemPath>src/configs/libsimuconfig.c</itemPath>
+        <itemPath>src/configs/libsimuconfig.h</itemPath>
+        <itemPath>src/configs/libsourceconfig.c</itemPath>
+        <itemPath>src/configs/libsourceconfig.h</itemPath>
+      </logicalFolder>
+      <logicalFolder name="meshreader" displayName="meshreader" projectFiles="true">
+        <itemPath>src/meshreader/libgmshreader.c</itemPath>
+        <itemPath>src/meshreader/libgmshreader.h</itemPath>
+        <itemPath>src/meshreader/libmeshreader.c</itemPath>
+        <itemPath>src/meshreader/libmeshreader.h</itemPath>
+        <itemPath>src/meshreader/libmeshtlmbht.c</itemPath>
+        <itemPath>src/meshreader/libmeshtlmbht.h</itemPath>
+        <itemPath>src/meshreader/libtbnreader.c</itemPath>
+        <itemPath>src/meshreader/libtbnreader.h</itemPath>
+      </logicalFolder>
+      <logicalFolder name="miscellaneous"
+                     displayName="miscellaneous"
+                     projectFiles="true">
+        <logicalFolder name="benchmark" displayName="benchmark" projectFiles="true">
+          <itemPath>src/miscellaneous/benchmark/libbenchmark.c</itemPath>
+          <itemPath>src/miscellaneous/benchmark/libbenchmark.h</itemPath>
+          <itemPath>src/miscellaneous/benchmark/libbenchmatmult.c</itemPath>
+          <itemPath>src/miscellaneous/benchmark/libbenchmatmult.h</itemPath>
+        </logicalFolder>
+        <logicalFolder name="external" displayName="external" projectFiles="true">
+          <itemPath>src/miscellaneous/external/eigeninterface.cpp</itemPath>
+          <itemPath>src/miscellaneous/external/eigeninterface.h</itemPath>
+        </logicalFolder>
+        <itemPath>src/miscellaneous/getncore.cpp</itemPath>
+        <itemPath>src/miscellaneous/getncore.h</itemPath>
+        <itemPath>src/miscellaneous/liberrorcode.c</itemPath>
+        <itemPath>src/miscellaneous/liberrorcode.h</itemPath>
+        <itemPath>src/miscellaneous/libmiscellaneous.c</itemPath>
+        <itemPath>src/miscellaneous/libmiscellaneous.h</itemPath>
+        <itemPath>src/miscellaneous/libstringtlmbht.c</itemPath>
+        <itemPath>src/miscellaneous/libstringtlmbht.h</itemPath>
+      </logicalFolder>
+      <logicalFolder name="octave" displayName="octave" projectFiles="true">
+        <logicalFolder name="analytical" displayName="analytical" projectFiles="true">
+          <logicalFolder name="1D" displayName="1D" projectFiles="true">
+            <itemPath>src/octave/analytical/1D/MilanTWM1D.m</itemPath>
+            <itemPath>src/octave/analytical/1D/MilanTWM1D_calling.m</itemPath>
+            <itemPath>src/octave/analytical/1D/readme.txt</itemPath>
+          </logicalFolder>
+          <logicalFolder name="2D" displayName="2D" projectFiles="true">
+            <itemPath>src/octave/analytical/2D/D2_BHE_f.m</itemPath>
+          </logicalFolder>
+          <logicalFolder name="3D" displayName="3D" projectFiles="true">
+            <itemPath>src/octave/analytical/3D/D3_BHE_f.m</itemPath>
+          </logicalFolder>
+        </logicalFolder>
+        <logicalFolder name="old_matlab_code"
+                       displayName="old_matlab_code"
+                       projectFiles="true">
+          <itemPath>src/octave/old_matlab_code/D2_BHE_f.m</itemPath>
+          <itemPath>src/octave/old_matlab_code/D3_BHE_f.m</itemPath>
+          <itemPath>src/octave/old_matlab_code/README.txt</itemPath>
+          <itemPath>src/octave/old_matlab_code/calling.m</itemPath>
+          <itemPath>src/octave/old_matlab_code/openmsh.m</itemPath>
+          <itemPath>src/octave/old_matlab_code/parallelepiped_6BC.geo</itemPath>
+          <itemPath>src/octave/old_matlab_code/parallelepiped_6BC_1368e.msh</itemPath>
+          <itemPath>src/octave/old_matlab_code/parallelepiped_6BC_206e.msh</itemPath>
+          <itemPath>src/octave/old_matlab_code/parallelepiped_6BC_24e.msh</itemPath>
+          <itemPath>src/octave/old_matlab_code/parallelepiped_6BC_69941e.msh</itemPath>
+          <itemPath>src/octave/old_matlab_code/parallelepiped_6BC_9618e.msh</itemPath>
+          <itemPath>src/octave/old_matlab_code/plate_4BC.geo</itemPath>
+          <itemPath>src/octave/old_matlab_code/plate_4BC_10766e.msh</itemPath>
+          <itemPath>src/octave/old_matlab_code/plate_4BC_10766e.tms.mat</itemPath>
+          <itemPath>src/octave/old_matlab_code/plate_4BC_40e.msh</itemPath>
+          <itemPath>src/octave/old_matlab_code/plate_4BC_40e.tms.mat</itemPath>
+          <itemPath>src/octave/old_matlab_code/plate_4BC_682e.msh</itemPath>
+          <itemPath>src/octave/old_matlab_code/plate_4BC_682e.tms.mat</itemPath>
+          <itemPath>src/octave/old_matlab_code/plate_6BC_1368e.tms.mat</itemPath>
+          <itemPath>src/octave/old_matlab_code/plate_6BC_206e.tms.mat</itemPath>
+          <itemPath>src/octave/old_matlab_code/plate_6BC_24e.tms.mat</itemPath>
+          <itemPath>src/octave/old_matlab_code/plate_6BC_69941e.tms.mat</itemPath>
+          <itemPath>src/octave/old_matlab_code/plate_6BC_9618e.tms.mat</itemPath>
+          <itemPath>src/octave/old_matlab_code/proproc.m</itemPath>
+          <itemPath>src/octave/old_matlab_code/testing.m</itemPath>
+        </logicalFolder>
+        <logicalFolder name="old_octave_code"
+                       displayName="old_octave_code"
+                       projectFiles="true">
+          <itemPath>src/octave/old_octave_code/D2_BHE_f.m</itemPath>
+          <itemPath>src/octave/old_octave_code/D3_BHE_f.m</itemPath>
+          <itemPath>src/octave/old_octave_code/calling.m</itemPath>
+          <itemPath>src/octave/old_octave_code/openmsh.m</itemPath>
+          <itemPath>src/octave/old_octave_code/plate_4BC_10766e.msh</itemPath>
+          <itemPath>src/octave/old_octave_code/plate_4BC_10766e.tms.mat</itemPath>
+          <itemPath>src/octave/old_octave_code/plate_4BC_40e.msh</itemPath>
+          <itemPath>src/octave/old_octave_code/plate_4BC_40e.tms.msh</itemPath>
+          <itemPath>src/octave/old_octave_code/plate_4BC_60e.msh</itemPath>
+          <itemPath>src/octave/old_octave_code/plate_4BC_682e.tms.mat</itemPath>
+          <itemPath>src/octave/old_octave_code/plate_6BC_1368e.tms.mat</itemPath>
+          <itemPath>src/octave/old_octave_code/plate_6BC_206e.tms.mat</itemPath>
+          <itemPath>src/octave/old_octave_code/plate_6BC_24e.tms.mat</itemPath>
+          <itemPath>src/octave/old_octave_code/plate_6BC_69941e.tms.mat</itemPath>
+          <itemPath>src/octave/old_octave_code/plate_6BC_9618e.tms.mat</itemPath>
+          <itemPath>src/octave/old_octave_code/proproc.m</itemPath>
+        </logicalFolder>
+      </logicalFolder>
+      <logicalFolder name="solver" displayName="solver" projectFiles="true">
+        <logicalFolder name="tlmsolver" displayName="tlmsolver" projectFiles="true">
+          <logicalFolder name="pennes" displayName="pennes" projectFiles="true">
+            <itemPath>src/solver/tlmsolver/pennes/libtlmpennes.c</itemPath>
+            <itemPath>src/solver/tlmsolver/pennes/libtlmpennes.h</itemPath>
+            <itemPath>src/solver/tlmsolver/pennes/libtlmpennes2dsolver.c</itemPath>
+            <itemPath>src/solver/tlmsolver/pennes/libtlmpennes2dsolver.h</itemPath>
+            <itemPath>src/solver/tlmsolver/pennes/libtlmpennes2dsolvereigen.cpp</itemPath>
+            <itemPath>src/solver/tlmsolver/pennes/libtlmpennes2dsolvereigen.h</itemPath>
+            <itemPath>src/solver/tlmsolver/pennes/libtlmpennes3dsolver.c</itemPath>
+            <itemPath>src/solver/tlmsolver/pennes/libtlmpennes3dsolver.h</itemPath>
+            <itemPath>src/solver/tlmsolver/pennes/libtlmpennes3dsolvereigen.cpp</itemPath>
+            <itemPath>src/solver/tlmsolver/pennes/libtlmpennes3dsolvereigen.h</itemPath>
+            <itemPath>src/solver/tlmsolver/pennes/libtlmpenneseigen.cpp</itemPath>
+            <itemPath>src/solver/tlmsolver/pennes/libtlmpenneseigen.h</itemPath>
+          </logicalFolder>
+          <itemPath>src/solver/tlmsolver/libtlmsolver.c</itemPath>
+          <itemPath>src/solver/tlmsolver/libtlmsolver.h</itemPath>
+          <itemPath>src/solver/tlmsolver/libtlmsolvereigen.cpp</itemPath>
+          <itemPath>src/solver/tlmsolver/libtlmsolvereigen.h</itemPath>
+        </logicalFolder>
+        <itemPath>src/solver/libinterfaceceigen.cpp</itemPath>
+        <itemPath>src/solver/libinterfaceceigen.h</itemPath>
+        <itemPath>src/solver/libsolver.c</itemPath>
+        <itemPath>src/solver/libsolver.h</itemPath>
+        <itemPath>src/solver/libsolvercalls.c</itemPath>
+        <itemPath>src/solver/libsolvercalls.h</itemPath>
+        <itemPath>src/solver/libsolvereigen.cpp</itemPath>
+        <itemPath>src/solver/libsolvereigen.h</itemPath>
+      </logicalFolder>
+      <itemPath>main.c</itemPath>
+    </logicalFolder>
+    <logicalFolder name="validation" displayName="validation" projectFiles="true">
+      <itemPath>readme.txt</itemPath>
+    </logicalFolder>
+    <logicalFolder name="TestFiles"
+                   displayName="Test Files"
+                   projectFiles="false"
+                   kind="TEST_LOGICAL_FOLDER">
+    </logicalFolder>
+    <logicalFolder name="ExternalFiles"
+                   displayName="Important Files"
+                   projectFiles="false"
+                   kind="IMPORTANT_FILES_FOLDER">
+      <itemPath>Makefile</itemPath>
+      <itemPath>case.tlm</itemPath>
+    </logicalFolder>
+  </logicalFolder>
+  <sourceRootList>
+    <Elem>include</Elem>
+    <Elem>src</Elem>
+    <Elem>validation</Elem>
+  </sourceRootList>
+  <projectmakefile>Makefile</projectmakefile>
+  <confs>
+    <conf name="Debug" type="1">
+      <toolsSet>
+        <compilerSet>default</compilerSet>
+        <dependencyChecking>true</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
+      </toolsSet>
+      <compileType>
+      </compileType>
+      <item path="LICENSE.md" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="README.md" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="acknowledgment.md" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/CMakeLists.txt" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/Cholesky" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/CholmodSupport" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/Core" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/Dense" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/Eigen" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/Eigenvalues" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/Geometry" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/Householder" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/IterativeLinearSolvers"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/Jacobi" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/LU" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/MetisSupport" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/OrderingMethods" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/PaStiXSupport" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/PardisoSupport" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/QR" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/QtAlignedMalloc" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/SPQRSupport" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/SVD" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/Sparse" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/SparseCholesky" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/SparseCore" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/SparseLU" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/SparseQR" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/StdDeque" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/StdList" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/StdVector" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/SuperLUSupport" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/UmfPackSupport" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Cholesky/LDLT.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Cholesky/LLT.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Cholesky/LLT_LAPACKE.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/CholmodSupport/CholmodSupport.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/Array.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/ArrayBase.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/ArrayWrapper.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/Assign.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/AssignEvaluator.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/Assign_MKL.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/BandMatrix.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/Block.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/BooleanRedux.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/CommaInitializer.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/ConditionEstimator.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/CoreEvaluators.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/CoreIterators.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/CwiseBinaryOp.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/CwiseNullaryOp.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/CwiseTernaryOp.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/CwiseUnaryOp.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/CwiseUnaryView.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/DenseBase.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/DenseCoeffsBase.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/DenseStorage.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/Diagonal.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/DiagonalMatrix.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/DiagonalProduct.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/Dot.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/EigenBase.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/ForceAlignedAccess.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/Fuzzy.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/GeneralProduct.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/GenericPacketMath.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/GlobalFunctions.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/IO.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/Inverse.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/Map.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/MapBase.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/MathFunctions.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/MathFunctionsImpl.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/Matrix.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/MatrixBase.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/NestByValue.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/NoAlias.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/NumTraits.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/PermutationMatrix.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/PlainObjectBase.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/Product.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/ProductEvaluators.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/Random.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/Redux.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/Ref.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/Replicate.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/ReturnByValue.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/Reverse.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/Select.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/SelfAdjointView.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/SelfCwiseBinaryOp.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/Solve.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/SolveTriangular.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/SolverBase.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/StableNorm.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/Stride.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/Swap.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/Transpose.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/Transpositions.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/TriangularMatrix.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/VectorBlock.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/VectorwiseOp.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/Visitor.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/arch/AVX/Complex.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/arch/AVX/MathFunctions.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/arch/AVX/PacketMath.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/arch/AVX/TypeCasting.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/arch/AVX512/MathFunctions.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/arch/AVX512/PacketMath.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/arch/AltiVec/Complex.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/arch/AltiVec/MathFunctions.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/arch/AltiVec/PacketMath.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/arch/CUDA/Complex.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/arch/CUDA/Half.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/arch/CUDA/MathFunctions.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/arch/CUDA/PacketMath.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/arch/CUDA/PacketMathHalf.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/arch/CUDA/TypeCasting.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/arch/Default/Settings.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/arch/NEON/Complex.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/arch/NEON/MathFunctions.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/arch/NEON/PacketMath.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/arch/SSE/Complex.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/arch/SSE/MathFunctions.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/arch/SSE/PacketMath.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/arch/SSE/TypeCasting.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/arch/ZVector/Complex.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/arch/ZVector/MathFunctions.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/arch/ZVector/PacketMath.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/functors/AssignmentFunctors.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/functors/BinaryFunctors.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/functors/NullaryFunctors.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/functors/StlFunctors.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/functors/TernaryFunctors.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/functors/UnaryFunctors.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/products/GeneralBlockPanelKernel.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/products/GeneralMatrixMatrix.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/products/GeneralMatrixMatrixTriangular.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/products/GeneralMatrixMatrixTriangular_BLAS.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/products/GeneralMatrixMatrix_BLAS.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/products/GeneralMatrixVector.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/products/GeneralMatrixVector_BLAS.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/products/Parallelizer.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/products/SelfadjointMatrixMatrix.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/products/SelfadjointMatrixMatrix_BLAS.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/products/SelfadjointMatrixVector.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/products/SelfadjointMatrixVector_BLAS.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/products/SelfadjointProduct.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/products/SelfadjointRank2Update.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/products/TriangularMatrixMatrix.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/products/TriangularMatrixMatrix_BLAS.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/products/TriangularMatrixVector.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/products/TriangularMatrixVector_BLAS.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/products/TriangularSolverMatrix.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/products/TriangularSolverMatrix_BLAS.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/products/TriangularSolverVector.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/util/BlasUtil.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/util/Constants.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/util/DisableStupidWarnings.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/util/ForwardDeclarations.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/util/MKL_support.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/util/Macros.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/util/Memory.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/util/Meta.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/util/NonMPL2.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/util/ReenableStupidWarnings.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/util/StaticAssert.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/util/XprHelper.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Eigenvalues/ComplexEigenSolver.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Eigenvalues/ComplexSchur.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Eigenvalues/ComplexSchur_LAPACKE.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Eigenvalues/EigenSolver.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Eigenvalues/GeneralizedEigenSolver.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Eigenvalues/GeneralizedSelfAdjointEigenSolver.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Eigenvalues/HessenbergDecomposition.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Eigenvalues/MatrixBaseEigenvalues.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Eigenvalues/RealQZ.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Eigenvalues/RealSchur.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Eigenvalues/RealSchur_LAPACKE.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Eigenvalues/SelfAdjointEigenSolver.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Eigenvalues/SelfAdjointEigenSolver_LAPACKE.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Eigenvalues/Tridiagonalization.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Geometry/AlignedBox.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Geometry/AngleAxis.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Geometry/EulerAngles.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Geometry/Homogeneous.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Geometry/Hyperplane.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Geometry/OrthoMethods.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Geometry/ParametrizedLine.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Geometry/Quaternion.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Geometry/Rotation2D.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Geometry/RotationBase.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Geometry/Scaling.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Geometry/Transform.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Geometry/Translation.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Geometry/Umeyama.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Geometry/arch/Geometry_SSE.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Householder/BlockHouseholder.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Householder/Householder.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Householder/HouseholderSequence.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/IterativeLinearSolvers/BasicPreconditioners.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/IterativeLinearSolvers/BiCGSTAB.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/IterativeLinearSolvers/ConjugateGradient.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/IterativeLinearSolvers/IncompleteCholesky.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/IterativeLinearSolvers/IncompleteLUT.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/IterativeLinearSolvers/IterativeSolverBase.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/IterativeLinearSolvers/LeastSquareConjugateGradient.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/IterativeLinearSolvers/SolveWithGuess.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Jacobi/Jacobi.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/src/LU/Determinant.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/src/LU/FullPivLU.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/src/LU/InverseImpl.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/src/LU/PartialPivLU.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/LU/PartialPivLU_LAPACKE.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/LU/arch/Inverse_SSE.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/MetisSupport/MetisSupport.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/OrderingMethods/Amd.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/OrderingMethods/Eigen_Colamd.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/OrderingMethods/Ordering.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/PaStiXSupport/PaStiXSupport.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/PardisoSupport/PardisoSupport.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/QR/ColPivHouseholderQR.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/QR/ColPivHouseholderQR_LAPACKE.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/QR/CompleteOrthogonalDecomposition.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/QR/FullPivHouseholderQR.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/QR/HouseholderQR.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/QR/HouseholderQR_LAPACKE.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SPQRSupport/SuiteSparseQRSupport.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SVD/BDCSVD.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SVD/JacobiSVD.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SVD/JacobiSVD_LAPACKE.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SVD/SVDBase.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SVD/UpperBidiagonalization.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SparseCholesky/SimplicialCholesky.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SparseCholesky/SimplicialCholesky_impl.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SparseCore/AmbiVector.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SparseCore/CompressedStorage.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SparseCore/ConservativeSparseSparseProduct.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SparseCore/MappedSparseMatrix.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SparseCore/SparseAssign.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SparseCore/SparseBlock.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SparseCore/SparseColEtree.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SparseCore/SparseCompressedBase.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SparseCore/SparseCwiseBinaryOp.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SparseCore/SparseCwiseUnaryOp.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SparseCore/SparseDenseProduct.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SparseCore/SparseDiagonalProduct.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SparseCore/SparseDot.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SparseCore/SparseFuzzy.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SparseCore/SparseMap.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SparseCore/SparseMatrix.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SparseCore/SparseMatrixBase.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SparseCore/SparsePermutation.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SparseCore/SparseProduct.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SparseCore/SparseRedux.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SparseCore/SparseRef.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SparseCore/SparseSelfAdjointView.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SparseCore/SparseSolverBase.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SparseCore/SparseSparseProductWithPruning.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SparseCore/SparseTranspose.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SparseCore/SparseTriangularView.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SparseCore/SparseUtil.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SparseCore/SparseVector.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SparseCore/SparseView.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SparseCore/TriangularSolver.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SparseLU/SparseLU.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SparseLU/SparseLUImpl.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SparseLU/SparseLU_Memory.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SparseLU/SparseLU_Structs.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SparseLU/SparseLU_SupernodalMatrix.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SparseLU/SparseLU_Utils.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SparseLU/SparseLU_column_bmod.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SparseLU/SparseLU_column_dfs.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SparseLU/SparseLU_copy_to_ucol.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SparseLU/SparseLU_gemm_kernel.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SparseLU/SparseLU_heap_relax_snode.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SparseLU/SparseLU_kernel_bmod.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SparseLU/SparseLU_panel_bmod.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SparseLU/SparseLU_panel_dfs.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SparseLU/SparseLU_pivotL.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SparseLU/SparseLU_pruneL.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SparseLU/SparseLU_relax_snode.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SparseQR/SparseQR.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/StlSupport/StdDeque.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/StlSupport/StdList.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/StlSupport/StdVector.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/StlSupport/details.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SuperLUSupport/SuperLUSupport.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/UmfPackSupport/UmfPackSupport.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/misc/Image.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/src/misc/Kernel.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/src/misc/RealSvd2x2.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/misc/blas.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/src/misc/lapack.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/src/misc/lapacke.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/src/misc/lapacke_mangling.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/plugins/ArrayCwiseBinaryOps.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/plugins/ArrayCwiseUnaryOps.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/plugins/BlockMethods.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/plugins/CommonCwiseBinaryOps.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/plugins/CommonCwiseUnaryOps.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/plugins/MatrixCwiseBinaryOps.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/plugins/MatrixCwiseUnaryOps.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="main.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="readme.txt" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="references.md" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/configs/libboundconfig.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="src/configs/libboundconfig.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/configs/libconfig.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="src/configs/libconfig.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/configs/libmatconfig.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="src/configs/libmatconfig.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/configs/libmeshconfig.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="src/configs/libmeshconfig.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/configs/libsimuconfig.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="src/configs/libsimuconfig.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/configs/libsourceconfig.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="src/configs/libsourceconfig.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/meshreader/libgmshreader.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="src/meshreader/libgmshreader.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/meshreader/libmeshreader.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="src/meshreader/libmeshreader.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/meshreader/libmeshtlmbht.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="src/meshreader/libmeshtlmbht.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/meshreader/libtbnreader.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="src/meshreader/libtbnreader.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/miscellaneous/benchmark/libbenchmark.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="src/miscellaneous/benchmark/libbenchmark.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/miscellaneous/benchmark/libbenchmatmult.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="src/miscellaneous/benchmark/libbenchmatmult.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/miscellaneous/external/eigeninterface.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="src/miscellaneous/external/eigeninterface.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/miscellaneous/getncore.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/miscellaneous/getncore.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/miscellaneous/liberrorcode.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="src/miscellaneous/liberrorcode.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/miscellaneous/libmiscellaneous.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="src/miscellaneous/libmiscellaneous.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/miscellaneous/libstringtlmbht.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="src/miscellaneous/libstringtlmbht.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/octave/analytical/1D/readme.txt"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/octave/old_matlab_code/README.txt"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/octave/old_matlab_code/parallelepiped_6BC.geo"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/octave/old_matlab_code/parallelepiped_6BC_1368e.msh"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/octave/old_matlab_code/parallelepiped_6BC_206e.msh"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/octave/old_matlab_code/parallelepiped_6BC_24e.msh"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/octave/old_matlab_code/parallelepiped_6BC_69941e.msh"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/octave/old_matlab_code/parallelepiped_6BC_9618e.msh"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/octave/old_matlab_code/plate_4BC.geo"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/octave/old_matlab_code/plate_4BC_10766e.msh"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/octave/old_matlab_code/plate_4BC_10766e.tms.mat"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/octave/old_matlab_code/plate_4BC_40e.msh"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/octave/old_matlab_code/plate_4BC_40e.tms.mat"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/octave/old_matlab_code/plate_4BC_682e.msh"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/octave/old_matlab_code/plate_4BC_682e.tms.mat"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/octave/old_matlab_code/plate_6BC_1368e.tms.mat"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/octave/old_matlab_code/plate_6BC_206e.tms.mat"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/octave/old_matlab_code/plate_6BC_24e.tms.mat"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/octave/old_matlab_code/plate_6BC_69941e.tms.mat"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/octave/old_matlab_code/plate_6BC_9618e.tms.mat"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/octave/old_octave_code/plate_4BC_10766e.msh"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/octave/old_octave_code/plate_4BC_10766e.tms.mat"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/octave/old_octave_code/plate_4BC_40e.msh"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/octave/old_octave_code/plate_4BC_40e.tms.msh"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/octave/old_octave_code/plate_4BC_60e.msh"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/octave/old_octave_code/plate_4BC_682e.tms.mat"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/octave/old_octave_code/plate_6BC_1368e.tms.mat"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/octave/old_octave_code/plate_6BC_206e.tms.mat"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/octave/old_octave_code/plate_6BC_24e.tms.mat"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/octave/old_octave_code/plate_6BC_69941e.tms.mat"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/octave/old_octave_code/plate_6BC_9618e.tms.mat"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/solver/libinterfaceceigen.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/solver/libinterfaceceigen.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/solver/libsolver.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="src/solver/libsolver.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/solver/libsolvercalls.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="src/solver/libsolvercalls.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/solver/libsolvereigen.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/solver/libsolvereigen.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/solver/tlmsolver/libtlmsolver.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="src/solver/tlmsolver/libtlmsolver.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/solver/tlmsolver/libtlmsolvereigen.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="src/solver/tlmsolver/libtlmsolvereigen.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/solver/tlmsolver/pennes/libtlmpennes.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="src/solver/tlmsolver/pennes/libtlmpennes.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/solver/tlmsolver/pennes/libtlmpennes2dsolver.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="src/solver/tlmsolver/pennes/libtlmpennes2dsolver.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/solver/tlmsolver/pennes/libtlmpennes2dsolvereigen.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="src/solver/tlmsolver/pennes/libtlmpennes2dsolvereigen.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/solver/tlmsolver/pennes/libtlmpennes3dsolver.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="src/solver/tlmsolver/pennes/libtlmpennes3dsolver.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/solver/tlmsolver/pennes/libtlmpennes3dsolvereigen.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="src/solver/tlmsolver/pennes/libtlmpennes3dsolvereigen.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/solver/tlmsolver/pennes/libtlmpenneseigen.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="src/solver/tlmsolver/pennes/libtlmpenneseigen.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+    </conf>
+    <conf name="Release" type="1">
+      <toolsSet>
+        <compilerSet>CUDA|GNU</compilerSet>
+        <dependencyChecking>true</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
+      </toolsSet>
+      <compileType>
+        <cTool>
+          <developmentMode>5</developmentMode>
+        </cTool>
+        <ccTool>
+          <developmentMode>5</developmentMode>
+        </ccTool>
+        <fortranCompilerTool>
+          <developmentMode>5</developmentMode>
+        </fortranCompilerTool>
+        <asmTool>
+          <developmentMode>5</developmentMode>
+        </asmTool>
+      </compileType>
+      <item path="LICENSE.md" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="README.md" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="acknowledgment.md" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/CMakeLists.txt" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/Cholesky" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/CholmodSupport" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/Core" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/Dense" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/Eigen" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/Eigenvalues" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/Geometry" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/Householder" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/IterativeLinearSolvers"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/Jacobi" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/LU" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/MetisSupport" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/OrderingMethods" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/PaStiXSupport" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/PardisoSupport" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/QR" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/QtAlignedMalloc" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/SPQRSupport" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/SVD" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/Sparse" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/SparseCholesky" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/SparseCore" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/SparseLU" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/SparseQR" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/StdDeque" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/StdList" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/StdVector" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/SuperLUSupport" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/UmfPackSupport" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Cholesky/LDLT.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Cholesky/LLT.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Cholesky/LLT_LAPACKE.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/CholmodSupport/CholmodSupport.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/Array.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/ArrayBase.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/ArrayWrapper.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/Assign.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/AssignEvaluator.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/Assign_MKL.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/BandMatrix.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/Block.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/BooleanRedux.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/CommaInitializer.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/ConditionEstimator.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/CoreEvaluators.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/CoreIterators.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/CwiseBinaryOp.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/CwiseNullaryOp.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/CwiseTernaryOp.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/CwiseUnaryOp.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/CwiseUnaryView.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/DenseBase.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/DenseCoeffsBase.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/DenseStorage.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/Diagonal.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/DiagonalMatrix.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/DiagonalProduct.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/Dot.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/EigenBase.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/ForceAlignedAccess.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/Fuzzy.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/GeneralProduct.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/GenericPacketMath.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/GlobalFunctions.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/IO.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/Inverse.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/Map.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/MapBase.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/MathFunctions.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/MathFunctionsImpl.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/Matrix.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/MatrixBase.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/NestByValue.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/NoAlias.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/NumTraits.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/PermutationMatrix.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/PlainObjectBase.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/Product.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/ProductEvaluators.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/Random.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/Redux.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/Ref.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/Replicate.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/ReturnByValue.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/Reverse.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/Select.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/SelfAdjointView.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/SelfCwiseBinaryOp.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/Solve.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/SolveTriangular.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/SolverBase.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/StableNorm.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/Stride.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/Swap.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/Transpose.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/Transpositions.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/TriangularMatrix.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/VectorBlock.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/VectorwiseOp.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/Visitor.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/arch/AVX/Complex.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/arch/AVX/MathFunctions.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/arch/AVX/PacketMath.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/arch/AVX/TypeCasting.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/arch/AVX512/MathFunctions.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/arch/AVX512/PacketMath.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/arch/AltiVec/Complex.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/arch/AltiVec/MathFunctions.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/arch/AltiVec/PacketMath.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/arch/CUDA/Complex.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/arch/CUDA/Half.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/arch/CUDA/MathFunctions.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/arch/CUDA/PacketMath.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/arch/CUDA/PacketMathHalf.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/arch/CUDA/TypeCasting.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/arch/Default/Settings.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/arch/NEON/Complex.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/arch/NEON/MathFunctions.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/arch/NEON/PacketMath.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/arch/SSE/Complex.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/arch/SSE/MathFunctions.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/arch/SSE/PacketMath.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/arch/SSE/TypeCasting.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/arch/ZVector/Complex.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/arch/ZVector/MathFunctions.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/arch/ZVector/PacketMath.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/functors/AssignmentFunctors.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/functors/BinaryFunctors.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/functors/NullaryFunctors.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/functors/StlFunctors.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/functors/TernaryFunctors.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/functors/UnaryFunctors.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/products/GeneralBlockPanelKernel.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/products/GeneralMatrixMatrix.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/products/GeneralMatrixMatrixTriangular.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/products/GeneralMatrixMatrixTriangular_BLAS.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/products/GeneralMatrixMatrix_BLAS.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/products/GeneralMatrixVector.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/products/GeneralMatrixVector_BLAS.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/products/Parallelizer.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/products/SelfadjointMatrixMatrix.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/products/SelfadjointMatrixMatrix_BLAS.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/products/SelfadjointMatrixVector.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/products/SelfadjointMatrixVector_BLAS.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/products/SelfadjointProduct.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/products/SelfadjointRank2Update.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/products/TriangularMatrixMatrix.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/products/TriangularMatrixMatrix_BLAS.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/products/TriangularMatrixVector.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/products/TriangularMatrixVector_BLAS.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/products/TriangularSolverMatrix.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/products/TriangularSolverMatrix_BLAS.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/products/TriangularSolverVector.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/util/BlasUtil.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/util/Constants.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/util/DisableStupidWarnings.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/util/ForwardDeclarations.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/util/MKL_support.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/util/Macros.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/util/Memory.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/util/Meta.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/util/NonMPL2.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/util/ReenableStupidWarnings.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/util/StaticAssert.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Core/util/XprHelper.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Eigenvalues/ComplexEigenSolver.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Eigenvalues/ComplexSchur.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Eigenvalues/ComplexSchur_LAPACKE.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Eigenvalues/EigenSolver.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Eigenvalues/GeneralizedEigenSolver.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Eigenvalues/GeneralizedSelfAdjointEigenSolver.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Eigenvalues/HessenbergDecomposition.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Eigenvalues/MatrixBaseEigenvalues.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Eigenvalues/RealQZ.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Eigenvalues/RealSchur.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Eigenvalues/RealSchur_LAPACKE.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Eigenvalues/SelfAdjointEigenSolver.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Eigenvalues/SelfAdjointEigenSolver_LAPACKE.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Eigenvalues/Tridiagonalization.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Geometry/AlignedBox.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Geometry/AngleAxis.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Geometry/EulerAngles.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Geometry/Homogeneous.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Geometry/Hyperplane.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Geometry/OrthoMethods.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Geometry/ParametrizedLine.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Geometry/Quaternion.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Geometry/Rotation2D.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Geometry/RotationBase.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Geometry/Scaling.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Geometry/Transform.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Geometry/Translation.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Geometry/Umeyama.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Geometry/arch/Geometry_SSE.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Householder/BlockHouseholder.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Householder/Householder.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Householder/HouseholderSequence.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/IterativeLinearSolvers/BasicPreconditioners.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/IterativeLinearSolvers/BiCGSTAB.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/IterativeLinearSolvers/ConjugateGradient.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/IterativeLinearSolvers/IncompleteCholesky.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/IterativeLinearSolvers/IncompleteLUT.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/IterativeLinearSolvers/IterativeSolverBase.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/IterativeLinearSolvers/LeastSquareConjugateGradient.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/IterativeLinearSolvers/SolveWithGuess.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/Jacobi/Jacobi.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/src/LU/Determinant.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/src/LU/FullPivLU.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/src/LU/InverseImpl.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/src/LU/PartialPivLU.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/LU/PartialPivLU_LAPACKE.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/LU/arch/Inverse_SSE.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/MetisSupport/MetisSupport.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/OrderingMethods/Amd.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/OrderingMethods/Eigen_Colamd.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/OrderingMethods/Ordering.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/PaStiXSupport/PaStiXSupport.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/PardisoSupport/PardisoSupport.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/QR/ColPivHouseholderQR.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/QR/ColPivHouseholderQR_LAPACKE.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/QR/CompleteOrthogonalDecomposition.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/QR/FullPivHouseholderQR.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/QR/HouseholderQR.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/QR/HouseholderQR_LAPACKE.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SPQRSupport/SuiteSparseQRSupport.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SVD/BDCSVD.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SVD/JacobiSVD.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SVD/JacobiSVD_LAPACKE.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SVD/SVDBase.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SVD/UpperBidiagonalization.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SparseCholesky/SimplicialCholesky.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SparseCholesky/SimplicialCholesky_impl.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SparseCore/AmbiVector.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SparseCore/CompressedStorage.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SparseCore/ConservativeSparseSparseProduct.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SparseCore/MappedSparseMatrix.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SparseCore/SparseAssign.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SparseCore/SparseBlock.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SparseCore/SparseColEtree.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SparseCore/SparseCompressedBase.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SparseCore/SparseCwiseBinaryOp.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SparseCore/SparseCwiseUnaryOp.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SparseCore/SparseDenseProduct.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SparseCore/SparseDiagonalProduct.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SparseCore/SparseDot.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SparseCore/SparseFuzzy.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SparseCore/SparseMap.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SparseCore/SparseMatrix.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SparseCore/SparseMatrixBase.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SparseCore/SparsePermutation.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SparseCore/SparseProduct.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SparseCore/SparseRedux.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SparseCore/SparseRef.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SparseCore/SparseSelfAdjointView.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SparseCore/SparseSolverBase.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SparseCore/SparseSparseProductWithPruning.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SparseCore/SparseTranspose.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SparseCore/SparseTriangularView.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SparseCore/SparseUtil.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SparseCore/SparseVector.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SparseCore/SparseView.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SparseCore/TriangularSolver.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SparseLU/SparseLU.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SparseLU/SparseLUImpl.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SparseLU/SparseLU_Memory.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SparseLU/SparseLU_Structs.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SparseLU/SparseLU_SupernodalMatrix.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SparseLU/SparseLU_Utils.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SparseLU/SparseLU_column_bmod.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SparseLU/SparseLU_column_dfs.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SparseLU/SparseLU_copy_to_ucol.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SparseLU/SparseLU_gemm_kernel.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SparseLU/SparseLU_heap_relax_snode.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SparseLU/SparseLU_kernel_bmod.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SparseLU/SparseLU_panel_bmod.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SparseLU/SparseLU_panel_dfs.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SparseLU/SparseLU_pivotL.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SparseLU/SparseLU_pruneL.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SparseLU/SparseLU_relax_snode.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SparseQR/SparseQR.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/StlSupport/StdDeque.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/StlSupport/StdList.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/StlSupport/StdVector.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/StlSupport/details.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/SuperLUSupport/SuperLUSupport.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/UmfPackSupport/UmfPackSupport.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/misc/Image.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/src/misc/Kernel.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/src/misc/RealSvd2x2.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/misc/blas.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/src/misc/lapack.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/src/misc/lapacke.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/Eigen/src/misc/lapacke_mangling.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/plugins/ArrayCwiseBinaryOps.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/plugins/ArrayCwiseUnaryOps.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/plugins/BlockMethods.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/plugins/CommonCwiseBinaryOps.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/plugins/CommonCwiseUnaryOps.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/plugins/MatrixCwiseBinaryOps.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/Eigen/src/plugins/MatrixCwiseUnaryOps.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="main.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="readme.txt" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="references.md" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/configs/libboundconfig.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="src/configs/libboundconfig.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/configs/libconfig.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="src/configs/libconfig.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/configs/libmatconfig.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="src/configs/libmatconfig.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/configs/libmeshconfig.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="src/configs/libmeshconfig.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/configs/libsimuconfig.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="src/configs/libsimuconfig.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/configs/libsourceconfig.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="src/configs/libsourceconfig.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/meshreader/libgmshreader.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="src/meshreader/libgmshreader.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/meshreader/libmeshreader.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="src/meshreader/libmeshreader.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/meshreader/libmeshtlmbht.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="src/meshreader/libmeshtlmbht.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/meshreader/libtbnreader.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="src/meshreader/libtbnreader.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/miscellaneous/benchmark/libbenchmark.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="src/miscellaneous/benchmark/libbenchmark.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/miscellaneous/benchmark/libbenchmatmult.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="src/miscellaneous/benchmark/libbenchmatmult.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/miscellaneous/external/eigeninterface.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="src/miscellaneous/external/eigeninterface.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/miscellaneous/getncore.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/miscellaneous/getncore.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/miscellaneous/liberrorcode.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="src/miscellaneous/liberrorcode.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/miscellaneous/libmiscellaneous.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="src/miscellaneous/libmiscellaneous.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/miscellaneous/libstringtlmbht.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="src/miscellaneous/libstringtlmbht.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/octave/analytical/1D/readme.txt"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/octave/old_matlab_code/README.txt"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/octave/old_matlab_code/parallelepiped_6BC.geo"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/octave/old_matlab_code/parallelepiped_6BC_1368e.msh"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/octave/old_matlab_code/parallelepiped_6BC_206e.msh"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/octave/old_matlab_code/parallelepiped_6BC_24e.msh"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/octave/old_matlab_code/parallelepiped_6BC_69941e.msh"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/octave/old_matlab_code/parallelepiped_6BC_9618e.msh"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/octave/old_matlab_code/plate_4BC.geo"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/octave/old_matlab_code/plate_4BC_10766e.msh"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/octave/old_matlab_code/plate_4BC_10766e.tms.mat"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/octave/old_matlab_code/plate_4BC_40e.msh"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/octave/old_matlab_code/plate_4BC_40e.tms.mat"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/octave/old_matlab_code/plate_4BC_682e.msh"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/octave/old_matlab_code/plate_4BC_682e.tms.mat"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/octave/old_matlab_code/plate_6BC_1368e.tms.mat"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/octave/old_matlab_code/plate_6BC_206e.tms.mat"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/octave/old_matlab_code/plate_6BC_24e.tms.mat"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/octave/old_matlab_code/plate_6BC_69941e.tms.mat"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/octave/old_matlab_code/plate_6BC_9618e.tms.mat"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/octave/old_octave_code/plate_4BC_10766e.msh"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/octave/old_octave_code/plate_4BC_10766e.tms.mat"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/octave/old_octave_code/plate_4BC_40e.msh"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/octave/old_octave_code/plate_4BC_40e.tms.msh"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/octave/old_octave_code/plate_4BC_60e.msh"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/octave/old_octave_code/plate_4BC_682e.tms.mat"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/octave/old_octave_code/plate_6BC_1368e.tms.mat"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/octave/old_octave_code/plate_6BC_206e.tms.mat"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/octave/old_octave_code/plate_6BC_24e.tms.mat"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/octave/old_octave_code/plate_6BC_69941e.tms.mat"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/octave/old_octave_code/plate_6BC_9618e.tms.mat"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/solver/libinterfaceceigen.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/solver/libinterfaceceigen.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/solver/libsolver.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="src/solver/libsolver.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/solver/libsolvercalls.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="src/solver/libsolvercalls.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/solver/libsolvereigen.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/solver/libsolvereigen.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/solver/tlmsolver/libtlmsolver.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="src/solver/tlmsolver/libtlmsolver.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/solver/tlmsolver/libtlmsolvereigen.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="src/solver/tlmsolver/libtlmsolvereigen.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/solver/tlmsolver/pennes/libtlmpennes.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="src/solver/tlmsolver/pennes/libtlmpennes.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/solver/tlmsolver/pennes/libtlmpennes2dsolver.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="src/solver/tlmsolver/pennes/libtlmpennes2dsolver.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/solver/tlmsolver/pennes/libtlmpennes2dsolvereigen.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="src/solver/tlmsolver/pennes/libtlmpennes2dsolvereigen.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/solver/tlmsolver/pennes/libtlmpennes3dsolver.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="src/solver/tlmsolver/pennes/libtlmpennes3dsolver.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/solver/tlmsolver/pennes/libtlmpennes3dsolvereigen.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="src/solver/tlmsolver/pennes/libtlmpennes3dsolvereigen.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="src/solver/tlmsolver/pennes/libtlmpenneseigen.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="src/solver/tlmsolver/pennes/libtlmpenneseigen.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+    </conf>
+  </confs>
+</configurationDescriptor>
