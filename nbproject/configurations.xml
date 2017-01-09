@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configurationDescriptor version="100">
   <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
-    <logicalFolder name="HeaderFiles"
-                   displayName="Header Files"
-                   projectFiles="true">
+    <logicalFolder name="include" displayName="include" projectFiles="true">
       <logicalFolder name="Eigen" displayName="Eigen" projectFiles="true">
         <logicalFolder name="src" displayName="src" projectFiles="true">
           <logicalFolder name="Cholesky" displayName="Cholesky" projectFiles="true">
@@ -405,6 +403,7 @@
         <itemPath>include/Eigen/SuperLUSupport</itemPath>
         <itemPath>include/Eigen/UmfPackSupport</itemPath>
       </logicalFolder>
+      <itemPath>include/readme.txt</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
                    displayName="Resource Files"
@@ -463,70 +462,6 @@
         <itemPath>src/miscellaneous/libstringtlmbht.c</itemPath>
         <itemPath>src/miscellaneous/libstringtlmbht.h</itemPath>
       </logicalFolder>
-      <logicalFolder name="octave" displayName="octave" projectFiles="true">
-        <logicalFolder name="analytical" displayName="analytical" projectFiles="true">
-          <logicalFolder name="1D" displayName="1D" projectFiles="true">
-            <itemPath>src/octave/analytical/1D/MilanTWM1D.m</itemPath>
-            <itemPath>src/octave/analytical/1D/MilanTWM1D_calling.m</itemPath>
-            <itemPath>src/octave/analytical/1D/readme.txt</itemPath>
-          </logicalFolder>
-          <logicalFolder name="2D" displayName="2D" projectFiles="true">
-            <itemPath>src/octave/analytical/2D/D2_BHE_f.m</itemPath>
-          </logicalFolder>
-          <logicalFolder name="3D" displayName="3D" projectFiles="true">
-            <itemPath>src/octave/analytical/3D/D3_BHE_f.m</itemPath>
-          </logicalFolder>
-        </logicalFolder>
-        <logicalFolder name="old_matlab_code"
-                       displayName="old_matlab_code"
-                       projectFiles="true">
-          <itemPath>src/octave/old_matlab_code/D2_BHE_f.m</itemPath>
-          <itemPath>src/octave/old_matlab_code/D3_BHE_f.m</itemPath>
-          <itemPath>src/octave/old_matlab_code/README.txt</itemPath>
-          <itemPath>src/octave/old_matlab_code/calling.m</itemPath>
-          <itemPath>src/octave/old_matlab_code/openmsh.m</itemPath>
-          <itemPath>src/octave/old_matlab_code/parallelepiped_6BC.geo</itemPath>
-          <itemPath>src/octave/old_matlab_code/parallelepiped_6BC_1368e.msh</itemPath>
-          <itemPath>src/octave/old_matlab_code/parallelepiped_6BC_206e.msh</itemPath>
-          <itemPath>src/octave/old_matlab_code/parallelepiped_6BC_24e.msh</itemPath>
-          <itemPath>src/octave/old_matlab_code/parallelepiped_6BC_69941e.msh</itemPath>
-          <itemPath>src/octave/old_matlab_code/parallelepiped_6BC_9618e.msh</itemPath>
-          <itemPath>src/octave/old_matlab_code/plate_4BC.geo</itemPath>
-          <itemPath>src/octave/old_matlab_code/plate_4BC_10766e.msh</itemPath>
-          <itemPath>src/octave/old_matlab_code/plate_4BC_10766e.tms.mat</itemPath>
-          <itemPath>src/octave/old_matlab_code/plate_4BC_40e.msh</itemPath>
-          <itemPath>src/octave/old_matlab_code/plate_4BC_40e.tms.mat</itemPath>
-          <itemPath>src/octave/old_matlab_code/plate_4BC_682e.msh</itemPath>
-          <itemPath>src/octave/old_matlab_code/plate_4BC_682e.tms.mat</itemPath>
-          <itemPath>src/octave/old_matlab_code/plate_6BC_1368e.tms.mat</itemPath>
-          <itemPath>src/octave/old_matlab_code/plate_6BC_206e.tms.mat</itemPath>
-          <itemPath>src/octave/old_matlab_code/plate_6BC_24e.tms.mat</itemPath>
-          <itemPath>src/octave/old_matlab_code/plate_6BC_69941e.tms.mat</itemPath>
-          <itemPath>src/octave/old_matlab_code/plate_6BC_9618e.tms.mat</itemPath>
-          <itemPath>src/octave/old_matlab_code/proproc.m</itemPath>
-          <itemPath>src/octave/old_matlab_code/testing.m</itemPath>
-        </logicalFolder>
-        <logicalFolder name="old_octave_code"
-                       displayName="old_octave_code"
-                       projectFiles="true">
-          <itemPath>src/octave/old_octave_code/D2_BHE_f.m</itemPath>
-          <itemPath>src/octave/old_octave_code/D3_BHE_f.m</itemPath>
-          <itemPath>src/octave/old_octave_code/calling.m</itemPath>
-          <itemPath>src/octave/old_octave_code/openmsh.m</itemPath>
-          <itemPath>src/octave/old_octave_code/plate_4BC_10766e.msh</itemPath>
-          <itemPath>src/octave/old_octave_code/plate_4BC_10766e.tms.mat</itemPath>
-          <itemPath>src/octave/old_octave_code/plate_4BC_40e.msh</itemPath>
-          <itemPath>src/octave/old_octave_code/plate_4BC_40e.tms.msh</itemPath>
-          <itemPath>src/octave/old_octave_code/plate_4BC_60e.msh</itemPath>
-          <itemPath>src/octave/old_octave_code/plate_4BC_682e.tms.mat</itemPath>
-          <itemPath>src/octave/old_octave_code/plate_6BC_1368e.tms.mat</itemPath>
-          <itemPath>src/octave/old_octave_code/plate_6BC_206e.tms.mat</itemPath>
-          <itemPath>src/octave/old_octave_code/plate_6BC_24e.tms.mat</itemPath>
-          <itemPath>src/octave/old_octave_code/plate_6BC_69941e.tms.mat</itemPath>
-          <itemPath>src/octave/old_octave_code/plate_6BC_9618e.tms.mat</itemPath>
-          <itemPath>src/octave/old_octave_code/proproc.m</itemPath>
-        </logicalFolder>
-      </logicalFolder>
       <logicalFolder name="solver" displayName="solver" projectFiles="true">
         <logicalFolder name="tlmsolver" displayName="tlmsolver" projectFiles="true">
           <logicalFolder name="pennes" displayName="pennes" projectFiles="true">
@@ -559,9 +494,6 @@
       </logicalFolder>
       <itemPath>main.c</itemPath>
     </logicalFolder>
-    <logicalFolder name="validation" displayName="validation" projectFiles="true">
-      <itemPath>readme.txt</itemPath>
-    </logicalFolder>
     <logicalFolder name="TestFiles"
                    displayName="Test Files"
                    projectFiles="false"
@@ -573,13 +505,10 @@
                    kind="IMPORTANT_FILES_FOLDER">
       <itemPath>Makefile</itemPath>
       <itemPath>case.tlm</itemPath>
+      <itemPath>src/octave</itemPath>
+      <itemPath>validation</itemPath>
     </logicalFolder>
   </logicalFolder>
-  <sourceRootList>
-    <Elem>include</Elem>
-    <Elem>src</Elem>
-    <Elem>validation</Elem>
-  </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
     <conf name="Debug" type="1">
@@ -589,6 +518,21 @@
         <rebuildPropChanged>false</rebuildPropChanged>
       </toolsSet>
       <compileType>
+        <cTool>
+          <incDir>
+            <pElem>include</pElem>
+          </incDir>
+          <commandLine>-fopenmp</commandLine>
+        </cTool>
+        <ccTool>
+          <incDir>
+            <pElem>include</pElem>
+          </incDir>
+          <commandLine>-fopenmp</commandLine>
+        </ccTool>
+        <fortranCompilerTool>
+          <developmentMode>0</developmentMode>
+        </fortranCompilerTool>
       </compileType>
       <item path="LICENSE.md" ex="false" tool="3" flavor2="0">
       </item>
@@ -1885,9 +1829,9 @@
             tool="3"
             flavor2="0">
       </item>
-      <item path="main.c" ex="false" tool="0" flavor2="0">
+      <item path="include/readme.txt" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="readme.txt" ex="false" tool="3" flavor2="0">
+      <item path="main.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="references.md" ex="false" tool="3" flavor2="0">
       </item>
@@ -1985,161 +1929,6 @@
             flavor2="0">
       </item>
       <item path="src/miscellaneous/libstringtlmbht.h"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="src/octave/analytical/1D/readme.txt"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="src/octave/old_matlab_code/README.txt"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="src/octave/old_matlab_code/parallelepiped_6BC.geo"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="src/octave/old_matlab_code/parallelepiped_6BC_1368e.msh"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="src/octave/old_matlab_code/parallelepiped_6BC_206e.msh"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="src/octave/old_matlab_code/parallelepiped_6BC_24e.msh"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="src/octave/old_matlab_code/parallelepiped_6BC_69941e.msh"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="src/octave/old_matlab_code/parallelepiped_6BC_9618e.msh"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="src/octave/old_matlab_code/plate_4BC.geo"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="src/octave/old_matlab_code/plate_4BC_10766e.msh"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="src/octave/old_matlab_code/plate_4BC_10766e.tms.mat"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="src/octave/old_matlab_code/plate_4BC_40e.msh"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="src/octave/old_matlab_code/plate_4BC_40e.tms.mat"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="src/octave/old_matlab_code/plate_4BC_682e.msh"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="src/octave/old_matlab_code/plate_4BC_682e.tms.mat"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="src/octave/old_matlab_code/plate_6BC_1368e.tms.mat"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="src/octave/old_matlab_code/plate_6BC_206e.tms.mat"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="src/octave/old_matlab_code/plate_6BC_24e.tms.mat"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="src/octave/old_matlab_code/plate_6BC_69941e.tms.mat"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="src/octave/old_matlab_code/plate_6BC_9618e.tms.mat"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="src/octave/old_octave_code/plate_4BC_10766e.msh"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="src/octave/old_octave_code/plate_4BC_10766e.tms.mat"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="src/octave/old_octave_code/plate_4BC_40e.msh"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="src/octave/old_octave_code/plate_4BC_40e.tms.msh"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="src/octave/old_octave_code/plate_4BC_60e.msh"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="src/octave/old_octave_code/plate_4BC_682e.tms.mat"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="src/octave/old_octave_code/plate_6BC_1368e.tms.mat"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="src/octave/old_octave_code/plate_6BC_206e.tms.mat"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="src/octave/old_octave_code/plate_6BC_24e.tms.mat"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="src/octave/old_octave_code/plate_6BC_69941e.tms.mat"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="src/octave/old_octave_code/plate_6BC_9618e.tms.mat"
             ex="false"
             tool="3"
             flavor2="0">
@@ -2243,19 +2032,27 @@
     </conf>
     <conf name="Release" type="1">
       <toolsSet>
-        <compilerSet>CUDA|GNU</compilerSet>
+        <compilerSet>default</compilerSet>
         <dependencyChecking>true</dependencyChecking>
         <rebuildPropChanged>false</rebuildPropChanged>
       </toolsSet>
       <compileType>
         <cTool>
           <developmentMode>5</developmentMode>
+          <incDir>
+            <pElem>include</pElem>
+          </incDir>
+          <commandLine>-fopenmp</commandLine>
         </cTool>
         <ccTool>
           <developmentMode>5</developmentMode>
+          <incDir>
+            <pElem>include</pElem>
+          </incDir>
+          <commandLine>-fopenmp</commandLine>
         </ccTool>
         <fortranCompilerTool>
-          <developmentMode>5</developmentMode>
+          <developmentMode>0</developmentMode>
         </fortranCompilerTool>
         <asmTool>
           <developmentMode>5</developmentMode>
@@ -3556,9 +3353,9 @@
             tool="3"
             flavor2="0">
       </item>
-      <item path="main.c" ex="false" tool="0" flavor2="0">
+      <item path="include/readme.txt" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="readme.txt" ex="false" tool="3" flavor2="0">
+      <item path="main.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="references.md" ex="false" tool="3" flavor2="0">
       </item>
@@ -3656,161 +3453,6 @@
             flavor2="0">
       </item>
       <item path="src/miscellaneous/libstringtlmbht.h"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="src/octave/analytical/1D/readme.txt"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="src/octave/old_matlab_code/README.txt"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="src/octave/old_matlab_code/parallelepiped_6BC.geo"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="src/octave/old_matlab_code/parallelepiped_6BC_1368e.msh"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="src/octave/old_matlab_code/parallelepiped_6BC_206e.msh"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="src/octave/old_matlab_code/parallelepiped_6BC_24e.msh"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="src/octave/old_matlab_code/parallelepiped_6BC_69941e.msh"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="src/octave/old_matlab_code/parallelepiped_6BC_9618e.msh"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="src/octave/old_matlab_code/plate_4BC.geo"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="src/octave/old_matlab_code/plate_4BC_10766e.msh"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="src/octave/old_matlab_code/plate_4BC_10766e.tms.mat"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="src/octave/old_matlab_code/plate_4BC_40e.msh"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="src/octave/old_matlab_code/plate_4BC_40e.tms.mat"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="src/octave/old_matlab_code/plate_4BC_682e.msh"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="src/octave/old_matlab_code/plate_4BC_682e.tms.mat"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="src/octave/old_matlab_code/plate_6BC_1368e.tms.mat"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="src/octave/old_matlab_code/plate_6BC_206e.tms.mat"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="src/octave/old_matlab_code/plate_6BC_24e.tms.mat"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="src/octave/old_matlab_code/plate_6BC_69941e.tms.mat"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="src/octave/old_matlab_code/plate_6BC_9618e.tms.mat"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="src/octave/old_octave_code/plate_4BC_10766e.msh"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="src/octave/old_octave_code/plate_4BC_10766e.tms.mat"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="src/octave/old_octave_code/plate_4BC_40e.msh"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="src/octave/old_octave_code/plate_4BC_40e.tms.msh"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="src/octave/old_octave_code/plate_4BC_60e.msh"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="src/octave/old_octave_code/plate_4BC_682e.tms.mat"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="src/octave/old_octave_code/plate_6BC_1368e.tms.mat"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="src/octave/old_octave_code/plate_6BC_206e.tms.mat"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="src/octave/old_octave_code/plate_6BC_24e.tms.mat"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="src/octave/old_octave_code/plate_6BC_69941e.tms.mat"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="src/octave/old_octave_code/plate_6BC_9618e.tms.mat"
             ex="false"
             tool="3"
             flavor2="0">

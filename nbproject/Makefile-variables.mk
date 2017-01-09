@@ -15,13 +15,13 @@ CND_PACKAGE_DIR_Debug=dist/Debug/GNU-Linux/package
 CND_PACKAGE_NAME_Debug=tlmbht.tar
 CND_PACKAGE_PATH_Debug=dist/Debug/GNU-Linux/package/tlmbht.tar
 # Release configuration
-CND_PLATFORM_Release=CUDA-Linux
-CND_ARTIFACT_DIR_Release=dist/Release/CUDA-Linux
+CND_PLATFORM_Release=GNU-Linux
+CND_ARTIFACT_DIR_Release=dist/Release/GNU-Linux
 CND_ARTIFACT_NAME_Release=tlmbht
-CND_ARTIFACT_PATH_Release=dist/Release/CUDA-Linux/tlmbht
-CND_PACKAGE_DIR_Release=dist/Release/CUDA-Linux/package
+CND_ARTIFACT_PATH_Release=dist/Release/GNU-Linux/tlmbht
+CND_PACKAGE_DIR_Release=dist/Release/GNU-Linux/package
 CND_PACKAGE_NAME_Release=tlmbht.tar
-CND_PACKAGE_PATH_Release=dist/Release/CUDA-Linux/package/tlmbht.tar
+CND_PACKAGE_PATH_Release=dist/Release/GNU-Linux/package/tlmbht.tar
 #
 # include compiler specific variables
 #

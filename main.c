@@ -79,13 +79,13 @@
 #include <string.h>
 #include <omp.h>
 
-#include "include/configs/libconfig.h"
-#include "include/miscellaneous/liberrorcode.h"
-#include "include/miscellaneous/libmiscellaneous.h"
-#include "include/meshreader/libmeshreader.h"
-#include "include/solver/libsolvercalls.h"
-#include "include/miscellaneous/benchmark/libbenchmark.h"
-#include "include/miscellaneous/getncore.h"
+#include "src/configs/libconfig.h"
+#include "src/miscellaneous/liberrorcode.h"
+#include "src/miscellaneous/libmiscellaneous.h"
+#include "src/meshreader/libmeshreader.h"
+#include "src/solver/libsolvercalls.h"
+#include "src/miscellaneous/benchmark/libbenchmark.h"
+#include "src/miscellaneous/getncore.h"
 
 /*
  * Declaring functions used here in main
