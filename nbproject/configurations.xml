@@ -499,6 +499,7 @@
       <itemPath>LICENSE.md</itemPath>
       <itemPath>Makefile</itemPath>
       <itemPath>README.md</itemPath>
+      <itemPath>README_future_release.md</itemPath>
       <itemPath>acknowledgment.md</itemPath>
       <itemPath>case.tlm</itemPath>
       <itemPath>src/octave</itemPath>

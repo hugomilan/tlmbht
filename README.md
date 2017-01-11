@@ -11,9 +11,7 @@
  
 # Compilation
  
-    *) How to make this code?
-    *) Download Eigen (http://eigen.tuxfamily.org/index.php?title=Main_Page).
-    *)
+    Insert instructions here.
  
 # Description
 
@@ -27,10 +25,8 @@ The numerical solution is based on a mesh of geometrical elements (or control vo
         1.1) Line in Cartesian coordinates.
     2) Two-dimensions.
         2.1) Triangle in Cartesian coordinates.
-        2.2) Quadrangle in Cartesian coordinates.
     3) Three-dimensions.
         3.1) Tetrahedron in Cartesian coordinates.
-        3.2) Hexahedron in Cartesian coordinates.
 
 The language is C/C++ and Eigen Library 3.3.1 (www.eigen.tuxfamily.org) is used for matrix calculations. Some analytical solutions and older versions of the code are available in Octave/Matlab in the folder src/octave/.
 
