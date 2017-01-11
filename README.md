@@ -1,4 +1,4 @@
-# tlmbht 0.2 (work in progress)
+# tlmbht 0.2.0 (work in progress)
  TLMBHT - Transmission-line Modeling Method applied to BioHeat Transfer Problems.
   
  Copyright (C) 2015 to 2017 by Cornell University. All Rights Reserved.
@@ -11,7 +11,9 @@
  
 # Compilation
  
-Future instructions here.
+    *) How to make this code?
+    *) Download Eigen (http://eigen.tuxfamily.org/index.php?title=Main_Page).
+    *)
  
 # Description
 
