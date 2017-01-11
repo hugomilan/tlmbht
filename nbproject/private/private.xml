@@ -8,10 +8,14 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/main.c</file>
+            <file>file:/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/src/miscellaneous/external/eigeninterface.h</file>
             <file>file:/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/src/miscellaneous/external/eigeninterface.cpp</file>
+            <file>file:/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/Makefile</file>
             <file>file:/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/src/solver/libsolvereigen.h</file>
             <file>file:/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/src/solver/tlmsolver/libtlmsolvereigen.h</file>
+            <file>file:/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/src/miscellaneous/getncore.cpp</file>
             <file>file:/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/src/meshreader/libmeshreader.h</file>
+            <file>file:/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/validation/readme.txt</file>
         </group>
     </open-files>
 </project-private>

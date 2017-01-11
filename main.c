@@ -1,7 +1,7 @@
 /*
  * TLMBHT - Transmission-line Modeling Method applied to BioHeat Transfer Problems.
  * 
- * Copyright (C) 2015 to 2016 by Cornell University. All Rights Reserved.
+ * Copyright (C) 2015 to 2017 by Cornell University. All Rights Reserved.
  * 
  * Written by Hugo Fernando Maia Milan.
  * 
@@ -29,7 +29,8 @@
 /*
  * Description of this file:
  * 
- * Main file for the TLMBHT Version 0.1b
+ * Main file for the TLMBHT Version 0.2.0
+ * We use Semantic Versioning 2.0.0 http://semver.org/
  * 
  * This function receives a script file as input and performs the operations requested
  * by the script file.
@@ -101,7 +102,7 @@ int main(int argc, char *argv[]) {
     clock_t begin = clock();
     struct dataForSimulation newDataConfig;
     unsigned int tlmErrorCode;
-    printf("TLMBHT 0.1b\n");
+    printf("TLMBHT 0.2.0\n");
     
     // initializing all the variables
     if ((tlmErrorCode = initializeAll(&newDataConfig)) != 0) {

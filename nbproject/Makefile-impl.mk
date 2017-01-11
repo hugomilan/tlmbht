@@ -31,7 +31,7 @@ DEFAULTCONF=Debug
 CONF=${DEFAULTCONF}
 
 # All Configurations
-ALLCONFS=Debug Release 
+ALLCONFS=Debug Release CUDA_Debug CUDA_Release 
 
 
 # build

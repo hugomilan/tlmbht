@@ -22,6 +22,22 @@ CND_ARTIFACT_PATH_Release=dist/Release/GNU-Linux/tlmbht
 CND_PACKAGE_DIR_Release=dist/Release/GNU-Linux/package
 CND_PACKAGE_NAME_Release=tlmbht.tar
 CND_PACKAGE_PATH_Release=dist/Release/GNU-Linux/package/tlmbht.tar
+# CUDA_Debug configuration
+CND_PLATFORM_CUDA_Debug=GNU-Linux
+CND_ARTIFACT_DIR_CUDA_Debug=dist/CUDA_Debug/GNU-Linux
+CND_ARTIFACT_NAME_CUDA_Debug=tlmbht
+CND_ARTIFACT_PATH_CUDA_Debug=dist/CUDA_Debug/GNU-Linux/tlmbht
+CND_PACKAGE_DIR_CUDA_Debug=dist/CUDA_Debug/GNU-Linux/package
+CND_PACKAGE_NAME_CUDA_Debug=tlmbht.tar
+CND_PACKAGE_PATH_CUDA_Debug=dist/CUDA_Debug/GNU-Linux/package/tlmbht.tar
+# CUDA_Release configuration
+CND_PLATFORM_CUDA_Release=GNU-Linux
+CND_ARTIFACT_DIR_CUDA_Release=dist/CUDA_Release/GNU-Linux
+CND_ARTIFACT_NAME_CUDA_Release=tlmbht
+CND_ARTIFACT_PATH_CUDA_Release=dist/CUDA_Release/GNU-Linux/tlmbht
+CND_PACKAGE_DIR_CUDA_Release=dist/CUDA_Release/GNU-Linux/package
+CND_PACKAGE_NAME_CUDA_Release=tlmbht.tar
+CND_PACKAGE_PATH_CUDA_Release=dist/CUDA_Release/GNU-Linux/package/tlmbht.tar
 #
 # include compiler specific variables
 #

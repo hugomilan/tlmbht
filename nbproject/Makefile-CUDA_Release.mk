@@ -23,7 +23,7 @@ AS=as
 # Macros
 CND_PLATFORM=GNU-Linux
 CND_DLIB_EXT=so
-CND_CONF=Release
+CND_CONF=CUDA_Release
 CND_DISTDIR=dist
 CND_BUILDDIR=build
 
@@ -68,11 +68,11 @@ OBJECTFILES= \
 
 
 # C Compiler Flags
-CFLAGS=-fopenmp
+CFLAGS=-Xcompiler -fopenmp
 
 # CC Compiler Flags
-CCFLAGS=-fopenmp -std=c++14
-CXXFLAGS=-fopenmp -std=c++14
+CCFLAGS=-Xcompiler -fopenmp -Xcompiler -std=c++14
+CXXFLAGS=-Xcompiler -fopenmp -Xcompiler -std=c++14
 
 # Fortran Compiler Flags
 FFLAGS=

@@ -8,10 +8,10 @@ wb = 1e-4;
 pb = p;
 cb = cp;
 Ti = 37;
-Ta = 36;
+Ta = 36*0;
 Tinf = 20;
 L = 0.015;
-Qm = 500;
+Qm = 500*0;
 Qr = 0;
 x = ((0:100)*L)/100;
 
@@ -27,5 +27,7 @@ for t = 0:(timeEnd/time)
         Qm, Qr, ninf);
     
     plot( x, T(t+1,:) )
+    ylim([0.9*Tinf 1.1*Ti])
+    xlim([0 L])
     pause(0.01)
 end
