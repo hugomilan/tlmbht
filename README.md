@@ -16,11 +16,13 @@
 # Description
 
 This is an Open-Source scientific code used to solve partial differential equations (pde) using the Transmission-line modeling (TLM; see Wiki and references for more information) numerical method. In this version, the following pde are supported:
+
     1) Heat transfer in 1D, 2D, and 3D.
     2) Bio-heat transfer in 1D, 2D, and 3D (Pennes, 1948; Minkowycz and Sparrow, 2009; Xu et al., 2011).
     3) Diffusion in 1D, 2D, and 3D.
 
 The numerical solution is based on a mesh of geometrical elements (or control volumes) that can be created using the Gmsh software (www.gmsh.info). The geometrical elements currently supported are based on my research on TLM (see the reference file for citation to the original papers) and are:
+
     1) One-dimension.
         1.1) Line in Cartesian coordinates.
     2) Two-dimensions.
