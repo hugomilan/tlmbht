@@ -266,7 +266,7 @@ unsigned int setConfigurationBoundary(char *input, struct BoundaryConfig *boundI
  * testInputBoundary: tests if all the required inputs were read
  */
 unsigned int testInputBoundary(struct BoundaryConfig * input,
-        struct Equation * equation, int id) {
+        struct Equation * equation, int id, struct Simulation *inputSimu) {
     int errorFound = 0;
 
     switch (equation->typeS) {
@@ -312,6 +312,22 @@ unsigned int testInputBoundary(struct BoundaryConfig * input,
                     errorFound = 1;
                 }
             }
+            
+            // generalized inputs.
+            input->generalized_scalar = input->scalarBoundary;
+            input->generalized_scalarDefined = input->scalarBoundaryDefined;
+            
+            input->generalized_flux = input->fluxBoundary;
+            input->generalized_fluxDefined = input->fluxBoundaryDefined;
+            
+            input->generalized_convectionScalar = input->convectionScalar;
+            input->generalized_convectionCoefficient = input->convectionCoefficient;
+            input->generalized_convectionDefined = input->convectionDefined;
+            
+            // these options are not defined for diffusion
+//            input->generalized_radiationScalar = input->radiationTemperature;
+//            input->generalized_radiationCoefficient = input->radiationEmissivity;
+//            input->generalized_radiationDefined = input->radiationDefined;
 
             break;
         case HYPERBOLIC_HEAT:
@@ -377,6 +393,23 @@ unsigned int testInputBoundary(struct BoundaryConfig * input,
                     errorFound = 1;
                 }
             }
+            
+            // generalized inputs.
+            input->generalized_scalar = input->temperatureBoundary;
+            input->generalized_scalarDefined = input->temperatureDefined;
+            
+            input->generalized_flux = input->heatFluxBoundary;
+            input->generalized_fluxDefined = input->heatFluxDefined;
+            
+            input->generalized_convectionScalar = input->convectionTemperature;
+            input->generalized_convectionCoefficient = input->convectionCoefficient;
+            input->generalized_convectionDefined = input->convectionDefined;
+            
+            input->generalized_radiationScalar = input->radiationTemperature -
+                    inputSimu->AbsoluteZero;
+            input->generalized_radiationCoefficient = input->radiationEmissivity;
+            input->generalized_radiationDefined = input->radiationDefined;
+            
             break;
         case EM:
             //future implementation

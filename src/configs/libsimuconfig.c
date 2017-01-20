@@ -319,11 +319,11 @@ unsigned int setConfigurationSimu(char * input, struct Simulation * configInput,
         removeBlankSpacesBeforeAndAfter(input);
 
         // I will put the correct name here latter, when I do the input testing.
-        if (compareCaseInsensitive(input, "--case")) {
+        if (compareCaseInsensitive(input, "--case") == 0) {
             configInput->nameOfOutputFile = (char*) malloc(sizeof (char)*(strlen("--case") + 1));
             strcpy(configInput->nameOfOutputFile, input);
 
-        } else if (compareCaseInsensitive(input, "--mesh")) {
+        } else if (compareCaseInsensitive(input, "--mesh") == 0) {
             configInput->nameOfOutputFile = (char*) malloc(sizeof (char)*(strlen("--mesh") + 1));
             strcpy(configInput->nameOfOutputFile, input);
 
@@ -442,14 +442,14 @@ unsigned int testInputSimu(struct Simulation *simu, char *meshName) {
     // 3) Stefan-Boltzmann constant?
 
     // Now I will adjust the nameOfOutputFile
-    if (compareCaseInsensitive(simu->nameOfOutputFile, "--case")) {
+    if (compareCaseInsensitive(simu->nameOfOutputFile, "--case") == 0) {
 
         simu->nameOfOutputFile = (char *) realloc(simu->nameOfOutputFile,
                 sizeof (char)*(strlen(simu->nameOfInputFile) + 1));
 
         strcpy(simu->nameOfOutputFile, simu->nameOfInputFile);
 
-    } else if (compareCaseInsensitive(simu->nameOfOutputFile, "--mesh")) {
+    } else if (compareCaseInsensitive(simu->nameOfOutputFile, "--mesh") == 0) {
 
         simu->nameOfOutputFile = (char *) realloc(simu->nameOfOutputFile,
                 sizeof (char)*(strlen(meshName) + 1));

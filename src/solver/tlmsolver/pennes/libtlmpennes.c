@@ -152,9 +152,9 @@ unsigned int initiateVariablesTLMPennes(struct dataForSimulation *input,
     // VERBOSE: see the preallocation
     if (input->simulationInput.verboseMode == 1) {
         printf("Pre-allocations for the connection variable with %u level(s): "
-                "%lld", level, allocateForEachLevel[0]);
+                "%llu", level, allocateForEachLevel[0]);
         for (int ilevel = 1; ilevel < level; ilevel++) {
-            printf(", %lld", allocateForEachLevel[ilevel]);
+            printf(", %llu", allocateForEachLevel[ilevel]);
         }
         printf("\n");
     }
@@ -353,8 +353,8 @@ unsigned int initiateBoundaryTypeAndDataPennes(struct boundaryData **input,
             continue;
         }
 
-        // temperature case
-        if (inputData->boundaryInput[ inputData->equationInput[id].boundaryNumbers[i] ].temperatureDefined == 1) {
+        // scalar case
+        if (inputData->boundaryInput[ inputData->equationInput[id].boundaryNumbers[i] ].generalized_scalarDefined == 1) {
             (*input)[i].quantityOfBoundaries = 1;
             (*input)[i].boundaries = (struct boundaryTypeAndData*)
                     malloc(sizeof (struct boundaryTypeAndData));
@@ -365,7 +365,7 @@ unsigned int initiateBoundaryTypeAndDataPennes(struct boundaryData **input,
 
             (*input)[i].boundaries[0].boundaryType = 1;
             (*input)[i].boundaries[0].boundaryData = (double*) malloc(sizeof (double));
-            (*input)[i].boundaries[0].boundaryData[0] = inputData->boundaryInput[ inputData->equationInput[id].boundaryNumbers[i] ].temperatureBoundary;
+            (*input)[i].boundaries[0].boundaryData[0] = inputData->boundaryInput[ inputData->equationInput[id].boundaryNumbers[i] ].generalized_scalar;
             continue;
         }
 
@@ -377,7 +377,7 @@ unsigned int initiateBoundaryTypeAndDataPennes(struct boundaryData **input,
         (*input)[i].boundaries = NULL;
 
         // heat flux case
-        if (inputData->boundaryInput[ inputData->equationInput[id].boundaryNumbers[i] ].heatFluxDefined == 1) {
+        if (inputData->boundaryInput[ inputData->equationInput[id].boundaryNumbers[i] ].generalized_fluxDefined == 1) {
             (*input)[i].quantityOfBoundaries++;
             (*input)[i].boundaries = (struct boundaryTypeAndData*)
                     realloc((*input)[i].boundaries,
@@ -390,11 +390,11 @@ unsigned int initiateBoundaryTypeAndDataPennes(struct boundaryData **input,
 
             (*input)[i].boundaries[(*input)[i].quantityOfBoundaries - 1].boundaryType = 2;
             (*input)[i].boundaries[(*input)[i].quantityOfBoundaries - 1].boundaryData = (double*) malloc(sizeof (double));
-            (*input)[i].boundaries[(*input)[i].quantityOfBoundaries - 1].boundaryData[0] = inputData->boundaryInput[ inputData->equationInput[id].boundaryNumbers[i] ].heatFluxBoundary; // heat flux value
+            (*input)[i].boundaries[(*input)[i].quantityOfBoundaries - 1].boundaryData[0] = inputData->boundaryInput[ inputData->equationInput[id].boundaryNumbers[i] ].generalized_flux; // heat flux value
         }
 
         // convection case
-        if (inputData->boundaryInput[ inputData->equationInput[id].boundaryNumbers[i] ].convectionDefined == 1) {
+        if (inputData->boundaryInput[ inputData->equationInput[id].boundaryNumbers[i] ].generalized_convectionDefined == 1) {
             (*input)[i].quantityOfBoundaries++;
             (*input)[i].boundaries = (struct boundaryTypeAndData*)
                     realloc((*input)[i].boundaries,
@@ -407,12 +407,12 @@ unsigned int initiateBoundaryTypeAndDataPennes(struct boundaryData **input,
 
             (*input)[i].boundaries[(*input)[i].quantityOfBoundaries - 1].boundaryType = 3;
             (*input)[i].boundaries[(*input)[i].quantityOfBoundaries - 1].boundaryData = (double*) malloc(sizeof (double)*2);
-            (*input)[i].boundaries[(*input)[i].quantityOfBoundaries - 1].boundaryData[0] = inputData->boundaryInput[ inputData->equationInput[id].boundaryNumbers[i] ].convectionTemperature; // temperature for the convection effect
-            (*input)[i].boundaries[(*input)[i].quantityOfBoundaries - 1].boundaryData[1] = inputData->boundaryInput[ inputData->equationInput[id].boundaryNumbers[i] ].convectionCoefficient; // convective heat transfer coefficient
+            (*input)[i].boundaries[(*input)[i].quantityOfBoundaries - 1].boundaryData[0] = inputData->boundaryInput[ inputData->equationInput[id].boundaryNumbers[i] ].generalized_convectionScalar; // temperature for the convection effect
+            (*input)[i].boundaries[(*input)[i].quantityOfBoundaries - 1].boundaryData[1] = inputData->boundaryInput[ inputData->equationInput[id].boundaryNumbers[i] ].generalized_convectionCoefficient; // convective heat transfer coefficient
         }
 
         // radiation case
-        if (inputData->boundaryInput[ inputData->equationInput[id].boundaryNumbers[i] ].radiationDefined == 1) {
+        if (inputData->boundaryInput[ inputData->equationInput[id].boundaryNumbers[i] ].generalized_radiationDefined == 1) {
             (*input)[i].quantityOfBoundaries++;
             (*input)[i].boundaries = (struct boundaryTypeAndData*)
                     realloc((*input)[i].boundaries,
@@ -425,8 +425,8 @@ unsigned int initiateBoundaryTypeAndDataPennes(struct boundaryData **input,
 
             (*input)[i].boundaries[(*input)[i].quantityOfBoundaries - 1].boundaryType = 4;
             (*input)[i].boundaries[(*input)[i].quantityOfBoundaries - 1].boundaryData = (double*) malloc(sizeof (double)*2);
-            (*input)[i].boundaries[(*input)[i].quantityOfBoundaries - 1].boundaryData[0] = inputData->boundaryInput[ inputData->equationInput[id].boundaryNumbers[i] ].radiationTemperature; // temperature for the radiation effect
-            (*input)[i].boundaries[(*input)[i].quantityOfBoundaries - 1].boundaryData[1] = inputData->boundaryInput[ inputData->equationInput[id].boundaryNumbers[i] ].radiationEmissivity; // radiation emissivity coefficient
+            (*input)[i].boundaries[(*input)[i].quantityOfBoundaries - 1].boundaryData[0] = inputData->boundaryInput[ inputData->equationInput[id].boundaryNumbers[i] ].generalized_radiationScalar; // temperature for the radiation effect
+            (*input)[i].boundaries[(*input)[i].quantityOfBoundaries - 1].boundaryData[1] = inputData->boundaryInput[ inputData->equationInput[id].boundaryNumbers[i] ].generalized_radiationCoefficient; // radiation emissivity coefficient
         }
     }
 

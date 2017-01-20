@@ -1,11 +1,3 @@
 /build/
 /include/Eigen/
 /dist/
-/README_future_release.md
-/case_testing_2D.tlm
-/case_testing_3D.tlm
-/case_testing_1D.tlm
-/line_2BC_47e*
-/parallelepiped_6BC_69941e*
-/plate_4BC_10766e*
-/nbproject/

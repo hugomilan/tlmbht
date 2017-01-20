@@ -269,7 +269,7 @@ unsigned int calculateMatricesPennesEigen(struct dataForSimulation *input,
     if (input->simulationInput.verboseMode == 1) {
         printf("Quantity of material tetrahedron nodes found: %llu\n", matrices->numbers.MaterialElements[4]);
         if (input->equationInput[id].dimen != THREE){
-            printf("Material tetrahedron nodes are not considered outside the two-dimensional problems. They will not be considered here.\n");
+            printf("Material tetrahedron nodes are not considered outside the three-dimensional problems. They will not be considered here.\n");
         }
     }
     if (matrices->numbers.MaterialElements[4] && input->equationInput[id].dimen == THREE) {

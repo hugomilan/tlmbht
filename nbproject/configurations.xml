@@ -499,12 +499,10 @@
       <itemPath>README_future_release.md</itemPath>
       <itemPath>acknowledgment.md</itemPath>
       <itemPath>case.tlm</itemPath>
-      <itemPath>case_testing_1D.tlm</itemPath>
-      <itemPath>case_testing_2D.tlm</itemPath>
-      <itemPath>case_testing_3D.tlm</itemPath>
       <itemPath>compilation flags.txt</itemPath>
       <itemPath>src/octave</itemPath>
       <itemPath>references.md</itemPath>
+      <itemPath>test</itemPath>
       <itemPath>validation</itemPath>
     </logicalFolder>
   </logicalFolder>

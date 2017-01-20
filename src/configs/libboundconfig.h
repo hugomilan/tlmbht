@@ -41,6 +41,7 @@ extern "C" {
 #endif
 
 #include "libequationconfig.h"
+#include "libsimuconfig.h"
 
     // structure that contains the information for the material input
 
@@ -106,6 +107,30 @@ extern "C" {
         //        int convectionDefined;
         //        
         //        int adiabaticDefined;
+        
+        
+        
+        // general values used to generalize the boundary for the following equations: diffusion,
+        // hyperbolic diffusion, heat, hyperbolic heat, pennes, hyperbolic pennes.
+        // The generalization is done during the test inputs.
+
+
+        // generalized inputs
+        // int adiabaticDefined; // This is generalized by default
+        
+        double generalized_scalar;
+        int generalized_scalarDefined;
+        
+        double generalized_flux;
+        int generalized_fluxDefined;
+        
+        double generalized_convectionScalar;
+        double generalized_convectionCoefficient;
+        int generalized_convectionDefined;
+        
+        double generalized_radiationScalar;
+        double generalized_radiationCoefficient;
+        int generalized_radiationDefined;
     };
 
     unsigned int initializeBoundaryConfig(struct BoundaryConfig *);
@@ -114,7 +139,8 @@ extern "C" {
 
     unsigned int setConfigurationBoundary(char *, struct BoundaryConfig*, int*);
 
-    unsigned int testInputBoundary(struct BoundaryConfig *, struct Equation *, int);
+    unsigned int testInputBoundary(struct BoundaryConfig *, struct Equation *, int,
+            struct Simulation*);
 
     void printfBoundConfig(struct BoundaryConfig *, struct Equation *equation);
     void printfNumberOfInputsBound(int **, int *);

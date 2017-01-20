@@ -115,6 +115,7 @@ extern "C" {
 
         // general values used to generalize the following equations: diffusion,
         // hyperbolic diffusion, heat, hyperbolic heat, pennes, hyperbolic pennes.
+        // The generalization is done during the test inputs.
         // b*d( m )/dt = - div( n ) - a*m + R
         // 
         // With the following definition of flux:

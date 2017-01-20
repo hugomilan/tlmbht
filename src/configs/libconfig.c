@@ -850,7 +850,8 @@ unsigned int testAllConfigurationVarialbes(struct dataForSimulation *input) {
         }
 
         if (testInputBoundary(&input->boundaryInput[i - 1],
-                &input->equationInput[input->boundaryInput[i - 1].equationNumber], i) != 0) {
+                &input->equationInput[input->boundaryInput[i - 1].equationNumber], i,
+                &input->simulationInput) != 0) {
             sendErrorCodeAndMessage(1873, &i, NULL, NULL, NULL);
             errorFound = 1;
         }
