@@ -55,11 +55,7 @@
  * 5) Create a debug mode
  * 6) make the equations interact, this is, solve for multiphysics.
  * 7) Create a automatic time-step algorithm.
- * 8) test if inputs are within the expected range, are the required type, etc.
- * 9) test if the number of the material was set more than once for different 
- * materials of the same equation 
- * 10) What should be tested when starting the solvers?
- * 11) Parallelize (with openMP?) reading the mesh input file (libgmshreader and 
+ * 8) Parallelize (with openMP?) reading the mesh input file (libgmshreader and 
  * libtbnreader) and create matrices functions.
  * See instructions on my Netbeans folder. May be I should have
  * a flag that says until what file size I should parallelize (remember of 
@@ -72,8 +68,14 @@
  * allocatePointsPort function? The sorting function is in libmiscellaneous.h
  * 2) I'm using qsort() in the function wrapTLMnumbers(). Should I change to a better
  * algorithm?
- * 3) test different libraries
+ * 3) test different libraries for solving sparse matrix equations.
  * 
+ * List of tests that can be implemented:
+ * 1) Test if inputs are within the expected range, are the required type, etc.
+ * 2) Test if the inputs in Material and Boundary are for the selected equation.
+ * 3) Test if the number of the material was set more than once for different 
+ * materials of the same equation 
+ * 4) What should be tested when starting the solvers?
  * 
  * Future works (or research):
  * 1) Use material line in 2D and 3D problems; use material triangle in 3D problems,

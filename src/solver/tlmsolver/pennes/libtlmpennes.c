@@ -177,13 +177,6 @@ unsigned int initiateVariablesTLMPennes(struct dataForSimulation *input,
                 time_spent_con * 1e3, time_spent_con, time_spent_con / 60.0, time_spent_con / (60 * 60));
     }
 
-
-    // DEBUG: testing if the levels were written correctly
-    //    printf("Some tests %u, %u, %u, %u, %u\n", intersections->level, intersections->innerLevel[5].level,
-    //            intersections->innerLevel[8].level, intersections->innerLevel[2].innerLevel[6].level,
-    //            intersections->innerLevel[2].innerLevel[2].level);
-
-
     if (input->simulationInput.printAdditionalMode == 1) {
         printf("Getting the TLM numbers (number of ports, nodes outputs, etc.) and the connection variable...\n");
     }

@@ -1455,7 +1455,13 @@ unsigned int terminateTLMnumbers(struct TLMnumbers* numbers) {
 }
 
 /*
- * initiate_aPortToRealPort: allocate aPortToRealPort
+ * initiate_aPortToRealPort: allocate aPortToRealPort. This variable is used
+ * to convert abstract ports to real ports. What are abstract ports? At the beginning
+ * of the simulation I don't known which elements are going to be used as materials
+ * or boundaries, neither if they will need stubs. Abstract ports consider all the 
+ * possibilities (such as all elements are materials and all of them need stubs).
+ * Then, we convert the abstract port number to the real port number to get the position
+ * of the port in the matrix equations
  */
 unsigned int initiate_aPortToRealPort(const struct dataForSimulation * input,
         struct aPortToRealPort** Ports, int id) {
