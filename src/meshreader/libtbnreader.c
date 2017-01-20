@@ -1,7 +1,7 @@
 /*
  * TLMBHT - Transmission-line Modeling Method applied to BioHeat Transfer Problems.
  * 
- * Copyright (C) 2015 to 2016 by Cornell University. All Rights Reserved.
+ * Copyright (C) 2015 to 2017 by Cornell University. All Rights Reserved.
  * 
  * Written by Hugo Fernando Maia Milan.
  * 
@@ -32,16 +32,16 @@
  *
  */
 
-#include "libtbnreader.h"
-#include "libmeshtlmbht.h"
-
-#include "../configs/libmeshconfig.h"
-#include "../miscellaneous/libstringtlmbht.h"
-#include "../miscellaneous/liberrorcode.h"
-
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
+
+#include "libtbnreader.h"
+
+#include "../miscellaneous/libstringtlmbht.h"
+#include "../miscellaneous/liberrorcode.h"
+
+
 
 /*
  * tbnReader: opens the input file and reads the data
@@ -51,7 +51,7 @@ unsigned int tbnReader(struct MeshConfig * input, struct tlmInternalMesh * outpu
     unsigned int errorTLMnumber = 0, lineNumber = 0, startEndBrackets = 0,
             ElementsWereRead = 0, * ElementsToRead = NULL, ElementsBeingRead = 0;
 
-    long long unsigned int numberOfNodeReads = 0, numberOfElementsRead = 0;
+    unsigned long long numberOfNodeReads = 0, numberOfElementsRead = 0;
     char * pline = NULL, *lineOriginal = NULL, *codeForReading = NULL;
     size_t lenLine = 0;
     enum tlmtbnConfig ConfigPoint = NOTHING_TBN;
@@ -164,6 +164,14 @@ unsigned int tbnReader(struct MeshConfig * input, struct tlmInternalMesh * outpu
                         &output->nodes[numberOfNodeReads].y,
                         &output->nodes[numberOfNodeReads].z);
 
+                // Applying the scale factor
+                output->nodes[numberOfNodeReads].x =
+                        output->nodes[numberOfNodeReads].x * input->scale[0];
+                output->nodes[numberOfNodeReads].y =
+                        output->nodes[numberOfNodeReads].y * input->scale[1];
+                output->nodes[numberOfNodeReads].z =
+                        output->nodes[numberOfNodeReads].z * input->scale[2];
+
                 numberOfNodeReads++;
                 break;
 
@@ -197,7 +205,7 @@ unsigned int tbnReader(struct MeshConfig * input, struct tlmInternalMesh * outpu
                             sizeof (unsigned int)*output->quantityOfElementTypes);
 
                     unsigned int elementCode;
-                    long long unsigned int quantityOfElements;
+                    unsigned long long quantityOfElements;
 
                     for (int j = 0; j < output->quantityOfElementTypes; j++) {
                         strcpy(codeForReading, "%*u ");

@@ -25,8 +25,11 @@
       <runprofile version="9">
         <runcommandpicklist>
           <runcommandpicklistitem>"${OUTPUT_PATH}"</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" case_testing.tlm</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" case_testing_3D.tlm</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" case_testing_1D.tlm</runcommandpicklistitem>
         </runcommandpicklist>
-        <runcommand>"${OUTPUT_PATH}"</runcommand>
+        <runcommand>"${OUTPUT_PATH}" case_testing_1D.tlm</runcommand>
         <rundir></rundir>
         <buildfirst>true</buildfirst>
         <terminal-type>0</terminal-type>
@@ -58,8 +61,11 @@
       <runprofile version="9">
         <runcommandpicklist>
           <runcommandpicklistitem>"${OUTPUT_PATH}"</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" case_testing.tlm</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" case_testing_3D.tlm</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" case_testing_1D.tlm</runcommandpicklistitem>
         </runcommandpicklist>
-        <runcommand>"${OUTPUT_PATH}"</runcommand>
+        <runcommand>"${OUTPUT_PATH}" case_testing_1D.tlm</runcommand>
         <rundir></rundir>
         <buildfirst>true</buildfirst>
         <terminal-type>0</terminal-type>
@@ -91,8 +97,11 @@
       <runprofile version="9">
         <runcommandpicklist>
           <runcommandpicklistitem>"${OUTPUT_PATH}"</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" case_testing.tlm</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" case_testing_3D.tlm</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" case_testing_1D.tlm</runcommandpicklistitem>
         </runcommandpicklist>
-        <runcommand>"${OUTPUT_PATH}"</runcommand>
+        <runcommand>"${OUTPUT_PATH}" case_testing_1D.tlm</runcommand>
         <rundir></rundir>
         <buildfirst>true</buildfirst>
         <terminal-type>0</terminal-type>
@@ -124,8 +133,11 @@
       <runprofile version="9">
         <runcommandpicklist>
           <runcommandpicklistitem>"${OUTPUT_PATH}"</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" case_testing.tlm</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" case_testing_3D.tlm</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" case_testing_1D.tlm</runcommandpicklistitem>
         </runcommandpicklist>
-        <runcommand>"${OUTPUT_PATH}"</runcommand>
+        <runcommand>"${OUTPUT_PATH}" case_testing_1D.tlm</runcommand>
         <rundir></rundir>
         <buildfirst>true</buildfirst>
         <terminal-type>0</terminal-type>

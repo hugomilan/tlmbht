@@ -1,7 +1,7 @@
 /*
  * TLMBHT - Transmission-line Modeling Method applied to BioHeat Transfer Problems.
  * 
- * Copyright (C) 2015 to 2016 by Cornell University. All Rights Reserved.
+ * Copyright (C) 2015 to 2017 by Cornell University. All Rights Reserved.
  * 
  * Written by Hugo Fernando Maia Milan.
  * 
@@ -33,18 +33,13 @@
  *
  */
 
-/*
- * TODO (hugomilan#1#): List of possible improvements
- * 
- * 1) Think through about what should be tested in testInputTLMPennes3D().
- */
+#include <stdlib.h>
 
 #include "libtlmpennes3dsolver.h"
-#include <stdlib.h>
-#include <string.h>
+
 
 /*
- * testInputTLMPennes2D: tests the inputs of the simulation
+ * testInputTLMPennes3D: tests the inputs of the simulation
  */
 unsigned int testInputTLMPennes3D(struct dataForSimulation* input) {
     unsigned int errorTLMnumber = 0;
@@ -91,6 +86,8 @@ unsigned int testInputTLMPennes3D(struct dataForSimulation* input) {
     if (Element3DDefined != 1) {
         errorTLMnumber = 6601;
     }
+
+    // TODO what more should I test?
 
     return errorTLMnumber;
 }

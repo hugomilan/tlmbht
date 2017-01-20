@@ -1,7 +1,7 @@
 /*
  * TLMBHT - Transmission-line Modeling Method applied to BioHeat Transfer Problems.
  * 
- * Copyright (C) 2015 to 2016 by Cornell University. All Rights Reserved.
+ * Copyright (C) 2015 to 2017 by Cornell University. All Rights Reserved.
  * 
  * Written by Hugo Fernando Maia Milan.
  * 
@@ -38,14 +38,22 @@
  */
 
 
+#include <stdlib.h>
+#include <time.h>
+#include <math.h>
+
 #include "libbenchmatmult.h"
+    
+
+#include "libbenchmarkeigen.h"
+#include "../liberrorcode.h"
 
 /*
  * benchmarkMatrixMult: 
  */
-unsigned int benchmarkSAXPY(long long unsigned int L1, long long unsigned int L2,
+unsigned int benchmarkSAXPY(unsigned long long L1, unsigned long long L2,
         int repetitions, double lowerTime, double higherTime, int numberOfSparsityTests,
-        FILE *file, long long unsigned int maxElement) {
+        FILE *file, unsigned long long maxElement) {
     unsigned int errorTLMnumber = 0;
     int numberOfTests = 1;
     int i;
@@ -105,12 +113,12 @@ unsigned int benchmarkSAXPY(long long unsigned int L1, long long unsigned int L2
     return errorTLMnumber;
 }
 
-unsigned int test_simple_axpy_d(long long unsigned int L1, long long unsigned int L2,
+unsigned int test_simple_axpy_d(unsigned long long L1, unsigned long long L2,
         int repetitions, double *timePerElement, double lowerTime, double higherTime,
-        FILE *file, double metaOfSparsity, long long unsigned int maxElement) {
+        FILE *file, double metaOfSparsity, unsigned long long maxElement) {
     double **A, *y, *x;
-    long long unsigned int L1_old = 0, L2_old = 0; // old values for L1 and L2
-    long long unsigned int i, j, nnz = 0; // nnz = number of non-zeros
+    unsigned long long L1_old = 0, L2_old = 0; // old values for L1 and L2
+    unsigned long long i, j, nnz = 0; // nnz = number of non-zeros
     int stayIn = 1, haverun = 0, running = 0;
     double sparsity, temp;
 
@@ -129,12 +137,12 @@ unsigned int test_simple_axpy_d(long long unsigned int L1, long long unsigned in
     printf("Running simplified matrix multiplication (simple axpy)\n");
     while (stayIn) {
         // DEBUG: See that it is allocating
-//         printf("Allocating the pointer with sizes (%llu, %llu).\n", L1, L2);
+        //         printf("Allocating the pointer with sizes (%llu, %llu).\n", L1, L2);
         x = (double*) realloc(x, sizeof (double)*L1);
         y = (double*) realloc(y, sizeof (double)*L1);
         A = (double**) realloc(A, sizeof (double*)*L1);
 
-        for (long long unsigned int i = 0; i < L1; i++) {
+        for (unsigned long long i = 0; i < L1; i++) {
             if (i >= L1_old)
                 A[i] = NULL;
 
@@ -178,8 +186,8 @@ unsigned int test_simple_axpy_d(long long unsigned int L1, long long unsigned in
         runtime = (double) (end - start) / CLOCKS_PER_SEC;
 
         // DEBUG: see the partial results
-//                 printf("It took %g s for (%llu, %llu) sparsity of %g and mean of %g us per element\n",
-//                         runtime, L1, L2, sparsity, runtime/(L1*L2)*1e6);
+        //                 printf("It took %g s for (%llu, %llu) sparsity of %g and mean of %g us per element\n",
+        //                         runtime, L1, L2, sparsity, runtime/(L1*L2)*1e6);
 
         if ((runtime > lowerTime && runtime <= higherTime) || running || (L1 * L2 >= maxElement)) {
             L1_old = L1;
@@ -232,14 +240,14 @@ unsigned int test_simple_axpy_d(long long unsigned int L1, long long unsigned in
  * simple_axpy: 
  */
 unsigned int simple_axpy_d_bench(double *y, double **A, double *x,
-        long long unsigned int L1, long long unsigned int L2) {
+        unsigned long long L1, unsigned long long L2) {
 
     // DEBUG: show that we started solving
     // printf("Solving simple_axpy_d\n");
 
-    for (long long unsigned int i = 0; i < L1; i++)
-        for (long long unsigned int j = 0; j < L2; j++) {
-            for (long long unsigned int k = 0; k < L2; k++)
+    for (unsigned long long i = 0; i < L1; i++)
+        for (unsigned long long j = 0; j < L2; j++) {
+            for (unsigned long long k = 0; k < L2; k++)
                 y[i] = y[i] + A[i][k] * x[k];
         }
 

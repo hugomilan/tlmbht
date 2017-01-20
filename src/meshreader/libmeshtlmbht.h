@@ -1,7 +1,7 @@
 /*
  * TLMBHT - Transmission-line Modeling Method applied to BioHeat Transfer Problems.
  * 
- * Copyright (C) 2015 to 2016 by Cornell University. All Rights Reserved.
+ * Copyright (C) 2015 to 2017 by Cornell University. All Rights Reserved.
  * 
  * Written by Hugo Fernando Maia Milan.
  * 
@@ -41,7 +41,6 @@ extern "C" {
 #endif
 
 #include <stdio.h>
-#include <stdlib.h>
 
     struct node {
         double x;
@@ -50,99 +49,99 @@ extern "C" {
     };
 
     struct elementLine { // 1
-        long long unsigned int N1;
-        long long unsigned int N2;
+        unsigned long long N1;
+        unsigned long long N2;
         long unsigned int tag;
     };
 
     struct elementTriangle { // 2
-        long long unsigned int N1;
-        long long unsigned int N2;
-        long long unsigned int N3;
+        unsigned long long N1;
+        unsigned long long N2;
+        unsigned long long N3;
         long unsigned int tag;
     };
 
     struct elementQuadrangle { // 3
-        long long unsigned int N1;
-        long long unsigned int N2;
-        long long unsigned int N3;
-        long long unsigned int N4;
+        unsigned long long N1;
+        unsigned long long N2;
+        unsigned long long N3;
+        unsigned long long N4;
         long unsigned int tag;
     };
 
     struct elementTetrahedron { // 4
-        long long unsigned int N1;
-        long long unsigned int N2;
-        long long unsigned int N3;
-        long long unsigned int N4;
+        unsigned long long N1;
+        unsigned long long N2;
+        unsigned long long N3;
+        unsigned long long N4;
         long unsigned int tag;
     };
 
     struct elementHexahedron { // 5
-        long long unsigned int N1;
-        long long unsigned int N2;
-        long long unsigned int N3;
-        long long unsigned int N4;
-        long long unsigned int N5;
-        long long unsigned int N6;
-        long long unsigned int N7;
-        long long unsigned int N8;
+        unsigned long long N1;
+        unsigned long long N2;
+        unsigned long long N3;
+        unsigned long long N4;
+        unsigned long long N5;
+        unsigned long long N6;
+        unsigned long long N7;
+        unsigned long long N8;
         long unsigned int tag;
     };
 
     struct elementPrism { // 6
-        long long unsigned int N1;
-        long long unsigned int N2;
-        long long unsigned int N3;
-        long long unsigned int N4;
-        long long unsigned int N5;
-        long long unsigned int N6;
+        unsigned long long N1;
+        unsigned long long N2;
+        unsigned long long N3;
+        unsigned long long N4;
+        unsigned long long N5;
+        unsigned long long N6;
         long unsigned int tag;
     };
 
     struct elementPyramid { // 7
-        long long unsigned int N1;
-        long long unsigned int N2;
-        long long unsigned int N3;
-        long long unsigned int N4;
-        long long unsigned int N5;
+        unsigned long long N1;
+        unsigned long long N2;
+        unsigned long long N3;
+        unsigned long long N4;
+        unsigned long long N5;
         long unsigned int tag;
     };
 
     struct elementPoint { // 15
-        long long unsigned int N1;
+        unsigned long long N1;
         long unsigned int tag;
     };
 
     struct elementAny {
         int elementCode;
         long unsigned int tag;
-        long long unsigned int N1;
-        long long unsigned int N2;
-        long long unsigned int N3;
-        long long unsigned int N4;
-        long long unsigned int N5;
-        long long unsigned int N6;
-        long long unsigned int N7;
-        long long unsigned int N8;
+        unsigned long long N1;
+        unsigned long long N2;
+        unsigned long long N3;
+        unsigned long long N4;
+        unsigned long long N5;
+        unsigned long long N6;
+        unsigned long long N7;
+        unsigned long long N8;
     };
 
     struct elementAll {
-        struct elementLine *Line; // Element code: 1
-        struct elementTriangle *Triangle; // Element code: 2
-        struct elementQuadrangle *Quadrangle; // Element code: 3
-        struct elementTetrahedron *Tetrahedron; // Element code: 4
-        struct elementHexahedron *Hexahedron; // Element code: 5
-        struct elementPrism *Prism; // Element code: 6
-        struct elementPyramid *Pyramid; // Element code: 7
-        struct elementPoint *Point; // Element code: 15
+        struct elementLine *Line;                   // Element code: 1
+        struct elementTriangle *Triangle;           // Element code: 2
+        struct elementQuadrangle *Quadrangle;       // Element code: 3
+        struct elementTetrahedron *Tetrahedron;     // Element code: 4
+        struct elementHexahedron *Hexahedron;       // Element code: 5
+        struct elementPrism *Prism;                 // Element code: 6
+        struct elementPyramid *Pyramid;             // Element code: 7
+        struct elementPoint *Point;                 // Element code: 15
     };
 
     struct tlmInternalMesh {
-        long long unsigned int numberOfNode;
+        unsigned long long numberOfNode;
         struct node *nodes;
 
-        long long unsigned int *quantityOfSpecificElement;
+        unsigned long long *quantityOfSpecificElement;
         unsigned int quantityOfElementTypes;
         struct elementAll elements;
     };
@@ -153,7 +152,7 @@ extern "C" {
     unsigned int terminateTlmInternalMesh(struct tlmInternalMesh *);
 
     unsigned int allocateTLMInternalMeshNodesAndElements(struct tlmInternalMesh *,
-            unsigned long long int, long long unsigned int*);
+            unsigned long long int, unsigned long long*);
 
     unsigned int allocateTLMInternalMeshElementsOnly(struct tlmInternalMesh *, const int *);
 

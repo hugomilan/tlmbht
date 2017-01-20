@@ -1,7 +1,7 @@
 /*
  * TLMBHT - Transmission-line Modeling Method applied to BioHeat Transfer Problems.
  * 
- * Copyright (C) 2015 to 2016 by Cornell University. All Rights Reserved.
+ * Copyright (C) 2015 to 2017 by Cornell University. All Rights Reserved.
  * 
  * Written by Hugo Fernando Maia Milan.
  * 
@@ -39,22 +39,17 @@
 extern "C" {
 #endif
 
-#include "../liberrorcode.h"
 #include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
-#include <math.h>
-#include "../external/eigeninterface.h"
 
-    unsigned int benchmarkSAXPY(long long unsigned int, long long unsigned int,
-        int, double, double, int, FILE *, long long unsigned int);
-    
-    
-    unsigned int test_simple_axpy_d(long long unsigned int, long long unsigned int,
-        int, double *, double, double, FILE *, double, long long unsigned int);
-    
+    unsigned int benchmarkSAXPY(unsigned long long, unsigned long long,
+            int, double, double, int, FILE *, unsigned long long);
+
+
+    unsigned int test_simple_axpy_d(unsigned long long, unsigned long long,
+            int, double *, double, double, FILE *, double, unsigned long long);
+
     unsigned int simple_axpy_d_bench(double *, double **, double *,
-        long long unsigned int, long long unsigned int);
+            unsigned long long, unsigned long long);
 
 
 #ifdef __cplusplus

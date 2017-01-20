@@ -1,7 +1,7 @@
 /*
  * TLMBHT - Transmission-line Modeling Method applied to BioHeat Transfer Problems.
  * 
- * Copyright (C) 2015 to 2016 by Cornell University. All Rights Reserved.
+ * Copyright (C) 2015 to 2017 by Cornell University. All Rights Reserved.
  * 
  * Written by Hugo Fernando Maia Milan.
  * 
@@ -41,19 +41,21 @@
 
 
 
+unsigned int solverTLMPennesEigenGeneral(struct dataForSimulation*, int, void **);
+
 unsigned int calculateMatricesPennesEigen(struct dataForSimulation *,
         struct calculationTLMEigen *, struct boundaryData**,
-        struct connectionLeveln *, FILE *);
+        struct connectionLeveln *, int);
 
 unsigned int MaterialLinePennesEigen(struct dataForSimulation *,
-        struct calculationTLMEigen *);
+        struct calculationTLMEigen *, int id);
 
-unsigned int MaterialTrianglePennesEigen(struct dataForSimulation *, struct calculationTLMEigen *);
+unsigned int MaterialTrianglePennesEigen(struct dataForSimulation *, struct calculationTLMEigen *, int);
 
-unsigned int MaterialTetrahedronPennesEigen(struct dataForSimulation *, struct calculationTLMEigen *);
+unsigned int MaterialTetrahedronPennesEigen(struct dataForSimulation *, struct calculationTLMEigen *, int);
 
 unsigned int connectionsAndBoundariesPennesEigen(struct calculationTLMEigen *, struct boundaryData *,
-        struct connectionLeveln *, struct dataForSimulation *);
+        struct connectionLeveln *, struct dataForSimulation *, int id);
 
 #ifdef __cplusplus
 extern "C" {

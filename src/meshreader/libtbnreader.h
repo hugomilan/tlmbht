@@ -1,7 +1,7 @@
 /*
  * TLMBHT - Transmission-line Modeling Method applied to BioHeat Transfer Problems.
  * 
- * Copyright (C) 2015 to 2016 by Cornell University. All Rights Reserved.
+ * Copyright (C) 2015 to 2017 by Cornell University. All Rights Reserved.
  * 
  * Written by Hugo Fernando Maia Milan.
  * 
@@ -42,16 +42,16 @@ extern "C" {
 
 #include "libmeshtlmbht.h"
 #include "../configs/libmeshconfig.h"
-    
+
     enum tlmtbnConfig {
         NOTHING_TBN,
         NODES_TBN,
         ELEMENTS_TBN
     };
-    
-unsigned int tbnReader(struct MeshConfig *, struct tlmInternalMesh *);
 
-unsigned int setMeshTbnConfigTo(char *, enum tlmtbnConfig *);
+    unsigned int tbnReader(struct MeshConfig *, struct tlmInternalMesh *);
+
+    unsigned int setMeshTbnConfigTo(char *, enum tlmtbnConfig *);
 
 
 #ifdef __cplusplus

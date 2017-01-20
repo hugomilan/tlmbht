@@ -1,7 +1,7 @@
 /*
  * TLMBHT - Transmission-line Modeling Method applied to BioHeat Transfer Problems.
  * 
- * Copyright (C) 2015 to 2016 by Cornell University. All Rights Reserved.
+ * Copyright (C) 2015 to 2017 by Cornell University. All Rights Reserved.
  * 
  * Written by Hugo Fernando Maia Milan.
  * 
@@ -47,11 +47,18 @@ extern "C" {
 
     struct MeshConfig {
         enum inputFormat inputF;
+        int inputFormatDefined;
+
         char *nameOfInputFile;
+        int inputNameDefined;
+
+        char *nameOfOutputFile;
+
+        double *scale;
 
         // flags
-        int nameDefined;
-        int inputFormatDefined;
+
+
 
 
     };
@@ -66,15 +73,16 @@ extern "C" {
 
     // functions for printing
     void printfMeshConfig(struct MeshConfig*);
-    void printfinputFormat(enum inputFormat*);
+    void printfInputFormatOutput(enum inputFormat*, char *);
     void printfNameOfInputFile(char *);
+    void printfScale(double *);
 
 
     // take the input text and extract the values of the variables. Returns 0 if no error.
     unsigned int setConfigurationMesh(char *, struct MeshConfig *, int *);
 
     // this function test if all the inputs for mesh configuration were correct
-    unsigned int testInputMesh(struct MeshConfig *);
+    unsigned int testInputMesh(struct MeshConfig *, char*);
 
 
 

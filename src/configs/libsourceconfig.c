@@ -1,7 +1,7 @@
 /*
  * TLMBHT - Transmission-line Modeling Method applied to BioHeat Transfer Problems.
  * 
- * Copyright (C) 2015 to 2016 by Cornell University. All Rights Reserved.
+ * Copyright (C) 2015 to 2017 by Cornell University. All Rights Reserved.
  * 
  * Written by Hugo Fernando Maia Milan.
  * 
@@ -33,7 +33,9 @@
  *
  */
 
+#include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 
 #include "libsourceconfig.h"
 
@@ -86,7 +88,7 @@ unsigned int setConfigurationSource(char *input, struct SourceConfig* sourceInpu
 /*
  * testInputSource: tests if all the required inputs were read
  */
-unsigned int testInputSource(struct SourceConfig *input, enum typeSim *typeS, int id) {
+unsigned int testInputSource(struct SourceConfig *input, int id) {
     //future implementation
     return 0;
 }
@@ -94,6 +96,6 @@ unsigned int testInputSource(struct SourceConfig *input, enum typeSim *typeS, in
 /*
  * printfSourceConfig: prints the source configurations that were read
  */
-void printfSourceConfig(struct SourceConfig *input, enum typeSim *typeS) {
+void printfSourceConfig(struct SourceConfig *input) {
     //future implementation
 }

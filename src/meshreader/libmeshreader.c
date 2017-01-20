@@ -1,7 +1,7 @@
 /*
  * TLMBHT - Transmission-line Modeling Method applied to BioHeat Transfer Problems.
  * 
- * Copyright (C) 2015 to 2016 by Cornell University. All Rights Reserved.
+ * Copyright (C) 2015 to 2017 by Cornell University. All Rights Reserved.
  * 
  * Written by Hugo Fernando Maia Milan.
  * 
@@ -32,21 +32,21 @@
  *
  */
 
-#include <time.h>
 #include "libmeshreader.h"
 
 #include "libgmshreader.h"
 #include "libtbnreader.h"
-#include "../configs/libmeshconfig.h"
 #include "../miscellaneous/liberrorcode.h"
 
 /*
  * meshReaderAndConverter: reads the mesh and convert it to .tbn, if required
  */
 unsigned int meshReaderAndConverter(struct MeshConfig * meshInput,
-        struct tlmInternalMesh * meshOutput, int timingMode) {
-    clock_t begin = clock();
+        struct tlmInternalMesh * meshOutput) {
     unsigned errorTLMnumber;
+    
+    printf("The mesh to be read will be scaled by [%lf, %lf, %lf]\n", meshInput->scale[0],
+            meshInput->scale[1], meshInput->scale[2]);
 
     switch (meshInput->inputF) {
         case GMSH: // Reading the gmsh input
@@ -64,14 +64,6 @@ unsigned int meshReaderAndConverter(struct MeshConfig * meshInput,
         default: // this is not expected
             sendErrorCodeAndMessage(6599, NULL, NULL, NULL, NULL);
             break;
-    }
-    
-    clock_t end = clock();
-
-    if (timingMode == 1) {
-        double time_spent = (double) (end - begin) / CLOCKS_PER_SEC;
-        printf("\n\nTime to read the mesh %g ms (or %g s, or %g min, or %g hours).\n\n",
-                time_spent * 1e3, time_spent, time_spent / 60.0, time_spent / (60 * 60));
     }
 
     return 0;

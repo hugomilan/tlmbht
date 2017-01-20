@@ -1,0 +1,24 @@
+Usage:
+        tlmbht [input_name] [options] [-i input_name]
+
+Options:
+    -h, --help              displays this message
+    -i FILE, --input FILE   directs the code to open the file that follows
+    -t, --timing            shows the run time in each inner function. Useful for benchmark
+    -e, --verbose           shows useful information for debugging
+    -v, --version           shows version
+
+Examples:
+    1) When the -i option is not used, the code will open the 'case.tlm' code that is
+    is the calling directory. It will through an error if this file doesn't exist.
+        tlmbht -e -t
+
+    2) The input name file can be the first option.
+        tlmbht input_name.any_extension -t
+
+    3) Showing the usage of -i
+        tlmbht -t -e -i input_name
+
+    4) Multiple combinations of options that start with '-' is NOT allowed. The 
+    code below WILL NOT WORK.
+        tlmbht -tei input_name

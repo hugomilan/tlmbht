@@ -1,7 +1,7 @@
 /*
  * TLMBHT - Transmission-line Modeling Method applied to BioHeat Transfer Problems.
  * 
- * Copyright (C) 2015 to 2016 by Cornell University. All Rights Reserved.
+ * Copyright (C) 2015 to 2017 by Cornell University. All Rights Reserved.
  * 
  * Written by Hugo Fernando Maia Milan.
  * 
@@ -42,7 +42,6 @@
 extern "C" {
 #endif
 
-#include "libsimuconfig.h"
 
     struct SourceConfig // structure that contains the information for the material input
     {
@@ -57,9 +56,9 @@ extern "C" {
 
     unsigned int setConfigurationSource(char *, struct SourceConfig*, int*);
 
-    unsigned int testInputSource(struct SourceConfig *, enum typeSim *, int);
+    unsigned int testInputSource(struct SourceConfig *, int);
 
-    void printfSourceConfig(struct SourceConfig *, enum typeSim*);
+    void printfSourceConfig(struct SourceConfig *);
 
 
 #ifdef __cplusplus

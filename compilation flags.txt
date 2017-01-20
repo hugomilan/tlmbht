@@ -1,0 +1,20 @@
+Using GCC:
+-O3 -fopenmp -DNDEBUG -march=native
+
+Using NVCC:
+-Xcompiler -O3 -Xcompiler -fopenmp -Xcompiler -DNDEBUG -Xcompiler -march=native
+
+-O3: Optimization level 3. Great speed up. This flag is automatically passed to the compiler by NetBeans.
+-fopenmp: Enables openMP. However, I was not able to enable openMP in Eigen Sparse matrix multiplication
+-DNDEBUG: Removes some debug information and slight speed up.
+-march=native: Tells the compiler to produce code specific for the CPU compiling the code. It can give you a good speed up. You should not use it if you intend to redistribute the executable.
+-std=c++14: I'm using the C++14 standard
+
+
+Flags that are not useful and possible dangerous:
+-funroll-loops: slight speed up but the speed up can be mesh dependent and even slow down
+-funroll-all-loops: slight speed up but the speed up can be mesh dependent and even slow down
+-ffast-math: slight speed up but the code may not fulfill all the assumptions this flag requires
+
+Flags:
+https://gcc.gnu.org/onlinedocs/gcc/Optimize-Options.html

@@ -1,7 +1,7 @@
 /*
  * TLMBHT - Transmission-line Modeling Method applied to BioHeat Transfer Problems.
  * 
- * Copyright (C) 2015 to 2016 by Cornell University. All Rights Reserved.
+ * Copyright (C) 2015 to 2017 by Cornell University. All Rights Reserved.
  * 
  * Written by Hugo Fernando Maia Milan.
  * 
@@ -33,9 +33,15 @@
  *
  */
 
-#include "libtlmpennes.h"
+
 #include <string.h>
 #include <stdlib.h>
+#include <time.h>
+
+#include "libtlmpennes.h"
+
+#include "../src/miscellaneous/libwritetofiletlmbht.h"
+#include "../../../miscellaneous/liberrorcode.h"
 
 
 // Maybe this function can be independent of the physics (Pennes, EM, CFD, etc) being solved.
@@ -48,24 +54,27 @@
  */
 unsigned int initiateVariablesTLMPennes(struct dataForSimulation *input,
         void * matrices, struct TLMnumbers *numbers, struct boundaryData** boundaries,
-        struct connectionLeveln *intersections, FILE **file) {
-    clock_t begin = clock();
-    if (input->timingMode == 1) printf("\n\nInitiating variables...\n");
+        struct connectionLeveln *intersections, int id) {
+
+    clock_t begin_con = clock();
+    if (input->simulationInput.printAdditionalMode == 1) {
+        printf("\n\nInitiating the connection variable.\n");
+    }
 
     unsigned int errorTLMnumber;
+
     // the level of the intersection variable
     unsigned int level;
     // variable that contains the initial allocation for each level of the intersection variable
-    long long unsigned int *allocateForEachLevel;
+    unsigned long long *allocateForEachLevel;
     // the values inserted for the allocateForEachLevel variable are arbitrary.
 
-    // #TODO: these are approximated calculations to initiate the boundary variable.
-    clock_t begin_con = clock();
-    switch (input->simulationInput.dimen) {
+    // TODO these are approximated calculations to initiate the connection variable.
+    switch (input->equationInput[id].dimen) {
         case ONE:
             level = 1;
 
-            allocateForEachLevel = (long long unsigned int *) malloc(sizeof (long long unsigned int)*(level + 1));
+            allocateForEachLevel = (unsigned long long *) malloc(sizeof (unsigned long long)*(level + 1));
 
             allocateForEachLevel[0] = input->mesh.numberOfNode; // line. Level 1. 1 point
             allocateForEachLevel[1] = 3; // level of the ports. Level 0
@@ -74,7 +83,7 @@ unsigned int initiateVariablesTLMPennes(struct dataForSimulation *input,
         case TWO:
             level = 2;
 
-            allocateForEachLevel = (long long unsigned int *) malloc(sizeof (long long unsigned int)*(level + 1));
+            allocateForEachLevel = (unsigned long long *) malloc(sizeof (unsigned long long)*(level + 1));
 
             // triangle and quadrangle. Level 2. 2 points
             allocateForEachLevel[0] = 1 + (input->mesh.quantityOfSpecificElement[2] +
@@ -83,8 +92,9 @@ unsigned int initiateVariablesTLMPennes(struct dataForSimulation *input,
             // line. Level 1. 1 point
             allocateForEachLevel[1] = 1 + input->mesh.quantityOfSpecificElement[1];
             allocateForEachLevel[2] = 3; // level of the ports. Level 0
-            
-            // this is an alternative way. With this, we allocate much less memory.
+
+            // this is an alternative way. I did run out of memory using the above approach.
+            // With this, we allocate much less memory.
             // I've to find a better alternative to balance memory/time.
             allocateForEachLevel[0] = 1;
             allocateForEachLevel[1] = 1;
@@ -93,24 +103,24 @@ unsigned int initiateVariablesTLMPennes(struct dataForSimulation *input,
         case THREE:
             if (input->mesh.quantityOfSpecificElement[5] ||
                     input->mesh.quantityOfSpecificElement[6] ||
-                    input->mesh.quantityOfSpecificElement[7]){
+                    input->mesh.quantityOfSpecificElement[7]) {
                 level = 4;
             } else {
                 level = 3;
             }
-            
-            
-            allocateForEachLevel = (long long unsigned int *) malloc(sizeof (long long unsigned int)*(level + 1));
+
+
+            allocateForEachLevel = (unsigned long long *) malloc(sizeof (unsigned long long)*(level + 1));
             int leveln = 0;
-            if (level == 4){
+            if (level == 4) {
                 // Hexahedron, prism and pyramid. Level 4. 4 points
                 allocateForEachLevel[leveln] = 1 + (input->mesh.quantityOfSpecificElement[5] +
                         input->mesh.quantityOfSpecificElement[6] +
                         input->mesh.quantityOfSpecificElement[7]) / 3;
                 leveln++;
             }
-            
-            
+
+
 
             // Tetrahedron, hexahedron, prism and pyramid. Level 3. 3 points
             allocateForEachLevel[leveln] = 1 + (input->mesh.quantityOfSpecificElement[4] +
@@ -129,32 +139,39 @@ unsigned int initiateVariablesTLMPennes(struct dataForSimulation *input,
             leveln++;
             // level of the port
             allocateForEachLevel[leveln] = 3; // level of the ports. Level 0
-            
-            // DEBUG: see what was calculated
-            //printf("%lld, %lld, %lld, %lld\n", allocateForEachLevel[0],allocateForEachLevel[1],
-            //        allocateForEachLevel[2],allocateForEachLevel[3]);
-            
-            // this is an alternative way. With this, we allocate much less memory.
+
+            // this is an alternative way. I did run out of memory using the above approach.
+            // With this, we allocate much less memory.
             // I've to find a better alternative to balance memory/time.
-            for (int i2 = 0; i2 < level; i2++){
+            for (int i2 = 0; i2 < level; i2++) {
                 allocateForEachLevel[i2] = 1;
             }
-
             break;
     }
 
+    // VERBOSE: see the preallocation
+    if (input->simulationInput.verboseMode == 1) {
+        printf("Pre-allocations for the connection variable with %u level(s): "
+                "%lld", level, allocateForEachLevel[0]);
+        for (int ilevel = 1; ilevel < level; ilevel++) {
+            printf(", %lld", allocateForEachLevel[ilevel]);
+        }
+        printf("\n");
+    }
 
-    // DEBUG: show where we are
-    //    printf("Initiating the connection variable.\n");
-    // initiate the variable that has the connections.
     if ((errorTLMnumber = initiate_connectionLeveln(intersections, level, allocateForEachLevel)) != 0) {
         return errorTLMnumber;
     }
     free(allocateForEachLevel);
     allocateForEachLevel = NULL;
+    
     clock_t end_con = clock();
 
-    if (input->timingMode == 1) {
+    if (input->simulationInput.printAdditionalMode == 1) {
+        printf("Done initiating the connection variable.\n");
+    }
+
+    if (input->simulationInput.timingMode == 1) {
         double time_spent_con = (double) (end_con - begin_con) / CLOCKS_PER_SEC;
         printf("Time to initiate connections %g ms (or %g s, or %g min, or %g hours).\n",
                 time_spent_con * 1e3, time_spent_con, time_spent_con / 60.0, time_spent_con / (60 * 60));
@@ -166,56 +183,77 @@ unsigned int initiateVariablesTLMPennes(struct dataForSimulation *input,
     //            intersections->innerLevel[8].level, intersections->innerLevel[2].innerLevel[6].level,
     //            intersections->innerLevel[2].innerLevel[2].level);
 
-    // DEBUG: show where we are
-    //    printf("Getting the TLM numbers.\n");
+
+    if (input->simulationInput.printAdditionalMode == 1) {
+        printf("Getting the TLM numbers (number of ports, nodes outputs, etc.) and the connection variable...\n");
+    }
 
     clock_t begin_get = clock();
     // get the numbers, the connections, and wrap them
-    if ((errorTLMnumber = getTLMnumbers(input, numbers, intersections)) != 0) {
+    if ((errorTLMnumber = getTLMnumbers(input, numbers, intersections, id)) != 0) {
         return errorTLMnumber;
     }
 
     clock_t end_get = clock();
 
+    if (input->simulationInput.printAdditionalMode == 1) {
+        printf("Done getting the TLM numbers (number of ports, nodes outputs, etc.) and the connection variable.\n");
+    }
+    
+    if (input->simulationInput.timingMode == 1) {
+        double time_spent_get = (double) (end_get - begin_get) / CLOCKS_PER_SEC;
+        printf("Time to initiate TLM numbers (number of ports, nodes outputs, etc.) and the connection variable %g ms (or %g s, or %g min, or %g hours).\n",
+                time_spent_get * 1e3, time_spent_get, time_spent_get / 60.0, time_spent_get / (60 * 60));
+    }
+
     // DEBUG: shows the numbers we got
     //    printf("Number of nodes %llu, number of ports %llu, number of outputs %llu\n",
     //            matrices->numbers.Nodes, matrices->numbers.Ports, matrices->numbers.Output);
 
+    if (input->simulationInput.printAdditionalMode == 1) {
+        printf("Initiating the boundary variable...\n");
+    }
     clock_t begin_bound = clock();
-    if ((errorTLMnumber = initiateBoundaryTypeAndDataPennes(boundaries, input)) != 0) {
+    if ((errorTLMnumber = initiateBoundaryTypeAndDataPennes(boundaries, input, id)) != 0) {
         return errorTLMnumber;
     }
     clock_t end_bound = clock();
-
-    // Now it is writing mode. If there is a file with the same name, I'm sorry,
-    // it will be replaced
-    char* nameOfFile = (char*) malloc(strlen(input->meshInput.nameOfInputFile) + 5);
-    strcpy(nameOfFile, input->meshInput.nameOfInputFile);
-    strcat(nameOfFile, ".tmo");
-
-
-    if ((*file = fopen(nameOfFile, "w")) == NULL) {
-        // error opening the file
-        // sendErrorCodeAndMessage(764, nameOfFile, NULL, NULL, NULL);
-        return 764;
+    if (input->simulationInput.printAdditionalMode == 1) {
+        printf("Done initiating the boundary variable.\n");
     }
-    free(nameOfFile);
+    
+    if (input->simulationInput.timingMode == 1) {
+        double time_spent_bound = (double) (end_bound - begin_bound) / CLOCKS_PER_SEC;
+        printf("Time to initiate the boundaries %g ms (or %g s, or %g min, or %g hours).\n",
+                time_spent_bound * 1e3, time_spent_bound, time_spent_bound / 60.0, time_spent_bound / (60 * 60));
+    }
+    
+    if (input->simulationInput.printAdditionalMode == 1) {
+        printf("Creating the output file...\n");
+    }
 
-
-
+    // creating the output file (or checking if it was already created)
+    if (errorTLMnumber = creatOutputFile(input) != 0) {
+        return errorTLMnumber;
+    }
+    
+    if (input->simulationInput.printAdditionalMode == 1) {
+        printf("Done creating the output file.\n");
+        printf("Allocating and initiating the matrices...\n");
+    }
 
     clock_t begin_mat = clock();
     // initiating the matrices
-    switch (input->simulationInput.libraryForCalculation) {
+    switch (input->equationInput[id].libraryForCalculation) {
         case EIGEN:
             // quantities to reserve in the sparse matrices used in the implementation
             // using the Eigen library
             ; // trick to overcome C limitation that would not allow me to 
             // define the variable below
-            unsigned int quantityToReserve[] = {4, 2}; // Initial value 
+            unsigned int quantityToReserve[] = {4, 4}; // Initial value 
 
-            // if we have ... I increase the number to reserve. The numbers
-            // to reserve are the square of the number of ports 
+            // if we have what is defined below, I increase the number to reserve. The numbers
+            // to reserve are the square of the number of ports .
 
             // Triangle elements
             if (input->mesh.quantityOfSpecificElement[2]) {
@@ -253,31 +291,19 @@ unsigned int initiateVariablesTLMPennes(struct dataForSimulation *input,
                 return errorTLMnumber;
             }
             break;
+
+        case CUDA:
+            // future implementation
+            break;
     }
     clock_t end_mat = clock();
-
-
-    clock_t end = clock();
-
-    if (input->timingMode == 1) {
-        double time_spent = (double) (end - begin) / CLOCKS_PER_SEC;
-
-        double time_spent_get = (double) (end_get - begin_get) / CLOCKS_PER_SEC;
-        double time_spent_bound = (double) (end_bound - begin_bound) / CLOCKS_PER_SEC;
+    if (input->simulationInput.printAdditionalMode == 1) {
+        printf("Done allocating and initiating the matrices.\n");
+    }
+    if (input->simulationInput.timingMode == 1) {
         double time_spent_mat = (double) (end_mat - begin_mat) / CLOCKS_PER_SEC;
-
-        printf("Total time to initiate TLM numbers %g ms (or %g s, or %g min, or %g hours).\n",
-                time_spent_get * 1e3, time_spent_get, time_spent_get / 60.0, time_spent_get / (60 * 60));
-
-
-        printf("Time to initiate the boundaries %g ms (or %g s, or %g min, or %g hours).\n",
-                time_spent_bound * 1e3, time_spent_bound, time_spent_bound / 60.0, time_spent_bound / (60 * 60));
-
         printf("Time to initiate the matrices %g ms (or %g s, or %g min, or %g hours).\n",
                 time_spent_mat * 1e3, time_spent_mat, time_spent_mat / 60.0, time_spent_mat / (60 * 60));
-
-        printf("Total time to initiate the variables %g ms (or %g s, or %g min, or %g hours).\n\n",
-                time_spent * 1e3, time_spent, time_spent / 60.0, time_spent / (60 * 60));
     }
 
 
@@ -289,17 +315,18 @@ unsigned int initiateVariablesTLMPennes(struct dataForSimulation *input,
  * allocate their values
  */
 unsigned int initiateBoundaryTypeAndDataPennes(struct boundaryData **input,
-        const struct dataForSimulation * inputData) {
+        const struct dataForSimulation * inputData, int id) {
 
     *input = (struct boundaryData*) malloc(sizeof (struct boundaryData)*
-            inputData->quantityOfBoundariesRead);
+            inputData->equationInput[id].numberOfBoundaries);
+    
 
     if (*input == NULL) {
         sendErrorCodeAndMessage(8707, NULL, NULL, NULL, NULL);
         return 8707;
     }
 
-    for (unsigned int i = 0; i < inputData->quantityOfBoundariesRead; i++) {
+    for (unsigned int i = 0; i < inputData->equationInput[id].numberOfBoundaries; i++) {
         // input[i].boundaries->boundaryType = 
         // 0 - Adiabatic
         // 1 - temperature
@@ -312,7 +339,7 @@ unsigned int initiateBoundaryTypeAndDataPennes(struct boundaryData **input,
         // we can have heat flux, convection, and radiation heat transfer.
 
         // adiabatic case
-        if (inputData->boundaryInput[i].adiabaticDefined == 1) {
+        if (inputData->boundaryInput[ inputData->equationInput[id].boundaryNumbers[i] ].adiabaticDefined == 1) {
             (*input)[i].quantityOfBoundaries = 1;
             (*input)[i].boundaries = (struct boundaryTypeAndData*)
                     malloc(sizeof (struct boundaryTypeAndData));
@@ -327,7 +354,7 @@ unsigned int initiateBoundaryTypeAndDataPennes(struct boundaryData **input,
         }
 
         // temperature case
-        if (inputData->boundaryInput[i].temperatureDefined == 1) {
+        if (inputData->boundaryInput[ inputData->equationInput[id].boundaryNumbers[i] ].temperatureDefined == 1) {
             (*input)[i].quantityOfBoundaries = 1;
             (*input)[i].boundaries = (struct boundaryTypeAndData*)
                     malloc(sizeof (struct boundaryTypeAndData));
@@ -338,7 +365,7 @@ unsigned int initiateBoundaryTypeAndDataPennes(struct boundaryData **input,
 
             (*input)[i].boundaries[0].boundaryType = 1;
             (*input)[i].boundaries[0].boundaryData = (double*) malloc(sizeof (double));
-            (*input)[i].boundaries[0].boundaryData[0] = inputData->boundaryInput[i].temperatureBoundary;
+            (*input)[i].boundaries[0].boundaryData[0] = inputData->boundaryInput[ inputData->equationInput[id].boundaryNumbers[i] ].temperatureBoundary;
             continue;
         }
 
@@ -350,7 +377,7 @@ unsigned int initiateBoundaryTypeAndDataPennes(struct boundaryData **input,
         (*input)[i].boundaries = NULL;
 
         // heat flux case
-        if (inputData->boundaryInput[i].heatFluxDefined == 1) {
+        if (inputData->boundaryInput[ inputData->equationInput[id].boundaryNumbers[i] ].heatFluxDefined == 1) {
             (*input)[i].quantityOfBoundaries++;
             (*input)[i].boundaries = (struct boundaryTypeAndData*)
                     realloc((*input)[i].boundaries,
@@ -363,11 +390,11 @@ unsigned int initiateBoundaryTypeAndDataPennes(struct boundaryData **input,
 
             (*input)[i].boundaries[(*input)[i].quantityOfBoundaries - 1].boundaryType = 2;
             (*input)[i].boundaries[(*input)[i].quantityOfBoundaries - 1].boundaryData = (double*) malloc(sizeof (double));
-            (*input)[i].boundaries[(*input)[i].quantityOfBoundaries - 1].boundaryData[0] = inputData->boundaryInput[i].heatFluxBoundary; // heat flux value
+            (*input)[i].boundaries[(*input)[i].quantityOfBoundaries - 1].boundaryData[0] = inputData->boundaryInput[ inputData->equationInput[id].boundaryNumbers[i] ].heatFluxBoundary; // heat flux value
         }
 
         // convection case
-        if (inputData->boundaryInput[i].convectionDefined == 1) {
+        if (inputData->boundaryInput[ inputData->equationInput[id].boundaryNumbers[i] ].convectionDefined == 1) {
             (*input)[i].quantityOfBoundaries++;
             (*input)[i].boundaries = (struct boundaryTypeAndData*)
                     realloc((*input)[i].boundaries,
@@ -380,12 +407,12 @@ unsigned int initiateBoundaryTypeAndDataPennes(struct boundaryData **input,
 
             (*input)[i].boundaries[(*input)[i].quantityOfBoundaries - 1].boundaryType = 3;
             (*input)[i].boundaries[(*input)[i].quantityOfBoundaries - 1].boundaryData = (double*) malloc(sizeof (double)*2);
-            (*input)[i].boundaries[(*input)[i].quantityOfBoundaries - 1].boundaryData[0] = inputData->boundaryInput[i].ConvectionTemperature; // temperature for the convection effect
-            (*input)[i].boundaries[(*input)[i].quantityOfBoundaries - 1].boundaryData[1] = inputData->boundaryInput[i].ConvectionCoefficient; // convective heat transfer coefficient
+            (*input)[i].boundaries[(*input)[i].quantityOfBoundaries - 1].boundaryData[0] = inputData->boundaryInput[ inputData->equationInput[id].boundaryNumbers[i] ].convectionTemperature; // temperature for the convection effect
+            (*input)[i].boundaries[(*input)[i].quantityOfBoundaries - 1].boundaryData[1] = inputData->boundaryInput[ inputData->equationInput[id].boundaryNumbers[i] ].convectionCoefficient; // convective heat transfer coefficient
         }
 
         // radiation case
-        if (inputData->boundaryInput[i].radiationDefined == 1) {
+        if (inputData->boundaryInput[ inputData->equationInput[id].boundaryNumbers[i] ].radiationDefined == 1) {
             (*input)[i].quantityOfBoundaries++;
             (*input)[i].boundaries = (struct boundaryTypeAndData*)
                     realloc((*input)[i].boundaries,
@@ -398,8 +425,8 @@ unsigned int initiateBoundaryTypeAndDataPennes(struct boundaryData **input,
 
             (*input)[i].boundaries[(*input)[i].quantityOfBoundaries - 1].boundaryType = 4;
             (*input)[i].boundaries[(*input)[i].quantityOfBoundaries - 1].boundaryData = (double*) malloc(sizeof (double)*2);
-            (*input)[i].boundaries[(*input)[i].quantityOfBoundaries - 1].boundaryData[0] = inputData->boundaryInput[i].RadiationTemperature; // temperature for the radiation effect
-            (*input)[i].boundaries[(*input)[i].quantityOfBoundaries - 1].boundaryData[1] = inputData->boundaryInput[i].RadiationEmissivity; // radiation emissivity coefficient
+            (*input)[i].boundaries[(*input)[i].quantityOfBoundaries - 1].boundaryData[0] = inputData->boundaryInput[ inputData->equationInput[id].boundaryNumbers[i] ].radiationTemperature; // temperature for the radiation effect
+            (*input)[i].boundaries[(*input)[i].quantityOfBoundaries - 1].boundaryData[1] = inputData->boundaryInput[ inputData->equationInput[id].boundaryNumbers[i] ].radiationEmissivity; // radiation emissivity coefficient
         }
     }
 

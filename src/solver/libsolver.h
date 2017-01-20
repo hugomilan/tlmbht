@@ -1,7 +1,7 @@
 /*
  * TLMBHT - Transmission-line Modeling Method applied to BioHeat Transfer Problems.
  * 
- * Copyright (C) 2015 to 2016 by Cornell University. All Rights Reserved.
+ * Copyright (C) 2015 to 2017 by Cornell University. All Rights Reserved.
  * 
  * Written by Hugo Fernando Maia Milan.
  * 
@@ -14,7 +14,7 @@
  * Author: Hugo Fernando Maia Milan
  * Email:  hugofernando@gmail.com
  *
- * Created on July 2, 2016.
+ * Created on August 8, 2016.
  *
  *
  *
@@ -28,8 +28,8 @@
 
 /*
  * Description of this file:
- * contains declaration of functions, structures, and enumerations for function
- * calls that are common to all the solvers. See libsolver.c for more details.
+ * contains declaration of functions, structures, and enumerations for selecting
+ * the solver. See libsolver.c for more details.
  *
  */
 
@@ -47,9 +47,11 @@ extern "C" {
         double y;
         double z;
     };
-    
-    //Check if the simulation is time-domain and print it.
-    void printTypeTemporalSimulation(struct dataForSimulation*);
+
+
+    unsigned int solve(struct dataForSimulation*);
+
+
 
 #ifdef __cplusplus
 }

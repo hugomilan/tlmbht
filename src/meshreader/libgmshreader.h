@@ -1,7 +1,7 @@
 /*
  * TLMBHT - Transmission-line Modeling Method applied to BioHeat Transfer Problems.
  * 
- * Copyright (C) 2015 to 2016 by Cornell University. All Rights Reserved.
+ * Copyright (C) 2015 to 2017 by Cornell University. All Rights Reserved.
  * 
  * Written by Hugo Fernando Maia Milan.
  * 
@@ -43,9 +43,6 @@ extern "C" {
 #include "../configs/libmeshconfig.h"
 #include "libmeshtlmbht.h"
 
-#include <stdio.h>
-#include <stdlib.h>
-
     enum gmsh2_2Config {
         NOTHING_GMSH,
         MESH_FORMAT,
@@ -70,13 +67,13 @@ extern "C" {
 
     struct dataGmsh2_2 {
         struct meshFormat MeshFormat;
-        long long unsigned int numberOfNode;
-        long long unsigned int numberOfNodeReads;
+        unsigned long long numberOfNode;
+        unsigned long long numberOfNodeReads;
 
-        long long unsigned int numberOfElement;
-        long long unsigned int numberOfElementReads;
+        unsigned long long numberOfElement;
+        unsigned long long numberOfElementReads;
 
-        long long unsigned int *quantityOfSpecificElement;
+        unsigned long long *quantityOfSpecificElement;
         struct elementAny *saveElement;
 
         struct node *nodes;

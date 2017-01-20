@@ -1,7 +1,7 @@
 /*
  * TLMBHT - Transmission-line Modeling Method applied to BioHeat Transfer Problems.
  * 
- * Copyright (C) 2015 to 2016 by Cornell University. All Rights Reserved.
+ * Copyright (C) 2015 to 2017 by Cornell University. All Rights Reserved.
  * 
  * Written by Hugo Fernando Maia Milan.
  * 
@@ -40,42 +40,72 @@
 extern "C" {
 #endif
 
-#include "libsimuconfig.h"
+#include "libequationconfig.h"
 
     // structure that contains the information for the material input
 
     struct BoundaryConfig {
+        char *equationName;
+        // name of the equation associated with this material
+        int equationNameDefined;
+
+        int equationNumber;
+        // number of the equation. Used to call the right equation from the
+        // libequationconfig->Equation.
+        // This is an integer because -1 (initial value) indicates that we did
+        // not find a match of the Equations names and the name given herein.
+
+        enum typeSim typeOfEquation;
+        // type of simulation
+
         // data for the quantity of materials
         int *numberInput;
         int quantityOfNumberInput;
         // flags
         int numberInputDefined;
 
-        // data for the material itself. Used in Pennes and Heat
+        // Inputs associated with diffusion and hyperbolic diffusion
+        double scalarBoundary;
+        int scalarBoundaryDefined;
+
+        double fluxBoundary;
+        int fluxBoundaryDefined;
+
+        double convectionScalar;
+        int convectionScalarDefined;
+
+        double convectionCoefficient;
+        int convectionCoefficientDefined;
+        int convectionDefined;
+
+        int adiabaticDefined;
+
+
+
+
+        // Inputs associated with heat, hyperbolic heat, pennes, and hyperbolic pennes
         double temperatureBoundary;
-        // flags
         int temperatureDefined;
 
         double heatFluxBoundary;
-        // flags
         int heatFluxDefined;
 
-        double ConvectionTemperature;
-        double ConvectionCoefficient;
-        //flags
-        int convectionDefined;
-        int convectionTemperatureDefined;
-        int convectionCoefficientDefined;
-
-        double RadiationTemperature;
-        double RadiationEmissivity;
-        // flags
-        int radiationDefined;
+        double radiationTemperature;
         int radiationTemperatureDefined;
-        int radiationEmissivityDefined;
 
-        // flags for Pennes and Heat
-        int adiabaticDefined;
+        double radiationEmissivity;
+        int radiationEmissivityDefined;
+        int radiationDefined;
+
+        double convectionTemperature;
+        int convectionTemperatureDefined;
+
+        // these are the same defined for diffusion and hyperbolic diffusion
+        //        double convectionCoefficient;
+        //        int convectionCoefficientDefined;
+        //        int convectionDefined;
+        //        
+        //        int adiabaticDefined;
     };
 
     unsigned int initializeBoundaryConfig(struct BoundaryConfig *);
@@ -84,14 +114,17 @@ extern "C" {
 
     unsigned int setConfigurationBoundary(char *, struct BoundaryConfig*, int*);
 
-    unsigned int testInputBoundary(struct BoundaryConfig *, enum typeSim *, int);
+    unsigned int testInputBoundary(struct BoundaryConfig *, struct Equation *, int);
 
-    void printfBoundConfig(struct BoundaryConfig *, enum typeSim*);
+    void printfBoundConfig(struct BoundaryConfig *, struct Equation *equation);
     void printfNumberOfInputsBound(int **, int *);
     void printfAdiabatic(void);
+    void printfScalarBoundary(double);
+    void printfFluxBoundary(double);
+    void printfConvection(double, double);
     void printfTemperature(double);
     void printfHeatFlux(double);
-    void printfConvection(double, double);
+    void printfConvectionHeat(double, double);
     void printfRadiation(double, double);
 
 

@@ -1,7 +1,7 @@
 /*
  * TLMBHT - Transmission-line Modeling Method applied to BioHeat Transfer Problems.
  * 
- * Copyright (C) 2015 to 2016 by Cornell University. All Rights Reserved.
+ * Copyright (C) 2015 to 2017 by Cornell University. All Rights Reserved.
  * 
  * Written by Hugo Fernando Maia Milan.
  * 
@@ -35,15 +35,15 @@
 #include "libmiscellaneous.h"
 
 /*
- * sortOptmizedBubbleSort: Sorts long long unsigned int using the optimized 
+ * sortOptmizedBubbleSort: Sorts unsigned long long using the optimized 
  * bubble sort algorithm. It assumes that the position zero contains the length
  * of the pointer. Sorting from the smallest to the biggest
  */
-void sortOptmizedBubbleSort(long long unsigned int *input){
+void sortOptmizedBubbleSort(unsigned long long *input) {
     unsigned int endSort = input[0], swap = 1;
-    long long unsigned int temp;
-    
-    while(swap != 0){
+    unsigned long long temp;
+
+    while (swap != 0) {
         swap = 0;
         for (unsigned int i = 1; i < endSort; i++) {
             if (input[i] > input[i + 1]) {
@@ -57,12 +57,11 @@ void sortOptmizedBubbleSort(long long unsigned int *input){
     }
 }
 
-
 /*
  * compareLLU: function used in the qsort() function to sort
- * long long unsigned int.
+ * unsigned long long.
  */
-int compareLLU(const void *a, const void *b){
-    
-    return (*(long long unsigned int*)a - *(long long unsigned int*)b);
+int compareLLU(const void *a, const void *b) {
+
+    return (*(unsigned long long*) a - *(unsigned long long*) b);
 }

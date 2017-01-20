@@ -1,7 +1,7 @@
 /*
  * TLMBHT - Transmission-line Modeling Method applied to BioHeat Transfer Problems.
  * 
- * Copyright (C) 2015 to 2016 by Cornell University. All Rights Reserved.
+ * Copyright (C) 2015 to 2017 by Cornell University. All Rights Reserved.
  * 
  * Written by Hugo Fernando Maia Milan.
  * 
@@ -46,15 +46,22 @@ void sendErrorCodeAndMessage(unsigned int errorCode, void *input1v, void *input2
     fprintf(stderr, "ERROR: ");
 
     unsigned int *input1ui = (unsigned int *) input1v;
-    long long unsigned int *input2llui = (long long unsigned int *) input2v;
+    unsigned long long *input2llui = (unsigned long long *) input2v;
     char *input1c = (char*) input1v;
     char *input2c = (char*) input2v;
+
+    unsigned int *input3ui = (unsigned int *) input3v;
+    char *input4c = (char*) input4v;
 
 
     switch (errorCode) {
         case 0:
             // this should not be an error
-            fprintf(stderr, "Unknown error");
+            fprintf(stderr, "Unknown error OR no error at all. Maybe a programming error?");
+            break;
+
+        case 8:
+            fprintf(stderr, "Unknown error reading the file");
             break;
 
         case 12:
@@ -91,17 +98,31 @@ void sendErrorCodeAndMessage(unsigned int errorCode, void *input1v, void *input2
             break;
 
         case 211:
-            fprintf(stderr, "Materials configuration field was not found");
+            fprintf(stderr, "Material configuration field was not found");
+            break;
+
+        case 212:
+            fprintf(stderr, "Equation configuration field was not found");
             break;
 
         case 315:
-            // error when do not find the input file
-            fprintf(stderr, "Requires either an input file OR a case.tlm file in the same folder of the calling\n");
+            // error when we do not find the input file
+            fprintf(stderr, "Requires either an input file OR a case.tlm file in the same folder of the calling directory\n");
+            break;
+
+        case 316:
+            // error for unknown command
+            fprintf(stderr, "Unknown command '%s'\n", input1c);
+            break;
+
+        case 317:
+            // error for multiple inputs
+            fprintf(stderr, "Two input locations were found. Please, revise your input. We got '%s' at position %u and '%s' at position %u\n", input2c, *input1ui, input4c, *input3ui);
             break;
 
         case 345:
             //We couldn't find the input file
-            fprintf(stderr, "Unknown error closing the file %s", input1c);
+            fprintf(stderr, "Unknown error closing the output file");
             break;
 
         case 365:
@@ -130,33 +151,33 @@ void sendErrorCodeAndMessage(unsigned int errorCode, void *input1v, void *input2
             break;
 
         case 1858:
-            // error when reading the SIMULATION configurations
-            fprintf(stderr, "Type of equations for simulation was not defined within Simulation");
+            // error when reading the EQUATION configurations
+            fprintf(stderr, "Type of equations for simulation was not defined within Equation group %04d", *input1ui);
             break;
 
         case 1859:
-            // error when reading the SIMULATION configurations
-            fprintf(stderr, "Type of dimension was not defined within Simulation");
+            // error when reading the EQUATION configurations
+            fprintf(stderr, "Type of dimension was not defined within Equation group %04d", *input1ui);
             break;
 
-        case 1860:
-            // error when reading the SIMULATION configurations
-            fprintf(stderr, "Method for simulation was not defined within Simulation");
-            break;
+            //        case 1860:
+            //            // error when reading the EQUATION configurations
+            //            fprintf(stderr, "Method for solution was not defined within Equation");
+            //            break;
 
         case 1861:
-            // error when reading the SIMULATION configurations
-            fprintf(stderr, "Type of solution (steady-state or dynamic) was not defined within Simulation");
+            // error when reading the EQUATION configurations
+            fprintf(stderr, "Type of solution (steady-state or dynamic) was not defined within Equation group %04d", *input1ui);
             break;
 
         case 1862:
-            // error when reading the SIMULATION configurations
-            fprintf(stderr, "Type of solution was defined as dynamic but time-step was not defined within Simulation");
+            // error when reading the EQUATION configurations
+            fprintf(stderr, "Type of solution was defined as dynamic but time-step was not defined within Equation group %04d", *input1ui);
             break;
 
-        case 1863:
-            // error when reading the SIMULATION configurations
-            fprintf(stderr, "Type of solution was defined as dynamic but final time was not defined within Simulation");
+        case 1864:
+            // error when reading the EQUATION configurations
+            fprintf(stderr, "The name of the equation was not defined within Equation group %04d", *input1ui);
             break;
 
         case 1870:
@@ -165,12 +186,12 @@ void sendErrorCodeAndMessage(unsigned int errorCode, void *input1v, void *input2
             break;
 
         case 1871:
-            // error when reading the SIMULATION configurations
+            // error when reading the MESH configurations
             fprintf(stderr, "Error reading the mesh configuration");
             break;
 
         case 1872:
-            // error when reading the SIMULATION configurations
+            // error when reading the MATERIAL configurations
             fprintf(stderr, "Error reading the materials configuration for group %04d", *input1ui);
             break;
 
@@ -187,6 +208,16 @@ void sendErrorCodeAndMessage(unsigned int errorCode, void *input1v, void *input2
         case 1875:
             // The name of the mesh input was not given
             fprintf(stderr, "The name of the input mesh was not given");
+            break;
+
+        case 1877:
+            // error when reading the SIMULATION configurations
+            fprintf(stderr, "Equation group %04d (name: %s) and equation group %04d (name: %s) have the same name", *input1ui, input2c, *input3ui, input4c);
+            break;
+
+        case 1876:
+            // error when reading the SIMULATION configurations
+            fprintf(stderr, "Error reading the equation configuration for group %04d", *input1ui);
             break;
 
         case 2314:
@@ -240,8 +271,8 @@ void sendErrorCodeAndMessage(unsigned int errorCode, void *input1v, void *input2
             break;
 
         case 3880:
-            // Unknown input for print additional
-            fprintf(stderr, "Unknown input for print additional in line %04u: %s", *input1ui, input2c);
+            // Unknown input for print additional mode
+            fprintf(stderr, "Unknown input for print additional mode in line %04u: %s", *input1ui, input2c);
             break;
 
         case 3881:
@@ -258,30 +289,69 @@ void sendErrorCodeAndMessage(unsigned int errorCode, void *input1v, void *input2
             // Unknown input for benchmark
             fprintf(stderr, "Unknown input for library in line %04u: %s", *input1ui, input2c);
             break;
-            
+
         case 3884:
             // Unknown input for benchmark
             fprintf(stderr, "Unknown input for number of OpenMP cores in line %04u: %s", *input1ui, input2c);
             break;
 
+        case 3890:
+            // Unknown input for output extension
+            fprintf(stderr, "Unknown input for output extension in line %04u: %s", *input1ui, input2c);
+            break;
+
+        case 3891:
+            // Unknown input for timing mode
+            fprintf(stderr, "Unknown input for timing mode in line %04u: %s", *input1ui, input2c);
+
+        case 3892:
+            // Unknown input for verbose mode
+            fprintf(stderr, "Unknown input for verbose mode in line %04u: %s", *input1ui, input2c);
+            break;
+
+        case 4441:
+            // error when reading the MATERIAL configurations
+            fprintf(stderr, "The flux model for the materials group %04d was defined as hyperbolic but the relaxation time was not defined", *input1ui);
+            break;
+
+        case 4442:
+            // error when reading the MATERIAL configurations
+            fprintf(stderr, "We didn't find a match for the equation name from materials group %04d: '%s'", *input1ui, input2c);
+            break;
+
+        case 4443:
+            // error when reading the MATERIAL configurations
+            fprintf(stderr, "The equation name for materials group %04d was not defined", *input1ui);
+            break;
+
         case 4444:
-            // error when reading the SIMULATION configurations
+            // error when reading the MATERIAL configurations
             fprintf(stderr, "The density for materials group %04d was not defined", *input1ui);
             break;
 
         case 4445:
-            // error when reading the SIMULATION configurations
+            // error when reading the MATERIAL configurations
             fprintf(stderr, "The specific heat for materials group %04d was not defined", *input1ui);
             break;
 
         case 4446:
-            // error when reading the SIMULATION configurations
+            // error when reading the MATERIAL configurations
             fprintf(stderr, "The thermal conductivity for materials group %04d was not defined", *input1ui);
             break;
 
         case 4447:
-            // error when reading the SIMULATION configurations
-            fprintf(stderr, "Simulation was defined was dynamic but initial temperature for materials group %04d was not defined", *input1ui);
+            // error when reading the MATERIAL configurations
+            fprintf(stderr, "The Equation was defined was dynamic but initial temperature for materials group %04d was not defined", *input1ui);
+            break;
+
+        case 4448:
+            // error when reading the MATERIAL configurations
+            fprintf(stderr, "The diffusion coeeficient for materials group %04d was not defined", *input1ui);
+            break;
+
+        case 4449:
+            // error when reading the MATERIAL configurations
+            fprintf(stderr, "Simulation was defined was dynamic but initial value of the scalar field for materials group %04d was not defined", *input1ui);
             break;
 
         case 5165:
@@ -387,12 +457,17 @@ void sendErrorCodeAndMessage(unsigned int errorCode, void *input1v, void *input2
             // no 2d element for tlm 2d
             fprintf(stderr, "No two-dimensional element was found and the simulation chosen was 2D");
             break;
-            
-            case 6601:
+
+        case 6601:
             // no 3d element for tlm 3d
             fprintf(stderr, "No three-dimensional element was found and the simulation chosen was 3D");
             break;
-            
+
+        case 6602:
+            // no 1d element for tlm 1d
+            fprintf(stderr, "No one-dimensional element was found and the simulation chosen was 1D");
+            break;
+
         case 6610:
             // no material element
             fprintf(stderr, "No material element was found associated with the tag numbers supplied. "
@@ -415,8 +490,15 @@ void sendErrorCodeAndMessage(unsigned int errorCode, void *input1v, void *input2
             break;
 
         case 7154:
+            /* FALLTHRU */
+        case 7155:
             // this error happen when the software finds something more than } on its line
             fprintf(stderr, "We found more than one number but we did not found '[' and ']' in line %04u: %s", *input1ui, input2c);
+            break;
+
+        case 7156:
+            // Unknown number of inputs for scale
+            fprintf(stderr, "Wrong number of inputs to scale the mesh. It must be one or three. Line %04u: %s", *input1ui, input2c);
             break;
 
         case 7410:
@@ -489,6 +571,11 @@ void sendErrorCodeAndMessage(unsigned int errorCode, void *input1v, void *input2
             fprintf(stderr, "Unknown command in line %04u: %s", *input1ui, input2c);
             break;
 
+        case 8520:
+            // error when reading the BOUNDARY configurations
+            fprintf(stderr, "We didn't find a match for the equation name from boundary group %04d: '%s'", *input1ui, input2c);
+            break;
+
         case 8521:
             // error when reading the BOUNDARY configurations
             fprintf(stderr, "The convection coefficient for boundary group %04d was defined but the convection temperature was not defined", *input1ui);
@@ -512,19 +599,40 @@ void sendErrorCodeAndMessage(unsigned int errorCode, void *input1v, void *input2
         case 8525:
             // error when reading the BOUNDARY configurations
             fprintf(stderr, "The temperature for boundary group %04d was defined but the convection boundary condition was also defined. "
-                    "Can only solve when one of the two is selected", *input1ui);
+                    "It can only solve when one of the two is selected", *input1ui);
             break;
 
         case 8526:
             // error when reading the BOUNDARY configurations
             fprintf(stderr, "The temperature for boundary group %04d was defined but the radiation boundary condition was also defined. "
-                    "Can only solve when one of the two is selected", *input1ui);
+                    "It can only solve when one of the two is selected", *input1ui);
             break;
 
         case 8527:
             // error when reading the BOUNDARY configurations
             fprintf(stderr, "The temperature for boundary group %04d was defined but the heat flux boundary condition was also defined. "
-                    "Can only solve when one of the two is selected", *input1ui);
+                    "It can only solve when one of the two is selected", *input1ui);
+
+        case 8528:
+            // error when reading the BOUNDARY configurations
+            fprintf(stderr, "The convection coefficient for boundary group %04d was defined but the convection scalar value was not defined", *input1ui);
+            break;
+
+        case 8529:
+            // error when reading the BOUNDARY configurations
+            fprintf(stderr, "The convection scalar for boundary group %04d was defined but the convection coefficient was not defined", *input1ui);
+            break;
+
+        case 8530:
+            // error when reading the BOUNDARY configurations
+            fprintf(stderr, "The scalar value for boundary group %04d was defined but the convection boundary condition was also defined. "
+                    "It can only solve when one of the two is selected", *input1ui);
+            break;
+
+        case 8031:
+            // error when reading the BOUNDARY configurations
+            fprintf(stderr, "The scalar value for boundary group %04d was defined but the flux boundary condition was also defined. "
+                    "It can only solve when one of the two is selected", *input1ui);
 
             break;
         case 8693:

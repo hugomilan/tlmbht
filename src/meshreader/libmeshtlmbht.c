@@ -1,7 +1,7 @@
 /*
  * TLMBHT - Transmission-line Modeling Method applied to BioHeat Transfer Problems.
  * 
- * Copyright (C) 2015 to 2016 by Cornell University. All Rights Reserved.
+ * Copyright (C) 2015 to 2017 by Cornell University. All Rights Reserved.
  * 
  * Written by Hugo Fernando Maia Milan.
  * 
@@ -32,14 +32,16 @@
  *
  */
 
-#include "libmeshtlmbht.h"
-#include <stdio.h>
+
+
 #include <stdlib.h>
+
+#include "libmeshtlmbht.h"
 #include "../miscellaneous/liberrorcode.h"
 
 /*
  * initiateTlmInternalMesh: initialize the internal mesh variable. This variable
- * will be used as the mesh. The mesh reading will be used to change this variable.
+ * will be used as the mesh. The mesh being read will be used to change this variable.
  */
 unsigned int initiateTlmInternalMesh(struct tlmInternalMesh *input) {
     input->nodes = NULL;
@@ -55,8 +57,8 @@ unsigned int initiateTlmInternalMesh(struct tlmInternalMesh *input) {
     input->elements.Pyramid = NULL;
     input->elements.Point = NULL;
     // elements from 0 to 99
-    input->quantityOfSpecificElement = (long long unsigned int*)
-            malloc(sizeof (long long unsigned int)*100);
+    input->quantityOfSpecificElement = (unsigned long long*)
+            malloc(sizeof (unsigned long long)*100);
     for (int i = 0; i < 100; i++) {
         input->quantityOfSpecificElement[i] = 0;
     }
@@ -103,7 +105,7 @@ unsigned int terminateTlmInternalMesh(struct tlmInternalMesh *input) {
  * for the nodes and element of the internal mesh, which will be used in the solving process
  */
 unsigned int allocateTLMInternalMeshNodesAndElements(struct tlmInternalMesh *input,
-        unsigned long long int numberOfNodes, long long unsigned int *quantityOfSpecificElement) {
+        unsigned long long int numberOfNodes, unsigned long long *quantityOfSpecificElement) {
 
     unsigned int errorTLMnumber;
 
@@ -197,7 +199,7 @@ unsigned int allocateTLMInternalMeshElementsOnly(struct tlmInternalMesh *input, 
  * writeElementToFileTlmFormat: write the elements data to the file
  */
 unsigned int writeElementToFileTlmFormat(struct tlmInternalMesh *input, FILE *saveFile) {
-    long long unsigned int i;
+    unsigned long long i;
 
     fprintf(saveFile, "Elements\n");
     fprintf(saveFile, "{\n");
@@ -319,7 +321,7 @@ unsigned int testTlmInternalMesh(struct tlmInternalMesh * input) {
  * printfAllMeshData: prints the mesh information
  */
 void printfAllMeshData(struct tlmInternalMesh *input) {
-    printf("\n");
+    printf("\nData read from the mesh:\n");
     printMeshTlmbhtNodesInformation(input);
     printMeshTlmbhtElementsInformation(input);
     printf("\n");
@@ -336,7 +338,7 @@ void printMeshTlmbhtNodesInformation(struct tlmInternalMesh *input) {
  * printMeshTlmbhtElementsInformation: prints the elements information
  */
 void printMeshTlmbhtElementsInformation(struct tlmInternalMesh *input) {
-    long long unsigned int totalNumberOfElements = 0;
+    unsigned long long totalNumberOfElements = 0;
 
     for (int i = 0; i < 100; i++)
         totalNumberOfElements = totalNumberOfElements

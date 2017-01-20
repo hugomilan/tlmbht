@@ -1,7 +1,7 @@
 /*
  * TLMBHT - Transmission-line Modeling Method applied to BioHeat Transfer Problems.
  * 
- * Copyright (C) 2015 to 2016 by Cornell University. All Rights Reserved.
+ * Copyright (C) 2015 to 2017 by Cornell University. All Rights Reserved.
  * 
  * Written by Hugo Fernando Maia Milan.
  * 
@@ -39,11 +39,8 @@
 #ifndef LIBTLMSOLVEREIGEN_H
 #define LIBTLMSOLVEREIGEN_H
 
-
-#include "../libsolvereigen.h"
-#include "libtlmsolvereigen.h"
-#include <vector>
 #include <Eigen/Sparse>
+using namespace Eigen;
 
 #ifdef __cplusplus
 extern "C" {
@@ -52,6 +49,9 @@ extern "C" {
 #include "../../configs/libconfig.h"
 #include "../../meshreader/libmeshtlmbht.h"
 #include "libtlmsolver.h"
+#include "../libsolver.h"
+
+
 
 #ifdef __cplusplus
 }
@@ -94,25 +94,22 @@ unsigned int tlmInitializeSteadyMatrices(struct calculationTLMEigen *);
 
 unsigned int terminateVariablesTLMEigen(struct dataForSimulation*,
         struct calculationTLMEigen*, struct boundaryData**, struct connectionLeveln *,
-        FILE **);
+        int, int, int);
 
 unsigned int terminateSomeVariablesEigen(struct dataForSimulation *,
         struct calculationTLMEigen *,
-        struct boundaryData**, struct connectionLeveln *);
+        struct boundaryData**, struct connectionLeveln *, int);
 
 unsigned int tlmSolveMatricesTimeDomainEigen(struct calculationTLMEigen *,
-        const struct dataForSimulation *, FILE *);
+        struct dataForSimulation *, int);
 
 unsigned int tlmSolveMatricesSteadyStateEigen(struct calculationTLMEigen *,
-        const struct dataForSimulation *, FILE *);
+        struct dataForSimulation *, int);
 
 unsigned int adjustTimeJumpEigen(struct calculationTLMEigen *, unsigned int);
 
 unsigned int writePartialOutputEigen(struct calculationTLMEigen *,
-        long long unsigned int, FILE*);
-
-unsigned int writeFirstDataToFileEigen(struct calculationTLMEigen *,
-        struct dataForSimulation *, FILE*);
+        unsigned long long, FILE*);
 
 
 

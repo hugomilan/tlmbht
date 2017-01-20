@@ -6,7 +6,7 @@
 
 # Macros
 TOP=`pwd`
-CND_PLATFORM=GNU-Linux
+CND_PLATFORM=CUDA-Linux
 CND_CONF=CUDA_Release
 CND_DISTDIR=dist
 CND_BUILDDIR=build

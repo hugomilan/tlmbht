@@ -1,7 +1,7 @@
 /*
  * TLMBHT - Transmission-line Modeling Method applied to BioHeat Transfer Problems.
  * 
- * Copyright (C) 2015 to 2016 by Cornell University. All Rights Reserved.
+ * Copyright (C) 2015 to 2017 by Cornell University. All Rights Reserved.
  * 
  * Written by Hugo Fernando Maia Milan.
  * 
@@ -32,23 +32,21 @@
  *
  */
 
-#include "libgmshreader.h"
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <limits.h>
 
+#include "libgmshreader.h"
 
-#include "../configs/libmeshconfig.h"
 #include "../miscellaneous/libstringtlmbht.h"
 #include "../miscellaneous/liberrorcode.h"
-#include "libmeshtlmbht.h"
 #include "libtbnreader.h"
 
 /*
  * gmshReader: reads the gmsh input file and save it as .tbn.
- * The basic unit of measurement in gmhs is millimeters. I convert it
- * to meters by divided the positions of the points by 1000.
+ * I implemented a scale variable (which is configurable through the case.tlm)
+ * that can be used to scale the mesh, if required
  */
 unsigned int gmshReader(struct MeshConfig * input, struct tlmInternalMesh * output) {
 
@@ -191,15 +189,15 @@ unsigned int gmshReader(struct MeshConfig * input, struct tlmInternalMesh * outp
                             &inputGmsh.nodes[inputGmsh.numberOfNodeReads].x,
                             &inputGmsh.nodes[inputGmsh.numberOfNodeReads].y,
                             &inputGmsh.nodes[inputGmsh.numberOfNodeReads].z);
-                    
-                    // converting millimeters to meters
-                    inputGmsh.nodes[inputGmsh.numberOfNodeReads].x = 
-                            inputGmsh.nodes[inputGmsh.numberOfNodeReads].x/1000;
-                    inputGmsh.nodes[inputGmsh.numberOfNodeReads].y = 
-                            inputGmsh.nodes[inputGmsh.numberOfNodeReads].y/1000;
-                    inputGmsh.nodes[inputGmsh.numberOfNodeReads].z = 
-                            inputGmsh.nodes[inputGmsh.numberOfNodeReads].z/1000;
-                            
+
+                    // Applying the scale factor
+                    inputGmsh.nodes[inputGmsh.numberOfNodeReads].x =
+                            inputGmsh.nodes[inputGmsh.numberOfNodeReads].x * input->scale[0];
+                    inputGmsh.nodes[inputGmsh.numberOfNodeReads].y =
+                            inputGmsh.nodes[inputGmsh.numberOfNodeReads].y * input->scale[1];
+                    inputGmsh.nodes[inputGmsh.numberOfNodeReads].z =
+                            inputGmsh.nodes[inputGmsh.numberOfNodeReads].z * input->scale[2];
+
                     inputGmsh.numberOfNodeReads++;
                 }
                 break;
@@ -453,7 +451,8 @@ unsigned int gmshReader(struct MeshConfig * input, struct tlmInternalMesh * outp
         }
     }
 
-    // converting the TLM codes to the safe value
+    // converting the TLM codes from the safe values to zero if no error was detected
+    // and sending an error message if it happened
     if (errorTLMnumber >= 7652 && errorTLMnumber <= 7658) {
         // this is not an error, just an warning
         sendErrorCodeAndMessage(errorTLMnumber, &lineNumber, lineOriginal, NULL, NULL);
@@ -492,7 +491,9 @@ unsigned int gmshReader(struct MeshConfig * input, struct tlmInternalMesh * outp
     printf("The file %s was successfully read.\n", nameOfFile);
 
     // changing the name of file for saving the content read
-    strcpy(nameOfFile, input->nameOfInputFile);
+    nameOfFile = (char*) realloc(nameOfFile, sizeof (char)*(strlen(input->nameOfOutputFile) + 5));
+    // 4 (extension) + 1 ('\0')
+    strcpy(nameOfFile, input->nameOfOutputFile);
     strcat(nameOfFile, ".tbn");
 
     // Now it is writing mode. If there is a file with the same name, I'm sorry,
@@ -575,8 +576,8 @@ unsigned int initiateDataGmsh2_2(struct dataGmsh2_2 *input) {
     input->MeshFormat.MeshFormatDefined = 0;
 
     // elements from 0 to 99
-    input->quantityOfSpecificElement = (long long unsigned int*)
-            malloc(sizeof (long long unsigned int)*100);
+    input->quantityOfSpecificElement = (unsigned long long*)
+            malloc(sizeof (unsigned long long)*100);
     for (int i = 0; i < 100; i++) {
         input->quantityOfSpecificElement[i] = 0;
     }
@@ -638,9 +639,9 @@ unsigned int deallocateOnlyTheElementGmsh(struct dataGmsh2_2 *input) {
  */
 unsigned int readAndWriteGmsh(struct tlmInternalMesh * output,
         struct dataGmsh2_2 * input, FILE * saveFile) {
-    long long unsigned int i, *quantityOfElementTypesSaved;
+    unsigned long long i, *quantityOfElementTypesSaved;
     unsigned int errorTLMnumber;
-    
+
     // allocating in the memory the variables for nodes and elements
     if ((errorTLMnumber = allocateTLMInternalMeshNodesAndElements(output, input->numberOfNode,
             input->quantityOfSpecificElement)) != 0) {
@@ -649,8 +650,8 @@ unsigned int readAndWriteGmsh(struct tlmInternalMesh * output,
     }
 
     // variable used for incrementing the quantity of elements saved.
-    quantityOfElementTypesSaved = (long long unsigned int*)
-            malloc(sizeof (long long unsigned int)*100);
+    quantityOfElementTypesSaved = (unsigned long long*)
+            malloc(sizeof (unsigned long long)*100);
     for (int i = 0; i < 100; i++) {
         quantityOfElementTypesSaved[i] = 0;
     }
@@ -850,12 +851,27 @@ unsigned int writeThenReadGmsh(struct tlmInternalMesh * output,
         sendErrorCodeAndMessage(errorTLMnumber, NULL, NULL, NULL, NULL);
         return errorTLMnumber;
     }
+    
+    // I need to set the scale variable to 1. If don't do this, the mesh will be
+    // scaled twice.
+    double scale_temp[3];
+    scale_temp[0] = input->scale[0];
+    input->scale[0] = 1;
+    scale_temp[1] = input->scale[1];
+    input->scale[1] = 1;
+    scale_temp[2] = input->scale[2];
+    input->scale[2] = 1;
 
     // call the function that reads the tlm native format
     if ((errorTLMnumber = tbnReader(input, output)) != 0) {
         sendErrorCodeAndMessage(errorTLMnumber, NULL, NULL, NULL, NULL);
         return errorTLMnumber;
     }
+    
+    // recovering the value of the scale
+    input->scale[0] = scale_temp[0];
+    input->scale[1] = scale_temp[1];
+    input->scale[2] = scale_temp[2];
 
     fprintf(stderr, "WARNING: We were successful to save and read the mesh.");
 
@@ -867,7 +883,7 @@ unsigned int writeThenReadGmsh(struct tlmInternalMesh * output,
  */
 unsigned int onlyWriteGmsh2_2(struct dataGmsh2_2 * input, FILE * saveFile) {
 
-    long long unsigned int i, quantityOfElementSaved;
+    unsigned long long i, quantityOfElementSaved;
     unsigned int errorTLMnumber, quantityOfElementTypes = 0;
 
     fprintf(saveFile, "Nodes\n");

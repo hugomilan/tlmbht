@@ -1,7 +1,7 @@
 /*
  * TLMBHT - Transmission-line Modeling Method applied to BioHeat Transfer Problems.
  * 
- * Copyright (C) 2015 to 2016 by Cornell University. All Rights Reserved.
+ * Copyright (C) 2015 to 2017 by Cornell University. All Rights Reserved.
  * 
  * Written by Hugo Fernando Maia Milan.
  * 
@@ -29,38 +29,71 @@
 /*
  * Description of this file:
  * redirects the flow of the algorithm for choosing the adequate TLM solver.
- * Basic functions for working with TLM.
+ * Basic functions for working with TLM that are general to all TLM solvers.
  *
  */
-
-/*
- * TODO:
- * 1) use a better algorithm to sort the number of ports in the
- * allocatePointsPort function. The sorting function is in libmiscellaneous.h
- * 2) I'm using qsort() in the function wrapTLMnumbers(). Should I change to a better
- * algorithm?
- */
-
-#include "libtlmsolver.h"
-#include "../../configs/libconfig.h"
-#include "../../miscellaneous/liberrorcode.h"
-#include "../../miscellaneous/libmiscellaneous.h"
-#include "../../meshreader/libmeshtlmbht.h"
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include <time.h>
+
+#include "libtlmsolver.h"
+#include "../../miscellaneous/liberrorcode.h"
+#include "../../miscellaneous/libmiscellaneous.h"
+
+/*
+ * solverTLM: redirects the flow of the algorithm to the adequate function call
+ */
+unsigned int solverTLM(struct dataForSimulation* input, int id, void** generalMatrix) {
+    unsigned int errorTLMnumber = 0;
+
+    if (input->simulationInput.printAdditionalMode == 1) {
+        printf("TLM Solver\n");
+    }
+
+    switch (input->equationInput[id].libraryForCalculation) {
+        case EIGEN:
+            errorTLMnumber = call_from_c_solverEigenTLM(input, id, generalMatrix);
+            break;
+        case CUDA:
+            break;
+    }
+    return errorTLMnumber;
+}
+
+/*
+ * solveTimeStepTLM: redirects the flow of the algorithm to the adequate function call
+ */
+unsigned int solveTimeStepTLM(struct dataForSimulation* input, int id, void** generalMatrix) {
+    unsigned int errorTLMnumber = 0;
+
+    if (input->simulationInput.printAdditionalMode == 1) {
+        printf("\nCalculating the for equation group %04d\n", id + 1);
+        printf("TLM Solver\n");
+    }
+
+    switch (input->equationInput[id].libraryForCalculation) {
+        case EIGEN:
+            //            errorTLMnumber = call_from_c_solverTimeStepEigenTLM(input, id, generalMatrix);
+            break;
+        case CUDA:
+            break;
+    }
+    return errorTLMnumber;
+}
 
 /*
  * terminateBoundaryTypeAndData: deallocate the boundary variable from memory
  */
 unsigned int terminateBoundaryTypeAndData(struct boundaryData **input,
-        const struct dataForSimulation * inputData) {
+        const struct dataForSimulation * inputData, int id) {
 
     // if the pointed variable is null, it has been deallocated already
     if ((*input) != NULL) {
         // go over all the boundaries numbers
-        for (unsigned int i = 0; i < inputData->quantityOfBoundariesRead; i++) {
+
+        for (unsigned int i = 0; i < inputData->equationInput[id].numberOfBoundaries; i++) {
             // go over all quantity of boundaries for each boundary number
             for (unsigned int j = 0; j < (*input)[i].quantityOfBoundaries; j++) {
                 // deallocating the memory for the boundary data
@@ -84,7 +117,7 @@ unsigned int terminateBoundaryTypeAndData(struct boundaryData **input,
  * that will hold the connections.
  */
 unsigned int initiate_connectionLeveln(struct connectionLeveln *con,
-        unsigned int level, long long unsigned int *allocateForEachLevel) {
+        unsigned int level, unsigned long long *allocateForEachLevel) {
     unsigned int errorTLMnumber = 0;
 
     con->level = level;
@@ -95,8 +128,8 @@ unsigned int initiate_connectionLeveln(struct connectionLeveln *con,
     //        printf("Allocate for each %llu (%llu). Level %u. Pointer address %p \n",
     //                allocateForEachLevel[0], con->quantityAllocated, con->level, con);
 
-    if ((con->portsOrPoints = (long long unsigned int*) malloc(
-            sizeof (long long unsigned int)*con->quantityAllocated)) == NULL) {
+    if ((con->portsOrPoints = (unsigned long long*) malloc(
+            sizeof (unsigned long long)*con->quantityAllocated)) == NULL) {
         errorTLMnumber = 8698;
         sendErrorCodeAndMessage(errorTLMnumber, &level, &(con->quantityAllocated), NULL, NULL);
         return errorTLMnumber;
@@ -110,7 +143,7 @@ unsigned int initiate_connectionLeveln(struct connectionLeveln *con,
             return errorTLMnumber;
         }
 
-        for (long long unsigned int i = 0; i < con->quantityAllocated; i++) {
+        for (unsigned long long i = 0; i < con->quantityAllocated; i++) {
             if ((errorTLMnumber = initiate_connectionLeveln(
                     &(con->innerLevel[i]), level - 1, allocateForEachLevel + 1)) != 0)
                 return errorTLMnumber;
@@ -129,13 +162,13 @@ unsigned int reallocate_connectionLeveln(struct connectionLeveln *con, unsigned 
     unsigned int errorTLMnumber = 0;
 
     // I reallocate 20% + extra of the quantity already saved
-    con->quantityAllocated = extra + (long long unsigned int) (1.2 * con->quantitySaved);
+    con->quantityAllocated = extra + (unsigned long long) (1.2 * con->quantitySaved);
     // DEBUG: Show how much are we reallocating
     //    printf(" reallocated to %llu", con->quantityAllocated);
 
     // reallocating the portsOrPoints variable
-    if ((con->portsOrPoints = (long long unsigned int*) realloc(con->portsOrPoints,
-            sizeof (long long unsigned int)*con->quantityAllocated)) == NULL) {
+    if ((con->portsOrPoints = (unsigned long long*) realloc(con->portsOrPoints,
+            sizeof (unsigned long long)*con->quantityAllocated)) == NULL) {
         errorTLMnumber = 8696;
         sendErrorCodeAndMessage(errorTLMnumber, &(con->level), &(con->quantityAllocated), NULL, NULL);
         return errorTLMnumber;
@@ -149,9 +182,9 @@ unsigned int reallocate_connectionLeveln(struct connectionLeveln *con, unsigned 
             return errorTLMnumber;
         }
 
-        long long unsigned int *pointsToAllocate;
+        unsigned long long *pointsToAllocate;
 
-        pointsToAllocate = (long long unsigned int*) malloc(sizeof (long long unsigned int)*con->level);
+        pointsToAllocate = (unsigned long long*) malloc(sizeof (unsigned long long)*con->level);
 
         getquantityAllocated_connectionLeveln(&(con->innerLevel[0]), pointsToAllocate);
 
@@ -160,7 +193,7 @@ unsigned int reallocate_connectionLeveln(struct connectionLeveln *con, unsigned 
         //        for (unsigned int k = 0; k < con->level; k++)
         //            printf(" %llu", pointsToAllocate[k]);
 
-        for (long long unsigned int i = con->quantitySaved; i < con->quantityAllocated; i++) {
+        for (unsigned long long i = con->quantitySaved; i < con->quantityAllocated; i++) {
             if ((errorTLMnumber = initiate_connectionLeveln(
                     &(con->innerLevel[i]), con->level - 1, pointsToAllocate)) != 0) {
                 return errorTLMnumber;
@@ -186,10 +219,10 @@ unsigned int reallocate_connectionLeveln(struct connectionLeveln *con, unsigned 
  * add_to_connectionLeveln: add a value in the variable that has the connections
  */
 unsigned int add_to_connectionLeveln(struct connectionLeveln * con,
-        long long unsigned int* Points,
-        unsigned int quantityOfPortsToAdd, long long unsigned int* numberOfPortsToAdd) {
+        unsigned long long* Points,
+        unsigned int quantityOfPortsToAdd, unsigned long long* numberOfPortsToAdd) {
     unsigned int errorTLMnumber = 0, newInterception = 0;
-    long long unsigned int PointToSave = 0, i;
+    unsigned long long PointToSave = 0, i;
     // if the quantity of points is less than the level that we are, then, we
     // access an special point number, which is number zero. Point number zero
     // indicates the intersections that do not involve those levels.
@@ -292,7 +325,7 @@ get_out_if:
  */
 unsigned int wrap_size_connectionLeveln(struct connectionLeveln *con) {
     unsigned int errorTLMnumber;
-    long long unsigned int i;
+    unsigned long long i;
 
 
     // DEBUG: show where we are
@@ -309,8 +342,8 @@ unsigned int wrap_size_connectionLeveln(struct connectionLeveln *con) {
         // DEBUG: show where we are
         //        printf(", reallocating the portsOrPoints");
         // reallocating the portsOrPoints variable
-        if ((con->portsOrPoints = (long long unsigned int*) realloc(con->portsOrPoints,
-                sizeof (long long unsigned int)*con->quantitySaved)) == NULL) {
+        if ((con->portsOrPoints = (unsigned long long*) realloc(con->portsOrPoints,
+                sizeof (unsigned long long)*con->quantitySaved)) == NULL) {
             errorTLMnumber = 8694;
             sendErrorCodeAndMessage(errorTLMnumber, &(con->level), &(con->quantitySaved), NULL, NULL);
             return errorTLMnumber;
@@ -347,9 +380,9 @@ unsigned int wrap_size_connectionLeveln(struct connectionLeveln *con) {
 
             // now I get the quantity of accumulated elements.
             // First I allocate this variable
-            if ((con->accumulatedIntersections = (long long unsigned int*)
+            if ((con->accumulatedIntersections = (unsigned long long*)
                     realloc(con->accumulatedIntersections,
-                    sizeof (long long unsigned int)*(con->quantitySaved + 1))) == NULL) {
+                    sizeof (unsigned long long)*(con->quantitySaved + 1))) == NULL) {
                 errorTLMnumber = 8697;
                 sendErrorCodeAndMessage(errorTLMnumber, &(con->level), &(con->quantitySaved), NULL, NULL);
                 return errorTLMnumber;
@@ -425,7 +458,7 @@ unsigned int terminate_connectionLeveln(struct connectionLeveln *con) {
 
     if (con->portsOrPoints != NULL) {
         if (con->level > 0)
-            for (long long unsigned int i = 0; i < con->quantityAllocated; i++) {
+            for (unsigned long long i = 0; i < con->quantityAllocated; i++) {
                 terminate_connectionLeveln(con->innerLevel + i);
             }
 
@@ -449,7 +482,7 @@ unsigned int terminate_connectionLeveln(struct connectionLeveln *con) {
  * the innerLevel[0].
  */
 unsigned int getquantityAllocated_connectionLeveln(struct connectionLeveln *con,
-        long long unsigned int *allocatedPoints) {
+        unsigned long long *allocatedPoints) {
 
     allocatedPoints[0] = con->quantityAllocated;
     if (con->level > 0) {
@@ -464,7 +497,7 @@ unsigned int getquantityAllocated_connectionLeveln(struct connectionLeveln *con,
  * position = number of the intersection point that I want to get the number of the ports
  */
 unsigned int getPortsOrPoints(struct connectionLeveln *con,
-        long long unsigned int position, long long unsigned int **output) {
+        unsigned long long position, unsigned long long **output) {
     unsigned int errorTLMnumber = 0;
 
     if (con->level == 0) {
@@ -474,10 +507,10 @@ unsigned int getPortsOrPoints(struct connectionLeveln *con,
             // reallocate the output pointer with the size of quantitySaved
             // + 1 + 2 (position 0: size of output; position 1: size of the
             // saved variables) + 20% of the size of the quantitySaved
-            (*output)[0] = 1 + 2 + (long long unsigned int) (1.2 * con->quantitySaved);
+            (*output)[0] = 1 + 2 + (unsigned long long) (1.2 * con->quantitySaved);
 
-            if (((*output) = (long long unsigned int*) realloc((*output),
-                    sizeof (long long unsigned int)*(*output)[0])) == NULL) {
+            if (((*output) = (unsigned long long*) realloc((*output),
+                    sizeof (unsigned long long)*(*output)[0])) == NULL) {
                 errorTLMnumber = 8733;
                 sendErrorCodeAndMessage(errorTLMnumber, NULL, NULL, NULL, NULL);
                 return errorTLMnumber;
@@ -488,7 +521,7 @@ unsigned int getPortsOrPoints(struct connectionLeveln *con,
         //                printf(", quantity saved %llu, ports", con->quantitySaved);
         // saving the variables in the pointer output
         (*output)[1] = con->quantitySaved;
-        for (long long unsigned int i = 0; i < con->quantitySaved; i++) {
+        for (unsigned long long i = 0; i < con->quantitySaved; i++) {
             (*output)[i + 2] = con->portsOrPoints[i];
             // DEBUG: show where we are
             //                        printf(" %llu", con->portsOrPoints[i]);
@@ -497,7 +530,7 @@ unsigned int getPortsOrPoints(struct connectionLeveln *con,
     }
 
     // going to an inner level if this is not the level 0
-    for (long long unsigned int i = 0; i < con->quantitySaved; i++) {
+    for (unsigned long long i = 0; i < con->quantitySaved; i++) {
         // I will go to the level where position is at most equal to the 
         // highest number of that level
         if (position < con->accumulatedIntersections[i + 1]) {
@@ -525,10 +558,10 @@ unsigned int getPortsOrPoints(struct connectionLeveln *con,
  * allocatePointsPort: receive the number of the points to which the connection
  * happens and them allocate the ports on those positions
  */
-unsigned int allocatePointsPort(long long unsigned int *Points,
+unsigned int allocatePointsPort(unsigned long long *Points,
         struct connectionLeveln *input,
         unsigned int quantityOfPortsToAdd,
-        long long unsigned int *numberOfPortsToAdd) {
+        unsigned long long *numberOfPortsToAdd) {
 
     unsigned int errorTLMnumber;
 
@@ -547,26 +580,57 @@ unsigned int allocatePointsPort(long long unsigned int *Points,
 }
 
 /*
- * getGeometricalVariablesTriangle: Receives the x, y, z from the nodes and
+ * getGeometricalVariablesTLMline: Receives the x, y, z from the nodes and
+ * calculates the length of the ports. For the line, the length is defined as
+ * (line size)/2.
+ */
+unsigned int getGeometricalVariablesTLMline(const struct node *N1,
+        const struct node *N2, double *output) {
+    // output variable:
+    // 0 - length of port 1 and 2. They are equal to (nodes_length)/2.
+    // 1 - Lines' center x
+    // 2 - Lines' center y
+    // 3 - Lines' center z
+
+    // port 1: N1 and center
+    // port 2: N2 and center
+
+    // line nomenclature
+    //
+    //   vertex 1  \ 
+    //              \
+    //               \    
+    //                \
+    //                 \  vertex 2
+    //
+
+    double deltaXL, deltaYL, deltaZL; // temporary for calculating the lengths and area
+    double length;
+    double center[3];
+
+    deltaXL = N1->x - N2->x;
+    deltaYL = N1->y - N2->y;
+    deltaZL = N1->z - N2->z;
+    length = sqrt(deltaXL * deltaXL + deltaYL * deltaYL + deltaZL * deltaZL);
+
+    center[0] = (N1->x + N2->x) / 2;
+    center[1] = (N1->y + N2->y) / 2;
+    center[2] = (N1->z + N2->z) / 2;
+
+
+    output[0] = length/2;
+    output[1] = center[0];
+    output[2] = center[1];
+    output[3] = center[2];
+
+    return 0;
+}
+
+/*
+ * getGeometricalVariablesTLMtriangle: Receives the x, y, z from the nodes and
  * calculates the area of the triangle, the length of each triangular face,
  * and the distance from the center of the triangle to the middle of each
- * triangular face. This function was manually validated
- * 
- * One of the main differences between this version and tlmbht matlab version 0.1
- * is present in this function. In matlab, I numbered the ports as:
- * port 1_old: between point 2 and 3
- * port 2_old: between point 1 and 3
- * port 3_old: between point 1 and 2
- * 
- * Here, the numbers are:
- * port 1: between point 1 and 2
- * port 2: between point 1 and 3
- * port 3: between point 2 and 3
- * 
- * Therefore:
- * port 1_old: port 3
- * port 2_old: port 2
- * port 3_old: port 1
+ * triangular face. This function was manually validated.
  */
 unsigned int getGeometricalVariablesTLMtriangle(const struct node *N1,
         const struct node *N2, const struct node *N3, double *output) {
@@ -581,9 +645,6 @@ unsigned int getGeometricalVariablesTLMtriangle(const struct node *N1,
     // 7 - Triangles' center x
     // 8 - Triangles' center y
     // 9 - Triangles' center z
-    // 10 - perpendicular length of port 1 
-    // 11 - perpendicular length of port 2 
-    // 12 - perpendicular length of port 3 
 
     // port 1: N1 and N2
     // port 2: N1 and N3
@@ -597,11 +658,6 @@ unsigned int getGeometricalVariablesTLMtriangle(const struct node *N1,
     //           /      \
     // vertex 2 /________\ vertex 3
     //            face 3
-
-    // DEBUG: verify the x, y, z
-    // printf("Node 1 (%f, %f, %f)\n", N1->x, N1->y, N1->z);
-    // printf("Node 2 (%f, %f, %f)\n", N2->x, N2->y, N2->z);
-    // printf("Node 3 (%f, %f, %f)\n", N3->x, N3->y, N3->z);
 
     double deltaXL[3], deltaYL[3], deltaZL[3]; // temporary for calculating the lengths and area
     double length[3];
@@ -659,42 +715,6 @@ unsigned int getGeometricalVariablesTLMtriangle(const struct node *N1,
     output[8] = center[1];
     output[9] = center[2];
 
-    // DEBUG: output as the old tlmbht matlab version 0.1. Useful for validation
-    // purposes. The number of the ports at the function that calls this should
-    // also be adjusted. If not, the result will be a mess.
-    // output[0] = deltal[2];
-    // output[1] = deltal[1];
-    // output[2] = deltal[0];
-    // output[3] = area;
-    // output[4] = length[2];
-    // output[5] = length[1];
-    // output[6] = length[0];
-    // output[7] = center[0];
-    // output[8] = center[1];
-    // output[9] = center[2];
-
-
-    // tests about adjusting the value of R to account for the distance between
-    // the face and the center of the triangle by the projection in LT
-    // Result: I got about 50% improvement in the estimations
-    // This is the angle between the vector perpendicular to the face and the 
-    // vector that goes from the center of the face to the center of the triangle.
-    // That's why I calculate sin(teta)
-    double teta[3];
-
-    teta[0] = acos((deltaXL[0] * deltaXl[0] + deltaYL[0] * deltaYl[0] + deltaZL[0] * deltaZl[0]) /
-            (length[0] * deltal[0]));
-
-    teta[1] = acos((deltaXL[1] * deltaXl[1] + deltaYL[1] * deltaYl[1] + deltaZL[1] * deltaZl[1]) /
-            (length[1] * deltal[1]));
-
-    teta[2] = acos((deltaXL[2] * deltaXl[2] + deltaYL[2] * deltaYl[2] + deltaZL[2] * deltaZl[2]) /
-            (length[2] * deltal[2]));
-
-    output[10] = output[0] * fabs(sin(teta[0]));
-    output[11] = output[1] * fabs(sin(teta[1]));
-    output[12] = output[2] * fabs(sin(teta[2]));
-
     return 0;
 }
 
@@ -716,10 +736,6 @@ unsigned int getGeometricalVariablesTLMtetrahedron(const struct node *N1,
     // 9 - tetrahedron' center x
     // 10 - tetrahedron' center y
     // 11 - tetrahedron' center z
-    // 12 - perpendicular length of port 1
-    // 13 - perpendicular length of port 2
-    // 14 - perpendicular length of port 3
-    // 15 - perpendicular length of port 4 
 
     // port 1: N1, N2 and N3
     // port 2: N1, N2 and N4
@@ -829,26 +845,6 @@ unsigned int getGeometricalVariablesTLMtetrahedron(const struct node *N1,
     deltaZl[3] = (N2->z + N3->z + N4->z) / 3 - center[2];
     deltal[3] = sqrt(deltaXl[3] * deltaXl[3] + deltaYl[3] * deltaYl[3] + deltaZl[3] * deltaZl[3]);
 
-    // DEBUG: test calculations
-    //     printf("Node 1 (%.17g, %.17g, %.17g)\n", N1->x, N1->y, N1->z);
-    //     printf("Node 2 (%.17g, %.17g, %.17g)\n", N2->x, N2->y, N2->z);
-    //     printf("Node 3 (%.17g, %.17g, %.17g)\n", N3->x, N3->y, N3->z);
-    //     printf("Node 4 (%.17g, %.17g, %.17g)\n", N4->x, N4->y, N4->z);
-    //    printf("Center (%g, %g, %g) \n", center[0], center[1], center[2]);
-    //    printf("Edge 1 (%g, %g, %g, %g) \n", deltaXL[0], deltaYL[0], deltaZL[0], length[0]);
-    //    printf("Edge 2 (%g, %g, %g, %g) \n", deltaXL[1], deltaYL[1], deltaZL[1], length[1]);
-    //    printf("Edge 3 (%g, %g, %g, %g) \n", deltaXL[2], deltaYL[2], deltaZL[2], length[2]);
-    //    printf("Edge 4 (%g, %g, %g, %g) \n", deltaXL[3], deltaYL[3], deltaZL[3], length[3]);
-    //    printf("Edge 5 (%g, %g, %g, %g) \n", deltaXL[4], deltaYL[4], deltaZL[4], length[4]);
-    //    printf("Edge 6 (%g, %g, %g, %g) \n", deltaXL[5], deltaYL[5], deltaZL[5], length[5]);
-    //    printf("Areas (%g, %g, %g, %g) \nVolume %g\n", area[0], area[1], area[2], area[3], volume);
-    //    printf("TL 1 (%g, %g, %g, %g) \n", deltaXl[0], deltaYl[0], deltaZl[0], deltal[0]);
-    //    printf("TL 2 (%g, %g, %g, %g) \n", deltaXl[1], deltaYl[1], deltaZL[1], deltal[1]);
-    //    printf("TL 3 (%g, %g, %g, %g) \n", deltaXl[2], deltaYl[2], deltaZl[2], deltal[2]);
-    //    printf("TL 4 (%g, %g, %g, %g) \n", deltaXl[3], deltaYl[3], deltaZl[3], deltal[3]);
-    //    while(1)
-
-
     output[0] = deltal[0];
     output[1] = deltal[1];
     output[2] = deltal[2];
@@ -861,36 +857,6 @@ unsigned int getGeometricalVariablesTLMtetrahedron(const struct node *N1,
     output[9] = center[0];
     output[10] = center[1];
     output[11] = center[2];
-    // 12 - perpendicular length of port 1
-    // 13 - perpendicular length of port 2
-    // 14 - perpendicular length of port 3
-    // 15 - perpendicular length of port 4 
-
-    // this is the angle between the vector perpendicular to the face and the 
-    // vector that goes from the center of the face to the center of the triangle.
-    // That's why I calculate sin(teta)
-    double cosTheta[4];
-
-    cosTheta[0] = fabs(areaX[0] * deltaXl[0] + areaY[0] * deltaYl[0] + areaZ[0] * deltaZl[0]) /
-            (2 * area[0] * deltal[0]);
-
-    cosTheta[1] = fabs(areaX[1] * deltaXl[1] + areaY[1] * deltaYl[1] + areaZ[1] * deltaZl[1]) /
-            (2 * area[1] * deltal[1]);
-
-    cosTheta[2] = fabs(areaX[2] * deltaXl[2] + areaY[2] * deltaYl[2] + areaZ[2] * deltaZl[2]) /
-            (2 * area[2] * deltal[2]);
-
-    cosTheta[3] = fabs(areaX[3] * deltaXl[3] + areaY[3] * deltaYl[3] + areaZ[3] * deltaZl[3]) /
-            (2 * area[3] * deltal[3]);
-
-    //DEBUG: show the calculated cos(theta)
-    //    printf("CosTeta 1 (%.17g, %.17g, %.17g, %.17g)\n", cosTheta[0], cosTheta[1], cosTheta[2], cosTheta[3]);
-    //    while(1);
-
-    output[12] = output[0] * cosTheta[0];
-    output[13] = output[1] * cosTheta[1];
-    output[14] = output[2] * cosTheta[2];
-    output[15] = output[4] * cosTheta[3];
 
     return 0;
 }
@@ -907,18 +873,18 @@ unsigned int getGeometricalVariablesTLMtetrahedron(const struct node *N1,
  * 
  */
 unsigned int getTLMnumbers(const struct dataForSimulation * input,
-        struct TLMnumbers* numbers, struct connectionLeveln * intersections) {
+        struct TLMnumbers* numbers, struct connectionLeveln * intersections, int id) {
 
-    if (input->timingMode == 1) {
+    if (input->simulationInput.verboseMode == 1) {
         printf("Initiating TLM numbers... \n");
     }
     unsigned int errorTLMnumber = 0, flag, j, k, l, quantityOfPortsToAdd;
     // flag:
     // 0 - Undefined (not a boundary neither a material)
     // 1 - Boundary element
-    // 2 - Material Element
+    // 2 - Material element
 
-    long long unsigned int temp[] = {0, 0}, i,
+    unsigned long long temp[] = {0, 0}, i,
             points[] = {0, 0, 0, 0, 0, 0, 0, 0, 0};
     // points[0] - number of points saved
     // points[1] - point 0
@@ -931,7 +897,7 @@ unsigned int getTLMnumbers(const struct dataForSimulation * input,
     // points[8] - point 7
 
 
-    long unsigned int tag;
+    unsigned long tag;
 
 
     clock_t begin_iN = clock();
@@ -940,8 +906,14 @@ unsigned int getTLMnumbers(const struct dataForSimulation * input,
         return errorTLMnumber;
     clock_t end_iN = clock();
 
-
-    clock_t begin_ar = clock();
+    if (input->simulationInput.verboseMode == 1) {
+        printf("Done initiating the TLM numbers\n");
+        if (input->simulationInput.timingMode == 1) {
+            double time_spent_iN = (double) (end_iN - begin_iN) / CLOCKS_PER_SEC;
+            printf("Time to allocate the numbers %g ms (or %g s, or %g min, or %g hours).\n",
+                    time_spent_iN * 1e3, time_spent_iN, time_spent_iN / 60.0, time_spent_iN / (60 * 60));
+        }
+    }
     // initiate the variable that will be used to convert the abstract number of the port
     // to the real number of the port.
     // * the abstract number of the port is maximum number of port that would be used if
@@ -949,17 +921,34 @@ unsigned int getTLMnumbers(const struct dataForSimulation * input,
     // * the real number of the port is the abstract number of the port minus the
     // number of the ports that were boundaries. I use the real number of ports to access
     // the positions in the matrices
-    if ((errorTLMnumber = initiate_aPortToRealPort(input, &(numbers->abstractPortsToReal))) != 0) {
+    if (input->simulationInput.verboseMode == 1) {
+        printf("Initiating the converter from abstract number to real number...\n");
+    }
+    clock_t begin_ar = clock();
+    if ((errorTLMnumber = initiate_aPortToRealPort(input, &(numbers->abstractPortsToReal), id)) != 0) {
         return errorTLMnumber;
     }
     clock_t end_ar = clock();
 
+    if (input->simulationInput.verboseMode == 1) {
+        printf("Done initiating the converter from abstract number to real number.\n");
 
+        if (input->simulationInput.timingMode == 1) {
+            double time_spent_ar = (double) (end_ar - begin_ar) / CLOCKS_PER_SEC;
+
+            printf("Time to allocate the converter from Abstract number to Real number %g ms (or %g s, or %g min, or %g hours).\n",
+                    time_spent_ar * 1e3, time_spent_ar, time_spent_ar / 60.0, time_spent_ar / (60 * 60));
+        }
+    }
+
+    if (input->simulationInput.verboseMode == 1) {
+        printf("Allocating and saving connection positions in memory...\n");
+    }
     clock_t begin_al = clock();
     // this loop can be fully parallelized given that the accesses to the
     // functions below are synchronized. Maybe OpenMP would be a better approach
-    // here given that this function is not expected to by very heavy (consume
-    // a significant time for processing).
+    // here given that this function is not expected to by very heavy. I think
+    // that it would be best to parallelize the 'i' for loop (but you better analyze it).
     // 1) allocatePointsPort()
     // 2) add_to_aPortToRealPort()
     for (l = 0; l < 100; l++) {
@@ -1013,13 +1002,13 @@ unsigned int getTLMnumbers(const struct dataForSimulation * input,
             // that I'm just getting out the loops. You can also think that 
             // I'm going to the next 'i', that is, incrementing i by 1 and going
             // to the next value of i (if any).
-            for (j = 0; j < input->quantityOfBoundariesRead; j++)
-                for (k = 0; k < input->boundaryInput[j].quantityOfNumberInput; k++) {
+            for (j = 0; j < input->equationInput[id].numberOfBoundaries; j++)
+                for (k = 0; k < input->boundaryInput[ input->equationInput[id].boundaryNumbers[j] ].quantityOfNumberInput; k++) {
                     // checking if this is a boundary
-                    if (tag == input->boundaryInput[j].numberInput[k]) {
+                    if (tag == input->boundaryInput[ input->equationInput[id].boundaryNumbers[j] ].numberInput[k]) {
                         flag = 1;
                         temp[0] = 0; // flag that indicates that this is a boundary
-                        temp[1] = j; // number of the boundary
+                        temp[1] = input->equationInput[id].boundaryNumbers[j]; // number of the boundary
                         quantityOfPortsToAdd = 2; // we add two ports
                         numbers->BoundaryElements[l]++; // increment the number of boundary elements
                         // DEBUG: show where we were
@@ -1031,10 +1020,10 @@ unsigned int getTLMnumbers(const struct dataForSimulation * input,
                 }
 
             // I will get here if the element was not a boundary
-            for (j = 0; j < input->quantityOfMaterialsRead; j++)
-                for (k = 0; k < input->materialInput[j].quantityOfNumberInput; k++) {
+            for (j = 0; j < input->equationInput[id].numberOfMaterials; j++)
+                for (k = 0; k < input->materialInput[ input->equationInput[id].materialNumbers[j] ].quantityOfNumberInput; k++) {
 
-                    if (tag == input->materialInput[j].numberInput[k]) {
+                    if (tag == input->materialInput[ input->equationInput[id].materialNumbers[j] ].numberInput[k]) {
                         flag = 2;
                         quantityOfPortsToAdd = 1;
                         numbers->MaterialElements[l]++;
@@ -1051,7 +1040,7 @@ end_for_j_and_for_k_line:
             if (flag != 0)
                 switch (l) {
                     case 1: // 2 nodes line
-                        switch (input->simulationInput.dimen) {
+                        switch (input->equationInput[id].dimen) {
                             case ONE:
                                 // the ports start at 1 because 0 is my flag
                                 // to indicate that this is a boundary
@@ -1122,7 +1111,7 @@ end_for_j_and_for_k_line:
                         }
                         break;
                     case 2: // 3 nodes triangle
-                        switch (input->simulationInput.dimen) {
+                        switch (input->equationInput[id].dimen) {
                             case ONE:
                                 // not defined?
 
@@ -1219,7 +1208,7 @@ end_for_j_and_for_k_line:
                         break;
                     case 4: // 4 nodes tetrahedron
                         // I do the calculation depending on the dimension
-                        switch (input->simulationInput.dimen) {
+                        switch (input->equationInput[id].dimen) {
                             case ONE:
                                 // not defined?
                                 break;
@@ -1308,6 +1297,44 @@ end_for_j_and_for_k_line:
                     case 7: // 5 nodes pyramid
                         break;
                     case 15: // 1 node point
+                        // I do the calculation depending on the dimension
+                        switch (input->equationInput[id].dimen) {
+                            case ONE:
+                                // a point is always a boundary. The question
+                                // is how to include this boundary in the 2D and
+                                // 3D calculations?
+                                // 
+                                // the ports start at 1 because 0 is my flag
+                                // to indicate that this is a boundary
+                                // temp[0] is my offset that will give me the
+                                // abstract number of the node at that interface
+                                //
+                                // I don't expect flag == 2 for the point.
+                                if (flag == 2)
+                                    temp[0] = numbers->abstractPortsToReal[l].previousMaximumAbstractPort +
+                                        i;
+                                // numbers->abstractPortsToReal[l].portsPerNode * i;
+
+                                points[0] = 1;
+                                points[1] = input->mesh.elements.Point[i].N1;
+                                if ((errorTLMnumber = allocatePointsPort(points, intersections,
+                                        quantityOfPortsToAdd, temp)) != 0) {
+                                    if (errorTLMnumber == 1) {
+                                        numbers->Intersections++;
+                                        errorTLMnumber = 0;
+                                    } else {
+                                        return errorTLMnumber;
+                                    }
+                                }
+                                break;
+                            case TWO:
+                                // a point is always a boundary. The question
+                                // is how to include this boundary in the 2D and
+                                // 3D calculations?
+                                /* FALLTHRU */
+                            case THREE:
+                                break;
+                        }
                         break;
                 }
 
@@ -1324,17 +1351,43 @@ end_for_j_and_for_k_line:
     }
 
     clock_t end_al = clock();
+    if (input->simulationInput.verboseMode == 1) {
+        printf("Done allocating and saving connection positions in memory.\n");
+        if (input->simulationInput.timingMode == 1) {
+            double time_spent_al = (double) (end_al - begin_al) / CLOCKS_PER_SEC;
 
+            printf("Time to allocate and save connection positions in memory %g ms (or %g s, or %g min, or %g hours).\n",
+                    time_spent_al * 1e3, time_spent_al, time_spent_al / 60.0, time_spent_al / (60 * 60));
+        }
+    }
+
+    if (input->simulationInput.verboseMode == 1) {
+        printf("Wrapping the TLM numbers...\n");
+    }
     clock_t begin_wN = clock();
-    // wrap the TLM numbers, taking way points that are not needed
-    if ((errorTLMnumber = wrapTLMnumbers(input, numbers)) != 0)
+    // wrap the TLM numbers, taking away points that are not needed
+    if ((errorTLMnumber = wrapTLMnumbers(input, numbers, id)) != 0)
         return errorTLMnumber;
     clock_t end_wN = clock();
-    // if number of nodes is equal to zero, if did not find any material elements
+    // if number of nodes is equal to zero, it did not find any material elements
     // associated with the tags provided
     if (numbers->Nodes == 0)
         return 6610;
 
+
+    if (input->simulationInput.verboseMode == 1) {
+        printf("Done wrapping the TLM numbers.\n");
+        if (input->simulationInput.timingMode == 1) {
+            double time_spent_wN = (double) (end_wN - begin_wN) / CLOCKS_PER_SEC;
+
+            printf("Time to wrap the numbers %g ms (or %g s, or %g min, or %g hours).\n",
+                    time_spent_wN * 1e3, time_spent_wN, time_spent_wN / 60.0, time_spent_wN / (60 * 60));
+        }
+    }
+
+    if (input->simulationInput.verboseMode == 1) {
+        printf("Wrapping the connection variable...\n");
+    }
     clock_t begin_wC = clock();
     // DEBUG: show where we are
     //    printf("Wrapping the connection variable.\n");
@@ -1343,29 +1396,14 @@ end_for_j_and_for_k_line:
         return errorTLMnumber;
     clock_t end_wC = clock();
 
+    if (input->simulationInput.verboseMode == 1) {
+        printf("Done wrapping connection variable.\n");
+        if (input->simulationInput.timingMode == 1) {
+            double time_spent_wC = (double) (end_wC - begin_wC) / CLOCKS_PER_SEC;
 
-    clock_t end = clock();
-    if (input->timingMode == 1) {
-        double time_spent_iN = (double) (end_iN - begin_iN) / CLOCKS_PER_SEC;
-        double time_spent_ar = (double) (end_ar - begin_ar) / CLOCKS_PER_SEC;
-        double time_spent_al = (double) (end_al - begin_al) / CLOCKS_PER_SEC;
-        double time_spent_wN = (double) (end_wN - begin_wN) / CLOCKS_PER_SEC;
-        double time_spent_wC = (double) (end_wC - begin_wC) / CLOCKS_PER_SEC;
-
-        printf("Time to allocate the numbers %g ms (or %g s, or %g min, or %g hours).\n",
-                time_spent_iN * 1e3, time_spent_iN, time_spent_iN / 60.0, time_spent_iN / (60 * 60));
-
-        printf("Time to allocate the converter from Abstract number to Real number %g ms (or %g s, or %g min, or %g hours).\n",
-                time_spent_ar * 1e3, time_spent_ar, time_spent_ar / 60.0, time_spent_ar / (60 * 60));
-
-        printf("Time to allocate to save the positions in memory %g ms (or %g s, or %g min, or %g hours).\n",
-                time_spent_al * 1e3, time_spent_al, time_spent_al / 60.0, time_spent_al / (60 * 60));
-
-        printf("Time to wrap the numbers %g ms (or %g s, or %g min, or %g hours).\n",
-                time_spent_wN * 1e3, time_spent_wN, time_spent_wN / 60.0, time_spent_wN / (60 * 60));
-
-        printf("Time to wrap the connection %g ms (or %g s, or %g min, or %g hours).\n",
-                time_spent_wC * 1e3, time_spent_wC, time_spent_wC / 60.0, time_spent_wC / (60 * 60));
+            printf("Time to wrap the connection %g ms (or %g s, or %g min, or %g hours).\n",
+                    time_spent_wC * 1e3, time_spent_wC, time_spent_wC / 60.0, time_spent_wC / (60 * 60));
+        }
     }
 
     return 0;
@@ -1381,17 +1419,20 @@ unsigned int initiateTLMnumbers(struct TLMnumbers* numbers) {
     numbers->Points_Output = 0;
     numbers->Intersections = 0;
 
-    // initiate them as 0
-    if ((numbers->BoundaryElements = (long long unsigned int *) calloc(100,
-            sizeof (long long unsigned int))) == NULL)
+    // initiate them as 0. I have a list of 100 elements type, that's why I 
+    // allocate 100. But I don't use all of these positions. I might reduce it
+    // to a more usable number in the future. However, for developmental purposes,
+    // I will left it as 100.
+    if ((numbers->BoundaryElements = (unsigned long long *) calloc(100,
+            sizeof (unsigned long long))) == NULL)
         return 8730;
 
-    if ((numbers->MaterialElements = (long long unsigned int *) calloc(100,
-            sizeof (long long unsigned int))) == NULL)
+    if ((numbers->MaterialElements = (unsigned long long *) calloc(100,
+            sizeof (unsigned long long))) == NULL)
         return 8731;
 
-    if ((numbers->NotDefinedElements = (long long unsigned int *) calloc(100,
-            sizeof (long long unsigned int))) == NULL)
+    if ((numbers->NotDefinedElements = (unsigned long long *) calloc(100,
+            sizeof (unsigned long long))) == NULL)
         return 8732;
 
     return 0;
@@ -1417,7 +1458,7 @@ unsigned int terminateTLMnumbers(struct TLMnumbers* numbers) {
  * initiate_aPortToRealPort: allocate aPortToRealPort
  */
 unsigned int initiate_aPortToRealPort(const struct dataForSimulation * input,
-        struct aPortToRealPort** Ports) {
+        struct aPortToRealPort** Ports, int id) {
     double percentage = 0;
     unsigned int type = 0;
 
@@ -1428,7 +1469,7 @@ unsigned int initiate_aPortToRealPort(const struct dataForSimulation * input,
     for (unsigned int i = 0; i < 100; i++) {
         switch (i) {
             case 1: // 2 nodes line
-                switch (input->simulationInput.dimen) {
+                switch (input->equationInput[id].dimen) {
                     case ONE:
                         // expected to be all material
                         percentage = 0.02; // allocate 2%
@@ -1450,7 +1491,7 @@ unsigned int initiate_aPortToRealPort(const struct dataForSimulation * input,
 
 
             case 2: // 3 nodes triangle
-                switch (input->simulationInput.dimen) {
+                switch (input->equationInput[id].dimen) {
                     case ONE:
                         // undefined?
                         percentage = 0.01; // allocate 1%
@@ -1472,7 +1513,7 @@ unsigned int initiate_aPortToRealPort(const struct dataForSimulation * input,
 
 
             case 3: // 4 nodes quadrangle
-                switch (input->simulationInput.dimen) {
+                switch (input->equationInput[id].dimen) {
                     case ONE:
                         // undefined?
                         percentage = 0.01; // allocate 1%
@@ -1494,7 +1535,7 @@ unsigned int initiate_aPortToRealPort(const struct dataForSimulation * input,
 
 
             case 4: // 4 nodes tetrahedron
-                switch (input->simulationInput.dimen) {
+                switch (input->equationInput[id].dimen) {
                     case ONE:
                         // undefined?
                         percentage = 0.01; // allocate 1%
@@ -1516,7 +1557,7 @@ unsigned int initiate_aPortToRealPort(const struct dataForSimulation * input,
 
 
             case 5: // 8 nodes hexahedron
-                switch (input->simulationInput.dimen) {
+                switch (input->equationInput[id].dimen) {
                     case ONE:
                         // undefined?
                         percentage = 0.01; // allocate 1%
@@ -1538,7 +1579,7 @@ unsigned int initiate_aPortToRealPort(const struct dataForSimulation * input,
 
 
             case 6: // 6 nodes prism
-                switch (input->simulationInput.dimen) {
+                switch (input->equationInput[id].dimen) {
                     case ONE:
                         // undefined?
                         percentage = 0.01; // allocate 1%
@@ -1560,7 +1601,7 @@ unsigned int initiate_aPortToRealPort(const struct dataForSimulation * input,
 
 
             case 7: // 5 nodes pyramid
-                switch (input->simulationInput.dimen) {
+                switch (input->equationInput[id].dimen) {
                     case ONE:
                         // undefined?
                         percentage = 0.01; // allocate 1%
@@ -1582,7 +1623,7 @@ unsigned int initiate_aPortToRealPort(const struct dataForSimulation * input,
 
 
             case 15: // 1 node point
-                switch (input->simulationInput.dimen) {
+                switch (input->equationInput[id].dimen) {
                     case ONE:
                         // expected to be all boundary
                         percentage = 0.02; // allocate 2%
@@ -1607,7 +1648,7 @@ unsigned int initiate_aPortToRealPort(const struct dataForSimulation * input,
         }
 
         // get how many ports per node this element contains
-        (*Ports)[i].portsPerNode = getNumberOfPortsGivenElement(i, input->simulationInput.dimen);
+        (*Ports)[i].portsPerNode = getNumberOfPortsGivenElement(i, input->equationInput[id].dimen);
 
         if (i == 0) {
             // the number of the node shall start at 0
@@ -1642,8 +1683,8 @@ unsigned int initiate_aPortToRealPort(const struct dataForSimulation * input,
         (*Ports)[i].quantityAllocated = 1 + percentage *
                 input->mesh.quantityOfSpecificElement[i];
 
-        if (((*Ports)[i].nodesNumbers = (long long unsigned int*) malloc(
-                sizeof (long long unsigned int)*
+        if (((*Ports)[i].nodesNumbers = (unsigned long long*) malloc(
+                sizeof (unsigned long long)*
                 (*Ports)[i].quantityAllocated)) == NULL)
             return 8735;
 
@@ -1656,11 +1697,11 @@ unsigned int initiate_aPortToRealPort(const struct dataForSimulation * input,
  */
 unsigned int reallocate_aPortToRealPort(struct aPortToRealPort* Ports) {
 
-    Ports->quantityAllocated = 5 + (long long unsigned int) 1.2 * Ports->quantityAllocated;
+    Ports->quantityAllocated = 5 + (unsigned long long) 1.2 * Ports->quantityAllocated;
     // I add at least 5 for each reallocation
 
-    if ((Ports->nodesNumbers = (long long unsigned int*) realloc(Ports->nodesNumbers,
-            Ports->quantityAllocated * sizeof (long long unsigned int))) == NULL)
+    if ((Ports->nodesNumbers = (unsigned long long*) realloc(Ports->nodesNumbers,
+            Ports->quantityAllocated * sizeof (unsigned long long))) == NULL)
         return 8736;
 
 
@@ -1670,7 +1711,7 @@ unsigned int reallocate_aPortToRealPort(struct aPortToRealPort* Ports) {
 /*
  * add_to_aPortToRealPort: add the number of the port in the input variable
  */
-unsigned int add_to_aPortToRealPort(unsigned int flag, long long unsigned int number,
+unsigned int add_to_aPortToRealPort(unsigned int flag, unsigned long long number,
         struct aPortToRealPort* input) {
     // flag
     // 0 - undefined node
@@ -1709,7 +1750,7 @@ unsigned int add_to_aPortToRealPort(unsigned int flag, long long unsigned int nu
  * wrapTLMnumbers: remove the unnecessary allocate positions
  */
 unsigned int wrapTLMnumbers(const struct dataForSimulation * input,
-        struct TLMnumbers* numbers) {
+        struct TLMnumbers* numbers, int id) {
     unsigned int errorTLMnumber = 0;
 
     for (unsigned int i = 0; i < 100; i++) {
@@ -1756,16 +1797,16 @@ unsigned int wrapTLMnumbers(const struct dataForSimulation * input,
             // this elements are part boundary (and/or not defined) and part material
 
             // shortening the pointer to the quantity saved
-            if ((numbers->abstractPortsToReal[i].nodesNumbers = (long long unsigned int*)
+            if ((numbers->abstractPortsToReal[i].nodesNumbers = (unsigned long long*)
                     realloc(numbers->abstractPortsToReal[i].nodesNumbers,
-                    sizeof (long long unsigned int)*
+                    sizeof (unsigned long long)*
                     numbers->abstractPortsToReal[i].quantitySaved)) == NULL)
                 return 8738;
 
             // sorting the numbers saved from smallest to biggest
             qsort(numbers->abstractPortsToReal[i].nodesNumbers,
                     numbers->abstractPortsToReal[i].quantitySaved,
-                    sizeof (long long unsigned int),
+                    sizeof (unsigned long long),
                     compareLLU);
         }
 
@@ -1775,20 +1816,20 @@ unsigned int wrapTLMnumbers(const struct dataForSimulation * input,
 
 
     // getting the number of outputs
-    if (input->simulationInput.saveTemperature) {
+    if (input->equationInput[id].saveScalar) {
         numbers->Output += numbers->Nodes;
         numbers->Points_Output += numbers->Nodes;
     }
 
-    if (input->simulationInput.saveTemperatureBetween) {
+    if (input->equationInput[id].saveScalarBetween) {
         numbers->Output += numbers->Intersections;
         numbers->Points_Output += numbers->Intersections;
     }
 
-    if (input->simulationInput.saveHeatFlux) {
+    if (input->equationInput[id].saveFlux) {
         numbers->Output += numbers->Intersections;
         numbers->Points_Output += numbers->Intersections; // this is for projections in x, y, z
-        if (input->simulationInput.saveTemperatureBetween == 0)
+        if (input->equationInput[id].saveScalarBetween == 0)
             numbers->Points_Output += numbers->Intersections; // this is for positions
     }
 
@@ -1959,13 +2000,13 @@ unsigned int getNumberOfPortsGivenElement(unsigned int elementCode,
  * port plus 1
  */
 void getRealPortNumber_fromAbstractPortNumber(
-        long long unsigned int abstractPortNumber, struct aPortToRealPort* Ports,
-        long long unsigned int *output) {
+        unsigned long long abstractPortNumber, struct aPortToRealPort* Ports,
+        unsigned long long *output) {
     // 0 - position of the Real port
     // 1 - first real port number of the node that contains the port at 0
     // 2 - last real port number of the node that contains the port at 0
 
-    long long unsigned int j, offset;
+    unsigned long long j, offset;
     unsigned int i;
 
     // the element type of the abstractPortNumber is the type that has at most
@@ -2047,10 +2088,10 @@ void getRealPortNumber_fromAbstractPortNumber(
  * to do -1 to get the number of the port starting at 0.
  */
 void getRealNodeAndPort_fromAbstractNode(unsigned int elementCode,
-        long long unsigned int abstractNodeNumber, struct aPortToRealPort* Ports,
-        long long unsigned int *output) {
+        unsigned long long abstractNodeNumber, struct aPortToRealPort* Ports,
+        unsigned long long *output) {
 
-    long long unsigned int j;
+    unsigned long long j;
 
     if (Ports[elementCode].pointerType == 1) {
         output[0] = abstractNodeNumber + Ports[elementCode].previousMaximumRealNode;
@@ -2082,7 +2123,7 @@ void getRealNodeAndPort_fromAbstractNode(unsigned int elementCode,
 
         // this contains the number of the nodes that are material
     } else if (Ports[elementCode].pointerType == 3) {
-        for (long long unsigned int j = 0; j < Ports[elementCode].quantitySaved; j++) {
+        for (unsigned long long j = 0; j < Ports[elementCode].quantitySaved; j++) {
             if (Ports[elementCode].nodesNumbers[j] >= abstractNodeNumber) {
 
                 break;
@@ -2119,14 +2160,14 @@ void getRealNodeAndPort_fromAbstractNode(unsigned int elementCode,
  * what element code it is, and return the position of this port
  */
 unsigned int getBetweenPointFromRealPortNumber(struct aPortToRealPort *Ports,
-        long long unsigned int realPort, double *x, double *y, double *z,
+        unsigned long long realPort, double *x, double *y, double *z,
         const struct dataForSimulation * input) {
 
     // 0 - position of the Real port
     // 1 - first real port number of the node that contains the port at 0
     // 2 - last real port number of the node that contains the port at 0
 
-    long long unsigned int j, offset, nodeNumber, portOrder;
+    unsigned long long j, offset, nodeNumber, portOrder;
     unsigned int i;
 
     // the element type of the realPort is the type that has at most
@@ -2142,9 +2183,10 @@ unsigned int getBetweenPointFromRealPortNumber(struct aPortToRealPort *Ports,
         // this port number shall be the element 100.
     }
 
-    nodeNumber = (long long unsigned int) ((realPort
+    nodeNumber = (unsigned long long) ((realPort
             - Ports[i].previousMaximumRealNode) / Ports[i].portsPerNode);
 
+    // this is the number of the port.
     // 0, 1, 2, ... , or n-1
     portOrder = (realPort - Ports[i].previousMaximumRealNode) % Ports[i].portsPerNode;
 
@@ -2152,6 +2194,8 @@ unsigned int getBetweenPointFromRealPortNumber(struct aPortToRealPort *Ports,
 
     switch (i) {
         case 1: // 2 nodes line
+            getBetweenForLine(input, nodeNumber, portOrder, x, y, z);
+            
             break;
         case 2: // 3 nodes triangle
             getBetweenForTriangle(input, nodeNumber, portOrder, x, y, z);
@@ -2180,14 +2224,42 @@ unsigned int getBetweenPointFromRealPortNumber(struct aPortToRealPort *Ports,
 }
 
 /*
+ * getBetweenForLine: return the position of the points
+ * face.
+ */
+unsigned int getBetweenForLine(const struct dataForSimulation * input,
+        const unsigned long long nodeNumber, const unsigned long long portOrder,
+        double *x, double *y, double *z) {
+
+    unsigned long long P1;
+
+    switch (portOrder) {
+        case 0:
+            P1 = input->mesh.elements.Line[nodeNumber].N1 - 1;
+
+            break;
+        case 1:
+            P1 = input->mesh.elements.Line[nodeNumber].N2 - 1;
+
+            break;
+    }
+
+    *x = input->mesh.nodes[P1].x;
+    *y = input->mesh.nodes[P1].y;
+    *z = input->mesh.nodes[P1].z;
+
+    return 0;
+}
+
+/*
  * getBetweenForTriangle: return the position of the middle of the triangular
  * face.
  */
 unsigned int getBetweenForTriangle(const struct dataForSimulation * input,
-        const long long unsigned int nodeNumber, const long long unsigned int portOrder,
+        const unsigned long long nodeNumber, const unsigned long long portOrder,
         double *x, double *y, double *z) {
 
-    long long unsigned int P1, P2;
+    unsigned long long P1, P2;
 
     switch (portOrder) {
         case 0:
@@ -2218,10 +2290,10 @@ unsigned int getBetweenForTriangle(const struct dataForSimulation * input,
  * getBetweenForTetrahedron: return the position of the middle of the triangle.
  */
 unsigned int getBetweenForTetrahedron(const struct dataForSimulation * input,
-        const long long unsigned int nodeNumber, const long long unsigned int portOrder,
+        const unsigned long long nodeNumber, const unsigned long long portOrder,
         double *x, double *y, double *z) {
 
-    long long unsigned int P1, P2, P3;
+    unsigned long long P1, P2, P3;
 
     switch (portOrder) {
         case 0:
@@ -2262,14 +2334,14 @@ unsigned int getBetweenForTetrahedron(const struct dataForSimulation * input,
  * geometrical element from the port given.
  */
 unsigned int getProjectionFromRealPortNumber(struct aPortToRealPort *Ports,
-        long long unsigned int realPort, double *x, double *y, double *z,
+        unsigned long long realPort, double *x, double *y, double *z,
         const struct dataForSimulation * input) {
 
     // 0 - position of the Real port
     // 1 - first real port number of the node that contains the port at 0
     // 2 - last real port number of the node that contains the port at 0
 
-    long long unsigned int nodeNumber, portOrder;
+    unsigned long long nodeNumber, portOrder;
     unsigned int i;
 
     // the element type of the realPort is the type that has at most
@@ -2285,7 +2357,7 @@ unsigned int getProjectionFromRealPortNumber(struct aPortToRealPort *Ports,
         // this port number shall be the element 100.
     }
 
-    nodeNumber = (long long unsigned int) ((realPort
+    nodeNumber = (unsigned long long) ((realPort
             - Ports[i].previousMaximumRealNode) / Ports[i].portsPerNode);
 
     // 0, 1, 2, ... , or n-1
@@ -2295,6 +2367,8 @@ unsigned int getProjectionFromRealPortNumber(struct aPortToRealPort *Ports,
 
     switch (i) {
         case 1: // 2 nodes line
+            getOutsideProjectionLine(input, nodeNumber, portOrder, x, y, z);
+            
             break;
         case 2: // 3 nodes triangle
             getOutsideProjectionTriangle(input, nodeNumber, portOrder, x, y, z);
@@ -2323,13 +2397,56 @@ unsigned int getProjectionFromRealPortNumber(struct aPortToRealPort *Ports,
 }
 
 /*
- * getOutsideProjectionTriangle: return the projection facing away
+ * getOutsideProjectionLine: return the unitary vector going outside the 
+ * line element from the port given.
  */
-unsigned int getOutsideProjectionTriangle(const struct dataForSimulation * input,
-        const long long unsigned int nodeNumber, const long long unsigned int portOrder,
+unsigned int getOutsideProjectionLine(const struct dataForSimulation * input,
+        const unsigned long long nodeNumber, const unsigned long long portOrder,
         double *x, double *y, double *z) {
 
-    long long unsigned int P1, P2, P3;
+    unsigned long long P1, P2;
+
+    switch (portOrder) {
+        case 0:
+            P1 = input->mesh.elements.Line[nodeNumber].N1 - 1;
+            P2 = input->mesh.elements.Line[nodeNumber].N2 - 1;
+
+            break;
+        case 1:
+            P1 = input->mesh.elements.Line[nodeNumber].N2 - 1;
+            P2 = input->mesh.elements.Line[nodeNumber].N1 - 1;
+
+            break;
+    }
+
+    double Lx, Ly, Lz, L;
+
+    // this vector points on the direction of the triangular face. I wanna
+    // a vector that is perpendicular to it
+    // This vector has to be parallel to the area vector and must be going
+    // inward the triangle.
+    Lx = input->mesh.nodes[P1].x - input->mesh.nodes[P2].x;
+    Ly = input->mesh.nodes[P1].y - input->mesh.nodes[P2].y;
+    Lz = input->mesh.nodes[P1].z - input->mesh.nodes[P2].z;
+    L = sqrt(Lx * Lx + Ly * Ly + Lz * Lz);
+    
+    *x = Lx / L;
+    *y = Ly / L;
+    *z = Lz / L;
+
+
+    return 0;
+}
+
+/*
+ * getOutsideProjectionTriangle: return the unitary vector going outside the 
+ * triangle element from the port given.
+ */
+unsigned int getOutsideProjectionTriangle(const struct dataForSimulation * input,
+        const unsigned long long nodeNumber, const unsigned long long portOrder,
+        double *x, double *y, double *z) {
+
+    unsigned long long P1, P2, P3;
 
     switch (portOrder) {
         case 0:
@@ -2492,10 +2609,11 @@ unsigned int getOutsideProjectionTriangle(const struct dataForSimulation * input
 }
 
 /*
- * getOutsideProjectionTetrahedron: return the projection facing away
+ * getOutsideProjectionTetrahedron: return the unitary vector going outside the 
+ * tetrahedron element from the port given.
  */
 unsigned int getOutsideProjectionTetrahedron(const struct dataForSimulation * input,
-        const long long unsigned int nodeNumber, const long long unsigned int portOrder,
+        const unsigned long long nodeNumber, const unsigned long long portOrder,
         double *x, double *y, double *z) {
 
     /* tetrahedral nomenclature.
@@ -2519,7 +2637,7 @@ unsigned int getOutsideProjectionTetrahedron(const struct dataForSimulation * in
      * vertex 2 //_____________________________\/ vertex 3
      *                      edge 4
      */
-    long long unsigned int P1, P2, P3, P4;
+    unsigned long long P1, P2, P3, P4;
 
     switch (portOrder) {
         case 0:

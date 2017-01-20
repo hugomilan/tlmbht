@@ -1,7 +1,7 @@
 /*
  * TLMBHT - Transmission-line Modeling Method applied to BioHeat Transfer Problems.
  * 
- * Copyright (C) 2015 to 2016 by Cornell University. All Rights Reserved.
+ * Copyright (C) 2015 to 2017 by Cornell University. All Rights Reserved.
  * 
  * Written by Hugo Fernando Maia Milan.
  * 
@@ -40,9 +40,9 @@
 extern "C" {
 #endif
 
-void sortOptmizedBubbleSort(long long unsigned int *);
+    void sortOptmizedBubbleSort(unsigned long long *);
 
-int compareLLU(const void *, const void *);
+    int compareLLU(const void *, const void *);
 
 
 #ifdef __cplusplus

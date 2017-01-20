@@ -1,0 +1,825 @@
+// Standard for input files. The texts are case insensitivity.
+//
+// use only "//" for comments. The "/**/" is not allowed.
+//
+// Future implementation: field 'Function' that will be used to create functions
+// for the parameters. Examples: time-dependent sources and temperature-dependent
+// density, specific heat, etc.
+
+// For more help, do:
+//          tlmbht --help
+
+
+// Simulation and Mesh should appear only once. Others fields can be repeated.
+// the standard is:
+// Field //Simulation, Mesh, Material, Boundary, or Source (case insensitive)
+// {
+//      commands here...
+// }
+
+// Here I show inputs in SI units. You can use others unit systems if you are consistent with
+// the main equations. The algorithm will not check it for you.
+
+Simulation  // Configurations for the simulations
+{
+
+    // benchmark = run; // not required. Future implementation
+    // Options:
+    // dont: do not run benchmark (default)
+    // run: run the most complete benchmark and exit. Future implementation
+    // run and solve: run the most complete benchmark and solve the problem (not recommended). Future implementation
+    // run fast: run a simplified benchmark. Future implementation
+    // run fast and solve: run a simplified benchmark and solve the problem. Future implementation
+
+    OpenMP cores = max; // not required.
+    // Set the number of cores to use in parts of the code
+    // parallelized using OpenMP. If not set, it will use the 
+    // number of cores available by your system at run time. 
+    // Options:
+    // max: use the maximum number of cores available.
+    // 1: use one core
+    // 2: use two cores
+    // ...
+    // n: use n cores
+    // ...
+    // max: use all the cores available
+
+    Absolute zero = - 273.15; // (oC) not required. Use it only if you want to change
+    // the relationship between Kelvin and Celsius. Celsius = Kelvin - 273.15 (Absolute zero)
+
+    Stefan-Boltzmann constant = 5.6704e-8; // (W/(K4-m2)) not required. Use it only
+    // if you want to change the value of the Stefan-Boltzmann constant
+
+    output name = --case; // not required. Name of the output file.
+    // Options:
+    // --case: the same name as the name of the case input file before the file
+    //          extension (if any). Example: input_file.tlm => input_file. (default)
+    // --mesh: the same name as the name of the mesh input.
+    // any name you want.
+
+    output extension = tmo; // not required. Extension of the output file.
+    // tmo: native tlmbht extension output. (default)
+    // m: native Matlab/Octave file type. The data written is exactly the same as tmo.
+    //      this maybe useful when doing post-processing in Matlab/Octave.
+
+    timing mode = true; // not required
+    // will shown the time the algorithm takes to go through each step.
+    // This overwrites the option called in the terminal. This is, if the calling
+    // was 'tlmbht --timing' and, here, 'timing mode = false', the timing mode 
+    // will be set to false.
+    //
+    // Options:
+    // true: will print the timing
+    // false: will not print the timing (default).
+
+    print additional = true; // not required.
+    // Will print additional information while processing.
+    // Options:
+    // true: will print additional information while processing.
+    // false: will only print essential information (default).
+
+    verbose mode = true; // not required.
+    // print useful information for debug purposes. This overwrites the option
+    // called in the terminal. This is, if the calling was 'tlmbht --verbose'
+    // and, here, 'verbose mode = false', the verbose mode will be set to false.
+    // When verbose mode is set here, some information will not shown. That is,
+    // the informations before reading this line will not be shown. If you want
+    // to see all the information, you should set verbose mode calling 'tlmbht --verbose'
+    // 
+    // Options:
+    // true: will print more information than the command 'print additional'. This
+    //      set 'print additional = true'.
+    // false: will only print essential information (default).
+}
+
+Mesh
+{
+
+    // We assume that the directions [1, 2, 3] are:
+    // Cartesian coordinates: [x, y, z];
+    // Cylindrical coordinates: [z, r, theta];
+    // Spherical coordinates: [r, theta, phi];
+
+    file name = plate_4BC_10766e; // required.
+    // The name of the file without the extension.
+    // This is, if the name of your file is "problem.tbn", then you should input only
+    // "problem". The extension is defined on the "input format" variable below.
+
+    input format = tlmtbn; // required.
+    // Options:
+    // tlmtbn: .tbn, This is the native tlmbht input file. If you choose a different input
+    // format, the software will convert it to .tbn.
+    //
+    // gmsh: .msh from Gmsh software (MeshFormat = 2.2).
+    // Observations for Gmsh: The elements read by tlmbht are: 1 - 2 nodes line;
+    // 2 - 2 nodes triangle; 4 - 4 nodes tetrahedron; 15 - 1 node point.
+    // The software reads only the tag for the physical entity to which
+    // the element belongs (i.e., the first tag in the .msh file). The others tags
+    // are just ignored.  
+
+    // scale = 1; // not required.
+    // Use it wisely. If you simply forget that this scale is defined, every time
+    // the mesh is read the mesh will be scaled. This may yields to unwanted mesh sizes.
+    // 
+    // If it is only one element, then all the axes are multiplied by this scale factor.
+    // Otherwise, it must be a vector column with three elements.
+    //
+    // Example: to convert a mesh from millimeters to meters, both inputs are correct:
+    // scale = 1e-3;
+    // scale = [1e-3 1e-3 1e-3];
+    // The second option may be adequate when a base mesh is used for multiple simulations
+    // where the size of the mesh is expanded/contracted in different axes.
+
+
+    output name = --case; // not required. 
+    // Name of the output mesh if mesh format is different from tlmtbn. That is,
+    // if the input mesh is not tlmtbn, the algorithm will read it and convert to
+    // tlmtbn.
+    //
+    // when converting to tlmtbn, if, there is a file with the same name.tbn,
+    // the software will overwrite this file with the data from the new conversion.
+    //
+    // Options:
+    // --case: the same name as the name of the case input file. (default)
+    // --mesh: the same name as the name of the mesh input.
+    // any name you want.
+}
+
+Equation
+{
+
+    library = eigen;// not required. 
+    // This will set up the library to be used in the calculations. The options are:
+    // eigen: uses the eigen library (default)
+    // cuda: uses the cuda library. Future implementation
+
+    type = pennes; // required.
+    // Options (see more explanation about the equations below):
+    // diffusion: diffusion equation.
+    // hyperbolic diffusion: hyperbolic diffusion equation
+    // heat: heat transfer equation.
+    // hyperbolic heat: hyperbolic heat transfer equation.
+    // pennes: bioheat transfer equation (Pennes' equation);
+    // hyperbolic pennes: hyperbolic bioheat transfer equation (Pennes' equation);
+    //
+    //
+    //
+    //
+    //
+    // diffusion: diffusion equation.
+    // This equation is:
+    // b*d( m )/dt = - div( f - D*grad( m )) - a*m + R
+    // 
+    // With the following definition of flux:
+    // n = f - D*grad( m )
+    //
+    // where 'm' is the scalar variable; 'n' is the vectorial variable;
+    // 'b' is a coefficient for generalizing this model;
+    // 'D' is the diffusion coefficient; 'a' is a sink proportional
+    // to the intensity of 'm'; 'R' is a source; 'f' is a vectorial
+    // source of flux; 'd()/dt' represents time derivative; 
+    // 'grad( )' represents gradient operation; 'div(  )' represents divergence operation; 
+    //
+    // The inputs needed for this equation in the 'Material' field are (with 
+    // example values):
+    //
+    // diffusion coefficient = 1; // required;
+    // coefficient b = 1; // not required. Default value is 1.
+    //
+    // sink a = 0; // not required.
+    //      The default value is 0. Defines the value of the sink proportional to 'm'.
+    // source = 1; // not required.
+    //      The default value is 0. Defines the value of the source. 
+    // vectorial source = 0; // not required.
+    //      The default value is 0. Defines the value of the vectorial source.
+    //      Since this is a vector, you have two options to input it:
+    //              vectorial source = 1e-3;
+    //              vectorial source = [1e-3 1e-3 1e-3];
+    //      Use the first option when the vectorial source is the same for all directions.
+    //      Use the second options when it has different values for different directions.
+    //
+    // initial scalar = 1; // required if Solve = dynamic;
+    // 
+    //
+    // Four types of boundary conditions are applicable to this model:
+    // 1) Dirichlet Boundary Condition: constant values of 'm'. It is implemented
+    //      with:
+    //          scalar = value;
+    //  
+    // 2) Neumann Boundary Condition: constant value of 'n'. It is implemented
+    //      with:
+    //          flux = value;
+    //
+    // 3) Robin (or Convection) Boundary Condition: convection type boundary
+    //      condition, expressed as: n = h*(m - m_inf). It is implemented with:
+    //          Convection scalar = value; // this is m_inf
+    //          Convection coefficient = value; // this is h
+    //
+    // 4) Adiabatic (zero flux) Boundary Condition: This is the default boundary condition.
+    //      It is implemented with:
+    //          adiabatic = true;
+    //
+    // Obs.: Note that BC #2 and #3 can be used together but others cannot.
+    // Obs.2: Not defined BC will be defined as Adiabatic. 
+    //
+    //
+    //
+    //
+    //
+    //
+    // hyperbolic diffusion: hyperbolic diffusion equation.
+    // This equation is:
+    // b*d( m )/dt = - div( n ) - a*m + R
+    // 
+    // With the following definition of flux:
+    // n + tau*d( n )/dt = f - D*grad( m )
+    //
+    // where 'm' is the scalar variable; 'n' is the vectorial variable;
+    // 'b' is a coefficient for generalizing this model; 'tau' is the relaxation time;
+    // 'D' is the diffusion coefficient; 'a' is a sink proportional
+    // to the intensity of 'm'; 'R' is a source; 'f' is a vectorial
+    // source of flux; 'd()/dt' represents time derivative; 
+    // 'grad( )' represents gradient operation; 'div(  )' represents divergence operation; 
+    //
+    // The inputs needed for this equation in the 'Material' field are (with 
+    // example values):
+    //
+    // diffusion coefficient = 1; // required;
+    // coefficient b = 1; // not required. Default value is 1.
+    // relaxation time = 10; // required
+    //
+    // sink a = 0; // not required.
+    //      The default value is 0. Defines the value of the sink proportional to 'm'.
+    // source = 1; // not required.
+    //      The default value is 0. Defines the value of the source. 
+    // vectorial source = 0; // not required.
+    //      The default value is 0. Defines the value of the vectorial source.
+    //      Since this is a vector, you have two options to input it:
+    //              vectorial source = 1e-3;
+    //              vectorial source = [1e-3 1e-3 1e-3];
+    //      Use the first option when the vectorial source is the same for all directions.
+    //      Use the second options when it has different values for different directions.
+    //
+    // initial scalar = 1; // required if Solve = dynamic;
+    // 
+    //
+    // Four types of boundary conditions are applicable to this model:
+    // 1) Dirichlet Boundary Condition: constant values of 'm'. It is implemented
+    //      with:
+    //          scalar = value;
+    //  
+    // 2) Neumann Boundary Condition: constant value of 'n'. It is implemented
+    //      with:
+    //          flux = value;
+    //
+    // 3) Robin (or Convection) Boundary Condition: convection type boundary
+    //      condition, expressed as: n = h*(m - m_inf). It is implemented with:
+    //          Convection scalar = value; // this is m_inf
+    //          Convection coefficient = value; // this is h
+    //
+    // 4) Adiabatic (zero flux) Boundary Condition: This is the default boundary condition.
+    //      It is implemented with:
+    //          adiabatic = true;
+    //
+    // Obs.: Note that BC #2 and #3 can be used together but others cannot.
+    // Obs.2: Not defined BC will be defined as Adiabatic. 
+    //
+    //
+    //
+    //
+    //
+    //
+    // heat: heat transfer equation.
+    // This equation is:
+    // p*c*d( T )/dt = - div( f - k*grad( T )) - a*T + Q
+    // 
+    // With the following definition of heat flux:
+    // q = f - k*grad( T )
+    //
+    // where 'T' is temperature; 'q' is heat flux; 'p' is density; 'c' is specific heat;
+    // 'f' is a vectorial source of flux; 'k' is thermal conductivity;
+    // 'a' is a sink proportional to the intensity of 'T';
+    // 'Q' is volumetric heat source; 'd()/dt' represents time derivative; 
+    // 'grad( )' represents gradient operation; 'div(  )' represents divergence operation; 
+    //
+    // The inputs needed for this equation in the 'Material' field are (with 
+    // example values):
+    // density = 1200; // (kg/m3) required;
+    // specific heat = 3200; // (J/(K-kg)) required;
+    // thermal conductivity = 0.3; // (W/(K-m)) required;
+    //
+    // sink a = 0; // (W/(K-m3)) not required.
+    //      The default value is 0. Defines the value of the sink proportional to 'm'.
+    // source = 0; // (W/m3) not required.
+    //      The default value is 0.
+    // vectorial source = 0; // (W/m2) not required.
+    //      The default value is 0. Defines the value of the vectorial source.
+    //      Since this is a vector, you have two options to input it:
+    //              vectorial source = 1e-3;
+    //              vectorial source = [1e-3 1e-3 1e-3];
+    //      Use the first option when the vectorial source is the same for all directions.
+    //      Use the second options when it has different values for different directions.
+    //
+    // initial temperature = 37; // (oC) required if Solve = dynamic;
+    // 
+    //
+    // Five types of boundary conditions are applicable to this model:
+    // 1) Dirichlet Boundary Condition: constant values of 'T'. It is implemented
+    //      with:
+    //          temperature = value; // (oC)
+    //  
+    // 2) Neumann Boundary Condition: constant value of 'q'. It is implemented
+    //      with:
+    //          heat flux = value; // (W/m2)
+    //
+    // 3) Robin (or Convection) Boundary Condition: convection type boundary
+    //      condition, expressed as: q = h*(T - T_inf). It is implemented with:
+    //          Convection temperature = value; // (oC) this is T_inf
+    //          Convection coefficient = value; // (W/(m2-oC)) this is h
+    //
+    // 4) Radiation Boundary Condition:
+    //      expressed as: n = sigma*epsilon*(T^4 - T_rad^4).
+    //      'sigma' is the Stefan-Boltzmann constant; 'epsilon' is the emissivity
+    //      of the surface (value between 0 and 1).
+    //      It is implemented with:
+    //          Radiation temperature = value; // (oC) this is T_rad
+    //          Radiation Emissivity = value;  // this is epsilon (value between 0 and 1).
+    //
+    // 5) Adiabatic (zero flux) Boundary Condition: This is the default boundary condition.
+    //      It is implemented with:
+    //          adiabatic = true;
+    //
+    // Obs.: Note that BC #2, #3, and #4 can be used together but others cannot.
+    // Obs.2: Not defined BC will be defined as Adiabatic. 
+    //
+    //
+    //
+    //
+    //
+    //
+    // hyperbolic heat: hyperbolic heat transfer equation.
+    // This equation is:
+    // p*c*d( T )/dt = - div( q ) - a*T + Q
+    // 
+    // With the following definition of heat flux:
+    // q + tau*d( q )/dt = f - k*grad( T )
+    //
+    // where 'T' is temperature; 'q' is heat flux; 'p' is density; 'c' is specific heat;
+    // 'f' is a vectorial source of flux; 'k' is thermal conductivity;
+    // 'a' is a sink proportional to the intensity of 'T'; 'tau' is thermal relaxation time;
+    // 'Q' is volumetric heat source; 'd()/dt' represents time derivative; 
+    // 'grad( )' represents gradient operation; 'div(  )' represents divergence operation; 
+    //
+    // The inputs needed for this equation in the 'Material' field are (with 
+    // example values):
+    // density = 1200; // (kg/m3) required;
+    // specific heat = 3200; // (J/(K-kg)) required;
+    // thermal conductivity = 0.3; // (W/(K-m)) required;
+    // thermal relaxation time = 10; // (s) required;
+    //
+    // sink a = 0; // (W/(K-m3)) not required.
+    //      The default value is 0. Defines the value of the sink proportional to 'm'.
+    // source = 0; // (W/m3) not required.
+    //      The default value is 0.
+    // vectorial source = 0; // (W/m2) not required.
+    //      The default value is 0. Defines the value of the vectorial source.
+    //      Since this is a vector, you have two options to input it:
+    //              vectorial source = 1e-3;
+    //              vectorial source = [1e-3 1e-3 1e-3];
+    //      Use the first option when the vectorial source is the same for all directions.
+    //      Use the second options when it has different values for different directions.
+    //
+    // initial temperature = 37; // (oC) required if Solve = dynamic;
+    // 
+    //
+    // Five types of boundary conditions are applicable to this model:
+    // 1) Dirichlet Boundary Condition: constant values of 'T'. It is implemented
+    //      with:
+    //          temperature = value; // (oC)
+    //  
+    // 2) Neumann Boundary Condition: constant value of 'q'. It is implemented
+    //      with:
+    //          heat flux = value; // (W/m2)
+    //
+    // 3) Robin (or Convection) Boundary Condition: convection type boundary
+    //      condition, expressed as: q = h*(T - T_inf). It is implemented with:
+    //          Convection temperature = value; // (oC) this is T_inf
+    //          Convection coefficient = value; // (W/(m2-oC)) this is h
+    //
+    // 4) Radiation Boundary Condition:
+    //      expressed as: n = sigma*epsilon*(T^4 - T_rad^4).
+    //      'sigma' is the Stefan-Boltzmann constant; 'epsilon' is the emissivity
+    //      of the surface (value between 0 and 1).
+    //      It is implemented with:
+    //          Radiation temperature = value; // (oC) this is T_rad
+    //          Radiation Emissivity = value;  // this is epsilon (value between 0 and 1).
+    //
+    // 5) Adiabatic (zero flux) Boundary Condition: This is the default boundary condition.
+    //      It is implemented with:
+    //          adiabatic = true;
+    //
+    // Obs.: Note that BC #2, #3, and #4 can be used together but others cannot.
+    // Obs.2: Not defined BC will be defined as Adiabatic. 
+    //
+    //
+    //
+    //
+    //
+    //
+    // pennes: bioheat transfer equation (Pennes' equation);
+    // This equation is:
+    // p*c*d( T )/dt = - div( f - k*grad( T )) - wb*pb*cb*(T - Tb) + Qm + Q
+    // 
+    // With the following definition of heat flux:
+    // q = f - k*grad( T )
+    //
+    // where 'T' is temperature; 'q' is heat flux; 'p' is density; 'c' is specific heat;
+    // 'f' represents a vectorial source of flux; 'k' is thermal conductivity;
+    // 'wb' is blood perfusion; 'pb' is blood density; 'cb' is blood specific heat;
+    // 'Tb' is blood temperature; 'Qm' is volumetric metabolic heat source;
+    // 'Q' is volumetric heat source; 'd()/dt' represents time derivative; 
+    // 'grad( )' represents gradient operation; 'div(  )' represents divergence operation; 
+    //
+    // The inputs needed for this equation in the 'Material' field are (with 
+    // example values):
+    // density = 1200; // (kg/m3) required;
+    // specific heat = 3200; // (J/(K-kg)) required;
+    // thermal conductivity = 0.3; // (W/(K-m)) required;
+    //
+    // source = 0; // (W/m3) not required.
+    //      The default value is 0.
+    // vectorial source = 0; // (W/m2) not required.
+    //      The default value is 0. Defines the value of the vectorial source.
+    //      Since this is a vector, you have two options to input it:
+    //              vectorial source = 1e-3;
+    //              vectorial source = [1e-3 1e-3 1e-3];
+    //      Use the first option when the vectorial source is the same for all directions.
+    //      Use the second options when it has different values for different directions.
+    //
+    // blood perfusion = 1e-4; // (m3/(m3-s)) not required.
+    //      The default value is 0.
+    // blood density = 1052; // (kg/m3) not required.
+    //      The default value is 0.
+    // blood specific heat = 3600; // (J/(K-kg)) not required.
+    //      The default value is 0.
+    // blood temperature = 37; // (oC) not required.
+    //      The default value is 0.
+    //
+    // internal heat generation = 500; // (W/m3) not required.
+    //      The default value is 0.
+    //
+    // initial temperature = 37; // (oC) required if Solve = dynamic;
+    //
+    //
+    // Five types of boundary conditions are applicable to this model:
+    // 1) Dirichlet Boundary Condition: constant values of 'T'. It is implemented
+    //      with:
+    //          temperature = value; // (oC)
+    //  
+    // 2) Neumann Boundary Condition: constant value of 'q'. It is implemented
+    //      with:
+    //          heat flux = value; // (W/m2)
+    //
+    // 3) Robin (or Convection) Boundary Condition: convection type boundary
+    //      condition, expressed as: q = h*(T - T_inf). It is implemented with:
+    //          Convection temperature = value; // (oC) this is T_inf
+    //          Convection coefficient = value; // (W/(m2-oC)) this is h
+    //
+    // 4) Radiation Boundary Condition:
+    //      expressed as: n = sigma*epsilon*(T^4 - T_rad^4).
+    //      'sigma' is the Stefan-Boltzmann constant; 'epsilon' is the emissivity
+    //      of the surface (value between 0 and 1).
+    //      It is implemented with:
+    //          Radiation temperature = value; // (oC) this is T_rad
+    //          Radiation Emissivity = value;  // this is epsilon (value between 0 and 1).
+    //
+    // 5) Adiabatic (zero flux) Boundary Condition: This is the default boundary condition.
+    //      It is implemented with:
+    //          adiabatic = true;
+    //
+    // Obs.: Note that BC #2, #3, and #4 can be used together but others cannot.
+    // Obs.2: Not defined BC will be defined as Adiabatic. 
+    //
+    //
+    //
+    //
+    //
+    // hyperbolic pennes: hyperbolic bioheat transfer equation (Pennes' equation);
+    // This equation is:
+    // p*c*d( T )/dt = - div( q ) - wb*pb*cb*(T - Tb) + Qm + Q
+    // 
+    // With the following definition of heat flux:
+    // q + tau*d( q )/dt = f - k*grad( T )
+    //
+    // where 'T' is temperature; 'q' is heat flux; 'p' is density; 'c' is specific heat;
+    // 'f' represents a vectorial source of flux; 'k' is thermal conductivity;
+    //
+    // 'tau' is thermal relaxation time, but, as biological materials are heterogeneous,
+    // a better interpretation of 'tau', given by Liu, Chen, and Xu (IEEE T Biomed Eng, 1999),
+    // is: "the characteristic time needed for accumulating the thermal energy
+    // required for propagative transfer to the nearest element within the nonhomogeneous
+    // inner structures"
+    //
+    // 'wb' is blood perfusion; 'pb' is blood density; 'cb' is blood specific heat;
+    // 'Tb' is blood temperature; 'Qm' is volumetric metabolic heat source;
+    // 'Q' is volumetric heat source; 'd()/dt' represents time derivative; 
+    // 'grad( )' represents gradient operation; 'div(  )' represents divergence operation; 
+    //
+    // The inputs needed for this equation in the 'Material' field are (with 
+    // example values):
+    // density = 1200; // (kg/m3) required;
+    // specific heat = 3200; // (J/(K-kg)) required;
+    // thermal conductivity = 0.3; // (W/(K-m)) required;
+    // thermal relaxation time = 10; (s) required;
+    //
+    // source = 0; // (W/m3) not required.
+    //      The default value is 0.
+    // vectorial source = 0; // (W/m2) not required.
+    //      The default value is 0. Defines the value of the vectorial source.
+    //      Since this is a vector, you have two options to input it:
+    //              vectorial source = 1e-3;
+    //              vectorial source = [1e-3 1e-3 1e-3];
+    //      Use the first option when the vectorial source is the same for all directions.
+    //      Use the second options when it has different values for different directions.
+    //
+    // blood perfusion = 1e-4; // (m3/(m3-s)) not required.
+    //      The default value is 0.
+    // blood density = 1052; // (kg/m3) not required.
+    //      The default value is 0.
+    // blood specific heat = 3600; // (J/(K-kg)) not required.
+    //      The default value is 0.
+    // blood temperature = 37; // (oC) not required.
+    //      The default value is 0.
+    //
+    // internal heat generation = 500; // (W/m3) not required.
+    //      The default value is 0.
+    //
+    // initial temperature = 37; // (oC) required if Solve = dynamic;
+    //
+    //
+    // Five types of boundary conditions are applicable to this model:
+    // 1) Dirichlet Boundary Condition: constant values of 'T'. It is implemented
+    //      with:
+    //          temperature = value; // (oC)
+    //  
+    // 2) Neumann Boundary Condition: constant value of 'q'. It is implemented
+    //      with:
+    //          heat flux = value; // (W/m2)
+    //
+    // 3) Robin (or Convection) Boundary Condition: convection type boundary
+    //      condition, expressed as: q = h*(T - T_inf). It is implemented with:
+    //          Convection temperature = value; // (oC) this is T_inf
+    //          Convection coefficient = value; // (W/(m2-oC)) this is h
+    //
+    // 4) Radiation Boundary Condition:
+    //      expressed as: n = sigma*epsilon*(T^4 - T_rad^4).
+    //      'sigma' is the Stefan-Boltzmann constant; 'epsilon' is the emissivity
+    //      of the surface (value between 0 and 1).
+    //      It is implemented with:
+    //          Radiation temperature = value; // (oC) this is T_rad
+    //          Radiation Emissivity = value;  // this is epsilon (value between 0 and 1).
+    //
+    // 5) Adiabatic (zero flux) Boundary Condition: This is the default boundary condition.
+    //      It is implemented with:
+    //          adiabatic = true;
+    //
+    // Obs.: Note that BC #2, #3, and #4 can be used together but others cannot.
+    // Obs.2: Not defined BC will be defined as Adiabatic. 
+    //
+    //
+    //
+    //
+    // *********************************************************************
+    // *********************************************************************
+    // ************* GENERAL COMMENTS ABOUT THE EQUATIONS ******************
+    // *********************************************************************
+    // *********************************************************************
+    //
+    // 1) As you might have noted, the equations for diffusion, heat, and pennes are
+    // similar. In fact, the same TLM solver is used to solve these equations.
+    //
+    // 2) The same TLM solver is used to solve, hyperbolic diffusion, hyperbolic heat and
+    // hyperbolic pennes.
+    //
+    // 3) The code will automatically choose the best model for the input parameters
+    // in the material section. For example, if you define the equation as 
+    // 'hyperbolic pennes' but defines a material that can be solved using the
+    // model for 'heat' (which is simpler and faster), the code will 
+    // automatically reduce the model for you. That means that for an heterogeneous
+    // problem, you can simply define the governing equation as 'hyperbolic pennes'
+    // and set the material parameters that you don't need (such as 'tau' and 'wb') to zero.
+    //
+    // 4) The solver will NOT connect different equations. For instance, if you 
+    // define 'diffusion 1' and 'diffusion 2', they will be treated as different
+    // governing equations and will not be linked. Another example is if you
+    // define 'hyperbolic pennes' and 'heat', they will also be treated as  
+    // different governing equations and will not be linked. Thus, always choose
+    // the most complete governing equation and adjust the parameters you need
+    // to reduce the equation to zero. The solver will automatically choose the
+    // best model for the input parameters.
+    //
+    //
+    
+
+    
+    equation name = BHE; // required.
+    // Every equation should have a DIFFERENT NAME.
+    //
+    // This parameter defines the name of the equation. The name of the equations
+    // is used in the Material properties to indicate what equation to use to solve
+    // that material. They are also used in the Boundary properties to indicate 
+    // what boundaries apply to that material.
+
+
+
+    scalar name = temperature; // not required (see default names below).
+    // This parameter defines the name of the equation to be defined in the material
+    // properties.
+    //
+    // If, for example, you are using more than one diffusion equation you have
+    // to give different names to the scalar variables. One could use the default name
+    // and the other could be named 'scalar 2'. The names of the equation and the
+    // vectorial variables also need to be different.
+    //
+    // The default names are:
+    //
+    //         name scalar      |       type
+    //__________________________|_____________________
+    //          scalar n        |       diffusion
+    //          scalar n        | hyperbolic diffusion
+    //          temperature n   |       heat
+    //          temperature n   |   hyperbolic heat
+    //          temperature n   |       pennes
+    //          temperature n   |   hyperbolic pennes
+
+
+
+    vector name = heat flux; // not required (see default names below).
+    // This parameter defines the name of the equation to be defined in the material
+    // properties.
+    //
+    // If, for example, you are using more than one diffusion equation you have
+    // to give different names to the vectorial variables. One could use the default name
+    // and the other could be named 'vector 2'. The names of the equation and the
+    // scalar variables also need to be different.
+    // 
+    // The default names are:
+    //
+    //         name vector      |       type
+    //__________________________|_____________________
+    //          flux n          |       diffusion
+    //          flux n          | hyperbolic diffusion
+    //       heat flux n        |       heat
+    //       heat flux n        |   hyperbolic heat
+    //       heat flux n        |       pennes
+    //       heat flux n        |   hyperbolic pennes
+
+
+
+    dimensions = 2; // required.
+    // Options:
+    // 1: one-dimensional problem;
+    // 2: two-dimensional problem;
+    // 3: three-dimensional problem.
+
+    method = tlm; // not required.
+    // Options:
+    // tlm: transmission-line modeling (default).
+    // fdtd: finite difference time-domain. Future implementation
+    // fem: finite element method. Future implementation
+    //
+    // Obs.: see the Octave/Matlab codes for analytical solutions
+
+    // adjust method = none; // special variable for adjustment for specific methods. Future implementation
+
+    Solve = dynamic; // required. 
+    // Options:
+    // steady: steady state solution;
+    // dynamic: dynamic simulation
+
+    time-step = 1e-4; // Required if "solve = dynamic". (s) time-step in seconds. 
+    // This is the time-step between each calculation.
+
+    time-jump = 1000; // not required.
+    // Must be an integer greater than zero. If greater than 1, the algorithm 
+    // will group the amount of time-steps indicated in time-jump and solve them at once.
+    // For example, if time-jump = 11 and time-step = 0.01 s, the effective time-step will be
+    // 11*0.01 (time-jump*time-step) = 0.11 s. This is, internally each time-step
+    // is solved for 0.01 s but the output will only be available for each 0.11 s.
+    //
+    // The time-jump helps in speeding up the code since intermediary results
+    // will not be calculated. Nonetheless, intermediary results can always be 
+    // obtained using interpolations (not implemented).
+
+    final time = 10; // Required if solve = dynamic. (s) end time for simulation in seconds. 
+
+
+    save = scalar; // indicates what to save.
+    save = scalar between;
+    save = vector;
+    // This field can be repeated to include other options. If nothings is 
+    // requested to be saved, the algorithm will only save what is necessary to 
+    // calculate the the scalar and vectorial variables latter.
+    // 
+    // The options are:
+    // scalar OR temperature: saves the scalar variable in the center of the node.
+    // scalar between OR temperature between: saves the scalar variable in between the nodes.
+    // vector OR heat flux: saves the vector variable in between the nodes.
+    //
+    //
+    //
+    // THIS OPTION SHOULD BE DEPRECATED IN THE FUTURE (WHEN???). I think that 
+    // we should save what is necessary to calculate them and the user should 
+    // give the position to calculate these variables. This might require the use
+    // of interpolation. Moreover, it is not clear how it should be performed 
+    // in the TLM method. More research is needed here.
+}
+
+
+
+Material
+{
+    equation = BHE; // required.
+    // This is the name of the equation that will be used to solve this material.
+    // This is case insensitive.
+
+    number =  7; // required.
+    // This is the tag number of the medium.
+    // These numbers shall be natural numbers greater than 0.
+    // It can be a vector (as [33 55 11]). If it is a vector, the parameters here
+    // will be assigned to all the numbers.
+
+     density = 1200; // (kg/m3) required;
+     specific heat = 3200; // (J/(K-kg)) required;
+     thermal conductivity = 0.3; // (W/(K-m)) required;
+    //
+     source = 0; // (W/m3) not required.
+    //      The default value is 0.
+     vectorial source = 0; // (W/m2) not required.
+    //      The default value is 0. Defines the value of the vectorial source.
+    //      Since this is a vector, you have two options to input it:
+    //              vectorial source = 1e-3;
+    //              vectorial source = [1e-3 1e-3 1e-3];
+    //      Use the first option when the vectorial source is the same for all directions.
+    //      Use the second options when it has different values for different directions.
+    //
+     blood perfusion = 1e-4; // (m3/(m3-s)) not required.
+    //      The default value is 0.
+     blood density = 1052; // (kg/m3) not required.
+    //      The default value is 0.
+     blood specific heat = 3600; // (J/(K-kg)) not required.
+    //      The default value is 0.
+     blood temperature = 37; // (oC) not required.
+    //      The default value is 0.
+    //
+     internal heat generation = 500; // (W/m3) not required.
+    //      The default value is 0.
+    //
+     initial temperature = 37; // (oC) required if Solve = dynamic;
+    // future implementation: reload previous calculated data
+}
+
+
+Boundary
+{
+    equation = BHE; // required.
+    // This is the name of the equation that this boundary condition is applied to
+
+    number = 10; // required;
+    // this is the tag number of the boundary.
+    // It can be a vector (like [33 55 11]). If it is a vector, the parameters here
+    // will be assigned to all the numbers.
+    
+    Temperature = 37; // (oC). This assumes a constant temperature at the
+// boundary. It cannot be used in conjunction with heat flux, convection, or radiation.
+    
+}
+
+
+Boundary
+{
+    equation = BHE; // required.
+    // This is the name of the equation that this boundary condition is applied to
+
+    number = 11; // this is the tag number of the boundary.
+// It can be a vector (like [33 55 11]). If it is a vector, the parameters here
+// will be assigned to all the numbers.
+
+    Temperature = 150; // (oC). This assumes a constant temperature at the
+// boundary. It cannot be used in conjunction with heat flux, convection, or radiation.
+}
+
+
+Boundary
+{
+    equation = BHE; // required.
+    // This is the name of the equation that this boundary condition is applied to
+
+    number = 8; // this is the tag number of the boundary.
+// It can be a vector (like [33 55 11]). If it is a vector, the parameters here
+// will be assigned to all the numbers.
+
+    Heat flux = 1e5; // (W/m2). This assumes a constant heat flux flowing at the boundary.
+}
+
+

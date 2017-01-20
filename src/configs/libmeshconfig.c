@@ -1,7 +1,7 @@
 /*
  * TLMBHT - Transmission-line Modeling Method applied to BioHeat Transfer Problems.
  * 
- * Copyright (C) 2015 to 2016 by Cornell University. All Rights Reserved.
+ * Copyright (C) 2015 to 2017 by Cornell University. All Rights Reserved.
  * 
  * Written by Hugo Fernando Maia Milan.
  * 
@@ -38,6 +38,7 @@
 #include <string.h>
 
 #include "libmeshconfig.h"
+
 #include "../miscellaneous/libstringtlmbht.h"
 #include "../miscellaneous/liberrorcode.h"
 
@@ -48,9 +49,16 @@
 unsigned int initiateMeshVariable(struct MeshConfig *mesh) {
     mesh->inputF = GMSH;
     mesh->nameOfInputFile = NULL;
+    mesh->nameOfOutputFile = NULL;
+
+    mesh->scale = (double*) malloc(sizeof (double)*3);
+
+    mesh->scale[0] = 1;
+    mesh->scale[1] = 1;
+    mesh->scale[2] = 1;
 
     // initializing the flags as zero.
-    mesh->nameDefined = 0;
+    mesh->inputNameDefined = 0;
     mesh->inputFormatDefined = 0;
     return 0;
 }
@@ -61,6 +69,13 @@ unsigned int initiateMeshVariable(struct MeshConfig *mesh) {
 unsigned int terminateMeshVariable(struct MeshConfig *mesh) {
     free(mesh->nameOfInputFile);
     mesh->nameOfInputFile = NULL;
+
+    free(mesh->nameOfOutputFile);
+    mesh->nameOfOutputFile = NULL;
+
+    free(mesh->scale);
+    mesh->scale = NULL;
+
     return 0;
 }
 
@@ -72,7 +87,9 @@ void printfMeshConfig(struct MeshConfig* input) {
     printf("Input data for the Mesh configuration:\n");
 
     printfNameOfInputFile(input->nameOfInputFile);
-    printfinputFormat(&input->inputF);
+    printfInputFormatOutput(&input->inputF, input->nameOfOutputFile);
+
+    printfScale(input->scale);
 
 }
 
@@ -84,18 +101,18 @@ void printfNameOfInputFile(char *input) {
 }
 
 /*
- * printfinputFormat: prints the name of the input format for the mesh
+ * printfInputFormatOutput: prints the name of the input format for the mesh
  */
-void printfinputFormat(enum inputFormat *input) {
+void printfInputFormatOutput(enum inputFormat *input, char *outputName) {
     printf("The format of the input file was ");
 
     switch (*input) {
         case GMSH:
             printf("gmsh (.msh, MeshFormat = 2.2), which will be converted to "
-                    "tlmbht native (.tbn)");
+                    "tlmbht native with the following name: %s.tbn", outputName);
             break;
         case TLMTBN:
-            printf("natiave tlmbht native (.tbn) mesh format");
+            printf("native tlmbht native (.tbn) mesh format");
             break;
         default:
             printf("Unknown mesh format");
@@ -103,6 +120,14 @@ void printfinputFormat(enum inputFormat *input) {
     }
 
     printf(".\n");
+
+}
+
+/*
+ * printfScale: prints the scale
+ */
+void printfScale(double *scale) {
+    printf("The mesh will be scaled by [%lf, %lf, %lf]\n", scale[0], scale[1], scale[2]);
 
 }
 
@@ -130,7 +155,7 @@ unsigned int setConfigurationMesh(char * input, struct MeshConfig * meshInput, i
         meshInput->nameOfInputFile = (char*) realloc(meshInput->nameOfInputFile, strlen(input) + 1);
 
         strcpy(meshInput->nameOfInputFile, input);
-        meshInput->nameDefined = 1;
+        meshInput->inputNameDefined = 1;
 
     } else if (compareCaseInsensitive(input, "input format") == 0) {
         if ((errorTLMnumber = getBetweenEqualAndSemicolon(input)) != 0)
@@ -147,6 +172,36 @@ unsigned int setConfigurationMesh(char * input, struct MeshConfig * meshInput, i
 
         // flag that the input format was defined
         meshInput->inputFormatDefined = 1;
+
+    } else if (compareCaseInsensitive(input, "output name") == 0) {
+        if ((errorTLMnumber = getBetweenEqualAndSemicolon(input)) != 0)
+            return errorTLMnumber;
+
+        removeBlankSpacesBeforeAndAfter(input);
+
+        // I will put the correct name here latter, when I do the input testing.
+        if (compareCaseInsensitive(input, "--case") == 0) {
+            meshInput->nameOfOutputFile = (char*) malloc(sizeof ("--case")*(strlen(input) + 1));
+            strcpy(meshInput->nameOfOutputFile, input);
+
+        } else if (compareCaseInsensitive(input, "--mesh") == 0) {
+            meshInput->nameOfOutputFile = (char*) malloc(sizeof ("--mesh")*(strlen(input) + 1));
+            strcpy(meshInput->nameOfOutputFile, input);
+
+        } else {
+            // the input is the name
+            meshInput->nameOfOutputFile = (char*) malloc(sizeof (char)*(strlen(input) + 1));
+            strcpy(meshInput->nameOfOutputFile, input);
+        }
+
+
+
+    } else if (compareCaseInsensitive(input, "scale") == 0) {
+
+        if ((errorTLMnumber = readVectorDoubleLengthThreeInputs(input, meshInput->scale)) != 0)
+            return errorTLMnumber;
+        printf("Scale %f, %f, %f\n", meshInput->scale[0], meshInput->scale[1], meshInput->scale[2]);
+
 
     } else if (input[0] == '}' && *startEndBrackets == 1) {
         // DEBUG: closing the brackets
@@ -168,11 +223,28 @@ unsigned int setConfigurationMesh(char * input, struct MeshConfig * meshInput, i
 /*
  * testInputMesh: tests if all the required inputs were read
  */
-unsigned int testInputMesh(struct MeshConfig *mesh) {
+unsigned int testInputMesh(struct MeshConfig *mesh, char * nameCase) {
     unsigned int errorFound = 0;
-    if (mesh->nameDefined == 0) {
+
+    if (mesh->inputNameDefined == 0) {
         sendErrorCodeAndMessage(1875, NULL, NULL, NULL, NULL);
         errorFound = 1;
     }
+
+    // Now I will adjust the nameOfOutputFile
+    if (compareCaseInsensitive(mesh->nameOfOutputFile, "--case") == 0) {
+        mesh->nameOfOutputFile = (char *) realloc(mesh->nameOfOutputFile,
+                sizeof (char)*(strlen(nameCase) + 1));
+
+        strcpy(mesh->nameOfOutputFile, nameCase);
+
+    } else if (compareCaseInsensitive(mesh->nameOfOutputFile, "--mesh") == 0) {
+        mesh->nameOfOutputFile = (char *) realloc(mesh->nameOfOutputFile,
+                sizeof (char)*(strlen(mesh->nameOfInputFile) + 1));
+
+        strcpy(mesh->nameOfOutputFile, mesh->nameOfInputFile);
+
+    }
+
     return errorFound;
 }

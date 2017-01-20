@@ -1,7 +1,7 @@
 /*
  * TLMBHT - Transmission-line Modeling Method applied to BioHeat Transfer Problems.
  * 
- * Copyright (C) 2015 to 2016 by Cornell University. All Rights Reserved.
+ * Copyright (C) 2015 to 2017 by Cornell University. All Rights Reserved.
  * 
  * Written by Hugo Fernando Maia Milan.
  * 
@@ -32,12 +32,12 @@
  *
  */
 
-#include "libstringtlmbht.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-#include <stdint.h>
+
+#include "libstringtlmbht.h"
 
 /*
  * compareCaseInsensitive: compare the two inputs to verify if they are equal,
@@ -52,7 +52,7 @@
  */
 unsigned int compareCaseInsensitive(char *input, char *wordToCompare) {
     // DEBUG: got inside and what was the input
-    // printf("inside compareCaseInsensitive %s\n", input);
+    // printf("inside compareCaseInsensitive '%s' and '%s'\n", input, wordToCompare);
 
     // if the length of input (which can be a phrase) is less than the length
     // of wordToCompare then, by definition, they are not the same word.
@@ -62,7 +62,9 @@ unsigned int compareCaseInsensitive(char *input, char *wordToCompare) {
         return 1;
     }
 
-    // compare letter by letter. If one of the letters are not equal, then, we get into the if
+    // compare letter by letter using case insensitivity.
+    // If one of the letters are not equal, then, we get into the if and return 2
+    // to indicate that the inputs are not equal.
     for (int i = 0; i < strlen(wordToCompare); i++) {
         if ((input[i] != wordToCompare[i]) && (input[i] != toupper(wordToCompare[i]))) {
             // DEBUG: Identify where did the return come from
@@ -71,8 +73,9 @@ unsigned int compareCaseInsensitive(char *input, char *wordToCompare) {
         }
     }
 
-    // now that I confirmed that the first characters are equal. I have to confirm
-    // that the following characters are blank spaces until I find '=' or ';'
+    // now that I confirmed that the firsts characters are equal. I have to confirm
+    // that the following characters are blank spaces until I find '=', ';', or
+    // the char length reaches the end.
 
     char *pEqual, *pSemiColon;
     int length;
@@ -101,6 +104,8 @@ unsigned int compareCaseInsensitive(char *input, char *wordToCompare) {
     }
 
 
+    // do the case insensitivity comparison for the remaining of the input.
+    // It must be blank or null.
     for (int i = strlen(wordToCompare); i < length; i++) {
         if ((!isspace(input[i])) && input[i] != '\0' && input[i] != EOF) {
             // DEBUG: Identify where did the return come from
@@ -210,7 +215,7 @@ unsigned int getBetweenEqualAndSemicolon(char * input) {
     int i, ic = 0;
 
     // DEBUG: inside the function
-    // printf("Inside getBetweenEqualAndSemicolon %s\n", input);
+    //     printf("Inside getBetweenEqualAndSemicolon %s\n", input);
     if ((pEqual = strchr(input, '=')) == NULL) // true if it did not found '='
     {
         return 3668;
@@ -266,9 +271,27 @@ unsigned int getBetweenBrackets(char * input) {
 }
 
 /*
- * readVectorInputs: read numbers that are allocated as line vectors
+ * getBeforePoint: get the text before '.'. Example: input_name.txt => input_name
  */
-unsigned int readVectorInputs(char * input, int * quantity, int ** numberStored) {
+unsigned int getBeforePoint(char * input) {
+    int i;
+
+    for (i = strlen(input); i >= 0; i--) {
+        if (input[i] == '.') {
+            input[i] = '\0';
+            break;
+        }
+    }
+
+    // DEBUG: print what the value this code gave for the input
+    // printf("Value (%d) = %s\n",strlen(input), input);
+    return 0;
+}
+
+/*
+ * readVectorIntInputs: read numbers that are allocated as line vectors
+ */
+unsigned int readVectorIntInputs(char * input, int * quantity, int ** numberStored) {
     unsigned int errorTLMnumber, withBrackets = 1;
 
     // get the text between equal and the semicolon
@@ -285,13 +308,14 @@ unsigned int readVectorInputs(char * input, int * quantity, int ** numberStored)
     removeBlankSpacesBeforeAndAfter(input);
 
     // get how many blank spaces are between the numbers. More specifically, gets
-    // the quantity of numbers separations.
+    // the quantity of numbers' separations.
     if ((errorTLMnumber = getQuantityOfBlankSpaces(input, quantity)) != 0)
         return errorTLMnumber;
     // DEBUG: testing how many blank spaces did it find
     // printf("We found %04d blank spaces.\n", *quantity);
     (*quantity)++;
 
+    // we don't have brackets but we have more than one input. That maybe a mistake
     if (withBrackets == 0 && *quantity > 1) return 7154;
 
     // DEBUG: testing how many numbers did it find
@@ -323,23 +347,83 @@ unsigned int readVectorInputs(char * input, int * quantity, int ** numberStored)
 }
 
 /*
+ * readVectorDoubleLengthThreeInputs: read numbers that are allocated as line vectors
+ */
+unsigned int readVectorDoubleLengthThreeInputs(char * input, double * numberStored) {
+    unsigned int errorTLMnumber, withBrackets = 1;
+    int quantity = 0;
+
+    // DEBUG: Inside the function
+    //    printf("Inside readVectorDoubleLengthThreeInputs\n");
+
+    // get the text between equal and the semicolon
+    if ((errorTLMnumber = getBetweenEqualAndSemicolon(input)) != 0)
+        return errorTLMnumber;
+
+    // get the text within the brackets, if any
+    if ((errorTLMnumber = getBetweenBrackets(input)) != 0)
+        if (errorTLMnumber != 9999) // when it is 9999, we did not find brackets
+            return errorTLMnumber;
+
+    if (errorTLMnumber == 9999) withBrackets = 0;
+
+    // remove the excessive blank spaces at the beginning and at the end
+    removeBlankSpacesBeforeAndAfter(input);
+
+    // get how many blank spaces are between the numbers. More specifically, gets
+    // the quantity of numbers' separations.
+    if ((errorTLMnumber = getQuantityOfBlankSpaces(input, &quantity)) != 0)
+        return errorTLMnumber;
+    // DEBUG: testing how many blank spaces did it find
+    //     printf("We found %04d blank spaces.\n", quantity);
+    quantity++;
+
+    // we don't have brackets but we have more than one input. That maybe a mistake
+    if (withBrackets == 0 && quantity > 1) return 7155;
+
+    // DEBUG: testing how many numbers did it find
+    //     printf("We found %04d numbers.\n", *quantity);
+
+    // now I now exactly how many numbers I shall get
+    //    *numberStored = (double*) malloc(sizeof (double)*(*quantity));
+
+    if (quantity == 1) {// I just have one number
+        sscanf(input, "%lf", &numberStored[0]);
+        numberStored[1] = numberStored[0];
+        numberStored[2] = numberStored[0];
+    } else if (quantity == 3) {
+        sscanf(input, "%lf", &numberStored[0]);
+        sscanf(input, "%lf", &numberStored[1]);
+        sscanf(input, "%lf", &numberStored[2]);
+    } else {
+        return 7156;
+    }
+    return 0;
+}
+
+/*
  * getQuantityOfBlankSpaces: get the quantity of blank spaces between the number.
  * double blank spaces are not counted. Example: '1 2 3  4   5' is read as 4 blank
  * spaces. The blank spaces between 3 and 4, 4 and 5, are counted as one, each one.
  */
 unsigned int getQuantityOfBlankSpaces(char *input, int * quantity) {
 
+    // DEBUG: inside the function
+    //    printf("Inside getQuantityOfBlankSpaces: '%s'\n",input);
+
     for (int i = 0; i < strlen(input); i++) {
+        // DEBUG: shows what position are we reading
+        //        printf("Reading position %d\n",i);
         if (isspace(input[i])) {
             if (!isspace(input[i - 1]))
                 (*quantity)++;
             // DEBUG: shows where spaces were found
-            // printf("Position with space %d\n",i);
+            //             printf("Position with space %d\n",i);
         }
     }
 
     //DEBUG: testing how many number did it find
-    //    printf("We found %04d blank spaces.\n", *quantity);
+    //        printf("We found %04d blank spaces.\n", *quantity);
 
     return 0;
 }

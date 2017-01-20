@@ -1,7 +1,7 @@
 /*
  * TLMBHT - Transmission-line Modeling Method applied to BioHeat Transfer Problems.
  * 
- * Copyright (C) 2015 to 2016 by Cornell University. All Rights Reserved.
+ * Copyright (C) 2015 to 2017 by Cornell University. All Rights Reserved.
  * 
  * Written by Hugo Fernando Maia Milan.
  * 
@@ -30,7 +30,8 @@
  * Description of this file:
  * contains declaration of functions, structures, and enumerations for making the
  * interface between solvers that use the Eigen library that is C++ and the
- * calls that are in C. See libinterfaceceigen.c for more details.
+ * calls that are in C. It is essential because the header cannot contain C++ code.
+ * See libinterfaceceigen.c for more details.
  *
  */
 
@@ -43,8 +44,8 @@ extern "C" {
 
 
 #include "../configs/libconfig.h"
-    unsigned int call_from_c_solverTLMPennes2DEigen(struct dataForSimulation*);
-    unsigned int call_from_c_solverTLMPennes3DEigen(struct dataForSimulation*);
+    unsigned int call_from_c_solverEigenTLM(struct dataForSimulation*, int, void **);
+
     unsigned int call_from_c_initiate_matrices_calculationTLMEigen(void *, unsigned int*);
 
 #ifdef __cplusplus

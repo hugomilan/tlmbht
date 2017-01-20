@@ -1,7 +1,7 @@
 /*
  * TLMBHT - Transmission-line Modeling Method applied to BioHeat Transfer Problems.
  * 
- * Copyright (C) 2015 to 2016 by Cornell University. All Rights Reserved.
+ * Copyright (C) 2015 to 2017 by Cornell University. All Rights Reserved.
  * 
  * Written by Hugo Fernando Maia Milan.
  * 
@@ -45,9 +45,9 @@ extern "C" {
 
 
 #include <stdio.h>
-#include <time.h>
 
 #include "libsimuconfig.h"
+#include "libequationconfig.h"
 #include "libmeshconfig.h"
 #include "libmatconfig.h"
 #include "libboundconfig.h"
@@ -56,12 +56,13 @@ extern "C" {
 
     enum configuringInside // Types of configurations
     {
-        NOTHING, // it is not inside any specific configuration group
-        SIMULATION, // it is inside the SIMULATION configuration group
-        MESH, // it is inside the MESH configuration group
-        MATERIAL, // it is inside the MATERIAL configuration group
-        BOUNDARY, // it is inside the BOUNDARY configuration group
-        SOURCES // it is inside the SOURCES configuration group
+        NOTHING,        // it is not inside any specific configuration group
+        SIMULATION,     // it is inside the SIMULATION configuration group
+        MESH,           // it is inside the MESH configuration group
+        EQUATION,       // it is inside the EQUATION configuration group
+        MATERIAL,       // it is inside the MATERIAL configuration group
+        BOUNDARY,       // it is inside the BOUNDARY configuration group
+        SOURCES         // it is inside the SOURCES configuration group
     };
 
 
@@ -69,7 +70,13 @@ extern "C" {
 
     struct dataForSimulation {
         struct Simulation simulationInput;
+
         struct MeshConfig meshInput;
+
+        struct Equation *equationInput;
+        int quantityOfEquationsRead;
+
+        struct tlmInternalMesh mesh;
 
         struct MaterialConfig *materialInput;
         int quantityOfMaterialsRead;
@@ -83,13 +90,14 @@ extern "C" {
         //flags
         int simulationRead;
         int meshRead;
+
+        // these variables help in managing the algorithm flow.
         int runningSimulation; // 0: not running simulation; 1: running simulation;
         int runningBenchmark; // 0: not running benchmark; 1: running benchmark;
-        int debugMode; // 0: not in debug mode; 1: in debug mode;
-        int timingMode; // 0: not in timing mode; 1: in timing mode;
 
-
-        struct tlmInternalMesh mesh;
+        // who am I
+        char *myName;
+        char *myVersion;
 
     };
 

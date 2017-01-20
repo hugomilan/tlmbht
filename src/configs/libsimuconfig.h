@@ -1,7 +1,7 @@
 /*
  * TLMBHT - Transmission-line Modeling Method applied to BioHeat Transfer Problems.
  * 
- * Copyright (C) 2015 to 2016 by Cornell University. All Rights Reserved.
+ * Copyright (C) 2015 to 2017 by Cornell University. All Rights Reserved.
  * 
  * Written by Hugo Fernando Maia Milan.
  * 
@@ -40,41 +40,7 @@
 extern "C" {
 #endif
 
-    enum typeSim // defines the type of simulation
-    {
-        PENNES, // solves the Pennes equation
-        HEAT, // solves the heat transfer equation. future implementation
-        EM, // future implementation
-        CFD // future implementation
-    };
-
-    enum dimSim // dimension to be solved
-    {
-        ONE, // solves for 1D problems. future implementation
-        TWO, // solves for 2D problems.
-        THREE // solves for 3D problems.
-    };
-
-    enum method // defines the type of numerical method to be used
-    {
-        TLM, // solves using the transmission-line modeling method
-        FDTD, // future implementation
-        FEM, // future implementation
-        ANALYTICAL // future implementation
-    };
-
-    enum method2 // defines adjustments for specific methods
-    {
-        NONE,
-        SPECIAL2,
-        SPECIAL3
-    };
-
-    enum solve // defines if it should be solved for steady-state or dynamic simulation
-    {
-        STEADY,
-        DYNAMIC
-    };
+#include <stdio.h>
 
     enum benchmark // defines if it should do benchmark
     {
@@ -86,64 +52,53 @@ extern "C" {
 
     };
 
-    enum libraryForCalc // the library to be used for the calculations
-    {
-        FOOL, // my fool version of matrix calculation
-        EIGEN, // solve using Eigen library
-        CUDA // solve using CUDA. Future implementation
-    };
-
     struct Simulation // structure that contains the information for the simulation
     {
-        enum typeSim typeS;
-        enum dimSim dimen;
-        enum method Meth;
-        enum method2 Meth2;
-        enum solve Solv;
         enum benchmark Benchmark;
-        double timeStep;
-        unsigned int timeJump;
-        double finalTime;
-        double AbsoluteZero;
-        double StefanBoltzmann;
-        
-        
+
         int nOpenMPcores;
         int nOpenMPcoresMax;
 
-        int printAdditional; // if 1 will print additional information. Otherwise
-        // only essential information
+        double AbsoluteZero;
+        double StefanBoltzmann;
 
-        enum libraryForCalc libraryForCalculation;
+        char *nameOfInputFile;
 
-        //flags to identify if the required parameters were defined.
-        // 0 if not defined 1 otherwise
-        int typeSimDefined;
-        int dimSimDefined;
-        int methodDefined;
-        int solveDefined; // 2 if dynamic simulation
-        int timeStepDefined; // only required if dynamic simulation
-        int finalTimeDefined; // only required if dynamic simulation
+        char *nameOfOutputFile;
+        // --case: the same name as the name of the case input file. (default)
+        // --mesh: the same name as the name of the mesh input.
+        // any name you want.
 
+        int outputFileExtension;
+        // tmo (default): 1
+        // m: 2
 
-        // flags to what to save
-        int saveTemperature;
-        int saveTemperatureBetween;
-        int saveHeatFlux;
+        // internal flags to write file
+        int outputFileCreated;
+        // 0: the output file was not created.
+        // 1: the output file was already created.
 
-    };
+        char *fullNameOfOutputFile;
+        // contains the full name of the output file, i.e., nameOfOutputFile + outputFileExtension
 
-    enum configSimu {
-        TYPE,
-        DIMENSIONS,
-        METHOD,
-        METHOD2,
-        SOLVE,
-        TIME_STEP,
-        TIME_jUMP,
-        FINAL_TIME,
-        ABSOLUTE_ZERO,
-        STEFAN_BOLTZMANN_CONSTANT
+        FILE *outputFileHandler;
+        // contains the handler of the output file.
+        
+        char *comentary_string;
+        // variable that will hold the commentary string for the output chosen
+
+        int printAdditionalMode;
+        // true: 1; will print additional information.
+        // false: 0; print only essential information
+
+        int verboseMode;
+        // true: 1; set printAdditional to 1 and print debug information
+        // false: 0; print only essential information
+
+        int timingMode;
+        // true: 1; shows the time it takes in each function
+        // false: 0; don't show.
+
     };
 
 
@@ -157,21 +112,20 @@ extern "C" {
     void printfAllSimuData(struct Simulation*);
 
     // specific printers
-    void printfTypeS(enum typeSim *);
-    void printfDimen(enum dimSim *);
-    void printfMeth(enum method *);
-    //void printfMeth(enum method2 *); // future implementation
-    void printfSolv(enum solve *);
-    void printWhatToSave(struct Simulation*);
     void printfBench(enum benchmark *);
-    void printfLibrary(enum libraryForCalc*);
+
+    void printfOutputFile(struct Simulation *);
+
+    void printfPrintAdditionMode(int);
+    void printfVerboseMode(int);
+    void printfTimingMode(int);
 
 
     // take the input text and extract the values of the variables. Returns 0 if no error.
     unsigned int setConfigurationSimu(char *, struct Simulation *, int *);
 
     // this function will test if all necessary variables were correctly initialized. Return 0 if no error.
-    unsigned int testInputSimu(struct Simulation *);
+    unsigned int testInputSimu(struct Simulation *, char *);
 
 
 

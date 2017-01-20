@@ -1,7 +1,7 @@
 /*
  * TLMBHT - Transmission-line Modeling Method applied to BioHeat Transfer Problems.
  * 
- * Copyright (C) 2015 to 2016 by Cornell University. All Rights Reserved.
+ * Copyright (C) 2015 to 2017 by Cornell University. All Rights Reserved.
  * 
  * Written by Hugo Fernando Maia Milan.
  * 
@@ -10,11 +10,11 @@
  */
 
 /* 
- * File:   libtlmpennes2dsolvereigen.h
+ * File:   libpennes1dsolver.h
  * Author: Hugo Fernando Maia Milan
  * Email:  hugofernando@gmail.com
  *
- * Created on August 9, 2016.
+ * Created on January 18, 2017.
  *
  *
  *
@@ -29,28 +29,27 @@
 /*
  * Description of this file:
  * contains declaration of functions, structures, and enumerations for using the
- * transmission-line modeling method as the solver of the Pennes equation.
- * See libtlmpennes2dsolvereigen.c for more details.
+ * transmission-line modeling method as the solver of the Pennes equation in 
+ * one-dimension. See libtlmpennes1dsolver.c for more details.
  *
  */
 
-#ifndef LIBTLMPENNES2DSOLVEREIGEN_H
-#define LIBTLMPENNES2DSOLVEREIGEN_H
-
-
-#include "libtlmpenneseigen.h"
-
-unsigned int solverTLMPennes2DEigen(struct dataForSimulation*);
-
+#ifndef LIBPENNES1DSOLVER_H
+#define LIBPENNES1DSOLVER_H
 
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+#include "../../../configs/libconfig.h"
+
+    unsigned int testInputTLMPennes1D(struct dataForSimulation*);
 
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* LIBTLMPENNES2DSOLVEREIGEN_H */
+#endif /* LIBPENNES1DSOLVER_H */
+
 

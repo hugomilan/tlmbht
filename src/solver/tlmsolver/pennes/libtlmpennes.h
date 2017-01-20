@@ -1,7 +1,7 @@
 /*
  * TLMBHT - Transmission-line Modeling Method applied to BioHeat Transfer Problems.
  * 
- * Copyright (C) 2015 to 2016 by Cornell University. All Rights Reserved.
+ * Copyright (C) 2015 to 2017 by Cornell University. All Rights Reserved.
  * 
  * Written by Hugo Fernando Maia Milan.
  * 
@@ -42,15 +42,14 @@ extern "C" {
 #endif
 
 #include "../libtlmsolver.h"
-#include "../../../miscellaneous/liberrorcode.h"
-#include "libtlmpennes2dsolver.h"
-#include "../../libinterfaceceigen.h"
+#include "../../../configs/libconfig.h"
 
     unsigned int initiateVariablesTLMPennes(struct dataForSimulation *,
             void *, struct TLMnumbers *, struct boundaryData**,
-            struct connectionLeveln *, FILE **);
+            struct connectionLeveln *, int id);
 
-    unsigned int initiateBoundaryTypeAndDataPennes(struct boundaryData **, const struct dataForSimulation *);
+    unsigned int initiateBoundaryTypeAndDataPennes(struct boundaryData **, const struct dataForSimulation *,
+            int);
 
 
 

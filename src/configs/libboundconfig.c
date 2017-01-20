@@ -1,7 +1,7 @@
 /*
  * TLMBHT - Transmission-line Modeling Method applied to BioHeat Transfer Problems.
  * 
- * Copyright (C) 2015 to 2016 by Cornell University. All Rights Reserved.
+ * Copyright (C) 2015 to 2017 by Cornell University. All Rights Reserved.
  * 
  * Written by Hugo Fernando Maia Milan.
  * 
@@ -49,16 +49,49 @@
  * with standard values
  */
 unsigned int initializeBoundaryConfig(struct BoundaryConfig * bound) {
-    // in the initialization, I will assume that this has only one boundary
-    bound->numberInput = (int*) malloc(sizeof (int));
+    bound->equationName = NULL;
+    bound->equationNameDefined = 0;
+
+    bound->equationNumber = 0;
+
+    bound->typeOfEquation = PENNES;
+
+    bound->numberInput = NULL;
     bound->quantityOfNumberInput = 0; // initializing as zero
 
-    // initiating the flags for pennes and heat
-    bound->adiabaticDefined = 0;
-    bound->temperatureDefined = 0;
-    bound->heatFluxDefined = 0;
+    // Inputs associated with diffusion and hyperbolic diffusion
+    bound->scalarBoundary = 0;
+    bound->scalarBoundaryDefined = 0;
+
+    bound->fluxBoundary = 0;
+    bound->fluxBoundaryDefined = 0;
+
+    bound->convectionCoefficient = 0;
+    bound->convectionCoefficientDefined = 0;
     bound->convectionDefined = 0;
+
+    bound->adiabaticDefined = 0;
+
+    // Inputs associated with heat, hyperbolic heat, pennes, and hyperbolic pennes
+    bound->temperatureBoundary = 0;
+    bound->temperatureDefined = 0;
+
+    bound->heatFluxBoundary = 0;
+    bound->heatFluxDefined = 0;
+
+    bound->radiationTemperature = 0;
+    bound->radiationTemperatureDefined = 0;
+
+    bound->radiationEmissivity = 0;
+    bound->radiationEmissivityDefined = 0;
     bound->radiationDefined = 0;
+
+    // these are the same defiend for diffusion and hyperbolic diffusion
+    //    bound->convectionCoefficient = 0;
+    //    bound->convectionCoefficientDefined = 0;
+    //    bound->convectionDefined = 0;
+    //    
+    //    bound->adiabaticDefined = 0;
 
     return 0;
 
@@ -68,8 +101,12 @@ unsigned int initializeBoundaryConfig(struct BoundaryConfig * bound) {
  * terminateBoundaryConfig: terminate the boundary variable used for configuration
  */
 unsigned int terminateBoundaryConfig(struct BoundaryConfig * bound) {
+    free(bound->equationName);
+    bound->equationName = NULL;
+
     free(bound->numberInput);
     bound->numberInput = NULL;
+
     return 0;
 }
 
@@ -86,8 +123,20 @@ unsigned int setConfigurationBoundary(char *input, struct BoundaryConfig *boundI
 
         *startEndBrackets = 1; //define as the bracket started
 
+    } else if (compareCaseInsensitive(input, "equation") == 0) {
+        if ((errorTLMnumber = getBetweenEqualAndSemicolon(input)) != 0)
+            return errorTLMnumber;
+
+        removeBlankSpacesBeforeAndAfter(input);
+
+        // the input is the name
+        boundInput->equationName = (char*) malloc(sizeof (char)*(strlen(input) + 1));
+        strcpy(boundInput->equationName, input);
+
+        boundInput->equationNameDefined = 1;
+
     } else if (compareCaseInsensitive(input, "number") == 0) {
-        if ((errorTLMnumber = readVectorInputs(input,
+        if ((errorTLMnumber = readVectorIntInputs(input,
                 &boundInput->quantityOfNumberInput, &boundInput->numberInput)) != 0)
             return errorTLMnumber;
 
@@ -98,6 +147,34 @@ unsigned int setConfigurationBoundary(char *input, struct BoundaryConfig *boundI
         // for (int i = 0; i < boundInput->quantityOfNumberInput; i++){
         //      printf(" %d", boundInput->numberInput[i]);
         // }
+
+    } else if (compareCaseInsensitive(input, "scalar") == 0) {
+        if ((errorTLMnumber = getBetweenEqualAndSemicolon(input)) != 0)
+            return errorTLMnumber;
+
+        sscanf(input, "%lf", &boundInput->scalarBoundary);
+        boundInput->scalarBoundaryDefined = 1;
+
+
+
+    } else if (compareCaseInsensitive(input, "flux") == 0) {
+        if ((errorTLMnumber = getBetweenEqualAndSemicolon(input)) != 0)
+            return errorTLMnumber;
+
+        sscanf(input, "%lf", &boundInput->fluxBoundary);
+        boundInput->fluxBoundaryDefined = 1;
+
+
+
+    } else if (compareCaseInsensitive(input, "Convection scalar") == 0) {
+        if ((errorTLMnumber = getBetweenEqualAndSemicolon(input)) != 0)
+            return errorTLMnumber;
+
+        sscanf(input, "%lf", &boundInput->convectionScalar);
+        boundInput->convectionDefined = 1;
+        boundInput->convectionScalarDefined = 1;
+
+
 
     } else if (compareCaseInsensitive(input, "adiabatic") == 0) {
         if ((errorTLMnumber = getBetweenEqualAndSemicolon(input)) != 0)
@@ -137,7 +214,7 @@ unsigned int setConfigurationBoundary(char *input, struct BoundaryConfig *boundI
         if ((errorTLMnumber = getBetweenEqualAndSemicolon(input)) != 0)
             return errorTLMnumber;
 
-        sscanf(input, "%lf", &boundInput->ConvectionTemperature);
+        sscanf(input, "%lf", &boundInput->convectionTemperature);
         boundInput->convectionDefined = 1;
         boundInput->convectionTemperatureDefined = 1;
 
@@ -147,7 +224,7 @@ unsigned int setConfigurationBoundary(char *input, struct BoundaryConfig *boundI
         if ((errorTLMnumber = getBetweenEqualAndSemicolon(input)) != 0)
             return errorTLMnumber;
 
-        sscanf(input, "%lf", &boundInput->ConvectionCoefficient);
+        sscanf(input, "%lf", &boundInput->convectionCoefficient);
         boundInput->convectionDefined = 1;
         boundInput->convectionCoefficientDefined = 1;
 
@@ -157,7 +234,7 @@ unsigned int setConfigurationBoundary(char *input, struct BoundaryConfig *boundI
         if ((errorTLMnumber = getBetweenEqualAndSemicolon(input)) != 0)
             return errorTLMnumber;
 
-        sscanf(input, "%lf", &boundInput->RadiationTemperature);
+        sscanf(input, "%lf", &boundInput->radiationTemperature);
         boundInput->radiationDefined = 1;
         boundInput->radiationTemperatureDefined = 1;
 
@@ -167,7 +244,7 @@ unsigned int setConfigurationBoundary(char *input, struct BoundaryConfig *boundI
         if ((errorTLMnumber = getBetweenEqualAndSemicolon(input)) != 0)
             return errorTLMnumber;
 
-        sscanf(input, "%lf", &boundInput->RadiationEmissivity);
+        sscanf(input, "%lf", &boundInput->radiationEmissivity);
         boundInput->radiationDefined = 1;
         boundInput->radiationEmissivityDefined = 1;
 
@@ -189,13 +266,64 @@ unsigned int setConfigurationBoundary(char *input, struct BoundaryConfig *boundI
  * testInputBoundary: tests if all the required inputs were read
  */
 unsigned int testInputBoundary(struct BoundaryConfig * input,
-        enum typeSim * typeS, int id) {
+        struct Equation * equation, int id) {
     int errorFound = 0;
 
-    switch (*typeS) {
-        case PENNES:
+    switch (equation->typeS) {
+        case HYPERBOLIC_DIFFUSION:
+            //break;
+            /* FALLTHRU */
+        case DIFFUSION:
+            if (input->scalarBoundaryDefined == 0 && input->fluxBoundaryDefined == 0 &&
+                    input->convectionDefined == 0 && input->adiabaticDefined == 0) {
+                printf("\nWARNING: Nothing was defined for boundary group %04d and, "
+                        "therefore, it was assumed adiabatic boundary condition.\n\n", id);
+                // defining the boundary as  adiabatic
+                input->adiabaticDefined = 1;
+
+            } else if (input->adiabaticDefined == 1 && (input->scalarBoundaryDefined == 1
+                    || input->fluxBoundaryDefined == 1 || input->convectionDefined == 1)) {
+                printf("\nWARNING: Adiabatic boundary condition was explicitely defined "
+                        "for boundary group %04d but others parameters were also defined. "
+                        "They will be ignored and this boundary will be considered as adiabatic.\n\n", id);
+
+                input->scalarBoundaryDefined = 0;
+                input->fluxBoundaryDefined = 0;
+                input->convectionDefined = 0;
+
+            } else {
+
+                if (input->convectionCoefficientDefined == 1 && input->convectionScalarDefined == 0) {
+                    sendErrorCodeAndMessage(8528, &id, NULL, NULL, NULL);
+                    errorFound = 1;
+
+                } else if (input->convectionCoefficientDefined == 0 && input->convectionScalarDefined == 1) {
+                    sendErrorCodeAndMessage(8529, &id, NULL, NULL, NULL);
+                    errorFound = 1;
+                }
+
+                if (input->scalarBoundaryDefined == 1 && input->convectionDefined == 1) {
+                    sendErrorCodeAndMessage(8530, &id, NULL, NULL, NULL);
+                    errorFound = 1;
+                }
+
+                if (input->scalarBoundaryDefined == 1 && input->heatFluxBoundary == 1) {
+                    sendErrorCodeAndMessage(8031, &id, NULL, NULL, NULL);
+                    errorFound = 1;
+                }
+            }
+
+            break;
+        case HYPERBOLIC_HEAT:
+            //break;
+            /* FALLTHRU */
+        case HYPERBOLIC_PENNES:
+            //break;
             /* FALLTHRU */
         case HEAT:
+            //break;
+            /* FALLTHRU */
+        case PENNES:
             if (input->temperatureDefined == 0 && input->heatFluxDefined == 0 &&
                     input->convectionDefined == 0 && input->radiationDefined == 0 &&
                     input->adiabaticDefined == 0) {
@@ -203,13 +331,13 @@ unsigned int testInputBoundary(struct BoundaryConfig * input,
                         "therefore, it was assumed adiabatic boundary condition.\n\n", id);
                 // defining the boundary as  adiabatic
                 input->adiabaticDefined = 1;
-                
+
             } else if (input->adiabaticDefined == 1 && (input->temperatureDefined == 1
                     || input->heatFluxDefined == 1 || input->convectionDefined == 1 ||
                     input->radiationDefined == 1)) {
                 printf("\nWARNING: Adiabatic boundary condition was explicitely defined "
                         "for boundary group %04d but others parameters were also defined. "
-                        "They will be ignored.\n\n", id);
+                        "They will be ignored and this boundary will be considered as adiabatic.\n\n", id);
 
                 input->temperatureDefined = 0;
                 input->heatFluxDefined = 0;
@@ -267,12 +395,40 @@ unsigned int testInputBoundary(struct BoundaryConfig * input,
 /*
  * printfBoundConfig: prints the boundary configurations that were read
  */
-void printfBoundConfig(struct BoundaryConfig *input, enum typeSim *typeS) {
+void printfBoundConfig(struct BoundaryConfig *input, struct Equation *equation) {
     printfNumberOfInputsBound(&input->numberInput, &input->quantityOfNumberInput);
-    switch (*typeS) {
-        case PENNES:
+    switch (equation->typeS) {
+        case HYPERBOLIC_DIFFUSION:
+            // break;
+            /* FALLTHRU */
+        case DIFFUSION:
+
+            if (input->adiabaticDefined == 1 ||
+                    (input->scalarBoundaryDefined == 0 && input->fluxBoundaryDefined == 0 &&
+                    input->convectionDefined == 0 &&
+                    input->adiabaticDefined == 0)) {
+                printfAdiabatic();
+            } else {
+                if (input->scalarBoundaryDefined == 1)
+                    printfScalarBoundary(input->scalarBoundary);
+                if (input->fluxBoundaryDefined == 1)
+                    printfFluxBoundary(input->fluxBoundary);
+                if (input->convectionDefined == 1)
+                    printfConvection(input->convectionCoefficient, input->convectionScalar);
+            }
+
+            break;
+        case HYPERBOLIC_HEAT:
+            // break;
             /* FALLTHRU */
         case HEAT:
+            // break;
+            /* FALLTHRU */
+        case HYPERBOLIC_PENNES:
+            // break;
+            /* FALLTHRU */
+
+        case PENNES:
 
             if (input->adiabaticDefined == 1 ||
                     (input->temperatureDefined == 0 && input->heatFluxDefined == 0 &&
@@ -285,10 +441,9 @@ void printfBoundConfig(struct BoundaryConfig *input, enum typeSim *typeS) {
                 if (input->heatFluxDefined == 1)
                     printfHeatFlux(input->heatFluxBoundary);
                 if (input->convectionDefined == 1)
-                    printfConvection(input->ConvectionCoefficient, input->ConvectionTemperature);
+                    printfConvectionHeat(input->convectionCoefficient, input->convectionTemperature);
                 if (input->radiationDefined)
-                    printfRadiation(input->RadiationEmissivity, input->RadiationTemperature);
-
+                    printfRadiation(input->radiationEmissivity, input->radiationTemperature);
             }
             break;
         case EM:
@@ -325,24 +480,46 @@ void printfAdiabatic() {
 }
 
 /*
+ * printfScalarBoundary: prints for scalar boundary condition value
+ */
+void printfScalarBoundary(double input) {
+    printf("Scalar value at the boundary with value of %9.4e .\n", input);
+}
+
+/*
+ * printfFluxBoundary: prints for flux boundary condition
+ */
+void printfFluxBoundary(double input) {
+    printf("Flux boundary with value of %9.4e \n", input);
+}
+
+/*
+ * printfConvection: prints for convection boundary condition
+ */
+void printfConvection(double coeff, double scalar) {
+    printf("Convection boundary condition with convection "
+            "coefficient of %9.4e  and convective scalar value of %9.4e .\n", coeff, scalar);
+}
+
+/*
  * printfTemperature: prints for temperature boundary condition
  */
 void printfTemperature(double input) {
-    printf("Temperature constant at the boundary with value of %9.4e oC.\n", input);
+    printf("Temperature at the boundary with value of %9.4e oC.\n", input);
 }
 
 /*
  * printfHeatFlux: prints for heat flux boundary condition
  */
 void printfHeatFlux(double input) {
-    printf("Heat flux constant at the boundary with value of %9.4e W/m2.\n", input);
+    printf("Heat flux at the boundary with value of %9.4e W/m2.\n", input);
 }
 
 /*
- * printfConvection: prints for convection boundary condition
+ * printfConvectionHeat: prints for convection heat transfer boundary condition
  */
-void printfConvection(double coeff, double temp) {
-    printf("Convection heat transfer (as Newton's cooling law) with heat transfer "
+void printfConvectionHeat(double coeff, double temp) {
+    printf("Convection heat transfer (as Newton's cooling law) boundary condition with heat transfer "
             "coefficient of %9.4e W/(K-m2) and convective temperature of %9.4e oC.\n", coeff, temp);
 }
 

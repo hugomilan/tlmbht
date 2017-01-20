@@ -1,7 +1,7 @@
 /*
  * TLMBHT - Transmission-line Modeling Method applied to BioHeat Transfer Problems.
  * 
- * Copyright (C) 2015 to 2016 by Cornell University. All Rights Reserved.
+ * Copyright (C) 2015 to 2017 by Cornell University. All Rights Reserved.
  * 
  * Written by Hugo Fernando Maia Milan.
  * 
@@ -42,7 +42,7 @@ extern "C" {
 
 #include "../../configs/libconfig.h"
 #include "../../meshreader/libmeshtlmbht.h"
-#include "../libsolver.h"
+#include "../libinterfaceceigen.h"
 
     /*
      * the structure connectionLeveln is intended to find out where TLM nodes
@@ -69,14 +69,14 @@ extern "C" {
     // that are connected, their numbers (ports) and the size of this buffer (quantityOfAllocated)
 
     struct connectionLeveln {
-        long long unsigned int quantitySaved;
+        unsigned long long quantitySaved;
         unsigned int level;
-        long long unsigned int *portsOrPoints;
-        long long unsigned int quantityAllocated;
+        unsigned long long *portsOrPoints;
+        unsigned long long quantityAllocated;
 
         struct connectionLeveln *innerLevel;
 
-        long long unsigned int *accumulatedIntersections; // shows how many intersections
+        unsigned long long *accumulatedIntersections; // shows how many intersections
         // each position has accumulated in total. Position 0 contains the the total number for that level
         // Useful to parallelize when I want
         // to read the intersection points.
@@ -111,13 +111,13 @@ extern "C" {
         // contains the biggest port number - 1 before this element. That is, the
         // port numbers of this element type will start at previousMaximumRealPort.
         // I have port number - 1 because C starts at zero.
-        long long unsigned int previousMaximumRealPort;
-        long long unsigned int previousMaximumAbstractPort;
+        unsigned long long previousMaximumRealPort;
+        unsigned long long previousMaximumAbstractPort;
 
-        long long unsigned int previousMaximumRealNode;
+        unsigned long long previousMaximumRealNode;
         // this is the number that the node should start in the next elementCode
         // It starts as 1
-        long long unsigned int previousMaximumAbstractNode;
+        unsigned long long previousMaximumAbstractNode;
         // this is the number that the port should start in the next elementCode
         // It starts as 1
 
@@ -130,43 +130,49 @@ extern "C" {
         // 2 - contains the number of the nodes that are boundary (and not defined)
         // 3 - contains the number of the nodes that are material
 
-        long long unsigned int quantityAllocated;
-        long long unsigned int quantitySaved;
+        unsigned long long quantityAllocated;
+        unsigned long long quantitySaved;
 
-        long long unsigned int *nodesNumbers;
+        unsigned long long *nodesNumbers;
     };
 
     struct TLMnumbers {
-        long long unsigned int Ports;
-        long long unsigned int Nodes;
-        long long unsigned int Output;
-        long long unsigned int Points_Output;
-        long long unsigned int Intersections;
-        long long unsigned int *BoundaryElements;
-        long long unsigned int *MaterialElements;
-        long long unsigned int *NotDefinedElements;
+        unsigned long long Ports;
+        unsigned long long Nodes;
+        unsigned long long Output;
+        unsigned long long Points_Output;
+        unsigned long long Intersections;
+        unsigned long long *BoundaryElements;
+        unsigned long long *MaterialElements;
+        unsigned long long *NotDefinedElements;
 
         struct aPortToRealPort *abstractPortsToReal;
     };
 
 
-    unsigned int terminateBoundaryTypeAndData(struct boundaryData **, const struct dataForSimulation *);
+    unsigned int solverTLM(struct dataForSimulation*, int, void**);
+
+    unsigned int solveTimeStepTLM(struct dataForSimulation*, int, void**);
+
+    unsigned int terminateBoundaryTypeAndData(struct boundaryData **, const struct dataForSimulation *, int);
 
     unsigned int initiate_connectionLeveln(struct connectionLeveln *, unsigned int,
-            long long unsigned int *);
+            unsigned long long *);
     unsigned int reallocate_connectionLeveln(struct connectionLeveln *, unsigned int);
-    unsigned int add_to_connectionLeveln(struct connectionLeveln *, long long unsigned int*,
-            unsigned int, long long unsigned int*);
+    unsigned int add_to_connectionLeveln(struct connectionLeveln *, unsigned long long*,
+            unsigned int, unsigned long long*);
     unsigned int wrap_size_connectionLeveln(struct connectionLeveln *);
     unsigned int terminate_connectionLeveln(struct connectionLeveln *);
-    unsigned int getquantityAllocated_connectionLeveln(struct connectionLeveln *, long long unsigned int*);
-    unsigned int getPortsOrPoints(struct connectionLeveln *, long long unsigned int,
-            long long unsigned int**);
+    unsigned int getquantityAllocated_connectionLeveln(struct connectionLeveln *, unsigned long long*);
+    unsigned int getPortsOrPoints(struct connectionLeveln *, unsigned long long,
+            unsigned long long**);
 
-    unsigned int allocatePointsPort(long long unsigned int*,
+    unsigned int allocatePointsPort(unsigned long long*,
             struct connectionLeveln *,
-            unsigned int, long long unsigned int *);
+            unsigned int, unsigned long long *);
 
+    unsigned int getGeometricalVariablesTLMline(const struct node*,
+        const struct node*, double*);
     unsigned int getGeometricalVariablesTLMtriangle(const struct node *,
             const struct node *, const struct node *, double*);
     unsigned int getGeometricalVariablesTLMtetrahedron(const struct node *,
@@ -174,9 +180,9 @@ extern "C" {
 
     unsigned int initiateTLMnumbers(struct TLMnumbers*);
     unsigned int getTLMnumbers(const struct dataForSimulation *,
-            struct TLMnumbers*, struct connectionLeveln *);
+            struct TLMnumbers*, struct connectionLeveln *, int);
     unsigned int wrapTLMnumbers(const struct dataForSimulation *,
-            struct TLMnumbers*);
+            struct TLMnumbers*, int);
     unsigned int terminateTLMnumbers(struct TLMnumbers*);
 
     unsigned int getNumberOfPortsGivenElement(unsigned int, enum dimSim);
@@ -184,44 +190,50 @@ extern "C" {
 
 
     unsigned int initiate_aPortToRealPort(const struct dataForSimulation *,
-            struct aPortToRealPort**);
+            struct aPortToRealPort**, int);
 
     unsigned int reallocate_aPortToRealPort(struct aPortToRealPort*);
-    unsigned int add_to_aPortToRealPort(unsigned int, long long unsigned int,
+    unsigned int add_to_aPortToRealPort(unsigned int, unsigned long long,
             struct aPortToRealPort*);
 
     unsigned int terminate_aPortToRealPort(struct aPortToRealPort**);
 
     void getRealPortNumber_fromAbstractPortNumber(
-            long long unsigned int, struct aPortToRealPort*,
-            long long unsigned int*);
+            unsigned long long, struct aPortToRealPort*,
+            unsigned long long*);
 
     void getRealNodeAndPort_fromAbstractNode(unsigned int,
-            long long unsigned int, struct aPortToRealPort*,
-            long long unsigned int *);
-    
-    unsigned int getBetweenPointFromRealPortNumber(struct aPortToRealPort*, 
-            long long unsigned int, double*, double*, double*, 
+            unsigned long long, struct aPortToRealPort*,
+            unsigned long long *);
+
+    unsigned int getBetweenPointFromRealPortNumber(struct aPortToRealPort*,
+            unsigned long long, double*, double*, double*,
             const struct dataForSimulation *);
-    
+
+    unsigned int getBetweenForLine(const struct dataForSimulation *,
+            const unsigned long long, const unsigned long long,
+            double *, double *, double *);
     unsigned int getBetweenForTriangle(const struct dataForSimulation *,
-        const long long unsigned int, const long long unsigned int,
-        double *, double *, double *);
+            const unsigned long long, const unsigned long long,
+            double *, double *, double *);
     unsigned int getBetweenForTetrahedron(const struct dataForSimulation *,
-        const long long unsigned int, const long long unsigned int,
-        double *, double *, double *);
-    
-    unsigned int getProjectionFromRealPortNumber(struct aPortToRealPort*, 
-            long long unsigned int, double*, double*, double*, 
+            const unsigned long long, const unsigned long long,
+            double *, double *, double *);
+
+    unsigned int getProjectionFromRealPortNumber(struct aPortToRealPort*,
+            unsigned long long, double*, double*, double*,
             const struct dataForSimulation *);
-    
+
+    unsigned int getOutsideProjectionLine(const struct dataForSimulation *,
+            const unsigned long long, const unsigned long long,
+            double *, double *, double *);
     unsigned int getOutsideProjectionTriangle(const struct dataForSimulation *,
-        const long long unsigned int, const long long unsigned int,
-        double *, double *, double *);
-    
+            const unsigned long long, const unsigned long long,
+            double *, double *, double *);
+
     unsigned int getOutsideProjectionTetrahedron(const struct dataForSimulation *,
-        const long long unsigned int, const long long unsigned int,
-        double *, double *, double *);
+            const unsigned long long, const unsigned long long,
+            double *, double *, double *);
 
 #ifdef __cplusplus
 }

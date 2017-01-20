@@ -1,7 +1,7 @@
 /*
  * TLMBHT - Transmission-line Modeling Method applied to BioHeat Transfer Problems.
  * 
- * Copyright (C) 2015 to 2016 by Cornell University. All Rights Reserved.
+ * Copyright (C) 2015 to 2017 by Cornell University. All Rights Reserved.
  * 
  * Written by Hugo Fernando Maia Milan.
  * 
@@ -37,13 +37,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 
 #include "libconfig.h"
-#include "libsimuconfig.h"
-#include "libmeshconfig.h"
-#include "libmatconfig.h"
-#include "libboundconfig.h"
-#include "libsourceconfig.h"
+
 #include "../miscellaneous/libstringtlmbht.h"
 #include "../miscellaneous/liberrorcode.h"
 
@@ -53,43 +50,134 @@
  */
 unsigned int testAndReadInputFile(int nInput, char* pArgs[], struct dataForSimulation *newDataForSimu) {
 
-    unsigned int tlmErrorCode, inputPosition = 0;
+    unsigned int tlmErrorCode = 0, inputPosition, inputPositionDefined = 0, showHelp, showVersion;
     FILE *pfile;
 
-    // checking the inputs. I don't check input 0 because this is just
+    // checking the inputs. I don't check input 0 because this is
     // the function being called
     for (unsigned int i = 1; i < nInput; i++) {
-        if (compareCaseInsensitive(pArgs[i], "--debug") == 0) {
-            newDataForSimu->debugMode = 1;
-            //            printf("Debug mode\n");
-            printf("\n\n\nDebug mode was not implemented yet\n\n\n");
-
-        } else if (compareCaseInsensitive(pArgs[i], "--timing") == 0) {
-            newDataForSimu->timingMode = 1;
-            printf("Timing mode\n");
-
-        } else if (compareCaseInsensitive(pArgs[i], "--input") == 0) {
+        // if we know where the input position is and we are looking at it,
+        // we just keep on going.
+        if (inputPositionDefined == 1 && inputPosition == i) {
+            continue;
+        }
+        // verifying the input
+        if (pArgs[i][0] == '-') {
+            // the input starts with '-' ?
+            if (pArgs[i][1] == '-') {
+                // the input starts with "--"
+                if (compareCaseInsensitive(pArgs[i], "--verbose") == 0) {
+                    newDataForSimu->simulationInput.verboseMode = 1;
+                } else if (compareCaseInsensitive(pArgs[i], "--timing") == 0) {
+                    newDataForSimu->simulationInput.timingMode = 1;
+                } else if (compareCaseInsensitive(pArgs[i], "--help") == 0) {
+                    showHelp = 1;
+                } else if (compareCaseInsensitive(pArgs[i], "--version") == 0) {
+                    showVersion = 1;
+                } else if (compareCaseInsensitive(pArgs[i], "--input") == 0) {
+                    if (inputPositionDefined == 1) {
+                        tlmErrorCode = 317;
+                        sendErrorCodeAndMessage(tlmErrorCode, &i, pArgs[i], &inputPosition, pArgs[inputPosition]);
+                        break;
+                    }
+                    inputPosition = i + 1;
+                    inputPositionDefined = 1;
+                } else {
+                    // this is an unknown input command
+                    tlmErrorCode = 316;
+                    sendErrorCodeAndMessage(tlmErrorCode, pArgs[i], NULL, NULL, NULL);
+                    break;
+                }
+            } else {
+                for (int j = 1; j < strlen(pArgs[i]); j++) {
+                    // the input starts with '-'
+                    if (compareCaseInsensitive(pArgs[i], "e") == 0) {
+                        newDataForSimu->simulationInput.verboseMode = 1;
+                    } else if (compareCaseInsensitive(pArgs[i], "t") == 0) {
+                        newDataForSimu->simulationInput.timingMode = 1;
+                    } else if (compareCaseInsensitive(pArgs[i], "h") == 0) {
+                        showHelp = 1;
+                    } else if (compareCaseInsensitive(pArgs[i], "v") == 0) {
+                        showVersion = 1;
+                    } else if (compareCaseInsensitive(pArgs[i], "i") == 0) {
+                        if (inputPositionDefined == 1) {
+                            tlmErrorCode = 317;
+                            sendErrorCodeAndMessage(tlmErrorCode, &i, pArgs[i], &inputPosition, pArgs[inputPosition]);
+                            break;
+                        }
+                        inputPosition = i + 1;
+                        inputPositionDefined = 1;
+                    } else {
+                        // this is an unknown input command
+                        tlmErrorCode = 316;
+                        sendErrorCodeAndMessage(tlmErrorCode, pArgs[i], NULL, NULL, NULL);
+                        break;
+                    }
+                }
+            }
+        } else if (i == 1) {
+            // it didn't start with '-' so I'm assuming this is the input
             inputPosition = i;
+            inputPositionDefined = 1;
 
         } else {
-            printf("Unknown command %s\n", pArgs[i]);
+            // some text after the first input that does not start with '-'. 
+            // I'm not sure what it is
+            tlmErrorCode = 316;
+            sendErrorCodeAndMessage(tlmErrorCode, pArgs[i], NULL, NULL, NULL);
+            break;
         }
-
     }
 
-    // checking if the number of inputs is greater than 1. If not, them the case.tlm
+    if (tlmErrorCode != 0) {
+        // we had an error while reading the inputs. Let me through the help
+        // BLACK_BOX_PRINT_HELP
+        return tlmErrorCode;
+    }
+
+    // displaying the options we got from the inputs
+    if (newDataForSimu->simulationInput.verboseMode == 1)
+        printf("Verbose mode on\n");
+    if (newDataForSimu->simulationInput.timingMode == 1)
+        printf("Timing mode on\n");
+    if (showHelp == 1)
+        printf("HELP\n");
+    if (showVersion == 1)
+        printf("Version\n");
+
+    // BLACK_BOX_PRINT_HELP
+    // useful link http://stackoverflow.com/questions/410980/include-a-text-file-in-a-c-program-as-a-char
+    // useful code xxd -i a | sed 's/\([0-9a-f]\)$/\0, 0x00/'
+    //            char *pline = NULL;
+    //            pfile = fopen("case.tlm", "r");
+    //            size_t lenLine = 0;
+    //
+    //            // readings line-by-line until we get to the end-of-file character
+    //            while (getline(&pline, &lenLine, f) != EOF) {
+    //                printf("%s", pline); 
+    //            }
+
+
+
+    // checking if the input file position was defined. If not, them the case.tlm
     // file should exist in the same folder where the call is being made
-    if (inputPosition == 0) {
+    if (inputPositionDefined == 0) {
         pfile = fopen("case.tlm", "r");
-        if (pfile == NULL)
+        if (pfile == NULL) {
             sendErrorCodeAndMessage(315, NULL, NULL, NULL, NULL);
+            return 315;
+        }
+
+        // saving the name of the input file
+        newDataForSimu->simulationInput.nameOfInputFile = (char *) malloc((strlen("case.tlm") + 1) * sizeof (char));
+        // 9 = strlen("case.tlm") + '\0'
+        strcpy(newDataForSimu->simulationInput.nameOfInputFile, "case.tlm");
 
         printf("Reading case.tlm\n");
 
+
         // We received an input
     } else {
-        printf("Input file: %s\n", pArgs[inputPosition]);
-
         pfile = fopen(pArgs[inputPosition], "r");
 
         //We couldn't find the input file
@@ -97,7 +185,17 @@ unsigned int testAndReadInputFile(int nInput, char* pArgs[], struct dataForSimul
             sendErrorCodeAndMessage(764, pArgs[1], NULL, NULL, NULL);
             return 764;
         }
+
+        // saving the name of the input file
+        newDataForSimu->simulationInput.nameOfInputFile = (char *) malloc((strlen(pArgs[inputPosition]) + 1) * sizeof (char));
+        // 9 = strlen(pArgs[inputPosition]) + '\0'
+        strcpy(newDataForSimu->simulationInput.nameOfInputFile, pArgs[inputPosition]);
+
+        printf("Reading the input file: %s\n", pArgs[inputPosition]);
     }
+
+    // saving the name of the input file without the last point (file extension)
+    getBeforePoint(newDataForSimu->simulationInput.nameOfInputFile);
 
     clock_t begin = clock();
 
@@ -106,13 +204,7 @@ unsigned int testAndReadInputFile(int nInput, char* pArgs[], struct dataForSimul
         return tlmErrorCode;
     }
 
-    clock_t end = clock();
-
-    if (newDataForSimu->timingMode == 1) {
-        double time_spent = (double) (end - begin) / CLOCKS_PER_SEC;
-        printf("\n\nTime to read the input file %g ms (or %g s, or %g min, or %g hours).\n\n",
-                time_spent * 1e3, time_spent, time_spent / 60.0, time_spent / (60 * 60));
-    }
+    printf("The input file was read.\n");
 
 
 
@@ -138,7 +230,7 @@ unsigned int readFileTLM(FILE * f, struct dataForSimulation *newDataForSimu) {
     int startEndBrackets = 0; // 0 - not started or finalized; 1 - started;
     enum configuringInside ConfigPoint = NOTHING;
 
-    // readings line-by-line until we get to the end-of-file character
+    // reading line-by-line until we get to the end-of-file character
     while (getline(&pline, &lenLine, f) != EOF) {
         // I start the loop checking the variable for error.
         if (errorTLMnumber != 0 && errorTLMnumber != 9999 && errorTLMnumber != 9998) {
@@ -170,6 +262,16 @@ unsigned int readFileTLM(FILE * f, struct dataForSimulation *newDataForSimu) {
                     newDataForSimu->meshRead++;
                     if (newDataForSimu->meshRead > 1)
                         errorTLMnumber = 202;
+                    break;
+
+                    // Reallocate the variable that has the data for the equations
+                    // with one extra space.
+                case EQUATION:
+                    newDataForSimu->quantityOfEquationsRead++;
+                    newDataForSimu->equationInput = (struct Equation*)
+                            realloc(newDataForSimu->equationInput,
+                            sizeof (struct Equation)*
+                            (newDataForSimu->quantityOfEquationsRead + 1));
                     break;
 
                     // Reallocate the variable that has the data for the materials
@@ -223,10 +325,10 @@ unsigned int readFileTLM(FILE * f, struct dataForSimulation *newDataForSimu) {
 
 
 
-        // if (newDataForSimu->debugMode == 1){
-        // DEBUG: Shown the line number, quantity of characters in the line and content
-        // printf("Line %04u (%zu): %s", lineNumber, strlen(pline), pline); 
-        // }
+        if (newDataForSimu->simulationInput.verboseMode == 1) {
+            // VERBOSE: Shown the line number, quantity of characters in the line and content
+            printf("Line %04u (%zu): %s", lineNumber, strlen(pline), pline);
+        }
 
 
 
@@ -243,18 +345,20 @@ unsigned int readFileTLM(FILE * f, struct dataForSimulation *newDataForSimu) {
             continue; // go to next iteration
 
 
-        // if (newDataForSimu->debugMode == 1){
-        // DEBUG: what comes out the useful test. Shown the line number, quantity of characters in the line and content
-        // printf("This line has something useful %04u (%zu): %s\n", lineNumber, strlen(pline), pline);
-        // }
+        if (newDataForSimu->simulationInput.verboseMode == 1) {
+            // DEBUG: what comes out the useful test. Shown the line number, quantity of characters in the line and content
+            printf("Useful content from line %04u (%zu): %s\n", lineNumber, strlen(pline), pline);
+        }
 
 
         switch (ConfigPoint) {
                 // is ConfigPoint NOTHING? If so, we should check the line to find out
-                // what sould we configure next
+                // what should we configure next
             case NOTHING:
-                // DEBUG: got inside nothing
-                // printf("Inside NOTHING %s", pline);
+                if (newDataForSimu->simulationInput.verboseMode == 1) {
+                    // VERBOSE: Shown what is being configured
+                    printf("Configuring NOTHING\n");
+                }
 
                 // checking if we need to change what we are configuring now
                 if ((errorTLMnumber = setConfigurationTo(pline, &ConfigPoint)) != 0)
@@ -263,8 +367,10 @@ unsigned int readFileTLM(FILE * f, struct dataForSimulation *newDataForSimu) {
                 break;
 
             case SIMULATION:
-                // DEBUG: got inside simulation
-                // printf("Inside SIMULATION %s", pline);
+                if (newDataForSimu->simulationInput.verboseMode == 1) {
+                    // VERBOSE: Shown what is being configured
+                    printf("Configuring SIMULATION\n");
+                }
 
                 // call the function responsible for configuring the simulation parameters
                 if ((errorTLMnumber = setConfigurationSimu(pline, &newDataForSimu->simulationInput, &startEndBrackets)) != 0)
@@ -273,17 +379,34 @@ unsigned int readFileTLM(FILE * f, struct dataForSimulation *newDataForSimu) {
                 break;
 
             case MESH:
-                // DEBUG: got inside mesh
-                // printf("Inside MESH %s", pline);
+                if (newDataForSimu->simulationInput.verboseMode == 1) {
+                    // VERBOSE: Shown what is being configured
+                    printf("Configuring MESH\n");
+                }
 
                 // call the function responsible for configuring the mesh parameters
                 if ((errorTLMnumber = setConfigurationMesh(pline, &newDataForSimu->meshInput, &startEndBrackets)) != 0)
                     continue; // go to the next loop if we found an error 
                 break;
 
+            case EQUATION:
+                if (newDataForSimu->simulationInput.verboseMode == 1) {
+                    // VERBOSE: Shown what is being configured
+                    printf("Configuring EQUATION\n");
+                }
+
+                // call the function responsible for configuring the material parameters
+                if ((errorTLMnumber = setConfigurationEquation(pline,
+                        &newDataForSimu->equationInput[newDataForSimu->quantityOfEquationsRead],
+                        &startEndBrackets)) != 0)
+                    continue; // go to the next loop if we found an error 
+                break;
+
             case MATERIAL:
-                // DEBUG: got inside material
-                // printf("Inside MATERIAL %s\n", pline);
+                if (newDataForSimu->simulationInput.verboseMode == 1) {
+                    // VERBOSE: Shown what is being configured
+                    printf("Configuring MATERIAL\n");
+                }
 
                 // call the function responsible for configuring the material parameters
                 if ((errorTLMnumber = setConfigurationMaterial(pline,
@@ -293,8 +416,10 @@ unsigned int readFileTLM(FILE * f, struct dataForSimulation *newDataForSimu) {
                 break;
 
             case BOUNDARY:
-                // DEBUG: got inside boundary
-                // printf("Inside BOUNDARY %s\n", pline);
+                if (newDataForSimu->simulationInput.verboseMode == 1) {
+                    // VERBOSE: Shown what is being configured
+                    printf("Configuring BOUNDARY\n");
+                }
 
                 // call the function responsible for configuring the boundary parameters
                 if ((errorTLMnumber = setConfigurationBoundary(pline,
@@ -304,8 +429,10 @@ unsigned int readFileTLM(FILE * f, struct dataForSimulation *newDataForSimu) {
 
                 break;
             case SOURCES:
-                // DEBUG: got inside source
-                // printf("Inside SOURCE %s\n", pline);
+                if (newDataForSimu->simulationInput.verboseMode == 1) {
+                    // VERBOSE: Shown what is being configured
+                    printf("Configuring SOURCES\n");
+                }
 
                 // call the function responsible for configuring the source parameters
                 if ((errorTLMnumber = setConfigurationSource(pline,
@@ -317,8 +444,8 @@ unsigned int readFileTLM(FILE * f, struct dataForSimulation *newDataForSimu) {
 
                 // this is not expected to happen
             default:
-                fprintf(stderr, "ERROR: Unknown error reading the file. Code 8.");
                 errorTLMnumber = 8;
+                sendErrorCodeAndMessage(errorTLMnumber, NULL, NULL, NULL, NULL);
                 break;
         }
     }
@@ -350,6 +477,8 @@ unsigned int setConfigurationTo(char *input, enum configuringInside * config) {
         *config = SIMULATION;
     } else if (compareCaseInsensitive(input, "mesh") == 0) {
         *config = MESH;
+    } else if (compareCaseInsensitive(input, "equation") == 0) {
+        *config = EQUATION;
     } else if (compareCaseInsensitive(input, "material") == 0) {
         *config = MATERIAL;
     } else if (compareCaseInsensitive(input, "boundary") == 0) {
@@ -374,12 +503,17 @@ unsigned int initiateAllConfigurationVarialbes(struct dataForSimulation *input) 
     input->simulationRead = 0;
     input->runningSimulation = 1;
     input->runningBenchmark = 0;
-    input->debugMode = 0;
-    input->timingMode = 0;
     input->meshRead = 0;
+    input->quantityOfEquationsRead = 0;
     input->quantityOfMaterialsRead = 0;
     input->quantityOfBoundariesRead = 0;
     input->quantityOfSourcesRead = 0;
+    
+    // initializing who am I
+    input->myName = malloc( ( strlen("tlmbht") + 1 )*sizeof(char) );
+    strcpy(input->myName, "tlmbht");
+    input->myVersion = malloc( ( strlen("0.2.0") + 1 )*sizeof(char) );
+    strcpy(input->myVersion, "0.2.0");
 
     // initializing simulation variables used for configuration
     if ((errorTLMnumber = initiateSimulationVariable(&input->simulationInput)) != 0)
@@ -388,6 +522,13 @@ unsigned int initiateAllConfigurationVarialbes(struct dataForSimulation *input) 
     // initializing mesh variables used for configuration
     if ((errorTLMnumber = initiateMeshVariable(&input->meshInput)) != 0)
         return errorTLMnumber;
+
+    // we can have more than one equationInput. Here we initialize the first
+    input->equationInput = (struct Equation*) malloc(sizeof (struct Equation));
+    // initializing the equation variables used for configuration.
+    if ((errorTLMnumber = initiateEquationVariable(&input->equationInput[0])) != 0)
+        return errorTLMnumber;
+
 
     // we can have more than one materialInput. Here we initialize the first
     input->materialInput = (struct MaterialConfig*) malloc(sizeof (struct MaterialConfig));
@@ -416,6 +557,11 @@ unsigned int initiateAllConfigurationVarialbes(struct dataForSimulation *input) 
 unsigned int terminateAllConfigurationVarialbes(struct dataForSimulation *input) {
     unsigned int errorTLMnumber;
     int i;
+    
+    free(input->myName);
+    input->myName = NULL;
+    free(input->myVersion);
+    input->myVersion = NULL;
 
     // terminating the simulation variables used for configuration
     if ((errorTLMnumber = terminateSimulationVariable(&input->simulationInput)) != 0)
@@ -424,6 +570,20 @@ unsigned int terminateAllConfigurationVarialbes(struct dataForSimulation *input)
     // terminating the mesh variables used for configuration
     if ((errorTLMnumber = terminateMeshVariable(&input->meshInput)) != 0)
         return errorTLMnumber;
+
+    // terminating the equation variables when the quantity of equations read was
+    // greater than zero. If it was zero, we won't get this loop initialized.
+    for (i = 0; i < input->quantityOfEquationsRead; i++)
+        if ((errorTLMnumber = terminateEquationConfig(&input->equationInput[i])) != 0)
+            return errorTLMnumber;
+    // this is the case that none equation was read. In this case, we only have to 
+    // terminate the equationInput[0].
+    if (input->quantityOfEquationsRead == 0)
+        if ((errorTLMnumber = terminateEquationConfig(&input->equationInput[0])) != 0)
+            return errorTLMnumber;
+    // now, the equationInput itself is being freed.
+    free(input->equationInput);
+    input->equationInput = NULL;
 
     // terminating the materials variables when the quantity of materials read was
     // greater than zero. If it was zero, we won't get this loop initialized.
@@ -476,7 +636,9 @@ unsigned int terminateAllConfigurationVarialbes(struct dataForSimulation *input)
  * printfAllInputData: prints the input data read by the algorithm from the input file
  */
 void printfAllInputData(struct dataForSimulation * input) {
-    printf("Information read from the input file:\n");
+    printf("%s %s\n", input->myName, input->myVersion);
+
+    printf("Information read from inputs:\n");
     // information from the simulation header
     printfAllSimuData(&input->simulationInput);
     printf("\n");
@@ -485,12 +647,20 @@ void printfAllInputData(struct dataForSimulation * input) {
     printfMeshConfig(&input->meshInput);
     printf("\n");
 
+    // information from the equation headers
+    printf("Input data for the Equation configuration:\n");
+    for (int i = 0; i < input->quantityOfEquationsRead; i++) {
+        printf("Equation group %04d:\n", i + 1);
+        printfAllEquaData(&input->equationInput[i]);
+        printf("\n");
+    }
+
     // information from the material headers
     printf("Input data for the Materials configuration:\n");
     for (int i = 0; i < input->quantityOfMaterialsRead; i++) {
         printf("Materials group %04d:\n", i + 1);
         printfMatConfig(&input->materialInput[i],
-                &input->simulationInput.typeS, &input->simulationInput.Solv);
+                &input->equationInput[input->materialInput[i].equationNumber]);
         printf("\n");
     }
 
@@ -499,19 +669,18 @@ void printfAllInputData(struct dataForSimulation * input) {
     for (int i = 0; i < input->quantityOfBoundariesRead; i++) {
         printf("Boundaries group %04d:\n", i + 1);
         printfBoundConfig(&input->boundaryInput[i],
-                &input->simulationInput.typeS);
+                &input->equationInput[input->boundaryInput[i].equationNumber]);
         printf("\n");
     }
 
     // future implementation
     // information from the source headers
-    printf("Input data for the Sources configuration:\n");
-    for (int i = 0; i < input->quantityOfSourcesRead; i++) {
-        printf("Sources group %04d:\n", i + 1);
-        printfSourceConfig(&input->sourceInput[i],
-                &input->simulationInput.typeS);
-        printf("\n");
-    }
+//    printf("Input data for the Sources configuration:\n");
+//    for (int i = 0; i < input->quantityOfSourcesRead; i++) {
+//        printf("Sources group %04d:\n", i + 1);
+//        printfSourceConfig(&input->sourceInput[i]);
+//        printf("\n");
+//    }
 
 }
 
@@ -521,12 +690,11 @@ void printfAllInputData(struct dataForSimulation * input) {
  */
 unsigned int testAllConfigurationVarialbes(struct dataForSimulation *input) {
     unsigned int errorFound = 0;
-    int i;
+    int i, j;
 
-    // tests some variables that dictates if we are going to run the simulation
-    // or not
+    // tests some variables that dictates if we are going to run the simulation or not. FUTURE IMPLEMENTATION
     if ((errorFound = testRunSimulation(input)) != 0) {
-        // if errorFound = 9999, then, we are not going to run simulation and,
+        // if errorFound = 9999, then, we are not going to run a simulation and,
         // hence, I don't need to care about the other variables
         if (errorFound == 9999) {
             input->runningSimulation = 0;
@@ -543,7 +711,7 @@ unsigned int testAllConfigurationVarialbes(struct dataForSimulation *input) {
     }
 
     // testing the simulation configurations input
-    if (testInputSimu(&input->simulationInput) != 0) {
+    if (testInputSimu(&input->simulationInput, input->meshInput.nameOfInputFile) != 0) {
         sendErrorCodeAndMessage(1870, NULL, NULL, NULL, NULL);
         errorFound = 1;
     }
@@ -557,22 +725,102 @@ unsigned int testAllConfigurationVarialbes(struct dataForSimulation *input) {
     }
 
     // testing the mesh configurations input
-    if (testInputMesh(&input->meshInput) != 0) {
+    if (testInputMesh(&input->meshInput, input->simulationInput.nameOfInputFile) != 0) {
         sendErrorCodeAndMessage(1871, NULL, NULL, NULL, NULL);
         errorFound = 1;
     }
 
+    // testing for the Equation configuration field
+    //
+    // we did not read the material configurations
+    if (input->quantityOfEquationsRead == 0) {
+        sendErrorCodeAndMessage(212, NULL, NULL, NULL, NULL);
+        errorFound = 1;
+    }
+    // testing the material configurations read.
+    for (i = 1; i <= input->quantityOfEquationsRead; i++) {
+
+        // allocating the pointer that will have the number of the materials
+        input->equationInput[i - 1].materialNumbers = (int *) malloc(sizeof (int)*input->quantityOfMaterialsRead);
+
+        // we make j from 0 until quantityOfMaterialsRead - 1.
+        for (j = 0; j < input->quantityOfMaterialsRead; j++) {
+            if (compareCaseInsensitive(input->materialInput[j].equationName, input->equationInput[i - 1].equationName) == 0) {
+
+                input->materialInput[j].equationNumber = i - 1;
+
+                input->equationInput[i - 1].materialNumbers[input->equationInput[i - 1].numberOfMaterials] = j;
+                input->equationInput[i - 1].numberOfMaterials++;
+            }
+        }
+
+        input->equationInput[i - 1].materialNumbers = (int *) realloc(input->equationInput[i - 1].materialNumbers, sizeof (int)*input->equationInput[i - 1].numberOfMaterials);
+
+        if (input->equationInput[i - 1].numberOfMaterials == 0) {
+            printf("WARNING: No material was found associated with this equation. It"
+                    "will be ignored during the calculation.");
+        }
+
+        // allocating the pointer that will have the number of the boundaries
+        input->equationInput[i - 1].boundaryNumbers = (int *) malloc(sizeof (int)*input->quantityOfBoundariesRead);
+
+        // we make j from 0 until quantityOfBoundariesRead - 1.
+        for (j = 0; j < input->quantityOfBoundariesRead; j++) {
+            if (compareCaseInsensitive(input->boundaryInput[j].equationName, input->equationInput[i - 1].equationName) == 0) {
+
+                input->boundaryInput[j].equationNumber = i - 1;
+
+                input->equationInput[i - 1].boundaryNumbers[input->equationInput[i - 1].numberOfBoundaries] = j;
+                input->equationInput[i - 1].numberOfBoundaries++;
+            }
+        }
+
+        input->equationInput[i - 1].boundaryNumbers = (int *) realloc(input->equationInput[i - 1].boundaryNumbers, sizeof (int)*input->equationInput[i - 1].numberOfBoundaries);
+
+
+        if (testInputEquation(&input->equationInput[i - 1], i) != 0) {
+            sendErrorCodeAndMessage(1876, &i, NULL, NULL, NULL);
+            errorFound = 1;
+        }
+
+        // checking if there are equations with the same name
+        for (j = i + 1; j <= input->quantityOfEquationsRead; j++) {
+            if (compareCaseInsensitive(input->equationInput[j - 1].equationName, input->equationInput[i - 1].equationName) == 0) {
+                sendErrorCodeAndMessage(1877, &i, input->equationInput[i - 1].equationName, &j, input->equationInput[j - 1].equationName);
+                errorFound = 1;
+            }
+        }
+    }
+
     // testing for the Materials configuration field
     //
+
     // we did not read the material configurations
     if (input->quantityOfMaterialsRead == 0) {
         sendErrorCodeAndMessage(211, NULL, NULL, NULL, NULL);
         errorFound = 1;
     }
+
     // testing the material configurations read.
     for (i = 1; i <= input->quantityOfMaterialsRead; i++) {
+
+        // we check if the name of the equation was defined
+        if (input->materialInput[i - 1].equationNameDefined == 0) {
+            sendErrorCodeAndMessage(4443, &i, NULL, NULL, NULL);
+            errorFound = 1;
+            // if the name of the equation was not defined, we move to the next material number
+            continue;
+        }
+
+        // We check if the name of the equation defined in the Material was found in the Equation configuration
+        if (input->materialInput[i - 1].equationNumber == -1) {
+            sendErrorCodeAndMessage(4442, &i, input->materialInput[i - 1].equationName, NULL, NULL);
+            errorFound = 1;
+            continue;
+        }
+
         if (testInputMaterial(&input->materialInput[i - 1],
-                &input->simulationInput.typeS, &input->simulationInput.Solv, i) != 0) {
+                &input->equationInput[input->materialInput[i - 1].equationNumber], i) != 0) {
             sendErrorCodeAndMessage(1872, &i, NULL, NULL, NULL);
             errorFound = 1;
         }
@@ -585,8 +833,24 @@ unsigned int testAllConfigurationVarialbes(struct dataForSimulation *input) {
     //
     // testing the boundary configurations read.
     for (i = 1; i <= input->quantityOfBoundariesRead; i++) {
+
+        // We check if the name of the equation defined in the Material are found in the Equation configuration
+        if (input->boundaryInput[i - 1].equationNameDefined == 0) {
+            sendErrorCodeAndMessage(4443, &i, NULL, NULL, NULL);
+            errorFound = 1;
+            // if we did not find matching equation names we move to the next material number
+            continue;
+        }
+
+        // We check if the name of the equation defined in the Boundary was found in the Equation configuration
+        if (input->boundaryInput[i - 1].equationNumber == -1) {
+            sendErrorCodeAndMessage(4442, &i, input->boundaryInput[i - 1].equationName, NULL, NULL);
+            errorFound = 1;
+            continue;
+        }
+
         if (testInputBoundary(&input->boundaryInput[i - 1],
-                &input->simulationInput.typeS, i) != 0) {
+                &input->equationInput[input->boundaryInput[i - 1].equationNumber], i) != 0) {
             sendErrorCodeAndMessage(1873, &i, NULL, NULL, NULL);
             errorFound = 1;
         }
@@ -600,8 +864,7 @@ unsigned int testAllConfigurationVarialbes(struct dataForSimulation *input) {
     //
     // testing the source configurations read.
     for (i = 1; i <= input->quantityOfSourcesRead; i++) {
-        if (testInputSource(&input->sourceInput[i - 1],
-                &input->simulationInput.typeS, i) != 0) {
+        if (testInputSource(&input->sourceInput[i - 1], i) != 0) {
             sendErrorCodeAndMessage(1874, &i, NULL, NULL, NULL);
             errorFound = 1;
         }
