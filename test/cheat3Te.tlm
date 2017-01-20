@@ -100,7 +100,7 @@ Mesh
     // Cylindrical coordinates: [z, r, theta];
     // Spherical coordinates: [r, theta, phi];
 
-    file name = plate_4BC_10766e; // required.
+    file name = parallelepiped_6BC_69941e; // required.
     // The name of the file without the extension.
     // This is, if the name of your file is "problem.tbn", then you should input only
     // "problem". The extension is defined on the "input format" variable below.
@@ -153,7 +153,7 @@ Equation
     // eigen: uses the eigen library (default)
     // cuda: uses the cuda library. Future implementation
 
-    type = pennes; // required.
+    type = heat; // required.
     // Options (see more explanation about the equations below):
     // diffusion: diffusion equation.
     // hyperbolic diffusion: hyperbolic diffusion equation
@@ -622,7 +622,7 @@ Equation
     
 
     
-    equation name = BHE; // required.
+    equation name = heat; // required.
     // Every equation should have a DIFFERENT NAME.
     //
     // This parameter defines the name of the equation. The name of the equations
@@ -676,7 +676,7 @@ Equation
 
 
 
-    dimensions = 2; // required.
+    dimensions = 3; // required.
     // Options:
     // 1: one-dimensional problem;
     // 2: two-dimensional problem;
@@ -697,10 +697,10 @@ Equation
     // steady: steady state solution;
     // dynamic: dynamic simulation
 
-    time-step = 1e-3; // Required if "solve = dynamic". (s) time-step in seconds. 
+    time-step = 1e-7; // Required if "solve = dynamic". (s) time-step in seconds. 
     // This is the time-step between each calculation.
 
-    time-jump = 1000; // not required.
+    time-jump = 2000; // not required.
     // Must be an integer greater than zero. If greater than 1, the algorithm 
     // will group the amount of time-steps indicated in time-jump and solve them at once.
     // For example, if time-jump = 11 and time-step = 0.01 s, the effective time-step will be
@@ -711,7 +711,7 @@ Equation
     // will not be calculated. Nonetheless, intermediary results can always be 
     // obtained using interpolations (not implemented).
 
-    final time = 10; // Required if solve = dynamic. (s) end time for simulation in seconds. 
+    final time = 1e-3; // Required if solve = dynamic. (s) end time for simulation in seconds. 
 
 
     save = scalar; // indicates what to save.
@@ -739,21 +739,21 @@ Equation
 
 Material
 {
-    equation = BHE; // required.
+    equation = heat; // required.
     // This is the name of the equation that will be used to solve this material.
     // This is case insensitive.
 
-    number =  7; // required.
+    number =  33; // required.
     // This is the tag number of the medium.
     // These numbers shall be natural numbers greater than 0.
     // It can be a vector (as [33 55 11]). If it is a vector, the parameters here
     // will be assigned to all the numbers.
 
-     density = 1200; // (kg/m3) required;
-     specific heat = 3200; // (J/(K-kg)) required;
-     thermal conductivity = 0.3; // (W/(K-m)) required;
+     density = 2700; // (kg/m3) required;
+     specific heat = 900; // (J/(K-kg)) required;
+     thermal conductivity = 205; // (W/(K-m)) required;
     //
-     source = 0; // (W/m3) not required.
+     source = 5000; // (W/m3) not required.
     //      The default value is 0.
      vectorial source = 0; // (W/m2) not required.
     //      The default value is 0. Defines the value of the vectorial source.
@@ -763,34 +763,23 @@ Material
     //      Use the first option when the vectorial source is the same for all directions.
     //      Use the second options when it has different values for different directions.
     //
-     blood perfusion = 1e-4; // (m3/(m3-s)) not required.
-    //      The default value is 0.
-     blood density = 1052; // (kg/m3) not required.
-    //      The default value is 0.
-     blood specific heat = 3600; // (J/(K-kg)) not required.
-    //      The default value is 0.
-     blood temperature = 37; // (oC) not required.
-    //      The default value is 0.
-    //
-     internal heat generation = 500; // (W/m3) not required.
-    //      The default value is 0.
-    //
-     initial temperature = 37; // (oC) required if Solve = dynamic;
+    
+     initial temperature = 100; // (oC) required if Solve = dynamic;
     // future implementation: reload previous calculated data
 }
 
 
 Boundary
 {
-    equation = BHE; // required.
+    equation = heat; // required.
     // This is the name of the equation that this boundary condition is applied to
 
-    number = 10; // required;
+    number = 27; // required;
     // this is the tag number of the boundary.
     // It can be a vector (like [33 55 11]). If it is a vector, the parameters here
     // will be assigned to all the numbers.
     
-    Temperature = 37; // (oC). This assumes a constant temperature at the
+    Temperature = 100; // (oC). This assumes a constant temperature at the
 // boundary. It cannot be used in conjunction with heat flux, convection, or radiation.
     
 }
@@ -798,28 +787,41 @@ Boundary
 
 Boundary
 {
-    equation = BHE; // required.
+    equation = heat; // required.
     // This is the name of the equation that this boundary condition is applied to
 
-    number = 11; // this is the tag number of the boundary.
+    number = 30; // this is the tag number of the boundary.
 // It can be a vector (like [33 55 11]). If it is a vector, the parameters here
 // will be assigned to all the numbers.
 
-    Temperature = 150; // (oC). This assumes a constant temperature at the
+    Temperature = 1000; // (oC). This assumes a constant temperature at the
 // boundary. It cannot be used in conjunction with heat flux, convection, or radiation.
 }
 
 
 Boundary
 {
-    equation = BHE; // required.
+    equation = heat; // required.
     // This is the name of the equation that this boundary condition is applied to
 
-    number = 8; // this is the tag number of the boundary.
+    number = 18; // this is the tag number of the boundary.
 // It can be a vector (like [33 55 11]). If it is a vector, the parameters here
 // will be assigned to all the numbers.
 
-    Heat flux = 1e5; // (W/m2). This assumes a constant heat flux flowing at the boundary.
+    Heat flux = 2.5e7; // (W/m2). This assumes a constant heat flux flowing at the boundary.
+}
+
+
+Boundary
+{
+    equation = heat; // required.
+    // This is the name of the equation that this boundary condition is applied to
+
+    number = 24; // this is the tag number of the boundary.
+// It can be a vector (like [33 55 11]). If it is a vector, the parameters here
+// will be assigned to all the numbers.
+
+    Heat flux = 5e7; // (W/m2). This assumes a constant heat flux flowing at the boundary.
 }
 
 
