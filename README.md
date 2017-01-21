@@ -21,14 +21,16 @@ Binaries for Windows.
     
 ### Option 2
 In simple terms:
-
+    
+    git clone https://github.com/hugomilan/tlmbht.git
+    cd tlmbht
     make
     
 Then, go to the folder build/ and use the binary output (named tlmbht).
 
 #### A more complete set of instructions to compile the code
         
-1) Download this repository. Type in the terminal: git clone https://github.com/hugomilan/tlmbht.git). Alternatively, you can use the green button on the right side of this page (https://github.com/hugomilan/tlmbht) that says "Clone or download". Remember to extract the zip if you download it as zip.
+1) Download this repository. Type in the terminal: `git clone https://github.com/hugomilan/tlmbht.git`. Alternatively, you can use the green button on the right side of this page that says "Clone or download". Remember to extract the zip if you download it as zip.
 
 2) Getting Eigen library. Download it at (http://eigen.tuxfamily.org/index.php?title=Main_Page). Extract the files, open the extracted folder, and copy the folder Eigen (this is the folder inside the extracted folder; it contains the Eigen library's codes) and past it in the include/ folder of this project. Alternatively, you may tell the compiler (using the -I flag) where the Eigen folder is.
 
@@ -48,7 +50,7 @@ This is an Open-Source scientific code used to solve partial differential equati
 
 3) Diffusion in 1D, 2D, and 3D.
 
-The numerical solution is based on a mesh of geometrical elements (or control volumes) that can be created using the [Gmsh software](www.gmsh.info). The geometrical elements currently supported are based on my research on TLM (see the reference file for citation to the original papers) and are:
+The numerical solution is based on a mesh of geometrical elements (or control volumes) that can be created using the [Gmsh software](https://www.gmsh.info). The geometrical elements currently supported are based on my research on TLM (see the reference file for citation to the original papers) and are:
 
 1) One-dimension.
 
@@ -87,6 +89,10 @@ You will need to open to use the command prompt or PowerShell (which depends on 
 Then, you will run `tlmbht` in the terminal.
 
 To get start, you may want to try the validations first. You will need [Octave](https://www.gnu.org/software/octave/) (free) or [Matlab](https://www.mathworks.com/products/matlab.html) (paid) to plot the results and see the comparison with the analytical results.
+
+## Other TLM codes
+
+Do you want to know what are the other TLM codes and software available in the internet? I compiled a list of what I found in the file [tlmcode](https://github.com/hugomilan/tlmbht/blob/master/tlmcode.md)
 
 ## [References](https://github.com/hugomilan/tlmbht/blob/master/references.md) and [Acknowledgements](https://github.com/hugomilan/tlmbht/blob/master/acknowledgements.md):
 
