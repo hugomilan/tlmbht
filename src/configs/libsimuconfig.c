@@ -36,7 +36,11 @@
 
 #include <stdlib.h>
 #include <string.h>
+
+// ignoring openmp when it is not available
+#if defined(_OPENMP)
 #include <omp.h>
+#endif
 
 #include "libsimuconfig.h"
 
@@ -50,8 +54,13 @@
 unsigned int initiateSimulationVariable(struct Simulation* simu) {
     simu->Benchmark = DONT;
 
+#if defined(_OPENMP)
     simu->nOpenMPcores = omp_get_max_threads(); // maximum number of cores allowed to run
     simu->nOpenMPcoresMax = omp_get_num_procs(); // maximum number of possible cores
+#else
+    simu->nOpenMPcores = 1; // maximum number of cores allowed to run
+    simu->nOpenMPcoresMax = 1; // maximum number of possible cores
+#endif
 
     simu->AbsoluteZero = -273.15;
     simu->StefanBoltzmann = 5.6704e-8;
@@ -67,7 +76,7 @@ unsigned int initiateSimulationVariable(struct Simulation* simu) {
     simu->fullNameOfOutputFile = NULL;
 
     simu->outputFileHandler = NULL;
-    
+
     simu->comentary_string = NULL;
 
     simu->printAdditionalMode = 0;
@@ -98,7 +107,7 @@ unsigned int terminateSimulationVariable(struct Simulation* simu) {
 
     free(simu->fullNameOfOutputFile);
     simu->fullNameOfOutputFile = NULL;
-    
+
     free(simu->comentary_string);
     simu->comentary_string = NULL;
 
@@ -283,7 +292,9 @@ unsigned int setConfigurationSimu(char * input, struct Simulation * configInput,
             // return 3884;
         }
 
+#if defined(_OPENMP)
         omp_set_num_threads(configInput->nOpenMPcores);
+#endif
 
     } else if (compareCaseInsensitive(input, "absolute zero") == 0) {
         if ((errorTLMnumber = getBetweenEqualAndSemicolon(input)) != 0)

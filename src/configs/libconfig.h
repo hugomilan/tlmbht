@@ -126,6 +126,7 @@ extern "C" {
 
     // this function prints all the information from the input file
     void printfAllInputData(struct dataForSimulation *);
+    void printfMyNameAndVersion(struct dataForSimulation *);
 
 #ifdef __cplusplus
 }

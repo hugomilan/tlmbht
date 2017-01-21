@@ -27,11 +27,11 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 PROJECTNAME=tlmbht
 
 # Active Configuration
-DEFAULTCONF=Debug
+DEFAULTCONF=release
 CONF=${DEFAULTCONF}
 
 # All Configurations
-ALLCONFS=Debug Release CUDA_Debug CUDA_Release 
+ALLCONFS=release no_flags debug cuda_release cuda_debug linux_32 linux_64 windows_32 windows_64 
 
 
 # build

@@ -49,6 +49,8 @@ MKDIR=mkdir
 CP=cp
 CCADMIN=CCadmin
 
+DESTDIR = /usr/local/bin
+
 
 # build
 build: .build-post

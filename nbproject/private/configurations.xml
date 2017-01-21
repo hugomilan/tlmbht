@@ -2,50 +2,7 @@
 <configurationDescriptor version="100">
   <projectmakefile>Makefile</projectmakefile>
   <confs>
-    <conf name="Debug" type="1">
-      <toolsSet>
-        <developmentServer>localhost</developmentServer>
-        <platform>2</platform>
-      </toolsSet>
-      <dbx_gdbdebugger version="1">
-        <gdb_pathmaps>
-        </gdb_pathmaps>
-        <gdb_interceptlist>
-          <gdbinterceptoptions gdb_all="false" gdb_unhandled="true" gdb_unexpected="true"/>
-        </gdb_interceptlist>
-        <gdb_signals>
-        </gdb_signals>
-        <gdb_options>
-          <DebugOptions>
-          </DebugOptions>
-        </gdb_options>
-        <gdb_buildfirst gdb_buildfirst_overriden="false" gdb_buildfirst_old="false"/>
-      </dbx_gdbdebugger>
-      <nativedebugger version="1">
-        <engine>gdb</engine>
-      </nativedebugger>
-      <runprofile version="9">
-        <runcommandpicklist>
-          <runcommandpicklistitem>"${OUTPUT_PATH}"</runcommandpicklistitem>
-          <runcommandpicklistitem>"${OUTPUT_PATH}" case_testing.tlm</runcommandpicklistitem>
-          <runcommandpicklistitem>"${OUTPUT_PATH}" case_testing_3D.tlm</runcommandpicklistitem>
-          <runcommandpicklistitem>"${OUTPUT_PATH}" case_testing_1D.tlm</runcommandpicklistitem>
-          <runcommandpicklistitem>"${OUTPUT_PATH}" test/cpennes1Li.tlm</runcommandpicklistitem>
-          <runcommandpicklistitem>"${OUTPUT_PATH}"/test cpennes1Li.tlm</runcommandpicklistitem>
-          <runcommandpicklistitem>"${OUTPUT_PATH}" cpennes1Li.tlm</runcommandpicklistitem>
-          <runcommandpicklistitem>"${OUTPUT_PATH}" cheat1Li.tlm</runcommandpicklistitem>
-          <runcommandpicklistitem>"${OUTPUT_PATH}" cdiff1Li.tlm</runcommandpicklistitem>
-        </runcommandpicklist>
-        <runcommand>"${OUTPUT_PATH}" cdiff1Li.tlm</runcommand>
-        <rundir>test</rundir>
-        <buildfirst>true</buildfirst>
-        <terminal-type>0</terminal-type>
-        <remove-instrumentation>0</remove-instrumentation>
-        <environment>
-        </environment>
-      </runprofile>
-    </conf>
-    <conf name="Release" type="1">
+    <conf name="release" type="1">
       <toolsSet>
         <developmentServer>localhost</developmentServer>
         <platform>2</platform>
@@ -87,7 +44,89 @@
         </environment>
       </runprofile>
     </conf>
-    <conf name="CUDA_Debug" type="1">
+    <conf name="no_flags" type="1">
+      <toolsSet>
+        <developmentServer>localhost</developmentServer>
+        <platform>2</platform>
+      </toolsSet>
+      <dbx_gdbdebugger version="1">
+        <gdb_pathmaps>
+        </gdb_pathmaps>
+        <gdb_interceptlist>
+          <gdbinterceptoptions gdb_all="false" gdb_unhandled="true" gdb_unexpected="true"/>
+        </gdb_interceptlist>
+        <gdb_options>
+          <DebugOptions>
+          </DebugOptions>
+        </gdb_options>
+        <gdb_buildfirst gdb_buildfirst_overriden="false" gdb_buildfirst_old="false"/>
+      </dbx_gdbdebugger>
+      <nativedebugger version="1">
+        <engine>gdb</engine>
+      </nativedebugger>
+      <runprofile version="9">
+        <runcommandpicklist>
+          <runcommandpicklistitem>"${OUTPUT_PATH}"</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" case_testing.tlm</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" case_testing_3D.tlm</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" case_testing_1D.tlm</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" test/cpennes1Li.tlm</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}"/test cpennes1Li.tlm</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" cpennes1Li.tlm</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" cheat1Li.tlm</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" cdiff1Li.tlm</runcommandpicklistitem>
+        </runcommandpicklist>
+        <runcommand>"${OUTPUT_PATH}" cdiff1Li.tlm</runcommand>
+        <rundir>test</rundir>
+        <buildfirst>true</buildfirst>
+        <terminal-type>0</terminal-type>
+        <remove-instrumentation>0</remove-instrumentation>
+        <environment>
+        </environment>
+      </runprofile>
+    </conf>
+    <conf name="debug" type="1">
+      <toolsSet>
+        <developmentServer>localhost</developmentServer>
+        <platform>2</platform>
+      </toolsSet>
+      <dbx_gdbdebugger version="1">
+        <gdb_pathmaps>
+        </gdb_pathmaps>
+        <gdb_interceptlist>
+          <gdbinterceptoptions gdb_all="false" gdb_unhandled="true" gdb_unexpected="true"/>
+        </gdb_interceptlist>
+        <gdb_options>
+          <DebugOptions>
+          </DebugOptions>
+        </gdb_options>
+        <gdb_buildfirst gdb_buildfirst_overriden="false" gdb_buildfirst_old="false"/>
+      </dbx_gdbdebugger>
+      <nativedebugger version="1">
+        <engine>gdb</engine>
+      </nativedebugger>
+      <runprofile version="9">
+        <runcommandpicklist>
+          <runcommandpicklistitem>"${OUTPUT_PATH}"</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" case_testing.tlm</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" case_testing_3D.tlm</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" case_testing_1D.tlm</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" test/cpennes1Li.tlm</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}"/test cpennes1Li.tlm</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" cpennes1Li.tlm</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" cheat1Li.tlm</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" cdiff1Li.tlm</runcommandpicklistitem>
+        </runcommandpicklist>
+        <runcommand>"${OUTPUT_PATH}" cdiff1Li.tlm</runcommand>
+        <rundir>test</rundir>
+        <buildfirst>true</buildfirst>
+        <terminal-type>0</terminal-type>
+        <remove-instrumentation>0</remove-instrumentation>
+        <environment>
+        </environment>
+      </runprofile>
+    </conf>
+    <conf name="cuda_release" type="1">
       <toolsSet>
         <developmentServer>localhost</developmentServer>
         <platform>2</platform>
@@ -128,7 +167,7 @@
         </environment>
       </runprofile>
     </conf>
-    <conf name="CUDA_Release" type="1">
+    <conf name="cuda_debug" type="1">
       <toolsSet>
         <developmentServer>localhost</developmentServer>
         <platform>2</platform>
@@ -161,6 +200,174 @@
           <runcommandpicklistitem>"${OUTPUT_PATH}" cdiff1Li.tlm</runcommandpicklistitem>
         </runcommandpicklist>
         <runcommand>"${OUTPUT_PATH}" cdiff1Li.tlm</runcommand>
+        <rundir>test</rundir>
+        <buildfirst>true</buildfirst>
+        <terminal-type>0</terminal-type>
+        <remove-instrumentation>0</remove-instrumentation>
+        <environment>
+        </environment>
+      </runprofile>
+    </conf>
+    <conf name="linux_32" type="1">
+      <toolsSet>
+        <developmentServer>localhost</developmentServer>
+        <platform>2</platform>
+      </toolsSet>
+      <dbx_gdbdebugger version="1">
+        <gdb_pathmaps>
+        </gdb_pathmaps>
+        <gdb_interceptlist>
+          <gdbinterceptoptions gdb_all="false" gdb_unhandled="true" gdb_unexpected="true"/>
+        </gdb_interceptlist>
+        <gdb_options>
+          <DebugOptions>
+          </DebugOptions>
+        </gdb_options>
+        <gdb_buildfirst gdb_buildfirst_overriden="false" gdb_buildfirst_old="false"/>
+      </dbx_gdbdebugger>
+      <nativedebugger version="1">
+        <engine>gdb</engine>
+      </nativedebugger>
+      <runprofile version="9">
+        <runcommandpicklist>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" case_testing.tlm</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" case_testing_3D.tlm</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" case_testing_1D.tlm</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" cpennes1Li.tlm</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" test/cpennes1Li.tlm</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}"/test cpennes1Li.tlm</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}"/test cdiff1Li.tlm</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" cheat1Li.tlm</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" cdiff1Li.tlm</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" cpennes2Tr.tlm</runcommandpicklistitem>
+        </runcommandpicklist>
+        <runcommand>"${OUTPUT_PATH}" cpennes2Tr.tlm</runcommand>
+        <rundir>test</rundir>
+        <buildfirst>true</buildfirst>
+        <terminal-type>0</terminal-type>
+        <remove-instrumentation>0</remove-instrumentation>
+        <environment>
+        </environment>
+      </runprofile>
+    </conf>
+    <conf name="linux_64" type="1">
+      <toolsSet>
+        <developmentServer>localhost</developmentServer>
+        <platform>2</platform>
+      </toolsSet>
+      <dbx_gdbdebugger version="1">
+        <gdb_pathmaps>
+        </gdb_pathmaps>
+        <gdb_interceptlist>
+          <gdbinterceptoptions gdb_all="false" gdb_unhandled="true" gdb_unexpected="true"/>
+        </gdb_interceptlist>
+        <gdb_options>
+          <DebugOptions>
+          </DebugOptions>
+        </gdb_options>
+        <gdb_buildfirst gdb_buildfirst_overriden="false" gdb_buildfirst_old="false"/>
+      </dbx_gdbdebugger>
+      <nativedebugger version="1">
+        <engine>gdb</engine>
+      </nativedebugger>
+      <runprofile version="9">
+        <runcommandpicklist>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" case_testing.tlm</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" case_testing_3D.tlm</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" case_testing_1D.tlm</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" cpennes1Li.tlm</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" test/cpennes1Li.tlm</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}"/test cpennes1Li.tlm</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}"/test cdiff1Li.tlm</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" cheat1Li.tlm</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" cdiff1Li.tlm</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" cpennes2Tr.tlm</runcommandpicklistitem>
+        </runcommandpicklist>
+        <runcommand>"${OUTPUT_PATH}" cpennes2Tr.tlm</runcommand>
+        <rundir>test</rundir>
+        <buildfirst>true</buildfirst>
+        <terminal-type>0</terminal-type>
+        <remove-instrumentation>0</remove-instrumentation>
+        <environment>
+        </environment>
+      </runprofile>
+    </conf>
+    <conf name="windows_32" type="1">
+      <toolsSet>
+        <developmentServer>localhost</developmentServer>
+        <platform>2</platform>
+      </toolsSet>
+      <dbx_gdbdebugger version="1">
+        <gdb_pathmaps>
+        </gdb_pathmaps>
+        <gdb_interceptlist>
+          <gdbinterceptoptions gdb_all="false" gdb_unhandled="true" gdb_unexpected="true"/>
+        </gdb_interceptlist>
+        <gdb_options>
+          <DebugOptions>
+          </DebugOptions>
+        </gdb_options>
+        <gdb_buildfirst gdb_buildfirst_overriden="false" gdb_buildfirst_old="false"/>
+      </dbx_gdbdebugger>
+      <nativedebugger version="1">
+        <engine>gdb</engine>
+      </nativedebugger>
+      <runprofile version="9">
+        <runcommandpicklist>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" case_testing.tlm</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" case_testing_3D.tlm</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" case_testing_1D.tlm</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" cpennes1Li.tlm</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" test/cpennes1Li.tlm</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}"/test cpennes1Li.tlm</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}"/test cdiff1Li.tlm</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" cheat1Li.tlm</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" cdiff1Li.tlm</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" cpennes2Tr.tlm</runcommandpicklistitem>
+        </runcommandpicklist>
+        <runcommand>"${OUTPUT_PATH}" cpennes2Tr.tlm</runcommand>
+        <rundir>test</rundir>
+        <buildfirst>true</buildfirst>
+        <terminal-type>0</terminal-type>
+        <remove-instrumentation>0</remove-instrumentation>
+        <environment>
+        </environment>
+      </runprofile>
+    </conf>
+    <conf name="windows_64" type="1">
+      <toolsSet>
+        <developmentServer>localhost</developmentServer>
+        <platform>2</platform>
+      </toolsSet>
+      <dbx_gdbdebugger version="1">
+        <gdb_pathmaps>
+        </gdb_pathmaps>
+        <gdb_interceptlist>
+          <gdbinterceptoptions gdb_all="false" gdb_unhandled="true" gdb_unexpected="true"/>
+        </gdb_interceptlist>
+        <gdb_options>
+          <DebugOptions>
+          </DebugOptions>
+        </gdb_options>
+        <gdb_buildfirst gdb_buildfirst_overriden="false" gdb_buildfirst_old="false"/>
+      </dbx_gdbdebugger>
+      <nativedebugger version="1">
+        <engine>gdb</engine>
+      </nativedebugger>
+      <runprofile version="9">
+        <runcommandpicklist>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" case_testing.tlm</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" case_testing_3D.tlm</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" case_testing_1D.tlm</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" cpennes1Li.tlm</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" test/cpennes1Li.tlm</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}"/test cpennes1Li.tlm</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}"/test cdiff1Li.tlm</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" cheat1Li.tlm</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" cdiff1Li.tlm</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" cpennes2Tr.tlm</runcommandpicklistitem>
+        </runcommandpicklist>
+        <runcommand>"${OUTPUT_PATH}" cpennes2Tr.tlm</runcommand>
         <rundir>test</rundir>
         <buildfirst>true</buildfirst>
         <terminal-type>0</terminal-type>

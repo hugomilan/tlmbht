@@ -32,6 +32,8 @@
  *
  */
 
+
+
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -53,7 +55,7 @@ unsigned int tbnReader(struct MeshConfig * input, struct tlmInternalMesh * outpu
 
     unsigned long long numberOfNodeReads = 0, numberOfElementsRead = 0;
     char * pline = NULL, *lineOriginal = NULL, *codeForReading = NULL;
-    size_t lenLine = 0;
+    long lenLine = 0;
     enum tlmtbnConfig ConfigPoint = NOTHING_TBN;
     FILE *pfile;
     char* nameOfFile = (char*) malloc(strlen(input->nameOfInputFile) + 5);
@@ -83,7 +85,7 @@ unsigned int tbnReader(struct MeshConfig * input, struct tlmInternalMesh * outpu
 
 
     // reads until we find the end-of-file character
-    while (getline(&pline, &lenLine, pfile) != EOF) {
+    while (getlineTlmbht(&pline, &lenLine, pfile) != 1) {
         // I start the loop checking the variable for error.
         if (errorTLMnumber != 0 && errorTLMnumber != 9999 && errorTLMnumber != 9998) {
             break;
@@ -98,7 +100,7 @@ unsigned int tbnReader(struct MeshConfig * input, struct tlmInternalMesh * outpu
         // DEBUG: Shown the line number and content
         // printf("Line %04u: %s", lineNumber, pline);
         // DEBUG: Shown the line number, quantity of characters in the line and content
-        // printf("Line %04u (%zu): %s", lineNumber, strlen(pline), pline); 
+        // printf("Line %04u (%u): %s", lineNumber, strlen(pline), pline); 
 
         // I will copy the pline as a matter to show it for troubleshooting purposes.
         lineOriginal = (char *) realloc(lineOriginal, strlen(pline) + 1);

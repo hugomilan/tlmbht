@@ -143,7 +143,6 @@
  * 
  */
 
-
 #include <stdio.h>
 #include <time.h>
 
@@ -166,12 +165,6 @@ int main(int argc, char *argv[]) {
     clock_t begin = clock();
     struct dataForSimulation newDataConfig;
     unsigned int tlmErrorCode = 0;
-    printf("tlmbht 0.2.0\n");
-    // If the name or the version are changed, see:
-    // 1) myName and myVersion in dataForSimulation
-    // 2) help file
-    // 3) version file
-    // 4) readme file
 
     // initializing all the variables
     printf("Initiating the software...\n");
@@ -179,6 +172,22 @@ int main(int argc, char *argv[]) {
         sendErrorCodeAndMessage(12, NULL, NULL, NULL, NULL);
         return tlmErrorCode;
     }
+    printf("\n");
+    printfMyNameAndVersion(&newDataConfig);
+    // If the name or the version are changed, see:
+    // 1) myName and myVersion in dataForSimulation
+    // 2) help file
+    // 3) version file
+    // 4) readme file
+    // 5) CMakeLists.txt file
+
+#if defined(_OPENMP)
+    printf("With openMP.\n\n");
+#else
+    printf("\nWithout openMP. If you want openMP, re-compile the code and include the openMP library.\n\n\n");
+#endif
+    
+    
     printf("Done initiating the software.\n");
 
     // Opening the input file

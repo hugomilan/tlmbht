@@ -33,7 +33,6 @@
  *
  */
 
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -50,9 +49,8 @@
  */
 unsigned int testAndReadInputFile(int nInput, char* pArgs[], struct dataForSimulation *newDataForSimu) {
 
-    unsigned int tlmErrorCode = 0, inputPosition, inputPositionDefined = 0, showHelp, showVersion;
+    unsigned int tlmErrorCode = 0, inputPosition, inputPositionDefined = 0, showHelp = 0, showVersion = 0;
     FILE *pfile;
-
     // checking the inputs. I don't check input 0 because this is
     // the function being called
     for (unsigned int i = 1; i < nInput; i++) {
@@ -224,14 +222,15 @@ unsigned int testAndReadInputFile(int nInput, char* pArgs[], struct dataForSimul
 unsigned int readFileTLM(FILE * f, struct dataForSimulation *newDataForSimu) {
     unsigned int lineNumber = 0, errorTLMnumber = 0;
     char *pline = NULL, *lineOriginal = NULL;
-    size_t lenLine = 0;
+    long lenLine = 0;
 
 
     int startEndBrackets = 0; // 0 - not started or finalized; 1 - started;
     enum configuringInside ConfigPoint = NOTHING;
 
     // reading line-by-line until we get to the end-of-file character
-    while (getline(&pline, &lenLine, f) != EOF) {
+    int lineInt = 1;
+        while (getlineTlmbht(&pline, &lenLine, f) != 1) {
         // I start the loop checking the variable for error.
         if (errorTLMnumber != 0 && errorTLMnumber != 9999 && errorTLMnumber != 9998) {
             // get out of the while loop
@@ -327,7 +326,7 @@ unsigned int readFileTLM(FILE * f, struct dataForSimulation *newDataForSimu) {
 
         if (newDataForSimu->simulationInput.verboseMode == 1) {
             // VERBOSE: Shown the line number, quantity of characters in the line and content
-            printf("Line %04u (%zu): %s", lineNumber, strlen(pline), pline);
+            printf("Line %04u (%lu): %s", lineNumber, strlen(pline), pline);
         }
 
 
@@ -347,7 +346,7 @@ unsigned int readFileTLM(FILE * f, struct dataForSimulation *newDataForSimu) {
 
         if (newDataForSimu->simulationInput.verboseMode == 1) {
             // DEBUG: what comes out the useful test. Shown the line number, quantity of characters in the line and content
-            printf("Useful content from line %04u (%zu): %s\n", lineNumber, strlen(pline), pline);
+            printf("Useful content from line %04u (%lu): %s\n", lineNumber, strlen(pline), pline);
         }
 
 
@@ -512,8 +511,8 @@ unsigned int initiateAllConfigurationVarialbes(struct dataForSimulation *input) 
     // initializing who am I
     input->myName = malloc( ( strlen("tlmbht") + 1 )*sizeof(char) );
     strcpy(input->myName, "tlmbht");
-    input->myVersion = malloc( ( strlen("0.2.0") + 1 )*sizeof(char) );
-    strcpy(input->myVersion, "0.2.0");
+    input->myVersion = malloc( ( strlen("0.2.0-alpha") + 1 )*sizeof(char) );
+    strcpy(input->myVersion, "0.2.0-alpha");
 
     // initializing simulation variables used for configuration
     if ((errorTLMnumber = initiateSimulationVariable(&input->simulationInput)) != 0)
@@ -636,7 +635,8 @@ unsigned int terminateAllConfigurationVarialbes(struct dataForSimulation *input)
  * printfAllInputData: prints the input data read by the algorithm from the input file
  */
 void printfAllInputData(struct dataForSimulation * input) {
-    printf("%s %s\n", input->myName, input->myVersion);
+    
+    printfMyNameAndVersion(input);
 
     printf("Information read from inputs:\n");
     // information from the simulation header
@@ -683,6 +683,14 @@ void printfAllInputData(struct dataForSimulation * input) {
 //    }
 
 }
+
+/*
+ * printfMyNameAndVersion: prints the name and version of this software
+ */
+void printfMyNameAndVersion(struct dataForSimulation * input) {
+    printf("%s %s\n", input->myName, input->myVersion);
+}
+
 
 /*
  * testAllConfigurationVarialbes: tests if all the configuration variables

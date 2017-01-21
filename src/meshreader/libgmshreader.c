@@ -32,7 +32,6 @@
  *
  */
 
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -55,7 +54,7 @@ unsigned int gmshReader(struct MeshConfig * input, struct tlmInternalMesh * outp
     struct dataGmsh2_2 inputGmsh;
 
     char * pline = NULL, *lineOriginal = NULL, *codeForReading = NULL;
-    size_t lenLine = 0;
+    long lenLine = 0;
     enum gmsh2_2Config ConfigPoint = NOTHING_GMSH;
     FILE *pfile, *pfileWrite;
     char* nameOfFile = (char*) malloc(strlen(input->nameOfInputFile) + 5);
@@ -83,7 +82,7 @@ unsigned int gmshReader(struct MeshConfig * input, struct tlmInternalMesh * outp
     }
 
     // read the entire gmsh file until we found the end-of-file character
-    while (getline(&pline, &lenLine, pfile) != EOF) {
+        while (getlineTlmbht(&pline, &lenLine, pfile) != 1) {
         // I start the loop checking the variable for error.
         if (errorTLMnumber != 0 && errorTLMnumber != 9999 && errorTLMnumber != 9998
                 && (errorTLMnumber < 7652 || errorTLMnumber > 7658)) {
@@ -105,7 +104,7 @@ unsigned int gmshReader(struct MeshConfig * input, struct tlmInternalMesh * outp
         // DEBUG: Shown the line number and content
         // printf("Line %04u: %s", lineNumber, pline);
         // DEBUG: Shown the line number, quantity of characters in the line and content
-        // printf("Line %04u (%zu): %s", lineNumber, strlen(pline), pline); 
+        // printf("Line %04u (%u): %s", lineNumber, strlen(pline), pline); 
 
         // I will copy the pline as a matter to show it for troubleshooting purposes.
         // + 1 for the end-of-line character

@@ -9,24 +9,42 @@
             <header-extensions>h</header-extensions>
             <sourceEncoding>UTF-8</sourceEncoding>
             <make-dep-projects/>
-            <sourceRootList>
-                <sourceRootElem>src/miscellaneous/messages</sourceRootElem>
-            </sourceRootList>
+            <sourceRootList/>
             <confList>
                 <confElem>
-                    <name>Debug</name>
+                    <name>release</name>
                     <type>1</type>
                 </confElem>
                 <confElem>
-                    <name>Release</name>
+                    <name>no_flags</name>
                     <type>1</type>
                 </confElem>
                 <confElem>
-                    <name>CUDA_Debug</name>
+                    <name>debug</name>
                     <type>1</type>
                 </confElem>
                 <confElem>
-                    <name>CUDA_Release</name>
+                    <name>cuda_release</name>
+                    <type>1</type>
+                </confElem>
+                <confElem>
+                    <name>cuda_debug</name>
+                    <type>1</type>
+                </confElem>
+                <confElem>
+                    <name>linux_32</name>
+                    <type>1</type>
+                </confElem>
+                <confElem>
+                    <name>linux_64</name>
+                    <type>1</type>
+                </confElem>
+                <confElem>
+                    <name>windows_32</name>
+                    <type>1</type>
+                </confElem>
+                <confElem>
+                    <name>windows_64</name>
                     <type>1</type>
                 </confElem>
             </confList>

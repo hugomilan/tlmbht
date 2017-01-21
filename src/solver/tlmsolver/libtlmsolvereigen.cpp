@@ -37,6 +37,7 @@
 #include <iostream>
 #include <stdexcept>
 #include <omp.h>
+#include <time.h>
 
 #include "libtlmsolvereigen.h"
 #include "../../miscellaneous/libwritetofiletlmbht.h"

@@ -128,14 +128,14 @@ unsigned int getUsefulContent(char * input) {
     char * pCommentChar;
 
     // DEBUG: print the quantity of character and input
-    // printf("Input line (%zu) %s:", strlen(input), input);
+    // printf("Input line (%u) %s:", strlen(input), input);
 
     // that's the end of file or just a new line character
     // Obs.: I don't expect to get EOF here because that's the condition to quit
     // the while-loop
     if (*input == EOF || *input == '\n') {
         // DEBUG: print the quantity of characters and the input
-        //        printf("Only new line (%zu) %s:", strlen(input), input);
+        //        printf("Only new line (%u) %s:", strlen(input), input);
         return 9998;
     }
 
@@ -150,7 +150,7 @@ unsigned int getUsefulContent(char * input) {
         if (*(pCommentChar + 1) == '/') {
             input[(strlen(input) - strlen(pCommentChar))] = '\0';
             // DEBUG: print the quantity of characters and the input after removing comments
-            // printf("Without comments (%zu) %s\n:", strlen(input), input);    
+            // printf("Without comments (%u) %s\n:", strlen(input), input);    
 
             // if the size is zero, then there were just comments on this line
             if (strlen(input) == 0) return 9998;
@@ -176,7 +176,7 @@ void removeBlankSpacesBefore(char * input) {
             input[i] = input[i + 1];
         }
         // DEBUG: Check that got inside the remove blanks before
-        // printf("Inside (%zu): %s\n", strlen(input), input);
+        // printf("Inside (%u): %s\n", strlen(input), input);
     }
 }
 
@@ -191,7 +191,7 @@ void removeBlankSpacesAfter(char * input) {
         i--;
     }
     // DEBUG: Check that got inside the remove blanks
-    // printf("Inside (%zu): [%s]\n", strlen(input), input);
+    // printf("Inside (%u): [%s]\n", strlen(input), input);
 }
 
 /*
@@ -285,6 +285,78 @@ unsigned int getBeforePoint(char * input) {
 
     // DEBUG: print what the value this code gave for the input
     // printf("Value (%d) = %s\n",strlen(input), input);
+    return 0;
+}
+
+/*
+ * getlineTlmbht: This is my implementation of getline. I decided to do that 
+ * because getline() doesn't exist in C for Windows. It will return the line read.
+ * 
+ * pline: char pointer that contains the line.
+ * size_line: that's the size of the line. I will increase it if I need to reallocate pline
+ * file: the file being read.
+ * 
+ * returns:
+ * 0 - It read a line without problems
+ * 1 - It read ONLY the EOF character on that line OR if it output 2 the last time
+ *      it had run (I set a flag value of -1 on size_line to now that).
+ * 2 - It read the line and got an EOF character on that line
+ * 
+ */
+unsigned int getlineTlmbht(char** pline, long* size_line, FILE* file) {
+    long position_pline = 0;
+
+    if (*size_line == -1) {
+        return 0;
+    }
+
+    if (*pline == NULL) {
+        // 100 is my first initial value for pline
+        *size_line = 256;
+        *pline = malloc(*size_line);
+
+    }
+
+    int char_read;
+    while (1) {
+        char_read = fgetc(file);
+
+        // (position_pline + 2) so that we have enough space to include '\n' and '\0'
+        if (position_pline + 2 >= *size_line) {
+            *size_line = (*size_line) * 2;
+            *pline = (char*) realloc(*pline,(*size_line) );
+        }
+
+        if ((char) char_read == '\n') {
+            (*pline)[position_pline] = '\n';
+            position_pline++;
+            (*pline)[position_pline] = '\0';
+            return 0;
+
+        } else if (char_read == EOF) {
+            // now, it could have happen that the file line did not end in '\n'
+            // but in EOF instead. I will verify if the amount of chars read are
+            // greater than 0. If so, then, I read something before EOF.
+            if (position_pline > 0) {
+                // I will put a '\n' and '\0' to read what was in this line.
+                (*pline)[position_pline] = '\n';
+                position_pline++;
+                (*pline)[position_pline] = '\0';
+                // now I set my flag that this is over
+                *size_line = -1;
+                return 0;
+            } else {
+                return 1;
+            }
+
+
+        } else {
+            (*pline)[position_pline] = char_read;
+            position_pline++;
+        }
+
+    }
+
     return 0;
 }
 

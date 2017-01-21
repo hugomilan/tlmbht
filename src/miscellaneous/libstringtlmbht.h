@@ -40,6 +40,8 @@
 extern "C" {
 #endif
 
+#include <stdio.h>
+    
     // this function makes comparison without considering for the case (upper or lower)
     unsigned int compareCaseInsensitive(char *, char *);
 
@@ -56,6 +58,8 @@ extern "C" {
     unsigned int getBetweenBrackets(char *);
 
     unsigned int getBeforePoint(char *);
+    
+    unsigned int getlineTlmbht(char**, long*, FILE*);
 
     unsigned int readVectorIntInputs(char *, int *, int **);
 
@@ -66,6 +70,7 @@ extern "C" {
     unsigned int testStartBrackets(char *);
 
     unsigned int testEndBrackets(char *);
+    
 
 
 #ifdef __cplusplus
