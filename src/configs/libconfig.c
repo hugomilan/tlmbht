@@ -326,7 +326,7 @@ unsigned int readFileTLM(FILE * f, struct dataForSimulation *newDataForSimu) {
 
         if (newDataForSimu->simulationInput.verboseMode == 1) {
             // VERBOSE: Shown the line number, quantity of characters in the line and content
-            printf("Line %04u (%lu): %s", lineNumber, strlen(pline), pline);
+            printf("Line %04u (%lu): %s", lineNumber, (unsigned long) strlen(pline), pline);
         }
 
 
@@ -346,7 +346,7 @@ unsigned int readFileTLM(FILE * f, struct dataForSimulation *newDataForSimu) {
 
         if (newDataForSimu->simulationInput.verboseMode == 1) {
             // DEBUG: what comes out the useful test. Shown the line number, quantity of characters in the line and content
-            printf("Useful content from line %04u (%lu): %s\n", lineNumber, strlen(pline), pline);
+            printf("Useful content from line %04u (%lu): %s\n", lineNumber,  (unsigned long) strlen(pline), pline);
         }
 
 
