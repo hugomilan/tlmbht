@@ -39,7 +39,7 @@ disp([' '; 'Time ' num2str(time_Ana) 's (step ' num2str(i0) ')'; ' '])
 temp_message = 'Model 1: ';
 
 [Ttemp, qxAnatemp] = D1_HEAT_f(Points_Output_1(1:number_Points,1)', 1e-3, time_Ana, ...
-             Ts, Tc, k, ro, cp, Qext, 500);
+             Ts, Tc, k, ro, cp, Qext, 50);
              
              if ( save_1(1) || save_1(2) )
               if (figure_defined == 0)

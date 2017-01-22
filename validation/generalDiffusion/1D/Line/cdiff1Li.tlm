@@ -754,7 +754,7 @@ Material
     //
     // sink a = 0; // not required.
     //      The default value is 0. Defines the value of the sink proportional to 'm'.
-     source = 0.3; // not required.
+     source = 10; // not required.
     //      The default value is 0. Defines the value of the source. 
     // vectorial source = 0; // not required.
     //      The default value is 0. Defines the value of the vectorial source.
@@ -764,7 +764,7 @@ Material
     //      Use the first option when the vectorial source is the same for all directions.
     //      Use the second options when it has different values for different directions.
     //
-    initial scalar = 1; // required if Solve = dynamic;
+    initial scalar = 100; // required if Solve = dynamic;
 }
 
 
@@ -778,7 +778,7 @@ Boundary
     // It can be a vector (like [33 55 11]). If it is a vector, the parameters here
     // will be assigned to all the numbers.
     
-    scalar = 1; // constant value at the boundary
+    scalar = 100; // constant value at the boundary
     
 }
 
@@ -792,7 +792,7 @@ Boundary
 // It can be a vector (like [33 55 11]). If it is a vector, the parameters here
 // will be assigned to all the numbers.
 
-    scalar = 0; // constant value at the boundary
+    scalar = 1; // constant value at the boundary
 }
 
 

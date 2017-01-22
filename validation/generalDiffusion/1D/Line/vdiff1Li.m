@@ -6,13 +6,13 @@ more off %turns pagination off
 cdiff1Li
 
 % Inputs
-mc = 1;
-minf = 0;
+mc = 100;
+minf = 1;
 
 % Characteristics for the mediums.
 diffusionCoefficient = 1e-8; 
 m0 = mc; % initial value
-source = 0.3;
+source = 10;
 
 % last position that has temperature values
 number_Temp = save_1(1)*numbers_1(1) + save_1(2)*numbers_1(3);
@@ -36,7 +36,7 @@ disp([' '; 'Time ' num2str(time_Ana) 's (step ' num2str(i0) ')'; ' '])
 temp_message = 'Model 1: ';
 
 [Ttemp, qxAnatemp] = D1_HEAT_f(Points_Output_1(1:number_Points,1)', 1e-3, time_Ana, ...
-             minf, mc, diffusionCoefficient, 1, 1, source, 5000);
+             minf, mc, diffusionCoefficient, 1, 1, source, 50);
              
              if ( save_1(1) || save_1(2) )
               if (figure_defined == 0)

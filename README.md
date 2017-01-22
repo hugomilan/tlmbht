@@ -14,12 +14,7 @@ This README file provides instructions in how to obtain the software tlmbht and 
 
 ## Installation
 ### Option 1
-You can use one of the binaries compiled for your system. However, compiling the code (Option 2) may yields better performance. If you have any questions, do not hesitate to contact me.
-
-Binaries for Linux.
-
-Binaries for Windows.
-
+You can download the most recent compiled binaries for your system [available in releases](https://github.com/hugomilan/tlmbht/releases). You will find binaries for Linux and Windows and for 32 bits and 64 bits. However, compiling the code (Option 2) may yields better performance.
     
 ### Option 2
 In simple terms:
@@ -34,7 +29,7 @@ Then, go to the folder build/ and use the binary output (named tlmbht).
         
 1. Download this repository. Type in the terminal: `git clone https://github.com/hugomilan/tlmbht.git`. Alternatively, you can use the green button on the right side of this page that says "Clone or download". Remember to extract the zip if you download it as zip.
 
-2. Getting Eigen library. Download it at (http://eigen.tuxfamily.org/index.php?title=Main_Page). Extract the files, open the extracted folder, and copy the folder Eigen (this is the folder inside the extracted folder; it contains the Eigen library's codes) and past it in the include/ folder of this project. Alternatively, you may tell the compiler (using the -I flag) where the Eigen folder is.
+2. Getting Eigen library. Download it [in this page](http://eigen.tuxfamily.org/index.php?title=Main_Page). Extract the files, open the extracted folder, and copy the folder Eigen (this is the folder inside the extracted folder; it contains the Eigen library's codes) and past it in the include/ folder of this project. Alternatively, you may tell the compiler (using the -I flag) where the Eigen folder is.
 
 3. Compiling the code. It should be as simple as typing `make` on the terminal. Use `make -jn` to compile faster (i.e., for 4 threads, type `make -j4`).
 
@@ -44,7 +39,7 @@ If you get any problem during the compilation, you may clean (`make clean`) and 
  
 ## Description
 
-This is an Open-Source scientific code used to solve partial differential equations (pde) using the transmission-line modeling numerical method (TLM; see [Wikipedia](https://en.wikipedia.org/wiki/Transmission-line_matrix_method), [Wiki](https://github.com/hugomilan/tlmbht/wiki), and [references](https://github.com/hugomilan/tlmbht/blob/master/references.md) for more information).
+This is powerful Open-Source scientific code used to solve partial differential equations (pde) using the transmission-line modeling numerical method (TLM; see [Wikipedia](https://en.wikipedia.org/wiki/Transmission-line_matrix_method), [Wiki](https://github.com/hugomilan/tlmbht/wiki), and [references](https://github.com/hugomilan/tlmbht/blob/master/references.md) for more information).
 
 The language is C/C++ and the [Eigen Library](http://www.eigen.tuxfamily.org) is used for matrix calculations. Older versions of the code and some analytical solutions, written in Octave/Matlab, are available in the folder src/octave/.
 
