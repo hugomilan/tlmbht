@@ -14,16 +14,16 @@ GREP=grep
 NM=nm
 CCADMIN=CCadmin
 RANLIB=ranlib
-CC=gcc
-CCC=g++
-CXX=g++
-FC=gfortran
-AS=as
+CC=x86_64-w64-mingw32-gcc
+CCC=x86_64-w64-mingw32-g++
+CXX=x86_64-w64-mingw32-g++
+FC=x86_64-w64-mingw32-gfortran
+AS=x86_64-w64-mingw32-as
 
 # Macros
-CND_PLATFORM=GNU-Linux
+CND_PLATFORM=MINGW64-Linux
 CND_DLIB_EXT=so
-CND_CONF=linux_64
+CND_CONF=release_windows_64
 CND_DISTDIR=dist
 CND_BUILDDIR=build
 
@@ -66,11 +66,11 @@ OBJECTFILES= \
 
 
 # C Compiler Flags
-CFLAGS=-m64 -fopenmp -DNDEBUG
+CFLAGS=-fopenmp -DNDEBUG -static -static-libgcc -static-libstdc++
 
 # CC Compiler Flags
-CCFLAGS=-m64 -fopenmp -DNDEBUG
-CXXFLAGS=-m64 -fopenmp -DNDEBUG
+CCFLAGS=-fopenmp -DNDEBUG -static -static-libgcc -static-libstdc++
+CXXFLAGS=-fopenmp -DNDEBUG -static -static-libgcc -static-libstdc++
 
 # Fortran Compiler Flags
 FFLAGS=
@@ -83,11 +83,11 @@ LDLIBSOPTIONS=
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
-	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/tlmbhtLinux64
+	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/tlmbhtWin64.exe
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/tlmbhtLinux64: ${OBJECTFILES}
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/tlmbhtWin64.exe: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
-	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/tlmbhtLinux64 ${OBJECTFILES} ${LDLIBSOPTIONS}
+	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/tlmbhtWin64.exe ${OBJECTFILES} ${LDLIBSOPTIONS}
 
 ${OBJECTDIR}/main.o: main.c
 	${MKDIR} -p ${OBJECTDIR}

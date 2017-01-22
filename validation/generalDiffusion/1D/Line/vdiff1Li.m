@@ -33,7 +33,7 @@ for (i0 = 1:times_1(5))
 
 time_Ana = i0*times_1(1);
 disp([' '; 'Time ' num2str(time_Ana) 's (step ' num2str(i0) ')'; ' '])
-temp_message = 'Model 1: ';
+temp_message = 'Errors and differences: ';
 
 [Ttemp, qxAnatemp] = D1_HEAT_f(Points_Output_1(1:number_Points,1)', 1e-3, time_Ana, ...
              minf, mc, diffusionCoefficient, 1, 1, source, 50);

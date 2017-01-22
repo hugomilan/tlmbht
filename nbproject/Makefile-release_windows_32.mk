@@ -14,16 +14,16 @@ GREP=grep
 NM=nm
 CCADMIN=CCadmin
 RANLIB=ranlib
-CC=x86_64-w64-mingw32-gcc
-CCC=x86_64-w64-mingw32-g++
-CXX=x86_64-w64-mingw32-g++
-FC=x86_64-w64-mingw32-gfortran
-AS=x86_64-w64-mingw32-as
+CC=i686-w64-mingw32-gcc
+CCC=i686-w64-mingw32-g++
+CXX=i686-w64-mingw32-g++
+FC=i686-w64-mingw32-gfortran
+AS=i686-w64-mingw32-as
 
 # Macros
-CND_PLATFORM=MINGW64-Linux
+CND_PLATFORM=MINGW32-Linux
 CND_DLIB_EXT=so
-CND_CONF=windows_64
+CND_CONF=release_windows_32
 CND_DISTDIR=dist
 CND_BUILDDIR=build
 
@@ -66,11 +66,11 @@ OBJECTFILES= \
 
 
 # C Compiler Flags
-CFLAGS=-fopenmp -DNDEBUG -static -static-libgcc -static-libstdc++
+CFLAGS=-m32 -fopenmp -DNDEBUG -static -static-libgcc -static-libstdc++
 
 # CC Compiler Flags
-CCFLAGS=-fopenmp -DNDEBUG -static -static-libgcc -static-libstdc++
-CXXFLAGS=-fopenmp -DNDEBUG -static -static-libgcc -static-libstdc++
+CCFLAGS=-m32 -fopenmp -DNDEBUG -static -static-libgcc -static-libstdc++
+CXXFLAGS=-m32 -fopenmp -DNDEBUG -static -static-libgcc -static-libstdc++
 
 # Fortran Compiler Flags
 FFLAGS=
@@ -83,11 +83,11 @@ LDLIBSOPTIONS=
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
-	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/tlmbhtWin64.exe
+	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/tlmbhtWin32.exe
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/tlmbhtWin64.exe: ${OBJECTFILES}
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/tlmbhtWin32.exe: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
-	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/tlmbhtWin64.exe ${OBJECTFILES} ${LDLIBSOPTIONS}
+	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/tlmbhtWin32.exe ${OBJECTFILES} ${LDLIBSOPTIONS}
 
 ${OBJECTDIR}/main.o: main.c
 	${MKDIR} -p ${OBJECTDIR}

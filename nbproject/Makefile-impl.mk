@@ -31,7 +31,7 @@ DEFAULTCONF=release
 CONF=${DEFAULTCONF}
 
 # All Configurations
-ALLCONFS=release no_flags debug cuda_release cuda_debug linux_32 linux_64 windows_32 windows_64 
+ALLCONFS=release no_flags debug cuda_release cuda_debug release_linux_32 release_linux_64 release_windows_32 release_windows_64 
 
 
 # build

@@ -6,13 +6,13 @@ more off %turns pagination off
 cdiff2Tr
 
 % Inputs
-mc = 1;
-minf = 0;
-flux = 5e-6;
+mc = 100;
+minf = 1;
+flux = 5e-4;
 
 % Characteristics for the mediums. They must be vectors
 diffusionCoefficient = 1e-8; 
-source = 0.3;
+source = 10;
 
 % last position that has temperature values
 number_Temp = save_1(1)*numbers_1(1) + save_1(2)*numbers_1(3);
@@ -33,10 +33,12 @@ for (i0 = 1:times_1(5))
 
 time_Ana = i0*times_1(1);
 disp([' '; 'Time ' num2str(time_Ana) 's (step ' num2str(i0) ')'; ' '])
-temp_message = 'Model 1: ';
+temp_message = 'Errors and differences: ';
 
-[Ttemp, qxAnatemp, qyAnatemp] = D2_BHE_f(Points_Output_1(1:number_Points,1)',  ...
-             Points_Output_1(1:number_Points,2)', 1e-3, 1e-3, time_Ana, ...
+% Note that we inverted the x,y vectors so that we could use this function to solve
+% the problem shown in the tutorial
+[Ttemp, qxAnatemp, qyAnatemp] = D2_BHE_f(Points_Output_1(1:number_Points,2)',  ...
+             Points_Output_1(1:number_Points,1)', 1e-3, 1e-3, time_Ana, ...
              flux, minf, mc, diffusionCoefficient, 1, 1, 0, 1e3, 1e3, 0, source, 50, 50, 2);
              
              if ( save_1(1) || save_1(2) )
@@ -123,9 +125,10 @@ temp_message = 'Model 1: ';
                 figure_Flux = gcf();
               end
               
-              qxAnaProj = Points_Output_1( (number_Temp + 1):number_Flux, 1).*qxAnatemp(number_Points_Flux:number_Points)';
+              qxAnaProj = Points_Output_1( (number_Temp + 1):number_Flux, 2).*qxAnatemp(number_Points_Flux:number_Points)';
+              qyAnaProj = Points_Output_1( (number_Temp + 1):number_Flux, 1).*qyAnatemp(number_Points_Flux:number_Points)';
               
-              qAnaLTn = qxAnaProj;
+              qAnaLTn = qxAnaProj + qyAnaProj;
              
              TotalDiffFlux(1,i0) = sum(abs(qAnaLTn - output_1((1 + number_Temp ):number_Flux, i0) ));
              MaxDiffFlux(1,i0) = max(abs( qAnaLTn - output_1((1 + number_Temp ):number_Flux, i0) ));

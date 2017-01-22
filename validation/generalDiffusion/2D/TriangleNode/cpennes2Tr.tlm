@@ -100,7 +100,7 @@ Mesh
     // Cylindrical coordinates: [z, r, theta];
     // Spherical coordinates: [r, theta, phi];
 
-    file name = plate_4BC_10766e; // required.
+    file name = plate_4BC_682e; // required.
     // The name of the file without the extension.
     // This is, if the name of your file is "problem.tbn", then you should input only
     // "problem". The extension is defined on the "input format" variable below.
@@ -785,7 +785,7 @@ Boundary
     equation = BHE; // required.
     // This is the name of the equation that this boundary condition is applied to
 
-    number = 10; // required;
+    number = 9; // required;
     // this is the tag number of the boundary.
     // It can be a vector (like [33 55 11]). If it is a vector, the parameters here
     // will be assigned to all the numbers.
@@ -801,7 +801,7 @@ Boundary
     equation = BHE; // required.
     // This is the name of the equation that this boundary condition is applied to
 
-    number = 11; // this is the tag number of the boundary.
+    number = 8; // this is the tag number of the boundary.
 // It can be a vector (like [33 55 11]). If it is a vector, the parameters here
 // will be assigned to all the numbers.
 
@@ -815,7 +815,7 @@ Boundary
     equation = BHE; // required.
     // This is the name of the equation that this boundary condition is applied to
 
-    number = 8; // this is the tag number of the boundary.
+    number = 11; // this is the tag number of the boundary.
 // It can be a vector (like [33 55 11]). If it is a vector, the parameters here
 // will be assigned to all the numbers.
 

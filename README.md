@@ -14,7 +14,8 @@ This README file provides instructions in how to obtain the software tlmbht and 
 
 ## Installation
 ### Option 1
-You can download the most recent compiled binaries for your system [available in releases](https://github.com/hugomilan/tlmbht/releases). You will find binaries for Linux and Windows and for 32 bits and 64 bits. However, compiling the code (Option 2) may yields better performance.
+
+[Download here](https://github.com/hugomilan/tlmbht/releases). You will find binaries for Linux and Windows in 32 bits and 64 bits. However, compiling the code (Option 2) may yields better performance.
     
 ### Option 2
 In simple terms:

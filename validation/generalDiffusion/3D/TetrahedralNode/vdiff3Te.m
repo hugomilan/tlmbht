@@ -33,7 +33,7 @@ for (i0 = 1:times_1(5))
 
 time_Ana = i0*times_1(1);
 disp([' '; 'Time ' num2str(time_Ana) 's (step ' num2str(i0) ')'; ' '])
-temp_message = 'Model 1: ';
+temp_message = 'Errors and differences: ';
 
 [Ttemp, qxAnatemp, qyAnatemp, qzAnatemp] = D3_BHE_f(Points_Output_1(1:number_Points,1)',  ...
              Points_Output_1(1:number_Points,2)', Points_Output_1(1:number_Points,3)', 1e-3, 0.75e-3, 0.5e-3, time_Ana, ...
