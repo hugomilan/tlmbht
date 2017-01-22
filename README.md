@@ -7,9 +7,13 @@
 
  Support from Brazilian National Counsel of Technological and Scientific Development (Proc. 203312/2014-7) for scholarship to HFMM.
   
- Free for educational, research and non-profit purposes.
- Refer to the license file for details.
- 
+ Free for educational, research and non-profit purposes.  Refer to the license file for details.
+***
+
+This README file provides instructions in how to obtain the software tlmbht and provides a brief description about it. If you want to know more about tlmbht and the theory behind it see [Why should I use the tlmbht](https://github.com/hugomilan/tlmbht/wiki/Why-should-I-use-the-tlmbht?).
+
+What is it? Why this software? Why TLM? How do I use it? How precise is it?
+
 ## Installation
 ### Option 1
 You can use one of the binaries compiled for your system. However, compiling the code (Option 2) may yields better performance. If you have any questions, do not hesitate to contact me.
@@ -42,37 +46,17 @@ If you get any problem during the compilation, you may clean (`make clean`) and 
  
 ## Description
 
-This is an Open-Source scientific code used to solve partial differential equations (pde) using the Transmission-line modeling numerical method (TLM; see [Wikipedia](https://en.wikipedia.org/wiki/Transmission-line_matrix_method) and [references](https://github.com/hugomilan/tlmbht/blob/master/references.md) for more information). In this version, the following partial differential equations (pde) are supported:
+This is an Open-Source scientific code used to solve partial differential equations (pde) using the transmission-line modeling numerical method (TLM; see [Wikipedia](https://en.wikipedia.org/wiki/Transmission-line_matrix_method) and [references](https://github.com/hugomilan/tlmbht/blob/master/references.md) for more information).
 
-1) Heat transfer in 1D, 2D, and 3D.
+The language is C/C++ and the [Eigen Library](http://www.eigen.tuxfamily.org) is used for matrix calculations. Older versions of the code and some analytical solutions, written in Octave/Matlab, are available in the folder src/octave/.
 
-2) Bio-heat transfer in 1D, 2D, and 3D (Pennes, 1948; Minkowycz and Sparrow, 2009; Xu et al., 2011).
+Binaries/executable files were tested in Ubuntu 16.10 and Windows 10. See Installation, Option 1 for information in how to get the binaries.
 
-3) Diffusion in 1D, 2D, and 3D.
-
-The numerical solution is based on a mesh of geometrical elements (or control volumes) that can be created using the [Gmsh software](https://www.gmsh.info). The geometrical elements currently supported are based on my research on TLM (see the reference file for citation to the original papers) and are:
-
-1) One-dimension.
-
- 1.1) Line in Cartesian coordinates.
- 
-2) Two-dimensions.
-
- 2.1) Triangle in Cartesian coordinates.
- 
-3) Three-dimensions.
-
- 3.1) Tetrahedron in Cartesian coordinates.
-
-The language is C/C++ and the [Eigen Library](www.eigen.tuxfamily.org) is used for matrix calculations. Older versions of the code written in Octave/Matlab and some analytical solutions used to validate the code are available in the folder src/octave/.
-
-Binaries/executable files were tested in Ubuntu 16.10 and Windows 10. See Installation:Option 1 to know how to get the binaries.
-
-Not everything is documented yet. I'm currently working on new approaches in how to use the TLM and will provide more information on the theory in the Wiki when my papers get published. Until then, you can see the reference and/or the [Wikipedia page](https://en.wikipedia.org/wiki/Transmission-line_matrix_method).
+Not everything is documented yet. I'm currently working on new approaches in how to use the TLM and will provide more information on the theory in the Wiki when my papers get published. Until then, you can see the incomplete documentation, the [references](https://github.com/hugomilan/tlmbht/blob/master/references.md),the [Wikipedia page](https://en.wikipedia.org/wiki/Transmission-line_matrix_method), and/or write me an e-mail if you need help..
 
 I hope you will find this software useful for learning/using the TLM.
 
-Please, fell free to use the software for educational, research and non-profit purposes. You can modify it and your modifications can be (if you want to) included into this project. For profitable purpose, please contact the Center for Technology Licensing at Cornell University (see the LICENSE file for more information).
+You can modify the code and your modifications can be (if you want to) included into this project.
 
 ## Usage
 
@@ -88,13 +72,13 @@ You will need to open to use the command prompt or PowerShell (which depends on 
 
 Then, you will run `tlmbht` in the terminal.
 
-To get start, you may want to try the validations first. You will need [Octave](https://www.gnu.org/software/octave/) (free) or [Matlab](https://www.mathworks.com/products/matlab.html) (paid) to plot the results and see the comparison with the analytical results.
+To get start, you may want to try the validations/tutorials first first. You will need [Octave](https://www.gnu.org/software/octave/) (free) or [Matlab](https://www.mathworks.com/products/matlab.html) (paid) to plot the results and see the comparison with the analytical results.
 
 ## Other TLM codes
 
 Do you want to know what are the other TLM codes and software available in the internet? I compiled a list of what I found in the file [tlmcode](https://github.com/hugomilan/tlmbht/blob/master/tlmcode.md)
 
-## [References](https://github.com/hugomilan/tlmbht/blob/master/references.md) and [Acknowledgements](https://github.com/hugomilan/tlmbht/blob/master/acknowledgements.md):
+## [References](https://github.com/hugomilan/tlmbht/blob/master/references.md) and [Acknowledgment](https://github.com/hugomilan/tlmbht/blob/master/acknowledgment.md):
 
 Please, refer to these files in the root.
 

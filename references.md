@@ -1,4 +1,4 @@
-<b>References</b>
+# References
 
 da Silva, R.G., Maia, A.S.C., 2013. Principles of Animal Biometeorology. Springer.
 
