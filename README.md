@@ -10,9 +10,7 @@
  Free for educational, research and non-profit purposes.  Refer to the license file for details.
 ***
 
-This README file provides instructions in how to obtain the software tlmbht and provides a brief description about it. If you want to know more about tlmbht and the theory behind it see [Why should I use the tlmbht](https://github.com/hugomilan/tlmbht/wiki/Why-should-I-use-the-tlmbht?).
-
-What is it? Why this software? Why TLM? How do I use it? How precise is it?
+This README file provides instructions in how to obtain the software tlmbht and provides a brief description about it. If you want to know more about tlmbht and the theory behind it see [Why should I use the tlmbht](https://github.com/hugomilan/tlmbht/wiki/Why-should-I-use-the-tlmbht?) and the [Wiki](https://github.com/hugomilan/tlmbht/wiki).
 
 ## Installation
 ### Option 1
@@ -34,11 +32,11 @@ Then, go to the folder build/ and use the binary output (named tlmbht).
 
 #### A more complete set of instructions to compile the code
         
-1) Download this repository. Type in the terminal: `git clone https://github.com/hugomilan/tlmbht.git`. Alternatively, you can use the green button on the right side of this page that says "Clone or download". Remember to extract the zip if you download it as zip.
+1. Download this repository. Type in the terminal: `git clone https://github.com/hugomilan/tlmbht.git`. Alternatively, you can use the green button on the right side of this page that says "Clone or download". Remember to extract the zip if you download it as zip.
 
-2) Getting Eigen library. Download it at (http://eigen.tuxfamily.org/index.php?title=Main_Page). Extract the files, open the extracted folder, and copy the folder Eigen (this is the folder inside the extracted folder; it contains the Eigen library's codes) and past it in the include/ folder of this project. Alternatively, you may tell the compiler (using the -I flag) where the Eigen folder is.
+2. Getting Eigen library. Download it at (http://eigen.tuxfamily.org/index.php?title=Main_Page). Extract the files, open the extracted folder, and copy the folder Eigen (this is the folder inside the extracted folder; it contains the Eigen library's codes) and past it in the include/ folder of this project. Alternatively, you may tell the compiler (using the -I flag) where the Eigen folder is.
 
-3) Compiling the code. It should be as simple as typing `make` on the terminal. Use `make -jn` to compile faster (i.e., for 4 threads, type `make -j4`).
+3. Compiling the code. It should be as simple as typing `make` on the terminal. Use `make -jn` to compile faster (i.e., for 4 threads, type `make -j4`).
 
 I prepared different makefile configurations. You may try to use the default (only do `make`). This default configuration was prepared for the gcc/g++ compiler. If you have a different compiler, you have to edit the file /nbproject/Makefile-release.mk and include the name (or the full path, if necessary) of your C compiler in the variable CC, your C++ compiler in the variables CCC and CXX, and you can delete the variables FC and AS.
 
@@ -46,13 +44,13 @@ If you get any problem during the compilation, you may clean (`make clean`) and 
  
 ## Description
 
-This is an Open-Source scientific code used to solve partial differential equations (pde) using the transmission-line modeling numerical method (TLM; see [Wikipedia](https://en.wikipedia.org/wiki/Transmission-line_matrix_method) and [references](https://github.com/hugomilan/tlmbht/blob/master/references.md) for more information).
+This is an Open-Source scientific code used to solve partial differential equations (pde) using the transmission-line modeling numerical method (TLM; see [Wikipedia](https://en.wikipedia.org/wiki/Transmission-line_matrix_method), [Wiki](https://github.com/hugomilan/tlmbht/wiki), and [references](https://github.com/hugomilan/tlmbht/blob/master/references.md) for more information).
 
 The language is C/C++ and the [Eigen Library](http://www.eigen.tuxfamily.org) is used for matrix calculations. Older versions of the code and some analytical solutions, written in Octave/Matlab, are available in the folder src/octave/.
 
 Binaries/executable files were tested in Ubuntu 16.10 and Windows 10. See Installation, Option 1 for information in how to get the binaries.
 
-Not everything is documented yet. I'm currently working on new approaches in how to use the TLM and will provide more information on the theory in the Wiki when my papers get published. Until then, you can see the incomplete documentation, the [references](https://github.com/hugomilan/tlmbht/blob/master/references.md),the [Wikipedia page](https://en.wikipedia.org/wiki/Transmission-line_matrix_method), and/or write me an e-mail if you need help..
+Not everything is documented yet. I'm currently working on new approaches in how to use the TLM and will provide more information on the theory in the Wiki when my papers get published. Until then, you can see the [Wiki](https://github.com/hugomilan/tlmbht/wiki), the [references](https://github.com/hugomilan/tlmbht/blob/master/references.md), the [Wikipedia page](https://en.wikipedia.org/wiki/Transmission-line_matrix_method), and/or write me an e-mail if you need help..
 
 I hope you will find this software useful for learning/using the TLM.
 
@@ -62,7 +60,7 @@ You can modify the code and your modifications can be (if you want to) included 
 
 This software does not provide a graphical user interface (yet). Everything is controlled via script and the solver is called via terminal.
 
-Refer to the case.tlm file to see instructions on how to configure the solver.
+Refer to the case.tlm file or to the link [How to configure a case file](https://github.com/hugomilan/tlmbht/wiki/How-to-configure-a-case-file) to see instructions on how to configure the solver.
 
 ### Linux 
 Run in the terminal `tlmbht`.
