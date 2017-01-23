@@ -100,12 +100,13 @@ Mesh
     // Cylindrical coordinates: [z, r, theta];
     // Spherical coordinates: [r, theta, phi];
 
-    file name = parallelepiped_6BC_69941e; // required.
+    file name = parallelepiped_6BC; // required.
+    // file name = parallelepiped_6BC_69941e; // required.
     // The name of the file without the extension.
     // This is, if the name of your file is "problem.tbn", then you should input only
     // "problem". The extension is defined on the "input format" variable below.
 
-    input format = tlmtbn; // required.
+    input format = gmsh; // required.
     // Options:
     // tlmtbn: .tbn, This is the native tlmbht input file. If you choose a different input
     // format, the software will convert it to .tbn.
@@ -125,7 +126,7 @@ Mesh
     // Otherwise, it must be a vector column with three elements.
     //
     // Example: to convert a mesh from millimeters to meters, both inputs are correct:
-    // scale = 1e-3;
+     scale = 1e-3;
     // scale = [1e-3 1e-3 1e-3];
     // The second option may be adequate when a base mesh is used for multiple simulations
     // where the size of the mesh is expanded/contracted in different axes.
@@ -754,7 +755,7 @@ Material
     //
     // sink a = 0; // not required.
     //      The default value is 0. Defines the value of the sink proportional to 'm'.
-     source = 0.3; // not required.
+     source = 10; // not required.
     //      The default value is 0. Defines the value of the source. 
     // vectorial source = 0; // not required.
     //      The default value is 0. Defines the value of the vectorial source.
@@ -764,7 +765,7 @@ Material
     //      Use the first option when the vectorial source is the same for all directions.
     //      Use the second options when it has different values for different directions.
     //
-    initial scalar = 1; // required if Solve = dynamic;
+    initial scalar = 100; // required if Solve = dynamic;
 }
 
 
@@ -773,39 +774,13 @@ Boundary
     equation = diffusion; // required.
     // This is the name of the equation that this boundary condition is applied to
 
-    number = 27; // required;
+    number = 21; // required;
     // this is the tag number of the boundary.
     // It can be a vector (like [33 55 11]). If it is a vector, the parameters here
     // will be assigned to all the numbers.
     
-    scalar = 1; // constant value at the boundary
+    scalar = 100; // constant value at the boundary
     
-}
-
-
-Boundary
-{
-    equation = diffusion; // required.
-    // This is the name of the equation that this boundary condition is applied to
-
-    number = 30; // this is the tag number of the boundary.
-// It can be a vector (like [33 55 11]). If it is a vector, the parameters here
-// will be assigned to all the numbers.
-
-    scalar = 0; // constant value at the boundary
-}
-
-
-Boundary
-{
-    equation = diffusion; // required.
-    // This is the name of the equation that this boundary condition is applied to
-
-    number = 18; // this is the tag number of the boundary.
-// It can be a vector (like [33 55 11]). If it is a vector, the parameters here
-// will be assigned to all the numbers.
-
-    Heat flux = 5e-7;
 }
 
 
@@ -818,7 +793,33 @@ Boundary
 // It can be a vector (like [33 55 11]). If it is a vector, the parameters here
 // will be assigned to all the numbers.
 
-    Heat flux = 1e-6;
+    scalar = 1; // constant value at the boundary
+}
+
+
+Boundary
+{
+    equation = diffusion; // required.
+    // This is the name of the equation that this boundary condition is applied to
+
+    number = 30; // this is the tag number of the boundary.
+// It can be a vector (like [33 55 11]). If it is a vector, the parameters here
+// will be assigned to all the numbers.
+
+    flux = 5e-4;
+}
+
+
+Boundary
+{
+    equation = diffusion; // required.
+    // This is the name of the equation that this boundary condition is applied to
+
+    number = 18; // this is the tag number of the boundary.
+// It can be a vector (like [33 55 11]). If it is a vector, the parameters here
+// will be assigned to all the numbers.
+
+    flux = 0e-4;
 }
 
 
