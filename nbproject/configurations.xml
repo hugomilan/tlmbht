@@ -504,7 +504,7 @@
       <itemPath>src/octave</itemPath>
       <itemPath>references.md</itemPath>
       <itemPath>test</itemPath>
-      <itemPath>validation</itemPath>
+      <itemPath>vte</itemPath>
     </logicalFolder>
   </logicalFolder>
   <projectmakefile>Makefile</projectmakefile>

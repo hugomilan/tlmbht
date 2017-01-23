@@ -66,11 +66,11 @@ You will need to open to use the command prompt or PowerShell (which depends on 
 
 Then, you will run `tlmbht` in the terminal.
 
-To get start, you may want to try the validations/tutorials first first. You will need [Octave](https://www.gnu.org/software/octave/) (free) or [Matlab](https://www.mathworks.com/products/matlab.html) (paid) to plot the results and see the comparison with the analytical results.
+To get start, you may want to go to [Validations, Tutorials, and Examples](https://github.com/hugomilan/tlmbht/wiki/Validations,-Tutorials,-and-Examples) first. You will need [Octave](https://www.gnu.org/software/octave/) (free) or [Matlab](https://www.mathworks.com/products/matlab.html) (paid) to plot the results and see the comparison with the analytical results.
 
 ## Other TLM codes
 
-Do you want to know what are the other TLM codes and software available in the internet? I compiled a list of what I found in the file [tlmcode](https://github.com/hugomilan/tlmbht/blob/master/tlmcode.md)
+Do you want to know what are the other TLM codes and software available on the internet? I compiled a list of what I found in the file [tlmcode.](https://github.com/hugomilan/tlmbht/blob/master/tlmcode.md)
 
 ## [References](https://github.com/hugomilan/tlmbht/blob/master/references.md) and [Acknowledgment](https://github.com/hugomilan/tlmbht/blob/master/acknowledgment.md):
 
