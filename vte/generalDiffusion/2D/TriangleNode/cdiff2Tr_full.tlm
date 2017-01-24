@@ -805,7 +805,7 @@ Boundary
 // It can be a vector (like [33 55 11]). If it is a vector, the parameters here
 // will be assigned to all the numbers.
 
-    flux = 5e-4;
+    flux = 5e-3;
 }
 
 

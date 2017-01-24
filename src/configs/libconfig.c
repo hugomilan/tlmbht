@@ -749,15 +749,6 @@ unsigned int testAllConfigurationVarialbes(struct dataForSimulation *input) {
         }
     }
 
-    // testing for the Simulation configuration field. 
-    //
-    // We did not read the simulation configurations.
-    // This is not necessary anymore
-    //    if (input->simulationRead == 0) {
-    //        sendErrorCodeAndMessage(208, NULL, NULL, NULL, NULL);
-    //        errorFound = 1;
-    //    }
-
     // testing the simulation configurations input
     if (testInputSimu(&input->simulationInput, input->meshInput.nameOfInputFile) != 0) {
         sendErrorCodeAndMessage(1870, NULL, NULL, NULL, NULL);
@@ -780,7 +771,7 @@ unsigned int testAllConfigurationVarialbes(struct dataForSimulation *input) {
 
     // testing for the Equation configuration field
     //
-    // we did not read the material configurations
+    // we did not read the equation configurations
     if (input->quantityOfEquationsRead == 0) {
         sendErrorCodeAndMessage(212, NULL, NULL, NULL, NULL);
         errorFound = 1;

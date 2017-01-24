@@ -8,7 +8,7 @@ cdiff2Tr
 % Inputs
 mc = 100;
 minf = 1;
-flux = 5e-4;
+flux = 5e-3;
 
 % Characteristics for the mediums. They must be vectors
 diffusionCoefficient = 1e-8; 
@@ -37,8 +37,8 @@ temp_message = 'Errors and differences: ';
 
 % Note that we inverted the x,y vectors so that we could use this function to solve
 % the problem shown in the tutorial
-[Ttemp, qxAnatemp, qyAnatemp] = D2_BHE_f(Points_Output_1(1:number_Points,2)',  ...
-             Points_Output_1(1:number_Points,1)', 1e-3, 1e-3, time_Ana, ...
+[Ttemp, qxAnatemp, qyAnatemp] = D2_BHE_f(Points_Output_1(1:number_Points,1)',  ...
+             Points_Output_1(1:number_Points,2)', 0.75e-3, 1e-3, time_Ana, ...
              flux, minf, mc, diffusionCoefficient, 1, 1, 0, 1e3, 1e3, 0, source, 50, 50, 2);
              
              if ( save_1(1) || save_1(2) )
@@ -82,9 +82,9 @@ temp_message = 'Errors and differences: ';
              
              % plot central temperatures
              set(0,'CurrentFigure',figure_Temp)
-             plot(Points_Output_1(1:numbers_1(1),1), Ttemp(1:numbers_1(1))', '*b')
+             plot(Points_Output_1(1:numbers_1(1),2), Ttemp(1:numbers_1(1))', '*b')
              hold on 
-             plot(Points_Output_1(1:numbers_1(1),1), output_1(1:numbers_1(1), i0), '*r')
+             plot(Points_Output_1(1:numbers_1(1),2), output_1(1:numbers_1(1), i0), '*r')
              
              end
              
@@ -107,9 +107,9 @@ temp_message = 'Errors and differences: ';
              ' maximum percentage error ' num2str(MaxPercentageError(3,i0)) ' %;'];
              
              set(0,'CurrentFigure',figure_Temp)
-             plot(Points_Output_1((1 + numbers_1(1)*save_1(1) ):number_Temp,1), Ttemp((1 + numbers_1(1)*save_1(1) ):number_Temp)', 'ob')
+             plot(Points_Output_1((1 + numbers_1(1)*save_1(1) ):number_Temp,2), Ttemp((1 + numbers_1(1)*save_1(1) ):number_Temp)', 'ob')
              hold on 
-             plot(Points_Output_1((1 + numbers_1(1)*save_1(1) ):number_Temp,1), output_1((1 + numbers_1(1)*save_1(1) ):number_Temp, i0), 'or')
+             plot(Points_Output_1((1 + numbers_1(1)*save_1(1) ):number_Temp,2), output_1((1 + numbers_1(1)*save_1(1) ):number_Temp, i0), 'or')
              end
              
              hold off
@@ -125,8 +125,8 @@ temp_message = 'Errors and differences: ';
                 figure_Flux = gcf();
               end
               
-              qxAnaProj = Points_Output_1( (number_Temp + 1):number_Flux, 2).*qxAnatemp(number_Points_Flux:number_Points)';
-              qyAnaProj = Points_Output_1( (number_Temp + 1):number_Flux, 1).*qyAnatemp(number_Points_Flux:number_Points)';
+              qxAnaProj = Points_Output_1( (number_Temp + 1):number_Flux, 1).*qxAnatemp(number_Points_Flux:number_Points)';
+              qyAnaProj = Points_Output_1( (number_Temp + 1):number_Flux, 2).*qyAnatemp(number_Points_Flux:number_Points)';
               
               qAnaLTn = qxAnaProj + qyAnaProj;
              
@@ -149,11 +149,11 @@ temp_message = 'Errors and differences: ';
              
              
              set(0,'CurrentFigure',figure_Flux);
-             plot(Points_Output_1(number_Points_Flux:number_Points,1), qAnaLTn, '*b')
+             plot(Points_Output_1(number_Points_Flux:number_Points,2), qAnaLTn, '*b')
              hold on 
-             plot(Points_Output_1(number_Points_Flux:number_Points,1), output_1((1 + number_Temp ):number_Flux, i0), '*r')
+             plot(Points_Output_1(number_Points_Flux:number_Points,2), output_1((1 + number_Temp ):number_Flux, i0), '*r')
              
-             plot(Points_Output_1(number_Points_Flux:number_Points,1), qAnaLTn - output_1((1 + number_Temp ):number_Flux, i0), '*g')
+             plot(Points_Output_1(number_Points_Flux:number_Points,2), qAnaLTn - output_1((1 + number_Temp ):number_Flux, i0), '*g')
              hold off
              
              
@@ -163,7 +163,7 @@ temp_message = 'Errors and differences: ';
              disp(temp_message)
 
              fflush(stdout);
-             pause(0.5)
+             pause(0.1)
              
              figure_defined = 1;
              

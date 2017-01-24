@@ -27,15 +27,15 @@ Material
 {
     equation = BHE;
     number =  7;
-     density = 1200;
-     specific heat = 3200;
-     thermal conductivity = 0.3;
-     blood perfusion = 1e-4;
-     blood density = 1052;
-     blood specific heat = 3600;
-     blood temperature = 37;
-     internal heat generation = 500;
-     initial temperature = 37;
+    density = 1200;
+    specific heat = 3200;
+    thermal conductivity = 0.3;
+    blood perfusion = 1e-4;
+    blood density = 1052;
+    blood specific heat = 3600;
+    blood temperature = 37;
+    internal heat generation = 500;
+    initial temperature = 37;
 }
 
 Boundary
