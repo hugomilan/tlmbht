@@ -6,14 +6,14 @@ more off %turns pagination off
 cdiff3Te
 
 % Inputs
-mc = 100;
+mc = 1;
 minf = 1;
 fluxY = 5e-4;
 fluxZ = 0e-4;
 
 % Characteristics for the mediums. They must be vectors
 diffusionCoefficient = 1e-8; 
-source = 10;
+source = 0;
 
 % last position that has temperature values
 number_Temp = save_1(1)*numbers_1(1) + save_1(2)*numbers_1(3);

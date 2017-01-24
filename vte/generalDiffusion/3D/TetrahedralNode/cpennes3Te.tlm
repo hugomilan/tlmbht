@@ -89,7 +89,7 @@ Simulation  // Configurations for the simulations
     // Options:
     // true: will print more information than the command 'print additional'. This
     //      set 'print additional = true'.
-    // false: will only print essential information (default).
+    // false: will only print essential information (default).ave
 }
 
 Mesh
@@ -100,12 +100,12 @@ Mesh
     // Cylindrical coordinates: [z, r, theta];
     // Spherical coordinates: [r, theta, phi];
 
-    file name = parallelepiped_6BC_69941e; // required.
+    file name = parallelepiped_6BC; // required.
     // The name of the file without the extension.
     // This is, if the name of your file is "problem.tbn", then you should input only
     // "problem". The extension is defined on the "input format" variable below.
 
-    input format = tlmtbn; // required.
+    input format = gmsh; // required.
     // Options:
     // tlmtbn: .tbn, This is the native tlmbht input file. If you choose a different input
     // format, the software will convert it to .tbn.
@@ -125,7 +125,7 @@ Mesh
     // Otherwise, it must be a vector column with three elements.
     //
     // Example: to convert a mesh from millimeters to meters, both inputs are correct:
-    // scale = 1e-3;
+     scale = 1e-3;
     // scale = [1e-3 1e-3 1e-3];
     // The second option may be adequate when a base mesh is used for multiple simulations
     // where the size of the mesh is expanded/contracted in different axes.
@@ -819,7 +819,7 @@ Boundary
 // It can be a vector (like [33 55 11]). If it is a vector, the parameters here
 // will be assigned to all the numbers.
 
-    Heat flux = 2.5e4; // (W/m2). This assumes a constant heat flux flowing at the boundary.
+    Heat flux = 0e4; // (W/m2). This assumes a constant heat flux flowing at the boundary.
 }
 
 

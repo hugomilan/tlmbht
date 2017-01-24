@@ -768,34 +768,34 @@ unsigned int getGeometricalVariablesTLMtetrahedron(const struct node *N1,
     double volume, area[4], areaX[4], areaY[4], areaZ[4], center[3];
     double deltaXl[4], deltaYl[4], deltaZl[4], deltal[4];
 
-    deltaXL[0] = N1->x - N2->x;
-    deltaYL[0] = N1->y - N2->y;
-    deltaZL[0] = N1->z - N2->z;
+    deltaXL[0] = N2->x - N1->x;
+    deltaYL[0] = N2->y - N1->y;
+    deltaZL[0] = N2->z - N1->z;
     length[0] = sqrt(deltaXL[0] * deltaXL[0] + deltaYL[0] * deltaYL[0] + deltaZL[0] * deltaZL[0]);
 
-    deltaXL[1] = N1->x - N3->x;
-    deltaYL[1] = N1->y - N3->y;
-    deltaZL[1] = N1->z - N3->z;
+    deltaXL[1] = N3->x - N1->x;
+    deltaYL[1] = N3->y - N1->y;
+    deltaZL[1] = N3->z - N1->z;
     length[1] = sqrt(deltaXL[1] * deltaXL[1] + deltaYL[1] * deltaYL[1] + deltaZL[1] * deltaZL[1]);
 
-    deltaXL[2] = N1->x - N4->x;
-    deltaYL[2] = N1->y - N4->y;
-    deltaZL[2] = N1->z - N4->z;
+    deltaXL[2] = N4->x - N1->x;
+    deltaYL[2] = N4->y - N1->y;
+    deltaZL[2] = N4->z - N1->z;
     length[2] = sqrt(deltaXL[2] * deltaXL[2] + deltaYL[2] * deltaYL[2] + deltaZL[2] * deltaZL[2]);
 
-    deltaXL[3] = N2->x - N3->x;
-    deltaYL[3] = N2->y - N3->y;
-    deltaZL[3] = N2->z - N3->z;
+    deltaXL[3] = N3->x - N2->x;
+    deltaYL[3] = N3->y - N2->y;
+    deltaZL[3] = N3->z - N2->z;
     length[3] = sqrt(deltaXL[3] * deltaXL[3] + deltaYL[3] * deltaYL[3] + deltaZL[3] * deltaZL[3]);
 
-    deltaXL[4] = N2->x - N4->x;
-    deltaYL[4] = N2->y - N4->y;
-    deltaZL[4] = N2->z - N4->z;
+    deltaXL[4] = N4->x - N2->x;
+    deltaYL[4] = N4->y - N2->y;
+    deltaZL[4] = N4->z - N2->z;
     length[4] = sqrt(deltaXL[4] * deltaXL[4] + deltaYL[4] * deltaYL[4] + deltaZL[4] * deltaZL[4]);
 
-    deltaXL[5] = N3->x - N4->x;
-    deltaYL[5] = N3->y - N4->y;
-    deltaZL[5] = N3->z - N4->z;
+    deltaXL[5] = N4->x - N3->x;
+    deltaYL[5] = N4->y - N3->y;
+    deltaZL[5] = N4->z - N3->z;
     length[5] = sqrt(deltaXL[5] * deltaXL[5] + deltaYL[5] * deltaYL[5] + deltaZL[5] * deltaZL[5]);
 
     areaX[0] = deltaYL[0] * deltaZL[1] - deltaYL[1] * deltaZL[0];
@@ -808,9 +808,9 @@ unsigned int getGeometricalVariablesTLMtetrahedron(const struct node *N1,
     areaZ[1] = deltaXL[0] * deltaYL[2] - deltaXL[2] * deltaYL[0];
     area[1] = sqrt(areaX[1] * areaX[1] + areaY[1] * areaY[1] + areaZ[1] * areaZ[1]) / 2;
 
-    areaX[2] = deltaYL[2] * deltaZL[1] - deltaYL[1] * deltaZL[2];
-    areaY[2] = deltaXL[1] * deltaZL[2] - deltaXL[2] * deltaZL[1];
-    areaZ[2] = deltaXL[2] * deltaYL[1] - deltaXL[1] * deltaYL[2];
+    areaX[2] = deltaYL[1] * deltaZL[2] - deltaYL[2] * deltaZL[1];
+    areaY[2] = deltaXL[2] * deltaZL[1] - deltaXL[1] * deltaZL[2];
+    areaZ[2] = deltaXL[1] * deltaYL[2] - deltaXL[2] * deltaYL[1];
     area[2] = sqrt(areaX[2] * areaX[2] + areaY[2] * areaY[2] + areaZ[2] * areaZ[2]) / 2;
 
     areaX[3] = deltaYL[3] * deltaZL[4] - deltaYL[4] * deltaZL[3];
@@ -2675,13 +2675,25 @@ unsigned int getOutsideProjectionTetrahedron(const struct dataForSimulation * in
 
             break;
     }
+    
+    // DEBUG: Testing this algorithm
+//    struct node N1, N2, N3, N4;
+//    N1.x = 0; N1.y = 0; N1.z = 0;
+//    N2.x = 1; N2.y = 0; N2.z = 0;
+//    N3.x = 0; N3.y = 1; N3.z = 0;
+//    N4.x = 0; N4.y = 0; N4.z = 1;
+//    
+//    input->mesh.nodes[P1] = N1;
+//    input->mesh.nodes[P2] = N2;
+//    input->mesh.nodes[P3] = N3;
+//    input->mesh.nodes[P4] = N4;
 
 
     // lengths of the edges
     double deltaXL[2], deltaYL[2], deltaZL[2];
     double area, areaX, areaY, areaZ;
-    double deltaXl, deltaYl, deltaZl;
-
+    double deltaXl, deltaYl, deltaZl, deltal;
+    
     deltaXL[0] = input->mesh.nodes[P1].x - input->mesh.nodes[P2].x;
     deltaYL[0] = input->mesh.nodes[P1].y - input->mesh.nodes[P2].y;
     deltaZL[0] = input->mesh.nodes[P1].z - input->mesh.nodes[P2].z;
@@ -2690,11 +2702,13 @@ unsigned int getOutsideProjectionTetrahedron(const struct dataForSimulation * in
     deltaYL[1] = input->mesh.nodes[P1].y - input->mesh.nodes[P3].y;
     deltaZL[1] = input->mesh.nodes[P1].z - input->mesh.nodes[P3].z;
 
+    // vector of the triangle (P1, P2, P3)
     areaX = deltaYL[0] * deltaZL[1] - deltaYL[1] * deltaZL[0];
     areaY = deltaXL[1] * deltaZL[0] - deltaXL[0] * deltaZL[1];
     areaZ = deltaXL[0] * deltaYL[1] - deltaXL[1] * deltaYL[0];
     area = sqrt(areaX * areaX + areaY * areaY + areaZ * areaZ); // Twice the real area of the triangle. That is, this is the area of a parallelogram
 
+    // vector from the center of the tetrahedron towards the center of the triangle
     deltaXl = (input->mesh.nodes[P1].x + input->mesh.nodes[P2].x + input->mesh.nodes[P3].x) / 3
             - (input->mesh.nodes[P1].x + input->mesh.nodes[P2].x + input->mesh.nodes[P3].x + input->mesh.nodes[P4].x) / 4;
 
@@ -2702,18 +2716,28 @@ unsigned int getOutsideProjectionTetrahedron(const struct dataForSimulation * in
             - (input->mesh.nodes[P1].y + input->mesh.nodes[P2].y + input->mesh.nodes[P3].y + input->mesh.nodes[P4].y) / 4;
 
     deltaZl = (input->mesh.nodes[P1].z + input->mesh.nodes[P2].z + input->mesh.nodes[P3].z) / 3
-            - (input->mesh.nodes[P1].z + input->mesh.nodes[P2].z + input->mesh.nodes[P3].z + input->mesh.nodes[P4].y) / 4;
+            - (input->mesh.nodes[P1].z + input->mesh.nodes[P2].z + input->mesh.nodes[P3].z + input->mesh.nodes[P4].z) / 4;
+    
+    deltal = sqrt(deltaXl*deltaXl + deltaYl*deltaYl + deltaZl*deltaZl);
 
     if (deltaXl * areaX + deltaYl * areaY + deltaZl * areaZ < 0) {
         *x = -areaX / area;
         *y = -areaY / area;
         *z = -areaZ / area;
+    } else {
+        *x = areaX / area;
+        *y = areaY / area;
+        *z = areaZ / area;
     }
 
-    *x = areaX / area;
-    *y = areaY / area;
-    *z = areaZ / area;
-
+    
+    
+//    printf("The output: %f\n", (*x)*(*x) + (*y)*(*y) + (*z)*(*z) );
+    
+    
+//    *x = deltaXl / deltal;
+//    *y = deltaYl / deltal;
+//    *z = deltaZl / deltal;
 
     return 0;
 }

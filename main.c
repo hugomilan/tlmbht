@@ -61,6 +61,8 @@
  * a flag that says until what file size I should parallelize (remember of 
  * parallelization overhead; it should get better as the file size increases though).
  * However, this is not priority. These functions consume so little computational time.
+ * 9) Make the software international--i.e., outputs in languages other than English.
+ * 10) Simulation header input is not required.
  * 
  * 
  *  List of possible improvements:

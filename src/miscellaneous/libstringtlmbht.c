@@ -336,7 +336,7 @@ unsigned int getlineTlmbht(char** pline, long* size_line, FILE* file) {
         } else if (char_read == EOF) {
             // now, it could have happen that the file line did not end in '\n'
             // but in EOF instead. I will verify if the amount of chars read are
-            // greater than 0. If so, then, I read something before EOF.
+            // greater than 0. If so, then, I've read something before EOF.
             if (position_pline > 0) {
                 // I will put a '\n' and '\0' to read what was in this line.
                 (*pline)[position_pline] = '\n';

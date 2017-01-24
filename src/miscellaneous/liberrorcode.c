@@ -83,7 +83,12 @@ void sendErrorCodeAndMessage(unsigned int errorCode, void *input1v, void *input2
             // error when choosing the configuration (SIMULATION, MESH, etc.)
             fprintf(stderr, "More than one 'mesh' configuration field was found. Last line read was  line %04u: %s", *input1ui, input2c);
             break;
-
+            
+        case 205:
+            // error when finishing reading one configuration and going to read another
+            fprintf(stderr, "Unknown error. Last line read was line %04u: %s", *input1ui, input2c);
+            break;
+            
         case 206:
             // error when finishing reading one configuration and going to read another
             fprintf(stderr, "Unknown error. Last line read was line %04u: %s", *input1ui, input2c);

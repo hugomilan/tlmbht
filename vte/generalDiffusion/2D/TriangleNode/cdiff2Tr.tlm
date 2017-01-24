@@ -1,95 +1,6 @@
-// Standard for input files. The texts are case insensitivity.
-//
-// use only "//" for comments. The "/**/" is not allowed.
-//
-// Future implementation: field 'Function' that will be used to create functions
-// for the parameters. Examples: time-dependent sources and temperature-dependent
-// density, specific heat, etc.
-
-// For more help, do:
-//          tlmbht --help
-
-
-// Simulation and Mesh should appear only once. Others fields can be repeated.
-// the standard is:
-// Field //Simulation, Mesh, Material, Boundary, or Source (case insensitive)
-// {
-//      commands here...
-// }
-
-// Here I show inputs in SI units. You can use others unit systems if you are consistent with
-// the main equations. The algorithm will not check it for you.
-
-Simulation  // Configurations for the simulations
+Simulation
 {
-
-    // benchmark = run; // not required. Future implementation
-    // Options:
-    // dont: do not run benchmark (default)
-    // run: run the most complete benchmark and exit. Future implementation
-    // run and solve: run the most complete benchmark and solve the problem (not recommended). Future implementation
-    // run fast: run a simplified benchmark. Future implementation
-    // run fast and solve: run a simplified benchmark and solve the problem. Future implementation
-
-    OpenMP cores = max; // not required.
-    // Set the number of cores to use in parts of the code
-    // parallelized using OpenMP. If not set, it will use the 
-    // number of cores available by your system at run time. 
-    // Options:
-    // max: use the maximum number of cores available.
-    // 1: use one core
-    // 2: use two cores
-    // ...
-    // n: use n cores
-    // ...
-    // max: use all the cores available
-
-    Absolute zero = - 273.15; // (oC) not required. Use it only if you want to change
-    // the relationship between Kelvin and Celsius. Celsius = Kelvin - 273.15 (Absolute zero)
-
-    Stefan-Boltzmann constant = 5.6704e-8; // (W/(K4-m2)) not required. Use it only
-    // if you want to change the value of the Stefan-Boltzmann constant
-
-    output name = --case; // not required. Name of the output file.
-    // Options:
-    // --case: the same name as the name of the case input file before the file
-    //          extension (if any). Example: input_file.tlm => input_file. (default)
-    // --mesh: the same name as the name of the mesh input.
-    // any name you want.
-
-    output extension = tmo; // not required. Extension of the output file.
-    // tmo: native tlmbht extension output. (default)
-    // m: native Matlab/Octave file type. The data written is exactly the same as tmo.
-    //      this maybe useful when doing post-processing in Matlab/Octave.
-
-    timing mode = true; // not required
-    // will shown the time the algorithm takes to go through each step.
-    // This overwrites the option called in the terminal. This is, if the calling
-    // was 'tlmbht --timing' and, here, 'timing mode = false', the timing mode 
-    // will be set to false.
-    //
-    // Options:
-    // true: will print the timing
-    // false: will not print the timing (default).
-
-    print additional = true; // not required.
-    // Will print additional information while processing.
-    // Options:
-    // true: will print additional information while processing.
-    // false: will only print essential information (default).
-
-    verbose mode = true; // not required.
-    // print useful information for debug purposes. This overwrites the option
-    // called in the terminal. This is, if the calling was 'tlmbht --verbose'
-    // and, here, 'verbose mode = false', the verbose mode will be set to false.
-    // When verbose mode is set here, some information will not shown. That is,
-    // the informations before reading this line will not be shown. If you want
-    // to see all the information, you should set verbose mode calling 'tlmbht --verbose'
-    // 
-    // Options:
-    // true: will print more information than the command 'print additional'. This
-    //      set 'print additional = true'.
-    // false: will only print essential information (default).
+    output extension = m;
 }
 
 Mesh
@@ -100,7 +11,7 @@ Mesh
     // Cylindrical coordinates: [z, r, theta];
     // Spherical coordinates: [r, theta, phi];
 
-    file name = plate_4BC_682e; // required.
+    file name = plate_4BC_628e; // required.
     // The name of the file without the extension.
     // This is, if the name of your file is "problem.tbn", then you should input only
     // "problem". The extension is defined on the "input format" variable below.
@@ -622,7 +533,7 @@ Equation
     
 
     
-    equation name = diffusion; // required.
+    equation name = diffusion_name; // required.
     // Every equation should have a DIFFERENT NAME.
     //
     // This parameter defines the name of the equation. The name of the equations
@@ -739,7 +650,7 @@ Equation
 
 Material
 {
-    equation = diffusion; // required.
+    equation = diffusion_name; // required.
     // This is the name of the equation that will be used to solve this material.
     // This is case insensitive.
 
@@ -770,10 +681,10 @@ Material
 
 Boundary
 {
-    equation = diffusion; // required.
+    equation = diffusion_name; // required.
     // This is the name of the equation that this boundary condition is applied to
 
-    number = 9; // required;
+    number = 10; // required;
     // this is the tag number of the boundary.
     // It can be a vector (like [33 55 11]). If it is a vector, the parameters here
     // will be assigned to all the numbers.
@@ -785,10 +696,10 @@ Boundary
 
 Boundary
 {
-    equation = diffusion; // required.
+    equation = diffusion_name; // required.
     // This is the name of the equation that this boundary condition is applied to
 
-    number = 8; // this is the tag number of the boundary.
+    number = 11; // this is the tag number of the boundary.
 // It can be a vector (like [33 55 11]). If it is a vector, the parameters here
 // will be assigned to all the numbers.
 
@@ -798,10 +709,10 @@ Boundary
 
 Boundary
 {
-    equation = diffusion; // required.
+    equation = diffusion_name; // required.
     // This is the name of the equation that this boundary condition is applied to
 
-    number = 11; // this is the tag number of the boundary.
+    number = 8; // this is the tag number of the boundary.
 // It can be a vector (like [33 55 11]). If it is a vector, the parameters here
 // will be assigned to all the numbers.
 

@@ -758,7 +758,7 @@ unsigned int MaterialTetrahedronPennesEigen(struct dataForSimulation *input, str
                             numbersNodeAndPort);
 
                     // the -1 is necessary because the C indexing starts at zero
-                    // and my number of node starts at 1                    
+                    // and my number of node starts at 1
                     getGeometricalVariablesTLMtetrahedron(&input->mesh.nodes[input->mesh.elements.Tetrahedron[i].N1 - 1],
                             &input->mesh.nodes[input->mesh.elements.Tetrahedron[i].N2 - 1],
                             &input->mesh.nodes[input->mesh.elements.Tetrahedron[i].N3 - 1],
@@ -880,6 +880,7 @@ unsigned int MaterialTetrahedronPennesEigen(struct dataForSimulation *input, str
                     // matrix E_output
                     matrices->E_output(numbersNodeAndPort[0]) = Zhat*Is;
 
+                    // the center of the tetrahedron
                     matrices->Points_output[numbersNodeAndPort[0]].x = tempVar[9];
                     matrices->Points_output[numbersNodeAndPort[0]].y = tempVar[10];
                     matrices->Points_output[numbersNodeAndPort[0]].z = tempVar[11];
@@ -1188,17 +1189,19 @@ unsigned int connectionsAndBoundariesPennesEigen(struct calculationTLMEigen *mat
                                 if (input->equationInput[id].saveScalarBetween) {
                                     switch (approximationTB) {
                                         case 1: // using Vr
+                                            // effect of the heat flux on Tp
                                             B_out[0] = (matrices->Z[startEnd[2]] + matrices->R[startEnd[2]])
                                                     * boundaries[portsNumbers[j + 1]].boundaries[0].boundaryData[0]
                                                     * matrices->L[startEnd[2]];
-
+                                            // effect of Vr on Tp
                                             transmission_out[0] = 2;
                                             break;
                                         case 2: // using Tc
-                                            B_out[0] = matrices->Z[startEnd[2]]
-                                                    * boundaries[portsNumbers[j + 1]].boundaries[0].boundaryData[0]
-                                                    * matrices->L[startEnd[2]];
-
+                                            // effect of the heat flux on Tp
+                                            B_out[0] = boundaries[portsNumbers[j + 1]].boundaries[0].boundaryData[0] // q''
+                                                        * matrices->R[startEnd[2]]
+                                                        * matrices->L[startEnd[2]];
+                                            // effect of Tc on Tp
                                             transmission_out[0] = 1;
                                             break;
                                     }
@@ -1383,6 +1386,7 @@ transmission_and_reflection:
                             &(matrices->Points_output[offset_heat_flux + i].y),
                             &(matrices->Points_output[offset_heat_flux + i].z),
                             input);
+//                    printf("The output outside: %f\n", matrices->Points_output[offset_heat_flux + i].x*matrices->Points_output[offset_heat_flux + i].x + matrices->Points_output[offset_heat_flux + i].y*matrices->Points_output[offset_heat_flux + i].y + matrices->Points_output[offset_heat_flux + i].z*matrices->Points_output[offset_heat_flux + i].z);
 
                 }
             }

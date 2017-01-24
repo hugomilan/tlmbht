@@ -49,7 +49,10 @@
 unsigned int initiateMeshVariable(struct MeshConfig *mesh) {
     mesh->inputF = GMSH;
     mesh->nameOfInputFile = NULL;
-    mesh->nameOfOutputFile = NULL;
+    mesh->nameOfOutputFile = malloc( (strlen("--case") + 1)*sizeof(char) );
+    strcpy(mesh->nameOfOutputFile, "--case");
+    // I'm initiating the variable nameOfOutputFile with the default value.
+    
 
     mesh->scale = (double*) malloc(sizeof (double)*3);
 
@@ -178,22 +181,10 @@ unsigned int setConfigurationMesh(char * input, struct MeshConfig * meshInput, i
             return errorTLMnumber;
 
         removeBlankSpacesBeforeAndAfter(input);
-
-        // I will put the correct name here latter, when I do the input testing.
-        if (compareCaseInsensitive(input, "--case") == 0) {
-            meshInput->nameOfOutputFile = (char*) malloc(sizeof ("--case")*(strlen(input) + 1));
-            strcpy(meshInput->nameOfOutputFile, input);
-
-        } else if (compareCaseInsensitive(input, "--mesh") == 0) {
-            meshInput->nameOfOutputFile = (char*) malloc(sizeof ("--mesh")*(strlen(input) + 1));
-            strcpy(meshInput->nameOfOutputFile, input);
-
-        } else {
-            // the input is the name
-            meshInput->nameOfOutputFile = (char*) malloc(sizeof (char)*(strlen(input) + 1));
-            strcpy(meshInput->nameOfOutputFile, input);
-        }
-
+        
+        // add one for the terminating character '\0'
+        meshInput->nameOfOutputFile = realloc(meshInput->nameOfOutputFile, (strlen(input) + 1)*sizeof (char) );
+        strcpy(meshInput->nameOfOutputFile, input);
 
 
     } else if (compareCaseInsensitive(input, "scale") == 0) {
@@ -233,7 +224,7 @@ unsigned int testInputMesh(struct MeshConfig *mesh, char * nameCase) {
 
     // Now I will adjust the nameOfOutputFile
     if (compareCaseInsensitive(mesh->nameOfOutputFile, "--case") == 0) {
-        mesh->nameOfOutputFile = (char *) realloc(mesh->nameOfOutputFile,
+        mesh->nameOfOutputFile = realloc(mesh->nameOfOutputFile,
                 sizeof (char)*(strlen(nameCase) + 1));
 
         strcpy(mesh->nameOfOutputFile, nameCase);

@@ -66,8 +66,9 @@ unsigned int initiateSimulationVariable(struct Simulation* simu) {
     simu->StefanBoltzmann = 5.6704e-8;
 
     simu->nameOfInputFile = NULL;
-    simu->nameOfOutputFile = NULL;
-    // Initialize this variable as null. When the input is read, I will allocate
+    simu->nameOfOutputFile = malloc( ( strlen("--case")  + 1 )*sizeof(char));
+    strcpy(simu->nameOfOutputFile,"--case");
+    // Initialize this variable with the default value "--case". When the input is read, I will allocate
     // the name on it without the extension. The extension will be used to define
     // how to write the output.
     simu->outputFileExtension = 1;
@@ -328,23 +329,10 @@ unsigned int setConfigurationSimu(char * input, struct Simulation * configInput,
             return errorTLMnumber;
 
         removeBlankSpacesBeforeAndAfter(input);
-
-        // I will put the correct name here latter, when I do the input testing.
-        if (compareCaseInsensitive(input, "--case") == 0) {
-            configInput->nameOfOutputFile = (char*) malloc(sizeof (char)*(strlen("--case") + 1));
-            strcpy(configInput->nameOfOutputFile, input);
-
-        } else if (compareCaseInsensitive(input, "--mesh") == 0) {
-            configInput->nameOfOutputFile = (char*) malloc(sizeof (char)*(strlen("--mesh") + 1));
-            strcpy(configInput->nameOfOutputFile, input);
-
-        } else {
-            // the input is the name
-            configInput->nameOfOutputFile = (char*) malloc(sizeof (char)*(strlen(input) + 1));
-            strcpy(configInput->nameOfOutputFile, input);
-
-        }
-
+        
+        // add one for the terminating character '\0'
+        configInput->nameOfOutputFile = realloc(configInput->nameOfOutputFile, (strlen(input) + 1)*sizeof (char) );
+        strcpy(configInput->nameOfOutputFile, input);
 
 
     } else if (compareCaseInsensitive(input, "output extension") == 0) {
@@ -354,10 +342,10 @@ unsigned int setConfigurationSimu(char * input, struct Simulation * configInput,
         removeBlankSpacesBeforeAndAfter(input);
 
         // I will put the correct name here latter, when I do the input testing.
-        if (compareCaseInsensitive(input, "tmo")) {
+        if (compareCaseInsensitive(input, "tmo") == 0) {
             configInput->outputFileExtension = 1;
 
-        } else if (compareCaseInsensitive(input, "m")) {
+        } else if (compareCaseInsensitive(input, "m") == 0) {
             configInput->outputFileExtension = 2;
 
         } else {
@@ -455,7 +443,7 @@ unsigned int testInputSimu(struct Simulation *simu, char *meshName) {
     // Now I will adjust the nameOfOutputFile
     if (compareCaseInsensitive(simu->nameOfOutputFile, "--case") == 0) {
 
-        simu->nameOfOutputFile = (char *) realloc(simu->nameOfOutputFile,
+        simu->nameOfOutputFile = realloc(simu->nameOfOutputFile,
                 sizeof (char)*(strlen(simu->nameOfInputFile) + 1));
 
         strcpy(simu->nameOfOutputFile, simu->nameOfInputFile);

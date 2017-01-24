@@ -135,7 +135,8 @@ unsigned int testAndReadInputFile(int nInput, char* pArgs[], struct dataForSimul
 
     // displaying the options we got from the inputs
     if (newDataForSimu->simulationInput.verboseMode == 1)
-        printf("Verbose mode on\n");
+        newDataForSimu->simulationInput.printAdditionalMode = 1;
+    printf("Verbose mode on\n");
     if (newDataForSimu->simulationInput.timingMode == 1)
         printf("Timing mode on\n");
     if (showHelp == 1)
@@ -229,13 +230,181 @@ unsigned int readFileTLM(FILE * f, struct dataForSimulation *newDataForSimu) {
     enum configuringInside ConfigPoint = NOTHING;
 
     // reading line-by-line until we get to the end-of-file character
-    int lineInt = 1;
-        while (getlineTlmbht(&pline, &lenLine, f) != 1) {
+    while (getlineTlmbht(&pline, &lenLine, f) != 1) {
         // I start the loop checking the variable for error.
         if (errorTLMnumber != 0 && errorTLMnumber != 9999 && errorTLMnumber != 9998) {
             // get out of the while loop
             break;
-        } else if (errorTLMnumber == 9999) {
+        }
+        //DEBUG: Count up of the number of lines. Also used in the function that displays the error
+        lineNumber++;
+
+
+
+        if (newDataForSimu->simulationInput.verboseMode == 1) {
+            // VERBOSE: Shown the line number, quantity of characters in the line and content
+            printf("Line %04u (%lu): %s", lineNumber, (unsigned long) strlen(pline), pline);
+        }
+
+
+
+        // I will copy the content of pline to show it for troubleshooting purposes.
+        lineOriginal = (char *) realloc(lineOriginal, strlen(pline) + 1);
+        strcpy(lineOriginal, pline);
+
+
+
+        // It returns 0 if it got some useful content on that line.
+        // it returns 9998 if it got nothing useful
+        // if there's nothing useful or an error, we should go to the next loop iteration.
+        if ((errorTLMnumber = getUsefulContent(pline)) != 0)
+            continue; // go to next iteration
+
+
+        if (newDataForSimu->simulationInput.verboseMode == 1) {
+            // DEBUG: what comes out the useful test. Shown the line number, quantity of characters in the line and content
+            printf("Useful content from line %04u (%lu): %s\n", lineNumber, (unsigned long) strlen(pline), pline);
+        }
+
+
+        switch (ConfigPoint) {
+                // is ConfigPoint NOTHING? If so, we should check the line to find out
+                // what should we configure next
+            case NOTHING:
+                if (newDataForSimu->simulationInput.verboseMode == 1) {
+                    // VERBOSE: Shown what is being configured
+                    printf("Looking for Headers...\n");
+                }
+
+                // checking if we need to change what we are configuring now
+                if ((errorTLMnumber = setConfigurationTo(pline, &ConfigPoint)) != 0)
+                    continue; // go to the next iteration if we found an error
+
+                switch (ConfigPoint) {
+                    case SIMULATION:
+                        if (newDataForSimu->simulationInput.verboseMode == 1) {
+                            // VERBOSE: Shown what is being configured
+                            printf("Changing to configure SIMULATION\n");
+                        }
+                        break;
+                    case MESH:
+                        if (newDataForSimu->simulationInput.verboseMode == 1) {
+                            // VERBOSE: Shown what is being configured
+                            printf("Changing to configure MESH\n");
+                        }
+                        break;
+                    case EQUATION:
+                        if (newDataForSimu->simulationInput.verboseMode == 1) {
+                            // VERBOSE: Shown what is being configured
+                            printf("Changing to configure EQUATION\n");
+                        }
+                        break;
+                    case MATERIAL:
+                        if (newDataForSimu->simulationInput.verboseMode == 1) {
+                            // VERBOSE: Shown what is being configured
+                            printf("Changing to configure MATERIAL\n");
+                        }
+                        break;
+                    case BOUNDARY:
+                        if (newDataForSimu->simulationInput.verboseMode == 1) {
+                            // VERBOSE: Shown what is being configured
+                            printf("Changing to configure BOUNDARY\n");
+                        }
+                        break;
+                    case SOURCES:
+                        if (newDataForSimu->simulationInput.verboseMode == 1) {
+                            // VERBOSE: Shown what is being configured
+                            printf("Changing to configure SOURCES\n");
+                        }
+                        break;
+                        // this is not expected to happen
+                    default:
+                        errorTLMnumber = 205;
+                        break;
+                }
+                
+                break;
+
+            case SIMULATION:
+                if (newDataForSimu->simulationInput.verboseMode == 1) {
+                    // VERBOSE: Shown what is being configured
+                    printf("Configuring SIMULATION\n");
+                }
+
+                // call the function responsible for configuring the simulation parameters
+                errorTLMnumber = setConfigurationSimu(pline, &newDataForSimu->simulationInput, &startEndBrackets);
+
+                break;
+
+            case MESH:
+                if (newDataForSimu->simulationInput.verboseMode == 1) {
+                    // VERBOSE: Shown what is being configured
+                    printf("Configuring MESH\n");
+                }
+
+                // call the function responsible for configuring the mesh parameters
+                errorTLMnumber = setConfigurationMesh(pline, &newDataForSimu->meshInput, &startEndBrackets);
+                break;
+
+            case EQUATION:
+                if (newDataForSimu->simulationInput.verboseMode == 1) {
+                    // VERBOSE: Shown what is being configured
+                    printf("Configuring EQUATION\n");
+                }
+
+                // call the function responsible for configuring the material parameters
+                errorTLMnumber = setConfigurationEquation(pline,
+                        &newDataForSimu->equationInput[newDataForSimu->quantityOfEquationsRead],
+                        &startEndBrackets);
+                break;
+
+            case MATERIAL:
+                if (newDataForSimu->simulationInput.verboseMode == 1) {
+                    // VERBOSE: Shown what is being configured
+                    printf("Configuring MATERIAL\n");
+                }
+
+                // call the function responsible for configuring the material parameters
+                errorTLMnumber = setConfigurationMaterial(pline,
+                        &newDataForSimu->materialInput[newDataForSimu->quantityOfMaterialsRead],
+                        &startEndBrackets);
+                break;
+
+            case BOUNDARY:
+                if (newDataForSimu->simulationInput.verboseMode == 1) {
+                    // VERBOSE: Shown what is being configured
+                    printf("Configuring BOUNDARY\n");
+                }
+
+                // call the function responsible for configuring the boundary parameters
+                errorTLMnumber = setConfigurationBoundary(pline,
+                        &newDataForSimu->boundaryInput[newDataForSimu->quantityOfBoundariesRead],
+                        &startEndBrackets);
+
+                break;
+            case SOURCES:
+                if (newDataForSimu->simulationInput.verboseMode == 1) {
+                    // VERBOSE: Shown what is being configured
+                    printf("Configuring SOURCES\n");
+                }
+
+                // call the function responsible for configuring the source parameters
+                errorTLMnumber = setConfigurationSource(pline,
+                        &newDataForSimu->sourceInput[newDataForSimu->quantityOfSourcesRead],
+                        &startEndBrackets);
+
+                break;
+
+                // this is not expected to happen
+            default:
+                errorTLMnumber = 8;
+                sendErrorCodeAndMessage(errorTLMnumber, NULL, NULL, NULL, NULL);
+                break;
+        }
+        
+        // Here I check if I the reading of the header as finilized and I move to the next
+        // header.
+        if (errorTLMnumber == 9999) {
             // this is not an error. This is just how I make the flag to indicate
             // that the reading of some configuration was just finished
             switch (ConfigPoint) {
@@ -309,7 +478,6 @@ unsigned int readFileTLM(FILE * f, struct dataForSimulation *newDataForSimu) {
                     errorTLMnumber = 206;
                     break;
             }
-
             // if an error was found, we stop the algorithm here.
             if (errorTLMnumber != 9999) {
                 break; // get out of the while loop
@@ -318,134 +486,6 @@ unsigned int readFileTLM(FILE * f, struct dataForSimulation *newDataForSimu) {
             // change to nothing being configured, so that the algorithm can look for
             // another configuration header
             ConfigPoint = NOTHING;
-        }
-        //DEBUG: Count up of the number of lines. Also used in the function that displays the error
-        lineNumber++;
-
-
-
-        if (newDataForSimu->simulationInput.verboseMode == 1) {
-            // VERBOSE: Shown the line number, quantity of characters in the line and content
-            printf("Line %04u (%lu): %s", lineNumber, (unsigned long) strlen(pline), pline);
-        }
-
-
-
-        // I will copy the content of pline to show it for troubleshooting purposes.
-        lineOriginal = (char *) realloc(lineOriginal, strlen(pline) + 1);
-        strcpy(lineOriginal, pline);
-
-
-
-        // It returns 0 if it got some useful content on that line.
-        // it returns 9998 if it got nothing useful
-        // if there's nothing useful or an error, we should go to the next loop iteration.
-        if ((errorTLMnumber = getUsefulContent(pline)) != 0)
-            continue; // go to next iteration
-
-
-        if (newDataForSimu->simulationInput.verboseMode == 1) {
-            // DEBUG: what comes out the useful test. Shown the line number, quantity of characters in the line and content
-            printf("Useful content from line %04u (%lu): %s\n", lineNumber,  (unsigned long) strlen(pline), pline);
-        }
-
-
-        switch (ConfigPoint) {
-                // is ConfigPoint NOTHING? If so, we should check the line to find out
-                // what should we configure next
-            case NOTHING:
-                if (newDataForSimu->simulationInput.verboseMode == 1) {
-                    // VERBOSE: Shown what is being configured
-                    printf("Configuring NOTHING\n");
-                }
-
-                // checking if we need to change what we are configuring now
-                if ((errorTLMnumber = setConfigurationTo(pline, &ConfigPoint)) != 0)
-                    continue; // go to the next iteration if we found an error
-
-                break;
-
-            case SIMULATION:
-                if (newDataForSimu->simulationInput.verboseMode == 1) {
-                    // VERBOSE: Shown what is being configured
-                    printf("Configuring SIMULATION\n");
-                }
-
-                // call the function responsible for configuring the simulation parameters
-                if ((errorTLMnumber = setConfigurationSimu(pline, &newDataForSimu->simulationInput, &startEndBrackets)) != 0)
-                    continue; // go to the next loop if we found an error
-
-                break;
-
-            case MESH:
-                if (newDataForSimu->simulationInput.verboseMode == 1) {
-                    // VERBOSE: Shown what is being configured
-                    printf("Configuring MESH\n");
-                }
-
-                // call the function responsible for configuring the mesh parameters
-                if ((errorTLMnumber = setConfigurationMesh(pline, &newDataForSimu->meshInput, &startEndBrackets)) != 0)
-                    continue; // go to the next loop if we found an error 
-                break;
-
-            case EQUATION:
-                if (newDataForSimu->simulationInput.verboseMode == 1) {
-                    // VERBOSE: Shown what is being configured
-                    printf("Configuring EQUATION\n");
-                }
-
-                // call the function responsible for configuring the material parameters
-                if ((errorTLMnumber = setConfigurationEquation(pline,
-                        &newDataForSimu->equationInput[newDataForSimu->quantityOfEquationsRead],
-                        &startEndBrackets)) != 0)
-                    continue; // go to the next loop if we found an error 
-                break;
-
-            case MATERIAL:
-                if (newDataForSimu->simulationInput.verboseMode == 1) {
-                    // VERBOSE: Shown what is being configured
-                    printf("Configuring MATERIAL\n");
-                }
-
-                // call the function responsible for configuring the material parameters
-                if ((errorTLMnumber = setConfigurationMaterial(pline,
-                        &newDataForSimu->materialInput[newDataForSimu->quantityOfMaterialsRead],
-                        &startEndBrackets)) != 0)
-                    continue; // go to the next loop if we found an error 
-                break;
-
-            case BOUNDARY:
-                if (newDataForSimu->simulationInput.verboseMode == 1) {
-                    // VERBOSE: Shown what is being configured
-                    printf("Configuring BOUNDARY\n");
-                }
-
-                // call the function responsible for configuring the boundary parameters
-                if ((errorTLMnumber = setConfigurationBoundary(pline,
-                        &newDataForSimu->boundaryInput[newDataForSimu->quantityOfBoundariesRead],
-                        &startEndBrackets)) != 0)
-                    continue; // go to the next loop if we found an error 
-
-                break;
-            case SOURCES:
-                if (newDataForSimu->simulationInput.verboseMode == 1) {
-                    // VERBOSE: Shown what is being configured
-                    printf("Configuring SOURCES\n");
-                }
-
-                // call the function responsible for configuring the source parameters
-                if ((errorTLMnumber = setConfigurationSource(pline,
-                        &newDataForSimu->sourceInput[newDataForSimu->quantityOfSourcesRead],
-                        &startEndBrackets)) != 0)
-                    continue; // go to the next loop if we found an error 
-
-                break;
-
-                // this is not expected to happen
-            default:
-                errorTLMnumber = 8;
-                sendErrorCodeAndMessage(errorTLMnumber, NULL, NULL, NULL, NULL);
-                break;
         }
     }
 
@@ -507,11 +547,11 @@ unsigned int initiateAllConfigurationVarialbes(struct dataForSimulation *input) 
     input->quantityOfMaterialsRead = 0;
     input->quantityOfBoundariesRead = 0;
     input->quantityOfSourcesRead = 0;
-    
+
     // initializing who am I
-    input->myName = malloc( ( strlen("tlmbht") + 1 )*sizeof(char) );
+    input->myName = malloc((strlen("tlmbht") + 1) * sizeof (char));
     strcpy(input->myName, "tlmbht");
-    input->myVersion = malloc( ( strlen("0.2.0-alpha") + 1 )*sizeof(char) );
+    input->myVersion = malloc((strlen("0.2.0-alpha") + 1) * sizeof (char));
     strcpy(input->myVersion, "0.2.0-alpha");
 
     // initializing simulation variables used for configuration
@@ -556,7 +596,7 @@ unsigned int initiateAllConfigurationVarialbes(struct dataForSimulation *input) 
 unsigned int terminateAllConfigurationVarialbes(struct dataForSimulation *input) {
     unsigned int errorTLMnumber;
     int i;
-    
+
     free(input->myName);
     input->myName = NULL;
     free(input->myVersion);
@@ -635,7 +675,7 @@ unsigned int terminateAllConfigurationVarialbes(struct dataForSimulation *input)
  * printfAllInputData: prints the input data read by the algorithm from the input file
  */
 void printfAllInputData(struct dataForSimulation * input) {
-    
+
     printfMyNameAndVersion(input);
 
     printf("Information read from inputs:\n");
@@ -675,12 +715,12 @@ void printfAllInputData(struct dataForSimulation * input) {
 
     // future implementation
     // information from the source headers
-//    printf("Input data for the Sources configuration:\n");
-//    for (int i = 0; i < input->quantityOfSourcesRead; i++) {
-//        printf("Sources group %04d:\n", i + 1);
-//        printfSourceConfig(&input->sourceInput[i]);
-//        printf("\n");
-//    }
+    //    printf("Input data for the Sources configuration:\n");
+    //    for (int i = 0; i < input->quantityOfSourcesRead; i++) {
+    //        printf("Sources group %04d:\n", i + 1);
+    //        printfSourceConfig(&input->sourceInput[i]);
+    //        printf("\n");
+    //    }
 
 }
 
@@ -690,7 +730,6 @@ void printfAllInputData(struct dataForSimulation * input) {
 void printfMyNameAndVersion(struct dataForSimulation * input) {
     printf("%s %s\n", input->myName, input->myVersion);
 }
-
 
 /*
  * testAllConfigurationVarialbes: tests if all the configuration variables
@@ -712,11 +751,12 @@ unsigned int testAllConfigurationVarialbes(struct dataForSimulation *input) {
 
     // testing for the Simulation configuration field. 
     //
-    // We did not read the simulation configurations
-    if (input->simulationRead == 0) {
-        sendErrorCodeAndMessage(208, NULL, NULL, NULL, NULL);
-        errorFound = 1;
-    }
+    // We did not read the simulation configurations.
+    // This is not necessary anymore
+    //    if (input->simulationRead == 0) {
+    //        sendErrorCodeAndMessage(208, NULL, NULL, NULL, NULL);
+    //        errorFound = 1;
+    //    }
 
     // testing the simulation configurations input
     if (testInputSimu(&input->simulationInput, input->meshInput.nameOfInputFile) != 0) {
