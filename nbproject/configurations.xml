@@ -497,15 +497,17 @@
       <itemPath>LICENSE.md</itemPath>
       <itemPath>Makefile</itemPath>
       <itemPath>README.md</itemPath>
+      <itemPath>Wiki</itemPath>
       <itemPath>acknowledgment.md</itemPath>
       <itemPath>case.tlm</itemPath>
       <itemPath>compilation flags.txt</itemPath>
-      <itemPath>docs</itemPath>
       <itemPath>src/octave</itemPath>
       <itemPath>references.md</itemPath>
       <itemPath>test</itemPath>
-      <itemPath>vte</itemPath>
+      <itemPath>tlmcode.md</itemPath>
+      <itemPath>validation</itemPath>
     </logicalFolder>
+    <itemPath>CMakeLists.txt</itemPath>
   </logicalFolder>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
@@ -537,6 +539,8 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
+      <item path="CMakeLists.txt" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="include/Eigen/CMakeLists.txt" ex="false" tool="3" flavor2="0">
       </item>
       <item path="include/Eigen/Cholesky" ex="false" tool="3" flavor2="0">
@@ -2050,6 +2054,8 @@
           <developmentMode>0</developmentMode>
         </fortranCompilerTool>
       </compileType>
+      <item path="CMakeLists.txt" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="include/Eigen/CMakeLists.txt" ex="false" tool="3" flavor2="0">
       </item>
       <item path="include/Eigen/Cholesky" ex="false" tool="3" flavor2="0">
@@ -3540,10 +3546,9 @@
             flavor2="0">
       </item>
     </conf>
-    <conf name="debug" type="1" platformSpecific="true">
+    <conf name="debug" type="1">
       <toolsSet>
         <compilerSet>GNU|GNU</compilerSet>
-        <platform>2</platform>
         <dependencyChecking>false</dependencyChecking>
         <rebuildPropChanged>false</rebuildPropChanged>
       </toolsSet>
@@ -3564,6 +3569,8 @@
           <developmentMode>0</developmentMode>
         </fortranCompilerTool>
       </compileType>
+      <item path="CMakeLists.txt" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="include/Eigen/CMakeLists.txt" ex="false" tool="3" flavor2="0">
       </item>
       <item path="include/Eigen/Cholesky" ex="false" tool="3" flavor2="0">
@@ -5054,10 +5061,9 @@
             flavor2="0">
       </item>
     </conf>
-    <conf name="cuda_release" type="1" platformSpecific="true">
+    <conf name="cuda_release" type="1">
       <toolsSet>
         <compilerSet>CUDA|GNU</compilerSet>
-        <platform>2</platform>
         <dependencyChecking>false</dependencyChecking>
         <rebuildPropChanged>false</rebuildPropChanged>
       </toolsSet>
@@ -5083,6 +5089,8 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
+      <item path="CMakeLists.txt" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="include/Eigen/CMakeLists.txt" ex="false" tool="3" flavor2="0">
       </item>
       <item path="include/Eigen/Cholesky" ex="false" tool="3" flavor2="0">
@@ -6573,10 +6581,9 @@
             flavor2="0">
       </item>
     </conf>
-    <conf name="cuda_debug" type="1" platformSpecific="true">
+    <conf name="cuda_debug" type="1">
       <toolsSet>
         <compilerSet>CUDA|GNU</compilerSet>
-        <platform>2</platform>
         <dependencyChecking>false</dependencyChecking>
         <rebuildPropChanged>false</rebuildPropChanged>
       </toolsSet>
@@ -6597,6 +6604,8 @@
           <developmentMode>0</developmentMode>
         </fortranCompilerTool>
       </compileType>
+      <item path="CMakeLists.txt" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="include/Eigen/CMakeLists.txt" ex="false" tool="3" flavor2="0">
       </item>
       <item path="include/Eigen/Cholesky" ex="false" tool="3" flavor2="0">
@@ -8087,10 +8096,9 @@
             flavor2="0">
       </item>
     </conf>
-    <conf name="release_linux_32" type="1" platformSpecific="true">
+    <conf name="linux_32" type="1">
       <toolsSet>
         <compilerSet>GNU|GNU</compilerSet>
-        <platform>2</platform>
         <dependencyChecking>false</dependencyChecking>
         <rebuildPropChanged>false</rebuildPropChanged>
       </toolsSet>
@@ -8121,6 +8129,8 @@
           <output>${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/tlmbhtLinux32</output>
         </linkerTool>
       </compileType>
+      <item path="CMakeLists.txt" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="include/Eigen/CMakeLists.txt" ex="false" tool="3" flavor2="0">
       </item>
       <item path="include/Eigen/Cholesky" ex="false" tool="3" flavor2="0">
@@ -9611,10 +9621,9 @@
             flavor2="0">
       </item>
     </conf>
-    <conf name="release_linux_64" type="1" platformSpecific="true">
+    <conf name="linux_64" type="1">
       <toolsSet>
         <compilerSet>GNU|GNU</compilerSet>
-        <platform>2</platform>
         <dependencyChecking>false</dependencyChecking>
         <rebuildPropChanged>false</rebuildPropChanged>
       </toolsSet>
@@ -9645,6 +9654,8 @@
           <output>${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/tlmbhtLinux64</output>
         </linkerTool>
       </compileType>
+      <item path="CMakeLists.txt" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="include/Eigen/CMakeLists.txt" ex="false" tool="3" flavor2="0">
       </item>
       <item path="include/Eigen/Cholesky" ex="false" tool="3" flavor2="0">
@@ -11135,7 +11146,7 @@
             flavor2="0">
       </item>
     </conf>
-    <conf name="release_windows_32" type="1">
+    <conf name="windows_32" type="1">
       <toolsSet>
         <compilerSet>MINGW32|GNU</compilerSet>
         <dependencyChecking>false</dependencyChecking>
@@ -11168,6 +11179,8 @@
           <output>${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/tlmbhtWin32.exe</output>
         </linkerTool>
       </compileType>
+      <item path="CMakeLists.txt" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="include/Eigen/CMakeLists.txt" ex="false" tool="3" flavor2="0">
       </item>
       <item path="include/Eigen/Cholesky" ex="false" tool="3" flavor2="0">
@@ -12658,7 +12671,7 @@
             flavor2="0">
       </item>
     </conf>
-    <conf name="release_windows_64" type="1">
+    <conf name="windows_64" type="1">
       <toolsSet>
         <compilerSet>MINGW64|GNU</compilerSet>
         <dependencyChecking>false</dependencyChecking>
@@ -12689,6 +12702,8 @@
           <output>${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/tlmbhtWin64.exe</output>
         </linkerTool>
       </compileType>
+      <item path="CMakeLists.txt" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="include/Eigen/CMakeLists.txt" ex="false" tool="3" flavor2="0">
       </item>
       <item path="include/Eigen/Cholesky" ex="false" tool="3" flavor2="0">

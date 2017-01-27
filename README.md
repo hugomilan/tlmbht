@@ -10,7 +10,7 @@
  Free for educational, research and non-profit purposes.  Refer to the license file for details.
 ***
 
-This README file provides instructions in how to obtain the software tlmbht and provides a brief description about it. If you want to know more about tlmbht and the theory behind it see [Why should I use the tlmbht](https://github.com/hugomilan/tlmbht/wiki/Why-should-I-use-the-tlmbht?) and the [Wiki](https://github.com/hugomilan/tlmbht/wiki).
+This README file provides instructions in how to obtain the software tlmbht and provides a brief description about it. If you want to know more about tlmbht and the theory behind it see [Why should I use the tlmbht](https://github.com/hugomilan/tlmbht/wiki/Why-should-I-use-the-tlmbht%3F) and the [Wiki](https://github.com/hugomilan/tlmbht/wiki).
 
 ## Installation
 ### Option 1

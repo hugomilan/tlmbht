@@ -57,7 +57,7 @@ Simulation  // Configurations for the simulations
     // --mesh: the same name as the name of the mesh input.
     // any name you want.
 
-    output extension = tmo; // not required. Extension of the output file.
+    output extension = m; // not required. Extension of the output file.
     // tmo: native tlmbht extension output. (default)
     // m: native Matlab/Octave file type. The data written is exactly the same as tmo.
     //      this maybe useful when doing post-processing in Matlab/Octave.
@@ -100,7 +100,7 @@ Mesh
     // Cylindrical coordinates: [z, r, theta];
     // Spherical coordinates: [r, theta, phi];
 
-    file name = parallelepiped_6BC_69941e; // required.
+    file name = parallelepiped_6BC_1572e; // required.
     // The name of the file without the extension.
     // This is, if the name of your file is "problem.tbn", then you should input only
     // "problem". The extension is defined on the "input format" variable below.
@@ -622,7 +622,7 @@ Equation
     
 
     
-    equation name = heat; // required.
+    equation name = heat_name; // required.
     // Every equation should have a DIFFERENT NAME.
     //
     // This parameter defines the name of the equation. The name of the equations
@@ -700,7 +700,7 @@ Equation
     time-step = 1e-7; // Required if "solve = dynamic". (s) time-step in seconds. 
     // This is the time-step between each calculation.
 
-    time-jump = 2000; // not required.
+    time-jump = 1000; // not required.
     // Must be an integer greater than zero. If greater than 1, the algorithm 
     // will group the amount of time-steps indicated in time-jump and solve them at once.
     // For example, if time-jump = 11 and time-step = 0.01 s, the effective time-step will be
@@ -739,7 +739,7 @@ Equation
 
 Material
 {
-    equation = heat; // required.
+    equation = heat_name; // required.
     // This is the name of the equation that will be used to solve this material.
     // This is case insensitive.
 
@@ -771,7 +771,7 @@ Material
 
 Boundary
 {
-    equation = heat; // required.
+    equation = heat_name; // required.
     // This is the name of the equation that this boundary condition is applied to
 
     number = 27; // required;
@@ -787,7 +787,7 @@ Boundary
 
 Boundary
 {
-    equation = heat; // required.
+    equation = heat_name; // required.
     // This is the name of the equation that this boundary condition is applied to
 
     number = 30; // this is the tag number of the boundary.
@@ -801,27 +801,27 @@ Boundary
 
 Boundary
 {
-    equation = heat; // required.
+    equation = heat_name; // required.
     // This is the name of the equation that this boundary condition is applied to
 
     number = 18; // this is the tag number of the boundary.
 // It can be a vector (like [33 55 11]). If it is a vector, the parameters here
 // will be assigned to all the numbers.
 
-    Heat flux = 2.5e7; // (W/m2). This assumes a constant heat flux flowing at the boundary.
+    Heat flux = 2e8; // (W/m2). This assumes a constant heat flux flowing at the boundary.
 }
 
 
 Boundary
 {
-    equation = heat; // required.
+    equation = heat_name; // required.
     // This is the name of the equation that this boundary condition is applied to
 
     number = 24; // this is the tag number of the boundary.
 // It can be a vector (like [33 55 11]). If it is a vector, the parameters here
 // will be assigned to all the numbers.
 
-    Heat flux = 5e7; // (W/m2). This assumes a constant heat flux flowing at the boundary.
+    Heat flux = 1e8; // (W/m2). This assumes a constant heat flux flowing at the boundary.
 }
 
 

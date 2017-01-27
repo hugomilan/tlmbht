@@ -6,9 +6,9 @@ more off %turns pagination off
 cheat3Te
 
 Tc = 100;
-Ts = 1000;
-qfluxX = 5e7;
-qfluxZ = 2.5e7;
+Ts = 100;
+qfluxX = 0e7;
+qfluxZ = 0e7;
 
 % Characteristics for the mediums. They must be vectors
 ro = 2700; % tissue density (kg/m3)
@@ -39,8 +39,8 @@ disp([' '; 'Time ' num2str(time_Ana) 's (step ' num2str(i0) ')'; ' '])
 temp_message = 'Errors and differences: ';
 
 [Ttemp, qxAnatemp, qyAnatemp, qzAnatemp] = D3_BHE_f(Points_Output_1(1:number_Points,1)',  ...
-             Points_Output_1(1:number_Points,2)', Points_Output_1(1:number_Points,3)', 1e-3, 0.75e-3, 0.5e-3, time_Ana, ...
-            qfluxX, qfluxZ, Ts, Tc, k, ro, cp, 0, 1e3, 1e3, 0, Qmet, 50, 50, 50, 2);
+             Points_Output_1(1:number_Points,2)', Points_Output_1(1:number_Points,3)', 0.75e-3, 1e-3, 0.375e-3, time_Ana, ...
+            qfluxX, qfluxZ, Ts, Tc, k, ro, cp, 0, 1e3, 1e3, 0, Qext, 50, 50, 50, 2);
              
              if ( save_1(1) || save_1(2) )
               if (figure_defined == 0)
@@ -83,9 +83,9 @@ temp_message = 'Errors and differences: ';
              
              % plot central temperatures
              set(0,'CurrentFigure',figure_Temp)
-             plot(Points_Output_1(1:numbers_1(1),1), Ttemp(1:numbers_1(1))', '*b')
+             plot(Points_Output_1(1:numbers_1(1),2), Ttemp(1:numbers_1(1))', '*b')
              hold on 
-             plot(Points_Output_1(1:numbers_1(1),1), output_1(1:numbers_1(1), i0), '*r')
+             plot(Points_Output_1(1:numbers_1(1),2), output_1(1:numbers_1(1), i0), '*r')
              
 %             plot(Points_Output_1(1:numbers_1(1),1), output_1(1:numbers_1(1), i0)- Ttemp(1:numbers_1(1))', '*r')
              
@@ -132,8 +132,9 @@ temp_message = 'Errors and differences: ';
               
               qxAnaProj = Points_Output_1( (number_Temp + 1):number_Flux, 1).*qxAnatemp(number_Points_Flux:number_Points)';
               qyAnaProj = Points_Output_1( (number_Temp + 1):number_Flux, 2).*qyAnatemp(number_Points_Flux:number_Points)';
+              qzAnaProj = Points_Output_1( (number_Temp + 1):number_Flux, 3).*qzAnatemp(number_Points_Flux:number_Points)';
               
-              qAnaLTn = qxAnaProj + qyAnaProj;
+              qAnaLTn = qxAnaProj + qyAnaProj + qzAnaProj;
               
 %             qAnaLTn =  sqrt( qxAnaProj.*qxAnaProj + qyAnaProj.*qyAnaProj );
              
@@ -156,11 +157,11 @@ temp_message = 'Errors and differences: ';
              
              
              set(0,'CurrentFigure',figure_Flux);
-             plot(Points_Output_1(number_Points_Flux:number_Points,1), qAnaLTn, '*b')
+             plot(Points_Output_1(number_Points_Flux:number_Points,2), qAnaLTn, '*b')
              hold on 
-             plot(Points_Output_1(number_Points_Flux:number_Points,1), output_1((1 + number_Temp ):number_Flux, i0), '*r')
+             plot(Points_Output_1(number_Points_Flux:number_Points,2), output_1((1 + number_Temp ):number_Flux, i0), '*r')
              
-             plot(Points_Output_1(number_Points_Flux:number_Points,1), qAnaLTn - output_1((1 + number_Temp ):number_Flux, i0), '*g')
+             plot(Points_Output_1(number_Points_Flux:number_Points,2), qAnaLTn - output_1((1 + number_Temp ):number_Flux, i0), '*g')
              hold off
              
              

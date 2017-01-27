@@ -1,0 +1,63 @@
+Simulation
+{
+    output extension = m;
+}
+
+Mesh
+{
+    file name = parallelepiped_6BC_1572e;
+    input format = tlmtbn;
+}
+
+Equation
+{
+    type = heat;
+    equation name = heat_name;
+    dimensions = 3;
+    Solve = dynamic;
+    time-step = 1e-7;
+    time-jump = 1000;
+    final time = 1e-3;
+    save = scalar;
+    save = scalar between;
+    save = vector;
+}
+
+Material
+{
+    equation = heat_name;
+    number =  33;
+     density = 2700;
+     specific heat = 900;
+     thermal conductivity = 205;
+     source = 5000;
+     initial temperature = 100;
+}
+
+Boundary
+{
+    equation = heat_name;
+    number = 27;
+    Temperature = 100;
+}
+
+Boundary
+{
+    equation = heat_name;
+    number = 30;
+    Temperature = 100;
+}
+
+Boundary
+{
+    equation = heat_name;
+    number = 18;
+    Heat flux = 0e7;
+}
+
+Boundary
+{
+    equation = heat_name;
+    number = 24;
+    Heat flux = 0e7;
+}

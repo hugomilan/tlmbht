@@ -57,7 +57,7 @@ Simulation  // Configurations for the simulations
     // --mesh: the same name as the name of the mesh input.
     // any name you want.
 
-    output extension = tmo; // not required. Extension of the output file.
+    output extension = m; // not required. Extension of the output file.
     // tmo: native tlmbht extension output. (default)
     // m: native Matlab/Octave file type. The data written is exactly the same as tmo.
     //      this maybe useful when doing post-processing in Matlab/Octave.
@@ -99,13 +99,13 @@ Mesh
     // Cartesian coordinates: [x, y, z];
     // Cylindrical coordinates: [z, r, theta];
     // Spherical coordinates: [r, theta, phi];
-
-    file name = parallelepiped_6BC; // required.
+    
+    file name = parallelepiped_6BC_1572e; // required.
     // The name of the file without the extension.
     // This is, if the name of your file is "problem.tbn", then you should input only
     // "problem". The extension is defined on the "input format" variable below.
 
-    input format = gmsh; // required.
+    input format = tlmtbn; // required.
     // Options:
     // tlmtbn: .tbn, This is the native tlmbht input file. If you choose a different input
     // format, the software will convert it to .tbn.
@@ -125,7 +125,7 @@ Mesh
     // Otherwise, it must be a vector column with three elements.
     //
     // Example: to convert a mesh from millimeters to meters, both inputs are correct:
-     scale = 1e-3;
+    // scale = 1e-1;
     // scale = [1e-3 1e-3 1e-3];
     // The second option may be adequate when a base mesh is used for multiple simulations
     // where the size of the mesh is expanded/contracted in different axes.
@@ -700,7 +700,7 @@ Equation
     time-step = 1e-3; // Required if "solve = dynamic". (s) time-step in seconds. 
     // This is the time-step between each calculation.
 
-    time-jump = 1000; // not required.
+    time-jump = 100; // not required.
     // Must be an integer greater than zero. If greater than 1, the algorithm 
     // will group the amount of time-steps indicated in time-jump and solve them at once.
     // For example, if time-jump = 11 and time-step = 0.01 s, the effective time-step will be
@@ -711,7 +711,7 @@ Equation
     // will not be calculated. Nonetheless, intermediary results can always be 
     // obtained using interpolations (not implemented).
 
-    final time = 4; // Required if solve = dynamic. (s) end time for simulation in seconds. 
+    final time = 1; // Required if solve = dynamic. (s) end time for simulation in seconds. 
 
 
     save = scalar; // indicates what to save.
@@ -805,7 +805,7 @@ Boundary
 // It can be a vector (like [33 55 11]). If it is a vector, the parameters here
 // will be assigned to all the numbers.
 
-    Temperature = 150; // (oC). This assumes a constant temperature at the
+    Temperature = 100; // (oC). This assumes a constant temperature at the
 // boundary. It cannot be used in conjunction with heat flux, convection, or radiation.
 }
 
@@ -819,7 +819,7 @@ Boundary
 // It can be a vector (like [33 55 11]). If it is a vector, the parameters here
 // will be assigned to all the numbers.
 
-    Heat flux = 0e4; // (W/m2). This assumes a constant heat flux flowing at the boundary.
+    Heat flux = 2e4; // (W/m2). This assumes a constant heat flux flowing at the boundary.
 }
 
 
@@ -832,7 +832,7 @@ Boundary
 // It can be a vector (like [33 55 11]). If it is a vector, the parameters here
 // will be assigned to all the numbers.
 
-    Heat flux = 5e4; // (W/m2). This assumes a constant heat flux flowing at the boundary.
+    Heat flux = 1e4; // (W/m2). This assumes a constant heat flux flowing at the boundary.
 }
 
 

@@ -779,10 +779,10 @@ unsigned int MaterialTetrahedronPennesEigen(struct dataForSimulation *input, str
                             (tempVar[0] + tempVar[1] + tempVar[2] + tempVar[3]);
                     
                     // generalization of R
-                    R[0] = tempVar[0] / (input->materialInput[j2].generalized_diffusionCoeff * tempVar[4]);
-                    R[1] = tempVar[1] / (input->materialInput[j2].generalized_diffusionCoeff * tempVar[5]);
-                    R[2] = tempVar[2] / (input->materialInput[j2].generalized_diffusionCoeff * tempVar[6]);
-                    R[3] = tempVar[3] / (input->materialInput[j2].generalized_diffusionCoeff * tempVar[7]);
+                    R[0] = tempVar[0] / (input->materialInput[j2].generalized_diffusionCoeff * tempVar[4] );
+                    R[1] = tempVar[1] / (input->materialInput[j2].generalized_diffusionCoeff * tempVar[5] );
+                    R[2] = tempVar[2] / (input->materialInput[j2].generalized_diffusionCoeff * tempVar[6] );
+                    R[3] = tempVar[3] / (input->materialInput[j2].generalized_diffusionCoeff * tempVar[7] );
                     
                     // generalization of G
                     G = tempVar[8] * input->materialInput[j2].generalized_sink_a;
@@ -905,7 +905,7 @@ end_for_j_and_for_k_triangle:
  * connectionsAndBoundariesPennesEigen: assumes that the intersection happens between two nodes
  * or between one node and a boundary, only. Intersections with three nodes would break
  * 
- * THIS FUNCTION MAYBE WELL SUITED FOR GOING AT THE LEVEL OF TLM AND NOT BEING SPECIFIC
+ * THIS FUNCTION MAY BE WELL SUITED FOR GOING AT THE LEVEL OF TLM AND NOT BEING SPECIFIC
  * FOR PENNES
  */
 unsigned int connectionsAndBoundariesPennesEigen(struct calculationTLMEigen *matrices,
@@ -1210,7 +1210,7 @@ unsigned int connectionsAndBoundariesPennesEigen(struct calculationTLMEigen *mat
                                 if (input->equationInput[id].saveFlux) {
                                     // from inside to outside. Positive values for 
                                     // heat flux input are towards inside, hence
-                                    // why -1
+                                    // that's why -1
                                     B_out_flux[0] = -1 * boundaries[portsNumbers[j + 1]].boundaries[0].boundaryData[0];
 
                                     transmission_out_flux[0] = 0;
