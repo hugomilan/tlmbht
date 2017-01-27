@@ -2,3 +2,6 @@
 /include/Eigen/
 /dist/
 /test/
+/docs/_site
+/docs/.sass-cache
+/docs/.jekyll-metadata
