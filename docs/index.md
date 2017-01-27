@@ -11,11 +11,16 @@ layout: page
     </script>
 </head>
 
-can you include equations?
+can you include equations2?
 
 $$a^2 + b^2 = c^2$$
 
 $$ \mathsf{Data = PCs} \times \mathsf{Loadings} $$
+
+\\[ \frac{1}{n^{2}} \\]
+
+Here is an example MathJax inline rendering \\( 1/x^{2} \\), and here is a block rendering: 
+\\[ \frac{1}{n^{2}} \\]
 
 can you include sketchfab?
 
