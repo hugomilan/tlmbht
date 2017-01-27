@@ -11,7 +11,7 @@ layout: page
     </script>
 </head>
 
-can you include equations2?
+can you include equations3?
 
 $$a^2 + b^2 = c^2$$
 
