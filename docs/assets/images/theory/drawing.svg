@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 744.09448819 1052.3622047"
+   id="svg15326"
+   version="1.1"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="drawing.svg">
+  <defs
+     id="defs15328">
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker16322"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 Z"
+         id="path16324"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="Arrow1Lend"
+       style="overflow:visible;"
+       inkscape:isstock="true">
+      <path
+         id="path15935"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1;fill:#000000;fill-opacity:1"
+         transform="scale(0.8) rotate(180) translate(12.5,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lstart"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="marker6444-0-0-9-4"
+       style="overflow:visible"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         inkscape:connector-curvature="0"
+         id="path6177-4-9-2-7"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 Z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         transform="matrix(0.8,0,0,0.8,10,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lstart"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="marker6444-0-0-9-4-8"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path6177-4-9-2-7-4"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 Z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         transform="matrix(0.8,0,0,0.8,10,0)" />
+    </marker>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.4"
+     inkscape:cx="-515.48928"
+     inkscape:cy="700.36181"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     showguides="false"
+     inkscape:window-width="1855"
+     inkscape:window-height="1056"
+     inkscape:window-x="65"
+     inkscape:window-y="24"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata15331">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       style="fill:#000000;fill-rule:evenodd;stroke:#000000;stroke-width:6.80000019;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -725.45369,159.67488 454.0469,0"
+       id="path3140"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/src/miscellaneous/images/1D_Line_Pennes_Problem_Simplified.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <circle
+       style="fill:#000000;stroke:#000000;stroke-width:6.80000019;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="path3216"
+       cx="-725.45374"
+       cy="159.67488"
+       r="11.035823"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/src/miscellaneous/images/1D_Line_Pennes_Problem_Simplified.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <circle
+       style="fill:#000000;stroke:#000000;stroke-width:6.80000019;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="path3216-3"
+       cx="-270.61856"
+       cy="160.46318"
+       r="11.035823"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/src/miscellaneous/images/1D_Line_Pennes_Problem_Simplified.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="-283.7861"
+       y="215.74203"
+       id="text3233"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/src/miscellaneous/images/1D_Line_Pennes_Problem_Simplified.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300"><tspan
+         sodipodi:role="line"
+         id="tspan3235"
+         x="-283.7861"
+         y="215.74203">T<tspan
+   style="font-size:64.99999762%;baseline-shift:sub"
+   id="tspan3260"> s</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="-740.31824"
+       y="220.34401"
+       id="text3233-6"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/src/miscellaneous/images/1D_Line_Pennes_Problem_Simplified.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300"><tspan
+         sodipodi:role="line"
+         id="tspan3235-7"
+         x="-740.31824"
+         y="220.34401">T<tspan
+   style="font-size:64.99999762%;baseline-shift:sub"
+   id="tspan3262"> c</tspan></tspan></text>
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.53;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-start:url(#marker6444-0-0-9-4)"
+       d="m -544.74159,115.22559 -180.5656,0"
+       id="path6087-4-4-42-8-2-65"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/src/miscellaneous/images/3D_Tetrahedron_Diffusion_Problem.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <text
+       transform="matrix(0.99985332,-0.01712714,0.01712714,0.99985332,0,0)"
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:44.28239822px;line-height:125%;font-family:sans-serif;-inkscape-font-specification:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="-554.32428"
+       y="83.837784"
+       id="text19223-41-0-4-2-5-5-4-0-2-8-6"
+       sodipodi:linespacing="125%"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/src/miscellaneous/images/3D_Tetrahedron_Diffusion_Problem.png"><tspan
+         sodipodi:role="line"
+         id="tspan19225-6-4-1-2-7-00-9-55-0-9-9"
+         x="-554.32428"
+         y="83.837784"
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:44.28239822px;font-family:sans-serif;-inkscape-font-specification:sans-serif">y</tspan></text>
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.52999997;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -726.57219,93.942194 0,42.566896"
+       id="path5181-3"
+       inkscape:connector-curvature="0"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <path
+       style="fill:#000000;fill-rule:evenodd;stroke:#000000;stroke-width:2.29999995;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -725.45369,282.27489 454.0469,0"
+       id="path3140-7"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/src/miscellaneous/images/1D_Line_Pennes_Problem_Simplified.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.52999997;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -726.71869,259.99255 0,44.56467"
+       id="path5850"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.52999997;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -270.14179,259.99256 0,44.56467"
+       id="path5850-4"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="-524.90155"
+       y="321.78995"
+       id="text3233-5"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/src/miscellaneous/images/1D_Line_Pennes_Problem_Simplified.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300"><tspan
+         sodipodi:role="line"
+         id="tspan3235-2"
+         x="-524.90155"
+         y="321.78995">H </tspan></text>
+    <path
+       style="fill:#000000;fill-rule:evenodd;stroke:#000000;stroke-width:6.80000019;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -728.80081,452.14247 454.04692,0"
+       id="path3140-3"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/src/miscellaneous/images/1D_Line_Pennes_Problem_Simplified.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <circle
+       style="fill:#000000;stroke:#000000;stroke-width:6.80000019;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="path3216-1"
+       cx="-728.80078"
+       cy="452.14246"
+       r="11.035823"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/src/miscellaneous/images/1D_Line_Pennes_Problem_Simplified.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <circle
+       style="fill:#000000;stroke:#000000;stroke-width:6.80000019;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="path3216-3-4"
+       cx="-273.96567"
+       cy="452.93076"
+       r="11.035823"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/src/miscellaneous/images/1D_Line_Pennes_Problem_Simplified.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="-287.13321"
+       y="508.20963"
+       id="text3233-9"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/src/miscellaneous/images/1D_Line_Pennes_Problem_Simplified.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300"><tspan
+         sodipodi:role="line"
+         id="tspan3235-20"
+         x="-287.13321"
+         y="508.20963">C<tspan
+   style="font-size:64.99999762%;baseline-shift:sub"
+   id="tspan3260-6"> s</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="-743.66528"
+       y="512.81158"
+       id="text3233-6-8"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/src/miscellaneous/images/1D_Line_Pennes_Problem_Simplified.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300"><tspan
+         sodipodi:role="line"
+         id="tspan3235-7-9"
+         x="-743.66528"
+         y="512.81158">C<tspan
+   style="font-size:64.99999762%;baseline-shift:sub"
+   id="tspan3262-2"> c</tspan></tspan></text>
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.52999997;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-start:url(#marker16322)"
+       d="m -548.08869,407.69318 -180.56562,0"
+       id="path6087-4-4-42-8-2-65-6"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/src/miscellaneous/images/3D_Tetrahedron_Diffusion_Problem.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <text
+       transform="matrix(0.99985332,-0.01712714,0.01712714,0.99985332,0,0)"
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:44.28239822px;line-height:125%;font-family:sans-serif;-inkscape-font-specification:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="-562.68005"
+       y="376.20514"
+       id="text19223-41-0-4-2-5-5-4-0-2-8-6-6"
+       sodipodi:linespacing="125%"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/src/miscellaneous/images/3D_Tetrahedron_Diffusion_Problem.png"><tspan
+         sodipodi:role="line"
+         id="tspan19225-6-4-1-2-7-00-9-55-0-9-9-4"
+         x="-562.68005"
+         y="376.20514"
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:44.28239822px;font-family:sans-serif;-inkscape-font-specification:sans-serif">y</tspan></text>
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.52999997;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -729.91931,386.40978 0,42.5669"
+       id="path5181-3-9"
+       inkscape:connector-curvature="0"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <path
+       style="fill:#000000;fill-rule:evenodd;stroke:#000000;stroke-width:2.29999995;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -728.80081,574.74247 454.04692,0"
+       id="path3140-7-5"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/src/miscellaneous/images/1D_Line_Pennes_Problem_Simplified.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.52999997;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -730.06581,552.46013 0,44.56467"
+       id="path5850-0"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.52999997;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -273.48889,552.46014 0,44.56467"
+       id="path5850-4-4"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="-528.2486"
+       y="614.25757"
+       id="text3233-5-8"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/src/miscellaneous/images/1D_Line_Pennes_Problem_Simplified.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300"><tspan
+         sodipodi:role="line"
+         id="tspan3235-2-7"
+         x="-528.2486"
+         y="614.25757">H </tspan></text>
+  </g>
+</svg>

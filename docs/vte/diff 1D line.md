@@ -1,18 +1,39 @@
-Here, I will walk you through in how to validate the TLM method to solve the Diffusion equation in 1D with the element Line by comparing the tlmbht predictions with analytical solution predictions. 
+---
+# You don't need to edit this file, it's empty on purpose.
+# Edit theme's home layout instead if you wanna make some changes
+# See: https://jekyllrb.com/docs/themes/#overriding-theme-defaults
+# 
+# Set autoNumber to "all" if you want every displayed equation to be numbered
+# 
+layout: page
+permalink: vte/diff-1D-line.html
+---
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript" ></script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } } 
+});
+</script>
+
+
+# Validation of the TLMBHT to solve the diffusion equation in 1D using the element line
+
+Here, I will walk you through in how to validate the TLM method to solve the Diffusion equation in 1D with the element Line by comparing the tlmbht predictions with [analytical solution]({{ site.baseurl }}{% link theory/ana/heat 1D TT.md %}) predictions. 
 
 Everything you need is available in the folder /vte/generalDiffusion/1D/LineNode. This folder was downloaded when you downloaded the source files. If you did not download the source files, you can download it from [here](https://github.com/hugomilan/tlmbht/tree/master/vte/generalDiffusion/1D/LineNode). If you do not want to, you do not need to download or install anything--all the relevant outputs will be shown here. If you want to download tlmbht, go to [releases](https://github.com/hugomilan/tlmbht/releases) and get the most updated version of tlmbht.
 
-In this validation, we will follow the 5 steps [showed here](https://github.com/hugomilan/tlmbht/wiki).
+In this validation, we will follow the 5 steps [showed here]({{ site.baseurl }}{% link vte/how tlmbht.md %}).
 
 ### 1) Create the geometry of the problem.
 
-We will solve a simple one-dimensional problem that has analytical solution. In this problem, we will consider the diffusion of a concentration, include a source of concentration, and two constant concentration boundary conditions (constant core concentration C<sub>C</sub>, and constant surface concentration C<sub>S</sub>). The problem geometry is shown below.
+We will solve a simple one-dimensional problem that has analytical solution. In this problem, we will consider the diffusion of a concentration, include a source of concentration, and two constant concentration boundary conditions (constant core concentration \\(C_C\\), and constant surface concentration \\(C_S\\)). The problem geometry is shown below.
 
-![Geometry of the problem used to validate the line element for the diffusion equation in 1D](https://github.com/hugomilan/tlmbht/blob/master/docs/_includes/images/1D_Line_Diffusion_Problem.png "Geometry of the problem used to validate the line element for the diffusion equation in 1D")
+![Geometry of the problem used to validate the line element for the diffusion equation in 1D]({{ site.baseurl }}/assets/images/vte/1D_Line_Diffusion_Problem.png "Geometry of the problem used to validate the line element for the diffusion equation in 1D")
 
 Now that we defined the problem, we need to draw the problem geometry using a format that tlmbht knows how to read. This was already done for you. The geometry of the problem was created using [gmsh](http://www.gmsh.info). The script file is line_2BC.geo. Note in the script file that we chose different sizes for the points (the last value in the Points' line). This will make a mesh of line elements that differ in size. You can also see in the script file that we put 'Physical tags' in the Line geometry and in the Points. We did this so that we can tell tlmbht which tag is for material (number 10) and which tag is for boundary (number 20 and 21).
 
-![Geometry of the problem draw in gmsh](https://github.com/hugomilan/tlmbht/blob/master/docs/_includes/images/1D_Line_Geometry.png "Geometry of the problem draw in gmsh")
+![Geometry of the problem draw in gmsh]({{ site.baseurl }}/assets/images/vte/1D_Line_Geometry.png "Geometry of the problem draw in gmsh")
 
 Now we are ready to create the mesh.
 
@@ -20,7 +41,7 @@ Now we are ready to create the mesh.
 
 The mesh was easily created using gmsh/Mesh/1D. The mesh file (already converted to tlmbht native mesh format) is line_2BC.tbn It contains 48 points (vertices) and 47 line segments (elements). You can also see that the line segments are shorter (the mesh is denser) near the point that we set a smaller size for the point.
 
-![Line mesh of the problem geometry](https://github.com/hugomilan/tlmbht/blob/master/docs/_includes/images/1D_Line_Mesh.png "Line mesh of the problem geometry")
+![Line mesh of the problem geometry]({{ site.baseurl }}/assets/images/vte/1D_Line_Mesh.png "Line mesh of the problem geometry")
 
 Now we are ready to create the description of the problem
 
@@ -89,11 +110,11 @@ The Boundary header defines the boundary conditions. You can have different Boun
         scalar = 1;
     }
 
-The file cdiff1Li_full.tlm contains additional explanation about the input. If you want more information in how to configure the case file, go to [How to configure a case file.](https://github.com/hugomilan/tlmbht/wiki/How-to-configure-a-case-file)
+The file cdiff1Li_full.tlm contains additional explanation about the input. If you want more information in how to configure the case file, go to [How to configure a case file.]({{ site.baseurl }}{% link vte/configure case file.md %})
 
 ### 4) Solve the problem.
 
-#### [Click here if you have Windows and need help to run tlmbht in your machine.](https://github.com/hugomilan/tlmbht/wiki/Running-tlmbht-in-Windows)
+#### [Click here if you have Windows and need help to run tlmbht in your PC.]({{ site.baseurl }}{% link vte/run on windows.md %})
 
 If you have the tlmbht binary in your path environment, simply type `tlmbht cdiff1Li.tlm`. If you don't have it in your path environment, you may copy the binary to the folder /vte/generalDiffusion/1D/LineNode/ and then type `./tlmbht cdiff1Li.tlm`. In some seconds, the calculation will be done.
 
@@ -109,7 +130,7 @@ This part should be as simple as opening vdiff1Li.m in Octave/Matlab and running
 
 You may note in the flux plot that the left most point has positive value while the closer points have negative values. This is because this is the point at the boundary and it represents flux going from the medium to that boundary. The negative values are representing the fluxes going into the direction of the lower concentration value boundary. Here, we observe that the core of the medium is acquiring concentration, which might not seem logical since this is the higher concentration boundary. However, we have a high intensity source (see cdiff1Li.tlm) that increases the concentration in the medium in a way that the concentration in the medium is higher than the concentration in both boundaries.
 
-![Predictions using tlmbht with lines vs. predictions using analytical solution for the 1D problem](https://github.com/hugomilan/tlmbht/blob/master/docs/_includes/images/1D_Line_Diffusion_Result.png "Predictions using tlmbht with lines vs. predictions using analytical solution for the 1D problem")
+![Predictions using tlmbht with lines vs. predictions using analytical solution for the 1D problem]({{ site.baseurl }}/assets/images/vte/1D_Line_Diffusion_Result.png "Predictions using tlmbht with lines vs. predictions using analytical solution for the 1D problem")
 
 
 You are not satisfied with this accuracy? Well... this is a numerical method; we will never get the same exact numbers as the analytical solution gives. Besides, this analytical solution is based on a infinity sum and, by default, the script vdiff1Li.m only considers the first 50 terms. If you insist, you can try to increase the number of terms in the analytical solution. Then, as it is true for numerical methods, you can try to increase the number of elements and/or decrease the time-step. These changes will increase the computational time but also increase the accuracy.
@@ -120,4 +141,4 @@ I hope you have enjoyed this validation section! You may now try to change the c
 
 Remember: you are using a powerful numerical solver. You do not need to be constrained by solutions that can be solved analytically. Explore! Try different boundary conditions, include more materials, etc. Make this problem more realistic!
 
-If you want to, you can move to the [validation for Diffusion 2D.](https://github.com/hugomilan/tlmbht/wiki/Validating-Diffusion-Equation-in-2D-with-triangle-elements)
+If you want to, you can move to the [validation for Diffusion 2D.]({{ site.baseurl }}{% link vte/diff 2D triangle.md %})

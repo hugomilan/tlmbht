@@ -26,24 +26,24 @@ Validations for the diffusion equation, heat equation, and Pennes equation are v
 
 #### Diffusion equation
 
-1. [One-dimension using the element line]({{ site.baseurl }}{% link vte/v diff 1D line.md %})
+1. [One-dimension using the element line]({{ site.baseurl }}{% link vte/diff 1D line.md %})
 
-2. [Two-dimensions using the element triangle](https://github.com/hugomilan/tlmbht/wiki/Validating-Diffusion-Equation-in-2D-with-triangle-elements)
+2. [Two-dimensions using the element triangle]({{ site.baseurl }}{% link vte/diff 2D triangle.md %})
 
-3. [Three-dimensions using the element tetrahedron](https://github.com/hugomilan/tlmbht/wiki/Validating-Diffusion-Equation-in-3D-with-tetrahedron-elements)
+3. [Three-dimensions using the element tetrahedron]({{ site.baseurl }}{% link vte/diff 3D tetrahedron.md %})
 
 #### Heat equation
 
-1. [One-dimension using the element line](https://github.com/hugomilan/tlmbht/wiki/Validating-Heat-Equation-in-1D-with-line-elements)
+1. [One-dimension using the element line]({{ site.baseurl }}{% link vte/heat 1D line.md %})
 
-2. [Two-dimensions using the element triangle](https://github.com/hugomilan/tlmbht/wiki/Validating-Heat-Equation-in-2D-with-triangle-elements)
+2. [Two-dimensions using the element triangle]({{ site.baseurl }}{% link vte/heat 2D triangle.md %})
 
-3. [Three-dimensions using the element tetrahedron](https://github.com/hugomilan/tlmbht/wiki/Validating-Heat-Equation-in-3D-with-tetrahedron-elements)
+3. [Three-dimensions using the element tetrahedron]({{ site.baseurl }}{% link vte/heat 3D tetrahedron.md %})
 
 #### Pennes bioheat equation
 
-1. [One-dimension using the element line](https://github.com/hugomilan/tlmbht/wiki/Validating-Pennes-Equation-in-1D-with-line-elements)
+1. [One-dimension using the element line]({{ site.baseurl }}{% link vte/pennes 1D line.md %})
 
-2. [Two-dimensions using the element triangle](https://github.com/hugomilan/tlmbht/wiki/Validating-Pennes-Equation-in-2D-with-triangle-elements)
+2. [Two-dimensions using the element triangle]({{ site.baseurl }}{% link vte/pennes 2D triangle.md %})
 
-3. [Three-dimensions using the element tetrahedron](https://github.com/hugomilan/tlmbht/wiki/Validating-Pennes-Equation-in-3D-with-tetrahedron-elements)
+3. [Three-dimensions using the element tetrahedron]({{ site.baseurl }}{% link vte/pennes 3D tetrahedron.md %})

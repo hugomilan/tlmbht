@@ -8,7 +8,10 @@ permalink: theory/tlm/index.html
 ---
 <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
 
-This page is not finished yet. See here [why you should use tlmbht]({{ site.baseurl }}{% link theory/tlm/why tlmbht.md %})Until then, you may read the [Wikipedia webpage](https://en.wikipedia.org/wiki/Transmission-line_matrix_method) or one of the following paper accordingly to your main interest ([citation and more references are available here](https://github.com/hugomilan/tlmbht/tree/master/references.md)):
+useful link:
+[Why you should use tlmbht]({{ site.baseurl }}{% link theory/tlm/why tlmbht.md %})
+
+This page is not finished yet. Until then, you may read the [Wikipedia webpage](https://en.wikipedia.org/wiki/Transmission-line_matrix_method) or one of the following paper accordingly to your main interest ([citation and more references are available here](https://github.com/hugomilan/tlmbht/tree/master/references.md)):
 
 
 ### Diffusion, Heat, and Pennes equations
@@ -26,3 +29,4 @@ The paper below were focused on solving the Pennes bio-heat equation but the the
 **Three-dimensional tetrahedron element:**
 
 * [Milan and Gebremedhin (2016b).](http://www.sciencedirect.com/science/article/pii/S0010482516302839)
+

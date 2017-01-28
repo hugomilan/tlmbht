@@ -35,10 +35,6 @@ function [T, qx, phi_a, qx_phi_a, YTau, qx_YTau] = ...
 %
 % this algorithm uses the principle of superposition to make
 % T = Tc + phi_a(x) + YTau(x,t)
-%
-%
-%
-% This algorithm is not intended for wb = 0. Use D1_HEAT_f.m instead.
 
 
 % defining constants
