@@ -31,41 +31,56 @@ We define the diffusion equation as:
 
 with the following definition of flux
 
-\\[ q^{''} = -D\nabla C\\]
+\begin{equation}
+    q = -D\nabla C
+\end{equation}
 
 where \\(C\\) is concentration, \\(t\\) is time, \\(D\\) is diffusivity, and \\(S\\) is source.
 
 And we define the heat equation as:
 
-\\[ \rho c_{p}\frac{\partial T}{\partial t} = k\nabla^2 T + S\\]
+\begin{equation}
+    \rho c_{p}\frac{\partial T}{\partial t} = k\nabla^2 T + S
+\end{equation}
 
 with the following definition of flux
 
-\\[ q^{''} = -k\nabla T\\]
+\begin{equation}
+    q^{''} = -k\nabla T
+\end{equation}
 
 where \\(T\\) is temperature, \\(t\\) is time, \\(\rho\\) is density, \\(c_{p}\\) is specific heat, \\(k\\) is heat conductivity, and \\(S\\) is source.
 
 Note that the diffusion equation and the heat equation have the same form when \\(\rho c_{p} = 1\\).
 
-1. One-dimension.
+#### **1) One-dimension**
 
 Initial condition and boundary conditions:
 
-* \\(C(y=0, t)\\) = \\(C_{c}\\) or \\(T(y=0, t)\\) = \\(T_{c}\\)
-* \\(C(y, t = 0)\\) = \\(C_{c}\\) or \\(T(y, t = 0)\\) = \\(T_{c}\\)
-* \\(C(y=H, t)\\) = \\(C_{s}\\) or \\(T(y=H, t)\\) = \\(T_{s}\\)
+$$
+\begin{matrix}
+    C(y, t = 0) = C_{c} & \text{ or } & T(y, t = 0) = T_{c}\\
+    C(y = 0, t) = C_{c} & \text{ or } & T(y = 0, t) = T_{c}\\
+    C(y = H, t) = C_{s} & \text{ or } & T(y = H, t) = T_{s}
+\end{matrix}
+$$
 
-2. Two-dimensions
+#### **2) Two-dimensions**
 
 Initial condition and boundary conditions:
 
-* \\(C(x, y=0, t)\\) = \\(C_{c}\\) or \\(T(x, y=0, t)\\) = \\(T_{c}\\)
-* \\(C(x, y, t = 0)\\) = \\(C_{c}\\) or \\(T(x, y, t = 0)\\) = \\(T_{c}\\)
-* \\(C(x, y=H, t)\\) = \\(C_{s}\\) or \\(T(x, y=H, t)\\) = \\(T_{s}\\)
-* \\(\frac{\partial C}{\partial x}(x = 0, y, t)\\) = \\(0\\) or \\(T(x, y=H, t)\\) = \\(T_{s}\\)
-* \\(\frac{\partial C}{\partial x}(x = 0, y, t)\\) = \\(q^{''}_{x}\\) or \\(T(x, y=H, t)\\) = \\(T_{s}\\)
+$$
+\begin{matrix}
+    C(x,y, t = 0) = C_{c} & \text{ or } & T(x,y, t = 0) = T_{c}\\
+    C(x,y = 0, t) = C_{c} & \text{ or } & T(x,y = 0, t) = T_{c}\\
+    C(x,y = H, t) = C_{s} & \text{ or } & T(x,y = H, t) = T_{s}\\
+    \dfrac{\partial C}{\partial x} (x = 0, y, t) = 0 & \text{ or } & \dfrac{\partial T}{\partial x}(x = 0, y, t) = 0\\
+    \dfrac{\partial C}{\partial x}(x = L, y, t) = \dfrac{q_x}{D} & \text{ or } & \dfrac{\partial T}{\partial x}(x = L, y, t) = \dfrac{q_x}{k}\\
+\end{matrix}
+$$
 
-3. Three-dimensions
+
+#### **3) Three-dimensions**
 
 ### Pennes equation
 
