@@ -2,11 +2,10 @@
 # You don't need to edit this file, it's empty on purpose.
 # Edit theme's home layout instead if you wanna make some changes
 # See: https://jekyllrb.com/docs/themes/#overriding-theme-defaults
-layout: page
+layout: page_eqAMS_Disqus
 title: TLM Theory
 permalink: theory/tlm/index.html
 ---
-<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
 
 useful link:
 [Why you should use tlmbht]({{ site.baseurl }}{% link theory/tlm/why tlmbht.md %})

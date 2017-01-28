@@ -2,30 +2,12 @@
 # You don't need to edit this file, it's empty on purpose.
 # Edit theme's home layout instead if you wanna make some changes
 # See: https://jekyllrb.com/docs/themes/#overriding-theme-defaults
-# 
-# Set autoNumber to "all" if you want every displayed equation to be numbered
-# 
-layout: page
+layout: page_eqAMS_Disqus
 permalink: theory/ana/heat-1D-TT.html
-nameHugo: testHugo
-comments: true
 ---
-<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript" ></script>
 
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-  TeX: { equationNumbers: { autoNumber: "AMS" } } 
-});
-</script>
-
-{% include disqus.html %}
-
-<script id="dsq-count-scr" src="//hugomilan.disqus.com/count.js" async></script>
 
 # Analytical solution of the dynamic Diffusion/Heat equation in one-dimension
-something2
-
-
 
 You can download the algorithm `D1_HEAT_f.m` for Octave/Matlab that can solve this problem [here](https://github.com/hugomilan/tlmbht/tree/master/src/octave/analytical/1D) and you can see instructions in [how to use it here]({{ site.baseurl }}{% link theory/ana/heat 1D TT.md%}#using-the-algorithm). If you want to see the final solution, [go to Solution]({{ site.baseurl }}{% link theory/ana/heat 1D TT.md%}#solution).
 

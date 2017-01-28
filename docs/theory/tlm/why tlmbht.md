@@ -2,10 +2,9 @@
 # You don't need to edit this file, it's empty on purpose.
 # Edit theme's home layout instead if you wanna make some changes
 # See: https://jekyllrb.com/docs/themes/#overriding-theme-defaults
-layout: page
-permalink: conf/why.html
+layout: page_eqAMS_Disqus
+permalink: theory/tlm/why.html
 ---
-<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
 
 In this page, we will cover:
 
@@ -53,7 +52,7 @@ The numerical solution is based on a mesh of geometrical elements (or control vo
 
 
 
-# What does TLM really mean?
+# 3) What does TLM really mean?
 
 TLM is an acronym that stands for *Transmission-Line Modeling* and/or *Transmission-Line Matrix*. The term Transmisison-Line Matrix was conceived by Johns, the creator of the TLM method, in Johns and Beurly (1971). In this paper, they showed how the TLM method could be used to solve 2D electromagnetic problems. The term was well suited for the time, when the TLM method had been applied only to electromagnetic problems and the meshes were all structured. At that time, the use of structured meshes resemble a matrix arrangement.
 
