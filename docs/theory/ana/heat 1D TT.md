@@ -7,6 +7,8 @@
 # 
 layout: page
 permalink: theory/ana/heat-1D-TT.html
+nameHugo: testHugo
+comments: true
 ---
 <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript" ></script>
 
@@ -16,19 +18,12 @@ MathJax.Hub.Config({
 });
 </script>
 
+{% include disqus.html %}
+
+<script id="dsq-count-scr" src="//hugomilan.disqus.com/count.js" async></script>
+
 # Analytical solution of the dynamic Diffusion/Heat equation in one-dimension
-
-
-base url
-{{site.baseurl}}
-
-id
-{{page.id}}
-
-url
-{{page.url}}
-
-something
+something2
 
 
 
