@@ -32,19 +32,19 @@
                     <type>1</type>
                 </confElem>
                 <confElem>
-                    <name>release_linux_32</name>
+                    <name>linux_32</name>
                     <type>1</type>
                 </confElem>
                 <confElem>
-                    <name>release_linux_64</name>
+                    <name>linux_64</name>
                     <type>1</type>
                 </confElem>
                 <confElem>
-                    <name>release_windows_32</name>
+                    <name>windows_32</name>
                     <type>1</type>
                 </confElem>
                 <confElem>
-                    <name>release_windows_64</name>
+                    <name>windows_64</name>
                     <type>1</type>
                 </confElem>
             </confList>

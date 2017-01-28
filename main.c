@@ -102,6 +102,11 @@
  * a function getOutsideProjection.
  */
 
+/*
+ * The equations that tlmbht can solve are displayed in:
+ * 1) README.MD
+ * 2) page why tlmbht (this also has the elements that tlmbht can solve for)
+ */
 
 /* 
  * Standards used in this software:

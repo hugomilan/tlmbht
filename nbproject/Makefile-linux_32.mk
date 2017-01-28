@@ -23,7 +23,7 @@ AS=as
 # Macros
 CND_PLATFORM=GNU-Linux
 CND_DLIB_EXT=so
-CND_CONF=release_linux_64
+CND_CONF=linux_32
 CND_DISTDIR=dist
 CND_BUILDDIR=build
 
@@ -66,11 +66,11 @@ OBJECTFILES= \
 
 
 # C Compiler Flags
-CFLAGS=-m64 -fopenmp -DNDEBUG
+CFLAGS=-m32 -fopenmp -DNDEBUG
 
 # CC Compiler Flags
-CCFLAGS=-m64 -fopenmp -DNDEBUG
-CXXFLAGS=-m64 -fopenmp -DNDEBUG
+CCFLAGS=-m32 -fopenmp -DNDEBUG
+CXXFLAGS=-m32 -fopenmp -DNDEBUG
 
 # Fortran Compiler Flags
 FFLAGS=
@@ -83,11 +83,11 @@ LDLIBSOPTIONS=
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
-	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/tlmbhtLinux64
+	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/tlmbhtLinux32
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/tlmbhtLinux64: ${OBJECTFILES}
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/tlmbhtLinux32: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
-	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/tlmbhtLinux64 ${OBJECTFILES} ${LDLIBSOPTIONS}
+	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/tlmbhtLinux32 ${OBJECTFILES} ${LDLIBSOPTIONS}
 
 ${OBJECTDIR}/main.o: main.c
 	${MKDIR} -p ${OBJECTDIR}

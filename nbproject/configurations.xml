@@ -501,11 +501,12 @@
       <itemPath>acknowledgment.md</itemPath>
       <itemPath>case.tlm</itemPath>
       <itemPath>compilation flags.txt</itemPath>
+      <itemPath>docs</itemPath>
+      <itemPath>history.md</itemPath>
       <itemPath>src/octave</itemPath>
       <itemPath>references.md</itemPath>
       <itemPath>test</itemPath>
       <itemPath>tlmcode.md</itemPath>
-      <itemPath>validation</itemPath>
     </logicalFolder>
     <itemPath>CMakeLists.txt</itemPath>
   </logicalFolder>

@@ -85,7 +85,7 @@
         </environment>
       </runprofile>
     </conf>
-    <conf name="debug" type="1" platformSpecific="true">
+    <conf name="debug" type="1">
       <toolsSet>
         <developmentServer>localhost</developmentServer>
         <platform>2</platform>
@@ -96,8 +96,6 @@
         <gdb_interceptlist>
           <gdbinterceptoptions gdb_all="false" gdb_unhandled="true" gdb_unexpected="true"/>
         </gdb_interceptlist>
-        <gdb_signals>
-        </gdb_signals>
         <gdb_options>
           <DebugOptions>
           </DebugOptions>
@@ -129,7 +127,7 @@
         </environment>
       </runprofile>
     </conf>
-    <conf name="cuda_release" type="1" platformSpecific="true">
+    <conf name="cuda_release" type="1">
       <toolsSet>
         <developmentServer>localhost</developmentServer>
         <platform>2</platform>
@@ -170,7 +168,7 @@
         </environment>
       </runprofile>
     </conf>
-    <conf name="cuda_debug" type="1" platformSpecific="true">
+    <conf name="cuda_debug" type="1">
       <toolsSet>
         <developmentServer>localhost</developmentServer>
         <platform>2</platform>
@@ -192,7 +190,6 @@
       </nativedebugger>
       <runprofile version="9">
         <runcommandpicklist>
-          <runcommandpicklistitem>"${OUTPUT_PATH}" case_testing.tlm</runcommandpicklistitem>
           <runcommandpicklistitem>"${OUTPUT_PATH}" case_testing_3D.tlm</runcommandpicklistitem>
           <runcommandpicklistitem>"${OUTPUT_PATH}" case_testing_1D.tlm</runcommandpicklistitem>
           <runcommandpicklistitem>"${OUTPUT_PATH}" cpennes1Li.tlm</runcommandpicklistitem>
@@ -202,9 +199,10 @@
           <runcommandpicklistitem>"${OUTPUT_PATH}" cheat1Li.tlm</runcommandpicklistitem>
           <runcommandpicklistitem>"${OUTPUT_PATH}" cdiff1Li.tlm</runcommandpicklistitem>
           <runcommandpicklistitem>"${OUTPUT_PATH}" cpennes2Tr.tlm</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}"</runcommandpicklistitem>
         </runcommandpicklist>
-        <runcommand>"${OUTPUT_PATH}" cpennes2Tr.tlm</runcommand>
-        <rundir>test</rundir>
+        <runcommand>"${OUTPUT_PATH}"</runcommand>
+        <rundir></rundir>
         <buildfirst>true</buildfirst>
         <terminal-type>0</terminal-type>
         <remove-instrumentation>0</remove-instrumentation>
@@ -212,7 +210,7 @@
         </environment>
       </runprofile>
     </conf>
-    <conf name="release_linux_32" type="1" platformSpecific="true">
+    <conf name="linux_32" type="1">
       <toolsSet>
         <developmentServer>localhost</developmentServer>
         <platform>2</platform>
@@ -245,7 +243,7 @@
         </environment>
       </runprofile>
     </conf>
-    <conf name="release_linux_64" type="1" platformSpecific="true">
+    <conf name="linux_64" type="1">
       <toolsSet>
         <developmentServer>localhost</developmentServer>
         <platform>2</platform>
@@ -278,7 +276,7 @@
         </environment>
       </runprofile>
     </conf>
-    <conf name="release_windows_32" type="1">
+    <conf name="windows_32" type="1">
       <toolsSet>
         <developmentServer>localhost</developmentServer>
         <platform>2</platform>
@@ -311,7 +309,7 @@
         </environment>
       </runprofile>
     </conf>
-    <conf name="release_windows_64" type="1">
+    <conf name="windows_64" type="1">
       <toolsSet>
         <developmentServer>localhost</developmentServer>
         <platform>2</platform>

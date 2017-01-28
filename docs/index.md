@@ -4,28 +4,23 @@
 # See: https://jekyllrb.com/docs/themes/#overriding-theme-defaults
 layout: page
 ---
-
-<script type="text/javascript"
-        src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
-
-can you include equations5?
-
-$$a^2 + b^2 = c^2$$
-
-$$ \mathsf{Data = PCs} \times \mathsf{Loadings} $$
-
-can you include sketchfab?
-
-<div class="sketchfab-embed-wrapper"><iframe width="640" height="480" src="https://sketchfab.com/models/da99d159deb741ee8a4bf17298a9c02b/embed" frameborder="0" allowvr allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" onmousewheel=""></iframe>
-
-<p style="font-size: 13px; font-weight: normal; margin: 5px; color: #4A4A4A;">
-    <a href="https://sketchfab.com/models/da99d159deb741ee8a4bf17298a9c02b?utm_medium=embed&utm_source=website&utm_campain=share-popup" target="_blank" style="font-weight: bold; color: #1CAAD9;">Plate</a>
-    by <a href="https://sketchfab.com/hugomilan?utm_medium=embed&utm_source=website&utm_campain=share-popup" target="_blank" style="font-weight: bold; color: #1CAAD9;">hugomilan</a>
-    on <a href="https://sketchfab.com?utm_medium=embed&utm_source=website&utm_campain=share-popup" target="_blank" style="font-weight: bold; color: #1CAAD9;">Sketchfab</a>
-</p>
-</div>
-
-uauuu... I liked it.
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
 
 
+## Welcome to the TLMBHT website!
+
+TLMBHT is an open-source solver of partial differential equations in space and time based on the Transmission-Line Modeling (TLM) theory. You can [download the latest release here](https://github.com/hugomilan/tlmbht/releases). If you want to compile the code yourself, see [more instructions here](https://github.com/hugomilan/tlmbht/blob/master/README.md).
+
+#### [Why shoud I use tlmbht?]({{ site.baseurl }}{% link theory/tlm/why tlmbht.md %})
+
+#### [TLMBHT Workflow]({{ site.baseurl }}{% link vte/how tlmbht.md %})
+
+#### [Tutorials, examples, and validations]({{ site.baseurl }}{% link vte/index.md %})
+
+#### [How to configure a case file]({{ site.baseurl }}{% link vte/configure case file.md %})
+
+#### [TLM theory]({{ site.baseurl }}{% link theory/tlm/index.md %})
+
+#### [Analytical solutions]({{ site.baseurl }}{% link theory/ana/index.md %})
+
+#### [Running tlmbht in Windows]({{ site.baseurl }}{% link vte/run on windows.md %})
