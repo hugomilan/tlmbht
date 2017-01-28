@@ -5,7 +5,7 @@
 layout: page_eqAMS_Disqus
 ---
 
- test4
+ test
 
 ## Welcome to the TLMBHT website!
 
