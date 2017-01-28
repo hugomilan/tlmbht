@@ -5,6 +5,7 @@
 layout: page_eqAMS_Disqus
 title: Analytical solutions
 permalink: theory/ana/index.html
+order: 4
 ---
 
 Analytical solutions are essential to the verification process of numerical solvers. The analytical solutions are used to validate the predictions made using numerical solvers to problems that have analytical solutions. Here, we show how to obtain the analytical solutions that were used to validate TLMBHT.

@@ -2,6 +2,7 @@
 layout: page
 title: About
 permalink: /about/
+order: 5
 ---
 
 TLMBHT is open-source software free for Research and Educational purposes. See details of the [Cornell University license here]({{ site.baseurl }}{% link licenseCU.md %}).

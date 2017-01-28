@@ -5,6 +5,7 @@
 layout: page_eqAMS_Disqus
 title: TLM Theory
 permalink: theory/tlm/index.html
+order: 3
 ---
 
 useful link:

@@ -5,6 +5,7 @@
 layout: page_eqAMS_Disqus
 title: Tutorials, examples, and validations
 permalink: vte/index.html
+order: 2
 ---
 
 Here, you will find tutorials, case studies used to validate tlmbht (and the TLM method), and examples of simulation problems using tlmbht. This can also help you get familiarity with the software tlmbht. 

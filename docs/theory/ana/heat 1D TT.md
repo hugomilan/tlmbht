@@ -5,17 +5,6 @@
 layout: page_eqAMS_Disqus
 permalink: theory/ana/heat-1D-TT.html
 ---
-page.url
-{{ page.url }}
-
-absolute_url
-{{ absolute_url }}
-
-site.baseurl
-{{site.baseurl}}
-
-site.baseurl page.url
-{{site.baseurl}} {{ page.url }}
 
 # Analytical solution of the dynamic Diffusion/Heat equation in one-dimension
 
