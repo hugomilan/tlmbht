@@ -18,6 +18,18 @@ MathJax.Hub.Config({
 
 # Analytical solution of the dynamic Diffusion/Heat equation in one-dimension
 
+
+
+{{site.baseurl}}
+
+{{page.id}}
+
+{{page.url}}
+
+something
+
+
+
 You can download the algorithm `D1_HEAT_f.m` for Octave/Matlab that can solve this problem [here](https://github.com/hugomilan/tlmbht/tree/master/src/octave/analytical/1D) and you can see instructions in [how to use it here]({{ site.baseurl }}{% link theory/ana/heat 1D TT.md%}#using-the-algorithm). If you want to see the final solution, [go to Solution]({{ site.baseurl }}{% link theory/ana/heat 1D TT.md%}#solution).
 
 In this page, we will solve the dynamic diffusion/heat equation in one-dimension using the principles of superposition and separation of variables. The problem we will solve is restricted to the following initial and boundary conditions:
