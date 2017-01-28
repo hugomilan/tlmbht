@@ -7,7 +7,6 @@
 # 
 layout: page
 permalink: theory/ana/heat-1D-TT.html
-date: 2017-01-28 12:13:00 -0500
 ---
 <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript" ></script>
 
