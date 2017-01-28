@@ -19,11 +19,13 @@ MathJax.Hub.Config({
 # Analytical solution of the dynamic Diffusion/Heat equation in one-dimension
 
 
-
+base url
 {{site.baseurl}}
 
+id
 {{page.id}}
 
+url
 {{page.url}}
 
 something
@@ -308,6 +310,7 @@ which generates
 ### Done
 
 Now, you can go to:
+
 * [Analytical solutions menu]({{ site.baseurl }}{% link theory/ana/index.md %})
 * [Analytical solution in two-dimensions]({{ site.baseurl }}{% link theory/ana/heat 2D TTqq.md %})
 
