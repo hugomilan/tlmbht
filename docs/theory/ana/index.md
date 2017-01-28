@@ -55,7 +55,7 @@ Note that the diffusion equation and the heat equation have the same form when \
 
 #### **1) One-dimension**
 
-[Click here to see how to solve the problem with the following initial condition and boundary conditions:]({% link theory/ana/heat 1D TT.md %})
+[Click here to see how to solve the problem with the following initial condition and boundary conditions:]({{ site.baseurl }}{% link theory/ana/heat 1D TT.md %})
 
 
 $$
@@ -68,7 +68,7 @@ $$
 
 #### **2) Two-dimensions**
 
-[Click here to see how to solve the problem with the following initial condition and boundary conditions:]({% link theory/ana/heat 2D TTqq.md %})
+[Click here to see how to solve the problem with the following initial condition and boundary conditions:]({{ site.baseurl }}{% link theory/ana/heat 2D TTqq.md %})
 
 $$
 \begin{matrix}
@@ -83,7 +83,7 @@ $$
 
 #### **3) Three-dimensions**
 
-[Click here to see how to solve the problem with the following initial condition and boundary conditions:]({% link theory/ana/heat 3D TTqqqq.md %})
+[Click here to see how to solve the problem with the following initial condition and boundary conditions:]({{ site.baseurl }}{% link theory/ana/heat 3D TTqqqq.md %})
 
 $$
 \begin{matrix}
@@ -115,7 +115,7 @@ where \\(T\\) is temperature, \\(t\\) is time, \\(\rho\\) is density, \\(c_{p}\\
 
 #### **1) One-dimension**
 
-[Click here to see how to solve the problem with the following initial condition and boundary conditions:]({% link theory/ana/pennes 1D TT.md %})
+[Click here to see how to solve the problem with the following initial condition and boundary conditions:]({{ site.baseurl }}{% link theory/ana/pennes 1D TT.md %})
 
 $$
 \begin{matrix}
@@ -127,7 +127,7 @@ $$
 
 #### **2) Two-dimensions**
 
-[Click here to see how to solve the problem with the following initial condition and boundary conditions:]({% link theory/ana/pennes 2D TTqq.md %})
+[Click here to see how to solve the problem with the following initial condition and boundary conditions:]({{ site.baseurl }}{% link theory/ana/pennes 2D TTqq.md %})
 
 $$
 \begin{matrix}
@@ -142,7 +142,7 @@ $$
 
 #### **3) Three-dimensions**
 
-[Click here to see how to solve the problem with the following initial condition and boundary conditions:]({% link theory/ana/pennes 3D TTqqqq.md %})
+[Click here to see how to solve the problem with the following initial condition and boundary conditions:]({{ site.baseurl }}{% link theory/ana/pennes 3D TTqqqq.md %})
 
 $$
 \begin{matrix}
