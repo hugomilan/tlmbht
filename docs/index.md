@@ -6,7 +6,7 @@ layout: page
 ---
 
 ## Welcome to the TLMBHT website!
-<span style="color:#DFDAD9">Jan 29, 2017.</span>
+<span style="color:#40EA26">Jan 29, 2017.</span>
 
 TLMBHT is an open-source solver of partial differential equations in space and time based on the Transmission-Line Modeling (TLM) theory. You can [download the latest release here](https://github.com/hugomilan/tlmbht/releases). If you want to compile the code yourself, see [more instructions here](https://github.com/hugomilan/tlmbht/blob/master/README.md).
 
