@@ -5,6 +5,8 @@ permalink: /about/
 order: 5
 ---
 
+<span style="color:#697473">Jan 30, 2017</span> by [**Hugo Milan**](https://hugomilan.github.io/) 
+
 TLMBHT is open-source software free for Research and Educational purposes. See details of the [Cornell University license here]({{ site.baseurl }}{% link licenseCU.md %}).
 
 The details of these [webpages copyright are here]({{ site.baseurl }}{% link licenseSite.md %}).

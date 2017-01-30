@@ -6,52 +6,37 @@ layout: page_eqAMS_Disqus
 permalink: theory/ana/pennes-1D-TT.html
 ---
 
-# Analytical solution of the dynamic Diffusion/Heat equation in one-dimension
+# Analytical solution of the Pennes equation in time-domain for one-dimension
+<span style="color:#697473">Jan 30, 2017</span> by [**Hugo Milan**](https://hugomilan.github.io/)
 
-You can download the algorithm `D1_HEAT_f.m` for Octave/Matlab that can solve this problem [here](https://github.com/hugomilan/tlmbht/tree/master/src/octave/analytical/1D) and you can see instructions in [how to use it here]({% link theory/ana/heat 1D TT.md%}#using-the-algorithm). If you want to see the final solution, [go to Solution]({% link theory/ana/heat 1D TT.md%}#solution).
+You can download the algorithm `D1_BHE_f.m` for Octave/Matlab that can solve this problem [here](https://github.com/hugomilan/tlmbht/tree/master/src/octave/analytical/1D) and you can see instructions in [how to use it here]({% link theory/ana/pennes 1D TT.md%}#using-the-algorithm). If you want to see the final solution, [go to Solution]({% link theory/ana/pennes 1D TT.md%}#solution).
 
-In this page, we will solve the dynamic diffusion/heat equation in one-dimension using the principles of superposition and separation of variables. The problem we will solve is restricted to the following initial and boundary conditions:
+In this page, we will solve the dynamic Pennes equation in one-dimension using the principles of superposition and separation of variables. The problem we will solve is restricted to the following initial and boundary conditions:
 
 $$
 \begin{matrix}
-    C(y, t = 0) = C_{c} & \text{ or } & T(y, t = 0) = T_{c}\\
-    C(y = 0, t) = C_{c} & \text{ or } & T(y = 0, t) = T_{c}\\
-    C(y = H, t) = C_{s} & \text{ or } & T(y = H, t) = T_{s}
+    T(y, t = 0) = T_{c}\\
+    T(y = 0, t) = T_{c}\\
+    T(y = H, t) = T_{s}
 \end{matrix}
 $$
 
-The problem geometry for the diffusion equation can be represented as shown below.
-<img src="{{ site.baseurl }}/assets/images/theory/ana/diff 1D TT.png" alt="Geometry of the one-dimensional problem for diffusion equation" width="300">
-
-
-The problem geometry for the heat equation can be represented as shown below.
-<img src="{{ site.baseurl }}/assets/images/theory/ana/heat 1D TT.png" alt="Geometry of the one-dimensional problem for heat equation" width="300">
+The problem geometry for the pennes equation can be represented as shown below.
+<img src="{{ site.baseurl }}/assets/images/theory/ana/heat 1D TT.png" alt="Geometry of the one-dimensional problem for Pennes equation" width="300">
 
 ### Governing equations
 
-Diffusion equation:
+The Pennes equation is defined as:
 
 \begin{equation}
-    \frac{\partial C}{\partial t} = D\frac{\partial^2 C}{\partial y^2} + S
+    \rho c_{p}\frac{\partial T}{\partial t} = k\frac{\partial^2 T}{\partial y^2} +  S + Q_m + \omega_b\rho_b c_{b} (T_b - T)
+    \label{eq:Pennes}
 \end{equation}
 
-where \\(C\\) is concentration, \\(t\\) is time, \\(D\\) is diffusivity, and \\(S\\) is source.
-
-And we define the heat equation as:
-
-\begin{equation}
-    \rho c_{p}\frac{\partial T}{\partial t} = k\frac{\partial^2 T}{\partial y^2} + S
-    \label{eq:Heat}
-\end{equation}
-
-where \\(T\\) is temperature, \\(t\\) is time, \\(\rho\\) is density, \\(c_{p}\\) is specific heat, \\(k\\) is heat conductivity, and \\(S\\) is source.
-
-Note that the diffusion equation and the heat equation have the same form when \\(\rho c_{p} = 1\\).
+where \\(T\\) is temperature, \\(t\\) is time, \\(\rho\\) is density, \\(c_{p}\\) is specific heat, \\(k\\) is heat conductivity, and \\(S\\) is source, \\(Q_m\\) is metabolic heat generation, \\(\omega_b\\) is blood perfusion, \\(\rho_b\\) is blodd density, \\(c_{b}\\) is blood specific heat, and \\(T_b\\) is blood temperature.
 
 
 ### Solving
-
-I will show the solution process for the heat equation. The solution process for the diffusion equation follows straightforward.
 
 I will use the principle of suporposition so that:
 
@@ -65,29 +50,28 @@ and the initial and boundary conditions for these problems are:
 $$
 \begin{matrix}
     & T(y,t) & \phi_a(y) & \phi_b(y)\tau_b(t) \\
-    t = 0 & T(y, t=0) = T_c & - & \phi_b(y)\tau_b(t=0) = -\phi_a(y)\\
-    y = 0 & T(y = 0,t) = T_c & \phi_a(y=0) = 0 & \phi_b(y=0)\tau_b(t) = 0\\
-    H = 0 & T(y = 0,t) = T_s & \phi_a(y=0) = T_s - T_c & \phi_b(y=0)\tau_b(t) = 0
+    t = 0 & T = T_c & - & \phi_b\tau_b = -\phi_a\\
+    y = 0 & T = T_c & \phi_a = 0 & \phi_b\tau_b = 0\\
+    y = H & T = T_s & \phi_a = T_s - T_c & \phi_b\tau_b = 0
 \end{matrix}
 $$
 
-
-Applying Eq. \ref{eq:Sup} in \ref{eq:Heat} yields
+Defining \\(W_b = \omega_b\rho_b c_{b} \\) and applying Eq. \ref{eq:Sup} in \ref{eq:Pennes} yields
 
 \begin{equation}
-    k\frac{\partial^2 \phi_a}{\partial y^2} + S =
-    \rho c_{p}\phi_b\frac{\partial \tau_b}{\partial t} - k\tau_b\frac{\partial^2 \phi_b}{\partial y^2}
+    k\frac{\partial^2 \phi_a}{\partial y^2} - W_b\phi_a + S + Q_m + W_b(T_b - T_c) =
+    \rho c_{p}\phi_b\frac{\partial \tau_b}{\partial t} - k\tau_b\frac{\partial^2 \phi_b}{\partial y^2} + W_b\phi_b\tau_b
      = 0
 \end{equation}
 
 which implies that we can solve Eqs. \ref{eq:a} and \ref{eq:b}
 \begin{equation}
-    k\frac{\partial^2 \phi_a}{\partial y^2} + S = 0
+    k\frac{\partial^2 \phi_a}{\partial y^2} - W_b\phi_a + S + Q_m + W_b(T_b - T_c) = 0
     \label{eq:a}
 \end{equation}
 
 \begin{equation}
-    \rho c_{p}\phi_b\frac{\partial \tau_b}{\partial t} - k\tau_b\frac{\partial^2 \phi_b}{\partial y^2} = 0
+    \rho c_{p}\phi_b\frac{\partial \tau_b}{\partial t} - k\tau_b\frac{\partial^2 \phi_b}{\partial y^2} + W_b\phi_b\tau_b = 0
     \label{eq:b}
 \end{equation}
 
@@ -95,43 +79,57 @@ which implies that we can solve Eqs. \ref{eq:a} and \ref{eq:b}
 
 #### **Solving Eq. \ref{eq:a}**
 
-Equation \ref{eq:a} can be solved by direct integration, with the following general solution
+Defining
 
 \begin{equation}
-    \phi_a = -\frac{S}{2k}y^2 + c_1 y + c_2
+    Q_t = S + Q_m + W_b(T_b - T_c)
 \end{equation}
 
-Applying the boundary condition at \\(y = 0\\) we get \\(c_2 = 0\\). Applying the boundary condition at \\(y=H\\) we get:
+the general solution of Eq. \ref{eq:a} is 
+
 \begin{equation}
-    c_1 = \frac{T_s - T_c}{H} + \frac{SH}{2k}
+    \phi_a = \frac{Q_t}{W_b} + c_1 \sinh{ \left( y\sqrt{\dfrac{W_b}{k}} \right) } + c_2\cosh{ \left( y\sqrt{\dfrac{W_b}{k}} \right) }
+\end{equation}
+
+Applying the boundary condition at \\(y = 0\\) 
+
+\begin{equation}
+    c_2 = -\dfrac{Q_t}{W_b}
+\end{equation}
+
+Applying the boundary condition at \\(y=H\\) we get:
+\begin{equation}
+    c_1 = \frac{\left( T_s - T_c \right) + \dfrac{Q_t}{W_b}\left[ \cosh{ \left( H\sqrt{\dfrac{W_b}{k}} \right) } - 1\right]}{\sinh{ \left( H\sqrt{\dfrac{W_b}{k}} \right) }}
 \end{equation}
 
 So, the final solution for \\(\phi_a\\) is:
 
 \begin{equation}
-    \phi_a = -\frac{S}{2k}y^2 + \left( \frac{T_s - T_c}{H} + \frac{SH}{2k} \right) y
+    \phi_a = \frac{Q_t}{W_b} + \left\\{ \left( T_s - T_c \right) + \dfrac{Q_t}{W_b}\left[ \cosh{ \left( H\sqrt{\dfrac{W_b}{k}} \right) } - 1\right] \right\\}\frac{\sinh{ \left( y\sqrt{\dfrac{W_b}{k}} \right)}}{\sinh{ \left( H\sqrt{\dfrac{W_b}{k}} \right) }} \ldots\\\
+     \ldots - \frac{Q_t}{W_b} \cosh{ \left( y\sqrt{\dfrac{W_b}{k}} \right) }
 \end{equation}
 
+Note that this solution is not suitable for \\(W_b = 0\\). In this case, the correct solution is for the [heat equation shown here.]({{ site.baseurl }}{% link theory/ana/heat 1D TT.md %})
 
 #### **Solving Eq. \ref{eq:b}**
 
 We will use separation of variables to solve Eq. \ref{eq:b}. In separation of variables, we assume that the solution is the multiplication of a function of \\(y\\) ( \\(\phi_b(y)\\) ) and \\(t\\) ( \\(\tau_b(t)\\) ). Hence,
 
 \begin{equation}
-    \frac{\rho c_{p}}{k\tau_b}\frac{\partial \tau_b}{\partial t} = \frac{1}{\phi_b}\frac{\partial^2 \phi_b}{\partial y^2} = -\lambda_m^2
+    \frac{\rho c_{p}}{k\tau_b}\frac{\partial \tau_b}{\partial t} + \frac{W_b}{k} = \frac{1}{\phi_b}\frac{\partial^2 \phi_b}{\partial y^2} = -\lambda_m^2
 \end{equation}
 
 
 The solution of \\(\phi_b\\) can be expressed as:
 
 \begin{equation}
-    \phi_b = c_3 \sin\left(\lambda_m y\right) + c_4 \cos\left(\lambda_m y\right)
+    \phi_b = c_3 \sin{\left(\lambda_m y\right)} + c_4 \cos{\left(\lambda_m y\right)}
 \end{equation}
 
 Applying the boundary condition at \\(y = 0\\) we get \\(c_4 = 0\\). Applying the boundary condition at \\(y=H\\) we get:
 
 \begin{equation}
-    \sin\left(\lambda_m H\right) = 0
+    \sin{\left(\lambda_m H\right)} = 0
     \label{eq:lambdam}
 \end{equation}
 
@@ -141,89 +139,117 @@ which implies that
     \lambda_m = \frac{m\pi}{H}
 \end{equation}
 
-with \\(m = 1, 2, 3, \dotsc\\). We start the counting from \\(1\\) because \\(m = 0\\) yields \\(\phi_b = 0\\). Now, defining \\(\alpha = k/(\rho c_p) \\), the solution of \\(\tau_b\\) is:
+with \\(m = 1, 2, 3, \dotsc\\) We start the counting from \\(1\\) because \\(m = 0\\) yields \\(\phi_b = 0\\). Now, defining \\(\alpha = k/(\rho c_p) \\), the solution of \\(\tau_b\\) is:
 
 \begin{equation}
-    \tau_b = c_5 \exp\left(-\alpha\lambda_m t\right)
+    \tau_b = c_5 \exp{\left[-\alpha t \left(\lambda_m + \sqrt{\dfrac{W_b}{k}} \right)\right]}
 \end{equation}
 
 Therefore, the solution that we are looking for is:
 
 \begin{equation}
-    \phi_b\tau_b = \sum_{m=1}^{\infty}c_m \sin\left(\lambda_m y\right) \exp\left(-\alpha\lambda_m t\right)
+    \phi_b\tau_b = \sum_{m=1}^{\infty}c_m \sin{\left(\lambda_m y\right)} \exp{\left[-\alpha t \left(\lambda_m + \sqrt{\dfrac{W_b}{k}} \right)\right]}
     \label{eq:b:almost}
 \end{equation}
 
 Now, we apply the initial condition and get
 
 \begin{equation}
-    \sum_{m=1}^{\infty}c_m \sin\left(\lambda_m y\right) =  -\phi_a = \frac{S}{2k}y^2 - \left( \frac{T_s - T_c}{H} + \frac{SH}{2k} \right) y
+    \sum_{m=1}^{\infty}c_m \sin{\left(\lambda_m y\right)} =  -\phi_a
     \label{eq:b:cm}
 \end{equation}
 
-To solve Eq. \ref{eq:b:cm}, we multiply both sides by an [orthogonal function](https://en.wikipedia.org/wiki/Orthogonal_functions) of the function that multiplies \\(c_m\\) and integrate it from \\(y = 0\\) to \\(y = H\\) to elimate the \\(y\\) dependence of \\(c_m\\). That is, we need a function that is orthogonal to \\(\sin\left(\lambda_m y\right)\\). The function that we are looking for is \\(\sin\left(\lambda_n y\right)\\). Multiplying both sides by this function yields
+To solve Eq. \ref{eq:b:cm}, we multiply both sides by an [orthogonal function](https://en.wikipedia.org/wiki/Orthogonal_functions) of the function that multiplies \\(c_m\\) and integrate it from \\(y = 0\\) to \\(y = H\\) to elimate the \\(y\\) dependence. That is, we need a function that is orthogonal to \\(\sin{\left(\lambda_m y\right)}\\). The function that we are looking for is \\(\sin{\left(\lambda_n y\right)}\\). Multiplying both sides by this function yields
 
 \begin{equation}
-    \int_{y=0}^{y=H}\sum_{m=1}^{\infty}c_m \sin\left(\lambda_m y\right)\sin\left(\lambda_n y\right) dy =  \int_{y=0}^{y=H}\left[ \frac{S}{2k}y^2 - \left( \frac{T_s - T_c}{H} + \frac{SH}{2k} \right) y \right]\sin\left(\lambda_n y\right) dy
+    \int_{y=0}^{y=H}\sum_{m=1}^{\infty}c_m \sin{\left(\lambda_m y\right)}\sin{\left(\lambda_n y\right)} dy = - \int_{y=0}^{y=H}\phi_a\sin{\left(\lambda_n y\right)} dy
     \label{eq:b:cm2}
 \end{equation}
 
 Since we have
 
 \begin{equation}
-    \int_{y=0}^{y=H} \sin\left(\lambda_m y\right)\sin\left(\lambda_n y\right) dy = 0
+    \int_{y=0}^{y=H} \sin{\left(\lambda_m y\right)}\sin{\left(\lambda_n y\right)} dy = 0
 \end{equation}
 
 for \\(m \neq n\\), and
 
 \begin{equation}
-    \int_{y=0}^{y=H} \sin\left(\lambda_m y\right)\sin\left(\lambda_n y\right) dy = \frac{H}{2}
+    \int_{y=0}^{y=H} \sin{\left(\lambda_m y\right)}\sin{\left(\lambda_n y\right)} dy = \frac{H}{2}
     \label{eq:mn}
 \end{equation}
 
 for \\(m = n\\), we can drop the summation and solve Eq. \ref{eq:b:cm2} for each \\(c_m\\):
 
 \begin{equation}
-    c_m =  \dfrac{\displaystyle \int_{y=0}^{y=H}\left[ \dfrac{S}{2k}y^2 - \left( \dfrac{T_s - T_c}{H} + \dfrac{SH}{2k} \right) y \right]\sin\left(\lambda_m y\right) dy}{ \displaystyle \int_{y=0}^{y=H}\sin^2\left(\lambda_m y\right) dy  }
+    c_m = - \dfrac{\displaystyle \int_{y=0}^{y=H}\phi_a\sin{\left(\lambda_n y\right)} dy}{ \displaystyle \int_{y=0}^{y=H}\sin^2{\left(\lambda_m y\right)} dy  }
     \label{eq:b:cm3}
 \end{equation}
 
+The solutions of these integrals are:
 
 \begin{equation}
-    \dfrac{S}{2k}\int_{y=0}^{y=H}y^2\sin\left(\lambda_m y\right) dy = \dfrac{S}{2k} \frac{ \left( 2 - \lambda_m^2H^2 \right)\cos\left(\lambda_m H\right) + 2\lambda_m H sin\left(\lambda_m H\right) - 2}{\lambda_m^3}
-    \label{eq:b:cmf1}
+    -\frac{Q_t}{W_b} \int_{y=0}^{y=H}  \sin{\left(\lambda_n y\right)} dy = \frac{Q_t}{W_b\lambda_m}\left[\cos{ \left( \lambda_m H\right) } - 1 \right]
 \end{equation}
+
 
 From the definition of \\(\lambda_m\\) in Eq. \ref{eq:lambdam},
 
 
 \begin{equation}
-    \dfrac{S}{2k}\int_{y=0}^{y=H}y^2\sin\left(\lambda_m y\right) dy = \dfrac{S}{2k} \frac{ \left( -1 \right)^m \left( 2 - \lambda_m^2H^2 \right) -2 }{\lambda_m^3}
-    \label{eq:b:cmf1b}
+    -\frac{Q_t}{W_b} \int_{y=0}^{y=H}  \sin{\left(\lambda_n y\right)} dy = \frac{Q_t}{W_b\lambda_m}\left[\left( -1 \right)^m - 1 \right]
 \end{equation}
 
-Now, solving the last integral:
+The next integral,
 
 \begin{equation}
-    -\left( \dfrac{T_s - T_c}{H} + \dfrac{SH}{2k} \right)\int_{y=0}^{y=H}y\sin\left(\lambda_m y\right) dy = -\left( \dfrac{T_s - T_c}{H} + \dfrac{SH}{2k} \right) \frac{sin\left(\lambda_m H\right) - \lambda_m H\cos\left(\lambda_m H\right)}{\lambda_m^2}
-    \label{eq:b:cmf2}
+    -c_1 \int_{y=0}^{y=H} \sinh{ \left( y\sqrt{\dfrac{W_b}{k}} \right)} \sin{\left(\lambda_n y\right)} dy =  \ldots \\\
+    \ldots c_1 \frac{\lambda_m\sinh{ \left( H\sqrt{\dfrac{W_b}{k}} \right)} \cos{\left(\lambda_n H\right)} 
+    - \sqrt{\dfrac{W_b}{k}} \cosh{ \left( H\sqrt{\dfrac{W_b}{k}} \right)} \sin{\left(\lambda_n H\right)} }{ \dfrac{W_b}{k} + \lambda_m^2}
 \end{equation}
 
+From the definition of \\(\lambda_m\\) in Eq. \ref{eq:lambdam},
+
+\begin{equation}
+    -c_1 \int_{y=0}^{y=H} \sinh{ \left( y\sqrt{\dfrac{W_b}{k}} \right)} \sin{\left(\lambda_n y\right)} dy = 
+     \left( -1 \right)^m c_1 \frac{\lambda_m\sinh{ \left( H\sqrt{\dfrac{W_b}{k}} \right)}  }{ \dfrac{W_b}{k} + \lambda_m^2}
+\end{equation}
+
+And the last integral,
+
+\begin{equation}
+    \frac{Q_t}{W_b} \int_{y=0}^{y=H} \cosh{ \left( y\sqrt{\dfrac{W_b}{k}} \right) } \sin{\left(\lambda_n y\right)} dy =  \ldots \\\
+    \ldots \frac{Q_t}{W_b} \frac{ \sqrt{\dfrac{W_b}{k}} \sinh{ \left( H\sqrt{\dfrac{W_b}{k}} \right)} \sin{\left(\lambda_n H\right)} 
+    - \lambda_m\cosh{ \left( H\sqrt{\dfrac{W_b}{k}} \right)} \cos{\left(\lambda_n H\right)} 
+    + \lambda_m }{ \dfrac{W_b}{k} + \lambda_m^2}
+\end{equation}
 
 which, from the definition of \\(\lambda_m\\) in Eq. \ref{eq:lambdam}, becomes
 
 \begin{equation}
-    -\left( \dfrac{T_s - T_c}{H} + \dfrac{SH}{2k} \right) \int_{y=0}^{y=H}y\sin\left(\lambda_m y\right) dy = \left( -1 \right)^m\left( \dfrac{T_s - T_c}{H} + \dfrac{SH}{2k} \right) \frac{H\cos\left(\lambda_m H\right)}{\lambda_m}
-    \label{eq:b:cmf2b}
+    \frac{Q_t}{W_b} \int_{y=0}^{y=H} \cosh{ \left( y\sqrt{\dfrac{W_b}{k}} \right) } \sin{\left(\lambda_n y\right)} dy = 
+    \frac{Q_t\lambda_m}{W_b} \frac{ 1 - \left( -1 \right)^m\cosh{ \left( H\sqrt{\dfrac{W_b}{k}} \right)}
+    }{ \dfrac{W_b}{k} + \lambda_m^2}
 \end{equation}
 
-From Eqs. \ref{eq:mn}, \ref{eq:b:cmf1b}, and, \ref{eq:b:cmf2b}, the final solution for \\(\phi_b(y)\tau_b(t)\\) is:
+Defining,
+
+\begin{eqnarray}
+    c_m &=& c_{m1} + c_{m2} + c_{m3}\\\
+    c_{m1} &=& \frac{2Q_t}{HW_b\lambda_m}\left[\left( -1 \right)^m - 1 \right]\\\
+    c_{m2} &=& \left( -1 \right)^m \frac{2\lambda_m c_1}{H} \frac{\sinh{ \left( H\sqrt{\dfrac{W_b}{k}} \right)}  }{ \dfrac{W_b}{k} + \lambda_m^2}\\\
+    c_{m3} &=& \frac{2Q_t\lambda_m}{HW_b} \frac{ 1 - \left( -1 \right)^m\cosh{ \left( H\sqrt{\dfrac{W_b}{k}} \right)}
+    }{ \dfrac{W_b}{k} + \lambda_m^2}
+\end{eqnarray}
+
+The final solution is, simply,
 
 \begin{equation}
-    \phi_b\tau_b = \sum_{m=1}^{\infty}\left( -1 \right)^m\left[ \dfrac{S}{Lk}  \frac{ \left( 2 - \lambda_m^2H^2 \right) -2 }{\lambda_m^3} + 2\left( \dfrac{T_s - T_c}{H} + \dfrac{SH}{2k} \right) \frac{\cos\left(\lambda_m\right)}{\lambda_m} \right]\sin\left(\lambda_m y\right) \exp\left(-\alpha\lambda_m t\right)
+    \phi_b\tau_b = \sum_{m=1}^{\infty}c_m \sin{\left(\lambda_m y\right)} \exp{\left[-\alpha t \left(\lambda_m + \sqrt{\dfrac{W_b}{k}} \right)\right]}
     \label{eq:b:final}
 \end{equation}
 
+Note that this solution is not suitable for \\(W_b = 0\\). In this case, the correct solution is for the [heat equation shown here.]({{ site.baseurl }}{% link theory/ana/heat 1D TT.md %})
 
 ### Solution
 
@@ -233,32 +259,55 @@ The final solution is:
     T(y,t) = T_c + \phi_a(y) + \phi_b(y)\tau_b(t)
 \end{equation}
 
-with \\(\phi_a(y)\\) and \\(\phi_b(y)\tau_b(t)\\) expressed as:
+with \\(\alpha = k/( \rho c_p ) \\), and \\(\phi_a(y)\\) and \\(\phi_b(y)\tau_b(t)\\) expressed as:
 
 \begin{equation}
-    \phi_a = -\frac{S}{2k}y^2 + \left( \frac{T_s - T_c}{H} + \frac{SH}{2k} \right) y
+    \phi_a = \frac{Q_t}{W_b} + \left\\{ \left( T_s - T_c \right) + \dfrac{Q_t}{W_b}\left[ \cosh{ \left( H\sqrt{\dfrac{W_b}{k}} \right) } - 1\right] \right\\}\frac{\sinh{ \left( y\sqrt{\dfrac{W_b}{k}} \right)}}{\sinh{ \left( H\sqrt{\dfrac{W_b}{k}} \right) }} \ldots\\\
+     \ldots - \frac{Q_t}{W_b} \cosh{ \left( y\sqrt{\dfrac{W_b}{k}} \right) }
 \end{equation}
 
 \begin{equation}
-    \phi_b\tau_b = \sum_{m=1}^{\infty}\left( -1 \right)^m\left[ \dfrac{S}{Lk}  \frac{ \left( 2 - \lambda_m^2H^2 \right) -2 }{\lambda_m^3} + 2\left( \dfrac{T_s - T_c}{H} + \dfrac{SH}{2k} \right) \frac{\cos\left(\lambda_m\right)}{\lambda_m} \right]\sin\left(\lambda_m y\right) \exp\left(-\alpha\lambda_m t\right)
+    \lambda_m = \frac{m\pi}{H}
 \end{equation}
 
-The flux/heat flux can be obtained by derivating these equations with respect to \\(y\\).
+\begin{eqnarray}
+    c_m &=& c_{m1} + c_{m2} + c_{m3}\\\
+    c_{m1} &=& \frac{2Q_t}{HW_b\lambda_m}\left[\left( -1 \right)^m - 1 \right]\\\
+    c_{m2} &=& \left( -1 \right)^m \frac{2\lambda_m c_1}{H} \frac{\sinh{ \left( H\sqrt{\dfrac{W_b}{k}} \right)}  }{ \dfrac{W_b}{k} + \lambda_m^2}\\\
+    c_{m3} &=& \frac{2Q_t\lambda_m}{HW_b} \frac{ 1 - \left( -1 \right)^m\cosh{ \left( H\sqrt{\dfrac{W_b}{k}} \right)}
+    }{ \dfrac{W_b}{k} + \lambda_m^2}
+\end{eqnarray}
+
+\begin{equation}
+    \phi_b\tau_b = \sum_{m=1}^{\infty}c_m \sin{\left(\lambda_m y\right)} \exp{\left[-\alpha t \left(\lambda_m + \sqrt{\dfrac{W_b}{k}} \right)\right]}
+\end{equation}
+
+The heat flux can be obtained by derivating these equations with respect to \\(y\\).
+
+Note that this solution is not suitable for \\(W_b = 0\\). In this case, the correct solution is for the [heat equation shown here.]({{ site.baseurl }}{% link theory/ana/heat 1D TT.md %})
 
 ### Using the Algorithm
 
-The algorithm `D1_HEAT_f.m` was written as a function in Octave/Matlab and you can obtain it [here](https://github.com/hugomilan/tlmbht/tree/master/src/octave/analytical/1D). To use it, you will need to define the material properties and the maximum value of \\(m\\).
+The algorithm `D1_BHE_f.m` was written as a function in Octave/Matlab and you can obtain it [here](https://github.com/hugomilan/tlmbht/tree/master/src/octave/analytical/1D). To use it, you will need to define the material properties and the maximum value of \\(m\\).
 
 As an example, we can use the following script:
 
 {% highlight matlab %}
 % Thermal properties
-Tc = 100; % core and initial temperature (oC)
-Ts = 1000; % superficial temperature (oC)
-rho = 2700; % density (kg/m3)
-cp = 900; % specific heat (J/(K-kg))
-k = 205; % thermal conductivity (W/(K-m))
-S = 5000; % internal heat source
+Tc = 37; % core and initial temperature (oC)
+Ts = 150; % superficial temperature (oC)
+rho = 1200; % tissue density (kg/m3)
+cp = 3200; % specific heat (J/(K-kg))
+k = 0.3; % thermal conductivity (W/(K-m))
+Ti = 37; % initial temperature
+wb = 1e-4; % blood perfusion (s-1)
+rhob = 1052; % blood density (kg/m3)
+cb = 3600; % blood specific heat (J/(K-kg))
+Tb = 37; % temperature of the blood (oC)
+
+Qmet = 500; % internal heat generation (W/m3)
+% If there is another heat source S besides Qmet, sum it to Qmet.
+% For example, if Qmet = 250 and S = 250, you would input Qmet = 500.
     
 % Material properties
 H = 1e-3; % m
@@ -268,9 +317,9 @@ y = 0:(H/100):H;
 minf = 50;
     
 % time of the solution
-t = 0.5e-3;
+t = 0.5;
     
-[T, q] = D1_HEAT_f(y, H, t, Ts, Tc, k, rho, cp, S, minf);
+[T, q] = D1_BHE_f(y, H, t, Ts, Tc, k, rho, cp, wb, rhob, cb, Tb, Qmet, minf);
     
 plot(y, T)
     
@@ -281,8 +330,13 @@ plot(y, q)
 
 which generates
 
-<img src="{{ site.baseurl }}/assets/images/theory/ana/heat 1D TT plot.png" alt="Solution of the problem for heat equation">
+<img src="{{ site.baseurl }}/assets/images/theory/ana/pennes 1D TT plot.png" alt="Solution of the problem for Pennes equation">
 
+### Done
 
-Now, you can move on to the [analytical solution in two-dimensions.]({% link theory/ana/heat 2D TTqq.md %})
+Now, you can go to:
+
+* [Analytical solutions menu]({{ site.baseurl }}{% link theory/ana/index.md %})
+* [Analytical solution in two-dimensions]({{ site.baseurl }}{% link theory/ana/pennes 2D TTqq.md %})
+
 

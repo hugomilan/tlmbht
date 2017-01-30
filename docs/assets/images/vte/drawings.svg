@@ -2858,9 +2858,9 @@
      inkscape:window-height="1056"
      id="namedview6"
      showgrid="false"
-     inkscape:zoom="0.5"
-     inkscape:cx="-5749.2669"
-     inkscape:cy="1255.6887"
+     inkscape:zoom="0.35355339"
+     inkscape:cx="-3144.073"
+     inkscape:cy="378.38818"
      inkscape:window-x="65"
      inkscape:window-y="24"
      inkscape:window-maximized="1"
@@ -4799,7 +4799,9 @@
        sodipodi:role="line"
        id="tspan3235-5-6-6"
        x="-314.70746"
-       y="-3432.3984">q'' = 100 kW/m<tspan
+       y="-3432.3984">q<tspan
+   style="font-size:65%;baseline-shift:sub"
+   id="tspan6854">x</tspan> = 100 kW/m<tspan
    style="font-size:64.99999762%;baseline-shift:super"
    id="tspan10832">2</tspan></tspan></text>
   <text
@@ -8265,7 +8267,9 @@
        sodipodi:role="line"
        id="tspan3235-5-6-6-1"
        x="-1405.5518"
-       y="-3385.7107">q'' = 100 MW/m<tspan
+       y="-3385.7107">q<tspan
+   style="font-size:65%;baseline-shift:sub"
+   id="tspan6852">x</tspan> = 100 MW/m<tspan
    style="font-size:64.99999762%;baseline-shift:super"
    id="tspan10832-0">2</tspan></tspan></text>
   <path
@@ -8867,7 +8871,9 @@
        sodipodi:role="line"
        id="tspan3235-5-6-6-0"
        x="-2589.5518"
-       y="-3369.7107">q'' = 5e-3 m<tspan
+       y="-3369.7107">q<tspan
+   style="font-size:65%;baseline-shift:sub"
+   id="tspan6850">x</tspan> = 5e-3 m<tspan
    style="font-size:64.99999762%;baseline-shift:super"
    id="tspan6829">-2</tspan></tspan></text>
   <path
@@ -9448,7 +9454,7 @@
        x="-102.80676"
        y="-5257.5391">q<tspan
    style="font-size:64.99999762%;baseline-shift:sub"
-   id="tspan5035">x</tspan>'' = 10 kW/m<tspan
+   id="tspan5035">x</tspan> = 10 kW/m<tspan
    style="font-size:64.99999762%;baseline-shift:super"
    id="tspan10832-1">2</tspan></tspan></text>
   <path
@@ -10100,7 +10106,7 @@
        x="-5874.917"
        y="-303.78357">q<tspan
    style="font-size:64.99999762%;baseline-shift:sub"
-   id="tspan5037">z</tspan>'' = </tspan><tspan
+   id="tspan5037">z</tspan> = </tspan><tspan
        sodipodi:role="line"
        x="-5874.917"
        y="-235.6096"
@@ -10441,7 +10447,7 @@
        x="-1457.2153"
        y="-5437.625">q<tspan
    style="font-size:64.99999762%;baseline-shift:sub"
-   id="tspan5035-2">x</tspan>'' = 100 MW/m<tspan
+   id="tspan5035-2">x</tspan> = 100 MW/m<tspan
    style="font-size:64.99999762%;baseline-shift:super"
    id="tspan10832-1-7">2</tspan></tspan></text>
   <path
@@ -11093,7 +11099,7 @@
        x="-6055.0029"
        y="1050.625">q<tspan
    style="font-size:64.99999762%;baseline-shift:sub"
-   id="tspan5037-8">z</tspan>'' = </tspan><tspan
+   id="tspan5037-8">z</tspan> = </tspan><tspan
        sodipodi:role="line"
        x="-6055.0029"
        y="1118.799"
@@ -11430,7 +11436,7 @@
        x="-2789.2153"
        y="-5509.625">q<tspan
    style="font-size:64.99999762%;baseline-shift:sub"
-   id="tspan5035-9">x</tspan>'' = 5e-3 m<tspan
+   id="tspan5035-9">x</tspan> = 5e-3 m<tspan
    style="font-size:64.99999762%;baseline-shift:super"
    id="tspan10832-1-6">-2</tspan></tspan></text>
   <path
@@ -12082,7 +12088,7 @@
        x="-6127.0029"
        y="2382.625">q<tspan
    style="font-size:64.99999762%;baseline-shift:sub"
-   id="tspan5037-5">z</tspan>'' = </tspan><tspan
+   id="tspan5037-5">z</tspan> = </tspan><tspan
        sodipodi:role="line"
        x="-6127.0029"
        y="2450.7991"
@@ -12099,4 +12105,4 @@
          height="1426"
          x="-6392"
          y="-851.63782" /></flowRegion><flowPara
-       id="flowPara5732"></flowPara></flowRoot></svg>
+       id="flowPara5732" /></flowRoot></svg>

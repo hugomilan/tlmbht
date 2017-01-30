@@ -7,6 +7,7 @@ permalink: vte/pennes-1D-line.html
 ---
 
 # Validation of the TLMBHT to solve the heat equation in 1D using the element line
+<span style="color:#697473">Jan 30, 2017</span> by [**Hugo Milan**](https://hugomilan.github.io/)
 
 Here, I will walk you through in how to validate the TLM method to solve the Heat equation in 1D with the element Line by comparing the tlmbht predictions with [analytical solution]({{ site.baseurl }}{% link theory/ana/pennes 1D TT.md %}) predictions.
 

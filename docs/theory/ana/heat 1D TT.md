@@ -6,7 +6,8 @@ layout: page_eqAMS_Disqus
 permalink: theory/ana/heat-1D-TT.html
 ---
 
-# Analytical solution of the dynamic Diffusion/Heat equation in one-dimension
+# Analytical solution of the dynamic Diffusion/Heat equation in time-domain for one-dimension
+<span style="color:#697473">Jan 30, 2017</span> by [**Hugo Milan**](https://hugomilan.github.io/)
 
 You can download the algorithm `D1_HEAT_f.m` for Octave/Matlab that can solve this problem [here](https://github.com/hugomilan/tlmbht/tree/master/src/octave/analytical/1D) and you can see instructions in [how to use it here]({{ site.baseurl }}{% link theory/ana/heat 1D TT.md%}#using-the-algorithm). If you want to see the final solution, [go to Solution]({{ site.baseurl }}{% link theory/ana/heat 1D TT.md%}#solution).
 
@@ -51,7 +52,7 @@ Note that the diffusion equation and the heat equation have the same form when \
 
 ### Solving
 
-I will show the solution process for the heat equation. The solution process for the diffusion equation follows straightforward.
+I will show the solution process for the heat equation. The solution process for the diffusion equation follows straightforwardly.
 
 I will use the principle of suporposition so that:
 
@@ -65,9 +66,9 @@ and the initial and boundary conditions for these problems are:
 $$
 \begin{matrix}
     & T(y,t) & \phi_a(y) & \phi_b(y)\tau_b(t) \\
-    t = 0 & T(y, t=0) = T_c & - & \phi_b(y)\tau_b(t=0) = -\phi_a(y)\\
-    y = 0 & T(y = 0,t) = T_c & \phi_a(y=0) = 0 & \phi_b(y=0)\tau_b(t) = 0\\
-    H = 0 & T(y = 0,t) = T_s & \phi_a(y=0) = T_s - T_c & \phi_b(y=0)\tau_b(t) = 0
+    t = 0 & T = T_c & - & \phi_b\tau_b = -\phi_a\\
+    y = 0 & T = T_c & \phi_a = 0 & \phi_b\tau_b = 0\\
+    y = H & T = T_s & \phi_a = T_s - T_c & \phi_b\tau_b = 0
 \end{matrix}
 $$
 
@@ -125,13 +126,13 @@ We will use separation of variables to solve Eq. \ref{eq:b}. In separation of va
 The solution of \\(\phi_b\\) can be expressed as:
 
 \begin{equation}
-    \phi_b = c_3 \sin\left(\lambda_m y\right) + c_4 \cos\left(\lambda_m y\right)
+    \phi_b = c_3 \sin{\left(\lambda_m y\right)} + c_4 \cos{\left(\lambda_m y\right)}
 \end{equation}
 
 Applying the boundary condition at \\(y = 0\\) we get \\(c_4 = 0\\). Applying the boundary condition at \\(y=H\\) we get:
 
 \begin{equation}
-    \sin\left(\lambda_m H\right) = 0
+    \sin{\left(\lambda_m H\right)} = 0
     \label{eq:lambdam}
 \end{equation}
 
@@ -141,56 +142,58 @@ which implies that
     \lambda_m = \frac{m\pi}{H}
 \end{equation}
 
-with \\(m = 1, 2, 3, \dotsc\\). We start the counting from \\(1\\) because \\(m = 0\\) yields \\(\phi_b = 0\\). Now, defining \\(\alpha = k/(\rho c_p) \\), the solution of \\(\tau_b\\) is:
+with \\(m = 1, 2, 3, \dotsc\\) We start the counting from \\(1\\) because \\(m = 0\\) yields \\(\phi_b = 0\\). Now, defining \\(\alpha = k/(\rho c_p) \\), the solution of \\(\tau_b\\) is:
 
 \begin{equation}
-    \tau_b = c_5 \exp\left(-\alpha\lambda_m t\right)
+    \tau_b = c_5 \exp{\left(-\alpha\lambda_m t\right)}
 \end{equation}
 
 Therefore, the solution that we are looking for is:
 
 \begin{equation}
-    \phi_b\tau_b = \sum_{m=1}^{\infty}c_m \sin\left(\lambda_m y\right) \exp\left(-\alpha\lambda_m t\right)
+    \phi_b\tau_b = \sum_{m=1}^{\infty}c_m \sin{\left(\lambda_m y\right)} \exp{\left(-\alpha\lambda_m t\right)}
     \label{eq:b:almost}
 \end{equation}
 
 Now, we apply the initial condition and get
 
 \begin{equation}
-    \sum_{m=1}^{\infty}c_m \sin\left(\lambda_m y\right) =  -\phi_a = \frac{S}{2k}y^2 - \left( \frac{T_s - T_c}{H} + \frac{SH}{2k} \right) y
+    \sum_{m=1}^{\infty}c_m \sin{\left(\lambda_m y\right)} =  -\phi_a = \frac{S}{2k}y^2 - \left( \frac{T_s - T_c}{H} + \frac{SH}{2k} \right) y
     \label{eq:b:cm}
 \end{equation}
 
-To solve Eq. \ref{eq:b:cm}, we multiply both sides by an [orthogonal function](https://en.wikipedia.org/wiki/Orthogonal_functions) of the function that multiplies \\(c_m\\) and integrate it from \\(y = 0\\) to \\(y = H\\) to elimate the \\(y\\) dependence of \\(c_m\\). That is, we need a function that is orthogonal to \\(\sin\left(\lambda_m y\right)\\). The function that we are looking for is \\(\sin\left(\lambda_n y\right)\\). Multiplying both sides by this function yields
+To solve Eq. \ref{eq:b:cm}, we multiply both sides by an [orthogonal function](https://en.wikipedia.org/wiki/Orthogonal_functions) of the function that multiplies \\(c_m\\) and integrate it from \\(y = 0\\) to \\(y = H\\) to elimate the \\(y\\) dependence. That is, we need a function that is orthogonal to \\(\sin{\left(\lambda_m y\right)}\\). The function that we are looking for is \\(\sin{\left(\lambda_n y\right)}\\). Multiplying both sides by this function yields
 
 \begin{equation}
-    \int_{y=0}^{y=H}\sum_{m=1}^{\infty}c_m \sin\left(\lambda_m y\right)\sin\left(\lambda_n y\right) dy =  \int_{y=0}^{y=H}\left[ \frac{S}{2k}y^2 - \left( \frac{T_s - T_c}{H} + \frac{SH}{2k} \right) y \right]\sin\left(\lambda_n y\right) dy
+    \int_{y=0}^{y=H}\sum_{m=1}^{\infty}c_m \sin{\left(\lambda_m y\right)}\sin{\left(\lambda_n y\right)} dy = \ldots \\\
+    \ldots \int_{y=0}^{y=H}\left[ \frac{S}{2k}y^2 - \left( \frac{T_s - T_c}{H} + \frac{SH}{2k} \right) y \right]\sin{\left(\lambda_n y\right)} dy
     \label{eq:b:cm2}
 \end{equation}
 
 Since we have
 
 \begin{equation}
-    \int_{y=0}^{y=H} \sin\left(\lambda_m y\right)\sin\left(\lambda_n y\right) dy = 0
+    \int_{y=0}^{y=H} \sin{\left(\lambda_m y\right)}\sin{\left(\lambda_n y\right)} dy = 0
 \end{equation}
 
 for \\(m \neq n\\), and
 
 \begin{equation}
-    \int_{y=0}^{y=H} \sin\left(\lambda_m y\right)\sin\left(\lambda_n y\right) dy = \frac{H}{2}
+    \int_{y=0}^{y=H} \sin{\left(\lambda_m y\right)}\sin{\left(\lambda_n y\right)} dy = \frac{H}{2}
     \label{eq:mn}
 \end{equation}
 
 for \\(m = n\\), we can drop the summation and solve Eq. \ref{eq:b:cm2} for each \\(c_m\\):
 
 \begin{equation}
-    c_m =  \dfrac{\displaystyle \int_{y=0}^{y=H}\left[ \dfrac{S}{2k}y^2 - \left( \dfrac{T_s - T_c}{H} + \dfrac{SH}{2k} \right) y \right]\sin\left(\lambda_m y\right) dy}{ \displaystyle \int_{y=0}^{y=H}\sin^2\left(\lambda_m y\right) dy  }
+    c_m =  \dfrac{\displaystyle \int_{y=0}^{y=H}\left[ \dfrac{S}{2k}y^2 - \left( \dfrac{T_s - T_c}{H} + \dfrac{SH}{2k} \right) y \right]\sin{\left(\lambda_m y\right)} dy}{ \displaystyle \int_{y=0}^{y=H}\sin^2{\left(\lambda_m y\right)} dy  }
     \label{eq:b:cm3}
 \end{equation}
 
+So, solving for the first integral,
 
 \begin{equation}
-    \dfrac{S}{2k}\int_{y=0}^{y=H}y^2\sin\left(\lambda_m y\right) dy = \dfrac{S}{2k} \frac{ \left( 2 - \lambda_m^2H^2 \right)\cos\left(\lambda_m H\right) + 2\lambda_m H sin\left(\lambda_m H\right) - 2}{\lambda_m^3}
+    \dfrac{S}{2k}\int_{y=0}^{y=H}y^2\sin{\left(\lambda_m y\right)} dy = \dfrac{S}{2k} \frac{ \left( 2 - \lambda_m^2H^2 \right)\cos{\left(\lambda_m H\right)} + 2\lambda_m H \sin{\left(\lambda_m H\right)} - 2}{\lambda_m^3}
     \label{eq:b:cmf1}
 \end{equation}
 
@@ -198,14 +201,15 @@ From the definition of \\(\lambda_m\\) in Eq. \ref{eq:lambdam},
 
 
 \begin{equation}
-    \dfrac{S}{2k}\int_{y=0}^{y=H}y^2\sin\left(\lambda_m y\right) dy = \dfrac{S}{2k} \frac{ \left( -1 \right)^m \left( 2 - \lambda_m^2H^2 \right) -2 }{\lambda_m^3}
+    \dfrac{S}{2k}\int_{y=0}^{y=H}y^2\sin{\left(\lambda_m y\right)} dy = \dfrac{S}{2k} \frac{ \left( -1 \right)^m \left( 2 - \lambda_m^2H^2 \right) -2 }{\lambda_m^3}
     \label{eq:b:cmf1b}
 \end{equation}
 
 Now, solving the last integral:
 
 \begin{equation}
-    -\left( \dfrac{T_s - T_c}{H} + \dfrac{SH}{2k} \right)\int_{y=0}^{y=H}y\sin\left(\lambda_m y\right) dy = -\left( \dfrac{T_s - T_c}{H} + \dfrac{SH}{2k} \right) \frac{sin\left(\lambda_m H\right) - \lambda_m H\cos\left(\lambda_m H\right)}{\lambda_m^2}
+    -\left( \dfrac{T_s - T_c}{H} + \dfrac{SH}{2k} \right)\int_{y=0}^{y=H}y\sin{\left(\lambda_m y\right)} dy = \ldots \\\
+    \ldots -\left( \dfrac{T_s - T_c}{H} + \dfrac{SH}{2k} \right) \frac{\sin{\left(\lambda_m H\right)} - \lambda_m H\cos{\left(\lambda_m H\right)}}{\lambda_m^2}
     \label{eq:b:cmf2}
 \end{equation}
 
@@ -213,14 +217,15 @@ Now, solving the last integral:
 which, from the definition of \\(\lambda_m\\) in Eq. \ref{eq:lambdam}, becomes
 
 \begin{equation}
-    -\left( \dfrac{T_s - T_c}{H} + \dfrac{SH}{2k} \right) \int_{y=0}^{y=H}y\sin\left(\lambda_m y\right) dy = \left( -1 \right)^m\left( \dfrac{T_s - T_c}{H} + \dfrac{SH}{2k} \right) \frac{H\cos\left(\lambda_m H\right)}{\lambda_m}
+    -\left( \dfrac{T_s - T_c}{H} + \dfrac{SH}{2k} \right) \int_{y=0}^{y=H}y\sin{\left(\lambda_m y\right)} dy = \left( -1 \right)^m\left( \dfrac{T_s - T_c}{H} + \dfrac{SH}{2k} \right) \frac{H}{\lambda_m}
     \label{eq:b:cmf2b}
 \end{equation}
 
 From Eqs. \ref{eq:mn}, \ref{eq:b:cmf1b}, and, \ref{eq:b:cmf2b}, the final solution for \\(\phi_b(y)\tau_b(t)\\) is:
 
 \begin{equation}
-    \phi_b\tau_b = \sum_{m=1}^{\infty}\left( -1 \right)^m\left[ \dfrac{S}{Lk}  \frac{ \left( 2 - \lambda_m^2H^2 \right) -2 }{\lambda_m^3} + 2\left( \dfrac{T_s - T_c}{H} + \dfrac{SH}{2k} \right) \frac{\cos\left(\lambda_m\right)}{\lambda_m} \right]\sin\left(\lambda_m y\right) \exp\left(-\alpha\lambda_m t\right)
+    \phi_b\tau_b = \sum_{m=1}^{\infty}\left( -1 \right)^m\left[ \dfrac{S}{Hk}  \frac{ \left( 2 - \lambda_m^2H^2 \right) -2 }{\lambda_m^3} \ldots \\\
+    \ldots + \frac{2}{\lambda_m}\left( \dfrac{T_s - T_c}{H} + \dfrac{SH}{2k} \right) \right]\sin{\left(\lambda_m y\right)} \exp{\left(-\alpha\lambda_m t\right)}
     \label{eq:b:final}
 \end{equation}
 
@@ -233,14 +238,19 @@ The final solution is:
     T(y,t) = T_c + \phi_a(y) + \phi_b(y)\tau_b(t)
 \end{equation}
 
-with \\(\phi_a(y)\\) and \\(\phi_b(y)\tau_b(t)\\) expressed as:
+with \\(\alpha = k/( \rho c_p ) \\), and \\(\phi_a(y)\\) and \\(\phi_b(y)\tau_b(t)\\) expressed as:
 
 \begin{equation}
     \phi_a = -\frac{S}{2k}y^2 + \left( \frac{T_s - T_c}{H} + \frac{SH}{2k} \right) y
 \end{equation}
 
 \begin{equation}
-    \phi_b\tau_b = \sum_{m=1}^{\infty}\left( -1 \right)^m\left[ \dfrac{S}{Lk}  \frac{ \left( 2 - \lambda_m^2H^2 \right) -2 }{\lambda_m^3} + 2\left( \dfrac{T_s - T_c}{H} + \dfrac{SH}{2k} \right) \frac{\cos\left(\lambda_m\right)}{\lambda_m} \right]\sin\left(\lambda_m y\right) \exp\left(-\alpha\lambda_m t\right)
+    \lambda_m = \frac{m\pi}{H}
+\end{equation}
+
+\begin{equation}
+    \phi_b\tau_b = \sum_{m=1}^{\infty}\left( -1 \right)^m\left[ \dfrac{S}{Hk}  \frac{ \left( 2 - \lambda_m^2H^2 \right) -2 }{\lambda_m^3} \ldots \\\
+    \ldots + \frac{2}{\lambda_m}\left( \dfrac{T_s - T_c}{H} + \dfrac{SH}{2k} \right)  \right]\sin{\left(\lambda_m y\right)} \exp{\left(-\alpha\lambda_m t\right)}
 \end{equation}
 
 The flux/heat flux can be obtained by derivating these equations with respect to \\(y\\).

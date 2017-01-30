@@ -1,5 +1,5 @@
-function [T, qx, phi_a, qx_phi_a, YTau, qx_YTau] = ...
-    D1_BHE_f(x, H, t, Ts, Tc, k, p, cp, wb, pb, cb, Ta, ...
+function [T, qy, phi_a, qy_phi_a, phi_b_tau_b, qy_phi_b_tau_b] = ...
+    D1_BHE_f(y, H, t, Ts, Tc, k, p, cp, wb, pb, cb, Tb, ...
     Qmet, minf)
     
 % This file is part of TLMBHT. See details of this function below.
@@ -14,7 +14,7 @@ function [T, qx, phi_a, qx_phi_a, YTau, qx_YTau] = ...
 %
 % 
 % The inputs to this function are:
-% x (vector with the positions in x to get outputs, m). Vector column.
+% y (vector with the positions in y to get outputs, m). Vector column.
 % H (tissue's thickness, m)
 % t (time instant to get outputs, s)
 % Ts (temperature at x = L, oC)
@@ -25,69 +25,92 @@ function [T, qx, phi_a, qx_phi_a, YTau, qx_YTau] = ...
 % wb (blood's perfusion, s-1)
 % pb (blood's density, kg/m3)
 % cp (blood's specific heat, J/K-kg)
-% Ta (arterial blood temperature, oC)
-% Qm (tissue's metabolic heat, W/m3)
+% Tb (blood's temperature, oC)
+% Qmet (tissue's metabolic heat, W/m3)
 % minf (number of repetition of the index m). If in doubt, chose 50 for
 %     fast (and still accurate) results or 500 for more accurate results.
 %
 %
-%
+% The outputs of this function are:
+% T (temperature at the given positions, oC)
+% qy (heat flux in the y direction calculated at the given positions, W/m2)
+% phi_a (temperatures calculated using the function phi_a at the given positions, oC)
+% qy_phi_a (heat flux in the y direction calculated using the function phi_a at the given positions, W/m2)
+% phi_b_tau_b (temperatures calculated using the function phi_b_tau_b at the given positions, oC)
+% qy_phi_b_tau_b (heat flux in the y direction calculated using the function phi_b_tau_b at the given positions, W/m2)
 %
 %
 % this algorithm uses the principle of superposition to make
-% T = Tc + phi_a(x) + YTau(x,t)
+% T = Tc + phi_a(x) + phi_b(x)tau_b(t)
 %
 %
 %
-% This algorithm is not intended for wb = 0. However, if you input that, we
-% will make wb = eps (the minimum value that your computer can use). This
-% approximation barely will lead to results different from when wb = 0.
+% This algorithm is not intended for wb = 0. For this case, you should use
+% D1_HEAT_f
+%
 
+% 
+% File:   D1_BHE_f.m
+% Author: Hugo Fernando Maia Milan
+% Email:  hugofernando@gmail.com
+%
+% Created on Dec 09, 2015.
+%
+%
+%
+% Revision history:
+% 
+% Date: Jan 30, 2017
+% Who: Hugo Milan
+% Description: making the nomenclature compatible with the analytical solution in the website
+%
 
 if wb == 0;
-    wb = eps;
+  disp('The input has wb = 0, which is not suitable to use in this solution. Please, use the function D1_HEAT_f instead.');
+  return;
 end
 
 % defining constants
 alpha = k/(p*cp); % thermal difusivity (m2/s)
 Wb = wb*pb*cb; % heat dissipation through blood perfusion
-QT = Qmet + Wb*( Ta - Tc ); % total heat generation
+QT = Qmet + Wb*( Tb - Tc ); % total heat generation
 theta_inf = Ts - Tc; % boundary condition for solution of phi_a
 QWb = QT/Wb; % constant for solution of phi_a
 Wbk = sqrt(Wb/k); % constant for solution of phi_a
 WbkH = Wbk*H; % constant for solution of phi_a
 c1 = ( theta_inf + QWb*( cosh(WbkH) - 1 ) )/sinh(WbkH); % constant for solution of phi_a
 
-% solution phi_a(y). The boundary conditions are: x = 0 => theta = 0; x = H =>
-% theta = theta_inf.
-phi_a = QWb + c1*sinh(Wbk*x) - QWb*cosh(Wbk*x);
-qx_phi_a = - k*c1*Wbk*cosh(Wbk*x) + k*QWb*Wbk*sinh(Wbk*x);
+% solution phi_a(y). The boundary conditions are:
+% y = 0 => phi_a = 0.
+% y = H => phi_a = theta_inf.
+phi_a = QWb + c1*sinh(Wbk*y) - QWb*cosh(Wbk*y);
+qy_phi_a = - k*c1*Wbk*cosh(Wbk*y) + k*QWb*Wbk*sinh(Wbk*y);
 
-% variable for solution of YTau(x,t). The boundary conditions are: x = 0 => theta = 0; x = H =>
-% theta = theta_inf. The initial condition is: t = 0 => - phi_a(x).
-YTau = zeros(1,size(x,2));
-qx_YTau = zeros(1,size(x,2));
+% variable for solution of phi_b(y)tau_b(t). The boundary conditions are: 
+% y = 0 => phi_b(y)tau_b(t) = 0.
+% y = H => phi_b(y)tau_b(t) = theta_inf.
+% The initial condition is: t = 0 => phi_b_tau_b = - phi_a(y).
+phi_b_tau_b = zeros(1,size(y,2));
+qy_phi_b_tau_b = zeros(1,size(y,2));
 
 
-for m = 1:minf
-    % We make use of symmetry to increase m by 2 and speed up the solution.
-    
-    lambda = m*pi/H; % comes from separation of variables. Used for solution of YTau
+for m = 1:minf    
+    lambda = m*pi/H; % comes from separation of variables. Used for solution of phi_b_tau_b
     gamma = sqrt(Wb/k + lambda^2); % appears because of blood perfusion.
     
-    C3m1 = 2*QWb/( H*lambda )*( cos( lambda*H ) - 1 );
-    C3m2 = 2*c1/H*cos( lambda*H )*sinh(WbkH)/( lambda + Wb/( k*lambda ) );
-    C3m3 = 2*QWb/H*( 1 - cos( lambda*H )*cosh(WbkH) )/( lambda + Wb/( k*lambda ) );
+    C3m1 = 2*QWb/( H*lambda )*( (-1)^m - 1 );
+    C3m2 = 2*(-1)^m*lambda*c1/H*sinh(WbkH)/( lambda^2 + Wb/k );
+    C3m3 = 2*QWb/H*lambda*( 1 - (-1)^m*cosh(WbkH) )/( lambda^2 + Wb/k );
     
     C3m = C3m1 + C3m2 + C3m3;
     
-    YTau = C3m*sin( lambda*x )*exp( -(lambda^2 + Wb/k)*alpha*t ) + YTau;
-    qx_YTau = -k*C3m*lambda*cos(lambda*x)*exp( -(lambda^2 + Wb/k)*alpha*t ) + qx_YTau;
+    phi_b_tau_b = C3m*sin( lambda*y )*exp( -(lambda^2 + Wb/k)*alpha*t ) + phi_b_tau_b;
+    qy_phi_b_tau_b = -k*C3m*lambda*cos(lambda*y)*exp( -(lambda^2 + Wb/k)*alpha*t ) + qy_phi_b_tau_b;
     
 end
 
 
 
 % at the end we sum the solutions.
-T = YTau + phi_a + Tc;
-qx = qx_YTau + qx_phi_a;
+T = Tc + phi_a + phi_b_tau_b;
+qy = qy_phi_a + qy_phi_b_tau_b;

@@ -8,13 +8,15 @@ permalink: theory/ana/index.html
 order: 4
 ---
 
-Analytical solutions are essential to the verification process of numerical solvers. The analytical solutions are used to validate the predictions made using numerical solvers to problems that have analytical solutions. Here, we show how to obtain the analytical solutions that were used to validate TLMBHT.
+<span style="color:#697473">Jan 30, 2017</span> by [**Hugo Milan**](https://hugomilan.github.io/)
+
+Analytical solutions are essential to the verification process of numerical solvers. The analytical solutions are used to validate the predictions made using numerical solvers to problems that have analytical solutions. Here, we show how to obtain the analytical solutions in time-domain that were used to validate TLMBHT.
 
 ### Diffusion equation and Heat equation
 
 Analytical solutions of the heat equation can be used to solve the diffusion equation because these equations are similar.
 
-We define the diffusion equation as:
+We define the diffusion equation in time-domain as:
 
 \begin{equation}
     \frac{\partial C}{\partial t} = D\nabla^2 C + S
@@ -28,7 +30,7 @@ with the following definition of flux
 
 where \\(C\\) is concentration, \\(\bar{q}\\) is concentration flux, \\(t\\) is time, \\(D\\) is diffusivity, and \\(S\\) is source.
 
-And we define the heat equation as:
+And we define the heat equation in time-domain as:
 
 \begin{equation}
     \rho c_{p}\frac{\partial T}{\partial t} = k\nabla^2 T + S
@@ -90,7 +92,7 @@ $$
 
 ### Pennes equation
 
-The bio-heat equation is defined as:
+The bio-heat equation in time-domain is defined as:
 
 \begin{equation}
     \rho c_{p}\frac{\partial T}{\partial t} = k\nabla^2 T + S + Q_m + \omega_b\rho_b c_{b} (T_b - T)
