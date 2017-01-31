@@ -3,7 +3,7 @@
 # Edit theme's home layout instead if you wanna make some changes
 # See: https://jekyllrb.com/docs/themes/#overriding-theme-defaults
 layout: page_eqAMS_Disqus
-title: Analytical solution of the dynamic Diffusion/Heat equation in time-domain for three-dimensions
+title: Analytical solution of the Diffusion/Heat equation in time-domain for three-dimensions
 permalink: theory/ana/heat-3D-TTqqqq.html
 ---
 
