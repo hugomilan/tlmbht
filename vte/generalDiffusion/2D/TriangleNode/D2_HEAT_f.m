@@ -35,6 +35,7 @@ function [T, qx, qy, phi_a, qy_phi_a, phi_b_tau_b, qy_phi_b_tau_b, ...
 %
 % The outputs of this function are:
 % T (temperature at the given positions, oC)
+% qx (heat flux in the x direction calculated at the given positions, W/m2)
 % qy (heat flux in the y direction calculated at the given positions, W/m2)
 % phi_a (temperatures calculated using the function phi_a at the given y positions, oC)
 % qy_phi_a (heat flux in the y direction calculated using the function phi_a at the given positions, W/m2)
@@ -55,7 +56,7 @@ function [T, qx, qy, phi_a, qy_phi_a, phi_b_tau_b, qy_phi_b_tau_b, ...
 % T = Tc + phi_a(x) + phi_b(x)tau_b(t) + phi_c(x,y) + phi_d(x,y)tau_d(t)
 
 % 
-% File:   D2_BHE_f.m
+% File:   D2_HEAT_f.m
 % Author: Hugo Fernando Maia Milan
 % Email:  hugofernando@gmail.com
 %
@@ -75,7 +76,7 @@ sizex = size(x,2);
 if sizey ~= sizex
     error(['size(y,2) = ', num2str(sizey), ...
         ' and size(x,2) = ', num2str(sizex), '. They should be equal.', ...
-        'type help D2_BHE_f for more information.'])
+        'type help D2_HEAT_f for more information.'])
         return;
 end
     
@@ -127,7 +128,7 @@ qy_phi_c = zeros(1,size(y,2));
 % y = H => phi_d(x,y)tau_d(t) = 0.
 % x = 0 => d(phi_d(x,y)tau_d(t))/dx = 0.
 % x = L => d(phi_d(x,y)tau_d(t))/dx = 0.
-% The initial condition is: t = 0 => phi_d(x,y)tau_d(t) = - phi_c(y).
+% The initial condition is: t = 0 => phi_d(x,y)tau_d(t) = - phi_c(x,y).
 phi_d_tau_d = zeros(1,size(y,2));
 qx_phi_d_tau_d = zeros(1,size(y,2));
 qy_phi_d_tau_d = zeros(1,size(y,2));
@@ -146,7 +147,7 @@ for o = 1:oinf
     
         phi_d_tau_d = -(-1)^r*8*qx/(H*L*k*gamma*(gamma^2 + beta^2))*cos(beta*x).*sin(gamma*y)*exp(-alpha*t*(gamma^2 + beta^2)) + phi_d_tau_d;
         qx_phi_d_tau_d = -(-1)^r*beta*8*qx/(H*L*gamma*(gamma^2 + beta^2))*sin(beta*x).*sin(gamma*y)*exp(-alpha*t*(gamma^2 + beta^2)) + qx_phi_d_tau_d;
-        qy_phi_d_tau_d = (-1)^r*8*qx/(H*L*k*(gamma^2 + beta^2))*cos(beta*x).*cos(gamma*y)*exp(-alpha*t*(gamma^2 + beta^2)) + qy_phi_d_tau_d;
+        qy_phi_d_tau_d = (-1)^r*8*qx/(H*L*(gamma^2 + beta^2))*cos(beta*x).*cos(gamma*y)*exp(-alpha*t*(gamma^2 + beta^2)) + qy_phi_d_tau_d;
         
     end
         

@@ -3,10 +3,10 @@
 # Edit theme's home layout instead if you wanna make some changes
 # See: https://jekyllrb.com/docs/themes/#overriding-theme-defaults
 layout: page_eqAMS_Disqus
+title: Analytical solution of the Pennes equation in time-domain for one-dimension
 permalink: theory/ana/pennes-1D-TT.html
 ---
 
-# Analytical solution of the Pennes equation in time-domain for one-dimension
 <span style="color:#697473">Jan 30, 2017</span> by [**Hugo Milan**](https://hugomilan.github.io/)
 
 You can download the algorithm `D1_BHE_f.m` for Octave/Matlab that can solve this problem [here](https://github.com/hugomilan/tlmbht/tree/master/src/octave/analytical/1D) and you can see instructions in [how to use it here]({% link theory/ana/pennes 1D TT.md%}#using-the-algorithm). If you want to see the final solution, [go to Solution]({% link theory/ana/pennes 1D TT.md%}#solution).
@@ -142,13 +142,13 @@ which implies that
 with \\(m = 1, 2, 3, \dotsc\\) We start the counting from \\(1\\) because \\(m = 0\\) yields \\(\phi_b = 0\\). Now, defining \\(\alpha = k/(\rho c_p) \\), the solution of \\(\tau_b\\) is:
 
 \begin{equation}
-    \tau_b = c_5 \exp{\left[-\alpha t \left(\lambda_m + \sqrt{\dfrac{W_b}{k}} \right)\right]}
+    \tau_b = c_5 \exp{\left[-\alpha t \left(\lambda_m^2 + \dfrac{W_b}{k} \right)\right]}
 \end{equation}
 
 Therefore, the solution that we are looking for is:
 
 \begin{equation}
-    \phi_b\tau_b = \sum_{m=1}^{\infty}c_m \sin{\left(\lambda_m y\right)} \exp{\left[-\alpha t \left(\lambda_m + \sqrt{\dfrac{W_b}{k}} \right)\right]}
+    \phi_b\tau_b = \sum_{m=1}^{\infty}c_m \sin{\left(\lambda_m y\right)} \exp{\left[-\alpha t \left(\lambda_m^2 + \dfrac{W_b}{k} \right)\right]}
     \label{eq:b:almost}
 \end{equation}
 
@@ -245,7 +245,7 @@ Defining,
 The final solution is, simply,
 
 \begin{equation}
-    \phi_b\tau_b = \sum_{m=1}^{\infty}c_m \sin{\left(\lambda_m y\right)} \exp{\left[-\alpha t \left(\lambda_m + \sqrt{\dfrac{W_b}{k}} \right)\right]}
+    \phi_b\tau_b = \sum_{m=1}^{\infty}c_m \sin{\left(\lambda_m y\right)} \exp{\left[-\alpha t \left(\lambda_m^2 + \dfrac{W_b}{k} \right)\right]}
     \label{eq:b:final}
 \end{equation}
 
@@ -279,7 +279,7 @@ with \\(\alpha = k/( \rho c_p ) \\), and \\(\phi_a(y)\\) and \\(\phi_b(y)\tau_b(
 \end{eqnarray}
 
 \begin{equation}
-    \phi_b\tau_b = \sum_{m=1}^{\infty}c_m \sin{\left(\lambda_m y\right)} \exp{\left[-\alpha t \left(\lambda_m + \sqrt{\dfrac{W_b}{k}} \right)\right]}
+    \phi_b\tau_b = \sum_{m=1}^{\infty}c_m \sin{\left(\lambda_m y\right)} \exp{\left[-\alpha t \left(\lambda_m^2 + \dfrac{W_b}{k} \right)\right]}
 \end{equation}
 
 The heat flux can be obtained by derivating these equations with respect to \\(y\\).
@@ -332,11 +332,16 @@ which generates
 
 <img src="{{ site.baseurl }}/assets/images/theory/ana/pennes 1D TT plot.png" alt="Solution of the problem for Pennes equation">
 
+### Limitations
+
+Every solution method has limitations. The most noticeable limitation is that we have to perform infinity sums to get predictions using solutions from separation of variables. Infinity sums, however, cannot be performed in numerical computations, which leads us to truncate the calculations for large values of \\(m\\). How large this number have to be will depend on the problem geometry and on the material properties but, if theses number are not large enough, the calculations will manifest oscillations that will be most evident for predicted fluxes. When observed that \\(m\\) has to be increased, a rule-of-thumb is to double its valuee, re-calculate the predicionts, and observe if the oscillations have decreased to acceptable intensities.
+
 ### Done
 
 Now, you can go to:
 
 * [Analytical solutions menu]({{ site.baseurl }}{% link theory/ana/index.md %})
 * [Analytical solution in two-dimensions]({{ site.baseurl }}{% link theory/ana/pennes 2D TTqq.md %})
+* [TLM validation using this solution]({{ site.baseurl }}{% link vte/pennes 1D line.md %})
 
 

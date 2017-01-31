@@ -3,10 +3,10 @@
 # Edit theme's home layout instead if you wanna make some changes
 # See: https://jekyllrb.com/docs/themes/#overriding-theme-defaults
 layout: page_eqAMS_Disqus
+title: Analytical solution of the dynamic Diffusion/Heat equation in time-domain for two-dimensions
 permalink: theory/ana/heat-2D-TTqq.html
 ---
 
-# Analytical solution of the dynamic Diffusion/Heat equation in time-domain for two-dimensions
 <span style="color:#697473">Jan 30, 2017</span> by [**Hugo Milan**](https://hugomilan.github.io/)
 
 
@@ -181,7 +181,7 @@ Now, we apply the non-homogeneous boundary condition at \\(x = L\\):
 To solve Eq. \ref{eq:c:cn}, we multiply both sides by an [orthogonal function](https://en.wikipedia.org/wiki/Orthogonal_functions) of the function that multiplies \\(c_n\\) and integrate it from \\(y = 0\\) to \\(y = H\\) to elimate the \\(y\\) dependence. That is, we need a function that is orthogonal to \\(\sin{\left(\gamma_n y\right)}\\). The function that we are looking for is \\(\sin{\left(\gamma_m y\right)}\\). Multiplying both sides by this function yields
 
 \begin{equation}
-    \int_{y=0}^{y=H}\sum_{n=1}^{\infty}c_n \gamma_n\sinh{\left(\gamma_n L\right)}\sin{\left(\gamma_n y\right)}\sin{\left(\gamma_m y\right)} dy =  \int_{y=0}^{y=H}\dfrac{q_x}{k}\sin{\left(\lambda_n y\right)} dy
+    \int_{y=0}^{y=H}\sum_{n=1}^{\infty}c_n \gamma_n\sinh{\left(\gamma_n L\right)}\sin{\left(\gamma_n y\right)}\sin{\left(\gamma_m y\right)} dy =  \int_{y=0}^{y=H}\dfrac{q_x}{k}\sin{\left(\gamma_m y\right)} dy
     \label{eq:b:cn2}
 \end{equation}
 
@@ -296,7 +296,7 @@ which implies that
 with \\(s=1,2,3,\ldots\\) Therefore, the solution that we are looking for is:
 
 \begin{equation}
-    \phi_d\tau_d = \sum_{r=0}^{\infty}\sum_{s=1}^{\infty}c_{rs}\cos{ \left( \beta_r x \right) }\sin{ \left( \delta_s y\right) }\exp{\left[ -\alpha\ t \left(  \beta_r^2 + \delta_s^2 \right) \right]}
+    \phi_d\tau_d = \sum_{r=0}^{\infty}\sum_{s=1}^{\infty}c_{rs}\cos{ \left( \beta_r x \right) }\sin{ \left( \delta_s y\right) }\exp{\left[ -\alpha t \left(  \beta_r^2 + \delta_s^2 \right) \right]}
 \end{equation}
 
 Now, we apply the initial condition
@@ -319,12 +319,23 @@ From Eq. \ref{eq:mnn} and \ref{eq:mn}, the left-hand side of Eq. \ref{eq:int1} w
 
 \begin{equation}
     \int_{x=0}^{x=L}\sum_{r=0}^{\infty}c_{rs}\cos{ \left( \beta_r x \right) }\cos{\left(\beta_u x\right)} dx = \ldots \\\
-    \ldots \int_{x=0}^{x=L} \frac{4q_x}{Hk\gamma_o^2 \sinh{\left(\gamma_o L\right)} } \cosh{\left(\gamma_o x\right)}\cos{\left(\beta_u x\right)}dx
+    \ldots -\int_{x=0}^{x=L} \frac{4q_x}{Hk\gamma_o^2 \sinh{\left(\gamma_o L\right)} } \cosh{\left(\gamma_o x\right)}\cos{\left(\beta_u x\right)}dx
     \label{eq:int2}
 \end{equation}
 
+Also note that for \\(r=0\\) we do not need orthogonal functions and we can integrate Eq. \ref{eq:int2} directly without using cossines. This is,
 
-Since we have
+\begin{equation}
+    c_{0s} = -\dfrac{\displaystyle \int_{x=0}^{x=L} \frac{4q_x}{Hk\gamma_o^2\sinh{\left(L\gamma_o\right)} } \cosh{\left(x\gamma_o\right)} dx }{ \displaystyle \int_{x=0}^{x=L}dx}
+\end{equation}
+
+which yields
+
+\begin{equation}
+    c_{0s} = -\frac{4q_x}{HLk\gamma_o^3}
+\end{equation}
+
+Back to the case \\(r\neq 0\\), we have
 
 \begin{equation}
     \int_{x=0}^{x=L} \cos{\left(\beta_r x\right)}\cos{\left(\beta_u x\right)} dx = 0
@@ -338,7 +349,7 @@ for \\(r \neq u\\), and
     \label{eq:ru}
 \end{equation}
 
-for \\(r = u\\), we can drop the summation over \\(r\\) and solve Eq. \ref{eq:int2} for each \\(c_{rs}\\):
+for \\(r = u\\). Then we can drop the summation over \\(r\\) and solve Eq. \ref{eq:int2} for each \\(c_{rs}\\):
 
 \begin{equation}
     c_{rs} = -\dfrac{\displaystyle  \int_{x=0}^{x=L} \frac{4q_x}{Hk\gamma_o^2 \sinh{\left(\gamma_o L\right)} } \cosh{\left(\gamma_o x\right)}\cos{\left(\beta_r x\right)}dx   }{ \displaystyle  \int_{x=0}^{x=L}\cos^2{ \left( \beta_r x \right) } dx  }
@@ -358,7 +369,11 @@ which, from the definition of \\(\beta_r\\) (Eq. \ref{eq:d:beta}), becomes:
 Therefore, the final solution of Eq. \ref{eq:d} is:
 
 \begin{equation}
-    \phi_d\tau_d = \sum_{r=0}^{\infty}\sum_{o=1}^{\infty} -\left( -1 \right)^r\frac{8q_x}{HLk\gamma_o \left( \gamma_o^2 + \beta_r^2 \right)} \cos{ \left( \beta_r x \right) }\sin{ \left( \gamma_o y\right) }\exp{\left[ -\alpha\ t \left(  \beta_r^2 + \gamma_o^2 \right) \right]}
+    \phi_d\tau_d = \sum_{o=1}^{\infty} -\frac{4q_x\sin{ \left( \gamma_o y\right) }}{HLk\gamma_o}
+    \left\\{ \frac{\exp{\left( -\alpha\gamma_o^2 t  \right)}}{ \gamma_o^2 }
+    \ldots\\\
+    \ldots + 
+    \sum_{r=1}^{\infty} \left( -1 \right)^r\frac{2\cos{ \left( \beta_r x \right) }}{\beta_r^2 + \gamma_o^2 } \exp{\left[ -\alpha t \left(  \beta_r^2 + \gamma_o^2\right) \right]}\right\\}
 \end{equation}
 
 ### Solution
@@ -380,8 +395,8 @@ with \\(\alpha = k/( \rho c_p ) \\), and \\(\phi_a(y)\\), \\(\phi_b(y)\tau_b(t)\
 \end{equation}
 
 \begin{equation}
-    \phi_b\tau_b = \sum_{m=1}^{\infty}\left( -1 \right)^m\left[ \dfrac{S}{Hk}  \frac{ \left( 2 - \lambda_m^2H^2 \right) -2 }{\lambda_m^3} \ldots \\\
-    \ldots + \frac{2}{\lambda_m}\left( \dfrac{T_s - T_c}{H} + \dfrac{SH}{2k} \right)  \right]\sin{\left(\lambda_m y\right)} \exp{\left(-\alpha\lambda_m t\right)}\\\
+    \phi_b\tau_b = \sum_{m=1}^{\infty}\left[ \dfrac{S}{Hk}  \frac{ \left( -1 \right)^m\left( 2 - \lambda_m^2H^2 \right) -2 }{\lambda_m^3} \ldots \\\
+    \ldots + \left( -1 \right)^m\frac{2}{\lambda_m}\left( \dfrac{T_s - T_c}{H} + \dfrac{SH}{2k} \right) \right]\sin{\left(\lambda_m y\right)} \exp{\left(-\alpha\lambda_m^2 t\right)}
 \end{equation}
 
 \begin{equation}
@@ -390,6 +405,7 @@ with \\(\alpha = k/( \rho c_p ) \\), and \\(\phi_a(y)\\), \\(\phi_b(y)\tau_b(t)\
 
 \begin{equation}
     \phi_c = \sum_{o=1}^{\infty} \frac{4q_x}{Hk\gamma_o^2 \sinh{\left(\gamma_o L\right)} } \cosh{\left(\gamma_o x\right)}\sin{\left(\gamma_o y\right)}
+    \label{eq:c:solution}
 \end{equation}
 
 \begin{equation}
@@ -397,7 +413,12 @@ with \\(\alpha = k/( \rho c_p ) \\), and \\(\phi_a(y)\\), \\(\phi_b(y)\tau_b(t)\
 \end{equation}
 
 \begin{equation}
-    \phi_d\tau_d = \sum_{r=0}^{\infty}\sum_{o=1}^{\infty} -\left( -1 \right)^r\frac{8q_x}{HLk\gamma_o \left( \gamma_o^2 + \beta_r^2 \right)} \cos{ \left( \beta_r x \right) }\sin{ \left( \gamma_o y\right) }\exp{\left[ -\alpha\ t \left(  \beta_r^2 + \gamma_o^2 \right) \right]}
+    \phi_d\tau_d = \sum_{o=1}^{\infty} -\frac{4q_x\sin{ \left( \gamma_o y\right) }}{HLk\gamma_o}
+    \left\\{ \frac{\exp{\left( -\alpha\gamma_o^2 t  \right)}}{ \gamma_o^2 }
+    \ldots\\\
+    \ldots + 
+    \sum_{r=1}^{\infty} \left( -1 \right)^r\frac{2\cos{ \left( \beta_r x \right) }}{\beta_r^2 + \gamma_o^2 } \exp{\left[ -\alpha t \left(  \beta_r^2 + \gamma_o^2\right) \right]}\right\\}
+    \label{eq:d:solution}
 \end{equation}
 
 
@@ -405,7 +426,7 @@ The flux/heat flux can be obtained by derivating these equations with respect to
 
 ### Using the Algorithm
 
-The algorithm `D2_HEAT_f.m` was written as a function in Octave/Matlab and you can obtain it [here](https://github.com/hugomilan/tlmbht/tree/master/src/octave/analytical/1D). To use it, you will need to define the material properties and the maximum values for \\(m\\), \\(o\\), and \\(r\\).
+The algorithm `D2_HEAT_f.m` was written as a function in Octave/Matlab and you can obtain it [here](https://github.com/hugomilan/tlmbht/tree/master/src/octave/analytical/2D). To use it, you will need to define the material properties and the maximum values for \\(m\\), \\(o\\), and \\(r\\).
 
 As an example, we can use the following script:
 
@@ -426,7 +447,7 @@ yprime = 0:(H/100):H;
 xprime = 0:(L/100):L;
 y = repmat( yprime, 1, size(xprime,2)); % creating a subspace for y
 x = repelems( xprime, [1:size(xprime,2); ...
-        size(yprime,2)*ones(1,size(xprime,2))]) ; % creating a subspace for x
+        size(yprime,2)*ones(1,size(xprime,2))]); % creating a subspace for x
     
 % number of iterations
 minf = 50; % for m
@@ -464,11 +485,18 @@ which generates
 
 <img src="{{ site.baseurl }}/assets/images/theory/ana/heat 2D TTqq plot.png" alt="Solution of the problem for heat equation">
 
+### Limitations
+
+Every solution method has limitations. The most noticeable limitation is that we have to perform infinity sums to get predictions using solutions from separation of variables. Infinity sums, however, cannot be performed in numerical computations, which leads us to truncate the calculations for large values of \\(m\\), \\(o\\), and \\(r\\). How large these numbers have to be will depend on the problem geometry and on the material properties but, if theses number are not large enough, the calculations will manifest oscillations that will be most evident for predicted fluxes positioned near the flux boundary conditions (that is, near \\(x = L\\) in this solution). When observed that \\(m\\), \\(o\\), and/or \\(r\\) have to be increased, a rule-of-thumb is to double their values, re-calculate the predicionts, and observe if the oscillations have decreased to acceptable intensities.
+
+Another surprising limitation is that the flux boundary condition at \\(x = L\\) *is not* satisfied when \\(y = 0\\) or \\(y = H\\). You can derivate Eqs. \ref{eq:c:solution} and \ref{eq:d:solution} with respect to \\(x\\) and observe that the term \\(\sin{\left(\gamma_o y\right)}\\) vanishes when \\(y = 0\\) or \\(y = H\\) no matter what is the value of the boundary condition. The solution, however, is accurate for \\(y \rightarrow 0\\) and \\(y \rightarrow H\\) and the concentration/temperature is not affected by this peculiarity.
+
 ### Done
 
 Now, you can go to:
 
 * [Analytical solutions menu]({{ site.baseurl }}{% link theory/ana/index.md %})
 * [Analytical solution in three-dimensions]({{ site.baseurl }}{% link theory/ana/heat 3D TTqqqq.md %})
-
+* [TLM validation using this solution for diffusion equation]({{ site.baseurl }}{% link vte/diff 2D triangle.md %})
+* [TLM validation using this solution for heat equation]({{ site.baseurl }}{% link vte/heat 2D triangle.md %})
 

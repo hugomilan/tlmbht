@@ -3,15 +3,15 @@
 # Edit theme's home layout instead if you wanna make some changes
 # See: https://jekyllrb.com/docs/themes/#overriding-theme-defaults
 layout: page_eqAMS_Disqus
+title: Analytical solution of the Pennes equation in time-domain for two-dimensions
 permalink: theory/ana/pennes-2D-TTqq.html
 ---
 
-# Analytical solution of the Pennes equation in time-domain for two-dimensions
 <span style="color:#697473">Jan 30, 2017</span> by [**Hugo Milan**](https://hugomilan.github.io/)
 
 You can download the algorithm `D2_BHE_f.m` for Octave/Matlab that can solve this problem [here](https://github.com/hugomilan/tlmbht/tree/master/src/octave/analytical/2D) and you can see instructions in [how to use it here]({% link theory/ana/pennes 2D TTqq.md%}#using-the-algorithm). If you want to see the final solution, [go to Solution]({% link theory/ana/pennes 2D TTqq.md%}#solution).
 
-In this page, we will solve the dynamic Pennes equation in two-dimensions using the principles of superposition and separation of variables. We build on the previous solution of the Pennes equation in one-dimension described [here]({{ site.baseurl }}{% link theory/ana/pennes 2D TTqq.md%}) to solve this two-dimensional problem. The problem we will solve is restricted to the following initial and boundary conditions:
+In this page, we will solve the dynamic Pennes equation in two-dimensions using the principles of superposition and separation of variables. We build on the previous solution of the Pennes equation in one-dimension described [here]({{ site.baseurl }}{% link theory/ana/pennes 1D TT.md%}) to solve this two-dimensional problem. The problem we will solve is restricted to the following initial and boundary conditions:
 
 $$
 \begin{matrix}
@@ -75,7 +75,7 @@ Defining \\(W_b = \omega_b\rho_b c_{b} \\) and applying Eq. \ref{eq:Sup} in \ref
 \begin{equation}
     \left( k\frac{\partial^2 \phi_a}{\partial y^2} - W_b\phi_a + S + Q_m + W_b(T_b - T_c) \right) \ldots \\\
     \ldots - \left( \rho c_{p}\phi_b\frac{\partial \tau_b}{\partial t} - k\tau_b\frac{\partial^2 \phi_b}{\partial y^2} + W_b\phi_b\tau_b \right) = \ldots \\\
-    \ldots \left( -k \frac{\partial^2 \phi_c}{\partial x^2} - k \frac{\partial^2 \phi_c}{\partial y^2} + W_b\phi_c \right) \ldots \\\
+    \ldots \left( - k \frac{\partial^2 \phi_c}{\partial x^2} - k \frac{\partial^2 \phi_c}{\partial y^2} + W_b\phi_c \right) \ldots \\\
     \ldots + \left( \rho c_{p}\phi_d\frac{\partial \tau_d}{\partial t} - k \tau_d\frac{\partial^2 \phi_d}{\partial x^2} - k \tau_d\frac{\partial^2 \phi_d}{\partial y^2} + W_b\phi_d\tau_d\right) 
 \end{equation}
 
@@ -161,7 +161,7 @@ To solve Eq. \ref{eq:c:cn}, we multiply both sides by an [orthogonal function](h
 
 \begin{equation}
     \int_{y=0}^{y=H}\sum_{n=1}^{\infty}c_n \sqrt{\gamma_n^2 +\dfrac{W_b}{k}}\sinh{\left(L\sqrt{\gamma_n^2 +\dfrac{W_b}{k}}\right)}\sin{\left(\gamma_n y\right)}\sin{\left(\gamma_m y\right)} dy = \ldots\\\
-    \ldots \int_{y=0}^{y=H}\dfrac{q_x}{k}\sin{\left(\lambda_n y\right)} dy
+    \ldots \int_{y=0}^{y=H}\dfrac{q_x}{k}\sin{\left(\gamma_m y\right)} dy
     \label{eq:b:cn2}
 \end{equation}
 
@@ -277,7 +277,7 @@ which implies that
 with \\(s=1,2,3,\ldots\\) Therefore, the solution that we are looking for is:
 
 \begin{equation}
-    \phi_d\tau_d = \sum_{r=0}^{\infty}\sum_{s=1}^{\infty}c_{rs}\cos{ \left( \beta_r x \right) }\sin{ \left( \delta_s y\right) }\exp{\left[ -\alpha\ t \left(  \beta_r^2 + \delta_s^2 + \frac{W_b}{k} \right) \right]}
+    \phi_d\tau_d = \sum_{r=0}^{\infty}\sum_{s=1}^{\infty}c_{rs}\cos{ \left( \beta_r x \right) }\sin{ \left( \delta_s y\right) }\exp{\left[ -\alpha t \left(  \beta_r^2 + \delta_s^2 + \frac{W_b}{k} \right) \right]}
 \end{equation}
 
 Now, we apply the initial condition
@@ -300,12 +300,23 @@ From Eq. \ref{eq:mnn} and \ref{eq:mn}, the left-hand side of Eq. \ref{eq:int1} w
 
 \begin{equation}
     \int_{x=0}^{x=L}\sum_{r=0}^{\infty}c_{rs}\cos{ \left( \beta_r x \right) }\cos{\left(\beta_u x\right)} dx = \ldots \\\
-    \ldots \int_{x=0}^{x=L} \frac{4q_x\cosh{\left(x\sqrt{\gamma_o^2 +\dfrac{W_b}{k}}\right)}}{Hk\gamma_o\sqrt{\gamma_o^2 +\dfrac{W_b}{k}}\sinh{\left(L\sqrt{\gamma_o^2 +\dfrac{W_b}{k}}\right)} } \cos{\left(\beta_u x\right)}dx
+    \ldots -\int_{x=0}^{x=L} \frac{4q_x\cosh{\left(x\sqrt{\gamma_o^2 +\dfrac{W_b}{k}}\right)}}{Hk\gamma_o\sqrt{\gamma_o^2 +\dfrac{W_b}{k}}\sinh{\left(L\sqrt{\gamma_o^2 +\dfrac{W_b}{k}}\right)} } \cos{\left(\beta_u x\right)}dx
     \label{eq:int2}
 \end{equation}
 
+Also note that for \\(r=0\\) we do not need orthogonal functions and we can integrate Eq. \ref{eq:int2} directly without using cossines. This is,
 
-Since we have
+\begin{equation}
+    c_{0s} = -\dfrac{\displaystyle \int_{x=0}^{x=L} \frac{4q_x\cosh{\left(x\sqrt{\gamma_o^2 +\dfrac{W_b}{k}}\right)}}{Hk\gamma_o\sqrt{\gamma_o^2 +\dfrac{W_b}{k}}\sinh{\left(L\sqrt{\gamma_o^2 +\dfrac{W_b}{k}}\right)} } dx }{ \displaystyle \int_{x=0}^{x=L}dx}
+\end{equation}
+
+which yields
+
+\begin{equation}
+    c_{0s} = -\frac{4q_x}{HLk\gamma_o \left( \gamma_o^2 + \dfrac{W_b}{k} \right)}
+\end{equation}
+
+Back to the case \\(r\neq 0\\), we have
 
 \begin{equation}
     \int_{x=0}^{x=L} \cos{\left(\beta_r x\right)}\cos{\left(\beta_u x\right)} dx = 0
@@ -319,7 +330,7 @@ for \\(r \neq u\\), and
     \label{eq:ru}
 \end{equation}
 
-for \\(r = u\\), we can drop the summation over \\(r\\) and solve Eq. \ref{eq:int2} for each \\(c_{rs}\\):
+for \\(r = u\\). Then we can drop the summation over \\(r\\) and solve Eq. \ref{eq:int2} for each \\(c_{rs}\\):
 
 \begin{equation}
     c_{rs} = -\dfrac{\displaystyle  \int_{x=0}^{x=L} \frac{4q_x\cosh{\left(x\sqrt{\gamma_o^2 +\dfrac{W_b}{k}}\right)}}{Hk\gamma_o\sqrt{\gamma_o^2 +\dfrac{W_b}{k}}\sinh{\left(L\sqrt{\gamma_o^2 +\dfrac{W_b}{k}}\right)} } \cos{\left(\beta_u x\right)}dx  }{ \displaystyle  \int_{x=0}^{x=L}\cos^2{ \left( \beta_r x \right) } dx  }
@@ -341,7 +352,11 @@ which, from the definition of \\(\beta_r\\) (Eq. \ref{eq:d:beta}), becomes:
 Therefore, the final solution of Eq. \ref{eq:d} is:
 
 \begin{equation}
-    \phi_d\tau_d = \sum_{r=0}^{\infty}\sum_{o=1}^{\infty} -\left( -1 \right)^r\frac{8q_x}{HLk\gamma_o \left( \gamma_o^2 + \dfrac{W_b}{k} + \beta_r^2 \right)} \cos{ \left( \beta_r x \right) }\sin{ \left( \gamma_o y\right) }\exp{\left[ -\alpha\ t \left(  \beta_r^2 + \gamma_o^2 + \dfrac{W_b}{k}\right) \right]}
+    \phi_d\tau_d = \sum_{o=1}^{\infty} -\frac{4q_x\sin{ \left( \gamma_o y\right) }}{HLk\gamma_o}
+    \left\\{ \frac{\exp{\left[ -\alpha t \left( \gamma_o^2 + \dfrac{W_b}{k}\right) \right]}}{ \gamma_o^2 + \dfrac{W_b}{k} }
+    \ldots\\\
+    \ldots + 
+    \sum_{r=1}^{\infty} \left( -1 \right)^r\frac{2\cos{ \left( \beta_r x \right) }}{\beta_r^2 + \gamma_o^2 + \dfrac{W_b}{k}} \exp{\left[ -\alpha t \left(  \beta_r^2 + \gamma_o^2 + \dfrac{W_b}{k}\right) \right]}\right\\}
     \label{eq:d:final}
 \end{equation}
 
@@ -372,7 +387,7 @@ with \\(\alpha = k/( \rho c_p ) \\), and \\(\phi_a(y)\\) and \\(\phi_b(y)\tau_b(
 \end{eqnarray}
 
 \begin{equation}
-    \phi_b\tau_b = \sum_{m=1}^{\infty}c_m \sin{\left(\lambda_m y\right)} \exp{\left[-\alpha t \left(\lambda_m + \sqrt{\dfrac{W_b}{k}} \right)\right]}
+    \phi_b\tau_b = \sum_{m=1}^{\infty}c_m \sin{\left(\lambda_m y\right)} \exp{\left[-\alpha t \left(\lambda_m^2 + \dfrac{W_b}{k} \right)\right]}
 \end{equation}
 
 \begin{equation}
@@ -381,6 +396,7 @@ with \\(\alpha = k/( \rho c_p ) \\), and \\(\phi_a(y)\\) and \\(\phi_b(y)\tau_b(
 
 \begin{equation}
     \phi_c = \sum_{o=1}^{\infty} \frac{4q_x\cosh{\left(x\sqrt{\gamma_o^2 +\dfrac{W_b}{k}}\right)}\sin{\left(\gamma_o y\right)}}{Hk\gamma_o\sqrt{\gamma_o^2 +\dfrac{W_b}{k}}\sinh{\left(L\sqrt{\gamma_o^2 +\dfrac{W_b}{k}}\right)} }
+    \label{eq:c:solution}
 \end{equation}
 
 \begin{equation}
@@ -388,7 +404,12 @@ with \\(\alpha = k/( \rho c_p ) \\), and \\(\phi_a(y)\\) and \\(\phi_b(y)\tau_b(
 \end{equation}
 
 \begin{equation}
-    \phi_d\tau_d = \sum_{r=0}^{\infty}\sum_{o=1}^{\infty} -\left( -1 \right)^r\frac{8q_x}{HLk\gamma_o \left( \gamma_o^2 + \dfrac{W_b}{k} + \beta_r^2 \right)} \cos{ \left( \beta_r x \right) }\sin{ \left( \gamma_o y\right) }\exp{\left[ -\alpha\ t \left(  \beta_r^2 + \gamma_o^2 + \dfrac{W_b}{k}\right) \right]}
+    \phi_d\tau_d = \sum_{o=1}^{\infty} -\frac{4q_x\sin{ \left( \gamma_o y\right) }}{HLk\gamma_o}
+    \left\\{ \frac{\exp{\left[ -\alpha t \left( \gamma_o^2 + \dfrac{W_b}{k}\right) \right]}}{ \gamma_o^2 + \dfrac{W_b}{k} }
+    \ldots\\\
+    \ldots + 
+    \sum_{r=1}^{\infty} \left( -1 \right)^r\frac{2\cos{ \left( \beta_r x \right) }}{\beta_r^2 + \gamma_o^2 + \dfrac{W_b}{k}} \exp{\left[ -\alpha t \left(  \beta_r^2 + \gamma_o^2 + \dfrac{W_b}{k}\right) \right]}\right\\}
+    \label{eq:d:solution}
 \end{equation}
 
 
@@ -427,7 +448,7 @@ yprime = 0:(H/100):H;
 xprime = 0:(L/100):L;
 y = repmat( yprime, 1, size(xprime,2)); % creating a subspace for y
 x = repelems( xprime, [1:size(xprime,2); ...
-        size(yprime,2)*ones(1,size(xprime,2))]) ; % creating a subspace for x
+        size(yprime,2)*ones(1,size(xprime,2))]); % creating a subspace for x
     
 % number of iterations
 minf = 50; % for m
@@ -463,11 +484,17 @@ which generates
 
 <img src="{{ site.baseurl }}/assets/images/theory/ana/pennes 2D TTqq plot.png" alt="Solution of the problem for Pennes equation">
 
+### Limitations
+
+Every solution method has limitations. The most noticeable limitation is that we have to perform infinity sums to get predictions using solutions from separation of variables. Infinity sums, however, cannot be performed in numerical computations, which leads us to truncate the calculations for large values of \\(m\\), \\(o\\), and \\(r\\). How large these numbers have to be will depend on the problem geometry and on the material properties but, if theses number are not large enough, the calculations will manifest oscillations that will be most evident for predicted fluxes positioned near the flux boundary conditions (that is, near \\(x = L\\) in this solution). When observed that \\(m\\), \\(o\\), and/or \\(r\\) have to be increased, a rule-of-thumb is to double their values, re-calculate the predicionts, and observe if the oscillations have decreased to acceptable intensities.
+
+Another surprising limitation is that the flux boundary condition at \\(x = L\\) *is not* satisfied when \\(y = 0\\) or \\(y = H\\). You can derivate Eqs. \ref{eq:c:solution} and \ref{eq:d:solution} with respect to \\(x\\) and observe that the term \\(\sin{\left(\gamma_o y\right)}\\) vanishes when \\(y = 0\\) or \\(y = H\\) no matter what is the value of the boundary condition. The solution, however, is accurate for \\(y \rightarrow 0\\) and \\(y \rightarrow H\\) and the temperature is not affected by this peculiarity.
+
 ### Done
 
 Now, you can go to:
 
 * [Analytical solutions menu]({{ site.baseurl }}{% link theory/ana/index.md %})
 * [Analytical solution in three-dimensions]({{ site.baseurl }}{% link theory/ana/pennes 3D TTqqqq.md %})
-
+* [TLM validation using this solution]({{ site.baseurl }}{% link vte/pennes 2D triangle.md %})
 

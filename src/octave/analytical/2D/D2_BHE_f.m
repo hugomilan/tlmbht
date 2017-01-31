@@ -40,6 +40,7 @@ function [T, qx, qy, phi_a, qy_phi_a, phi_b_tau_b, qy_phi_b_tau_b, ...
 %
 % The outputs of this function are:
 % T (temperature at the given positions, oC)
+% qx (heat flux in the x direction calculated at the given positions, W/m2)
 % qy (heat flux in the y direction calculated at the given positions, W/m2)
 % phi_a (temperatures calculated using the function phi_a at the given y positions, oC)
 % qy_phi_a (heat flux in the y direction calculated using the function phi_a at the given positions, W/m2)
@@ -147,7 +148,7 @@ qy_phi_c = zeros(1,size(y,2));
 % y = H => phi_d(x,y)tau_d(t) = 0.
 % x = 0 => d(phi_d(x,y)tau_d(t))/dx = 0.
 % x = L => d(phi_d(x,y)tau_d(t))/dx = 0.
-% The initial condition is: t = 0 => phi_d(x,y)tau_d(t) = - phi_c(y).
+% The initial condition is: t = 0 => phi_d(x,y)tau_d(t) = - phi_c(x,y).
 phi_d_tau_d = zeros(1,size(y,2));
 qx_phi_d_tau_d = zeros(1,size(y,2));
 qy_phi_d_tau_d = zeros(1,size(y,2));
@@ -160,13 +161,16 @@ for o = 1:oinf
     qx_phi_c = -4*qx/( H*gamma*sinh(L*sqrt(gamma^2 + Wb/k)) )*sinh(x*sqrt(gamma^2 + Wb/k)).*sin(gamma*y) + qx_phi_c;
     qy_phi_c = -4*qx/( H*sqrt(gamma^2 + Wb/k)*sinh(L*sqrt(gamma^2 + Wb/k)) )*cosh(x*sqrt(gamma^2 + Wb/k)).*cos(gamma*y) + qy_phi_c;
     
-    for r = 0:rinf
+    % r = 0
+    phi_d_tau_d = -4*qx/(H*L*k*gamma*(gamma^2 + Wb/k))*sin(gamma*y)*exp(-alpha*t*(gamma^2 + Wb/k)) + phi_d_tau_d;
+    qy_phi_d_tau_d = 4*qx/(H*L*(gamma^2 + Wb/k))*cos(gamma*y)*exp(-alpha*t*(gamma^2 + Wb/k)) + qy_phi_d_tau_d;
+    for r = 1:rinf
     
         beta = r*pi/L; % comes from separation of variables. Used for solution of phi_d_tau_d
     
         phi_d_tau_d = -(-1)^r*8*qx/(H*L*k*gamma*(gamma^2 + Wb/k + beta^2))*cos(beta*x).*sin(gamma*y)*exp(-alpha*t*(gamma^2 + Wb/k + beta^2)) + phi_d_tau_d;
         qx_phi_d_tau_d = -(-1)^r*beta*8*qx/(H*L*gamma*(gamma^2 + Wb/k + beta^2))*sin(beta*x).*sin(gamma*y)*exp(-alpha*t*(gamma^2 + Wb/k + beta^2)) + qx_phi_d_tau_d;
-        qy_phi_d_tau_d = (-1)^r*8*qx/(H*L*k*(gamma^2 + Wb/k + beta^2))*cos(beta*x).*cos(gamma*y)*exp(-alpha*t*(gamma^2 + Wb/k + beta^2)) + qy_phi_d_tau_d;
+        qy_phi_d_tau_d = (-1)^r*8*qx/(H*L*(gamma^2 + Wb/k + beta^2))*cos(beta*x).*cos(gamma*y)*exp(-alpha*t*(gamma^2 + Wb/k + beta^2)) + qy_phi_d_tau_d;
         
     end
         

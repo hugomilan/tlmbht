@@ -3,10 +3,10 @@
 # Edit theme's home layout instead if you wanna make some changes
 # See: https://jekyllrb.com/docs/themes/#overriding-theme-defaults
 layout: page_eqAMS_Disqus
+title: Analytical solution of the dynamic Diffusion/Heat equation in time-domain for one-dimension
 permalink: theory/ana/heat-1D-TT.html
 ---
 
-# Analytical solution of the dynamic Diffusion/Heat equation in time-domain for one-dimension
 <span style="color:#697473">Jan 30, 2017</span> by [**Hugo Milan**](https://hugomilan.github.io/)
 
 You can download the algorithm `D1_HEAT_f.m` for Octave/Matlab that can solve this problem [here](https://github.com/hugomilan/tlmbht/tree/master/src/octave/analytical/1D) and you can see instructions in [how to use it here]({{ site.baseurl }}{% link theory/ana/heat 1D TT.md%}#using-the-algorithm). If you want to see the final solution, [go to Solution]({{ site.baseurl }}{% link theory/ana/heat 1D TT.md%}#solution).
@@ -145,13 +145,13 @@ which implies that
 with \\(m = 1, 2, 3, \dotsc\\) We start the counting from \\(1\\) because \\(m = 0\\) yields \\(\phi_b = 0\\). Now, defining \\(\alpha = k/(\rho c_p) \\), the solution of \\(\tau_b\\) is:
 
 \begin{equation}
-    \tau_b = c_5 \exp{\left(-\alpha\lambda_m t\right)}
+    \tau_b = c_5 \exp{\left(-\alpha\lambda_m^2 t\right)}
 \end{equation}
 
 Therefore, the solution that we are looking for is:
 
 \begin{equation}
-    \phi_b\tau_b = \sum_{m=1}^{\infty}c_m \sin{\left(\lambda_m y\right)} \exp{\left(-\alpha\lambda_m t\right)}
+    \phi_b\tau_b = \sum_{m=1}^{\infty}c_m \sin{\left(\lambda_m y\right)} \exp{\left(-\alpha\lambda_m^2 t\right)}
     \label{eq:b:almost}
 \end{equation}
 
@@ -224,8 +224,8 @@ which, from the definition of \\(\lambda_m\\) in Eq. \ref{eq:lambdam}, becomes
 From Eqs. \ref{eq:mn}, \ref{eq:b:cmf1b}, and, \ref{eq:b:cmf2b}, the final solution for \\(\phi_b(y)\tau_b(t)\\) is:
 
 \begin{equation}
-    \phi_b\tau_b = \sum_{m=1}^{\infty}\left( -1 \right)^m\left[ \dfrac{S}{Hk}  \frac{ \left( 2 - \lambda_m^2H^2 \right) -2 }{\lambda_m^3} \ldots \\\
-    \ldots + \frac{2}{\lambda_m}\left( \dfrac{T_s - T_c}{H} + \dfrac{SH}{2k} \right) \right]\sin{\left(\lambda_m y\right)} \exp{\left(-\alpha\lambda_m t\right)}
+    \phi_b\tau_b = \sum_{m=1}^{\infty}\left[ \dfrac{S}{Hk}  \frac{ \left( -1 \right)^m\left( 2 - \lambda_m^2H^2 \right) -2 }{\lambda_m^3} \ldots \\\
+    \ldots + \left( -1 \right)^m\frac{2}{\lambda_m}\left( \dfrac{T_s - T_c}{H} + \dfrac{SH}{2k} \right) \right]\sin{\left(\lambda_m y\right)} \exp{\left(-\alpha\lambda_m^2 t\right)}
     \label{eq:b:final}
 \end{equation}
 
@@ -249,8 +249,8 @@ with \\(\alpha = k/( \rho c_p ) \\), and \\(\phi_a(y)\\) and \\(\phi_b(y)\tau_b(
 \end{equation}
 
 \begin{equation}
-    \phi_b\tau_b = \sum_{m=1}^{\infty}\left( -1 \right)^m\left[ \dfrac{S}{Hk}  \frac{ \left( 2 - \lambda_m^2H^2 \right) -2 }{\lambda_m^3} \ldots \\\
-    \ldots + \frac{2}{\lambda_m}\left( \dfrac{T_s - T_c}{H} + \dfrac{SH}{2k} \right)  \right]\sin{\left(\lambda_m y\right)} \exp{\left(-\alpha\lambda_m t\right)}
+    \phi_b\tau_b = \sum_{m=1}^{\infty}\left[ \dfrac{S}{Hk}  \frac{ \left( -1 \right)^m\left( 2 - \lambda_m^2H^2 \right) -2 }{\lambda_m^3} \ldots \\\
+    \ldots + \left( -1 \right)^m\frac{2}{\lambda_m}\left( \dfrac{T_s - T_c}{H} + \dfrac{SH}{2k} \right) \right]\sin{\left(\lambda_m y\right)} \exp{\left(-\alpha\lambda_m^2 t\right)}
 \end{equation}
 
 The flux/heat flux can be obtained by derivating these equations with respect to \\(y\\).
@@ -293,11 +293,17 @@ which generates
 
 <img src="{{ site.baseurl }}/assets/images/theory/ana/heat 1D TT plot.png" alt="Solution of the problem for heat equation">
 
+### Limitations
+
+Every solution method has limitations. The most noticeable limitation is that we have to perform infinity sums to get predictions using solutions from separation of variables. Infinity sums, however, cannot be performed in numerical computations, which leads us to truncate the calculations for large values of \\(m\\). How large this number have to be will depend on the problem geometry and on the material properties but, if theses number are not large enough, the calculations will manifest oscillations that will be most evident for predicted fluxes. When observed that \\(m\\) has to be increased, a rule-of-thumb is to double its valuee, re-calculate the predicionts, and observe if the oscillations have decreased to acceptable intensities.
+
 ### Done
 
 Now, you can go to:
 
 * [Analytical solutions menu]({{ site.baseurl }}{% link theory/ana/index.md %})
 * [Analytical solution in two-dimensions]({{ site.baseurl }}{% link theory/ana/heat 2D TTqq.md %})
+* [TLM validation using this solution for diffusion equation]({{ site.baseurl }}{% link vte/diff 1D line.md %})
+* [TLM validation using this solution for heat equation]({{ site.baseurl }}{% link vte/heat 1D line.md %})
 
 

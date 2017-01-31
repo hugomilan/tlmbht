@@ -19,13 +19,227 @@
   <defs
      id="defs15328">
     <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker19847"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 Z"
+         id="path19849"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker19051"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 Z"
+         id="path19053"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible;"
+       id="marker18249"
+       refX="0.0"
+       refY="0.0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lend">
+      <path
+         transform="scale(0.8) rotate(180) translate(12.5,0)"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1;fill:#000000;fill-opacity:1"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         id="path18251" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible;"
+       id="marker17465"
+       refX="0.0"
+       refY="0.0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lend">
+      <path
+         transform="scale(0.8) rotate(180) translate(12.5,0)"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1;fill:#000000;fill-opacity:1"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         id="path17467" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="marker16663"
+       style="overflow:visible;"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         id="path16665"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1;fill:#000000;fill-opacity:1"
+         transform="scale(0.8) rotate(180) translate(12.5,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="marker15891"
+       style="overflow:visible;"
+       inkscape:isstock="true">
+      <path
+         id="path15893"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1;fill:#000000;fill-opacity:1"
+         transform="scale(0.8) rotate(180) translate(12.5,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="marker15125"
+       style="overflow:visible;"
+       inkscape:isstock="true">
+      <path
+         id="path15127"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1;fill:#000000;fill-opacity:1"
+         transform="scale(0.8) rotate(180) translate(12.5,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="marker14365"
+       style="overflow:visible;"
+       inkscape:isstock="true">
+      <path
+         id="path14367"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1;fill:#000000;fill-opacity:1"
+         transform="scale(0.8) rotate(180) translate(12.5,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="marker13611"
+       style="overflow:visible;"
+       inkscape:isstock="true">
+      <path
+         id="path13613"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1;fill:#000000;fill-opacity:1"
+         transform="scale(0.8) rotate(180) translate(12.5,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="marker12863"
+       style="overflow:visible;"
+       inkscape:isstock="true">
+      <path
+         id="path12865"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1;fill:#000000;fill-opacity:1"
+         transform="scale(0.8) rotate(180) translate(12.5,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="marker12121"
+       style="overflow:visible;"
+       inkscape:isstock="true">
+      <path
+         id="path12123"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1;fill:#000000;fill-opacity:1"
+         transform="scale(0.8) rotate(180) translate(12.5,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="marker11385"
+       style="overflow:visible;"
+       inkscape:isstock="true">
+      <path
+         id="path11387"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1;fill:#000000;fill-opacity:1"
+         transform="scale(0.8) rotate(180) translate(12.5,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="marker10655"
+       style="overflow:visible;"
+       inkscape:isstock="true">
+      <path
+         id="path10657"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1;fill:#000000;fill-opacity:1"
+         transform="scale(0.8) rotate(180) translate(12.5,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="marker9931"
+       style="overflow:visible;"
+       inkscape:isstock="true">
+      <path
+         id="path9933"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1;fill:#000000;fill-opacity:1"
+         transform="scale(0.8) rotate(180) translate(12.5,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="marker9213"
+       style="overflow:visible;"
+       inkscape:isstock="true">
+      <path
+         id="path9215"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1;fill:#000000;fill-opacity:1"
+         transform="scale(0.8) rotate(180) translate(12.5,0)" />
+    </marker>
+    <marker
        inkscape:stockid="Arrow1Lstart"
        orient="auto"
        refY="0"
        refX="0"
        id="marker15328"
        style="overflow:visible"
-       inkscape:isstock="true">
+       inkscape:isstock="true"
+       inkscape:collect="always">
       <path
          inkscape:connector-curvature="0"
          id="path15330"
@@ -70,7 +284,8 @@
        refX="0.0"
        refY="0.0"
        orient="auto"
-       inkscape:stockid="Arrow1Lend">
+       inkscape:stockid="Arrow1Lend"
+       inkscape:collect="always">
       <path
          transform="scale(0.8) rotate(180) translate(12.5,0)"
          style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1;fill:#000000;fill-opacity:1"
@@ -1080,6 +1295,681 @@
          style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
          transform="matrix(-0.8,0,0,-0.8,-10,0)" />
     </marker>
+    <marker
+       inkscape:stockid="Arrow2Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2Mend-1-3-7-7-7-7-8-3-0-7-56-5-3-8"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4510-6-4-2-24-9-1-0-6-9-9-3-35-0-3"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="scale(-0.6,-0.6)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow2Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2Mend-1-3-7-7-7-7-8-3-5-20-9-6-3-8"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4510-6-4-2-24-9-1-0-6-3-2-48-2-0-33"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="scale(-0.6,-0.6)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow2Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2Mend-1-3-7-7-7-7-8-3-5-2-1-6-93-9-3"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4510-6-4-2-24-9-1-0-6-3-7-8-1-60-2-80"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="scale(-0.6,-0.6)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow2Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2Mend-1-3-7-7-7-7-8-3-5-2-1-62-5-4"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4510-6-4-2-24-9-1-0-6-3-7-8-61-4-7"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="scale(-0.6,-0.6)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow2Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2Mend-1-3-7-7-7-7-8-3-0-7-87-0-6"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4510-6-4-2-24-9-1-0-6-9-9-92-5-8"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="scale(-0.6,-0.6)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lstart"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="marker6444-0-0-9-4-7-5-91-9-9"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path6177-4-9-2-7-1-9-2-6-0"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 Z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         transform="matrix(0.8,0,0,0.8,10,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lstart"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="marker6444-0-0-9-4-7-5-91-6"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path6177-4-9-2-7-1-9-2-8"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 Z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         transform="matrix(0.8,0,0,0.8,10,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lstart"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="marker6444-0-0-9-4-7-7-7"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path6177-4-9-2-7-1-0-9"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 Z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         transform="matrix(0.8,0,0,0.8,10,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow2Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2Mend-1-3-7-7-7-7-8-3-5-2-1-6-93-03"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4510-6-4-2-24-9-1-0-6-3-7-8-1-60-3"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="scale(-0.6,-0.6)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow2Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2Mend-1-3-7-7-7-7-8-3-5-2-1-62-37"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4510-6-4-2-24-9-1-0-6-3-7-8-61-3"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="scale(-0.6,-0.6)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow2Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2Mend-1-3-7-7-7-7-8-3-0-7-87-26"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4510-6-4-2-24-9-1-0-6-9-9-92-52"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="scale(-0.6,-0.6)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow2Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2Mend-1-3-7-7-7-7-8-3-5-20-0-65"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4510-6-4-2-24-9-1-0-6-3-2-23-87"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="scale(-0.6,-0.6)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow2Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2Mend-1-3-7-7-7-7-8-3-3-75-9"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4510-6-4-2-24-9-1-0-6-7-9-6"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="scale(-0.6,-0.6)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow2Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2Mend-1-3-7-7-7-7-8-3-5-2-2-0"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4510-6-4-2-24-9-1-0-6-3-7-2-41"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="scale(-0.6,-0.6)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow2Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2Mend-1-3-7-7-7-7-8-3-0-8-04"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4510-6-4-2-24-9-1-0-6-9-97-8"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="scale(-0.6,-0.6)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow2Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2Mend-1-3-7-7-7-7-8-3-0-7-56-5-3-2"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4510-6-4-2-24-9-1-0-6-9-9-3-35-0-8"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="scale(-0.6,-0.6)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow2Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2Mend-1-3-7-7-7-7-8-3-5-20-9-6-3-9"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4510-6-4-2-24-9-1-0-6-3-2-48-2-0-3"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="scale(-0.6,-0.6)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow2Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2Mend-1-3-7-7-7-7-8-3-5-2-1-6-93-9-6"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4510-6-4-2-24-9-1-0-6-3-7-8-1-60-2-8"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="scale(-0.6,-0.6)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow2Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2Mend-1-3-7-7-7-7-8-3-5-2-1-62-5-0"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4510-6-4-2-24-9-1-0-6-3-7-8-61-4-2"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="scale(-0.6,-0.6)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow2Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2Mend-1-3-7-7-7-7-8-3-0-7-87-0-1"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4510-6-4-2-24-9-1-0-6-9-9-92-5-0"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="scale(-0.6,-0.6)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lstart"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="marker6444-0-0-9-4-7-5-91-9-5"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path6177-4-9-2-7-1-9-2-6-1"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 Z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         transform="matrix(0.8,0,0,0.8,10,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lstart"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="marker6444-0-0-9-4-7-5-91-1"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path6177-4-9-2-7-1-9-2-0"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 Z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         transform="matrix(0.8,0,0,0.8,10,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lstart"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="marker6444-0-0-9-4-7-7-8"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path6177-4-9-2-7-1-0-5"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 Z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         transform="matrix(0.8,0,0,0.8,10,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow2Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2Mend-1-3-7-7-7-7-8-3-5-2-1-6-93-0"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4510-6-4-2-24-9-1-0-6-3-7-8-1-60-6"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="scale(-0.6,-0.6)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow2Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2Mend-1-3-7-7-7-7-8-3-5-2-1-62-4"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4510-6-4-2-24-9-1-0-6-3-7-8-61-6"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="scale(-0.6,-0.6)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow2Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2Mend-1-3-7-7-7-7-8-3-0-7-87-2"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4510-6-4-2-24-9-1-0-6-9-9-92-58"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="scale(-0.6,-0.6)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow2Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2Mend-1-3-7-7-7-7-8-3-5-20-0-62"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4510-6-4-2-24-9-1-0-6-3-2-23-8"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="scale(-0.6,-0.6)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow2Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2Mend-1-3-7-7-7-7-8-3-3-75-4"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4510-6-4-2-24-9-1-0-6-7-9-7"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="scale(-0.6,-0.6)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow2Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2Mend-1-3-7-7-7-7-8-3-5-2-2-2"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4510-6-4-2-24-9-1-0-6-3-7-2-4"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="scale(-0.6,-0.6)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow2Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2Mend-1-3-7-7-7-7-8-3-0-8-0"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4510-6-4-2-24-9-1-0-6-9-97-6"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="scale(-0.6,-0.6)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow2Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2Mend-1-3-7-7-7-7-8-3-0-7-56-5-3"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4510-6-4-2-24-9-1-0-6-9-9-3-35-0"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="scale(-0.6,-0.6)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow2Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2Mend-1-3-7-7-7-7-8-3-5-20-9-6-3"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4510-6-4-2-24-9-1-0-6-3-2-48-2-0"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="scale(-0.6,-0.6)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow2Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2Mend-1-3-7-7-7-7-8-3-5-2-1-6-93-9"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4510-6-4-2-24-9-1-0-6-3-7-8-1-60-2"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="scale(-0.6,-0.6)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow2Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2Mend-1-3-7-7-7-7-8-3-5-2-1-62-5"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4510-6-4-2-24-9-1-0-6-3-7-8-61-4"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="scale(-0.6,-0.6)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow2Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2Mend-1-3-7-7-7-7-8-3-0-7-87-0"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4510-6-4-2-24-9-1-0-6-9-9-92-5"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="scale(-0.6,-0.6)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lstart"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="marker6444-0-0-9-4-7-5-91-9"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path6177-4-9-2-7-1-9-2-6"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 Z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         transform="matrix(0.8,0,0,0.8,10,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lstart"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="marker6444-0-0-9-4-7-5-91"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path6177-4-9-2-7-1-9-2"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 Z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         transform="matrix(0.8,0,0,0.8,10,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lstart"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="marker6444-0-0-9-4-7-7"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path6177-4-9-2-7-1-0"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 Z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         transform="matrix(0.8,0,0,0.8,10,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow2Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2Mend-1-3-7-7-7-7-8-3-5-2-1-6-93"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4510-6-4-2-24-9-1-0-6-3-7-8-1-60"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="scale(-0.6,-0.6)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow2Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2Mend-1-3-7-7-7-7-8-3-5-2-1-62"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4510-6-4-2-24-9-1-0-6-3-7-8-61"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="scale(-0.6,-0.6)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow2Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2Mend-1-3-7-7-7-7-8-3-0-7-87"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4510-6-4-2-24-9-1-0-6-9-9-92"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="scale(-0.6,-0.6)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow2Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2Mend-1-3-7-7-7-7-8-3-5-20-0"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4510-6-4-2-24-9-1-0-6-3-2-23"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="scale(-0.6,-0.6)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow2Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2Mend-1-3-7-7-7-7-8-3-3-75"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4510-6-4-2-24-9-1-0-6-7-9"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="scale(-0.6,-0.6)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow2Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2Mend-1-3-7-7-7-7-8-3-5-2-2"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4510-6-4-2-24-9-1-0-6-3-7-2"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="scale(-0.6,-0.6)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow2Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2Mend-1-3-7-7-7-7-8-3-0-8"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4510-6-4-2-24-9-1-0-6-9-97"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="scale(-0.6,-0.6)" />
+    </marker>
   </defs>
   <sodipodi:namedview
      id="base"
@@ -1088,16 +1978,16 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.49497475"
-     inkscape:cx="-1897.0671"
-     inkscape:cy="503.23535"
+     inkscape:zoom="0.5"
+     inkscape:cx="-4615.9439"
+     inkscape:cy="200.88332"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
      showguides="false"
      inkscape:window-width="1855"
      inkscape:window-height="1056"
-     inkscape:window-x="65"
+     inkscape:window-x="1345"
      inkscape:window-y="24"
      inkscape:window-maximized="1" />
   <metadata
@@ -2574,5 +3464,1975 @@
        inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 2D TTqq.png"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:54.53916931px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="-4561.0005"
+       y="-458.78909"
+       id="text3233-3-3-7"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 3D TTqqqq.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300"><tspan
+         sodipodi:role="line"
+         id="tspan3235-5-6-8"
+         x="-4561.0005"
+         y="-458.78909">T<tspan
+   style="font-size:35.45046234px;baseline-shift:sub"
+   id="tspan3260-6-7-4"> s</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:54.53916931px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="-4578.5518"
+       y="219.9118"
+       id="text3233-6-9-3-0"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 3D TTqqqq.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300"><tspan
+         sodipodi:role="line"
+         id="tspan3235-7-1-5-3"
+         x="-4578.5518"
+         y="219.9118">T<tspan
+   style="font-size:35.45046234px;baseline-shift:sub"
+   id="tspan3262-2-6-61"> c</tspan></tspan></text>
+    <rect
+       style="fill:none;stroke:#000000;stroke-width:7.954;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect3264-0-9-3-36"
+       width="658.71283"
+       height="492.04614"
+       x="-281.64218"
+       y="4354.9458"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 3D TTqqqq.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300"
+       transform="matrix(0,-1,-1,0,0,0)" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4774.6458,172.93125 -28.2893,16.3328"
+       id="path3305-1-2"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 3D TTqqqq.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4774.6458,152.93125 -28.2893,16.3328"
+       id="path3305-9-27-06"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 3D TTqqqq.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4774.6458,132.93125 -28.2893,16.3328"
+       id="path3305-3-09-15"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 3D TTqqqq.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4774.6458,112.93125 -28.2893,16.3328"
+       id="path3305-9-6-36-54"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 3D TTqqqq.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4774.6458,94.931279 -28.2893,16.332771"
+       id="path3305-0-06-76"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 3D TTqqqq.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4774.6458,74.931279 -28.2893,16.3328"
+       id="path3305-9-62-26-5"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 3D TTqqqq.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4774.6458,54.931279 -28.2893,16.3328"
+       id="path3305-3-6-1-69"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 3D TTqqqq.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4774.6458,34.931279 -28.2893,16.3328"
+       id="path3305-9-6-1-87-3"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 3D TTqqqq.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4774.6458,14.931239 -28.2893,16.3328"
+       id="path3305-8-9-7-7"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 3D TTqqqq.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4774.6458,-5.0687607 -28.2893,16.3327997"
+       id="path3305-9-7-20-45"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 3D TTqqqq.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4774.6458,-25.068761 -28.2893,16.3328003"
+       id="path3305-3-9-2-25"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 3D TTqqqq.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4774.6458,-45.068761 -28.2893,16.3328"
+       id="path3305-9-6-2-3-47"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 3D TTqqqq.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4774.6458,-63.068761 -28.2893,16.3328"
+       id="path3305-0-0-75-4"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 3D TTqqqq.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4774.6458,-83.068761 -28.2893,16.3328"
+       id="path3305-9-62-2-9-4"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 3D TTqqqq.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4774.6458,-103.06876 -28.2893,16.332799"
+       id="path3305-3-6-3-22-30"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 3D TTqqqq.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4774.6458,-123.06876 -28.2893,16.3328"
+       id="path3305-9-6-1-7-8-7"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 3D TTqqqq.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4774.6458,-143.06876 -28.2893,16.3328"
+       id="path3305-5-9-8"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 3D TTqqqq.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4774.6458,-163.06876 -28.2893,16.3328"
+       id="path3305-9-9-7-6"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 3D TTqqqq.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4774.6458,-183.06876 -28.2893,16.3328"
+       id="path3305-3-2-3-8"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 3D TTqqqq.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4774.6458,-203.06876 -28.2893,16.3328"
+       id="path3305-9-6-28-61-8"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 3D TTqqqq.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4774.6458,-221.06876 -28.2893,16.3328"
+       id="path3305-0-9-2-4"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 3D TTqqqq.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4774.6458,-241.06876 -28.2893,16.3328"
+       id="path3305-9-62-7-93-3"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 3D TTqqqq.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4774.6458,-261.06876 -28.2893,16.3328"
+       id="path3305-3-6-36-1-1"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 3D TTqqqq.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4774.6458,-281.06876 -28.2893,16.3328"
+       id="path3305-9-6-1-1-94-4-5"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 3D TTqqqq.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4774.6458,-301.06876 -28.2893,16.3328"
+       id="path3305-8-2-7-9"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 3D TTqqqq.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4774.6458,-321.06876 -28.2893,16.3328"
+       id="path3305-9-7-9-8-2"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 3D TTqqqq.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <path
+       sodipodi:nodetypes="cc"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.53;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker12121)"
+       d="m -4154.129,36.013659 -147.0446,0"
+       id="path4477-0-4-15-1-4-7-2-2"
+       inkscape:connector-curvature="0"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 3D TTqqqq.png" />
+    <path
+       sodipodi:nodetypes="cc"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.53;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker11385)"
+       d="m -4154.129,-16.740041 -147.0446,0"
+       id="path4477-0-4-15-1-4-7-1-6-6"
+       inkscape:connector-curvature="0"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 3D TTqqqq.png" />
+    <path
+       sodipodi:nodetypes="cc"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.53;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker10655)"
+       d="m -4154.129,-69.493741 -147.0446,0"
+       id="path4477-0-4-15-1-4-7-8-6"
+       inkscape:connector-curvature="0"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 3D TTqqqq.png" />
+    <path
+       sodipodi:nodetypes="cc"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.53;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker9931)"
+       d="m -4154.129,-122.24744 -147.0446,0"
+       id="path4477-0-4-15-1-4-7-1-9-4"
+       inkscape:connector-curvature="0"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 3D TTqqqq.png" />
+    <path
+       sodipodi:nodetypes="cc"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.53;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker9213)"
+       d="m -4154.129,-175.00114 -147.0446,0"
+       id="path4477-0-4-15-1-4-7-2-7-95"
+       inkscape:connector-curvature="0"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 3D TTqqqq.png" />
+    <path
+       sodipodi:nodetypes="cc"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.53;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker13119)"
+       d="m -4154.129,-227.75484 -147.0446,0"
+       id="path4477-0-4-15-1-4-7-1-6-3-0"
+       inkscape:connector-curvature="0"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 3D TTqqqq.png" />
+    <path
+       sodipodi:nodetypes="cc"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.53;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker16663)"
+       d="m -4154.129,-280.50854 -147.0446,0"
+       id="path4477-0-4-15-1-4-7-1-6-3-1-4-3"
+       inkscape:connector-curvature="0"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 3D TTqqqq.png" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:54.53916931px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="92.621696"
+       y="-4093.9021"
+       id="text3233-3-3-4-8"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 3D TTqqqq.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300"
+       transform="matrix(0,-1,1,0,0,0)"><tspan
+         sodipodi:role="line"
+         id="tspan3235-5-6-6-7"
+         x="92.621696"
+         y="-4093.9021">q<tspan
+   style="font-size:64.99999762%;baseline-shift:sub"
+   id="tspan5035"> x</tspan><tspan
+   style="font-size:64.99999762%;baseline-shift:super"
+   id="tspan10832-1" /></tspan></text>
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.52999997;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-start:url(#marker19051)"
+       d="m -4665.7381,311.53055 -180.5656,0"
+       id="path6087-4-4-42-8-2-65-7-7-5"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 3D TTqqqq.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <text
+       transform="matrix(0.99985332,-0.01712714,0.01712714,0.99985332,0,0)"
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:44.28239822px;line-height:125%;font-family:sans-serif;-inkscape-font-specification:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="-4693.2788"
+       y="268.53555"
+       id="text19223-41-0-4-2-5-5-4-0-2-8-6-2-27"
+       sodipodi:linespacing="125%"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 3D TTqqqq.png"><tspan
+         sodipodi:role="line"
+         id="tspan19225-6-4-1-2-7-00-9-55-0-9-9-7-2"
+         x="-4693.2788"
+         y="268.53555"
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:50px;font-family:sans-serif;-inkscape-font-specification:sans-serif">x</tspan></text>
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.52999997;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4847.5687,290.24715 0,42.5669"
+       id="path5181-3-2-2"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 3D TTqqqq.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <path
+       style="fill:#000000;fill-rule:evenodd;stroke:#000000;stroke-width:2.29999995;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4846.3037,378.86805 491.3578,0"
+       id="path3140-7-2-6"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 3D TTqqqq.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.52999997;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4847.5687,356.58575 0,44.5647"
+       id="path5850-61-1"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 3D TTqqqq.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.52999997;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4353.6809,356.58575 0,44.5647"
+       id="path5850-4-0-06"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 3D TTqqqq.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="-4632.1489"
+       y="424.46811"
+       id="text3233-5-6-15"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 3D TTqqqq.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300"><tspan
+         sodipodi:role="line"
+         id="tspan3235-2-1-9-6"
+         x="-4632.1489"
+         y="424.46811"><tspan
+           style="font-size:50px"
+           id="tspan6264-4"> L</tspan></tspan></text>
+    <text
+       transform="matrix(0.99985332,-0.01712714,0.01712714,0.99985332,0,0)"
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:44.28239822px;line-height:125%;font-family:sans-serif;-inkscape-font-specification:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="-4964.0112"
+       y="54.053383"
+       id="text19223-41-0-4-2-5-5-4-0-2-8-6-2-9-9"
+       sodipodi:linespacing="125%"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 3D TTqqqq.png"><tspan
+         sodipodi:role="line"
+         id="tspan19225-6-4-1-2-7-00-9-55-0-9-9-7-0-0"
+         x="-4964.0112"
+         y="54.053383"
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:44.28239822px;font-family:sans-serif;-inkscape-font-specification:sans-serif">y</tspan></text>
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.52999997;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-start:url(#marker19847)"
+       d="m -4916.8225,99.311719 0,180.565631"
+       id="path6087-4-4-42-8-2-65-7-4-91"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 3D TTqqqq.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.52999997;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4938.1065,281.14235 42.5674,0"
+       id="path5181-3-2-9-7"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 3D TTqqqq.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <path
+       style="fill:#000000;fill-rule:evenodd;stroke:#000000;stroke-width:2.29999995;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4996.6335,-377.07051 0,656.94796"
+       id="path3140-7-2-7-7"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 3D TTqqqq.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.52999997;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4974.3505,-377.07051 -44.565,0"
+       id="path5850-61-7-1"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 3D TTqqqq.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.52999997;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4974.3505,281.14245 -44.565,0"
+       id="path5850-4-0-1-1"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 3D TTqqqq.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="15.682037"
+       y="-5006.9878"
+       id="text3233-5-6-1-5"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 3D TTqqqq.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300"
+       transform="matrix(0,-1,1,0,0,0)"><tspan
+         sodipodi:role="line"
+         id="tspan3235-2-1-5-9-2"
+         x="15.682037"
+         y="-5006.9878"><tspan
+           style="font-size:50px"
+           id="tspan6266-7"> H</tspan></tspan></text>
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4774.6458,-339.06876 -28.2893,16.3328"
+       id="path3305-0-0-75-6-6"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 3D TTqqqq.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4774.6458,-359.06876 -28.2893,16.3328"
+       id="path3305-9-62-2-9-3-5"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 3D TTqqqq.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4774.6458,-379.06876 -28.2893,16.3328"
+       id="path3305-3-6-3-22-8-63"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 3D TTqqqq.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4774.6458,-399.06876 -28.2893,16.3328"
+       id="path3305-9-6-1-7-8-5-9"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 3D TTqqqq.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4774.6458,-419.06876 -28.2893,16.3328"
+       id="path3305-5-9-6-4"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 3D TTqqqq.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4774.6458,-439.06876 -28.2893,16.3328"
+       id="path3305-9-9-7-1-8"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 3D TTqqqq.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4774.6458,-459.06876 -28.2893,16.3328"
+       id="path3305-3-2-3-1-12"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 3D TTqqqq.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4774.6458,-479.06877 -28.2893,16.3328"
+       id="path3305-9-6-28-61-5-9"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 3D TTqqqq.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:7.954;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4847.6937,-378.59324 122.5665,-160.73214"
+       id="path4630"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 3D TTqqqq.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:7.954;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M -4354.9459,-377.07056 -4236.4401,-537.646"
+       id="path4632"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 3D TTqqqq.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:7.954;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4728.486,-537.646 492.0459,0 0,658.71285 -118.5058,0 0,0 0,0"
+       id="path4634"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccccc"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 3D TTqqqq.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m -4728.4862,-377.07056 2e-4,-160.57544"
+       id="path4636"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 3D TTqqqq.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:36, 36;stroke-dashoffset:0;stroke-opacity:1"
+       d="m -4728.486,121.06685 -118.5058,160.5755"
+       id="path4638"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 3D TTqqqq.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:36, 36;stroke-dashoffset:0;stroke-opacity:1"
+       d="m -4728.4862,-377.07056 2e-4,498.13741"
+       id="path4640"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 3D TTqqqq.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:36, 36;stroke-dashoffset:0;stroke-opacity:1"
+       d="m -4728.486,121.06685 373.5401,0"
+       id="path4642"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 3D TTqqqq.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <g
+       id="g4704"
+       transform="translate(5023.9123,-577.15232)"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 3D TTqqqq.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300">
+      <path
+         inkscape:transform-center-y="-194.5181"
+         inkscape:transform-center-x="-151.41434"
+         sodipodi:nodetypes="cc"
+         inkscape:export-ydpi="900"
+         inkscape:export-xdpi="900"
+         inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/src/miscellaneous/images/1D_Line_Pennes_Problem_Simplified.png"
+         inkscape:connector-curvature="0"
+         id="path3140-7-2-6-9"
+         d="m -9975.7039,113.73486 122.7455,-156.924945"
+         style="fill:#000000;fill-rule:evenodd;stroke:#000000;stroke-width:2.29999995;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         inkscape:transform-center-y="-0.36718224"
+         inkscape:transform-center-x="1.1854483"
+         sodipodi:nodetypes="cc"
+         inkscape:connector-curvature="0"
+         id="path5850-61-1-0"
+         d="m -9994.0043,100.96002 35.0374,27.53887"
+         style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.52999997;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         inkscape:transform-center-y="-388.66895"
+         inkscape:transform-center-x="-304.01418"
+         sodipodi:nodetypes="cc"
+         inkscape:connector-curvature="0"
+         id="path5850-4-0-06-8"
+         d="m -9869.5713,-57.668066 35.0375,27.53892"
+         style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.52999997;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="-2636.1692"
+       y="-4210.4053"
+       id="text3233-5-6-15-8"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 3D TTqqqq.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300"
+       inkscape:transform-center-x="-169.29099"
+       inkscape:transform-center-y="-162.1658"
+       transform="matrix(0.6179532,-0.78621488,0.78621488,0.6179532,0,0)"><tspan
+         sodipodi:role="line"
+         id="tspan3235-2-1-9-5"
+         x="-2636.1692"
+         y="-4210.4053"><tspan
+           style="font-size:50px"
+           id="tspan6264-4-0"> T<tspan
+   style="font-size:64.99999762%;baseline-shift:sub"
+   id="tspan4713"> z</tspan></tspan></tspan></text>
+    <text
+       transform="matrix(0.99975826,-0.02198673,0.02198673,0.99975826,0,0)"
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:44.28239822px;line-height:125%;font-family:sans-serif;-inkscape-font-specification:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="-4787.6807"
+       y="-662.8595"
+       id="text19223-41-0-4-2-5-5-4-0-2-8-6-2-9-9-3"
+       sodipodi:linespacing="125%"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 3D TTqqqq.png"
+       inkscape:transform-center-x="0.47651279"
+       inkscape:transform-center-y="0.44969926"><tspan
+         sodipodi:role="line"
+         id="tspan19225-6-4-1-2-7-00-9-55-0-9-9-7-0-0-8"
+         x="-4787.6807"
+         y="-662.8595"
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:44.28239822px;font-family:sans-serif;-inkscape-font-specification:sans-serif">z</tspan></text>
+    <g
+       id="g4709"
+       transform="translate(5132.9373,-492.69119)"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 3D TTqqqq.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300">
+      <path
+         inkscape:transform-center-y="-71.794484"
+         inkscape:transform-center-x="-56.264431"
+         inkscape:export-ydpi="300"
+         inkscape:export-xdpi="300"
+         inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/src/miscellaneous/images/3D_Tetrahedron_Diffusion_Problem.png"
+         sodipodi:nodetypes="cc"
+         inkscape:connector-curvature="0"
+         id="path6087-4-4-42-8-2-65-7-4-91-5"
+         d="M -9901.5613,-61.134677 -10013.897,80.23222"
+         style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.52999997;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-start:url(#marker6444-0-0-9-4-7-5-91-9)" />
+      <path
+         inkscape:transform-center-y="-0.12093356"
+         inkscape:transform-center-x="0.69086903"
+         inkscape:connector-curvature="0"
+         id="path5181-3-2-9-7-6"
+         d="m -10031.348,67.981123 33.3266,26.482397"
+         style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.52999997;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    </g>
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:7.954;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4354.9459,281.64235 118.5058,-160.5755"
+       id="path4715"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 3D TTqqqq.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4795.0118,6.2747193 -16.3328,-28.2893003"
+       id="path3305-9-62-2-9-4-1"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 3D TTqqqq.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4775.0118,6.2747193 -16.3328,-28.2893003"
+       id="path3305-3-6-3-22-30-1"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 3D TTqqqq.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4755.0118,6.2747193 -16.3328,-28.2893003"
+       id="path3305-9-6-1-7-8-7-5"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 3D TTqqqq.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4735.0118,6.2747193 -16.3328,-28.2893003"
+       id="path3305-5-9-8-9"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 3D TTqqqq.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4715.0118,6.2747193 -16.3328,-28.2893003"
+       id="path3305-9-9-7-6-8"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 3D TTqqqq.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4695.0118,6.2747193 -16.3328,-28.2893003"
+       id="path3305-3-2-3-8-4"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 3D TTqqqq.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4675.0118,6.2747193 -16.3328,-28.2893003"
+       id="path3305-9-6-28-61-8-8"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 3D TTqqqq.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4657.0118,6.2747193 -16.3328,-28.2893003"
+       id="path3305-0-9-2-4-1"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 3D TTqqqq.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4637.0118,6.2747193 -16.3328,-28.2893003"
+       id="path3305-9-62-7-93-3-0"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 3D TTqqqq.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4617.0118,6.2747193 -16.3328,-28.2893003"
+       id="path3305-3-6-36-1-1-3"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 3D TTqqqq.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4597.0118,6.2747193 -16.3328,-28.2893003"
+       id="path3305-9-6-1-1-94-4-0"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 3D TTqqqq.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4577.0118,6.2747193 -16.3328,-28.2893003"
+       id="path3305-8-2-7-9-4"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 3D TTqqqq.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4557.0118,6.2747193 -16.3328,-28.2893003"
+       id="path3305-9-7-9-8-2-4"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 3D TTqqqq.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4539.0118,6.2747193 -16.3328,-28.2893003"
+       id="path3305-0-0-75-6-6-4"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 3D TTqqqq.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4519.0118,6.2747193 -16.3328,-28.2893003"
+       id="path3305-9-62-2-9-3-5-4"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 3D TTqqqq.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4499.0118,6.2747193 -16.3328,-28.2893003"
+       id="path3305-3-6-3-22-8-63-7"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 3D TTqqqq.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4479.0118,6.2747193 -16.3328,-28.2893003"
+       id="path3305-9-6-1-7-8-5-9-6"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 3D TTqqqq.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4459.0118,6.2747193 -16.3328,-28.2893003"
+       id="path3305-5-9-6-4-3"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 3D TTqqqq.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4439.0118,6.2747193 -16.3328,-28.2893003"
+       id="path3305-9-9-7-1-8-1"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 3D TTqqqq.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4419.0118,6.2747193 -16.3328,-28.2893003"
+       id="path3305-3-2-3-1-12-7"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 3D TTqqqq.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4399.0118,6.2747193 -16.3328,-28.2893003"
+       id="path3305-3-6-3-22-8-63-7-9"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 3D TTqqqq.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4379.0118,6.2747193 -16.3328,-28.2893003"
+       id="path3305-9-6-1-7-8-5-9-6-6"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 3D TTqqqq.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4359.0118,6.2747193 -16.3328,-28.2893003"
+       id="path3305-5-9-6-4-3-2"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 3D TTqqqq.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4339.0118,6.2747193 -16.3328,-28.2893003"
+       id="path3305-9-9-7-1-8-1-1"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 3D TTqqqq.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4835.0118,6.2747193 -16.3328,-28.2893003"
+       id="path3305-9-62-2-9-4-1-8"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 3D TTqqqq.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4815.0118,6.2747193 -16.3328,-28.2893003"
+       id="path3305-3-6-3-22-30-1-5"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 3D TTqqqq.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <path
+       sodipodi:nodetypes="cc"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.53;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker15891)"
+       d="m -4365.9419,-225.62372 -107.1663,147.044599"
+       id="path4477-0-4-15-1-4-7-2-7-95-2"
+       inkscape:connector-curvature="0"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 3D TTqqqq.png" />
+    <path
+       sodipodi:nodetypes="cc"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.53;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker15125)"
+       d="m -4418.6956,-225.62372 -107.1663,147.044599"
+       id="path4477-0-4-15-1-4-7-1-6-3-0-2"
+       inkscape:connector-curvature="0"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 3D TTqqqq.png" />
+    <path
+       sodipodi:nodetypes="cc"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.53;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker14365)"
+       d="m -4471.4493,-225.62372 -107.1663,147.044599"
+       id="path4477-0-4-15-1-4-7-1-6-3-1-4-4"
+       inkscape:connector-curvature="0"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 3D TTqqqq.png" />
+    <path
+       sodipodi:nodetypes="cc"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.53;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker13611)"
+       d="m -4524.203,-225.62372 -107.1663,147.044599"
+       id="path4477-0-4-15-1-4-7-1-9-0-7-7"
+       inkscape:connector-curvature="0"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 3D TTqqqq.png" />
+    <path
+       sodipodi:nodetypes="cc"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.53;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker12863)"
+       d="M -4576.9567,-225.62372 -4684.123,-78.579121"
+       id="path4477-0-4-15-1-4-7-2-7-88-67-7"
+       inkscape:connector-curvature="0"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 3D TTqqqq.png" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:54.53916931px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="-4524.6035"
+       y="-277.18051"
+       id="text3233-3-3-4-8-4"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 3D TTqqqq.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300"><tspan
+         sodipodi:role="line"
+         x="-4524.6035"
+         y="-277.18051"
+         id="tspan5039">q<tspan
+   style="font-size:64.99999762%;baseline-shift:sub"
+   id="tspan5037"> z</tspan><tspan
+   style="font-size:64.99999762%;baseline-shift:super"
+   id="tspan10832-1-1" /></tspan></text>
+    <text
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 3D TTqqqq.png"
+       sodipodi:linespacing="125%"
+       id="text20663"
+       y="703.69446"
+       x="-4614.7407"
+       style="font-style:normal;font-weight:normal;font-size:54.53916931px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       xml:space="preserve"><tspan
+         y="703.69446"
+         x="-4614.7407"
+         id="tspan20665"
+         sodipodi:role="line">C<tspan
+   id="tspan20667"
+   style="font-size:35.45046234px;baseline-shift:sub"> s</tspan></tspan></text>
+    <text
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 3D TTqqqq.png"
+       sodipodi:linespacing="125%"
+       id="text20669"
+       y="1382.3954"
+       x="-4632.292"
+       style="font-style:normal;font-weight:normal;font-size:54.53916931px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       xml:space="preserve"><tspan
+         y="1382.3954"
+         x="-4632.292"
+         id="tspan20671"
+         sodipodi:role="line">C<tspan
+   id="tspan20673"
+   style="font-size:35.45046234px;baseline-shift:sub"> c</tspan></tspan></text>
+    <rect
+       transform="matrix(0,-1,-1,0,0,0)"
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 3D TTqqqq.png"
+       y="4408.686"
+       x="-1444.1257"
+       height="492.04614"
+       width="658.71283"
+       id="rect20675"
+       style="fill:none;stroke:#000000;stroke-width:7.954;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <path
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 3D TTqqqq.png"
+       inkscape:connector-curvature="0"
+       id="path20677"
+       d="m -4828.3859,1335.4148 -28.2893,16.3328"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <path
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 3D TTqqqq.png"
+       inkscape:connector-curvature="0"
+       id="path20679"
+       d="m -4828.3859,1315.4148 -28.2893,16.3328"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <path
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 3D TTqqqq.png"
+       inkscape:connector-curvature="0"
+       id="path20681"
+       d="m -4828.3859,1295.4148 -28.2893,16.3328"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <path
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 3D TTqqqq.png"
+       inkscape:connector-curvature="0"
+       id="path20683"
+       d="m -4828.3859,1275.4148 -28.2893,16.3328"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <path
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 3D TTqqqq.png"
+       inkscape:connector-curvature="0"
+       id="path20685"
+       d="m -4828.3859,1257.4148 -28.2893,16.3328"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <path
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 3D TTqqqq.png"
+       inkscape:connector-curvature="0"
+       id="path20687"
+       d="m -4828.3859,1237.4148 -28.2893,16.3328"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <path
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 3D TTqqqq.png"
+       inkscape:connector-curvature="0"
+       id="path20689"
+       d="m -4828.3859,1217.4148 -28.2893,16.3328"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <path
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 3D TTqqqq.png"
+       inkscape:connector-curvature="0"
+       id="path20691"
+       d="m -4828.3859,1197.4148 -28.2893,16.3328"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <path
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 3D TTqqqq.png"
+       inkscape:connector-curvature="0"
+       id="path20693"
+       d="m -4828.3859,1177.4148 -28.2893,16.3328"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <path
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 3D TTqqqq.png"
+       inkscape:connector-curvature="0"
+       id="path20695"
+       d="m -4828.3859,1157.4148 -28.2893,16.3328"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <path
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 3D TTqqqq.png"
+       inkscape:connector-curvature="0"
+       id="path20697"
+       d="m -4828.3859,1137.4148 -28.2893,16.3328"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <path
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 3D TTqqqq.png"
+       inkscape:connector-curvature="0"
+       id="path20699"
+       d="m -4828.3859,1117.4148 -28.2893,16.3328"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <path
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 3D TTqqqq.png"
+       inkscape:connector-curvature="0"
+       id="path20701"
+       d="m -4828.3859,1099.4148 -28.2893,16.3328"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <path
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 3D TTqqqq.png"
+       inkscape:connector-curvature="0"
+       id="path20703"
+       d="m -4828.3859,1079.4148 -28.2893,16.3328"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <path
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 3D TTqqqq.png"
+       inkscape:connector-curvature="0"
+       id="path20705"
+       d="m -4828.3859,1059.4148 -28.2893,16.3328"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <path
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 3D TTqqqq.png"
+       inkscape:connector-curvature="0"
+       id="path20707"
+       d="m -4828.3859,1039.4148 -28.2893,16.3328"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <path
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 3D TTqqqq.png"
+       inkscape:connector-curvature="0"
+       id="path20709"
+       d="m -4828.3859,1019.4148 -28.2893,16.3328"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <path
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 3D TTqqqq.png"
+       inkscape:connector-curvature="0"
+       id="path20711"
+       d="m -4828.3859,999.41479 -28.2893,16.33281"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <path
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 3D TTqqqq.png"
+       inkscape:connector-curvature="0"
+       id="path20713"
+       d="m -4828.3859,979.41479 -28.2893,16.3328"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <path
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 3D TTqqqq.png"
+       inkscape:connector-curvature="0"
+       id="path20715"
+       d="m -4828.3859,959.41479 -28.2893,16.3328"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <path
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 3D TTqqqq.png"
+       inkscape:connector-curvature="0"
+       id="path20717"
+       d="m -4828.3859,941.41479 -28.2893,16.3328"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <path
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 3D TTqqqq.png"
+       inkscape:connector-curvature="0"
+       id="path20719"
+       d="m -4828.3859,921.41479 -28.2893,16.3328"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <path
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 3D TTqqqq.png"
+       inkscape:connector-curvature="0"
+       id="path20721"
+       d="m -4828.3859,901.41479 -28.2893,16.3328"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <path
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 3D TTqqqq.png"
+       inkscape:connector-curvature="0"
+       id="path20723"
+       d="m -4828.3859,881.41479 -28.2893,16.3328"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <path
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 3D TTqqqq.png"
+       inkscape:connector-curvature="0"
+       id="path20725"
+       d="m -4828.3859,861.41479 -28.2893,16.3328"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <path
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 3D TTqqqq.png"
+       inkscape:connector-curvature="0"
+       id="path20727"
+       d="m -4828.3859,841.41479 -28.2893,16.3328"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <path
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 3D TTqqqq.png"
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:connector-curvature="0"
+       id="path20729"
+       d="m -4207.8691,1198.4972 -147.0446,0"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.52999997;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker12121)"
+       sodipodi:nodetypes="cc" />
+    <path
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 3D TTqqqq.png"
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:connector-curvature="0"
+       id="path20731"
+       d="m -4207.8691,1145.7435 -147.0446,0"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.52999997;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker11385)"
+       sodipodi:nodetypes="cc" />
+    <path
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 3D TTqqqq.png"
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:connector-curvature="0"
+       id="path20733"
+       d="m -4207.8691,1092.9898 -147.0446,0"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.52999997;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker10655)"
+       sodipodi:nodetypes="cc" />
+    <path
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 3D TTqqqq.png"
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:connector-curvature="0"
+       id="path20735"
+       d="m -4207.8691,1040.2361 -147.0446,0"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.52999997;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker9931)"
+       sodipodi:nodetypes="cc" />
+    <path
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 3D TTqqqq.png"
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:connector-curvature="0"
+       id="path20737"
+       d="m -4207.8691,987.48241 -147.0446,0"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.52999997;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker9213)"
+       sodipodi:nodetypes="cc" />
+    <path
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 3D TTqqqq.png"
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:connector-curvature="0"
+       id="path20739"
+       d="m -4207.8691,934.72871 -147.0446,0"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.52999997;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker13119)"
+       sodipodi:nodetypes="cc" />
+    <path
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 3D TTqqqq.png"
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:connector-curvature="0"
+       id="path20741"
+       d="m -4207.8691,881.97501 -147.0446,0"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.52999997;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker16663)"
+       sodipodi:nodetypes="cc" />
+    <text
+       transform="matrix(0,-1,1,0,0,0)"
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 3D TTqqqq.png"
+       sodipodi:linespacing="125%"
+       id="text20743"
+       y="-4147.6421"
+       x="-1069.8618"
+       style="font-style:normal;font-weight:normal;font-size:54.53916931px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       xml:space="preserve"><tspan
+         y="-4147.6421"
+         x="-1069.8618"
+         id="tspan20745"
+         sodipodi:role="line">q<tspan
+   id="tspan20747"
+   style="font-size:64.99999762%;baseline-shift:sub"> x</tspan><tspan
+   id="tspan20749"
+   style="font-size:64.99999762%;baseline-shift:super" /></tspan></text>
+    <path
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 3D TTqqqq.png"
+       sodipodi:nodetypes="cc"
+       inkscape:connector-curvature="0"
+       id="path20751"
+       d="m -4719.4782,1474.0141 -180.5656,0"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.52999997;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-start:url(#marker19051)" />
+    <text
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 3D TTqqqq.png"
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       sodipodi:linespacing="125%"
+       id="text20753"
+       y="1429.9282"
+       x="-4766.9209"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:44.28239822px;line-height:125%;font-family:sans-serif;-inkscape-font-specification:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       xml:space="preserve"
+       transform="matrix(0.99985332,-0.01712714,0.01712714,0.99985332,0,0)"><tspan
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:50px;font-family:sans-serif;-inkscape-font-specification:sans-serif"
+         y="1429.9282"
+         x="-4766.9209"
+         id="tspan20755"
+         sodipodi:role="line">x</tspan></text>
+    <path
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 3D TTqqqq.png"
+       inkscape:connector-curvature="0"
+       id="path20757"
+       d="m -4901.3088,1452.7307 0,42.5669"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.52999997;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <path
+       sodipodi:nodetypes="cc"
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 3D TTqqqq.png"
+       inkscape:connector-curvature="0"
+       id="path20759"
+       d="m -4900.0438,1541.3516 491.3578,0"
+       style="fill:#000000;fill-rule:evenodd;stroke:#000000;stroke-width:2.29999995;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <path
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 3D TTqqqq.png"
+       sodipodi:nodetypes="cc"
+       inkscape:connector-curvature="0"
+       id="path20761"
+       d="m -4901.3088,1519.0693 0,44.5647"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.52999997;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <path
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 3D TTqqqq.png"
+       sodipodi:nodetypes="cc"
+       inkscape:connector-curvature="0"
+       id="path20763"
+       d="m -4407.421,1519.0693 0,44.5647"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.52999997;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <text
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 3D TTqqqq.png"
+       sodipodi:linespacing="125%"
+       id="text20765"
+       y="1586.9517"
+       x="-4685.8892"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       xml:space="preserve"><tspan
+         y="1586.9517"
+         x="-4685.8892"
+         id="tspan20767"
+         sodipodi:role="line"><tspan
+           id="tspan20769"
+           style="font-size:50px"> L</tspan></tspan></text>
+    <text
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 3D TTqqqq.png"
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       sodipodi:linespacing="125%"
+       id="text20771"
+       y="1215.446"
+       x="-5037.6533"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:44.28239822px;line-height:125%;font-family:sans-serif;-inkscape-font-specification:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       xml:space="preserve"
+       transform="matrix(0.99985332,-0.01712714,0.01712714,0.99985332,0,0)"><tspan
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:44.28239822px;font-family:sans-serif;-inkscape-font-specification:sans-serif"
+         y="1215.446"
+         x="-5037.6533"
+         id="tspan20773"
+         sodipodi:role="line">y</tspan></text>
+    <path
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 3D TTqqqq.png"
+       sodipodi:nodetypes="cc"
+       inkscape:connector-curvature="0"
+       id="path20775"
+       d="m -4970.5626,1261.7953 0,180.5656"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.52999997;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-start:url(#marker19847)" />
+    <path
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 3D TTqqqq.png"
+       inkscape:connector-curvature="0"
+       id="path20777"
+       d="m -4991.8466,1443.6259 42.5674,0"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.52999997;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <path
+       sodipodi:nodetypes="cc"
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 3D TTqqqq.png"
+       inkscape:connector-curvature="0"
+       id="path20779"
+       d="m -5050.3736,785.41304 0,656.94796"
+       style="fill:#000000;fill-rule:evenodd;stroke:#000000;stroke-width:2.29999995;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <path
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 3D TTqqqq.png"
+       sodipodi:nodetypes="cc"
+       inkscape:connector-curvature="0"
+       id="path20781"
+       d="m -5028.0906,785.41304 -44.565,0"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.52999997;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <path
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 3D TTqqqq.png"
+       sodipodi:nodetypes="cc"
+       inkscape:connector-curvature="0"
+       id="path20783"
+       d="m -5028.0906,1443.626 -44.565,0"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.52999997;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <text
+       transform="matrix(0,-1,1,0,0,0)"
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 3D TTqqqq.png"
+       sodipodi:linespacing="125%"
+       id="text20785"
+       y="-5060.728"
+       x="-1146.8015"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       xml:space="preserve"><tspan
+         y="-5060.728"
+         x="-1146.8015"
+         id="tspan20787"
+         sodipodi:role="line"><tspan
+           id="tspan20789"
+           style="font-size:50px"> H</tspan></tspan></text>
+    <path
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 3D TTqqqq.png"
+       inkscape:connector-curvature="0"
+       id="path20791"
+       d="m -4828.3859,823.41479 -28.2893,16.3328"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <path
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 3D TTqqqq.png"
+       inkscape:connector-curvature="0"
+       id="path20793"
+       d="m -4828.3859,803.41479 -28.2893,16.3328"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <path
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 3D TTqqqq.png"
+       inkscape:connector-curvature="0"
+       id="path20795"
+       d="m -4828.3859,783.41479 -28.2893,16.3328"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <path
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 3D TTqqqq.png"
+       inkscape:connector-curvature="0"
+       id="path20797"
+       d="m -4828.3859,763.41479 -28.2893,16.3328"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <path
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 3D TTqqqq.png"
+       inkscape:connector-curvature="0"
+       id="path20799"
+       d="m -4828.3859,743.41479 -28.2893,16.3328"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <path
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 3D TTqqqq.png"
+       inkscape:connector-curvature="0"
+       id="path20801"
+       d="m -4828.3859,723.41479 -28.2893,16.3328"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <path
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 3D TTqqqq.png"
+       inkscape:connector-curvature="0"
+       id="path20803"
+       d="m -4828.3859,703.41479 -28.2893,16.3328"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <path
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 3D TTqqqq.png"
+       inkscape:connector-curvature="0"
+       id="path20805"
+       d="m -4828.3859,683.41478 -28.2893,16.3328"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <path
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 3D TTqqqq.png"
+       sodipodi:nodetypes="cc"
+       inkscape:connector-curvature="0"
+       id="path20807"
+       d="m -4901.4338,783.89031 122.5665,-160.73214"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:7.954;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <path
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 3D TTqqqq.png"
+       inkscape:connector-curvature="0"
+       id="path20809"
+       d="m -4408.686,785.41299 118.5058,-160.57544"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:7.954;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <path
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 3D TTqqqq.png"
+       sodipodi:nodetypes="cccccc"
+       inkscape:connector-curvature="0"
+       id="path20811"
+       d="m -4782.2261,624.83755 492.0459,0 0,658.71285 -118.5058,0 0,0 0,0"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:7.954;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <path
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 3D TTqqqq.png"
+       inkscape:connector-curvature="0"
+       id="path20813"
+       d="m -4782.2263,785.41299 2e-4,-160.57544"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    <path
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 3D TTqqqq.png"
+       inkscape:connector-curvature="0"
+       id="path20815"
+       d="m -4782.2261,1283.5504 -118.5058,160.5755"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:36, 36;stroke-dashoffset:0;stroke-opacity:1" />
+    <path
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 3D TTqqqq.png"
+       inkscape:connector-curvature="0"
+       id="path20817"
+       d="m -4782.2263,785.41299 2e-4,498.13741"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:36, 36;stroke-dashoffset:0;stroke-opacity:1" />
+    <path
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 3D TTqqqq.png"
+       inkscape:connector-curvature="0"
+       id="path20819"
+       d="m -4782.2261,1283.5504 373.5401,0"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:36, 36;stroke-dashoffset:0;stroke-opacity:1" />
+    <g
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 3D TTqqqq.png"
+       transform="translate(4970.1722,585.33123)"
+       id="g20821">
+      <path
+         style="fill:#000000;fill-rule:evenodd;stroke:#000000;stroke-width:2.29999995;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="m -9975.7039,113.73486 122.7455,-156.924945"
+         id="path20823"
+         inkscape:connector-curvature="0"
+         inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/src/miscellaneous/images/1D_Line_Pennes_Problem_Simplified.png"
+         inkscape:export-xdpi="900"
+         inkscape:export-ydpi="900"
+         sodipodi:nodetypes="cc"
+         inkscape:transform-center-x="-151.41434"
+         inkscape:transform-center-y="-194.5181" />
+      <path
+         style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.52999997;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="m -9994.0043,100.96002 35.0374,27.53887"
+         id="path20825"
+         inkscape:connector-curvature="0"
+         sodipodi:nodetypes="cc"
+         inkscape:transform-center-x="1.1854483"
+         inkscape:transform-center-y="-0.36718224" />
+      <path
+         style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.52999997;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="m -9869.5713,-57.668066 35.0375,27.53892"
+         id="path20827"
+         inkscape:connector-curvature="0"
+         sodipodi:nodetypes="cc"
+         inkscape:transform-center-x="-304.01418"
+         inkscape:transform-center-y="-388.66895" />
+    </g>
+    <text
+       transform="matrix(0.6179532,-0.78621488,0.78621488,0.6179532,0,0)"
+       inkscape:transform-center-y="-162.1658"
+       inkscape:transform-center-x="-169.29099"
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 3D TTqqqq.png"
+       sodipodi:linespacing="125%"
+       id="text20829"
+       y="-3534.2961"
+       x="-3583.3398"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       xml:space="preserve"><tspan
+         y="-3534.2961"
+         x="-3583.3398"
+         id="tspan20831"
+         sodipodi:role="line"><tspan
+           id="tspan20833"
+           style="font-size:50px"> T<tspan
+   id="tspan20835"
+   style="font-size:64.99999762%;baseline-shift:sub"> z</tspan></tspan></tspan></text>
+    <text
+       inkscape:transform-center-y="0.44969926"
+       inkscape:transform-center-x="0.47651279"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 3D TTqqqq.png"
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       sodipodi:linespacing="125%"
+       id="text20837"
+       y="498.16147"
+       x="-4866.9673"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:44.28239822px;line-height:125%;font-family:sans-serif;-inkscape-font-specification:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       xml:space="preserve"
+       transform="matrix(0.99975826,-0.02198673,0.02198673,0.99975826,0,0)"><tspan
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:44.28239822px;font-family:sans-serif;-inkscape-font-specification:sans-serif"
+         y="498.16147"
+         x="-4866.9673"
+         id="tspan20839"
+         sodipodi:role="line">z</tspan></text>
+    <g
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 3D TTqqqq.png"
+       transform="translate(5079.1972,669.79236)"
+       id="g20841">
+      <path
+         style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.52999997;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-start:url(#marker6444-0-0-9-4-7-5-91-9)"
+         d="M -9901.5613,-61.134677 -10013.897,80.23222"
+         id="path20843"
+         inkscape:connector-curvature="0"
+         sodipodi:nodetypes="cc"
+         inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/src/miscellaneous/images/3D_Tetrahedron_Diffusion_Problem.png"
+         inkscape:export-xdpi="300"
+         inkscape:export-ydpi="300"
+         inkscape:transform-center-x="-56.264431"
+         inkscape:transform-center-y="-71.794484" />
+      <path
+         style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.52999997;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="m -10031.348,67.981123 33.3266,26.482397"
+         id="path20845"
+         inkscape:connector-curvature="0"
+         inkscape:transform-center-x="0.69086903"
+         inkscape:transform-center-y="-0.12093356" />
+    </g>
+    <path
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 3D TTqqqq.png"
+       inkscape:connector-curvature="0"
+       id="path20847"
+       d="m -4408.686,1444.1259 118.5058,-160.5755"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:7.954;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <path
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 3D TTqqqq.png"
+       inkscape:connector-curvature="0"
+       id="path20849"
+       d="m -4848.7519,1168.7583 -16.3328,-28.2893"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <path
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 3D TTqqqq.png"
+       inkscape:connector-curvature="0"
+       id="path20851"
+       d="m -4828.7519,1168.7583 -16.3328,-28.2893"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <path
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 3D TTqqqq.png"
+       inkscape:connector-curvature="0"
+       id="path20853"
+       d="m -4808.7519,1168.7583 -16.3328,-28.2893"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <path
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 3D TTqqqq.png"
+       inkscape:connector-curvature="0"
+       id="path20855"
+       d="m -4788.7519,1168.7583 -16.3328,-28.2893"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <path
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 3D TTqqqq.png"
+       inkscape:connector-curvature="0"
+       id="path20857"
+       d="m -4768.7519,1168.7583 -16.3328,-28.2893"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <path
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 3D TTqqqq.png"
+       inkscape:connector-curvature="0"
+       id="path20859"
+       d="m -4748.7519,1168.7583 -16.3328,-28.2893"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <path
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 3D TTqqqq.png"
+       inkscape:connector-curvature="0"
+       id="path20861"
+       d="m -4728.7519,1168.7583 -16.3328,-28.2893"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <path
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 3D TTqqqq.png"
+       inkscape:connector-curvature="0"
+       id="path20863"
+       d="m -4710.7519,1168.7583 -16.3328,-28.2893"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <path
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 3D TTqqqq.png"
+       inkscape:connector-curvature="0"
+       id="path20865"
+       d="m -4690.7519,1168.7583 -16.3328,-28.2893"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <path
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 3D TTqqqq.png"
+       inkscape:connector-curvature="0"
+       id="path20867"
+       d="m -4670.7519,1168.7583 -16.3328,-28.2893"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <path
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 3D TTqqqq.png"
+       inkscape:connector-curvature="0"
+       id="path20869"
+       d="m -4650.7519,1168.7583 -16.3328,-28.2893"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <path
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 3D TTqqqq.png"
+       inkscape:connector-curvature="0"
+       id="path20871"
+       d="m -4630.7519,1168.7583 -16.3328,-28.2893"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <path
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 3D TTqqqq.png"
+       inkscape:connector-curvature="0"
+       id="path20873"
+       d="m -4610.7519,1168.7583 -16.3328,-28.2893"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <path
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 3D TTqqqq.png"
+       inkscape:connector-curvature="0"
+       id="path20875"
+       d="m -4592.7519,1168.7583 -16.3328,-28.2893"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <path
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 3D TTqqqq.png"
+       inkscape:connector-curvature="0"
+       id="path20877"
+       d="m -4572.7519,1168.7583 -16.3328,-28.2893"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <path
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 3D TTqqqq.png"
+       inkscape:connector-curvature="0"
+       id="path20879"
+       d="m -4552.7519,1168.7583 -16.3328,-28.2893"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <path
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 3D TTqqqq.png"
+       inkscape:connector-curvature="0"
+       id="path20881"
+       d="m -4532.7519,1168.7583 -16.3328,-28.2893"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <path
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 3D TTqqqq.png"
+       inkscape:connector-curvature="0"
+       id="path20883"
+       d="m -4512.7519,1168.7583 -16.3328,-28.2893"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <path
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 3D TTqqqq.png"
+       inkscape:connector-curvature="0"
+       id="path20885"
+       d="m -4492.7519,1168.7583 -16.3328,-28.2893"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <path
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 3D TTqqqq.png"
+       inkscape:connector-curvature="0"
+       id="path20887"
+       d="m -4472.7519,1168.7583 -16.3328,-28.2893"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <path
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 3D TTqqqq.png"
+       inkscape:connector-curvature="0"
+       id="path20889"
+       d="m -4452.7519,1168.7583 -16.3328,-28.2893"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <path
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 3D TTqqqq.png"
+       inkscape:connector-curvature="0"
+       id="path20891"
+       d="m -4432.7519,1168.7583 -16.3328,-28.2893"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <path
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 3D TTqqqq.png"
+       inkscape:connector-curvature="0"
+       id="path20893"
+       d="m -4412.7519,1168.7583 -16.3328,-28.2893"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <path
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 3D TTqqqq.png"
+       inkscape:connector-curvature="0"
+       id="path20895"
+       d="m -4392.7519,1168.7583 -16.3328,-28.2893"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <path
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 3D TTqqqq.png"
+       inkscape:connector-curvature="0"
+       id="path20897"
+       d="m -4888.7519,1168.7583 -16.3328,-28.2893"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <path
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 3D TTqqqq.png"
+       inkscape:connector-curvature="0"
+       id="path20899"
+       d="m -4868.7519,1168.7583 -16.3328,-28.2893"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <path
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 3D TTqqqq.png"
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:connector-curvature="0"
+       id="path20901"
+       d="m -4419.682,936.85983 -107.1663,147.04457"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.52999997;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker15891)"
+       sodipodi:nodetypes="cc" />
+    <path
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 3D TTqqqq.png"
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:connector-curvature="0"
+       id="path20903"
+       d="M -4472.4357,936.85983 -4579.602,1083.9044"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.52999997;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker15125)"
+       sodipodi:nodetypes="cc" />
+    <path
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 3D TTqqqq.png"
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:connector-curvature="0"
+       id="path20905"
+       d="m -4525.1894,936.85983 -107.1663,147.04457"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.52999997;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker14365)"
+       sodipodi:nodetypes="cc" />
+    <path
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 3D TTqqqq.png"
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:connector-curvature="0"
+       id="path20907"
+       d="m -4577.9431,936.85983 -107.1663,147.04457"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.52999997;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker13611)"
+       sodipodi:nodetypes="cc" />
+    <path
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 3D TTqqqq.png"
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:connector-curvature="0"
+       id="path20909"
+       d="m -4630.6968,936.85983 -107.1663,147.04457"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.52999997;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker12863)"
+       sodipodi:nodetypes="cc" />
+    <text
+       inkscape:export-ydpi="300"
+       inkscape:export-xdpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 3D TTqqqq.png"
+       sodipodi:linespacing="125%"
+       id="text20911"
+       y="885.30304"
+       x="-4578.3438"
+       style="font-style:normal;font-weight:normal;font-size:54.53916931px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       xml:space="preserve"><tspan
+         id="tspan20913"
+         y="885.30304"
+         x="-4578.3438"
+         sodipodi:role="line">q<tspan
+   id="tspan20915"
+   style="font-size:64.99999762%;baseline-shift:sub"> z</tspan><tspan
+   id="tspan20917"
+   style="font-size:64.99999762%;baseline-shift:super" /></tspan></text>
   </g>
 </svg>
