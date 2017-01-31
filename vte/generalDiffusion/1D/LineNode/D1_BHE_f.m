@@ -26,7 +26,7 @@ function [T, qy, phi_a, qy_phi_a, phi_b_tau_b, qy_phi_b_tau_b] = ...
 % pb (blood's density, kg/m3)
 % cp (blood's specific heat, J/K-kg)
 % Tb (blood's temperature, oC)
-% Qm (tissue's metabolic heat, W/m3)
+% Qmet (tissue's metabolic heat, W/m3)
 % minf (number of repetition of the index m). If in doubt, chose 50 for
 %     fast (and still accurate) results or 500 for more accurate results.
 %
