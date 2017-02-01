@@ -62,7 +62,7 @@ You can modify the code and your modifications can be (if you want to) included 
 
 ## Usage
 
-This software does not provide a graphical user interface (yet). Everything is controlled via script and the solver is called via terminal. To get start, you may want to go to [Validations, Tutorials, and Examples](https://hugomilan.github.io/tlmbht/vte/index.html) first. You will need [Octave](https://www.gnu.org/software/octave/) (free) or [Matlab](https://www.mathworks.com/products/matlab.html) (paid) to plot the results and see the comparison with the analytical results.
+This software does not provide a graphical user interface (yet). Everything is controlled via script and the solver is called via terminal. To get start, you may want to go to [Tutorials, examples, and validations](https://hugomilan.github.io/tlmbht/vte/index.html) first. You will need [Octave](https://www.gnu.org/software/octave/) (free) or [Matlab](https://www.mathworks.com/products/matlab.html) (paid) to plot the results and see the comparison with the analytical results.
 
 Refer to the case.tlm file or to the link [How to configure a case file](https://hugomilan.github.io/tlmbht/conf/case-file.html) to see instructions on how to configure the solver.
 
