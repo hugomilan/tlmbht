@@ -5,6 +5,9 @@
 layout: page
 ---
 
+[![DOI](https://zenodo.org/badge/61003231.svg)](https://zenodo.org/badge/latestdoi/61003231)
+
+
 ## Welcome to the TLMBHT website!
 <span style="color:#697473">Jan 30, 2017</span> by [**Hugo Milan**](https://hugomilan.github.io/)
 
