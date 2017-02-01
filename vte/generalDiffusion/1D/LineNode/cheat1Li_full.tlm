@@ -697,10 +697,10 @@ Equation
     // steady: steady state solution;
     // dynamic: dynamic simulation
 
-    time-step = 1e-7; // Required if "solve = dynamic". (s) time-step in seconds. 
+    time-step = 1e-3; // Required if "solve = dynamic". (s) time-step in seconds. 
     // This is the time-step between each calculation.
 
-    time-jump = 1000; // not required.
+    time-jump = 100; // not required.
     // Must be an integer greater than zero. If greater than 1, the algorithm 
     // will group the amount of time-steps indicated in time-jump and solve them at once.
     // For example, if time-jump = 11 and time-step = 0.01 s, the effective time-step will be
@@ -711,7 +711,7 @@ Equation
     // will not be calculated. Nonetheless, intermediary results can always be 
     // obtained using interpolations (not implemented).
 
-    final time = 1e-3; // Required if solve = dynamic. (s) end time for simulation in seconds. 
+    final time = 1; // Required if solve = dynamic. (s) end time for simulation in seconds. 
 
 
     save = scalar; // indicates what to save.
@@ -749,9 +749,9 @@ Material
     // It can be a vector (as [33 55 11]). If it is a vector, the parameters here
     // will be assigned to all the numbers.
 
-     density = 2700; // (kg/m3) required;
-     specific heat = 900; // (J/(K-kg)) required;
-     thermal conductivity = 205; // (W/(K-m)) required;
+     density = 1200; // (kg/m3) required;
+     specific heat = 3200; // (J/(K-kg)) required;
+     thermal conductivity = 0.3; // (W/(K-m)) required;
     //
      source = 5000; // (W/m3) not required.
     //      The default value is 0.
@@ -793,7 +793,7 @@ Boundary
 // It can be a vector (like [33 55 11]). If it is a vector, the parameters here
 // will be assigned to all the numbers.
 
-    Temperature = 1000; // (oC). This assumes a constant temperature at the
+    Temperature = 200; // (oC). This assumes a constant temperature at the
 // boundary. It cannot be used in conjunction with heat flux, convection, or radiation.
 }
 

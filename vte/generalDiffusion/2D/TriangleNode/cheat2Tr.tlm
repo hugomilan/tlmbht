@@ -15,9 +15,9 @@ Equation
     equation name = heat_name;
     dimensions = 2;
     Solve = dynamic;
-    time-step = 1e-7;
-    time-jump = 1000;
-    final time = 1e-3;
+    time-step = 1e-3;
+    time-jump = 100;
+    final time = 1;
     save = scalar;
     save = scalar between;
     save = vector;
@@ -27,9 +27,9 @@ Material
 {
     equation = heat_name;
     number =  7;
-    density = 2700;
-    specific heat = 900;
-    thermal conductivity = 205;
+    density = 1200;
+    specific heat = 3200;
+    thermal conductivity = 0.3;
     source = 5000;
     initial temperature = 100;
 }
@@ -45,12 +45,12 @@ Boundary
 {
     equation = heat_name;
     number = 11;
-    Temperature = 1000;
+    Temperature = 200;
 }
 
 Boundary
 {
     equation = heat_name;
     number = 8;
-    Heat flux = 1e8;
+    Heat flux = 1e4;
 }

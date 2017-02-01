@@ -7,13 +7,12 @@ cheat1Li
 
 % Inputs
 Tc = 100;
-Ts = 1000;
+Ts = 200;
 
 % Characteristics for the mediums.
-ro = 2700; % tissue density (kg/m3)
-cp = 900; % specific heat (J/(K-kg))
-k = 205; % thermal conductivity (W/(K-m))
-Ti = 100; % initial temperature
+ro = 1200; % tissue density (kg/m3)
+cp = 3200; % specific heat (J/(K-kg))
+k = 0.3; % thermal conductivity (W/(K-m))
 
 Qext = 5000; % internal heat generation (W/m3)
 

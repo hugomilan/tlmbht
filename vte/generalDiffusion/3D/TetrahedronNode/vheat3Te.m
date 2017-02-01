@@ -6,15 +6,14 @@ more off %turns pagination off
 cheat3Te
 
 Tc = 100;
-Ts = 100;
-qfluxX = 0e7;
-qfluxZ = 0e7;
+Ts = 200;
+qfluxX = 1e4;
+qfluxZ = 2e4;
 
 % Characteristics for the mediums. They must be vectors
-ro = 2700; % tissue density (kg/m3)
-cp = 900; % specific heat (J/(K-kg))
-k = 205; % thermal conductivity (W/(K-m))
-Ti = 100; % initial temperature
+ro = 1200; % tissue density (kg/m3)
+cp = 3200; % specific heat (J/(K-kg))
+k = 0.3; % thermal conductivity (W/(K-m))
 
 Qext = 5000; % internal heat generation (W/m3)
 
@@ -38,9 +37,9 @@ time_Ana = i0*times_1(1);
 disp([' '; 'Time ' num2str(time_Ana) 's (step ' num2str(i0) ')'; ' '])
 temp_message = 'Errors and differences: ';
 
-[Ttemp, qxAnatemp, qyAnatemp, qzAnatemp] = D3_BHE_f(Points_Output_1(1:number_Points,1)',  ...
+[Ttemp, qxAnatemp, qyAnatemp, qzAnatemp] = D3_HEAT_f(Points_Output_1(1:number_Points,1)',  ...
              Points_Output_1(1:number_Points,2)', Points_Output_1(1:number_Points,3)', 0.75e-3, 1e-3, 0.375e-3, time_Ana, ...
-            qfluxX, qfluxZ, Ts, Tc, k, ro, cp, 0, 1e3, 1e3, 0, Qext, 50, 50, 50, 2);
+            Ts, Tc, qfluxX, qfluxZ, k, ro, cp, Qext, 50, 100, 50, 100, 50);
              
              if ( save_1(1) || save_1(2) )
               if (figure_defined == 0)

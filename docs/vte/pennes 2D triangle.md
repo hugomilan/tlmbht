@@ -1,18 +1,40 @@
-Here, I will walk you through in how to use the TLM method to solve the Pennes equation in 2D with the element Triangle and we will also validated the tlmbht predictions using an analytical solution.
+---
+# You don't need to edit this file, it's empty on purpose.
+# Edit theme's home layout instead if you wanna make some changes
+# See: https://jekyllrb.com/docs/themes/#overriding-theme-defaults
+layout: page_eqAMS_Disqus
+title: Validation of TLMBHT to solve the Pennes equation in time-domain for two-dimensions using triangular elements
+permalink: vte/pennes-2D-Tr.html
+---
+
+<span style="color:#697473">Jan 31, 2017</span> by [**Hugo Milan**](https://hugomilan.github.io/)
+
+Here, I will walk you through in how to use the TLM method to solve the Pennes equation in 2D with the element Triangle by comparing the tlmbht predictions with [analytical solution]({{ site.baseurl }}{% link theory/ana/pennes 2D TTqq.md %}) predictions.
 
 Everything you need is available in the folder /vte/generalDiffusion/2D/TriangleNode. This folder was downloaded when you downloaded the source files. If you did not download the source files, you can download it from [here](https://github.com/hugomilan/tlmbht/tree/master/vte/generalDiffusion/2D/TriangleNode). If you do not want to, you do not need to download or install anything--all the relevant outputs will be shown here. If you want to download tlmbht, go to [releases](https://github.com/hugomilan/tlmbht/releases) and get the most updated version of tlmbht.
 
-In this validation, we will follow the 5 steps [showed here](https://github.com/hugomilan/tlmbht/wiki).
+In this validation, we will follow the 5 steps [showed here]({{ site.baseurl }}{% link vte/how tlmbht.md %}).
 
 ### 1) Create the geometry of the problem.
 
-We are building up from the problem description of the [validation for Pennes 1D equation with line elements](https://github.com/hugomilan/tlmbht/wiki/Validating-Pennes-Equation-in-1D-with-line-elements). Here, we will consider a simple two-dimensional problem that has analytical solution. In this problem, we will  effect of blood perfusion, metabolic heat generation, two constant temperatures boundary conditions (constant core temperature T<sub>C</sub>, and constant surface temperature T<sub>S</sub>), one constant heat flux boundary condition (q<sup>''</sup>), and one adiabatic boundary condition. This problem may represent the increase in temperature when the human skin gets in contact with two hot surface (where one we simplify as a fixed temperature T<sub>S</sub> and the other we considered as a constant heat flux q<sup>''</sup>). The problem geometry is shown below.
+We are building up from the problem description of the [validation for Pennes 1D equation with line elements]({{ site.baseurl }}{% link vte/pennes 1D line.md %}). Here, we will consider a simple two-dimensional problem that has analytical solution. In this problem, we will include effect of blood perfusion, metabolic heat generation, two constant temperatures boundary conditions (constant core temperature T<sub>C</sub>, and constant surface temperature T<sub>S</sub>), one constant heat flux boundary condition (q<sub>x</sub>), and one adiabatic boundary condition. This problem may represent the increase in temperature when the human skin gets in contact with two hot surface (where one we simplify as a fixed temperature T<sub>S</sub> and the other we considered as a constant heat flux q<sub>x</sub>). The problem geometry is shown below.
 
-![Geometry of the problem used to validate the triangle element for the Pennes equation in 2D](https://github.com/hugomilan/tlmbht/blob/master/docs/_includes/images/2D_Triangle_Pennes_Problem.png "Geometry of the problem used to validate the triangle element for the Peat equation in 2D")
+<img src="{{ site.baseurl }}/assets/images/vte/2D_Triangle_Pennes_Problem.png" alt="Geometry of the problem used to validate the triangle element for the Pennes equation in 2D" width="500">
+
+This geometry is a plate in a three-dimensional space, as you can see in the three-dimensional model below.
+<div class="sketchfab-embed-wrapper"><iframe width="640" height="480" src="https://sketchfab.com/models/d8000a11836843989111d9b9b7c03b0f/embed" frameborder="0" allowvr allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" onmousewheel=""></iframe>
+
+<p style="font-size: 13px; font-weight: normal; margin: 5px; color: #4A4A4A;">
+    <a href="https://sketchfab.com/models/d8000a11836843989111d9b9b7c03b0f?utm_medium=embed&utm_source=website&utm_campain=share-popup" target="_blank" style="font-weight: bold; color: #1CAAD9;">Plate 0.75 x 1</a>
+    by <a href="https://sketchfab.com/hugomilan?utm_medium=embed&utm_source=website&utm_campain=share-popup" target="_blank" style="font-weight: bold; color: #1CAAD9;">hugomilan</a>
+    on <a href="https://sketchfab.com?utm_medium=embed&utm_source=website&utm_campain=share-popup" target="_blank" style="font-weight: bold; color: #1CAAD9;">Sketchfab</a>
+</p>
+</div>
+
 
 Now that we defined the problem, we need to draw the problem geometry using a format that tlmbht knows how to read. This was already done for you. The geometry of the problem was created using [gmsh](http://www.gmsh.info). The script file is plate_4BC.geo. Note in the script file that we put 'Physical tags' in the Surface geometry and in the Lines. We did this so that we can tell tlmbht which tag is for material (number 7) and which tag is for boundary (number 8, 9, 10, and 11).
 
-![Geometry of the problem drawn in gmsh](https://github.com/hugomilan/tlmbht/blob/master/docs/_includes/images/2D_Triangle_Geometry.png "Geometry of the problem draw in gmsh")
+![Geometry of the problem drawn in gmsh]({{ site.baseurl }}/assets/images/vte/2D_Triangle_Geometry.png "Geometry of the problem draw in gmsh")
 
 Now we are ready to create the mesh.
 
@@ -20,7 +42,7 @@ Now we are ready to create the mesh.
 
 The mesh was easily created using gmsh/Mesh/2D and Refined by Splitting. The mesh file (already converted to tlmbht native mesh format) is plate_4BC_628e.tbn. It contains 347 points (vertices), 64 line segments, and 628 triangles (elements).
 
-![Triangular mesh of the problem geometry](https://github.com/hugomilan/tlmbht/blob/master/docs/_includes/images/2D_Triangle_Mesh.png "Triangular mesh of the problem geometry")
+![Triangular mesh of the problem geometry]({{ site.baseurl }}/assets/images/vte/2D_Triangle_Mesh.png "Triangular mesh of the problem geometry")
 
 Now we are ready to create the description of the problem
 
@@ -30,7 +52,7 @@ The description of the problem is in the file cpennes2Tr.tlm. Here, I will expla
 
 #### Explanation of this case file
 
-The case file is structured in headers and I will go over every header in the file cpennes2Tr.tlm. This script file is similar to the script file for [validation for Pennes 1D equation with line elements](https://github.com/hugomilan/tlmbht/wiki/Validating-Pennes-Equation-in-1D-with-line-elements). The differences are the inclusion of one additional boundary condition and changing to two-dimensions.
+The case file is structured in headers and I will go over every header in the file cpennes2Tr.tlm. This script file is similar to the script file for [validation for Pennes 1D equation with line elements]({{ site.baseurl }}{% link vte/pennes 1D line.md %}). The differences are the inclusion of one additional boundary condition and changing to two-dimensions.
 
 The first header you see (Simulation), is used to configure parameters common to the equations of the problem. In this case, we are only configuring the output extension to the 'm' (Octave/Matlab m format) so that it is easier to run the validation algorithm.
 
@@ -93,17 +115,17 @@ The Boundary header defines the boundary conditions. You can have different Boun
     {
         equation = BHE;
         number = 11;
-        Temperature = 150;
+        Temperature = 100;
     }
 
     Boundary
     {
         equation = BHE;
         number = 8;
-        Heat flux = 1e5;
+        Heat flux = 1e4;
     }
 
-The file cpennes2Tr_full.tlm contains additional explanation about the input. If you want more information in how to configure the case file, go to [How to configure a case file.](https://github.com/hugomilan/tlmbht/wiki/How-to-configure-a-case-file)
+The file cpennes2Tr_full.tlm contains additional explanation about the input. If you want more information in how to configure the case file, go to [How to configure a case file.]({{ site.baseurl }}{% link vte/configure case file.md %})
 
 ### 4) Solve the problem.
 
@@ -115,13 +137,13 @@ Now we are ready to visualize the output and compare the TLM predictions with an
 
 ### 5) Visualize the output.
 
-After you have run tlmbht, it created the output file cpennes2Tr.m. In this tutorial, you do not need to worry about this file. We will run a script that automatically loads the data into Octave/Matlab. The script is in the file vpennes2Tr.m, which calls the analytical solver function D2_BHE_f.m.
+After you have run tlmbht, it created the output file cpennes2Tr.m. In this tutorial, you do not need to worry about this file. We will run a script that automatically loads the data into Octave/Matlab. The script is in the file vpennes2Tr.m, which calls the analytical solver function D2_BHE_f.m ([click here to read more about the analytical solution and how to use this function]({{ site.baseurl }}{% link theory/ana/pennes 2D TTqq.md %})).
 
-This part should be as simple as opening vpennes2Tr.m in Octave/Matlab and running it (press key F5). It will show you two plots and textual information. The figure below shows the two plots and part of the textual information. Temperature is shown in the left figure and heat flux is shown on the right figure. The analytical predictions are shown in blue, the tlmbht predictions are shown in red, and the green shows the difference of the calculated heat fluxes. In the temperature plots, asterisks represent temperatures calculated at the center of the TLM nodes and the circles represent the temperatures calculated between nodes. You can see that the predictions are almost identical, which you can confirm by looking at the textual information that tells you that the mean temperature error was 0.81 % and the mean heat flux difference was 2202 W/m<sup>2</sup> (which correspond to a fraction of 0.02 of the input heat flux). In this problem, the mean heat flux error is not a viable validation variable because the heat flux is close to zero in some parts of the mesh and, hence, very small differences yields very large percentage errors.
+This part should be as simple as opening vpennes2Tr.m in Octave/Matlab and running it (press key F5). It will show you two plots and textual information. The figure below shows the two plots and part of the textual information. Temperature is shown in the left figure and heat flux is shown on the right figure. The analytical predictions are shown in blue, the tlmbht predictions are shown in red, and the green shows the difference of the calculated heat fluxes. In the temperature plots, asterisks represent temperatures calculated at the center of the TLM nodes and the circles represent the temperatures calculated between nodes. You can see that the predictions are almost identical, which you can confirm by looking at the textual information that tells you that the mean temperature error was 0.37 % and the mean heat flux difference was 830 W/m<sup>2</sup> (which correspond to a fraction of 0.08 of the input heat flux). In this problem, the mean heat flux error is not a viable validation variable because the heat flux is close to zero in some parts of the mesh and, hence, very small differences yields very large percentage errors.
 
-![Predictions using tlmbht with triangles vs. predictions using analytical solution for the 2D problem](https://github.com/hugomilan/tlmbht/blob/master/docs/_includes/images/2D_Triangle_Pennes_Result.png "Predictions using tlmbht with triangles vs. predictions using analytical solution for the 2D problem")
+![Predictions using tlmbht with triangles vs. predictions using analytical solution for the 2D problem]({{ site.baseurl }}/assets/images/vte/2D_Triangle_Pennes_Result.png "Predictions using tlmbht with triangles vs. predictions using analytical solution for the 2D problem")
 
-You are not satisfied with this accuracy? Well... this is a numerical method; we will never get the same exact numbers as the analytical solution gives. Besides, this analytical solution is based on a infinity sum and, by default, the script vheat1Li.m only considers the first 50 terms. If you insist, you can try to increase the number of terms in the analytical solution. Then, as it is true for numerical methods, you can try to increase the number of elements and/or decrease the time-step. These changes will increase the computational time but also increase the accuracy.
+You are not satisfied with this accuracy? Well... this is a numerical method; we will never get the same exact numbers as the analytical solution gives. Besides, this analytical solution is based on a infinity sum and, by default, the script vpennes2Tr.m considers up to the first 100 terms. If you insist, you can try to increase the number of terms in the analytical solution. Then, as it is true for numerical methods, you can try to increase the number of elements and/or decrease the time-step. These changes will increase the computational time but also increase the accuracy.
 
 ### Done!
 
@@ -129,4 +151,7 @@ I hope you have enjoyed this validation section! You may now try to change the c
 
 Remember: you are using a powerful numerical solver. You do not need to be constrained by solutions that can be solved analytically. Explore! Try different boundary conditions, include more materials, etc. Make this problem more realistic!
 
-If you want to, you can move to the [validation for Pennes 3D.](https://github.com/hugomilan/tlmbht/wiki/Validating-Pennes-Equation-in-3D-with-tetrahedron-elements)
+Now, you can go to:
+
+* [Tutorials, examples, and validations]({{ site.baseurl }}{% link vte/index.md %})
+* [Validation in three-dimensions of Pennes equation using the element tetrahedron]({{ site.baseurl }}{% link vte/pennes 3D tetrahedron.md %})

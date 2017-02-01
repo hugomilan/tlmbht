@@ -6,13 +6,12 @@ more off %turns pagination off
 cdiff1Li
 
 % Inputs
-mc = 100;
-minf = 1;
+mc = 20;
+minf = 50;
 
 % Characteristics for the mediums.
-diffusionCoefficient = 1e-8; 
-m0 = mc; % initial value
-source = 10;
+diffusionCoefficient = 1e-9;
+source = 0.1;
 
 % last position that has temperature values
 number_Temp = save_1(1)*numbers_1(1) + save_1(2)*numbers_1(3);

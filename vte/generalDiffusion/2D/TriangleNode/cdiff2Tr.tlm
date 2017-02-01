@@ -17,9 +17,9 @@ Equation
     dimensions = 2;
     method = tlm;
     Solve = dynamic;
-    time-step = 1e-3;
-    time-jump = 250;
-    final time = 5;
+    time-step = 1e-2;
+    time-jump = 500;
+    final time = 50;
     save = scalar;
     save = scalar between;
     save = vector;
@@ -29,28 +29,28 @@ Material
 {
     equation = diffusion_name;
     number =  7;
-    diffusion coefficient = 1e-8;
-    source = 10;
-    initial scalar = 100;
+    diffusion coefficient = 1e-9;
+    source = 0.1;
+    initial scalar = 20;
 }
 
 Boundary
 {
     equation = diffusion_name;
     number = 10;
-    scalar = 100;
+    scalar = 20;
 }
 
 Boundary
 {
     equation = diffusion_name;
     number = 11;
-    scalar = 1;
+    scalar = 50;
 }
 
 Boundary
 {
     equation = diffusion_name;
     number = 8;
-    flux = 5e-3;
+    flux = 1e-5;
 }

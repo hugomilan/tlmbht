@@ -7,7 +7,7 @@ cpennes1Li
 
 % Inputs
 Tc = 37;
-Ts = 150;
+Ts = 100;
 
 % Characteristics for the mediums.
 ro = 1200; % tissue density (kg/m3)

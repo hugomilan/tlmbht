@@ -3,11 +3,11 @@
 # Edit theme's home layout instead if you wanna make some changes
 # See: https://jekyllrb.com/docs/themes/#overriding-theme-defaults
 layout: page_eqAMS_Disqus
+title: Validation of TLMBHT to solve the Diffusion equation in time-domain for one-dimension using Line elements
 permalink: vte/diff-1D-line.html
 ---
 
-# Validation of the TLMBHT to solve the diffusion equation in 1D using the element line
-<span style="color:#697473">Jan 30, 2017</span> by [**Hugo Milan**](https://hugomilan.github.io/)
+<span style="color:#697473">Jan 31, 2017</span> by [**Hugo Milan**](https://hugomilan.github.io/)
 
 Here, I will walk you through in how to validate the TLM method to solve the Diffusion equation in 1D with the element Line by comparing the tlmbht predictions with [analytical solution]({{ site.baseurl }}{% link theory/ana/heat 1D TT.md %}) predictions. 
 
@@ -19,7 +19,7 @@ In this validation, we will follow the 5 steps [showed here]({{ site.baseurl }}{
 
 We will solve a simple one-dimensional problem that has analytical solution. In this problem, we will consider the diffusion of a concentration, include a source of concentration, and two constant concentration boundary conditions (constant core concentration \\(C_C\\), and constant surface concentration \\(C_S\\)). The problem geometry is shown below.
 
-![Geometry of the problem used to validate the line element for the diffusion equation in 1D]({{ site.baseurl }}/assets/images/vte/1D_Line_Diffusion_Problem.png "Geometry of the problem used to validate the line element for the diffusion equation in 1D")
+<img src="{{ site.baseurl }}/assets/images/vte/1D_Line_Diffusion_Problem.png" alt="Geometry of the problem used to validate the line element for the diffusion equation in 1D" width="300">
 
 Now that we defined the problem, we need to draw the problem geometry using a format that tlmbht knows how to read. This was already done for you. The geometry of the problem was created using [gmsh](http://www.gmsh.info). The script file is line_2BC.geo. Note in the script file that we chose different sizes for the points (the last value in the Points' line). This will make a mesh of line elements that differ in size. You can also see in the script file that we put 'Physical tags' in the Line geometry and in the Points. We did this so that we can tell tlmbht which tag is for material (number 10) and which tag is for boundary (number 20 and 21).
 
@@ -56,7 +56,7 @@ The Mesh header contains information about the mesh. Here we tell the software w
         input format = tlmtbn;
     }
 
-The Equation header tells the software what equation it should solve and how. You can have different Equations headers to defined different equations being solved simultaneously in a multi-physical problem. In the Equation header, we define the type of equation and give it a name. The name is essential to link what is in the Equation header with what is in the Material and Boundary headers. Then, we define the dimension of the problem and tell tlmbht to solve this problem in the time-domain ("Solve = dynamic"). Since we are solving a time-domain problem, we need to define the time-step and the final simulation time. The "time-jump" is a configuration that tells tlmbht after how many time-steps it should save the output data (which is defined in the "save" options). Here, we are saving at every 250 time-steps, which is equivalent to saving at every 0.25 s. Note that these 250 time-steps are all solved.
+The Equation header tells the software what equation it should solve and how. You can have different Equations headers to defined different equations being solved simultaneously in a multi-physical problem. In the Equation header, we define the type of equation and give it a name. The name is essential to link what is in the Equation header with what is in the Material and Boundary headers. Then, we define the dimension of the problem and tell tlmbht to solve this problem in the time-domain ("Solve = dynamic"). Since we are solving a time-domain problem, we need to define the time-step and the final simulation time. The "time-jump" is a configuration that tells tlmbht after how many time-steps it should save the output data (which is defined in the "save" options). Here, we are saving at every 500 time-steps, which is equivalent to saving at every 5 s. Note that these 500 time-steps are all solved.
 
     Equation
     {
@@ -64,9 +64,9 @@ The Equation header tells the software what equation it should solve and how. Yo
         equation name = diffusion_name;
         dimensions = 1;
         Solve = dynamic;
-        time-step = 1e-3;
-        time-jump = 250;
-        final time = 5;
+        time-step = 1e-2;
+        time-jump = 500;
+        final time = 50;
         save = scalar;
         save = scalar between;
         save = vector;
@@ -78,9 +78,9 @@ The Material header defines the properties of the equation. You can have differe
     {
         equation = diffusion_name;
         number =  10;
-        diffusion coefficient = 1e-8;
-        source = 10;
-        initial scalar = 100;
+        diffusion coefficient = 1e-9;
+        source = 0.1;
+        initial scalar = 20;
     }
 
 The Boundary header defines the boundary conditions. You can have different Boundary headers for different boundary conditions and for each equation being solved. We proceed similar to what we did in the Material header. That is, we define the equation name and the Physical tag number that this boundary will be applied to. Since our boundary conditions are for defined concentrations, we defined the "scalar" options that tells tlmbht that these boundaries are for defined scalar (concentration, in this problem) values.
@@ -89,15 +89,14 @@ The Boundary header defines the boundary conditions. You can have different Boun
     {
         equation = diffusion_name;
         number = 20;
-        scalar = 100;
-
+        scalar = 20;
     }
 
     Boundary
     {
         equation = diffusion_name;
         number = 21;
-        scalar = 1;
+        scalar = 50;
     }
 
 The file cdiff1Li_full.tlm contains additional explanation about the input. If you want more information in how to configure the case file, go to [How to configure a case file.]({{ site.baseurl }}{% link vte/configure case file.md %})
@@ -114,9 +113,9 @@ Now we are ready to visualize the output and compare the TLM predictions with an
 
 ### 5) Visualize the output.
 
-After you have run tlmbht, it created the output file cdiff1Li.m. In this tutorial, you do not need to worry about this file. We will run a script that automatically loads the data into Octave/Matlab. The script is the file vdiff1Li.m, which calls the analytical solver function D1_HEAT_f.m.
+After you have run tlmbht, it created the output file cdiff1Li.m. In this tutorial, you do not need to worry about this file. We will run a script that automatically loads the data into Octave/Matlab. The script is the file vdiff1Li.m, which calls the analytical solver function D1_HEAT_f.m ([click here to read more about the analytical solution and how to use this function]({{ site.baseurl }}{% link theory/ana/heat 1D TT.md %})).
 
-This part should be as simple as opening vdiff1Li.m in Octave/Matlab and running it (press key F5). It will show you two plots and textual information. The figure below shows the two plots and part of the textual information. Concentration is shown in the left figure and flux is shown on the right figure. The analytical predictions are shown in blue, the tlmbht predictions are shown in red, and the green shows the difference of the calculated fluxes. In the concentration plots, asterisks represent concentration calculated at the center of the TLM nodes and the circles represent the concentration calculated between nodes. You can see that the predictions are almost identical, which you can confirm by looking at the textual information that tells you that the mean concentration error was 0.11 % and the mean heat flux error was 0.32 %.
+This part should be as simple as opening vdiff1Li.m in Octave/Matlab and running it (press key F5). It will show you two plots and textual information. The figure below shows the two plots and part of the textual information. Concentration is shown in the left figure and flux is shown on the right figure. The analytical predictions are shown in blue, the tlmbht predictions are shown in red, and the green shows the difference of the calculated fluxes. In the concentration plots, asterisks represent concentration calculated at the center of the TLM nodes and the circles represent the concentration calculated between nodes. You can see that the predictions are almost identical, which you can confirm by looking at the textual information that tells you that the mean concentration error was 0.04 % and the mean heat flux error was 0.34 %.
 
 You may note in the flux plot that the left most point has positive value while the closer points have negative values. This is because this is the point at the boundary and it represents flux going from the medium to that boundary. The negative values are representing the fluxes going into the direction of the lower concentration value boundary. Here, we observe that the core of the medium is acquiring concentration, which might not seem logical since this is the higher concentration boundary. However, we have a high intensity source (see cdiff1Li.tlm) that increases the concentration in the medium in a way that the concentration in the medium is higher than the concentration in both boundaries.
 
@@ -131,4 +130,7 @@ I hope you have enjoyed this validation section! You may now try to change the c
 
 Remember: you are using a powerful numerical solver. You do not need to be constrained by solutions that can be solved analytically. Explore! Try different boundary conditions, include more materials, etc. Make this problem more realistic!
 
-If you want to, you can move to the [validation for Diffusion 2D.]({{ site.baseurl }}{% link vte/diff 2D triangle.md %})
+Now, you can go to:
+
+* [Tutorials, examples, and validations]({{ site.baseurl }}{% link vte/index.md %})
+* [Validation in two-dimensions of Diffusion equation using the element triangle]({{ site.baseurl }}{% link vte/diff 2D triangle.md %})

@@ -6,13 +6,13 @@ more off %turns pagination off
 cdiff2Tr
 
 % Inputs
-mc = 100;
-minf = 1;
-flux = 5e-3;
+mc = 20;
+minf = 50;
+flux = 1e-5;
 
 % Characteristics for the mediums. They must be vectors
-diffusionCoefficient = 1e-8; 
-source = 10;
+diffusionCoefficient = 1e-9; 
+source = 0.1;
 
 % last position that has temperature values
 number_Temp = save_1(1)*numbers_1(1) + save_1(2)*numbers_1(3);
@@ -37,9 +37,9 @@ temp_message = 'Errors and differences: ';
 
 % Note that we inverted the x,y vectors so that we could use this function to solve
 % the problem shown in the tutorial
-[Ttemp, qxAnatemp, qyAnatemp] = D2_BHE_f(Points_Output_1(1:number_Points,1)',  ...
+[Ttemp, qxAnatemp, qyAnatemp] = D2_HEAT_f(Points_Output_1(1:number_Points,1)',  ...
              Points_Output_1(1:number_Points,2)', 0.75e-3, 1e-3, time_Ana, ...
-             flux, minf, mc, diffusionCoefficient, 1, 1, 0, 1e3, 1e3, 0, source, 50, 50, 2);
+             minf, mc, flux, diffusionCoefficient, 1, 1, source, 50, 100, 50);
              
              if ( save_1(1) || save_1(2) )
               if (figure_defined == 0)

@@ -241,6 +241,7 @@ with \\(\alpha = k/( \rho c_p ) \\), and \\(\phi_a(y)\\), \\(\phi_b(y)\tau_b(t)\
     \ldots\\\
     \ldots + 
     \sum_{v=1}^{\infty} \left( -1 \right)^v\frac{2\cos{ \left( \nu_v z \right) }}{\nu_v^2 + \mu_u^2 } \exp{\left[ -\alpha t \left(  \nu_v^2 + \mu_u^2\right) \right]}\right\\}
+    \label{eq:f:solution}
 \end{equation}
 
 The flux/heat flux can be obtained by derivating these equations with respect to \\(x\\), \\(y\\), and\or \\(z\\).

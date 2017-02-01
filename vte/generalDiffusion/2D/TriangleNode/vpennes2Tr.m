@@ -7,8 +7,8 @@ cpennes2Tr
 
 % Inputs
 Tc = 37;
-Ts = 150;
-qflux = 1e5;
+Ts = 100;
+qflux = 1e4;
 
 % Characteristics for the mediums. They must be vectors
 ro = 1200; % tissue density (kg/m3)
@@ -48,7 +48,7 @@ temp_message = 'Errors and differences: ';
 % the problem shown in the tutorial
 [Ttemp, qxAnatemp, qyAnatemp] = D2_BHE_f(Points_Output_1(1:number_Points,1)',  ...
              Points_Output_1(1:number_Points,2)', 0.75e-3, 1e-3, time_Ana, ...
-             qflux, Ts, Tc, k, ro, cp, wb, pb, cb, Tb, Qmet, 50, 50, 2);
+             Ts, Tc, qflux, k, ro, cp, wb, pb, cb, Tb, Qmet, 50, 100, 50);
              
              if ( save_1(1) || save_1(2) )
               if (figure_defined == 0)

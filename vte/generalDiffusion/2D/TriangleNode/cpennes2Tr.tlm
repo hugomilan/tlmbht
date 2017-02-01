@@ -49,12 +49,12 @@ Boundary
 {
     equation = BHE;
     number = 11;
-    Temperature = 150;
+    Temperature = 100;
 }
 
 Boundary
 {
     equation = BHE;
     number = 8;
-    Heat flux = 1e5;
+    Heat flux = 1e4;
 }

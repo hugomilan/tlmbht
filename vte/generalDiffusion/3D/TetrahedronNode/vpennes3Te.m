@@ -44,7 +44,7 @@ temp_message = 'Errors and differences: ';
 
 [Ttemp, qxAnatemp, qyAnatemp, qzAnatemp] = D3_BHE_f(Points_Output_1(1:number_Points,1)',  ...
              Points_Output_1(1:number_Points,2)', Points_Output_1(1:number_Points,3)', 0.75e-3, 1e-3, 0.375e-3, time_Ana, ...
-            qfluxX, qfluxZ, Ts, Tc, k, ro, cp, wb, pb, cb, Tb, Qmet, 50, 50, 50, 2);
+            Ts, Tc, qfluxX, qfluxZ, k, ro, cp, wb, pb, cb, Tb, Qmet, 50, 100, 50, 100, 50);
              
              if ( save_1(1) || save_1(2) )
               if (figure_defined == 0)

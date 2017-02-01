@@ -13,6 +13,8 @@
         <gdb_interceptlist>
           <gdbinterceptoptions gdb_all="false" gdb_unhandled="true" gdb_unexpected="true"/>
         </gdb_interceptlist>
+        <gdb_signals>
+        </gdb_signals>
         <gdb_options>
           <DebugOptions>
           </DebugOptions>
@@ -96,6 +98,8 @@
         <gdb_interceptlist>
           <gdbinterceptoptions gdb_all="false" gdb_unhandled="true" gdb_unexpected="true"/>
         </gdb_interceptlist>
+        <gdb_signals>
+        </gdb_signals>
         <gdb_options>
           <DebugOptions>
           </DebugOptions>
@@ -107,8 +111,6 @@
       </nativedebugger>
       <runprofile version="9">
         <runcommandpicklist>
-          <runcommandpicklistitem>"${OUTPUT_PATH}" case_testing_1D.tlm</runcommandpicklistitem>
-          <runcommandpicklistitem>"${OUTPUT_PATH}" test/cpennes1Li.tlm</runcommandpicklistitem>
           <runcommandpicklistitem>"${OUTPUT_PATH}"/test cpennes1Li.tlm</runcommandpicklistitem>
           <runcommandpicklistitem>"${OUTPUT_PATH}" cheat1Li.tlm</runcommandpicklistitem>
           <runcommandpicklistitem>"${OUTPUT_PATH}" cdiff3Te.tlm</runcommandpicklistitem>
@@ -116,9 +118,11 @@
           <runcommandpicklistitem>"${OUTPUT_PATH}" cpennes1Li.tlm</runcommandpicklistitem>
           <runcommandpicklistitem>"${OUTPUT_PATH}" cpennes1Li.tlm --verbose</runcommandpicklistitem>
           <runcommandpicklistitem>"${OUTPUT_PATH}" cdiff1Li.tlm --verbose</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}"/test cdiff3Te.tlm --verbose</runcommandpicklistitem>
           <runcommandpicklistitem>"${OUTPUT_PATH}" cdiff3Te.tlm --verbose</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" cheat3Te.tlm --verbose</runcommandpicklistitem>
         </runcommandpicklist>
-        <runcommand>"${OUTPUT_PATH}" cdiff3Te.tlm --verbose</runcommand>
+        <runcommand>"${OUTPUT_PATH}" cheat3Te.tlm --verbose</runcommand>
         <rundir>test</rundir>
         <buildfirst>true</buildfirst>
         <terminal-type>0</terminal-type>

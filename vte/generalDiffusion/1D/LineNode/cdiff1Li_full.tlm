@@ -697,10 +697,10 @@ Equation
     // steady: steady state solution;
     // dynamic: dynamic simulation
 
-    time-step = 1e-3; // Required if "solve = dynamic". (s) time-step in seconds. 
+    time-step = 1e-2; // Required if "solve = dynamic". (s) time-step in seconds. 
     // This is the time-step between each calculation.
 
-    time-jump = 250; // not required.
+    time-jump = 500; // not required.
     // Must be an integer greater than zero. If greater than 1, the algorithm 
     // will group the amount of time-steps indicated in time-jump and solve them at once.
     // For example, if time-jump = 11 and time-step = 0.01 s, the effective time-step will be
@@ -711,7 +711,7 @@ Equation
     // will not be calculated. Nonetheless, intermediary results can always be 
     // obtained using interpolations (not implemented).
 
-    final time = 5; // Required if solve = dynamic. (s) end time for simulation in seconds. 
+    final time = 50; // Required if solve = dynamic. (s) end time for simulation in seconds. 
 
 
     save = scalar; // indicates what to save.
@@ -749,12 +749,12 @@ Material
     // It can be a vector (as [33 55 11]). If it is a vector, the parameters here
     // will be assigned to all the numbers.
 
-    diffusion coefficient = 1e-8; // required;
+    diffusion coefficient = 1e-9; // required;
     // coefficient b = 1; // not required. Default value is 1.
     //
     // sink a = 0; // not required.
     //      The default value is 0. Defines the value of the sink proportional to 'm'.
-     source = 10; // not required.
+     source = 0.1; // not required.
     //      The default value is 0. Defines the value of the source. 
     // vectorial source = 0; // not required.
     //      The default value is 0. Defines the value of the vectorial source.
@@ -764,7 +764,7 @@ Material
     //      Use the first option when the vectorial source is the same for all directions.
     //      Use the second options when it has different values for different directions.
     //
-    initial scalar = 100; // required if Solve = dynamic;
+    initial scalar = 20; // required if Solve = dynamic;
 }
 
 
@@ -778,7 +778,7 @@ Boundary
     // It can be a vector (like [33 55 11]). If it is a vector, the parameters here
     // will be assigned to all the numbers.
     
-    scalar = 100; // constant value at the boundary
+    scalar = 20; // constant value at the boundary
     
 }
 
@@ -792,7 +792,7 @@ Boundary
 // It can be a vector (like [33 55 11]). If it is a vector, the parameters here
 // will be assigned to all the numbers.
 
-    scalar = 1; // constant value at the boundary
+    scalar = 50; // constant value at the boundary
 }
 
 

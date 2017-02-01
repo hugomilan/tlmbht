@@ -92,5 +92,5 @@ end
 
 
 % at the end we sum the solutions.
-T = Tc + phi_a + phi_b_tau_b + phi_c;
+T = Tc + phi_a + phi_b_tau_b;
 qy = qy_phi_a + qy_phi_b_tau_b;

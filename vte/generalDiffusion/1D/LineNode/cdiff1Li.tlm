@@ -15,9 +15,9 @@ Equation
     equation name = diffusion_name;
     dimensions = 1;
     Solve = dynamic;
-    time-step = 1e-3;
-    time-jump = 250;
-    final time = 5;
+    time-step = 1e-2;
+    time-jump = 500;
+    final time = 50;
     save = scalar;
     save = scalar between;
     save = vector;
@@ -27,16 +27,16 @@ Material
 {
     equation = diffusion_name;
     number =  10;
-    diffusion coefficient = 1e-8;
-    source = 10;
-    initial scalar = 100;
+    diffusion coefficient = 1e-9;
+    source = 0.1;
+    initial scalar = 20;
 }
 
 Boundary
 {
     equation = diffusion_name;
     number = 20;
-    scalar = 100;
+    scalar = 20;
     
 }
 
@@ -44,5 +44,5 @@ Boundary
 {
     equation = diffusion_name;
     number = 21;
-    scalar = 1;
+    scalar = 50;
 }

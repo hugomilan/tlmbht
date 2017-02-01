@@ -788,7 +788,7 @@ unsigned int MaterialTetrahedronPennesEigen(struct dataForSimulation *input, str
                     G = tempVar[8] * input->materialInput[j2].generalized_sink_a;
                     
                     // generalization of Is
-                    Is = tempVar[8]*input->materialInput[j2].generalized_source;
+                    Is = tempVar[8] * input->materialInput[j2].generalized_source;
 
                     // Z = dt/(2*C*deltal).
                     Z[0] = input->equationInput[id].timeStep / (2 * Cd);

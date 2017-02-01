@@ -49,5 +49,5 @@ Boundary
 {
     equation = BHE;
     number = 21;
-    Temperature = 150;
+    Temperature = 100;
 }
