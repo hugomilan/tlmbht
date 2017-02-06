@@ -10,7 +10,7 @@ order: 2
 
 <span style="color:#697473">Jan 30, 2017</span> by [**Hugo Milan**](https://hugomilan.github.io/)
 
-Here, you will find tutorials, case studies used to validate tlmbht (and the TLM method), and examples of simulation problems using tlmbht. This can also help you get familiarity with the software tlmbht. 
+Here you will find tutorials, case studies used to validate tlmbht (and the TLM method), and examples of simulation problems using tlmbht. This can also help you get familiarity with the software tlmbht. 
 
 ## Tutorials
 
