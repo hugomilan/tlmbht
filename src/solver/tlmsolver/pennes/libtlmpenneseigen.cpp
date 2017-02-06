@@ -141,18 +141,18 @@ unsigned int solverTLMPennesEigenGeneral(struct dataForSimulation* input, int id
             printf("Solving this equation directly\n");
         }
         begin_solve = clock();
-            // in time domain
-            if (input->equationInput[id].Solv == DYNAMIC) {
-                errorTLMnumber = tlmSolveMatricesTimeDomainEigen(&calcs, input, id);
-            } else if (input->equationInput[id].Solv == STEADY) {
-                errorTLMnumber = tlmSolveMatricesSteadyStateEigen(&calcs, input, id);
-            }
-            if (errorTLMnumber != 0) {
-                sendErrorCodeAndMessage(errorTLMnumber, NULL, NULL, NULL, NULL);
-                // If I find an error, I will redirect the code to the cleaning part
-                goto cleaning_part;
-            }
-        
+        // in time domain
+        if (input->equationInput[id].Solv == DYNAMIC) {
+            errorTLMnumber = tlmSolveMatricesTimeDomainEigen(&calcs, input, id);
+        } else if (input->equationInput[id].Solv == STEADY) {
+            errorTLMnumber = tlmSolveMatricesSteadyStateEigen(&calcs, input, id);
+        }
+        if (errorTLMnumber != 0) {
+            sendErrorCodeAndMessage(errorTLMnumber, NULL, NULL, NULL, NULL);
+            // If I find an error, I will redirect the code to the cleaning part
+            goto cleaning_part;
+        }
+
         end_solve = clock();
 
         // this equation does not need to be solved anymore. It was solved
@@ -212,7 +212,7 @@ unsigned int calculateMatricesPennesEigen(struct dataForSimulation *input,
     // calculating the matrices for material line elements
     if (input->simulationInput.verboseMode == 1) {
         printf("Quantity of material line nodes found: %llu\n", matrices->numbers.MaterialElements[1]);
-        if (input->equationInput[id].dimen != ONE){
+        if (input->equationInput[id].dimen != ONE) {
             printf("Material line nodes are not considered outside the one-dimensional problems. They will not be considered here.\n");
         }
     }
@@ -241,7 +241,7 @@ unsigned int calculateMatricesPennesEigen(struct dataForSimulation *input,
     // calculating the matrices for material triangle elements
     if (input->simulationInput.verboseMode == 1) {
         printf("Quantity of material triangle nodes found: %llu\n", matrices->numbers.MaterialElements[2]);
-        if (input->equationInput[id].dimen != TWO){
+        if (input->equationInput[id].dimen != TWO) {
             printf("Material triangle nodes are not considered outside the two-dimensional problems. They will not be considered here.\n");
         }
     }
@@ -268,7 +268,7 @@ unsigned int calculateMatricesPennesEigen(struct dataForSimulation *input,
     // calculating the matrices for material tetrahedron elements
     if (input->simulationInput.verboseMode == 1) {
         printf("Quantity of material tetrahedron nodes found: %llu\n", matrices->numbers.MaterialElements[4]);
-        if (input->equationInput[id].dimen != THREE){
+        if (input->equationInput[id].dimen != THREE) {
             printf("Material tetrahedron nodes are not considered outside the three-dimensional problems. They will not be considered here.\n");
         }
     }
@@ -384,7 +384,7 @@ unsigned int MaterialLinePennesEigen(struct dataForSimulation *input, struct cal
     // 0 - number of node
     // 1 - number of port 0
     unsigned int j2;
-    double Cd, Z[1], R[1], G, Is, Zhat, tau[1];
+    double Cd, Z[1], Cs, Zs, R[1], G, Is, Zhat, tau[1], taus;
 
     // line nomenclature
     //
@@ -420,87 +420,235 @@ unsigned int MaterialLinePennesEigen(struct dataForSimulation *input, struct cal
                     // I'm going to the next 'i', that is, incrementing i by 1 and going
                     // to the next value of i (if any).
 
-                    getRealNodeAndPort_fromAbstractNode(1, // element code
-                            i, // element number
-                            matrices->numbers.abstractPortsToReal,
-                            numbersNodeAndPort);
-
-                    // the -1 is necessary because the C indexing starts at zero
-                    // and my number of node starts at 1
-                    getGeometricalVariablesTLMline(&input->mesh.nodes[input->mesh.elements.Line[i].N1 - 1],
-                            &input->mesh.nodes[input->mesh.elements.Line[i].N2 - 1], tempVar);
-
-                    matrices->L[numbersNodeAndPort[1] + 0] = 1; // this length is defined as 1 for 1D nodes
-                    matrices->L[numbersNodeAndPort[1] + 1] = 1; // this length is defined as 1 for 1D nodes
-
-                    matrices->deltal[numbersNodeAndPort[1] + 0] = tempVar[0]; // length of port 1
-                    matrices->deltal[numbersNodeAndPort[1] + 1] = tempVar[0]; // length of port 2
+                    // here I switch the code accordingly to what type of node I have
                     
-                    // generalization of Cd
-                    Cd = input->materialInput[j2].generalized_coefficient_b;
-                    
-                    // generalization of R
-                    R[0] = tempVar[0] / input->materialInput[j2].generalized_diffusionCoeff;
-                    
-                    // generalization of G
-                    G = 2*tempVar[0] * input->materialInput[j2].generalized_sink_a;
-                    
-                    // generalization of Is
-                    Is = 2*tempVar[0]*input->materialInput[j2].generalized_source;
+                    // this is the simplest of all. Also called parabolic equation.
+                    // Used for 'diffusion', 'heat', and 'pennes'
+                    if (input->materialInput[j2].generalized_relaxationTime == 0) {
+                        // this has two nodes that connect with others elements
 
-                    // Z = dt/(2*Cd*deltal). Manually validated
-                    Z[0] = input->equationInput[id].timeStep / (tempVar[0] * 2 * Cd);
+                        getRealNodeAndPort_fromAbstractNode(1, // element code
+                                i, // element number
+                                matrices->numbers.abstractPortsToReal,
+                                numbersNodeAndPort);
 
-                    // all the impedances
-                    matrices->Z[numbersNodeAndPort[1] + 0] = Z[0];
-                    matrices->Z[numbersNodeAndPort[1] + 1] = Z[0];
+                        // the -1 is necessary because the C indexing starts at zero
+                        // and my number of node starts at 1
+                        getGeometricalVariablesTLMline(&input->mesh.nodes[input->mesh.elements.Line[i].N1 - 1],
+                                &input->mesh.nodes[input->mesh.elements.Line[i].N2 - 1], tempVar);
 
-                    // all the resistances
-                    matrices->R[numbersNodeAndPort[1] + 0] = R[0];
-                    matrices->R[numbersNodeAndPort[1] + 1] = R[0];
+                        matrices->L[numbersNodeAndPort[1] + 0] = 1; // this length is defined as 1 for 1D nodes
+                        matrices->L[numbersNodeAndPort[1] + 1] = 1; // this length is defined as 1 for 1D nodes
 
-                    // Manually validated
-                    Zhat = Z[0] / (2 + Z[0] * G);
+                        matrices->deltal[numbersNodeAndPort[1] + 0] = tempVar[0]; // length of port 1
+                        matrices->deltal[numbersNodeAndPort[1] + 1] = tempVar[0]; // length of port 2
 
-                    // Manually validated
-                    tau[0] = 2 * Zhat / Z[0];
-                    // this is actually matrix S.
-                    // M = C*S
-                    // this matrix is M[line][column].
-                    matrices->M.insert(numbersNodeAndPort[1] + 0,
-                            numbersNodeAndPort[1] + 0) = tau[0] - 1;
-                    matrices->M.insert(numbersNodeAndPort[1] + 0,
-                            numbersNodeAndPort[1] + 1) = tau[0];
+                        // generalization of Cd
+                        Cd = input->materialInput[j2].generalized_coefficient_b;
 
-                    matrices->M.insert(numbersNodeAndPort[1] + 1,
-                            numbersNodeAndPort[1] + 0) = tau[0];
-                    matrices->M.insert(numbersNodeAndPort[1] + 1,
-                            numbersNodeAndPort[1] + 1) = tau[0] - 1;
+                        // generalization of R
+                        R[0] = tempVar[0] / input->materialInput[j2].generalized_diffusionCoeff;
 
-                    // matrix tau
-                    matrices->tau.insert(numbersNodeAndPort[0],
-                            numbersNodeAndPort[1] + 0) = tau[0];
-                    matrices->tau.insert(numbersNodeAndPort[0],
-                            numbersNodeAndPort[1] + 1) = tau[0];
+                        // generalization of G
+                        G = 2 * tempVar[0] * input->materialInput[j2].generalized_sink_a;
 
-                    // this is actually matrix ZIS.
-                    // E = C*ZIS + B
-                    matrices->E(numbersNodeAndPort[1] + 0) = Zhat*Is;
-                    matrices->E(numbersNodeAndPort[1] + 1) = Zhat*Is;
+                        // generalization of Is
+                        Is = 2 * tempVar[0] * input->materialInput[j2].generalized_source;
 
-                    // matrix E_output
-                    matrices->E_output(numbersNodeAndPort[0]) = Zhat*Is;
+                        // Z = dt/(2*Cd*deltal). Manually validated
+                        Z[0] = input->equationInput[id].timeStep / (tempVar[0] * 2 * Cd);
 
-                    matrices->Points_output[numbersNodeAndPort[0]].x = tempVar[1];
-                    matrices->Points_output[numbersNodeAndPort[0]].y = tempVar[2];
-                    matrices->Points_output[numbersNodeAndPort[0]].z = tempVar[3];
+                        // all the impedances
+                        matrices->Z[numbersNodeAndPort[1] + 0] = Z[0];
+                        matrices->Z[numbersNodeAndPort[1] + 1] = Z[0];
+
+                        // all the resistances
+                        matrices->R[numbersNodeAndPort[1] + 0] = R[0];
+                        matrices->R[numbersNodeAndPort[1] + 1] = R[0];
+
+                        // Manually validated
+                        Zhat = Z[0] / (2 + Z[0] * G);
+
+                        // Manually validated
+                        tau[0] = 2 * Zhat / Z[0];
+                        // this is actually matrix S.
+                        // M = C*S
+                        // this matrix is M[line][column].
+                        matrices->M.insert(numbersNodeAndPort[1] + 0,
+                                numbersNodeAndPort[1] + 0) = tau[0] - 1;
+                        matrices->M.insert(numbersNodeAndPort[1] + 0,
+                                numbersNodeAndPort[1] + 1) = tau[0];
+
+                        matrices->M.insert(numbersNodeAndPort[1] + 1,
+                                numbersNodeAndPort[1] + 0) = tau[0];
+                        matrices->M.insert(numbersNodeAndPort[1] + 1,
+                                numbersNodeAndPort[1] + 1) = tau[0] - 1;
+
+                        // matrix tau
+                        matrices->tau.insert(numbersNodeAndPort[0],
+                                numbersNodeAndPort[1] + 0) = tau[0];
+                        matrices->tau.insert(numbersNodeAndPort[0],
+                                numbersNodeAndPort[1] + 1) = tau[0];
+
+                        // this is actually matrix ZIS.
+                        // E = C*ZIS + B
+                        matrices->E(numbersNodeAndPort[1] + 0) = Zhat*Is;
+                        matrices->E(numbersNodeAndPort[1] + 1) = Zhat*Is;
+
+                        // matrix E_output
+                        matrices->E_output(numbersNodeAndPort[0]) = Zhat*Is;
+
+                        matrices->Points_output[numbersNodeAndPort[0]].x = tempVar[1];
+                        matrices->Points_output[numbersNodeAndPort[0]].y = tempVar[2];
+                        matrices->Points_output[numbersNodeAndPort[0]].z = tempVar[3];
 
 
-                    // initial value
-                    // Vi0 = (Ti - ZIS)/sum(tau)
-                    matrices->Vi(numbersNodeAndPort[1] + 0) = (input->materialInput[j2].generalized_initialScalar
-                            - matrices->E(numbersNodeAndPort[1] + 0)) / ( 2 * tau[0] );
-                    matrices->Vi(numbersNodeAndPort[1] + 1) = matrices->Vi(numbersNodeAndPort[1] + 0);
+                        // initial value
+                        // Vi0 = (Ti - ZIS)/sum(tau)
+                        matrices->Vi(numbersNodeAndPort[1] + 0) = (input->materialInput[j2].generalized_initialScalar
+                                - matrices->E(numbersNodeAndPort[1] + 0)) / (2 * tau[0]);
+                        matrices->Vi(numbersNodeAndPort[1] + 1) = matrices->Vi(numbersNodeAndPort[1] + 0);
+                        
+                        
+                        
+                        
+                        
+                        // this is for the wave models. Also called hyperbolic equation.
+                        // Used for 'hyperbolic diffusion', 'hyperbolic heat', and 
+                        // 'hyperbolic pennes'
+                    } else {
+                        // this has three nodes. Two nodes connect with others elements
+                        // and one extra node is used to model the relaxation time
+                        
+                        getRealNodeAndPort_fromAbstractNode(1, // element code
+                                i, // element number
+                                matrices->numbers.abstractPortsToReal,
+                                numbersNodeAndPort);
+
+                        // the -1 is necessary because the C indexing starts at zero
+                        // and my number of node starts at 1
+                        getGeometricalVariablesTLMline(&input->mesh.nodes[input->mesh.elements.Line[i].N1 - 1],
+                                &input->mesh.nodes[input->mesh.elements.Line[i].N2 - 1], tempVar);
+
+                        matrices->L[numbersNodeAndPort[1] + 0] = 1; // this length is defined as 1 for 1D nodes
+                        matrices->L[numbersNodeAndPort[1] + 1] = 1; // this length is defined as 1 for 1D nodes
+                        matrices->L[numbersNodeAndPort[1] + 2] = 1; // this length is defined as 1 for 1D nodes
+
+                        matrices->deltal[numbersNodeAndPort[1] + 0] = tempVar[0]; // length of port 1
+                        matrices->deltal[numbersNodeAndPort[1] + 1] = tempVar[0]; // length of port 2
+                        matrices->deltal[numbersNodeAndPort[1] + 2] = 1; // length of stub is not defined
+
+                        // generalization of Cd
+                        Cd = input->materialInput[j2].generalized_diffusionCoeff*
+                                input->equationInput[id].timeStep*input->equationInput[id].timeStep/
+                                (4*tempVar[0]*tempVar[0]*input->materialInput[j2].generalized_relaxationTime);
+                        
+                        // generalization of Cs
+                        Cs = (input->materialInput[j2].generalized_coefficient_b - Cd)*2*tempVar[0];
+                        
+                        // generalization of R
+                        R[0] = tempVar[0] / input->materialInput[j2].generalized_diffusionCoeff;
+
+                        // generalization of G
+                        G = 2 * tempVar[0] * input->materialInput[j2].generalized_sink_a;
+
+                        // generalization of Is
+                        Is = 2 * tempVar[0] * input->materialInput[j2].generalized_source;
+
+                        // Z = dt/(2*Cd*deltal). Manually validated
+                        Z[0] = input->equationInput[id].timeStep / (tempVar[0] * 2 * Cd);
+                        
+                        // Zs = dt/(2*Cs*deltal)
+                        if (Cs > 0){
+                            Zs = input->equationInput[id].timeStep / (tempVar[0] * 2 * Cs);
+                        } else if (Cs < 0){
+                            Zs = -input->equationInput[id].timeStep / (tempVar[0] * 2 * Cs);
+                            // this can only be Cs = 0, which means that we don't need stub
+                        } else {
+                            Zs = -1; // this is my flag that tells me that I don't need stub
+                        }
+                        
+
+                        // all the impedances
+                        matrices->Z[numbersNodeAndPort[1] + 0] = Z[0];
+                        matrices->Z[numbersNodeAndPort[1] + 1] = Z[0];
+                        // this is the stub impedance
+                        matrices->Z[numbersNodeAndPort[1] + 2] = Zs;
+
+                        // all the resistances
+                        matrices->R[numbersNodeAndPort[1] + 0] = R[0];
+                        matrices->R[numbersNodeAndPort[1] + 1] = R[0];
+                        matrices->R[numbersNodeAndPort[1] + 2] = 1; // this is not defined
+
+                        // Calculating Zhat
+                        // In this case I don't have Zs
+                        if (Zs == -1){
+                            Zhat = Z[0] / (2 + Z[0] * G);
+                            taus = 0;
+                            
+                            // this is the case that I need Zs
+                        } else {
+                            Zhat = 1/(G + 1/Zs + 2/Z);
+                            taus = 2 * Zhat / Zs;
+                        }
+                        
+
+                        // Manually validated
+                        tau[0] = 2 * Zhat / Z[0];
+                        
+                        // this is actually matrix S.
+                        // M = C*S
+                        // this matrix is M[line][column].
+                        matrices->M.insert(numbersNodeAndPort[1] + 0,
+                                numbersNodeAndPort[1] + 0) = tau[0] - 1;
+                        matrices->M.insert(numbersNodeAndPort[1] + 0,
+                                numbersNodeAndPort[1] + 1) = tau[0];
+                        matrices->M.insert(numbersNodeAndPort[1] + 0,
+                                numbersNodeAndPort[1] + 2) = taus;
+
+                        matrices->M.insert(numbersNodeAndPort[1] + 1,
+                                numbersNodeAndPort[1] + 0) = tau[0];
+                        matrices->M.insert(numbersNodeAndPort[1] + 1,
+                                numbersNodeAndPort[1] + 1) = tau[0] - 1;
+                        matrices->M.insert(numbersNodeAndPort[1] + 1,
+                                numbersNodeAndPort[1] + 2) = taus;
+                        
+                        matrices->M.insert(numbersNodeAndPort[1] + 2,
+                                numbersNodeAndPort[1] + 0) = tau[0];
+                        matrices->M.insert(numbersNodeAndPort[1] + 2,
+                                numbersNodeAndPort[1] + 1) = tau[0];
+                        matrices->M.insert(numbersNodeAndPort[1] + 2,
+                                numbersNodeAndPort[1] + 2) = taus - 1;
+
+                        // matrix tau
+                        matrices->tau.insert(numbersNodeAndPort[0],
+                                numbersNodeAndPort[1] + 0) = tau[0];
+                        matrices->tau.insert(numbersNodeAndPort[0],
+                                numbersNodeAndPort[1] + 1) = tau[0];
+                        matrices->tau.insert(numbersNodeAndPort[0],
+                                numbersNodeAndPort[1] + 2) = taus;
+
+                        // this is actually matrix ZIS.
+                        // E = C*ZIS + B
+                        matrices->E(numbersNodeAndPort[1] + 0) = Zhat*Is;
+                        matrices->E(numbersNodeAndPort[1] + 1) = Zhat*Is;
+                        matrices->E(numbersNodeAndPort[1] + 2) = Zhat*Is;
+
+                        // matrix E_output
+                        matrices->E_output(numbersNodeAndPort[0]) = Zhat*Is;
+
+                        matrices->Points_output[numbersNodeAndPort[0]].x = tempVar[1];
+                        matrices->Points_output[numbersNodeAndPort[0]].y = tempVar[2];
+                        matrices->Points_output[numbersNodeAndPort[0]].z = tempVar[3];
+
+
+                        // initial value
+                        // Vi0 = (Ti - ZIS)/sum(tau)
+                        matrices->Vi(numbersNodeAndPort[1] + 0) = (input->materialInput[j2].generalized_initialScalar
+                                - matrices->E(numbersNodeAndPort[1] + 0)) / (2 * tau[0]);
+                        matrices->Vi(numbersNodeAndPort[1] + 1) = matrices->Vi(numbersNodeAndPort[1] + 0);
+                        
+                    }
 
                     goto end_for_j_and_for_k_line;
                 }
@@ -584,21 +732,21 @@ unsigned int MaterialTrianglePennesEigen(struct dataForSimulation *input, struct
                     matrices->deltal[numbersNodeAndPort[1] + 0] = tempVar[0]; // length of port 1
                     matrices->deltal[numbersNodeAndPort[1] + 1] = tempVar[1]; // length of port 2
                     matrices->deltal[numbersNodeAndPort[1] + 2] = tempVar[2]; // length of port 3
-                    
+
                     // generalization of Cd
                     Cd = tempVar[3] * input->materialInput[j2].generalized_coefficient_b /
                             (tempVar[0] + tempVar[1] + tempVar[2]);
-                    
+
                     // generalization of R
                     R[0] = tempVar[0] / (input->materialInput[j2].generalized_diffusionCoeff * tempVar[4]);
                     R[1] = tempVar[1] / (input->materialInput[j2].generalized_diffusionCoeff * tempVar[5]);
                     R[2] = tempVar[2] / (input->materialInput[j2].generalized_diffusionCoeff * tempVar[6]);
-                    
+
                     // generalization of G
                     G = tempVar[3] * input->materialInput[j2].generalized_sink_a;
-                    
+
                     // generalization of Is
-                    Is = tempVar[3]*input->materialInput[j2].generalized_source;
+                    Is = tempVar[3] * input->materialInput[j2].generalized_source;
 
                     // Z = dt/(2*Cd*deltal). Manually validated
                     Z[0] = input->equationInput[id].timeStep / (2 * Cd);
@@ -773,20 +921,20 @@ unsigned int MaterialTetrahedronPennesEigen(struct dataForSimulation *input, str
                     matrices->deltal[numbersNodeAndPort[1] + 1] = tempVar[1]; // length of port 2
                     matrices->deltal[numbersNodeAndPort[1] + 2] = tempVar[2]; // length of port 3
                     matrices->deltal[numbersNodeAndPort[1] + 3] = tempVar[3]; // length of port 4
-                    
+
                     // generalization of Cd
                     Cd = tempVar[8] * input->materialInput[j2].generalized_coefficient_b /
                             (tempVar[0] + tempVar[1] + tempVar[2] + tempVar[3]);
-                    
+
                     // generalization of R
-                    R[0] = tempVar[0] / (input->materialInput[j2].generalized_diffusionCoeff * tempVar[4] );
-                    R[1] = tempVar[1] / (input->materialInput[j2].generalized_diffusionCoeff * tempVar[5] );
-                    R[2] = tempVar[2] / (input->materialInput[j2].generalized_diffusionCoeff * tempVar[6] );
-                    R[3] = tempVar[3] / (input->materialInput[j2].generalized_diffusionCoeff * tempVar[7] );
-                    
+                    R[0] = tempVar[0] / (input->materialInput[j2].generalized_diffusionCoeff * tempVar[4]);
+                    R[1] = tempVar[1] / (input->materialInput[j2].generalized_diffusionCoeff * tempVar[5]);
+                    R[2] = tempVar[2] / (input->materialInput[j2].generalized_diffusionCoeff * tempVar[6]);
+                    R[3] = tempVar[3] / (input->materialInput[j2].generalized_diffusionCoeff * tempVar[7]);
+
                     // generalization of G
                     G = tempVar[8] * input->materialInput[j2].generalized_sink_a;
-                    
+
                     // generalization of Is
                     Is = tempVar[8] * input->materialInput[j2].generalized_source;
 
@@ -808,7 +956,7 @@ unsigned int MaterialTetrahedronPennesEigen(struct dataForSimulation *input, str
                     matrices->R[numbersNodeAndPort[1] + 1] = R[1];
                     matrices->R[numbersNodeAndPort[1] + 2] = R[2];
                     matrices->R[numbersNodeAndPort[1] + 3] = R[3];
-                    
+
 
                     // Manually validated
                     Zhat = Z[0] * Z[1] * Z[2] * Z[3] / (Z[0] * Z[1] * Z[2]
@@ -820,7 +968,7 @@ unsigned int MaterialTetrahedronPennesEigen(struct dataForSimulation *input, str
                     tau[1] = 2 * Zhat / Z[1];
                     tau[2] = 2 * Zhat / Z[2];
                     tau[3] = 2 * Zhat / Z[3];
-                    
+
                     // this is actually matrix S.
                     // M = C*S
                     // this matrix is M[line][column].
@@ -884,7 +1032,7 @@ unsigned int MaterialTetrahedronPennesEigen(struct dataForSimulation *input, str
                     matrices->Points_output[numbersNodeAndPort[0]].x = tempVar[9];
                     matrices->Points_output[numbersNodeAndPort[0]].y = tempVar[10];
                     matrices->Points_output[numbersNodeAndPort[0]].z = tempVar[11];
-                    
+
                     // Vi0 = (Ti - ZIS)/sum(tau)
                     // generalization of the initial value
                     matrices->Vi(numbersNodeAndPort[1]) = (input->materialInput[j2].generalized_initialScalar
@@ -979,7 +1127,7 @@ unsigned int connectionsAndBoundariesPennesEigen(struct calculationTLMEigen *mat
     transmission_out_flux = (double *) malloc(sizeof (double)*2);
     B_out_flux = (double *) malloc(sizeof (double)*2);
 
-    
+
     unsigned long long *portsNumbers;
     // this pointer will contain the number of the ports
     // 0: size of the pointer
@@ -1199,8 +1347,8 @@ unsigned int connectionsAndBoundariesPennesEigen(struct calculationTLMEigen *mat
                                         case 2: // using Tc
                                             // effect of the heat flux on Tp
                                             B_out[0] = boundaries[portsNumbers[j + 1]].boundaries[0].boundaryData[0] // q''
-                                                        * matrices->R[startEnd[2]]
-                                                        * matrices->L[startEnd[2]];
+                                                    * matrices->R[startEnd[2]]
+                                                    * matrices->L[startEnd[2]];
                                             // effect of Tc on Tp
                                             transmission_out[0] = 1;
                                             break;
@@ -1386,7 +1534,7 @@ transmission_and_reflection:
                             &(matrices->Points_output[offset_heat_flux + i].y),
                             &(matrices->Points_output[offset_heat_flux + i].z),
                             input);
-//                    printf("The output outside: %f\n", matrices->Points_output[offset_heat_flux + i].x*matrices->Points_output[offset_heat_flux + i].x + matrices->Points_output[offset_heat_flux + i].y*matrices->Points_output[offset_heat_flux + i].y + matrices->Points_output[offset_heat_flux + i].z*matrices->Points_output[offset_heat_flux + i].z);
+                    //                    printf("The output outside: %f\n", matrices->Points_output[offset_heat_flux + i].x*matrices->Points_output[offset_heat_flux + i].x + matrices->Points_output[offset_heat_flux + i].y*matrices->Points_output[offset_heat_flux + i].y + matrices->Points_output[offset_heat_flux + i].z*matrices->Points_output[offset_heat_flux + i].z);
 
                 }
             }
@@ -1479,7 +1627,7 @@ transmission_and_reflection:
 
     matrices->M.makeCompressed();
     matrices->tau.makeCompressed();
-    
+
     free(startEnd);
     startEnd = NULL;
 
