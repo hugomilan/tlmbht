@@ -948,7 +948,7 @@ unsigned int getTLMnumbers(const struct dataForSimulation * input,
     // this loop can be fully parallelized given that the accesses to the
     // functions below are synchronized. Maybe OpenMP would be a better approach
     // here given that this function is not expected to by very heavy. I think
-    // that it would be best to parallelize the 'i' for loop (but you better analyze it).
+    // that it would be best to parallelize the 'i' for-loop (but you better analyze it).
     // 1) allocatePointsPort()
     // 2) add_to_aPortToRealPort()
     for (l = 0; l < 100; l++) {
@@ -1422,7 +1422,7 @@ unsigned int initiateTLMnumbers(struct TLMnumbers* numbers) {
     // initiate them as 0. I have a list of 100 elements type, that's why I 
     // allocate 100. But I don't use all of these positions. I might reduce it
     // to a more usable number in the future. However, for developmental purposes,
-    // I will left it as 100.
+    // I will leave it as 100.
     if ((numbers->BoundaryElements = (unsigned long long *) calloc(100,
             sizeof (unsigned long long))) == NULL)
         return 8730;
@@ -1800,7 +1800,7 @@ unsigned int wrapTLMnumbers(const struct dataForSimulation * input,
             numbers->abstractPortsToReal[i].nodesNumbers = NULL;
 
         } else {
-            // this elements are part boundary (and/or not defined) and part material
+            // these elements are part boundary (and/or not defined) and part material
 
             // shortening the pointer to the quantity saved
             if ((numbers->abstractPortsToReal[i].nodesNumbers = (unsigned long long*)

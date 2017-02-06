@@ -4,7 +4,7 @@
 
 * [MEFiSTo<sup>TM</sup> Electromagnetic Simulations](http://www.faustcorp.com/): Commercial software to solve 2D and 3D electromagnetic scattering problems using TLM. The 2D version (MEFiSTo-2D Classic) can be obtained free of charge. This software does not seem to be maintained anymore.
 
-* [emGine](http://www.petr-lorenz.com/emgine/index.php?option=com_content&view=article&id=44&Itemid=53): Free for non-commercial purposes, emGine solves time-domain full-wave 3D electromagnetic problems. It does not seem to be maintained anymore (last update is from 2014). Tri-license MPL/GPL/LGPL.
+* [emGine](http://www.petr-lorenz.com/emgine/index.php?option=com_content&view=article&id=44&Itemid=53): Free for non-commercial purposes, emGine solves time-domain full-wave 3D electromagnetic problems. It does not seem to be maintained anymore (last version is from 2011 and the last website updated was in 2014). Tri-license MPL/GPL/LGPL.
 
 * [CST](https://www.cst.com/) [TLM solver](https://www.cst.com/products/cstmws/Solvers/TLM-Solver): Active commercial software that provides the TLM solver for electromagnetic simulations.
 

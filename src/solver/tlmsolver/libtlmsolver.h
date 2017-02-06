@@ -134,6 +134,11 @@ extern "C" {
         unsigned long long quantitySaved;
 
         unsigned long long *nodesNumbers;
+        // this is used when pointerType == 2 or pointerType == 3
+        // When pointerType == 2, nodesNumber has allocated the (sorted) number of the 
+        // nodes that are boundary.
+        // When pointerType == 3, nodesNumber has allocated the (sorted) number of the 
+        // nodes that are material.
     };
 
     struct TLMnumbers {

@@ -30,7 +30,6 @@
  * Description of this file:
  * 
  * Main file for the TLMBHT Version 0.2.0
- * We use Semantic Versioning 2.0.0 http://semver.org/
  * 
  * This function receives a script file as input and performs the operations requested
  * by the script file. See the README file to know my features.
