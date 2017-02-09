@@ -194,7 +194,8 @@ unsigned int setConfigurationMaterial(char * input, struct MaterialConfig * matI
 
         sscanf(input, "%lf", &matInput->coefficient_b);
 
-    } else if (compareCaseInsensitive(input, "relaxation time") == 0) {
+    } else if (compareCaseInsensitive(input, "relaxation time") == 0 || 
+            compareCaseInsensitive(input, "thermal relaxation time") == 0) {
         if ((errorTLMnumber = getBetweenEqualAndSemicolon(input)) != 0)
             return errorTLMnumber;
 

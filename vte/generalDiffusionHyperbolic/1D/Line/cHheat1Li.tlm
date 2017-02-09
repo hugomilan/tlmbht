@@ -1,0 +1,50 @@
+Simulation
+{
+   output extension = m;
+}
+
+Mesh
+{
+    file name = line_2BC_47e;
+    input format = tlmtbn;
+}
+
+Equation
+{
+    type = hyperbolic heat;
+    equation name = heat_name;
+    dimensions = 1;
+    Solve = dynamic;
+    time-step = 1e-3;
+    time-jump = 100;
+    final time = 1;
+    save = scalar;
+    save = scalar between;
+    save = vector;
+}
+
+Material
+{
+    equation = heat_name;
+    number =  10;
+    density = 1200;
+    specific heat = 3200;
+    thermal conductivity = 0.3;
+    thermal relaxation time = 10;
+    source = 5000;
+    initial temperature = 100;
+}
+
+Boundary
+{
+    equation = heat_name;
+    number = 20;
+    Temperature = 100;
+}
+
+Boundary
+{
+    equation = heat_name;
+    number = 21;
+    Temperature = 200;
+}

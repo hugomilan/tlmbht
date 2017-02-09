@@ -49,12 +49,14 @@
 unsigned int initiate_matrices_calculationTLMEigen(struct calculationTLMEigen *matrices,
         unsigned int *quantityToReserve) {
 
-    matrices->M.resize(matrices->numbers.Ports, matrices->numbers.Ports);
+    matrices->M.resize(matrices->numbers.Ports + matrices->numbers.StubPorts,
+            matrices->numbers.Ports + matrices->numbers.StubPorts);
     // this means that each column has reserved 'n' spaces
-    matrices->M.reserve(VectorXi::Constant(matrices->numbers.Ports, quantityToReserve[0]));
+    matrices->M.reserve(VectorXi::Constant(matrices->numbers.Ports + matrices->numbers.StubPorts,
+            quantityToReserve[0]));
 
 
-    matrices->E.resize(matrices->numbers.Ports);
+    matrices->E.resize(matrices->numbers.Ports + matrices->numbers.StubPorts);
 
     // allocating for all the resistances
     if (((*matrices).R = (double*) malloc(sizeof (double)*matrices->numbers.Ports)) == NULL) {
@@ -62,11 +64,11 @@ unsigned int initiate_matrices_calculationTLMEigen(struct calculationTLMEigen *m
     }
 
     // allocating for all the impedances
-    if (((*matrices).Z = (double*) malloc(sizeof (double)*matrices->numbers.Ports)) == NULL) {
+    if (((*matrices).Z = (double*) malloc(sizeof (double)*(matrices->numbers.Ports + matrices->numbers.StubPorts))) == NULL) {
         return 8717;
     }
 
-    matrices->Vi.resize(matrices->numbers.Ports);
+    matrices->Vi.resize(matrices->numbers.Ports + matrices->numbers.StubPorts);
 
     // allocating the characteristic length vector
     if (((*matrices).L = (double*) malloc(sizeof (double)*matrices->numbers.Ports)) == NULL) {
@@ -79,9 +81,9 @@ unsigned int initiate_matrices_calculationTLMEigen(struct calculationTLMEigen *m
     }
 
 
-    matrices->tau.resize(matrices->numbers.Output, matrices->numbers.Ports);
+    matrices->tau.resize(matrices->numbers.Output, matrices->numbers.Ports + matrices->numbers.StubPorts);
     // this means that each line has reserved 'm' spaces
-    matrices->tau.reserve(VectorXi::Constant(matrices->numbers.Ports, quantityToReserve[1]));
+    matrices->tau.reserve(VectorXi::Constant(matrices->numbers.Ports + matrices->numbers.StubPorts, quantityToReserve[1]));
     matrices->output.resize(matrices->numbers.Output);
 
     matrices->E_output.resize(matrices->numbers.Output);

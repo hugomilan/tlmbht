@@ -63,5 +63,7 @@ void sortOptmizedBubbleSort(unsigned long long *input) {
  */
 int compareLLU(const void *a, const void *b) {
 
-    return (*(unsigned long long*) a - *(unsigned long long*) b);
+    if (*(unsigned long long*) a < *(unsigned long long*) b) return -1;
+    if (*(unsigned long long*) a > *(unsigned long long*) b) return +1;
+    return 0;
 }

@@ -13,7 +13,6 @@ Ts = 100;
 ro = 1200; % tissue density (kg/m3)
 cp = 3200; % specific heat (J/(K-kg))
 k = 0.3; % thermal conductivity (W/(K-m))
-Ti = 37; % initial temperature
 
 wb = 1e-4; % blood perfusion (s-1)
 pb = 1052; % blood density (kg/m3)

@@ -4,14 +4,14 @@
 # See: https://jekyllrb.com/docs/themes/#overriding-theme-defaults
 layout: page_eqAMS_Disqus
 title: Analytical solution of the Pennes equation in time-domain for three-dimensions
-permalink: theory/ana/pennes-3D-TTqqqq.html
+permalink: theory/ana/pennes/pennes-3D-TTqqqq.html
 ---
 
 <span style="color:#697473">Jan 30, 2017</span> by [**Hugo Milan**](https://hugomilan.github.io/)
 
-You can download the algorithm `D3_BHE_f.m` for Octave/Matlab that can solve this problem [here](https://github.com/hugomilan/tlmbht/tree/master/src/octave/analytical/3D) and you can see instructions in [how to use it here]({% link theory/ana/pennes 3D TTqqqq.md%}#using-the-algorithm). If you want to see the final solution, [go to Solution]({% link theory/ana/pennes 3D TTqqqq.md%}#solution).
+You can download the algorithm `D3_BHE_f.m` for Octave/Matlab that can solve this problem [here](https://github.com/hugomilan/tlmbht/tree/master/src/octave/analytical/3D) and you can see instructions in [how to use it here]({% link theory/ana/pennes/pennes 3D TTqqqq.md%}#using-the-algorithm). If you want to see the final solution, [go to Solution]({% link theory/ana/pennes/pennes 3D TTqqqq.md%}#solution).
 
-In this page, we will solve the dynamic Pennes equation in three-dimensions using the principles of superposition and separation of variables. We build on the previous solution of the Pennes equation in two-dimensions described [here]({{ site.baseurl }}{% link theory/ana/pennes 2D TTqq.md%}) to solve this three-dimensional problem. The problem we will solve is restricted to the following initial and boundary conditions:
+In this page, we will solve the dynamic Pennes equation in three-dimensions using the principles of superposition and separation of variables. We build on the previous solution of the Pennes equation in two-dimensions described [here]({{ site.baseurl }}{% link theory/ana/pennes/pennes 2D TTqq.md%}) to solve this three-dimensional problem. The problem we will solve is restricted to the following initial and boundary conditions:
 
 $$
 \begin{matrix}
@@ -122,17 +122,17 @@ which implies that we can solve Eqs. \ref{eq:a}-\ref{eq:f}
 
 #### **Solving Eq. \ref{eq:a} and \ref{eq:b}**
 
-The solution of Eq. \ref{eq:a} and \ref{eq:b} was previously covered when we [solved the pennes equation in one-dimension.]({{ site.baseurl }}{% link theory/ana/pennes 1D TT.md%})
+The solution of Eq. \ref{eq:a} and \ref{eq:b} was previously covered when we [solved the pennes equation in one-dimension.]({{ site.baseurl }}{% link theory/ana/pennes/pennes 1D TT.md%})
 
 
 
 #### **Solving Eq. \ref{eq:c} and \ref{eq:d}**
 
-The solution of Eq. \ref{eq:c} and \ref{eq:d} was previously covered when we [solved the pennes equation in two-dimensions.]({{ site.baseurl }}{% link theory/ana/pennes 2D TTqq.md%})
+The solution of Eq. \ref{eq:c} and \ref{eq:d} was previously covered when we [solved the pennes equation in two-dimensions.]({{ site.baseurl }}{% link theory/ana/pennes/pennes 2D TTqq.md%})
 
 #### **Solving Eq. \ref{eq:e}**
 
-The solution procedure for Eq. \ref{eq:e} is exactly the same as the solution procedure for Eq. \ref{eq:c} showed [here.]({{ site.baseurl }}{% link theory/ana/pennes 2D TTqq.md%}) Hence, changing the nomenclature from the solution of Eq. \ref{eq:c}, the solution of Eq. \ref{eq:e} is:
+The solution procedure for Eq. \ref{eq:e} is exactly the same as the solution procedure for Eq. \ref{eq:c} showed [here.]({{ site.baseurl }}{% link theory/ana/pennes/pennes 2D TTqq.md%}) Hence, changing the nomenclature from the solution of Eq. \ref{eq:c}, the solution of Eq. \ref{eq:e} is:
 
 \begin{equation}
     \mu_u = \frac{ \left( 2u - 1 \right) \pi}{H}
@@ -144,7 +144,7 @@ The solution procedure for Eq. \ref{eq:e} is exactly the same as the solution pr
 
 #### **Solving Eq. \ref{eq:f}**
 
-The solution procedure for Eq. \ref{eq:f} is exactly the same as the solution procedure for Eq. \ref{eq:d} showed [here.]({{ site.baseurl }}{% link theory/ana/pennes 2D TTqq.md%}) Hence, changing the nomenclature from the solution of Eq. \ref{eq:d}, the solution of Eq. \ref{eq:f} is:
+The solution procedure for Eq. \ref{eq:f} is exactly the same as the solution procedure for Eq. \ref{eq:d} showed [here.]({{ site.baseurl }}{% link theory/ana/pennes/pennes 2D TTqq.md%}) Hence, changing the nomenclature from the solution of Eq. \ref{eq:d}, the solution of Eq. \ref{eq:f} is:
 
 \begin{equation}
     \nu_v = \frac{v\pi}{T_z}
@@ -233,7 +233,7 @@ with \\(\alpha = k/( \rho c_p ) \\), and \\(\phi_a(y)\\) and \\(\phi_b(y)\tau_b(
 
 The flux/heat flux can be obtained by derivating these equations with respect to \\(x\\), \\(y\\), and \\(z\\).
 
-Note that these solutions are not suitable for \\(W_b = 0\\). In this case, the correct solutions are for the [heat equation shown here.]({{ site.baseurl }}{% link theory/ana/heat 3D TTqqqq.md %})
+Note that these solutions are not suitable for \\(W_b = 0\\). In this case, the correct solutions are for the [heat equation shown here.]({{ site.baseurl }}{% link theory/ana/heat/heat 3D TTqqqq.md %})
 
 ### Using the Algorithm
 
@@ -250,7 +250,6 @@ qz = 2e5; % heat flux at z = Tz (W/m2)
 rho = 1200; % tissue density (kg/m3)
 cp = 3200; % specific heat (J/(K-kg))
 k = 0.3; % thermal conductivity (W/(K-m))
-Ti = 37; % initial temperature
 wb = 1e-4; % blood perfusion (s-1)
 rhob = 1052; % blood density (kg/m3)
 cb = 3600; % blood specific heat (J/(K-kg))
@@ -327,4 +326,5 @@ Another surprising limitation is that the flux boundary conditions at \\(x = L\\
 Now, you can go to:
 
 * [Analytical solutions menu]({{ site.baseurl }}{% link theory/ana/index.md %})
+* [Analytical solutions of Pennes equations menu]({{ site.baseurl }}{% link theory/ana/pennes/index.md %})
 * [TLM validation using this solution]({{ site.baseurl }}{% link vte/pennes 3D tetrahedron.md %})

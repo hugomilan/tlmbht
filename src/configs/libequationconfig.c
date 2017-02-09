@@ -157,7 +157,7 @@ unsigned int setConfigurationEquation(char * input, struct Equation * configInpu
         // removes all the blank spaces before and after and only gets the string
         // with the information. This is only valid for inputs that are not separated
         // by blank spaces
-        sscanf(input, "%s", input);
+        removeBlankSpacesBeforeAndAfter(input);
 
         if (compareCaseInsensitive(input, "diffusion") == 0) {
             configInput->typeS = DIFFUSION;

@@ -3,17 +3,17 @@
 % Configuration for Octave:
 more off %turns pagination off
 
-cpennes2Tr
+cHpennes1Li
 
 % Inputs
 Tc = 37;
 Ts = 100;
-qflux = 1e4;
 
-% Characteristics for the mediums. They must be vectors
+% Characteristics for the mediums.
 ro = 1200; % tissue density (kg/m3)
 cp = 3200; % specific heat (J/(K-kg))
 k = 0.3; % thermal conductivity (W/(K-m))
+tau = 10; % thermal relaxation time (s)
 
 wb = 1e-4; % blood perfusion (s-1)
 pb = 1052; % blood density (kg/m3)
@@ -43,11 +43,8 @@ time_Ana = i0*times_1(1);
 disp([' '; 'Time ' num2str(time_Ana) 's (step ' num2str(i0) ')'; ' '])
 temp_message = 'Errors and differences: ';
 
-% Note that we inverted the x,y vectors so that we could use this function to solve
-% the problem shown in the tutorial
-[Ttemp, qxAnatemp, qyAnatemp] = D2_BHE_f(Points_Output_1(1:number_Points,1)',  ...
-             Points_Output_1(1:number_Points,2)', 0.75e-3, 1e-3, time_Ana, ...
-             Ts, Tc, qflux, k, ro, cp, wb, pb, cb, Tb, Qmet, 50, 100, 50);
+[Ttemp, qxAnatemp] = D1_H_BHE_f(Points_Output_1(1:number_Points,1)', 1e-3, time_Ana, ...
+             Ts, Tc, k, ro, cp, tau, wb, pb, cb, Tb, Qmet, 500);
              
              if ( save_1(1) || save_1(2) )
               if (figure_defined == 0)
@@ -90,9 +87,9 @@ temp_message = 'Errors and differences: ';
              
              % plot central temperatures
              set(0,'CurrentFigure',figure_Temp)
-             plot(Points_Output_1(1:numbers_1(1),2), Ttemp(1:numbers_1(1))', '*b')
+             plot(Points_Output_1(1:numbers_1(1),1), Ttemp(1:numbers_1(1))', '*b')
              hold on 
-             plot(Points_Output_1(1:numbers_1(1),2), output_1(1:numbers_1(1), i0), '*r')
+             plot(Points_Output_1(1:numbers_1(1),1), output_1(1:numbers_1(1), i0), '*r')
              
              end
              
@@ -115,9 +112,9 @@ temp_message = 'Errors and differences: ';
              ' maximum percentage error ' num2str(MaxPercentageError(3,i0)) ' %;'];
              
              set(0,'CurrentFigure',figure_Temp)
-             plot(Points_Output_1((1 + numbers_1(1)*save_1(1) ):number_Temp,2), Ttemp((1 + numbers_1(1)*save_1(1) ):number_Temp)', 'ob')
+             plot(Points_Output_1((1 + numbers_1(1)*save_1(1) ):number_Temp,1), Ttemp((1 + numbers_1(1)*save_1(1) ):number_Temp)', 'ob')
              hold on 
-             plot(Points_Output_1((1 + numbers_1(1)*save_1(1) ):number_Temp,2), output_1((1 + numbers_1(1)*save_1(1) ):number_Temp, i0), 'or')
+             plot(Points_Output_1((1 + numbers_1(1)*save_1(1) ):number_Temp,1), output_1((1 + numbers_1(1)*save_1(1) ):number_Temp, i0), 'or')
              end
              
              hold off
@@ -134,9 +131,8 @@ temp_message = 'Errors and differences: ';
               end
               
               qxAnaProj = Points_Output_1( (number_Temp + 1):number_Flux, 1).*qxAnatemp(number_Points_Flux:number_Points)';
-              qyAnaProj = Points_Output_1( (number_Temp + 1):number_Flux, 2).*qyAnatemp(number_Points_Flux:number_Points)';
               
-              qAnaLTn = qxAnaProj + qyAnaProj;
+              qAnaLTn = qxAnaProj;
              
              TotalDiffFlux(1,i0) = sum(abs(qAnaLTn - output_1((1 + number_Temp ):number_Flux, i0) ));
              MaxDiffFlux(1,i0) = max(abs( qAnaLTn - output_1((1 + number_Temp ):number_Flux, i0) ));
@@ -157,11 +153,11 @@ temp_message = 'Errors and differences: ';
              
              
              set(0,'CurrentFigure',figure_Flux);
-             plot(Points_Output_1(number_Points_Flux:number_Points,2), qAnaLTn, '*b')
+             plot(Points_Output_1(number_Points_Flux:number_Points,1), qAnaLTn, '*b')
              hold on 
-             plot(Points_Output_1(number_Points_Flux:number_Points,2), output_1((1 + number_Temp ):number_Flux, i0), '*r')
+             plot(Points_Output_1(number_Points_Flux:number_Points,1), output_1((1 + number_Temp ):number_Flux, i0), '*r')
              
-             plot(Points_Output_1(number_Points_Flux:number_Points,2), qAnaLTn - output_1((1 + number_Temp ):number_Flux, i0), '*g')
+             plot(Points_Output_1(number_Points_Flux:number_Points,1), qAnaLTn - output_1((1 + number_Temp ):number_Flux, i0), '*g')
              hold off
              
              
@@ -171,7 +167,7 @@ temp_message = 'Errors and differences: ';
              disp(temp_message)
 
              fflush(stdout);
-             pause(0.1)
+             pause
              
              figure_defined = 1;
              

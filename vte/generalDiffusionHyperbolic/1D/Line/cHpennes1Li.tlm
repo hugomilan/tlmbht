@@ -1,0 +1,54 @@
+Simulation  // Configurations for the simulations
+{
+    output extension = m;
+}
+
+Mesh
+{
+    file name = line_2BC_47e;
+    input format = tlmtbn;
+}
+
+Equation
+{
+    type = hyperbolic pennes;
+    equation name = BHE;
+    dimensions = 1;
+    Solve = dynamic;
+    time-step = 1e-3;
+    time-jump = 100;
+    final time = 1;
+    save = scalar;
+    save = scalar between;
+    save = vector;
+}
+
+Material
+{
+    equation = BHE;
+    number =  10;
+    density = 1200;
+    specific heat = 3200;
+    thermal conductivity = 0.3;
+    thermal relaxation time = 10;
+    blood perfusion = 1e-4;
+    blood density = 1052;
+    blood specific heat = 3600;
+    blood temperature = 37;
+    internal heat generation = 500;
+    initial temperature = 37;
+}
+
+Boundary
+{
+    equation = BHE;
+    number = 20;
+    Temperature = 37;
+}
+
+Boundary
+{
+    equation = BHE;
+    number = 21;
+    Temperature = 100;
+}

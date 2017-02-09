@@ -20,16 +20,9 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/main.c</file>
-            <file>file:/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/src/meshreader/libmeshtlmbht.h</file>
-            <file>file:/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/src/solver/tlmsolver/pennes/libtlmpennes.c</file>
-            <file>file:/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/tlmcode.md</file>
-            <file>file:/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/Wiki/tlmbht.wiki/Home.md</file>
-            <file>file:/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/LICENSE.md</file>
-            <file>file:/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/src/solver/tlmsolver/pennes/libtlmpenneseigen.cpp</file>
-            <file>file:/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/src/solver/tlmsolver/libtlmsolver.c</file>
-            <file>file:/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/src/configs/libmatconfig.c</file>
+            <file>file:/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/src/meshreader/libmeshtlmbht.c</file>
             <file>file:/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/src/configs/libconfig.c</file>
-            <file>file:/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/README.md</file>
+            <file>file:/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/src/meshreader/libgmshreader.c</file>
         </group>
     </open-files>
 </project-private>

@@ -9,7 +9,7 @@ permalink: vte/diff-2D-Tr.html
 
 <span style="color:#697473">Jan 31, 2017</span> by [**Hugo Milan**](https://hugomilan.github.io/)
 
-Here, I will walk you through in how to use the TLM method to solve the Diffusion equation in 2D with the element Triangle by comparing the tlmbht predictions with [analytical solution]({{ site.baseurl }}{% link theory/ana/heat 2D TTqq.md %}) predictions. 
+Here, I will walk you through in how to use the TLM method to solve the Diffusion equation in 2D with the element Triangle by comparing the tlmbht predictions with [analytical solution]({{ site.baseurl }}{% link theory/ana/heat/heat 2D TTqq.md %}) predictions. 
 
 Everything you need is available in the folder /vte/generalDiffusion/2D/TriangleNode. This folder was downloaded when you downloaded the source files. If you did not download the source files, you can download it from [here](https://github.com/hugomilan/tlmbht/tree/master/vte/generalDiffusion/2D/TriangleNode). If you do not want to, you do not need to download or install anything--all the relevant outputs will be shown here. If you want to download tlmbht, go to [releases](https://github.com/hugomilan/tlmbht/releases) and get the most updated version of tlmbht.
 
@@ -131,7 +131,7 @@ Now we are ready to visualize the output and compare the TLM predictions with an
 
 ### 5) Visualize the output.
 
-After you have run tlmbht, it created the output file cdiff2Tr.m. In this tutorial, you do not need to worry about this file. We will run a script that automatically loads the data into Octave/Matlab. The script is in the file vdiff2Tr.m, which calls the analytical solver function D2_HEAT_f.m  ([click here to read more about the analytical solution and how to use this function]({{ site.baseurl }}{% link theory/ana/heat 2D TTqq.md %})).
+After you have run tlmbht, it created the output file cdiff2Tr.m. In this tutorial, you do not need to worry about this file. We will run a script that automatically loads the data into Octave/Matlab. The script is in the file vdiff2Tr.m, which calls the analytical solver function D2_HEAT_f.m  ([click here to read more about the analytical solution and how to use this function]({{ site.baseurl }}{% link theory/ana/heat/heat 2D TTqq.md %})).
 
 This part should be as simple as opening vdiff2Tr.m in Octave/Matlab and running it (press key F5). It will show you two plots and textual information. The figure below shows the two plots and part of the textual information. Concentration is shown in the left figure and flux is shown on the right figure. The analytical predictions are shown in blue, the tlmbht predictions are shown in red, and the green shows the difference of the calculated fluxes. In the concentration plots, asterisks represent concentration calculated at the center of the TLM nodes and the circles represent the concentration calculated between nodes. You can see that the predictions are almost identical, which you can confirm by looking at the textual information that tells you that the mean concentration error was 0.28 % and the mean flux difference was 1.3e-+ m<sup>-2</sup> (which correspond to a fraction of 0.13 of the input flux). In this problem, we the mean flux error is not a viable validation variable because the flux is close to zero in some parts of the mesh and, hence, very small differences yields very large percentage errors. Moreover, concentration values close to zero inflated the percentage errors. However, we graphically observe that the tlmbht predictions match the analytical predictions very well.
 

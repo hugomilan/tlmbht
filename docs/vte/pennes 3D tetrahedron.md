@@ -9,7 +9,7 @@ permalink: vte/pennes-3D-Te.html
 
 <span style="color:#697473">Jan 31, 2017</span> by [**Hugo Milan**](https://hugomilan.github.io/)
 
-Here, I will walk you through in how to use the TLM method to solve the Pennes equation in 3D with the element Tetrahedron by comparing the tlmbht predictions with [analytical solution]({{ site.baseurl }}{% link theory/ana/pennes 3D TTqqqq.md %}) predictions.
+Here, I will walk you through in how to use the TLM method to solve the Pennes equation in 3D with the element Tetrahedron by comparing the tlmbht predictions with [analytical solution]({{ site.baseurl }}{% link theory/ana/pennes/pennes 3D TTqqqq.md %}) predictions.
 
 Everything you need is available in the folder /vte/generalDiffusion/3D/TetrahedronNode. This folder was downloaded when you downloaded the source files. If you did not download the source files, you can download it from [here](https://github.com/hugomilan/tlmbht/tree/master/vte/generalDiffusion/3D/TetrahedronNode). If you do not want to, you do not need to download or install anything--all the relevant outputs will be shown here. If you want to download tlmbht, go to [releases](https://github.com/hugomilan/tlmbht/releases) and get the most updated version of tlmbht.
 
@@ -17,7 +17,7 @@ In this validation, we will follow the 5 steps [showed here]({{ site.baseurl }}{
 
 ### 1) Create the geometry of the problem.
 
-We are building up from the problem description of the [validation for Pennes equation in 2D with Triangular elements]({{ site.baseurl }}{% link vte/pennes 2D triangle.md %}). Here, we will consider a simple three-dimensional problem that has [analytical solution]({{ site.baseurl }}{% link theory/ana/pennes 3D TTqqqq.md %}). In this problem, we will include effect of blood perfusion, metabolic heat generation, two constant temperature boundary conditions (constant core temperature T<sub>C</sub>, and constant surface temperature T<sub>S</sub>), two constant heat flux boundary condition (q<sub>x</sub> and q<sub>z</sub>), and two adiabatic boundary condition. The problem geometry is shown below.
+We are building up from the problem description of the [validation for Pennes equation in 2D with Triangular elements]({{ site.baseurl }}{% link vte/pennes 2D triangle.md %}). Here, we will consider a simple three-dimensional problem that has [analytical solution]({{ site.baseurl }}{% link theory/ana/pennes/pennes 3D TTqqqq.md %}). In this problem, we will include effect of blood perfusion, metabolic heat generation, two constant temperature boundary conditions (constant core temperature T<sub>C</sub>, and constant surface temperature T<sub>S</sub>), two constant heat flux boundary condition (q<sub>x</sub> and q<sub>z</sub>), and two adiabatic boundary condition. The problem geometry is shown below.
 
 <img src="{{ site.baseurl }}/assets/images/vte/3D_Tetrahedron_Pennes_Problem.png" alt="Geometry of the problem used to validate the tetrahedron element for the Pennes equation in 3D" width="500">
 
@@ -145,7 +145,7 @@ Now we are ready to visualize the output and compare the TLM predictions with an
 
 ### 5) Visualize the output.
 
-After you have run tlmbht, it created the output file cpennes3Te.m. In this tutorial, you do not need to worry about this file. We will run a script that automatically loads the data into Octave/Matlab. The script is in the file vpennes3Te.m, which calls the analytical solver function D3_BHE_f.m ([click here to read more about the analytical solution and how to use this function]({{ site.baseurl }}{% link theory/ana/pennes 3D TTqqqq.md %})).
+After you have run tlmbht, it created the output file cpennes3Te.m. In this tutorial, you do not need to worry about this file. We will run a script that automatically loads the data into Octave/Matlab. The script is in the file vpennes3Te.m, which calls the analytical solver function D3_BHE_f.m ([click here to read more about the analytical solution and how to use this function]({{ site.baseurl }}{% link theory/ana/pennes/pennes 3D TTqqqq.md %})).
 
 This part should be as simple as opening vpennes3Te.m in Octave/Matlab and running it (press key F5). It will show you two plots along the y-axis and textual information. The figure below shows the two plots and part of the textual information. Temperature is shown in the left figure and heat flux is shown on the right figure. The analytical predictions are shown in blue, the tlmbht predictions are shown in red, and the green shows the difference of the calculated heat fluxes. In the temperature plots, asterisks represent temperatures calculated at the center of the TLM nodes and the circles represent the temperatures calculated between nodes. You can see that the predictions are similar, which you can confirm by looking at the textual information that tells you that the mean temperature error was 1.76 % and the mean heat flux difference was 2563 W/m<sup>2</sup> (which correspond to a fraction of 0.13 of the highest input heat flux). In this problem, the mean heat flux error is not a viable validation variable because the heat flux is close to zero in some parts of the mesh and, hence, very small differences yields very large percentage errors.
 

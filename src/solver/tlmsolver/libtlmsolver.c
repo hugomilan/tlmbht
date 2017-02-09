@@ -493,7 +493,7 @@ unsigned int getquantityAllocated_connectionLeveln(struct connectionLeveln *con,
 }
 
 /*
- * getPortsOrPoints: get the points or ports saved.
+ * getPortsOrPoints: get the points or ports saved on the connection variable.
  * position = number of the intersection point that I want to get the number of the ports
  */
 unsigned int getPortsOrPoints(struct connectionLeveln *con,
@@ -618,7 +618,7 @@ unsigned int getGeometricalVariablesTLMline(const struct node *N1,
     center[2] = (N1->z + N2->z) / 2;
 
 
-    output[0] = length/2;
+    output[0] = length / 2;
     output[1] = center[0];
     output[2] = center[1];
     output[3] = center[2];
@@ -878,11 +878,15 @@ unsigned int getTLMnumbers(const struct dataForSimulation * input,
     if (input->simulationInput.verboseMode == 1) {
         printf("Initiating TLM numbers... \n");
     }
-    unsigned int errorTLMnumber = 0, flag, j, k, l, quantityOfPortsToAdd;
+    unsigned int errorTLMnumber = 0, flag, flagStub, j, k, l, quantityOfPortsToAdd;
     // flag:
     // 0 - Undefined (not a boundary neither a material)
     // 1 - Boundary element
     // 2 - Material element
+
+    // flagStub:
+    // 0 - this element does not have stub
+    // 1 - this element have stub
 
     unsigned long long temp[] = {0, 0}, i,
             points[] = {0, 0, 0, 0, 0, 0, 0, 0, 0};
@@ -967,6 +971,7 @@ unsigned int getTLMnumbers(const struct dataForSimulation * input,
             //        input->mesh.quantityOfSpecificElement[l]);
 
             flag = 0;
+            flagStub = 0;
 
             // get the tag number of this element and use the inner two for-loops to
             // see if it is a material or a boundary
@@ -1025,6 +1030,10 @@ unsigned int getTLMnumbers(const struct dataForSimulation * input,
 
                     if (tag == input->materialInput[ input->equationInput[id].materialNumbers[j] ].numberInput[k]) {
                         flag = 2;
+                        // I will probably have to modify this part when I code to solve for parameters that change
+                        if (input->materialInput[ input->equationInput[id].materialNumbers[j] ].generalized_relaxationTime != 0) {
+                            flagStub = 1;
+                        }
                         quantityOfPortsToAdd = 1;
                         numbers->MaterialElements[l]++;
                         // DEBUG: show where we were
@@ -1079,6 +1088,7 @@ end_for_j_and_for_k_line:
                                 break;
                             case TWO:
                                 /* FALLTHRU */
+                                // break;
                             case THREE:
                                 // the ports start at 1 because 0 is my flag
                                 // to indicate that this is a boundary
@@ -1340,7 +1350,7 @@ end_for_j_and_for_k_line:
 
 
             if ((errorTLMnumber =
-                    add_to_aPortToRealPort(flag, j, &(numbers->abstractPortsToReal[l]))) != 0)
+                    add_to_aPortToRealPort(flag, flagStub, j, &(numbers->abstractPortsToReal[l]))) != 0)
                 // add_to_a[bstract]PortToRealPort. I add the number of the node
                 return errorTLMnumber;
 
@@ -1414,6 +1424,7 @@ end_for_j_and_for_k_line:
  */
 unsigned int initiateTLMnumbers(struct TLMnumbers* numbers) {
     numbers->Ports = 0;
+    numbers->StubPorts = 0;
     numbers->Nodes = 0;
     numbers->Output = 0;
     numbers->Points_Output = 0;
@@ -1465,7 +1476,8 @@ unsigned int terminateTLMnumbers(struct TLMnumbers* numbers) {
  */
 unsigned int initiate_aPortToRealPort(const struct dataForSimulation * input,
         struct aPortToRealPort** Ports, int id) {
-    double percentage = 0;
+    double percentage = 0, percentageStub = 0;
+    // the values used for percentage and percentageStub are arbitrary
     unsigned int type = 0;
 
     if ((*Ports = (struct aPortToRealPort*) malloc(sizeof (struct aPortToRealPort)*100)) == NULL)
@@ -1659,8 +1671,6 @@ unsigned int initiate_aPortToRealPort(const struct dataForSimulation * input,
         if (i == 0) {
             // the number of the node shall start at 0
             (*Ports)[i].previousMaximumAbstractNode = 0;
-            // previousMaximumAbstractNode is used only here to initialize the
-            // previousMaximumAbstractPort
 
             // I've to start with 1 because 0 is my code to when an intersection
             // has a boundary
@@ -1681,11 +1691,11 @@ unsigned int initiate_aPortToRealPort(const struct dataForSimulation * input,
         }
 
 
+        // setting the pointerType
         (*Ports)[i].pointerType = type;
 
-
         (*Ports)[i].quantitySaved = 0;
-        // this 1 guarantees that we will have at least one position saved
+        // this 1 guarantees that we will have at least one position to save
         (*Ports)[i].quantityAllocated = 1 + percentage *
                 input->mesh.quantityOfSpecificElement[i];
 
@@ -1694,7 +1704,52 @@ unsigned int initiate_aPortToRealPort(const struct dataForSimulation * input,
                 (*Ports)[i].quantityAllocated)) == NULL)
             return 8735;
 
+
+
+        // setting the pointerTypeStub based on the equation we are going to solve
+        switch (input->equationInput[id].typeS) {
+            case HYPERBOLIC_DIFFUSION:
+                /* FALLTHRU */
+                // break;
+            case HYPERBOLIC_HEAT:
+                /* FALLTHRU */
+                // break;
+            case HYPERBOLIC_PENNES:
+                // I start assuming that the majority of the elements DO have stub
+                (*Ports)[i].pointerTypeStub = 2;
+                percentageStub = 0.02; // allocate 2% in case we have elements
+                // that DO NOT have stub
+                break;
+            case DIFFUSION:
+                /* FALLTHRU */
+                // break;
+            case HEAT:
+                /* FALLTHRU */
+                // break;
+            case PENNES:
+                // I start assuming that the majority of the elements DO NOT have stub
+                (*Ports)[i].pointerTypeStub = 3;
+                percentageStub = 0.02; // allocate 2% in case we have elements
+                // that DO have stub
+
+                // this part will have to be modified when we consider parameters that change with time...
+                // they will also add one stub
+                break;
+        }
+
+        (*Ports)[i].quantitySavedStub = 0;
+        // this 1 guarantees that we will have at least one position to save
+        (*Ports)[i].quantityAllocatedStub = 1 + percentageStub *
+                input->mesh.quantityOfSpecificElement[i];
+
+        if (((*Ports)[i].nodesNumbersStub = (unsigned long long*) malloc(
+                sizeof (unsigned long long)*
+                (*Ports)[i].quantityAllocatedStub)) == NULL)
+            return 8741;
+
     }
+
+
     return 0;
 }
 
@@ -1704,7 +1759,8 @@ unsigned int initiate_aPortToRealPort(const struct dataForSimulation * input,
 unsigned int reallocate_aPortToRealPort(struct aPortToRealPort* Ports) {
 
     Ports->quantityAllocated = 5 + (unsigned long long) 1.2 * Ports->quantityAllocated;
-    // I add at least 5 for each reallocation
+    // add 20% of the existing plus 5 for each reallocation (in case 20% is < 1)
+    // these values are arbitrary
 
     if ((Ports->nodesNumbers = (unsigned long long*) realloc(Ports->nodesNumbers,
             Ports->quantityAllocated * sizeof (unsigned long long))) == NULL)
@@ -1715,14 +1771,36 @@ unsigned int reallocate_aPortToRealPort(struct aPortToRealPort* Ports) {
 }
 
 /*
+ * reallocate_aPortToRealPortStub: reallocate aPortToRealPort for Stubs
+ */
+unsigned int reallocate_aPortToRealPortStub(struct aPortToRealPort* Ports) {
+
+    Ports->quantityAllocatedStub = 5 + (unsigned long long) 1.5 * Ports->quantityAllocatedStub;
+    // add 50% of the existing plus 5 for each reallocation (in case 50% is < 1)
+    // these values are arbitrary
+
+    if ((Ports->nodesNumbersStub = (unsigned long long*) realloc(Ports->nodesNumbersStub,
+            Ports->quantityAllocatedStub * sizeof (unsigned long long))) == NULL)
+        return 8740;
+
+
+    return 0;
+}
+
+/*
  * add_to_aPortToRealPort: add the number of the port in the input variable
  */
-unsigned int add_to_aPortToRealPort(unsigned int flag, unsigned long long number,
+unsigned int add_to_aPortToRealPort(unsigned int flag, unsigned int flagStub,
+        unsigned long long number,
         struct aPortToRealPort* input) {
     // flag
     // 0 - undefined node
     // 1 - boundary node
     // 2 - material node
+
+    // flagStub
+    // 0 - does not have stub
+    // 1 - have stub
 
     // pointerType
     // 0 - this element type is all boundary. We have nothing allocated. This is defined later.
@@ -1730,13 +1808,21 @@ unsigned int add_to_aPortToRealPort(unsigned int flag, unsigned long long number
     // 2 - contains the number of the nodes that are boundary (and not defined)
     // 3 - contains the number of the nodes that are material
 
+    // pointerTypeStub
+    // 0 - this element type do not have stub. We have nothing allocated. This is defined later.
+    // 1 - this element type have stub. We have nothing allocated. This is defined later.
+    // 2 - contains the number of the nodes that do not have stub
+    // 3 - contains the number of the nodes that have stub
+
     unsigned int errorTLMnumber;
 
     if ((flag == 0 || flag == 1) && input->pointerType != 2)
-        return 0;
+        goto addStub;
+    //return 0; // I can't just exit. I have to treat the stub
 
     if (flag == 2 && (input->pointerType != 3))
-        return 0;
+        goto addStub;
+    //return 0; // I can't just exit. I have to treat the stub
 
     if (input->quantitySaved == input->quantityAllocated) {
         if ((errorTLMnumber = reallocate_aPortToRealPort(
@@ -1748,22 +1834,57 @@ unsigned int add_to_aPortToRealPort(unsigned int flag, unsigned long long number
 
     input->quantitySaved++;
 
+    // now for the stub
+addStub:
+    // I only add the stub number IF the element is material.
+    if (flag != 2)
+        return 0;
+
+    if (flagStub == 0 && input->pointerTypeStub != 2)
+        return 0;
+
+    if (flagStub == 1 && input->pointerTypeStub != 3)
+        return 0;
+
+    if (input->quantitySavedStub == input->quantityAllocatedStub) {
+        if ((errorTLMnumber = reallocate_aPortToRealPortStub(
+                input)) != 0)
+            return errorTLMnumber;
+    }
+
+    input->nodesNumbersStub[input->quantitySavedStub] = number;
+
+    input->quantitySavedStub++;
+
 
     return 0;
 }
 
 /*
- * wrapTLMnumbers: remove the unnecessary allocate positions
+ * wrapTLMnumbers: remove the unnecessary allocated positions
  */
 unsigned int wrapTLMnumbers(const struct dataForSimulation * input,
         struct TLMnumbers* numbers, int id) {
     unsigned int errorTLMnumber = 0;
 
     for (unsigned int i = 0; i < 100; i++) {
+        // Nodes is initiated as zero. Here I'm accumulating the number of nodes
         numbers->Nodes = numbers->Nodes + numbers->MaterialElements[i];
 
         numbers->Ports = numbers->Ports +
                 numbers->abstractPortsToReal[i].portsPerNode * numbers->MaterialElements[i];
+
+        if (numbers->abstractPortsToReal[i].pointerTypeStub == 2) {
+            // here the quantitySavedStub has the quantity of nodes that DO NOT have stub
+            numbers->StubPorts = numbers->StubPorts +
+                    (numbers->MaterialElements[i] -
+                    numbers->abstractPortsToReal[i].quantitySavedStub);
+
+        } else if (numbers->abstractPortsToReal[i].pointerTypeStub == 3) {
+            // here the quantitySavedStub has the quantity of nodes that DO have stub
+            numbers->StubPorts = numbers->StubPorts +
+                    numbers->abstractPortsToReal[i].quantitySavedStub;
+        }
 
         if (i == 0) {
             numbers->abstractPortsToReal[i].previousMaximumRealNode = 0;
@@ -1771,6 +1892,7 @@ unsigned int wrapTLMnumbers(const struct dataForSimulation * input,
             numbers->abstractPortsToReal[i].previousMaximumRealPort = 1;
             // I start with 1 because 0 is my flag for boundary condition
 
+            numbers->abstractPortsToReal[i].previousMaximumRealStubPort = 0;
 
         } else {
             numbers->abstractPortsToReal[i].previousMaximumRealNode =
@@ -1780,8 +1902,38 @@ unsigned int wrapTLMnumbers(const struct dataForSimulation * input,
             numbers->abstractPortsToReal[i].previousMaximumRealPort =
                     numbers->abstractPortsToReal[i - 1].previousMaximumRealPort +
                     numbers->abstractPortsToReal[i - 1].portsPerNode * numbers->MaterialElements[i - 1];
+
+            // calculate the number of previous stubs based on the pointerTypeStub of the previous element
+            switch (numbers->abstractPortsToReal[i - 1].pointerTypeStub) {
+                case 0:
+                    // all nodes of the element i-1 DO NOT have stub
+                    numbers->abstractPortsToReal[i].previousMaximumRealStubPort =
+                            numbers->abstractPortsToReal[i - 1].previousMaximumRealStubPort;
+                    break;
+                case 1:
+                    // all nodes of the element i-1 DO have stub
+                    numbers->abstractPortsToReal[i].previousMaximumRealStubPort =
+                            numbers->abstractPortsToReal[i - 1].previousMaximumRealStubPort +
+                            numbers->MaterialElements[i - 1];
+                    break;
+                case 2:
+                    // here the quantitySavedStub has the quantity of nodes that DO NOT have stub
+                    numbers->abstractPortsToReal[i].previousMaximumRealStubPort =
+                            numbers->abstractPortsToReal[i - 1].previousMaximumRealStubPort +
+                            (numbers->MaterialElements[i - 1] -
+                            numbers->abstractPortsToReal[i - 1].quantitySavedStub);
+                    break;
+                case 3:
+                    // here the quantitySavedStub has the quantity of nodes that DO have stub
+                    numbers->abstractPortsToReal[i].previousMaximumRealStubPort =
+                            numbers->abstractPortsToReal[i - 1].previousMaximumRealStubPort +
+                            numbers->abstractPortsToReal[i - 1].quantitySavedStub;
+                    break;
+            }
         }
 
+        // wrapping the nodesNumbers vector to see if it was all boundary/material
+        // or a mixture of both
         if (numbers->MaterialElements[i] == 0) {
             // this element is all boundary
             numbers->abstractPortsToReal[i].pointerType = 0;
@@ -1802,22 +1954,130 @@ unsigned int wrapTLMnumbers(const struct dataForSimulation * input,
         } else {
             // these elements are part boundary (and/or not defined) and part material
 
-            // shortening the pointer to the quantity saved
-            if ((numbers->abstractPortsToReal[i].nodesNumbers = (unsigned long long*)
-                    realloc(numbers->abstractPortsToReal[i].nodesNumbers,
-                    sizeof (unsigned long long)*
-                    numbers->abstractPortsToReal[i].quantitySaved)) == NULL)
-                return 8738;
-
             // sorting the numbers saved from smallest to biggest
             qsort(numbers->abstractPortsToReal[i].nodesNumbers,
                     numbers->abstractPortsToReal[i].quantitySaved,
                     sizeof (unsigned long long),
                     compareLLU);
+
+            // can we reduce the size of nodesNumbers by inverting the pointerType?
+            // that is, if I saved more than half of the elements I will change the type
+            // of the pointerType so that it will have less than half
+            if (numbers->abstractPortsToReal[i].quantitySaved >
+                    (numbers->MaterialElements[i] - numbers->abstractPortsToReal[i].quantitySaved)) {
+                // changing the nodesNumberStub type. Inside this function I also
+                // change the value of quantitySavedStub
+                if ((errorTLMnumber = changeNodesNumbersType(
+                        &numbers->abstractPortsToReal[i].nodesNumbers,
+                        &numbers->abstractPortsToReal[i].quantitySaved,
+                        numbers->MaterialElements[i])) != 0) {
+                    return errorTLMnumber;
+                }
+
+                // here I change pointerTypeStub
+                if (numbers->abstractPortsToReal[i].pointerType == 3) {
+                    numbers->abstractPortsToReal[i].pointerType = 2;
+                } else {
+                    numbers->abstractPortsToReal[i].pointerType = 3;
+                }
+
+
+                // I'm already with the allocation that has the smallest length of nodesNumbersStub
+            } else {
+                // shortening the pointer to the quantity saved
+                if ((numbers->abstractPortsToReal[i].nodesNumbers = (unsigned long long*)
+                        realloc(numbers->abstractPortsToReal[i].nodesNumbers,
+                        sizeof (unsigned long long)*
+                        numbers->abstractPortsToReal[i].quantitySaved)) == NULL)
+                    return 8738;
+            }
         }
 
         numbers->abstractPortsToReal[i].quantityAllocated =
                 numbers->abstractPortsToReal[i].quantitySaved;
+
+
+
+
+        // wrapping the nodesNumbersStub vector to see if it was all with/without stub
+        // or a mixture of both
+        if (numbers->MaterialElements[i] == 0
+                // this element is all boundary so we don't have stubs here
+                || (numbers->abstractPortsToReal[i].pointerTypeStub == 3 && 
+                numbers->abstractPortsToReal[i].quantitySavedStub == 0) ||
+                // we were allocating the number of nodes that DO have stub and
+                // we didn't find any stub. I don't need to include a check that
+                // MaterialElements > 0 here because if if it zero it would get into
+                // here anyways.
+                (numbers->abstractPortsToReal[i].pointerTypeStub == 2 &&
+                numbers->abstractPortsToReal[i].quantitySavedStub == numbers->MaterialElements[i])
+                // we were allocating the number of nodes that DO NOT have stub and
+                // we find that all the nodes of this material element have stub.
+                ) {
+            
+            numbers->abstractPortsToReal[i].pointerTypeStub = 0;
+            numbers->abstractPortsToReal[i].quantitySavedStub = 0;
+
+            free(numbers->abstractPortsToReal[i].nodesNumbersStub);
+            numbers->abstractPortsToReal[i].nodesNumbersStub = NULL;
+
+        } else if ( (numbers->abstractPortsToReal[i].pointerTypeStub == 3 && numbers->MaterialElements[i] == numbers->abstractPortsToReal[i].quantitySavedStub) ||
+                // we were allocating the number of nodes that DO have stub and
+                // we find that all the nodes of this material element have stub.
+                (numbers->abstractPortsToReal[i].pointerTypeStub == 2 && numbers->abstractPortsToReal[i].quantitySavedStub == 0 && numbers->MaterialElements[i] > 0)) {
+            // we were allocating the number of nodes that DO NOT have not stub and we 
+            // didn't find any even though we found material nodes. So, we 
+            // conclude that the elements of these nodes all have stub
+            
+            numbers->abstractPortsToReal[i].pointerTypeStub = 1;
+            numbers->abstractPortsToReal[i].quantitySavedStub = 0;
+
+            free(numbers->abstractPortsToReal[i].nodesNumbersStub);
+            numbers->abstractPortsToReal[i].nodesNumbersStub = NULL;
+
+        } else {
+            // these elements are part with/without stub
+
+            // sorting the numbers saved from smallest to biggest
+            qsort(numbers->abstractPortsToReal[i].nodesNumbersStub,
+                    numbers->abstractPortsToReal[i].quantitySavedStub,
+                    sizeof (unsigned long long),
+                    compareLLU);
+
+            // can we reduce the size of nodesNumbersStub by inverting the pointerTypeStub?
+            // that is, if I saved more than half of the elements I will change the type
+            // of the pointerTypeStub so that it will have less than half
+            if (numbers->abstractPortsToReal[i].quantitySavedStub >
+                    (numbers->MaterialElements[i] - numbers->abstractPortsToReal[i].quantitySavedStub)) {
+                // changing the nodesNumberStub type. Inside this function I also
+                // change the value of quantitySavedStub
+                if ((errorTLMnumber = changeNodesNumbersType(
+                        &numbers->abstractPortsToReal[i].nodesNumbersStub,
+                        &numbers->abstractPortsToReal[i].quantitySavedStub,
+                        numbers->MaterialElements[i])) != 0) {
+                    return errorTLMnumber;
+                }
+
+                // here I change pointerTypeStub
+                if (numbers->abstractPortsToReal[i].pointerTypeStub == 3) {
+                    numbers->abstractPortsToReal[i].pointerTypeStub = 2;
+                } else {
+                    numbers->abstractPortsToReal[i].pointerTypeStub = 3;
+                }
+
+
+                // I'm already with the allocation that has the smallest length of nodesNumbersStub
+            } else {
+                // shortening the pointer to the quantity saved
+                if ((numbers->abstractPortsToReal[i].nodesNumbersStub = (unsigned long long*)
+                        realloc(numbers->abstractPortsToReal[i].nodesNumbersStub,
+                        sizeof (unsigned long long)*
+                        numbers->abstractPortsToReal[i].quantitySavedStub)) == NULL)
+                    return 8742;
+            }
+        }
+        numbers->abstractPortsToReal[i].quantityAllocatedStub =
+                numbers->abstractPortsToReal[i].quantitySavedStub;
     }
 
 
@@ -1843,6 +2103,50 @@ unsigned int wrapTLMnumbers(const struct dataForSimulation * input,
 }
 
 /*
+ * changeNodesNumbersType: change the type of the nodesNumbers by changing what
+ * is in nodesNumbers. For instance, if nodesNumbers have the number of the nodes
+ * that DO have stub, it will change it to have the number of nodes that DO NOT have stub.
+ */
+unsigned int changeNodesNumbersType(unsigned long long **input,
+        unsigned long long *size, unsigned long long maxNodeNumber) {
+    unsigned long long i, j, k;
+    unsigned int errorTLMnumber;
+
+    // first I copy the content of input
+    unsigned long long *input_copied;
+    if ((input_copied = malloc(*size * sizeof (unsigned long long))) == NULL) {
+        errorTLMnumber = 8743;
+        sendErrorCodeAndMessage(errorTLMnumber, NULL, NULL, NULL, NULL);
+        return errorTLMnumber;
+    }
+
+    for (i = 0; i < *size; i++) {
+        input_copied[i] = (*input)[i];
+    }
+
+    // now I realloc input so that it matches the new size
+    if ((*input = realloc(*input, (maxNodeNumber - *size) * sizeof (unsigned long long))) == NULL) {
+        errorTLMnumber = 8744;
+        sendErrorCodeAndMessage(errorTLMnumber, NULL, NULL, NULL, NULL);
+        return errorTLMnumber;
+    }
+
+    // changing the content of input
+    for (i = 0; i < input_copied[0]; i++) {
+        (*input)[i] = i;
+    }
+    k = i;
+    for (j = 0; j < *size; j++) {
+        for (i = input_copied[j] + 1; i < input_copied[j + 1]; i++) {
+            (*input)[k] = i;
+            k++;
+        }
+    }
+    *size = maxNodeNumber - *size;
+    return 0;
+}
+
+/*
  * terminate_aPortToRealPort: deallocate aPortToRealPort
  */
 unsigned int terminate_aPortToRealPort(struct aPortToRealPort** Ports) {
@@ -1851,6 +2155,9 @@ unsigned int terminate_aPortToRealPort(struct aPortToRealPort** Ports) {
         for (unsigned int i = 0; i < 100; i++) {
             free((*Ports)[i].nodesNumbers);
             (*Ports)[i].nodesNumbers = NULL;
+
+            free((*Ports)[i].nodesNumbersStub);
+            (*Ports)[i].nodesNumbersStub = NULL;
         }
 
         free((*Ports));
@@ -2003,7 +2310,8 @@ unsigned int getNumberOfPortsGivenElement(unsigned int elementCode,
  * and return the real number of the port, the first port number of that node, and
  * the last port number of that node. This is used to make the connection process.
  * The abstract port comes from the connection variable and is the number of the 
- * port plus 1
+ * port plus 1. The abstract port number assumes that all elements are material 
+ * and that we don't have stubs
  */
 void getRealPortNumber_fromAbstractPortNumber(
         unsigned long long abstractPortNumber, struct aPortToRealPort* Ports,
@@ -2011,9 +2319,12 @@ void getRealPortNumber_fromAbstractPortNumber(
     // 0 - position of the Real port
     // 1 - first real port number of the node that contains the port at 0
     // 2 - last real port number of the node that contains the port at 0
+    // 3 - position of the Real port with offset from stub
+    // 4 - same as 3 + offset from stub
+    // 5 - same as 4 + offset from stub and is the stub port number if this node has stub
 
-    unsigned long long j, offset;
-    unsigned int i;
+    unsigned long long j, offset, numberOfNodeWithinElement;
+    unsigned int i, offsetStub;
 
     // the element type of the abstractPortNumber is the type that has at most
     // the number of the abstract port number.
@@ -2082,83 +2393,209 @@ void getRealPortNumber_fromAbstractPortNumber(
 
     output[1] = output[0] - output[1];
 
+    // calculating the effects of stub offset on this node
+    switch (Ports[i].pointerTypeStub) {
+        case 0:
+            // all nodes of the element DO NOT have stub
+            output[3] = output[0] + Ports[i].previousMaximumRealStubPort;
+            output[4] = output[1] + Ports[i].previousMaximumRealStubPort;
+            output[5] = output[2] + Ports[i].previousMaximumRealStubPort;
+            break;
+
+            // all nodes of this element DO have stub
+        case 1:
+            // this is the number of THIS node (starting at zero).
+            numberOfNodeWithinElement = (output[1] -
+                    (Ports[i].previousMaximumRealPort - 1)) / Ports[i].portsPerNode;
+
+            output[3] = output[0] + Ports[i].previousMaximumRealStubPort
+                    + numberOfNodeWithinElement; // offset from the previous nodes of this element
+            output[4] = output[1] + Ports[i].previousMaximumRealStubPort
+                    + numberOfNodeWithinElement; // offset from the previous nodes of this element
+            output[5] = output[2] + Ports[i].previousMaximumRealStubPort
+                    + numberOfNodeWithinElement + 1; // offset from the previous nodes of this element + the stub of itself
+            break;
+
+            // this contains the nodes that DO NOT have stub
+        case 2:
+            // this is the number of THIS node (starting at zero).
+            numberOfNodeWithinElement = (output[1] -
+                    (Ports[i].previousMaximumRealPort - 1)) / Ports[i].portsPerNode;
+
+            // how many stub nodes are there that have a number LESS than
+            // this.
+            for (j = 0; j < Ports[i].quantitySavedStub; j++) {
+                if (Ports[i].nodesNumbers[j] >= numberOfNodeWithinElement) {
+                    break;
+                }
+            }
+            // if they are equal then THIS node does not have stub
+            if (Ports[i].nodesNumbers[j] == numberOfNodeWithinElement) {
+                offsetStub = 0;
+            } else {
+                offsetStub = 1;
+            }
+            output[3] = output[0] + Ports[i].previousMaximumRealStubPort
+                    + (numberOfNodeWithinElement - j); // offset from the previous nodes of this element
+            output[4] = output[1] + Ports[i].previousMaximumRealStubPort
+                    + (numberOfNodeWithinElement - j); // offset from the previous nodes of this element
+            output[5] = output[2] + Ports[i].previousMaximumRealStubPort
+                    + (numberOfNodeWithinElement - j) // offset from the previous nodes of this element
+                    + offsetStub; //  + the stub of itself
+            break;
+
+            // this contains the nodes that DO have stub
+        case 3:
+            // this is the number of THIS node (starting at zero).
+            numberOfNodeWithinElement = (output[1] -
+                    (Ports[i].previousMaximumRealPort - 1)) / Ports[i].portsPerNode;
+
+            // how many nodes without stub are there that have a number LESS than
+            // this.
+            for (j = 0; j < Ports[i].quantitySavedStub; j++) {
+                if (Ports[i].nodesNumbers[j] >= numberOfNodeWithinElement) {
+                    break;
+                }
+            }
+            // if they are equal then THIS node does have stub
+            if (Ports[i].nodesNumbers[j] == numberOfNodeWithinElement) {
+                offsetStub = 1;
+            } else {
+                offsetStub = 0;
+            }
+            output[3] = output[0] + Ports[i].previousMaximumRealStubPort
+                    + j; // offset from the previous nodes of this element
+            output[4] = output[1] + Ports[i].previousMaximumRealStubPort
+                    + j; // offset from the previous nodes of this element
+            output[5] = output[2] + Ports[i].previousMaximumRealStubPort
+                    + j // offset from the previous nodes of this element
+                    + offsetStub; //  + the stub of itself
+            break;
+    }
+
 
     return;
 }
 
 /*
- * getRealNodeAndPort_fromAbstractNode: return the real number of the node and
- * the real number of the first real port of that node given the abstract number
- * of the node. I receive the abstract number of the node and the element code.
- * The number of the nodes start at 0. The number of the ports start at 1. I have
- * to do -1 to get the number of the port starting at 0.
+ * getRealNodeAndPort_fromAbstractNode: return the real number of the node,
+ * the real number of the first port of that node, and the real number of the 
+ * first port of that node considering the offsets that stubs might do on the 
+ * numbering.
  */
 void getRealNodeAndPort_fromAbstractNode(unsigned int elementCode,
         unsigned long long abstractNodeNumber, struct aPortToRealPort* Ports,
         unsigned long long *output) {
-
     unsigned long long j;
 
+    // abstractNodeNumber starts at 0 for every elementCode.
+    // the previousMaximumRealNode contains the number of node of the previous element + 1
+    // Hence, I can safely do abstractNodeNumber + previousMaximumRealNode.
+    // Also note that previousMaximumRealPort has + 1 offset. What I mean by offset?
+    // when abastractNodenumber = 0, previousMaximumRealNode = realNumber of this node
+    // and previousMaximumRealPort - 1 = firstRealPortNumber of this node. I do -1
+    // for the realPort number because it has an offset + 1. The +1 offset is used
+    // elsewhere in the code to distinguish boundaries (value 0) from ports (value > 0).
+
+    // all nodes of this boundary are material.
     if (Ports[elementCode].pointerType == 1) {
         output[0] = abstractNodeNumber + Ports[elementCode].previousMaximumRealNode;
 
         output[1] = Ports[elementCode].portsPerNode * abstractNodeNumber +
                 Ports[elementCode].previousMaximumRealPort - 1;
 
-        return;
-    }
-
-    // this contains the number of the nodes that are boundary or undefined
-    if (Ports[elementCode].pointerType == 2) {
+        // this contains the number of the nodes that are boundary or undefined
+    } else if (Ports[elementCode].pointerType == 2) {
         for (j = 0; j < Ports[elementCode].quantitySaved; j++) {
-            // 
+            // I do a loop until I can find the boundary-element that has an abstract
+            // number greater than the abstract number I'm asking to get the real numbers.
+            // That is, the boundary-elements from 0 until j-1 will influence the calculated
+            // real numbers that I'm asking
             if (Ports[elementCode].nodesNumbers[j] > abstractNodeNumber) {
-
                 break;
             }
         }
         // j represents the quantity of nodes that are boundary and has a number less than the
-        // abstractNodeNumber. Then, We remove this extras j from the real
+        // abstractNodeNumber. Then, we remove these extras js from the real
         // node number (output[0])
         output[0] = abstractNodeNumber - j
                 + Ports[elementCode].previousMaximumRealNode;
 
         output[1] = Ports[elementCode].portsPerNode * (abstractNodeNumber - j)
                 + Ports[elementCode].previousMaximumRealPort - 1;
-        return;
 
         // this contains the number of the nodes that are material
     } else if (Ports[elementCode].pointerType == 3) {
         for (unsigned long long j = 0; j < Ports[elementCode].quantitySaved; j++) {
+            // I do a loop until I can find the material-element that has an abstract
+            // number equal or greater than the abstract number I'm asking to get
+            // the real numbers. It is likely that this will end when they are
+            // equal and so I should be able to change >= by ==.
             if (Ports[elementCode].nodesNumbers[j] >= abstractNodeNumber) {
-
                 break;
             }
         }
-        // j represents the quantity of nodes that are material and has a number 
-        // less than the abstractNodeNumber. I'm interested in the number of nodes
-        // that are boundary and has a number less than the abstractNodeNumber.
-        // To get it, I take the number of the node that was less than abstractNodeNumber
-        // (i.e., nodesNumber[j - 1]) and subtract the number of j
+        // j represents the position of the abstractNodeNumber in the vector
+        // nodesNumbers. That is, j represents the number of nodes that are
+        // material - 1. I'm OK with - 1 because previousMaximumRealNode has + 1 offset.
+        output[0] = j
+                + Ports[elementCode].previousMaximumRealNode;
 
-        if (j == 0) {
-            output[0] = abstractNodeNumber
-                    + Ports[elementCode].previousMaximumRealNode;
-
-            output[1] = Ports[elementCode].portsPerNode * abstractNodeNumber
-                    + Ports[elementCode].previousMaximumRealPort - 1;
-
-        } else {
-            output[0] = abstractNodeNumber - (Ports[elementCode].nodesNumbers[j - 1] - j)
-                    + Ports[elementCode].previousMaximumRealNode;
-
-            output[1] = Ports[elementCode].portsPerNode * (abstractNodeNumber -
-                    (Ports[elementCode].nodesNumbers[j - 1] - j))
-                    + Ports[elementCode].previousMaximumRealPort - 1;
-        }
-
-        return;
+        output[1] = Ports[elementCode].portsPerNode * j
+                + Ports[elementCode].previousMaximumRealPort - 1;
     }
+
+    // considering the effect of stub in the numbering
+
+    // all nodes of this element type DO NOT have stub
+    if (Ports[elementCode].pointerTypeStub == 0) {
+        // number of realPorts + offset done by previous stubs
+        output[2] = output[1] + Ports[elementCode].previousMaximumRealStubPort;
+
+        // all nodes of this element type DO have stub
+    } else if (Ports[elementCode].pointerTypeStub == 1) {
+        // number of realPorts + offset done by previous stubs
+        // + offset done by previous nodes that have stub
+        output[2] = output[1] + Ports[elementCode].previousMaximumRealStubPort +
+                abstractNodeNumber;
+
+        // contains the number of the nodes that DO NOT have stub
+    } else if (Ports[elementCode].pointerTypeStub == 2) {
+        for (unsigned long long j = 0; j < Ports[elementCode].quantitySavedStub; j++) {
+            // I do a loop until I can find the node without stub that has an abstract
+            // number equal or greater than the abstract number I'm asking to get
+            // the real numbers.
+            if (Ports[elementCode].nodesNumbers[j] >= abstractNodeNumber) {
+                break;
+            }
+        }
+        // j represents the number of nodes without stub before abstractNodeNumber.
+        // Then, to get the number of nodes with stub we do (abstractNodeNumber - j)
+        output[2] = output[1] + Ports[elementCode].previousMaximumRealStubPort +
+                (abstractNodeNumber - j);
+
+        // contains the number of the nodes that DO have stub
+    } else if (Ports[elementCode].pointerTypeStub == 3) {
+        for (j = 0; j < Ports[elementCode].quantitySavedStub; j++) {
+            // I do a loop until I can find the stubed-node that has an abstract
+            // number equal or greater than the abstract number I'm asking to get the real numbers.
+            // That is, the stubed-node from 0 until j-1 will influence the calculated
+            // stub offset that I'm asking
+            if (Ports[elementCode].nodesNumbers[j] >= abstractNodeNumber) {
+                break;
+            }
+        }
+        // j represents the quantity of nodes that have stub and has a number less than the
+        // abstractNodeNumber. Then, we add these extras js 
+        // 
+        // number of realPorts + offset done by previous stubs
+        // + offset done by previous nodes that have stub
+        output[2] = output[1] + Ports[elementCode].previousMaximumRealStubPort +
+                j;
+    }
+
+
+    return;
 }
 
 /*
@@ -2201,7 +2638,7 @@ unsigned int getBetweenPointFromRealPortNumber(struct aPortToRealPort *Ports,
     switch (i) {
         case 1: // 2 nodes line
             getBetweenForLine(input, nodeNumber, portOrder, x, y, z);
-            
+
             break;
         case 2: // 3 nodes triangle
             getBetweenForTriangle(input, nodeNumber, portOrder, x, y, z);
@@ -2374,7 +2811,7 @@ unsigned int getProjectionFromRealPortNumber(struct aPortToRealPort *Ports,
     switch (i) {
         case 1: // 2 nodes line
             getOutsideProjectionLine(input, nodeNumber, portOrder, x, y, z);
-            
+
             break;
         case 2: // 3 nodes triangle
             getOutsideProjectionTriangle(input, nodeNumber, portOrder, x, y, z);
@@ -2435,7 +2872,7 @@ unsigned int getOutsideProjectionLine(const struct dataForSimulation * input,
     Ly = input->mesh.nodes[P1].y - input->mesh.nodes[P2].y;
     Lz = input->mesh.nodes[P1].z - input->mesh.nodes[P2].z;
     L = sqrt(Lx * Lx + Ly * Ly + Lz * Lz);
-    
+
     *x = Lx / L;
     *y = Ly / L;
     *z = Lz / L;
@@ -2675,25 +3112,25 @@ unsigned int getOutsideProjectionTetrahedron(const struct dataForSimulation * in
 
             break;
     }
-    
+
     // DEBUG: Testing this algorithm
-//    struct node N1, N2, N3, N4;
-//    N1.x = 0; N1.y = 0; N1.z = 0;
-//    N2.x = 1; N2.y = 0; N2.z = 0;
-//    N3.x = 0; N3.y = 1; N3.z = 0;
-//    N4.x = 0; N4.y = 0; N4.z = 1;
-//    
-//    input->mesh.nodes[P1] = N1;
-//    input->mesh.nodes[P2] = N2;
-//    input->mesh.nodes[P3] = N3;
-//    input->mesh.nodes[P4] = N4;
+    //    struct node N1, N2, N3, N4;
+    //    N1.x = 0; N1.y = 0; N1.z = 0;
+    //    N2.x = 1; N2.y = 0; N2.z = 0;
+    //    N3.x = 0; N3.y = 1; N3.z = 0;
+    //    N4.x = 0; N4.y = 0; N4.z = 1;
+    //    
+    //    input->mesh.nodes[P1] = N1;
+    //    input->mesh.nodes[P2] = N2;
+    //    input->mesh.nodes[P3] = N3;
+    //    input->mesh.nodes[P4] = N4;
 
 
     // lengths of the edges
     double deltaXL[2], deltaYL[2], deltaZL[2];
     double area, areaX, areaY, areaZ;
     double deltaXl, deltaYl, deltaZl, deltal;
-    
+
     deltaXL[0] = input->mesh.nodes[P1].x - input->mesh.nodes[P2].x;
     deltaYL[0] = input->mesh.nodes[P1].y - input->mesh.nodes[P2].y;
     deltaZL[0] = input->mesh.nodes[P1].z - input->mesh.nodes[P2].z;
@@ -2717,8 +3154,8 @@ unsigned int getOutsideProjectionTetrahedron(const struct dataForSimulation * in
 
     deltaZl = (input->mesh.nodes[P1].z + input->mesh.nodes[P2].z + input->mesh.nodes[P3].z) / 3
             - (input->mesh.nodes[P1].z + input->mesh.nodes[P2].z + input->mesh.nodes[P3].z + input->mesh.nodes[P4].z) / 4;
-    
-    deltal = sqrt(deltaXl*deltaXl + deltaYl*deltaYl + deltaZl*deltaZl);
+
+    deltal = sqrt(deltaXl * deltaXl + deltaYl * deltaYl + deltaZl * deltaZl);
 
     if (deltaXl * areaX + deltaYl * areaY + deltaZl * areaZ < 0) {
         *x = -areaX / area;
@@ -2730,14 +3167,14 @@ unsigned int getOutsideProjectionTetrahedron(const struct dataForSimulation * in
         *z = areaZ / area;
     }
 
-    
-    
-//    printf("The output: %f\n", (*x)*(*x) + (*y)*(*y) + (*z)*(*z) );
-    
-    
-//    *x = deltaXl / deltal;
-//    *y = deltaYl / deltal;
-//    *z = deltaZl / deltal;
+
+
+    //    printf("The output: %f\n", (*x)*(*x) + (*y)*(*y) + (*z)*(*z) );
+
+
+    //    *x = deltaXl / deltal;
+    //    *y = deltaYl / deltal;
+    //    *z = deltaZl / deltal;
 
     return 0;
 }

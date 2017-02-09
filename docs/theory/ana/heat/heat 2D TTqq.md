@@ -4,16 +4,16 @@
 # See: https://jekyllrb.com/docs/themes/#overriding-theme-defaults
 layout: page_eqAMS_Disqus
 title: Analytical solution of the Diffusion/Heat equation in time-domain for two-dimensions
-permalink: theory/ana/heat-2D-TTqq.html
+permalink: theory/ana/heat/heat-2D-TTqq.html
 ---
 
 <span style="color:#697473">Jan 30, 2017</span> by [**Hugo Milan**](https://hugomilan.github.io/)
 
 
 
-You can download the algorithm `D2_HEAT_f.m` for Octave/Matlab that can solve this problem [here](https://github.com/hugomilan/tlmbht/tree/master/src/octave/analytical/2D) and you can see instructions in [how to use it here]({{ site.baseurl }}{% link theory/ana/heat 2D TTqq.md%}#using-the-algorithm). If you want to see the final solution, [go to Solution]({{ site.baseurl }}{% link theory/ana/heat 2D TTqq.md%}#solution).
+You can download the algorithm `D2_HEAT_f.m` for Octave/Matlab that can solve this problem [here](https://github.com/hugomilan/tlmbht/tree/master/src/octave/analytical/2D) and you can see instructions in [how to use it here]({{ site.baseurl }}{% link theory/ana/heat/heat 2D TTqq.md%}#using-the-algorithm). If you want to see the final solution, [go to Solution]({{ site.baseurl }}{% link theory/ana/heat/heat 2D TTqq.md%}#solution).
 
-In this page, we will solve the dynamic diffusion/heat equation in two-dimensions using the principles of superposition and separation of variables. We build on the previous solution of the diffusion/heat equation in one-dimension described [here]({{ site.baseurl }}{% link theory/ana/heat 1D TT.md%}) to solve this two-dimensional problem. The problem we will solve is restricted to the following initial and boundary conditions:
+In this page, we will solve the dynamic diffusion/heat equation in two-dimensions using the principles of superposition and separation of variables. We build on the previous solution of the diffusion/heat equation in one-dimension described [here]({{ site.baseurl }}{% link theory/ana/heat/heat 1D TT.md%}) to solve this two-dimensional problem. The problem we will solve is restricted to the following initial and boundary conditions:
 
 $$
 \begin{matrix}
@@ -126,7 +126,7 @@ which implies that we can solve Eqs. \ref{eq:a}-\ref{eq:d}
 
 #### **Solving Eq. \ref{eq:a} and \ref{eq:b}**
 
-The solution of Eq. \ref{eq:a} and \ref{eq:b} was previously covered when we [solved the diffusion/heat equation in one-dimension.]({{ site.baseurl }}{% link theory/ana/heat 1D TT.md%})
+The solution of Eq. \ref{eq:a} and \ref{eq:b} was previously covered when we [solved the diffusion/heat equation in one-dimension.]({{ site.baseurl }}{% link theory/ana/heat/heat 1D TT.md%})
 
 
 
@@ -438,7 +438,7 @@ qx = 1e8; % heat flux at x = L (W/m2)
 rho = 2700; % density (kg/m3)
 cp = 900; % specific heat (J/(K-kg))
 k = 205; % thermal conductivity (W/(K-m))
-S = 5000; % internal heat source
+S = 5000; % internal heat source (W/m3)
     
 % Material properties
 H = 1e-3; % m
@@ -496,7 +496,8 @@ Another surprising limitation is that the flux boundary condition at \\(x = L\\)
 Now, you can go to:
 
 * [Analytical solutions menu]({{ site.baseurl }}{% link theory/ana/index.md %})
-* [Analytical solution in three-dimensions]({{ site.baseurl }}{% link theory/ana/heat 3D TTqqqq.md %})
+* [Analytical solutions of Diffusion and Heat equations menu]({{ site.baseurl }}{% link theory/ana/heat/index.md %})
+* [Analytical solution in three-dimensions]({{ site.baseurl }}{% link theory/ana/heat/heat 3D TTqqqq.md %})
 * [TLM validation using this solution for diffusion equation]({{ site.baseurl }}{% link vte/diff 2D triangle.md %})
 * [TLM validation using this solution for heat equation]({{ site.baseurl }}{% link vte/heat 2D triangle.md %})
 

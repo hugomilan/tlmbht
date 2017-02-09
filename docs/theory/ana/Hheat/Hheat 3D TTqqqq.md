@@ -3,17 +3,17 @@
 # Edit theme's home layout instead if you wanna make some changes
 # See: https://jekyllrb.com/docs/themes/#overriding-theme-defaults
 layout: page_eqAMS_Disqus
-title: Analytical solution of the Diffusion/Heat equation in time-domain for three-dimensions
-permalink: theory/ana/heat-3D-TTqqqq.html
+title: Analytical solution of the Hyperbolic Diffusion/Heat equation in time-domain for three-dimensions
+permalink: theory/ana/Hheat/Hheat-3D-TTqqqq.html
 ---
 
 <span style="color:#697473">Jan 30, 2017</span> by [**Hugo Milan**](https://hugomilan.github.io/)
 
 
 
-You can download the algorithm `D3_HEAT_f.m` for Octave/Matlab that can solve this problem [here](https://github.com/hugomilan/tlmbht/tree/master/src/octave/analytical/3D) and you can see instructions in [how to use it here]({{ site.baseurl }}{% link theory/ana/heat 3D TTqqqq.md%}#using-the-algorithm). If you want to see the final solution, [go to Solution]({{ site.baseurl }}{% link theory/ana/heat 3D TTqqqq.md%}#solution).
+You can download the algorithm `D3_HEAT_f.m` for Octave/Matlab that can solve this problem [here](https://github.com/hugomilan/tlmbht/tree/master/src/octave/analytical/3D) and you can see instructions in [how to use it here]({{ site.baseurl }}{% link theory/ana/heat/heat 3D TTqqqq.md%}#using-the-algorithm). If you want to see the final solution, [go to Solution]({{ site.baseurl }}{% link theory/ana/heat/heat 3D TTqqqq.md%}#solution).
 
-In this page, we will solve the dynamic diffusion/heat equation in three-dimensions using the principles of superposition and separation of variables. We build on the previous solution of the diffusion/heat equation in two-dimensions described [here]({{ site.baseurl }}{% link theory/ana/heat 2D TTqq.md%}) to solve this three-dimensional problem. The problem we will solve is restricted to the following initial and boundary conditions:
+In this page, we will solve the dynamic diffusion/heat equation in three-dimensions using the principles of superposition and separation of variables. We build on the previous solution of the diffusion/heat equation in two-dimensions described [here]({{ site.baseurl }}{% link theory/ana/heat/heat 2D TTqq.md%}) to solve this three-dimensional problem. The problem we will solve is restricted to the following initial and boundary conditions:
 
 $$
 \begin{matrix}
@@ -142,15 +142,15 @@ which implies that we can solve Eqs. \ref{eq:a}-\ref{eq:f}
 
 #### **Solving Eq. \ref{eq:a} and \ref{eq:b}**
 
-The solution of Eq. \ref{eq:a} and \ref{eq:b} was previously covered when we [solved the diffusion/heat equation in one-dimension.]({{ site.baseurl }}{% link theory/ana/heat 1D TT.md%})
+The solution of Eq. \ref{eq:a} and \ref{eq:b} was previously covered when we [solved the diffusion/heat equation in one-dimension.]({{ site.baseurl }}{% link theory/ana/heat/heat 1D TT.md%})
 
 #### **Solving Eq. \ref{eq:c} and \ref{eq:d}**
 
-The solution of Eq. \ref{eq:c} and \ref{eq:d} was previously covered when we [solved the diffusion/heat equation in two-dimensions.]({{ site.baseurl }}{% link theory/ana/heat 2D TTqq.md%})
+The solution of Eq. \ref{eq:c} and \ref{eq:d} was previously covered when we [solved the diffusion/heat equation in two-dimensions.]({{ site.baseurl }}{% link theory/ana/heat/heat 2D TTqq.md%})
 
 #### **Solving Eq. \ref{eq:e}**
 
-The solution procedure for Eq. \ref{eq:e} is exactly the same as the solution procedure for Eq. \ref{eq:c} showed [here.]({{ site.baseurl }}{% link theory/ana/heat 2D TTqq.md%}) Hence, changing the nomenclature from the solution of Eq. \ref{eq:c}, the solution of Eq. \ref{eq:e} is:
+The solution procedure for Eq. \ref{eq:e} is exactly the same as the solution procedure for Eq. \ref{eq:c} showed [here.]({{ site.baseurl }}{% link theory/ana/heat/heat 2D TTqq.md%}) Hence, changing the nomenclature from the solution of Eq. \ref{eq:c}, the solution of Eq. \ref{eq:e} is:
 
 \begin{equation}
     \mu_u = \frac{ \left( 2u - 1 \right) \pi}{H}
@@ -163,7 +163,7 @@ The solution procedure for Eq. \ref{eq:e} is exactly the same as the solution pr
 
 #### **Solving Eq. \ref{eq:f}**
 
-The solution procedure for Eq. \ref{eq:f} is exactly the same as the solution procedure for Eq. \ref{eq:d} showed [here.]({{ site.baseurl }}{% link theory/ana/heat 2D TTqq.md%}) Hence, changing the nomenclature from the solution of Eq. \ref{eq:d}, the solution of Eq. \ref{eq:f} is:
+The solution procedure for Eq. \ref{eq:f} is exactly the same as the solution procedure for Eq. \ref{eq:d} showed [here.]({{ site.baseurl }}{% link theory/ana/heat/heat 2D TTqq.md%}) Hence, changing the nomenclature from the solution of Eq. \ref{eq:d}, the solution of Eq. \ref{eq:f} is:
 
 \begin{equation}
     \nu_v = \frac{v\pi}{T_z}
@@ -261,7 +261,7 @@ qz = 2e8; % heat flux at z = Tz (W/m2)
 rho = 2700; % density (kg/m3)
 cp = 900; % specific heat (J/(K-kg))
 k = 205; % thermal conductivity (W/(K-m))
-S = 5000; % internal heat source
+S = 5000; % internal heat source (W/m3)
     
 % Material properties
 H = 1e-3; % m
@@ -331,6 +331,7 @@ Another surprising limitation is that the flux boundary conditions at \\(x = L\\
 Now, you can go to:
 
 * [Analytical solutions menu]({{ site.baseurl }}{% link theory/ana/index.md %})
+* [Analytical solutions of Diffusion and Heat equations menu]({{ site.baseurl }}{% link theory/ana/heat/index.md %})
 * [TLM validation using this solution for diffusion equation]({{ site.baseurl }}{% link vte/diff 3D tetrahedron.md %})
 * [TLM validation using this solution for heat equation]({{ site.baseurl }}{% link vte/heat 3D tetrahedron.md %})
 

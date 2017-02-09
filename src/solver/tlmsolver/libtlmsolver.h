@@ -139,14 +139,48 @@ extern "C" {
         // nodes that are boundary.
         // When pointerType == 3, nodesNumber has allocated the (sorted) number of the 
         // nodes that are material.
+        
+        
+        // Code to consider stubs
+        unsigned long long previousMaximumRealStubPort;
+        // I don't have abstract stub port number. I calculate the number of stubs
+        // for each element code, which is this variable. Then, I use it to do
+        // the offset to calculate the RealPortNumber.
+        
+        
+        unsigned int pointerTypeStub;
+        // this will be changed during processing
+        // 0 - all nodes of this element type DO NOT have stub
+        // 1 - all nodes of this element type DO have stub
+        // 2 - contains the number of the nodes that DO NOT have stub
+        // 3 - contains the number of the nodes that DO have stub
+        
+        unsigned long long quantityAllocatedStub;
+        unsigned long long quantitySavedStub;
+        // the size and the quantity of elements saved on the nodesNumbersStub.
+        // It is not necessarily the number of stubs.
+
+        unsigned long long *nodesNumbersStub;
+        // this is used when pointerTypeStub == 2 or pointerTypeStub == 3
+        // When pointerTypeStub == 2, nodesNumber has allocated the (sorted) number of the 
+        // nodes that DO NOT have stub.
+        // When pointerTypeStub == 3, nodesNumber has allocated the (sorted) number of the 
+        // nodes that DO have stub.
     };
 
     struct TLMnumbers {
         unsigned long long Ports;
+        // number of ports
+        unsigned long long StubPorts;
+        // number of stub ports
         unsigned long long Nodes;
+        // number of nodes
         unsigned long long Output;
+        // number of outputs
         unsigned long long Points_Output;
+        // positions in space of the outputs
         unsigned long long Intersections;
+        // number of intersections in the mesh
         unsigned long long *BoundaryElements;
         unsigned long long *MaterialElements;
         unsigned long long *NotDefinedElements;
@@ -188,6 +222,8 @@ extern "C" {
             struct TLMnumbers*, struct connectionLeveln *, int);
     unsigned int wrapTLMnumbers(const struct dataForSimulation *,
             struct TLMnumbers*, int);
+    unsigned int changeNodesNumbersType(unsigned long long **,
+            unsigned long long *, unsigned long long);
     unsigned int terminateTLMnumbers(struct TLMnumbers*);
 
     unsigned int getNumberOfPortsGivenElement(unsigned int, enum dimSim);
@@ -198,7 +234,8 @@ extern "C" {
             struct aPortToRealPort**, int);
 
     unsigned int reallocate_aPortToRealPort(struct aPortToRealPort*);
-    unsigned int add_to_aPortToRealPort(unsigned int, unsigned long long,
+    unsigned int reallocate_aPortToRealPortStub(struct aPortToRealPort*);
+    unsigned int add_to_aPortToRealPort(unsigned int, unsigned int, unsigned long long,
             struct aPortToRealPort*);
 
     unsigned int terminate_aPortToRealPort(struct aPortToRealPort**);

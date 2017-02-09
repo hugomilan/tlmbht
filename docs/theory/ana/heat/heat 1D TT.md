@@ -4,12 +4,12 @@
 # See: https://jekyllrb.com/docs/themes/#overriding-theme-defaults
 layout: page_eqAMS_Disqus
 title: Analytical solution of the Diffusion/Heat equation in time-domain for one-dimension
-permalink: theory/ana/heat-1D-TT.html
+permalink: theory/ana/heat/heat-1D-TT.html
 ---
 
 <span style="color:#697473">Jan 30, 2017</span> by [**Hugo Milan**](https://hugomilan.github.io/)
 
-You can download the algorithm `D1_HEAT_f.m` for Octave/Matlab that can solve this problem [here](https://github.com/hugomilan/tlmbht/tree/master/src/octave/analytical/1D) and you can see instructions in [how to use it here]({{ site.baseurl }}{% link theory/ana/heat 1D TT.md%}#using-the-algorithm). If you want to see the final solution, [go to Solution]({{ site.baseurl }}{% link theory/ana/heat 1D TT.md%}#solution).
+You can download the algorithm `D1_HEAT_f.m` for Octave/Matlab that can solve this problem [here](https://github.com/hugomilan/tlmbht/tree/master/src/octave/analytical/1D) and you can see instructions in [how to use it here]({{ site.baseurl }}{% link theory/ana/heat/heat 1D TT.md%}#using-the-algorithm). If you want to see the final solution, [go to Solution]({{ site.baseurl }}{% link theory/ana/heat/heat 1D TT.md%}#solution).
 
 In this page, we will solve the dynamic diffusion/heat equation in one-dimension using the principles of superposition and separation of variables. The problem we will solve is restricted to the following initial and boundary conditions:
 
@@ -268,7 +268,7 @@ Ts = 1000; % superficial temperature (oC)
 rho = 2700; % density (kg/m3)
 cp = 900; % specific heat (J/(K-kg))
 k = 205; % thermal conductivity (W/(K-m))
-S = 5000; % internal heat source
+S = 5000; % internal heat source (W/m3)
     
 % Material properties
 H = 1e-3; % m
@@ -302,7 +302,8 @@ Every solution method has limitations. The most noticeable limitation is that we
 Now, you can go to:
 
 * [Analytical solutions menu]({{ site.baseurl }}{% link theory/ana/index.md %})
-* [Analytical solution in two-dimensions]({{ site.baseurl }}{% link theory/ana/heat 2D TTqq.md %})
+* [Analytical solutions of Diffusion and Heat equations menu]({{ site.baseurl }}{% link theory/ana/heat/index.md %})
+* [Analytical solution in two-dimensions]({{ site.baseurl }}{% link theory/ana/heat/heat 2D TTqq.md %})
 * [TLM validation using this solution for diffusion equation]({{ site.baseurl }}{% link vte/diff 1D line.md %})
 * [TLM validation using this solution for heat equation]({{ site.baseurl }}{% link vte/heat 1D line.md %})
 
