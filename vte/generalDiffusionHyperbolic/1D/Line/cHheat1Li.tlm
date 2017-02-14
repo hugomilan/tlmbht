@@ -17,7 +17,7 @@ Equation
     Solve = dynamic;
     time-step = 1e-3;
     time-jump = 100;
-    final time = 1;
+    final time = 10;
     save = scalar;
     save = scalar between;
     save = vector;
@@ -30,7 +30,7 @@ Material
     density = 1200;
     specific heat = 3200;
     thermal conductivity = 0.3;
-    thermal relaxation time = 10;
+    thermal relaxation time = 0.1;
     source = 5000;
     initial temperature = 100;
 }

@@ -139,22 +139,22 @@ extern "C" {
         // nodes that are boundary.
         // When pointerType == 3, nodesNumber has allocated the (sorted) number of the 
         // nodes that are material.
-        
-        
+
+
         // Code to consider stubs
         unsigned long long previousMaximumRealStubPort;
         // I don't have abstract stub port number. I calculate the number of stubs
         // for each element code, which is this variable. Then, I use it to do
         // the offset to calculate the RealPortNumber.
-        
-        
+
+
         unsigned int pointerTypeStub;
         // this will be changed during processing
         // 0 - all nodes of this element type DO NOT have stub
         // 1 - all nodes of this element type DO have stub
         // 2 - contains the number of the nodes that DO NOT have stub
         // 3 - contains the number of the nodes that DO have stub
-        
+
         unsigned long long quantityAllocatedStub;
         unsigned long long quantitySavedStub;
         // the size and the quantity of elements saved on the nodesNumbersStub.
@@ -188,6 +188,69 @@ extern "C" {
         struct aPortToRealPort *abstractPortsToReal;
     };
 
+    struct connectionAndBoundaryCoefficients {
+        double *reflection;
+        double *transmission;
+        double *B;
+        double *transmission_out;
+        double *B_out;
+        double *transmission_out_flux;
+        double *B_out_flux;
+        // reflection
+        // 0: total reflection for port 1
+        // 1: total reflection for port 2
+        // ...
+
+        // transmission
+        // 0: port 1 to port 2
+        // 1: port 1 to port 3
+        // ...
+        // startEnd[0]: port 2 to port 3
+        // startEnd[0] + 1: port 2 to port 4
+        // ...
+
+        // B:
+        // 0: value for port 1
+        // 1: value for port 2
+        // ...
+
+        // transmission_out(_flux)
+        // 0: effect of port 1 on TB (or q'')
+        // 1: effect of port 2 on TB (or q'')
+        // ...
+        // n: effect of port n on TB (or q'')
+
+        // B_out(_flux)
+        // 0: constant effect of port 1 on TB (or q'')
+        // 1: constant effect of port 2 on TB (or q'')
+        // ...
+        // n: constant effect of port n on TB (or q'')
+        unsigned long long *startEnd;
+        // 0 - number of ports saved
+        // 1 - number of allocations
+        // 2 - number of the port 0
+        // 3 - number of the first port of the Node that contains port 0
+        // 4 - number of the last port of the Node that contains  port 0
+        // 5 - number of the port 0 with offset from stub
+        // 6 - same as 3 + offset from stub
+        // 7 - same as 4 + offset from stub and is the stub port number if this node has stub
+        // 8 - number of the port 1
+        // ...
+        //
+        // These are offsets related to startEnd.
+        unsigned int distanceBetweenPorts, offsetRealPort, offsetStubPort,
+        offsetStubPortFirst, offsetStubPortLast, offsetRealPort0,
+        offsetStubPort0, offsetRealPort1, offsetStubPort1;
+
+        unsigned long long *portsNumbers;
+        // this pointer will contain the number of the ports
+        // 0: size of the pointer
+        // 1: quantity of port numbers
+        // 2: number of the ports 0
+        // ...
+        // n: number of port n - 2
+    };
+
 
     unsigned int solverTLM(struct dataForSimulation*, int, void**);
 
@@ -211,7 +274,7 @@ extern "C" {
             unsigned int, unsigned long long *);
 
     unsigned int getGeometricalVariablesTLMline(const struct node*,
-        const struct node*, double*);
+            const struct node*, double*);
     unsigned int getGeometricalVariablesTLMtriangle(const struct node *,
             const struct node *, const struct node *, double*);
     unsigned int getGeometricalVariablesTLMtetrahedron(const struct node *,
@@ -276,6 +339,9 @@ extern "C" {
     unsigned int getOutsideProjectionTetrahedron(const struct dataForSimulation *,
             const unsigned long long, const unsigned long long,
             double *, double *, double *);
+
+    unsigned int initiateConnectionAndBoundaryCoefficients(struct connectionAndBoundaryCoefficients *);
+    unsigned int terminateConnectionAndBoundaryCoefficients(struct connectionAndBoundaryCoefficients *);
 
 #ifdef __cplusplus
 }

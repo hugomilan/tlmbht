@@ -57,6 +57,10 @@ unsigned int MaterialTetrahedronPennesEigen(struct dataForSimulation *, struct c
 unsigned int connectionsAndBoundariesPennesEigen(struct calculationTLMEigen *, struct boundaryData *,
         struct connectionLeveln *, struct dataForSimulation *, int id);
 
+unsigned int calculateConnectionCoefficientsEigen(struct calculationTLMEigen *,
+        struct boundaryData *, struct connectionAndBoundaryCoefficients *,
+        struct dataForSimulation *, int);
+
 #ifdef __cplusplus
 extern "C" {
 #endif

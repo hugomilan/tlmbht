@@ -34,6 +34,8 @@
 
 
 #include <stdlib.h>
+#include <stdio.h>
+#include <math.h>
 #include <time.h>
 
 #include "libtlmpenneseigen.h"
@@ -421,37 +423,37 @@ unsigned int MaterialLinePennesEigen(struct dataForSimulation *input, struct cal
                     // I'm going to the next 'i', that is, incrementing i by 1 and going
                     // to the next value of i (if any).
 
-                    
+
                     getRealNodeAndPort_fromAbstractNode(1, // element code
-                                i, // element number
-                                matrices->numbers.abstractPortsToReal,
-                                numbersNodeAndPort);
+                            i, // element number
+                            matrices->numbers.abstractPortsToReal,
+                            numbersNodeAndPort);
 
-                        // the -1 is necessary because the C indexing starts at zero
-                        // and my number of node starts at 1
-                        getGeometricalVariablesTLMline(&input->mesh.nodes[input->mesh.elements.Line[i].N1 - 1],
-                                &input->mesh.nodes[input->mesh.elements.Line[i].N2 - 1], tempVar);
+                    // the -1 is necessary because the C indexing starts at zero
+                    // and my number of node starts at 1
+                    getGeometricalVariablesTLMline(&input->mesh.nodes[input->mesh.elements.Line[i].N1 - 1],
+                            &input->mesh.nodes[input->mesh.elements.Line[i].N2 - 1], tempVar);
 
-                        matrices->L[numbersNodeAndPort[1] + 0] = 1; // this length is defined as 1 for 1D nodes
-                        matrices->L[numbersNodeAndPort[1] + 1] = 1; // this length is defined as 1 for 1D nodes
+                    matrices->L[numbersNodeAndPort[1] + 0] = 1; // this length is defined as 1 for 1D nodes
+                    matrices->L[numbersNodeAndPort[1] + 1] = 1; // this length is defined as 1 for 1D nodes
 
-                        matrices->deltal[numbersNodeAndPort[1] + 0] = tempVar[0]; // length of port 1
-                        matrices->deltal[numbersNodeAndPort[1] + 1] = tempVar[0]; // length of port 2
-                        
-                        // generalization of R
-                        R[0] = tempVar[0] / input->materialInput[j2].generalized_diffusionCoeff;
+                    matrices->deltal[numbersNodeAndPort[1] + 0] = tempVar[0]; // length of port 1
+                    matrices->deltal[numbersNodeAndPort[1] + 1] = tempVar[0]; // length of port 2
 
-                        // generalization of G
-                        G = 2 * tempVar[0] * input->materialInput[j2].generalized_sink_a;
+                    // generalization of R
+                    R[0] = tempVar[0] / input->materialInput[j2].generalized_diffusionCoeff;
 
-                        // generalization of Is
-                        Is = 2 * tempVar[0] * input->materialInput[j2].generalized_source;
-                        
-                        // all the resistances
-                        matrices->R[numbersNodeAndPort[1] + 0] = R[0];
-                        matrices->R[numbersNodeAndPort[1] + 1] = R[0];
-                        
-                        
+                    // generalization of G
+                    G = 2 * tempVar[0] * input->materialInput[j2].generalized_sink_a;
+
+                    // generalization of Is
+                    Is = 2 * tempVar[0] * input->materialInput[j2].generalized_source;
+
+                    // all the resistances
+                    matrices->R[numbersNodeAndPort[1] + 0] = R[0];
+                    matrices->R[numbersNodeAndPort[1] + 1] = R[0];
+
+
                     // here I switch the code accordingly to what type of node I have
                     // 
                     // this is the simplest of all. Also called parabolic equation.
@@ -468,7 +470,7 @@ unsigned int MaterialLinePennesEigen(struct dataForSimulation *input, struct cal
                         // all the impedances
                         matrices->Z[numbersNodeAndPort[2] + 0] = Z[0];
                         matrices->Z[numbersNodeAndPort[2] + 1] = Z[0];
-                        
+
                         // Manually validated
                         Zhat = Z[0] / (2 + Z[0] * G);
 
@@ -497,39 +499,48 @@ unsigned int MaterialLinePennesEigen(struct dataForSimulation *input, struct cal
                         // E = C*ZIS + B
                         matrices->E(numbersNodeAndPort[2] + 0) = Zhat*Is;
                         matrices->E(numbersNodeAndPort[2] + 1) = Zhat*Is;
-                        
+
                         // initial value
                         // Vi0 = (Ti - ZIS)/sum(tau)
                         matrices->Vi(numbersNodeAndPort[2] + 0) = (input->materialInput[j2].generalized_initialScalar
                                 - matrices->E(numbersNodeAndPort[2] + 0)) / (2 * tau[0]);
                         matrices->Vi(numbersNodeAndPort[2] + 1) = matrices->Vi(numbersNodeAndPort[2] + 0);
-                        
-                        
+
+
                         // this is for the wave models. Also called hyperbolic equation.
                         // Used for 'hyperbolic diffusion', 'hyperbolic heat', and 
                         // 'hyperbolic pennes'
                     } else {
                         // this has three nodes. Two nodes connect with others elements
                         // and one extra node is used to model the relaxation time
-                        
+
                         // generalization of Cd
-                        Cd = input->materialInput[j2].generalized_diffusionCoeff*
-                                input->equationInput[id].timeStep*input->equationInput[id].timeStep/
-                                (4*tempVar[0]*tempVar[0]*input->materialInput[j2].generalized_relaxationTime);
-                        
+//                        Cd = input->materialInput[j2].generalized_diffusionCoeff *
+//                                input->equationInput[id].timeStep * input->equationInput[id].timeStep /
+//                                (4 * tempVar[0] * tempVar[0] * input->materialInput[j2].generalized_relaxationTime);
+
                         // generalization of Cs
-                        Cs = (input->materialInput[j2].generalized_coefficient_b - Cd)*2*tempVar[0];
+//                        Cs = (input->materialInput[j2].generalized_coefficient_b - Cd)* 2 * tempVar[0];
 
                         // Z = dt/(2*Cd*deltal). Manually validated
-                        Z[0] = input->equationInput[id].timeStep / (tempVar[0] * 2 * Cd);
+//                        Z[0] = input->equationInput[id].timeStep / (tempVar[0] * 2 * Cd);
                         
-                        // Zs = dt/(2*Cs*deltal)
-                        if (Cs > 0){
-                            Zs = input->equationInput[id].timeStep / (tempVar[0] * 2 * Cs);
-                        } else if (Cs < 0){
-                            Zs = -input->equationInput[id].timeStep / (tempVar[0] * 2 * Cs);
+                        // trying new approach
+                        double Ld;
+                        Ld = input->materialInput[j2].generalized_diffusionCoeff/input->materialInput[j2].generalized_relaxationTime;
+                        Cd = input->materialInput[j2].generalized_coefficient_b;
+                        Cs = input->materialInput[j2].generalized_coefficient_b*(1 - 2 * tempVar[0]);
+                        Z[0] = sqrt(Ld/Cd);
+
+                        // Zs = dt/(2*Cs)
+                        if (Cs > 0) {
+                            Zs = input->equationInput[id].timeStep / (2 * Cs);
+                        } else if (Cs < 0) {
+                            Zs = -input->equationInput[id].timeStep / (2 * Cs);
+                        } else {
+                            Zs = INFINITY;
                         }
-                        
+
 
                         // all the impedances
                         matrices->Z[numbersNodeAndPort[2] + 0] = Z[0];
@@ -538,14 +549,14 @@ unsigned int MaterialLinePennesEigen(struct dataForSimulation *input, struct cal
                         matrices->Z[numbersNodeAndPort[2] + 2] = Zs;
                         // Calculating Zhat
                         // In this case I don't have Zs
-                        if (Cs == 0){
+                        if (Cs == 0) {
                             Zhat = Z[0] / (2 + Z[0] * G);
                             taus = 0;
-                            
+
                             // this is the case that I have Zs
                         } else {
-                            Zhat = 1/(G + 1/Zs + 2/Z[0]);
-                            if (Cs < 0){
+                            Zhat = 1 / (G + 1 / Zs + 2 / Z[0]);
+                            if (Cs < 0) {
                                 taus = -2 * Zhat / Zs;
                                 ros = taus + 1;
                             } else {
@@ -553,11 +564,11 @@ unsigned int MaterialLinePennesEigen(struct dataForSimulation *input, struct cal
                                 ros = taus - 1;
                             }
                         }
-                        
+
 
                         // Manually validated
                         tau[0] = 2 * Zhat / Z[0];
-                        
+
                         // this is actually matrix S.
                         // M = C*S
                         // this matrix is M[line][column].
@@ -574,13 +585,13 @@ unsigned int MaterialLinePennesEigen(struct dataForSimulation *input, struct cal
                                 numbersNodeAndPort[2] + 1) = tau[0] - 1;
                         matrices->M.insert(numbersNodeAndPort[2] + 1,
                                 numbersNodeAndPort[2] + 2) = taus;
-                        
+
                         matrices->M.insert(numbersNodeAndPort[2] + 2,
                                 numbersNodeAndPort[2] + 0) = tau[0];
                         matrices->M.insert(numbersNodeAndPort[2] + 2,
                                 numbersNodeAndPort[2] + 1) = tau[0];
                         matrices->M.insert(numbersNodeAndPort[2] + 2,
-                                numbersNodeAndPort[2] + 2) = taus - 1;
+                                numbersNodeAndPort[2] + 2) = ros;
 
                         // matrix tau
                         matrices->tau.insert(numbersNodeAndPort[0],
@@ -599,18 +610,19 @@ unsigned int MaterialLinePennesEigen(struct dataForSimulation *input, struct cal
                         // initial value
                         // Vi0 = (Ti - ZIS)/sum(tau)
                         matrices->Vi(numbersNodeAndPort[2] + 0) = (input->materialInput[j2].generalized_initialScalar
-                                - matrices->E(numbersNodeAndPort[2] + 0)) / (2 * tau[0]);
+                                - matrices->E(numbersNodeAndPort[2] + 0)) / (2 * tau[0] + taus);
                         matrices->Vi(numbersNodeAndPort[2] + 1) = matrices->Vi(numbersNodeAndPort[2] + 0);
+                        matrices->Vi(numbersNodeAndPort[2] + 2) = matrices->Vi(numbersNodeAndPort[2] + 0);
                         // I'm initiating Vs as 0
-                        
-                    }
-                        
-                        // matrix E_output
-                        matrices->E_output(numbersNodeAndPort[0]) = Zhat*Is;
 
-                        matrices->Points_output[numbersNodeAndPort[0]].x = tempVar[1];
-                        matrices->Points_output[numbersNodeAndPort[0]].y = tempVar[2];
-                        matrices->Points_output[numbersNodeAndPort[0]].z = tempVar[3];
+                    }
+
+                    // matrix E_output
+                    matrices->E_output(numbersNodeAndPort[0]) = Zhat*Is;
+
+                    matrices->Points_output[numbersNodeAndPort[0]].x = tempVar[1];
+                    matrices->Points_output[numbersNodeAndPort[0]].y = tempVar[2];
+                    matrices->Points_output[numbersNodeAndPort[0]].z = tempVar[3];
 
                     goto end_for_j_and_for_k_line;
                 }
@@ -1015,588 +1027,477 @@ end_for_j_and_for_k_triangle:
  * connectionsAndBoundariesPennesEigen: assumes that the intersection happens between two nodes
  * or between one node and a boundary, only. Intersections with three nodes would break
  * 
- * THIS FUNCTION MAY BE WELL SUITED FOR GOING AT THE LEVEL OF TLM AND NOT BEING SPECIFIC
- * FOR PENNES
+ * TODO: THIS FUNCTION MAY BE WELL SUITED FOR GOING AT THE LEVEL OF TLM AND NOT BEING SPECIFIC
+ * FOR PENNES. It should probably be split into more functions...
  */
 unsigned int connectionsAndBoundariesPennesEigen(struct calculationTLMEigen *matrices,
         struct boundaryData* boundaries, struct connectionLeveln *connection,
         struct dataForSimulation *input, int id) {
+    // THIS IS A GOOD CANDIDATE FOR OPENMP PARALLELIZATION. ANALYSE AND DO IT
+    unsigned errorTLMnumber = 0;
 
-    unsigned errorTLMnumber = 0, approximationTB = 1, j;
-    // approximationTB = 1; calculates TB using Vr
-    // approximationTB = 2; calculates TB using Tc
-    // tests showed that using Vr gives a better approximation than using Tc
-    // I will try to keep both internally just for testing purposes
-
-    unsigned long long i, j1, offset, j2, j3, k, offset_TB, offset_heat_flux;
+    unsigned long long i, j1, offset, j2, j3, offset_TB, offset_heat_flux;
+    
+    // this is what we got for the scattering matrix
+//    for (j3 = 0; j3 < matrices->numbers.Ports + matrices->numbers.StubPorts; j3++){
+//            for (j1 = 0; j1 < matrices->numbers.Ports + matrices->numbers.StubPorts; j1++){
+//                printf("%0.17g ", matrices->M.coeff(j3, j1));
+//            }
+//            printf("\n");
+//            printf("%0.17g\n", matrices->E.coeff(j3));
+//        }
+//        
+//        
+//        for (j3 = 0; j3 < matrices->numbers.Output; j3++){
+//            for (j1 = 0; j1 < matrices->numbers.Ports + matrices->numbers.StubPorts; j1++){
+//                printf("%0.17g ", matrices->tau.coeff(j3, j1));
+//            }
+//            printf("\n");
+//            printf("%0.17g\n", matrices->E_output.coeff(j3));
+//        }
 
     offset_TB = matrices->numbers.Nodes * input->equationInput[id].saveScalar;
-
+    // starting position to calculate the temperature between nodes
     offset_heat_flux = offset_TB + matrices->numbers.Intersections * input->equationInput[id].saveScalarBetween;
+    // starting position to calculate the heat flux getting into the nodes. I calculate the heat flux
+    // at the intersection between two nodes
 
-    unsigned long long *startEnd = NULL;
-    startEnd = (unsigned long long *) malloc(sizeof (unsigned long long)*14);
-    startEnd[1] = 14;
-    // 0 - number of ports saved
-    // 1 - number of allocations
-    // 2 - number of the port 0
-    // 3 - number of the first port of the Node that contains port 0
-    // 4 - number of the last port of the Node that contains  port 0
-    // 5 - number of the port 0 with offset from stub
-    // 6 - same as 3 + offset from stub
-    // 7 - same as 4 + offset from stub and is the stub port number if this node has stub
-    // 8 - number of the port 1
-    // ...
-    //
-    // These are offsets related to startEnd. The are used throughout this function
-    unsigned int distanceBetweenPorts = 6,
-            offsetRealPort = 2, offsetStubPort = 5,
-            offsetStubPortFirst = 6, offsetStubPortLast = 7,
-            offsetRealPort0 = 2, offsetStubPort0 = 5,
-            offsetRealPort1 = 8, offsetStubPort1 = 11;
+    // initiating the structure that contains the coefficients
+    struct connectionAndBoundaryCoefficients coeff;
+    if ((errorTLMnumber = initiateConnectionAndBoundaryCoefficients(&coeff)) != 0) {
+        return errorTLMnumber;
+    }
 
-    int j1a;
-    double *reflection, *transmission, *B, *transmission_out, *B_out,
-            *transmission_out_flux, *B_out_flux;
-    // reflection
-    // 0: total reflection for port 1
-    // 1: total reflection for port 2
-    // ...
-
-    // transmission
-    // 0: port 1 to port 2
-    // 1: port 1 to port 3
-    // ...
-    // startEnd[0]: port 2 to port 3
-    // startEnd[0] + 1: port 2 to port 4
-    // ...
-
-    // B:
-    // 0: value for port 1
-    // 1: value for port 2
-    // ...
-
-    // transmission_out(_flux)
-    // 0: effect of port 1 on TB (or q'')
-    // 1: effect of port 2 on TB (or q'')
-    // ...
-    // n: effect of port n on TB (or q'')
-
-    // B_out(_flux)
-    // 0: constant effect of port 1 on TB (or q'')
-    // 1: constant effect of port 2 on TB (or q'')
-    // ...
-    // n: constant effect of port n on TB (or q'')
-
-    // I will know how many ports by reading startEnd[0]. I will know the length
-    // of the vectors reflection and B by using (startEnd[1] - 2)/3
-    // the length of transmission by (startEnd[1] - 2)/3*(startEnd[1] - 2)/3
-    reflection = (double *) malloc(sizeof (double)*2);
-    transmission = (double *) malloc(sizeof (double)*4);
-    B = (double *) malloc(sizeof (double)*2);
-    transmission_out = (double *) malloc(sizeof (double)*2);
-    B_out = (double *) malloc(sizeof (double)*2);
-    transmission_out_flux = (double *) malloc(sizeof (double)*2);
-    B_out_flux = (double *) malloc(sizeof (double)*2);
-
-
-    unsigned long long *portsNumbers;
-    // this pointer will contain the number of the ports
-    // 0: size of the pointer
-    // 1: quantity of port numbers
-    // 2: number of the ports 0
-    // ...
-    // n: number of port n - 2
-    portsNumbers = (unsigned long long*) malloc(
-            sizeof (unsigned long long)*7);
-    // here I start getting the number of the ports
-    portsNumbers[0] = 7;
 
     for (i = 0; i < connection->accumulatedIntersections[0]; i++) {
-        // DEBUG: show where we are
-        //                printf("Initial i% llu", i);
-        getPortsOrPoints(connection, i, &portsNumbers);
-        // DEBUG: show where we are
-        //                 printf("\n");
-
-        // if the quantity of ports is equal to 1, then, this is just
-        // adiabatic boundary condition, which means that the reflection
-        // coefficient is zero
-        if (portsNumbers[1] == 1) {
-            // number of ports saved
-            startEnd[0] = 1;
-            // number of port 1
-            getRealPortNumber_fromAbstractPortNumber(portsNumbers[2],
-                    matrices->numbers.abstractPortsToReal, startEnd + offsetRealPort0);
-
-            // DEBUG: see the pair of points that are adiabatic
-            // I'm seeing the pairs of points.
-            // As in C, we start at zero and I start at 1, then, I need
-            // to convert, summing 1, to see the real point number
-            //            printf("Adiabatic boundary condition by lack. Test Points (%llu)\n", i + 1);
-
-            reflection[0] = 1;
-            transmission[0] = 0;
-            B[0] = 0;
-
-            if (input->equationInput[id].saveScalarBetween) {
-                B_out[0] = 0;
-                switch (approximationTB) {
-                    case 1: // using Vr
-                        transmission_out[0] = 2;
-                        break;
-                    case 2: // using Tc
-                        transmission_out[0] = 1;
-                        break;
-                }
-            }
-
-            if (input->equationInput[id].saveFlux) {
-                B_out_flux[0] = 0;
-                transmission_out_flux[0] = 0;
-            }
-
-        } else {
-            // testing if it is a boundary. If any of the ports allocated are equal to zero,
-            // then, this has a boundary. If the quantity of ports is 2, then, this is just
-            // a boundary condition that is not in contact with any material node. Then, I
-            // will do nothing about it. Otherwise, I will work it out
-            //
-            // By assumption, if j = 0, then the port will be located at j = 2.
-            // If j != 0, then the port will be located at j = 0.
-            // the maximum value of quantityOfPorts is 3
-            for (j = 2; j < (portsNumbers[1] + 2); j++) {
-                if (portsNumbers[j] == 0) {
-                    if (portsNumbers[1] > 2) {
-                        // the number following the first zero, is the number of the boundary.
-                        // The number of the boundary can be zero as well
-
-                        // DEBUG: testing the number of the boundary
-                        // printf("Test (%llu) number", i);
-                        // printf(" number of the boundary %llu\n", portsNumbers[j + 3]);
-
-                        // j1a is the position of the port. j is the position
-                        // of the first zero. Assuming that we have only ONE port
-                        // connected to this intersection, then, IF j == 2, the
-                        // boundary was the first one to be included in the connection
-                        // variable. Therefore, j1a is j + 2 ( +1 is the boundary
-                        // number and +2 is the port number). ELSE, then j > 2,
-                        // which means that the port is in the first position.                        
-                        if (j == 2) j1a = j + 2;
-                        else j1a = j - 1;
-
-                        // clening previous variables
-                        reflection[0] = 0;
-                        transmission[0] = 0;
-                        B[0] = 0;
-
-                        transmission_out[0] = 0;
-                        B_out[0] = 0;
-
-                        // by design, the number of boundaries for adiabatic or temperature are only one.
-                        switch (boundaries[portsNumbers[j + 1]].boundaries[0].boundaryType) {
-                                // this is adiabatic boundary condition
-                            case 0:
-                                // number of ports saved
-                                startEnd[0] = 1;
-                                // number of port 0
-                                getRealPortNumber_fromAbstractPortNumber(portsNumbers[j1a],
-                                        matrices->numbers.abstractPortsToReal, startEnd + offsetRealPort0);
-
-                                // DEBUG: see the pair of points that are adiabatic
-                                // I'm seeing the pairs of points.
-                                // As in C, we start at zero and I start at 1, then, I need
-                                // to convert, summing 1, to see the real point number
-                                //                                printf("Adiabatic boundary condition by choice.\n");
-
-                                reflection[0] = 1;
-                                // transmission[0] = 0; // was defined 0 above
-                                // B[0] = 0; // was defined 0 above
-
-                                if (input->equationInput[id].saveScalarBetween) {
-                                    B_out[0] = 0;
-                                    switch (approximationTB) {
-                                        case 1: // using Vr
-                                            transmission_out[0] = 2;
-                                            break;
-                                        case 2: // using Tc
-                                            transmission_out[0] = 1;
-                                            break;
-                                    }
-                                }
-
-                                if (input->equationInput[id].saveFlux) {
-                                    B_out_flux[0] = 0;
-                                    transmission_out_flux[0] = 0;
-                                }
-
-                                break;
-
-                                // this is temperature boundary condition
-                            case 1:
-                                // number of ports saved
-                                startEnd[0] = 1;
-
-                                getRealPortNumber_fromAbstractPortNumber(portsNumbers[j1a],
-                                        matrices->numbers.abstractPortsToReal, startEnd + offsetRealPort0);
-
-                                // DEBUG: see the pair of points that are adiabatic
-                                // I'm seeing the pairs of points.
-                                // As in C, we start at zero and I start at 1, then, I need
-                                // to convert, summing 1, to see the real point number
-                                //                                printf("Temperature boundary condition.\n");
-
-                                reflection[0] = (matrices->R[startEnd[offsetRealPort0]] - matrices->Z[startEnd[offsetStubPort0]]) /
-                                        (matrices->R[startEnd[offsetRealPort0]] + matrices->Z[startEnd[offsetStubPort0]]);
-
-                                // transmission[0] = 0; // was defined 0 above
-
-                                B[0] = boundaries[portsNumbers[j + 1]].boundaries[0].boundaryData[0]
-                                        * matrices->Z[startEnd[offsetStubPort0]] /
-                                        (matrices->R[startEnd[offsetRealPort0]] + matrices->Z[startEnd[offsetStubPort0]]);
-
-                                if (input->equationInput[id].saveScalarBetween) {
-                                    B_out[0] = boundaries[portsNumbers[j + 1]].boundaries[0].boundaryData[0];
-                                    switch (approximationTB) {
-                                        case 1: // using Vr
-                                            transmission_out[0] = 0;
-                                            break;
-                                        case 2: // using Tc
-                                            transmission_out[0] = 0;
-                                            break;
-                                    }
-                                }
-
-                                if (input->equationInput[id].saveFlux) {
-                                    // from port 0 to outside
-                                    transmission_out_flux[0] = 2 / (
-                                            (matrices->R[startEnd[offsetRealPort0]] + matrices->Z[startEnd[offsetStubPort0]]) *
-                                            matrices->L[startEnd[offsetRealPort0]]);
-
-
-                                    B_out_flux[0] = -1 * boundaries[portsNumbers[j + 1]].boundaries[0].boundaryData[0] *
-                                            transmission_out_flux[0] / 2;
-
-
-                                }
-
-                                break;
-
-
-                                // heat flux boundary condition
-                            case 2:
-
-                                //                                printf("Heat flux boundary condition.\n");
-
-                                // number of ports saved
-                                startEnd[0] = 1;
-                                // number of port 0
-                                getRealPortNumber_fromAbstractPortNumber(portsNumbers[j1a],
-                                        matrices->numbers.abstractPortsToReal, startEnd + offsetRealPort0);
-
-                                reflection[0] = 1;
-
-                                B[0] = boundaries[portsNumbers[j + 1]].boundaries[0].boundaryData[0] // q''
-                                        * matrices->Z[startEnd[offsetStubPort0]]
-                                        * matrices->L[startEnd[offsetRealPort0]];
-
-
-                                if (input->equationInput[id].saveScalarBetween) {
-                                    switch (approximationTB) {
-                                        case 1: // using Vr
-                                            // effect of the heat flux on Tp
-                                            B_out[0] = (matrices->Z[startEnd[offsetStubPort0]] + matrices->R[startEnd[offsetRealPort0]])
-                                                    * boundaries[portsNumbers[j + 1]].boundaries[0].boundaryData[0]
-                                                    * matrices->L[startEnd[offsetRealPort0]];
-                                            // effect of Vr on Tp
-                                            transmission_out[0] = 2;
-                                            break;
-                                        case 2: // using Tc
-                                            // effect of the heat flux on Tp
-                                            B_out[0] = boundaries[portsNumbers[j + 1]].boundaries[0].boundaryData[0] // q''
-                                                    * matrices->R[startEnd[offsetRealPort0]]
-                                                    * matrices->L[startEnd[offsetRealPort0]];
-                                            // effect of Tc on Tp
-                                            transmission_out[0] = 1;
-                                            break;
-                                    }
-                                }
-
-                                if (input->equationInput[id].saveFlux) {
-                                    // from inside to outside. Positive values for 
-                                    // heat flux input are towards inside, hence
-                                    // that's why -1
-                                    B_out_flux[0] = -1 * boundaries[portsNumbers[j + 1]].boundaries[0].boundaryData[0];
-
-                                    transmission_out_flux[0] = 0;
-                                }
-
-                                break;
-
-                                // convection heat flux boundary condition
-                            case 3:
-                                // number of ports saved
-                                startEnd[0] = 1;
-                                // number of port 0
-                                getRealPortNumber_fromAbstractPortNumber(portsNumbers[j1a],
-                                        matrices->numbers.abstractPortsToReal, startEnd + offsetRealPort0);
-
-                                double Rc;
-
-                                Rc = 1 / (boundaries[portsNumbers[j + 1]].boundaries[0].boundaryData[1]
-                                        * matrices->L[startEnd[offsetRealPort0]]);
-
-                                reflection[0] = (Rc + matrices->R[startEnd[offsetRealPort0]] - matrices->Z[startEnd[offsetStubPort0]]) /
-                                        (Rc + matrices->R[startEnd[offsetRealPort0]] + matrices->Z[startEnd[offsetStubPort0]]);
-
-                                B[0] = boundaries[portsNumbers[j + 1]].boundaries[0].boundaryData[0] // Tc
-                                        * matrices->Z[startEnd[offsetStubPort0]] /
-                                        (Rc + matrices->R[startEnd[offsetRealPort0]] + matrices->Z[startEnd[offsetStubPort0]]);
-
-
-
-                                if (input->equationInput[id].saveScalarBetween) {
-                                    switch (approximationTB) {
-                                        case 1: // using Vr
-                                            B_out[0] = (matrices->Z[startEnd[offsetStubPort0]] + matrices->R[startEnd[offsetRealPort0]]) /
-                                                    (matrices->Z[startEnd[offsetStubPort0]] + matrices->R[startEnd[offsetRealPort0]] + Rc)
-                                                    * boundaries[portsNumbers[j + 1]].boundaries[0].boundaryData[0];
-
-                                            transmission_out[0] = 2 * Rc /
-                                                    (matrices->Z[startEnd[offsetStubPort0]] + matrices->R[startEnd[offsetRealPort0]] + Rc);
-                                            break;
-                                        case 2: // using Tc
-                                            B_out[0] = matrices->R[startEnd[offsetRealPort0]] /
-                                                    (matrices->R[startEnd[offsetRealPort0]] + Rc)
-                                                    * boundaries[portsNumbers[j + 1]].boundaries[0].boundaryData[0];
-
-
-                                            transmission_out[0] = Rc /
-                                                    (matrices->R[startEnd[offsetRealPort0]] + Rc);
-                                            break;
-                                    }
-                                }
-
-                                if (input->equationInput[id].saveFlux) {
-                                    transmission_out_flux[0] = 2 / (
-                                            (matrices->R[startEnd[offsetRealPort0]] + matrices->Z[startEnd[offsetStubPort0]] + Rc) *
-                                            matrices->L[startEnd[offsetRealPort0]]);
-
-                                    B_out_flux[0] = -1 * boundaries[portsNumbers[j + 1]].boundaries[0].boundaryData[0] *
-                                            transmission_out_flux[0] / 2;
-
-
-                                }
-
-                                break;
-
-                                // radiation heat flux boundary condition
-                            case 4:
-                                //                                printf("Radiation boundary condition.\n");
-                                // future implementation
-                                break;
-                        }
-                        // get out of the for loop that verifies if it is a boundary
-                        goto transmission_and_reflection;
-                    }
-                }
-            }
-
-            // if the for loop did not find a boundary condition, then,
-            // my assumption is that this is between two ports
-            // number of ports saved
-            startEnd[0] = 2;
-            // number of port 0
-            getRealPortNumber_fromAbstractPortNumber(portsNumbers[2],
-                    matrices->numbers.abstractPortsToReal, startEnd + offsetRealPort0);
-
-            // number of port 1
-            getRealPortNumber_fromAbstractPortNumber(portsNumbers[3],
-                    matrices->numbers.abstractPortsToReal, startEnd + offsetRealPort1);
-
-            // DEBUG: see the pair of points that are adiabatic
-            // I'm seeing the pairs of points.
-            // As in C, we start at zero and I start at 1, then, I need
-            // to convert, summing 1, to see the real point number
-            //                    printf("Between two ports (%llu, %llu). Test Points (%llu, %llu)\n",
-            //                            startEnd[2], startEnd[5], i + 1, k + 1);
-
-            reflection[0] = matrices->R[startEnd[offsetRealPort0]] + matrices->Z[startEnd[offsetStubPort0]] +
-                    matrices->R[startEnd[offsetRealPort1]] + matrices->Z[startEnd[offsetStubPort1]];
-            reflection[1] = 1 - 2 * matrices->Z[startEnd[offsetStubPort1]] / reflection[0];
-            reflection[0] = 1 - 2 * matrices->Z[startEnd[offsetStubPort0]] / reflection[0];
-
-            // effect of port 0 in port 1
-            transmission[0] = 1 - reflection[1];
-            // effect of port 1 in port 0
-            transmission[1] = 1 - reflection[0];
-
-            // DEBUG: print reflection and transmission coefficients
-            //                    printf("reflection (%e, %e). Transmission (%e, %e)\n",
-            //                            reflection[0], reflection[1], transmission[0], transmission[1]);
-
-            B[0] = 0;
-            B[1] = 0;
-
-            if (input->equationInput[id].saveScalarBetween) {
-                B_out[0] = 0;
-                B_out[1] = 0;
-                switch (approximationTB) {
-                    case 1: // using Vr
-                        transmission_out[0] = 2 * (matrices->R[startEnd[offsetRealPort1]] + matrices->Z[startEnd[offsetStubPort1]]) / (
-                                matrices->R[startEnd[offsetRealPort0]] + matrices->Z[startEnd[offsetStubPort0]]
-                                + matrices->R[startEnd[offsetRealPort1]] + matrices->Z[startEnd[offsetStubPort1]]);
-
-                        transmission_out[1] = 2 * (matrices->R[startEnd[offsetRealPort0]] + matrices->Z[startEnd[offsetStubPort0]]) / (
-                                matrices->R[startEnd[offsetRealPort0]] + matrices->Z[startEnd[offsetStubPort0]]
-                                + matrices->R[startEnd[offsetRealPort1]] + matrices->Z[startEnd[offsetStubPort1]]);
-                        break;
-                    case 2: // using Tc
-                        transmission_out[0] = (matrices->R[startEnd[offsetRealPort1]]) / (
-                                matrices->R[startEnd[offsetRealPort0]] + matrices->R[startEnd[offsetRealPort1]]);
-
-                        transmission_out[1] = (matrices->R[startEnd[offsetRealPort0]]) / (
-                                matrices->R[startEnd[offsetRealPort0]] + matrices->R[startEnd[offsetRealPort1]]);
-                        break;
-                }
-            }
-
-            if (input->equationInput[id].saveFlux) {
-                B_out_flux[0] = 0;
-                B_out_flux[1] = 0;
-
-                transmission_out_flux[0] = 2 / (
-                        (matrices->R[startEnd[offsetRealPort0]] + matrices->Z[startEnd[offsetStubPort0]] +
-                        matrices->R[startEnd[offsetRealPort1]] + matrices->Z[startEnd[offsetStubPort1]]) *
-                        matrices->L[startEnd[offsetRealPort0]]);
-
-                transmission_out_flux[1] = -transmission_out_flux[0];
-            }
-
+        getPortsOrPoints(connection, i, &(coeff.portsNumbers));
+
+        // getting reflection and transmission coefficients, and effects on calculating
+        // temperature and heat flux
+        if ((errorTLMnumber = calculateConnectionCoefficientsEigen(matrices, boundaries,
+                &coeff, input, id)) != 0) {
+            return errorTLMnumber;
         }
 
 
-
-transmission_and_reflection:
-        ; // trick to write something after the goto statement
-        for (j1 = 0; j1 < startEnd[0]; j1++) {
-            offset = j1 * startEnd[0];
-
+        // efficient TLM matrix multiplication. From kVr = S*kVi to k+1Vi = M*kVi
+        for (j1 = 0; j1 < coeff.startEnd[0]; j1++) {
+            offset = j1 * coeff.startEnd[0];
             if (j1 == 0 && (input->equationInput[id].saveScalarBetween ||
                     input->equationInput[id].saveFlux)) {
                 // I'm getting the positions of the points "in between" two nodes. I can
                 // calculate the temperature on these points.
                 getBetweenPointFromRealPortNumber(matrices->numbers.abstractPortsToReal,
-                        startEnd[offsetRealPort],
+                        coeff.startEnd[coeff.offsetRealPort],
                         &(matrices->Points_output[offset_TB + i].x),
                         &(matrices->Points_output[offset_TB + i].y),
                         &(matrices->Points_output[offset_TB + i].z),
                         input);
 
                 if (input->equationInput[id].saveFlux) {
-                    // I should answer why do I need this...
+                    // TODO: I should answer why do I need this...
                     getProjectionFromRealPortNumber(matrices->numbers.abstractPortsToReal,
-                            startEnd[offsetRealPort],
+                            coeff.startEnd[coeff.offsetRealPort],
                             &(matrices->Points_output[offset_heat_flux + i].x),
                             &(matrices->Points_output[offset_heat_flux + i].y),
                             &(matrices->Points_output[offset_heat_flux + i].z),
                             input);
-                    //                    printf("The output outside: %f\n", matrices->Points_output[offset_heat_flux + i].x*matrices->Points_output[offset_heat_flux + i].x + matrices->Points_output[offset_heat_flux + i].y*matrices->Points_output[offset_heat_flux + i].y + matrices->Points_output[offset_heat_flux + i].z*matrices->Points_output[offset_heat_flux + i].z);
-
                 }
             }
 
+            // calculating the matrix coefficients used to calculate the temperature between nodes.
+            // Here, I only need to consider the effect of the port pointed by j1. 
             if (input->equationInput[id].saveScalarBetween) {
                 matrices->E_output(offset_TB + i) = matrices->E_output(offset_TB + i)
-                        + transmission_out[j1] * matrices->E(startEnd[j1 * distanceBetweenPorts + offsetStubPort])
-                        + B_out[j1];
-
-                switch (approximationTB) {
-                    case 1: // using Vr
-                        // transmission effects of port j1 into TB
-                        for (j2 = startEnd[j1 * distanceBetweenPorts + offsetStubPortFirst]; j2 < startEnd[j1 * distanceBetweenPorts + offsetStubPortLast]; j2++) {
-                            matrices->tau.insert(offset_TB + i, j2) =
-                                    transmission_out[j1] * matrices->M.coeff(startEnd[j1 * distanceBetweenPorts + offsetStubPort], j2);
-                        }
-                        break;
-                    case 2: // using Tc
-                        for (j2 = startEnd[j1 * distanceBetweenPorts + offsetStubPortFirst]; j2 < startEnd[j1 * distanceBetweenPorts + offsetStubPortLast]; j2++) {
-
-                            if (startEnd[j1 * distanceBetweenPorts + offsetStubPort] == j2) {
-                                if (j2 == startEnd[j1 * distanceBetweenPorts + offsetStubPortFirst]) {
-                                    matrices->tau.insert(offset_TB + i, j2) =
-                                            transmission_out[j1] * matrices->M.coeff(j2 + 1, j2);
-                                } else {
-                                    matrices->tau.insert(offset_TB + i, j2) =
-                                            transmission_out[j1] * matrices->M.coeff(j2 - 1, j2);
-                                }
-                            } else {
-                                matrices->tau.insert(offset_TB + i, j2) =
-                                        transmission_out[j1] * matrices->M.coeff(startEnd[j1 * distanceBetweenPorts + offsetStubPort], j2);
-                            }
-
-                        }
-                        break;
+                        // if there is any previous value on that position, a preserve it.
+                        // Think that the effect of port 0 is calculated first and then we calculate
+                        // the effect of port 1
+                        + coeff.transmission_out[j1] * matrices->E(coeff.startEnd[j1 * coeff.distanceBetweenPorts + coeff.offsetStubPort])
+                        + coeff.B_out[j1];
+                // transmission effects of port j1 into TB. Besides port numbering,
+                // this doesn't change with stub
+                for (j2 = coeff.startEnd[j1 * coeff.distanceBetweenPorts + coeff.offsetStubPortFirst]; j2 < coeff.startEnd[j1 * coeff.distanceBetweenPorts + coeff.offsetStubPortLast]; j2++) {
+                    matrices->tau.insert(offset_TB + i, j2) =
+                            coeff.transmission_out[j1] * matrices->M.coeff(coeff.startEnd[j1 * coeff.distanceBetweenPorts + coeff.offsetStubPort], j2);
+                    // I fix the line of matrix M and I go in the different columns. At this point of the code,
+                    // M is in kVr = M*kVi. So, I'm calculating the effects of kVr on the temperature between nodes (TB).
+                    // No that columns in M represents effect of different ports on the port that I'm now (which I 
+                    // calculate using coeff.startEnd[j1 * coeff.distanceBetweenPorts + coeff.offsetStubPort] )
                 }
             }
 
 
-
+            // calculating the matrix coefficients used to calculate the heat flux.
+            // Here, I only need to consider the effect of the port pointed by j1. 
             if (input->equationInput[id].saveFlux) {
                 matrices->E_output(offset_heat_flux + i) = matrices->E_output(offset_heat_flux + i)
-                        + transmission_out_flux[j1] * matrices->E(startEnd[j1 * distanceBetweenPorts + offsetStubPort])
-                        + B_out_flux[j1];
-
-                for (j2 = startEnd[j1 * distanceBetweenPorts + offsetStubPortFirst]; j2 < startEnd[j1 * distanceBetweenPorts + offsetStubPortLast]; j2++) {
+                        // if there is any previous value on that position, a preserve it.
+                        // Think that the effect of port 0 is calculated first and then we calculate
+                        // the effect of port 1
+                        + coeff.transmission_out_flux[j1] * matrices->E(coeff.startEnd[j1 * coeff.distanceBetweenPorts + coeff.offsetStubPort])
+                        + coeff.B_out_flux[j1];
+                // transmission effects of port j1 into TB. Besides port numbering,
+                // this doesn't change with stub
+                for (j2 = coeff.startEnd[j1 * coeff.distanceBetweenPorts + coeff.offsetStubPortFirst]; j2 < coeff.startEnd[j1 * coeff.distanceBetweenPorts + coeff.offsetStubPortLast]; j2++) {
                     matrices->tau.insert(offset_heat_flux + i, j2) =
-                            transmission_out_flux[j1] * matrices->M.coeff(startEnd[j1 * distanceBetweenPorts + offsetStubPort], j2);
+                            coeff.transmission_out_flux[j1] * matrices->M.coeff(coeff.startEnd[j1 * coeff.distanceBetweenPorts + coeff.offsetStubPort], j2);
+                    // I fix the line of matrix M and I go in the different columns. At this point of the code,
+                    // M is in kVr = M*kVi. So, I'm calculating the effects of kVr on the temperature between nodes (TB).
+                    // No that columns in M represents effect of different ports on the port that I'm now (which I 
+                    // calculate using coeff.startEnd[j1 * coeff.distanceBetweenPorts + coeff.offsetStubPort] )
                 }
             }
 
 
-            // going to port 2, port 3...
-            // startEnd[j3*distanceBetweenPorts + offsetStubPort] - 1 - number of port j3 - 1
-            // startEnd[j1*distanceBetweenPorts + offsetStubPort] - 1 - number of port j1 - 1
-            for (j3 = j1 + 1; j3 < startEnd[0]; j3++) {
+            // Now I will calculate how to go from kVr to k+1Vi
+            for (j3 = j1 + 1; j3 < coeff.startEnd[0]; j3++) {
                 // transmission effects of port j1 into port j3
-                for (j2 = startEnd[j1 * distanceBetweenPorts + offsetStubPortFirst]; j2 < startEnd[j1 * distanceBetweenPorts + offsetStubPortLast]; j2++) {
-                    matrices->M.insert(startEnd[j3 * distanceBetweenPorts + offsetStubPort], j2) =
-                            transmission[offset] * matrices->M.coeff(startEnd[j1 * distanceBetweenPorts + offsetStubPort], j2);
+                for (j2 = coeff.startEnd[j1 * coeff.distanceBetweenPorts + coeff.offsetStubPortFirst]; j2 < coeff.startEnd[j1 * coeff.distanceBetweenPorts + coeff.offsetStubPortLast]; j2++) {
+                    matrices->M.insert(coeff.startEnd[j3 * coeff.distanceBetweenPorts + coeff.offsetStubPort], j2) =
+                            coeff.transmission[offset] * matrices->M.coeff(coeff.startEnd[j1 * coeff.distanceBetweenPorts + coeff.offsetStubPort], j2);
                 }
 
                 // transmission effects of port j3 into port j1
-                for (j2 = startEnd[j3 * distanceBetweenPorts + offsetStubPortFirst]; j2 < startEnd[j3 * distanceBetweenPorts + offsetStubPortLast]; j2++) {
-                    matrices->M.insert(startEnd[j1 * distanceBetweenPorts + offsetStubPort], j2) =
-                            transmission[offset + (startEnd[0] - 1) * j3] * matrices->M.coeff(startEnd[j3 * distanceBetweenPorts + offsetStubPort], j2);
+                for (j2 = coeff.startEnd[j3 * coeff.distanceBetweenPorts + coeff.offsetStubPortFirst]; j2 < coeff.startEnd[j3 * coeff.distanceBetweenPorts + coeff.offsetStubPortLast]; j2++) {
+                    matrices->M.insert(coeff.startEnd[j1 * coeff.distanceBetweenPorts + coeff.offsetStubPort], j2) =
+                            coeff.transmission[offset + (coeff.startEnd[0] - 1) * j3] * matrices->M.coeff(coeff.startEnd[j3 * coeff.distanceBetweenPorts + coeff.offsetStubPort], j2);
                 }
 
                 // transmission effects of port j3 into port j1
-                B[j1] = B[j1] +
-                        transmission[offset + (startEnd[0] - 1) * j3] * matrices->E(startEnd[j3 * distanceBetweenPorts + offsetStubPort]);
+                coeff.B[j1] = coeff.B[j1] +
+                        coeff.transmission[offset + (coeff.startEnd[0] - 1) * j3] * matrices->E(coeff.startEnd[j3 * coeff.distanceBetweenPorts + coeff.offsetStubPort]);
                 // transmission effects of port j1 into port j3
-                B[j3] = B[j3] +
-                        transmission[offset] * matrices->E(startEnd[j1 * distanceBetweenPorts + offsetStubPort]);
+                coeff.B[j3] = coeff.B[j3] +
+                        coeff.transmission[offset] * matrices->E(coeff.startEnd[j1 * coeff.distanceBetweenPorts + coeff.offsetStubPort]);
                 offset++;
             }
         }
 
         // reflection effects
-        for (j1 = 0; j1 < startEnd[0]; j1++) {
-            for (j2 = startEnd[j1 * distanceBetweenPorts + offsetStubPortFirst]; j2 < startEnd[j1 * distanceBetweenPorts + offsetStubPortLast]; j2++) {
-                matrices->M.coeffRef(startEnd[j1 * distanceBetweenPorts + offsetStubPort], j2) =
-                        reflection[j1] * matrices->M.coeff(startEnd[j1 * distanceBetweenPorts + offsetStubPort], j2);
+        for (j1 = 0; j1 < coeff.startEnd[0]; j1++) {
+            for (j2 = coeff.startEnd[j1 * coeff.distanceBetweenPorts + coeff.offsetStubPortFirst]; j2 < coeff. startEnd[j1 * coeff.distanceBetweenPorts + coeff.offsetStubPortLast]; j2++) {
+                matrices->M.coeffRef(coeff.startEnd[j1 * coeff.distanceBetweenPorts + coeff.offsetStubPort], j2) =
+                        coeff.reflection[j1] * matrices->M.coeff(coeff.startEnd[j1 * coeff.distanceBetweenPorts + coeff.offsetStubPort], j2);
             }
-            matrices->E(startEnd[j1 * distanceBetweenPorts + offsetStubPort]) =
-                    reflection[j1] * matrices->E(startEnd[j1 * distanceBetweenPorts + offsetStubPort])
-                    + B[j1];
+            matrices->E(coeff.startEnd[j1 * coeff.distanceBetweenPorts + coeff.offsetStubPort]) =
+                    coeff.reflection[j1] * matrices->E(coeff.startEnd[j1 * coeff.distanceBetweenPorts + coeff.offsetStubPort])
+                    + coeff.B[j1];
         }
+
+
     }
 
     matrices->M.makeCompressed();
     matrices->tau.makeCompressed();
 
-    free(startEnd);
-    startEnd = NULL;
+    // terminating the variable that contains the coefficients
+    if ((errorTLMnumber = terminateConnectionAndBoundaryCoefficients(&coeff)) != 0) {
+        return errorTLMnumber;
+    }
 
+//        FILE *fM, *fTau, *fE, *fE_out;
+//        fM = fopen("matrixM.csv", "w");
+//        fE = fopen("matrixE.csv", "w");
+//        fE_out = fopen("matrixE_out.csv", "w");
+//        fTau = fopen("matrixTau.csv", "w");
+//        
+//        for (j3 = 0; j3 < matrices->numbers.Ports + matrices->numbers.StubPorts; j3++){
+//            for (j1 = 0; j1 < matrices->numbers.Ports + matrices->numbers.StubPorts; j1++){
+//                fprintf(fM, "%0.17g ", matrices->M.coeff(j3, j1));
+//            }
+//            fprintf(fM, "\n");
+//            fprintf(fE, "%0.17g\n", matrices->E.coeff(j3));
+//        }
+//        
+//        
+//        for (j3 = 0; j3 < matrices->numbers.Output; j3++){
+//            for (j1 = 0; j1 < matrices->numbers.Ports + matrices->numbers.StubPorts; j1++){
+//                fprintf(fTau, "%0.17g ", matrices->tau.coeff(j3, j1));
+//            }
+//            fprintf(fTau, "\n");
+//            fprintf(fE_out, "%0.17g\n", matrices->E_output.coeff(j3));
+//        }
+
+
+    return 0;
+}
+
+/*
+ * calculateConnectionCoefficientsEigen: Calculates several boundary coefficients
+ * that are used in the connection process. This includes reflection, transmission,
+ * and effect of boundaries
+ */
+unsigned int calculateConnectionCoefficientsEigen(struct calculationTLMEigen *matrices,
+        struct boundaryData* boundaries, struct connectionAndBoundaryCoefficients *coeff,
+        struct dataForSimulation *input, int id) {
+
+    unsigned long long j, j1a;
+    // if the quantity of ports is equal to 1, then, this is just
+    // adiabatic boundary condition, which means that the reflection
+    // coefficient is zero
+    if (coeff->portsNumbers[1] == 1) {
+        // number of ports saved
+        coeff->startEnd[0] = 1;
+        // number of port 1
+        getRealPortNumber_fromAbstractPortNumber(coeff->portsNumbers[2],
+                matrices->numbers.abstractPortsToReal, coeff->startEnd + coeff->offsetRealPort0);
+
+        // DEBUG: see the pair of points that are adiabatic
+        // I'm seeing the pairs of points.
+        // As in C, we start at zero and I start at 1, then, I need
+        // to convert, summing 1, to see the real point number
+        //            printf("Adiabatic boundary condition by lack. Test Points (%llu)\n", i + 1);
+
+        coeff->reflection[0] = 1;
+        coeff->transmission[0] = 0;
+        coeff->B[0] = 0;
+
+        if (input->equationInput[id].saveScalarBetween) {
+            coeff->B_out[0] = 0;
+            coeff->transmission_out[0] = 2;
+        }
+
+        if (input->equationInput[id].saveFlux) {
+            coeff->B_out_flux[0] = 0;
+            coeff->transmission_out_flux[0] = 0;
+        }
+
+    } else {
+        // testing if it is a boundary. If any of the ports allocated are equal to zero,
+        // then, this has a boundary. If the quantity of ports is 2, then, this is just
+        // a boundary condition that is not in contact with any material node. Then, I
+        // will do nothing about it. Otherwise, I will work it out
+        //
+        // By assumption, if j = 0, then the port will be located at j = 2.
+        // If j != 0, then the port will be located at j = 0.
+        // the maximum value of quantityOfPorts is 3
+        for (j = 2; j < (coeff->portsNumbers[1] + 2); j++) {
+            if (coeff->portsNumbers[j] == 0) {
+                if (coeff->portsNumbers[1] > 2) {
+                    // the number following the first zero, is the number of the boundary.
+                    // The number of the boundary can be zero as well
+
+                    // j1a is the position of the port. j is the position
+                    // of the first zero. Assuming that we have only ONE port
+                    // connected to this intersection, then, IF j == 2, the
+                    // boundary was the first one to be included in the connection
+                    // variable. Therefore, j1a is j + 2 ( +1 is the boundary
+                    // number and +2 is the port number). ELSE, then j > 2,
+                    // which means that the port is in the first position.                        
+                    if (j == 2) j1a = j + 2;
+                    else j1a = j - 1;
+
+                    // cleaning previous variables
+                    coeff->reflection[0] = 0;
+                    coeff->transmission[0] = 0;
+                    coeff->B[0] = 0;
+
+                    coeff->transmission_out[0] = 0;
+                    coeff->B_out[0] = 0;
+
+                    // by design, the number of boundaries for adiabatic or temperature are only one.
+                    switch (boundaries[coeff->portsNumbers[j + 1]].boundaries[0].boundaryType) {
+                            // this is adiabatic boundary condition
+                        case 0:
+                            // number of ports saved
+                            coeff->startEnd[0] = 1;
+                            // number of port 0
+                            getRealPortNumber_fromAbstractPortNumber(coeff->portsNumbers[j1a],
+                                    matrices->numbers.abstractPortsToReal, coeff->startEnd + coeff->offsetRealPort0);
+                            coeff->reflection[0] = 1;
+                            // transmission[0] = 0; // was defined 0 above
+                            // B[0] = 0; // was defined 0 above
+
+                            if (input->equationInput[id].saveScalarBetween) {
+                                coeff->B_out[0] = 0;
+                                coeff->transmission_out[0] = 2;
+                            }
+
+                            if (input->equationInput[id].saveFlux) {
+                                coeff->B_out_flux[0] = 0;
+                                coeff->transmission_out_flux[0] = 0;
+                            }
+
+                            break;
+
+                            // this is temperature boundary condition
+                        case 1:
+                            // number of ports saved
+                            coeff->startEnd[0] = 1;
+
+                            getRealPortNumber_fromAbstractPortNumber(coeff->portsNumbers[j1a],
+                                    matrices->numbers.abstractPortsToReal, coeff->startEnd + coeff->offsetRealPort0);
+
+                            coeff->reflection[0] = (matrices->R[coeff->startEnd[coeff->offsetRealPort0]] - matrices->Z[coeff->startEnd[coeff->offsetStubPort0]]) /
+                                    (matrices->R[coeff->startEnd[coeff->offsetRealPort0]] + matrices->Z[coeff->startEnd[coeff->offsetStubPort0]]);
+
+                            // transmission[0] = 0; // was defined 0 above
+
+                            coeff->B[0] = boundaries[coeff->portsNumbers[j + 1]].boundaries[0].boundaryData[0]
+                                    * matrices->Z[coeff->startEnd[coeff->offsetStubPort0]] /
+                                    (matrices->R[coeff->startEnd[coeff->offsetRealPort0]] + matrices->Z[coeff->startEnd[coeff->offsetStubPort0]]);
+
+                            if (input->equationInput[id].saveScalarBetween) {
+                                coeff->B_out[0] = boundaries[coeff->portsNumbers[j + 1]].boundaries[0].boundaryData[0];
+
+                                coeff->transmission_out[0] = 0;
+                            }
+
+                            if (input->equationInput[id].saveFlux) {
+                                // from port 0 to outside
+                                coeff->transmission_out_flux[0] = 2 / (
+                                        (matrices->R[coeff->startEnd[coeff->offsetRealPort0]] + matrices->Z[coeff->startEnd[coeff->offsetStubPort0]]) *
+                                        matrices->L[coeff->startEnd[coeff->offsetRealPort0]]);
+
+
+                                coeff->B_out_flux[0] = -1 * boundaries[coeff->portsNumbers[j + 1]].boundaries[0].boundaryData[0] *
+                                        coeff->transmission_out_flux[0] / 2;
+
+
+                            }
+
+                            break;
+
+
+                            // heat flux boundary condition
+                        case 2:
+                            // number of ports saved
+                            coeff->startEnd[0] = 1;
+                            // number of port 0
+                            getRealPortNumber_fromAbstractPortNumber(coeff->portsNumbers[j1a],
+                                    matrices->numbers.abstractPortsToReal, coeff->startEnd + coeff->offsetRealPort0);
+
+                            coeff->reflection[0] = 1;
+
+                            coeff->B[0] = boundaries[coeff->portsNumbers[j + 1]].boundaries[0].boundaryData[0] // q''
+                                    * matrices->Z[coeff->startEnd[coeff->offsetStubPort0]]
+                                    * matrices->L[coeff->startEnd[coeff->offsetRealPort0]];
+
+
+                            if (input->equationInput[id].saveScalarBetween) {
+                                // effect of the heat flux on Tp
+                                coeff->B_out[0] = (matrices->Z[coeff->startEnd[coeff->offsetStubPort0]] + matrices->R[coeff->startEnd[coeff->offsetRealPort0]])
+                                        * boundaries[coeff->portsNumbers[j + 1]].boundaries[0].boundaryData[0]
+                                        * matrices->L[coeff->startEnd[coeff->offsetRealPort0]];
+                                // effect of Vr on Tp
+                                coeff->transmission_out[0] = 2;
+                            }
+
+                            if (input->equationInput[id].saveFlux) {
+                                // from inside to outside. Positive values for 
+                                // heat flux input are towards inside, hence
+                                // that's why -1
+                                coeff->B_out_flux[0] = -1 * boundaries[coeff->portsNumbers[j + 1]].boundaries[0].boundaryData[0];
+
+                                coeff->transmission_out_flux[0] = 0;
+                            }
+
+                            break;
+
+                            // convection heat flux boundary condition
+                        case 3:
+                            // number of ports saved
+                            coeff->startEnd[0] = 1;
+                            // number of port 0
+                            getRealPortNumber_fromAbstractPortNumber(coeff->portsNumbers[j1a],
+                                    matrices->numbers.abstractPortsToReal, coeff->startEnd + coeff->offsetRealPort0);
+
+                            double Rc;
+
+                            Rc = 1 / (boundaries[coeff->portsNumbers[j + 1]].boundaries[0].boundaryData[1]
+                                    * matrices->L[coeff->startEnd[coeff->offsetRealPort0]]);
+
+                            coeff->reflection[0] = (Rc + matrices->R[coeff->startEnd[coeff->offsetRealPort0]] - matrices->Z[coeff->startEnd[coeff->offsetStubPort0]]) /
+                                    (Rc + matrices->R[coeff->startEnd[coeff->offsetRealPort0]] + matrices->Z[coeff->startEnd[coeff->offsetStubPort0]]);
+
+                            coeff->B[0] = boundaries[coeff->portsNumbers[j + 1]].boundaries[0].boundaryData[0] // Tc
+                                    * matrices->Z[coeff->startEnd[coeff->offsetStubPort0]] /
+                                    (Rc + matrices->R[coeff->startEnd[coeff->offsetRealPort0]] + matrices->Z[coeff->startEnd[coeff->offsetStubPort0]]);
+
+
+
+                            if (input->equationInput[id].saveScalarBetween) {
+                                coeff->B_out[0] = (matrices->Z[coeff->startEnd[coeff->offsetStubPort0]] + matrices->R[coeff->startEnd[coeff->offsetRealPort0]]) /
+                                        (matrices->Z[coeff->startEnd[coeff->offsetStubPort0]] + matrices->R[coeff->startEnd[coeff->offsetRealPort0]] + Rc)
+                                        * boundaries[coeff->portsNumbers[j + 1]].boundaries[0].boundaryData[0];
+
+                                coeff->transmission_out[0] = 2 * Rc /
+                                        (matrices->Z[coeff->startEnd[coeff->offsetStubPort0]] + matrices->R[coeff->startEnd[coeff->offsetRealPort0]] + Rc);
+                            }
+
+                            if (input->equationInput[id].saveFlux) {
+                                coeff->transmission_out_flux[0] = 2 / (
+                                        (matrices->R[coeff->startEnd[coeff->offsetRealPort0]] + matrices->Z[coeff->startEnd[coeff->offsetStubPort0]] + Rc) *
+                                        matrices->L[coeff->startEnd[coeff->offsetRealPort0]]);
+
+                                coeff->B_out_flux[0] = -1 * boundaries[coeff->portsNumbers[j + 1]].boundaries[0].boundaryData[0] *
+                                        coeff->transmission_out_flux[0] / 2;
+
+
+                            }
+
+                            break;
+
+                            // radiation heat flux boundary condition
+                        case 4:
+                            // future implementation
+                            break;
+                    }
+                    // get out of the for loop that verifies if it is a boundary
+                    return 0;
+                }
+            }
+        }
+
+        // if the for loop did not find a boundary condition, then,
+        // my assumption is that this is between two ports
+        // number of ports saved
+        coeff->startEnd[0] = 2;
+        // number of port 0
+        getRealPortNumber_fromAbstractPortNumber(coeff->portsNumbers[2],
+                matrices->numbers.abstractPortsToReal, coeff->startEnd + coeff->offsetRealPort0);
+
+        // number of port 1
+        getRealPortNumber_fromAbstractPortNumber(coeff->portsNumbers[3],
+                matrices->numbers.abstractPortsToReal, coeff->startEnd + coeff->offsetRealPort1);
+
+        coeff->reflection[0] = matrices->R[coeff->startEnd[coeff->offsetRealPort0]] + matrices->Z[coeff->startEnd[coeff->offsetStubPort0]] +
+                matrices->R[coeff->startEnd[coeff->offsetRealPort1]] + matrices->Z[coeff->startEnd[coeff->offsetStubPort1]];
+        coeff->reflection[1] = 1 - 2 * matrices->Z[coeff->startEnd[coeff->offsetStubPort1]] / coeff->reflection[0];
+        coeff->reflection[0] = 1 - 2 * matrices->Z[coeff->startEnd[coeff->offsetStubPort0]] / coeff->reflection[0];
+
+        // effect of port 0 in port 1
+        coeff->transmission[0] = 1 - coeff->reflection[1];
+        // effect of port 1 in port 0
+        coeff->transmission[1] = 1 - coeff->reflection[0];
+
+        coeff->B[0] = 0;
+        coeff->B[1] = 0;
+
+        if (input->equationInput[id].saveScalarBetween) {
+            coeff->B_out[0] = 0;
+            coeff->B_out[1] = 0;
+            coeff->transmission_out[0] = 2 * (matrices->R[coeff->startEnd[coeff->offsetRealPort1]] + matrices->Z[coeff->startEnd[coeff->offsetStubPort1]]) / (
+                    matrices->R[coeff->startEnd[coeff->offsetRealPort0]] + matrices->Z[coeff->startEnd[coeff->offsetStubPort0]]
+                    + matrices->R[coeff->startEnd[coeff->offsetRealPort1]] + matrices->Z[coeff->startEnd[coeff->offsetStubPort1]]);
+
+            coeff->transmission_out[1] = 2 * (matrices->R[coeff->startEnd[coeff->offsetRealPort0]] + matrices->Z[coeff->startEnd[coeff->offsetStubPort0]]) / (
+                    matrices->R[coeff->startEnd[coeff->offsetRealPort0]] + matrices->Z[coeff->startEnd[coeff->offsetStubPort0]]
+                    + matrices->R[coeff->startEnd[coeff->offsetRealPort1]] + matrices->Z[coeff->startEnd[coeff->offsetStubPort1]]);
+        }
+
+        if (input->equationInput[id].saveFlux) {
+            coeff->B_out_flux[0] = 0;
+            coeff->B_out_flux[1] = 0;
+
+            coeff->transmission_out_flux[0] = 2 / (
+                    (matrices->R[coeff->startEnd[coeff->offsetRealPort0]] + matrices->Z[coeff->startEnd[coeff->offsetStubPort0]] +
+                    matrices->R[coeff->startEnd[coeff->offsetRealPort1]] + matrices->Z[coeff->startEnd[coeff->offsetStubPort1]]) *
+                    matrices->L[coeff->startEnd[coeff->offsetRealPort0]]);
+
+            coeff->transmission_out_flux[1] = -coeff->transmission_out_flux[0];
+        }
+
+    }
     return 0;
 }

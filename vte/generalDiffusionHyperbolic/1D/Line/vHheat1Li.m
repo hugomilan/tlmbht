@@ -13,7 +13,7 @@ Ts = 200;
 ro = 1200; % tissue density (kg/m3)
 cp = 3200; % specific heat (J/(K-kg))
 k = 0.3; % thermal conductivity (W/(K-m))
-tau = 10; % thermal relaxation time (s) 
+tau = 0.1; % thermal relaxation time (s) 
 
 Qext = 5000; % internal heat generation (W/m3)
 
@@ -107,9 +107,9 @@ temp_message = 'Errors and differences: ';
              ' maximum percentage error ' num2str(MaxPercentageError(3,i0)) ' %;'];
              
              set(0,'CurrentFigure',figure_Temp)
-%             plot(Points_Output_1((1 + numbers_1(1)*save_1(1) ):number_Temp,1), Ttemp((1 + numbers_1(1)*save_1(1) ):number_Temp)', 'ob')
-%             hold on 
-%             plot(Points_Output_1((1 + numbers_1(1)*save_1(1) ):number_Temp,1), output_1((1 + numbers_1(1)*save_1(1) ):number_Temp, i0), 'or')
+             plot(Points_Output_1((1 + numbers_1(1)*save_1(1) ):number_Temp,1), Ttemp((1 + numbers_1(1)*save_1(1) ):number_Temp)', 'ob')
+             hold on 
+             plot(Points_Output_1((1 + numbers_1(1)*save_1(1) ):number_Temp,1), output_1((1 + numbers_1(1)*save_1(1) ):number_Temp, i0), 'or')
              end
              
              hold off
@@ -148,12 +148,11 @@ temp_message = 'Errors and differences: ';
              
              
              set(0,'CurrentFigure',figure_Flux);
-%             plot(Points_Output_1(number_Points_Flux:number_Points,1), qAnaLTn, '*b')
-%             hold on 
-%             plot(Points_Output_1(number_Points_Flux:number_Points,1), output_1((1 + number_Temp ):number_Flux, i0), '*r')
-%             
-%             plot(Points_Output_1(number_Points_Flux:number_Points,1), qAnaLTn - output_1((1 + number_Temp ):number_Flux, i0), '*g')
-%             hold off
+             plot(Points_Output_1(number_Points_Flux:number_Points,1), qAnaLTn, '*b')
+             hold on 
+             plot(Points_Output_1(number_Points_Flux:number_Points,1), output_1((1 + number_Temp ):number_Flux, i0), '*r')
+             plot(Points_Output_1(number_Points_Flux:number_Points,1), qAnaLTn - output_1((1 + number_Temp ):number_Flux, i0), '*g')
+             hold off
              
              
              
@@ -162,7 +161,7 @@ temp_message = 'Errors and differences: ';
              disp(temp_message)
 
              fflush(stdout);
-             pause(0.5)
+             pause%(0.5)
              
              figure_defined = 1;
              

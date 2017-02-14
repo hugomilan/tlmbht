@@ -746,6 +746,8 @@ void sendErrorCodeAndMessage(unsigned int errorCode, void *input1v, void *input2
             /* FALLTHRU */
         case 8744:
             /* FALLTHRU */
+        case 8745:
+            /* FALLTHRU */
         case 8750:
             fprintf(stderr, "Failed to allocate memory for the processing");
             break;

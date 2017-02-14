@@ -3178,3 +3178,84 @@ unsigned int getOutsideProjectionTetrahedron(const struct dataForSimulation * in
 
     return 0;
 }
+
+
+/*
+ * initiateConnectionAndBoundaryCoefficients: initiate the variable connectionAndBoundaryCoefficients.
+ * This variable is used during the connection & boundary process
+ */
+unsigned int initiateConnectionAndBoundaryCoefficients(struct connectionAndBoundaryCoefficients *input){
+    // I will know how many ports by reading startEnd[0]. I might end up reallocating
+    // these vectors in future implementations.
+    input->reflection = (double *) malloc(sizeof (double)*2);
+    input->transmission = (double *) malloc(sizeof (double)*4);
+    input->B = (double *) malloc(sizeof (double)*2);
+    input->transmission_out = (double *) malloc(sizeof (double)*2);
+    input->B_out = (double *) malloc(sizeof (double)*2);
+    input->transmission_out_flux = (double *) malloc(sizeof (double)*2);
+    input->B_out_flux = (double *) malloc(sizeof (double)*2);
+    
+    
+    input->startEnd = (unsigned long long *) malloc(sizeof (unsigned long long)*14);
+    input->startEnd[1] = 14;  
+    
+    input->distanceBetweenPorts = 6;
+    input->offsetRealPort = 2;
+    input->offsetStubPort = 5;
+    input->offsetStubPortFirst = 6;
+    input->offsetStubPortLast = 7;
+    input->offsetRealPort0 = 2;
+    input->offsetStubPort0 = 5;
+    input->offsetRealPort1 = 8;
+    input->offsetStubPort1 = 11;
+    
+    input->portsNumbers = (unsigned long long*) malloc(
+            sizeof (unsigned long long)*7);
+    input->portsNumbers[0] = 7;
+    
+    // I will do only one check in to see if everything was allocated because they
+    // use such small amount of memory spaces that it shouldn't be a problem
+    if (input->reflection == NULL || input->transmission == NULL || input->B == NULL ||
+            input->transmission_out == NULL || input->B_out == NULL || 
+            input->transmission_out_flux == NULL || input->B_out_flux == NULL ||
+            input->startEnd == NULL || input->portsNumbers == NULL){
+        return 8745;
+    }
+    
+    return 0;
+}
+
+/*
+ * terminateConnectionAndBoundaryCoefficients: terminate the variable connectionAndBoundaryCoefficients.
+ * This variable is used during the connection & boundary process
+ */
+    unsigned int terminateConnectionAndBoundaryCoefficients(struct connectionAndBoundaryCoefficients *input){
+        free(input->reflection);
+        input->reflection = NULL;
+        
+        free(input->transmission);
+        input->transmission = NULL;
+        
+        free(input->B);
+        input->B = NULL;
+        
+        free(input->transmission_out);
+        input->transmission_out = NULL;
+        
+        free(input->B_out);
+        input->B_out = NULL;
+        
+        free(input->transmission_out_flux);
+        input->transmission_out_flux = NULL;
+        
+        free(input->B_out_flux);
+        input->B_out_flux = NULL;
+        
+        free(input->startEnd);
+        input->startEnd = NULL;
+        
+        free(input->portsNumbers);
+        input->portsNumbers = NULL;
+        
+        return 0;
+    }

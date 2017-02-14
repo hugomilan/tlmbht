@@ -13,6 +13,8 @@
         <gdb_interceptlist>
           <gdbinterceptoptions gdb_all="false" gdb_unhandled="true" gdb_unexpected="true"/>
         </gdb_interceptlist>
+        <gdb_signals>
+        </gdb_signals>
         <gdb_options>
           <DebugOptions>
           </DebugOptions>
@@ -24,18 +26,18 @@
       </nativedebugger>
       <runprofile version="9">
         <runcommandpicklist>
-          <runcommandpicklistitem>"${OUTPUT_PATH}" case_testing.tlm</runcommandpicklistitem>
           <runcommandpicklistitem>"${OUTPUT_PATH}" case_testing_3D.tlm</runcommandpicklistitem>
           <runcommandpicklistitem>"${OUTPUT_PATH}" case_testing_1D.tlm</runcommandpicklistitem>
           <runcommandpicklistitem>"${OUTPUT_PATH}" cpennes1Li.tlm</runcommandpicklistitem>
           <runcommandpicklistitem>"${OUTPUT_PATH}" test/cpennes1Li.tlm</runcommandpicklistitem>
           <runcommandpicklistitem>"${OUTPUT_PATH}"/test cpennes1Li.tlm</runcommandpicklistitem>
           <runcommandpicklistitem>"${OUTPUT_PATH}"/test cdiff1Li.tlm</runcommandpicklistitem>
-          <runcommandpicklistitem>"${OUTPUT_PATH}" cheat1Li.tlm</runcommandpicklistitem>
           <runcommandpicklistitem>"${OUTPUT_PATH}" cpennes2Tr.tlm</runcommandpicklistitem>
           <runcommandpicklistitem>"${OUTPUT_PATH}" cdiff1Li.tlm</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" cHheat1Li.tlm</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" cheat1Li.tlm</runcommandpicklistitem>
         </runcommandpicklist>
-        <runcommand>"${OUTPUT_PATH}" cdiff1Li.tlm</runcommand>
+        <runcommand>"${OUTPUT_PATH}" cheat1Li.tlm</runcommand>
         <rundir>test</rundir>
         <buildfirst>true</buildfirst>
         <terminal-type>0</terminal-type>
@@ -117,10 +119,10 @@
           <runcommandpicklistitem>"${OUTPUT_PATH}" cpennes1Li.tlm --verbose</runcommandpicklistitem>
           <runcommandpicklistitem>"${OUTPUT_PATH}" cHpennes1Li.tlm</runcommandpicklistitem>
           <runcommandpicklistitem>"${OUTPUT_PATH}" cHheat1Li.tlm</runcommandpicklistitem>
-          <runcommandpicklistitem>"${OUTPUT_PATH}" cHheat1Li.tlm --verbose --timing</runcommandpicklistitem>
           <runcommandpicklistitem>"${OUTPUT_PATH}" cheat1Li.tlm --verbose --timing</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" cHheat1Li.tlm --verbose --timing</runcommandpicklistitem>
         </runcommandpicklist>
-        <runcommand>"${OUTPUT_PATH}" cheat1Li.tlm --verbose --timing</runcommand>
+        <runcommand>"${OUTPUT_PATH}" cHheat1Li.tlm --verbose --timing</runcommand>
         <rundir>test</rundir>
         <buildfirst>true</buildfirst>
         <terminal-type>0</terminal-type>

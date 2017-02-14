@@ -237,46 +237,71 @@ unsigned int initiateVariablesTLMPennes(struct dataForSimulation *input,
 
     clock_t begin_mat = clock();
     // initiating the matrices
+    int numberOfAdditionalPorts;
     switch (input->equationInput[id].libraryForCalculation) {
         case EIGEN:
             // quantities to reserve in the sparse matrices used in the implementation
             // using the Eigen library
-            ; // trick to overcome C limitation that would not allow me to 
-            // define the variable below
-            unsigned int quantityToReserve[] = {4, 4}; // Initial value 
+            // the number of ports depends on the equation we are solving
+            switch (input->equationInput[id].typeS) {
+            case HYPERBOLIC_DIFFUSION:
+                // break;
+                /* FALLTHRU */
+            case HYPERBOLIC_HEAT:
+                // break;
+                /* FALLTHRU */
+            case HYPERBOLIC_PENNES:
+                numberOfAdditionalPorts = 1;
+                 break;
+            case DIFFUSION : // the solver to these equations is the same
+                // break;
+                /* FALLTHRU */
+            case HEAT: // the solver to these equations is the same
+                // break;
+                /* FALLTHRU */
+            case PENNES:
+                numberOfAdditionalPorts = 0;
+                break;
+
+            case EM:
+                break;
+            case CFD:
+                break;
+        }
+            unsigned int quantityToReserve[] = {2*(2 + numberOfAdditionalPorts), 2*(2 + numberOfAdditionalPorts)}; // Initial value 
 
             // if we have what is defined below, I increase the number to reserve. The numbers
             // to reserve are the square of the number of ports .
 
             // Triangle elements
             if (input->mesh.quantityOfSpecificElement[2]) {
-                quantityToReserve[0] = 9;
-                quantityToReserve[1] = 9;
+                quantityToReserve[0] = 3*(3 + numberOfAdditionalPorts);
+                quantityToReserve[1] = 3*(3 + numberOfAdditionalPorts);
             }
 
             // quadrangle or tetrahedron elements
             if (input->mesh.quantityOfSpecificElement[3] != 0 ||
                     input->mesh.quantityOfSpecificElement[4] != 0) {
-                quantityToReserve[0] = 16;
-                quantityToReserve[1] = 16;
+                quantityToReserve[0] = 4*(4 + numberOfAdditionalPorts);
+                quantityToReserve[1] = 4*(4 + numberOfAdditionalPorts);
             }
 
             // pyramid elements
             if (input->mesh.quantityOfSpecificElement[7] != 0) {
-                quantityToReserve[0] = 25;
-                quantityToReserve[1] = 25;
+                quantityToReserve[0] = 5*(5 + numberOfAdditionalPorts);
+                quantityToReserve[1] = 5*(5 + numberOfAdditionalPorts);
             }
 
             // prism elements
             if (input->mesh.quantityOfSpecificElement[6] != 0) {
-                quantityToReserve[0] = 36;
-                quantityToReserve[1] = 36;
+                quantityToReserve[0] = 6*(6 + numberOfAdditionalPorts);
+                quantityToReserve[1] = 6*(6 + numberOfAdditionalPorts);
             }
 
             // hexahedron elements
             if (input->mesh.quantityOfSpecificElement[5] != 0) {
-                quantityToReserve[0] = 64;
-                quantityToReserve[1] = 64;
+                quantityToReserve[0] = 8*(8 + numberOfAdditionalPorts);
+                quantityToReserve[1] = 8*(8 + numberOfAdditionalPorts);
             }
 
             if (errorTLMnumber = call_from_c_initiate_matrices_calculationTLMEigen(matrices,
