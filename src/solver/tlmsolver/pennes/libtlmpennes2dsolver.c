@@ -58,7 +58,7 @@ unsigned int testInputTLMPennes2D(struct dataForSimulation* input) {
                     Element2DDefined = 1;
                     break;
                 case 3: // 4 nodes quadrangle
-                    Element2DDefined = 1; // Future implementation
+                    Element2DDefined = 1;
                     break;
                 case 4: // 4 nodes tetrahedron
                     fprintf(stderr, "\nWARNING: This mesh has the 4 nodes tetrahedron element "

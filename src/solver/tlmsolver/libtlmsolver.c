@@ -719,6 +719,110 @@ unsigned int getGeometricalVariablesTLMtriangle(const struct node *N1,
 }
 
 /*
+ * getGeometricalVariablesTLMquadrangle: Receives the x, y, z from the nodes and
+ * calculates the geometrical characteristics of the quadrangle.
+ */
+unsigned int getGeometricalVariablesTLMquadrangle(const struct node *N1,
+        const struct node *N2, const struct node *N3, const struct node *N4, double *output) {
+    // 0 - length of port 1 (from center of quadrangle to center of face 1)
+    // 1 - length of port 2 (from center of quadrangle to center of face 2)
+    // 2 - length of port 3 (from center of quadrangle to center of face 3)
+    // 3 - length of port 4 (from center of quadrangle to center of face 4)
+    // 4 - quadrangle area
+    // 5 - length of face 1
+    // 6 - length of face 2
+    // 7 - length of face 3
+    // 8 - length of face 4
+    // 9 - Quadrangle's center x
+    // 10 - Quadrangle's center y
+    // 11 - Quadrangle's center z
+
+    // port 1: N1 and N2
+    // port 2: N2 and N3
+    // port 3: N3 and N4
+    // port 4: N1 and N4
+
+    // triangular nomenclature.
+    //                        face 1   
+    //     vertex 1  _______________________ vertex 2
+    //              /                      / 
+    //             /                      / 
+    //    face 4  /                      / face 2
+    //           /                      /
+    // vertex 4 /______________________/ vertex 3
+    //                  face 3
+    
+    // lengths of the edges
+    double deltaXL[4], deltaYL[4], deltaZL[4], length[4];
+    double area, center[3];
+    double deltaXl[4], deltaYl[4], deltaZl[4], deltal[4];
+
+    deltaXL[0] = N2->x - N1->x;
+    deltaYL[0] = N2->y - N1->y;
+    deltaZL[0] = N2->z - N1->z;
+    length[0] = sqrt(deltaXL[0] * deltaXL[0] + deltaYL[0] * deltaYL[0] + deltaZL[0] * deltaZL[0]);
+
+    deltaXL[1] = N3->x - N2->x;
+    deltaYL[1] = N3->y - N2->y;
+    deltaZL[1] = N3->z - N2->z;
+    length[1] = sqrt(deltaXL[1] * deltaXL[1] + deltaYL[1] * deltaYL[1] + deltaZL[1] * deltaZL[1]);
+
+    deltaXL[2] = N4->x - N3->x;
+    deltaYL[2] = N4->y - N3->y;
+    deltaZL[2] = N4->z - N3->z;
+    length[2] = sqrt(deltaXL[2] * deltaXL[2] + deltaYL[2] * deltaYL[2] + deltaZL[2] * deltaZL[2]);
+
+    deltaXL[3] = N4->x - N1->x;
+    deltaYL[3] = N4->y - N1->y;
+    deltaZL[3] = N4->z - N1->z;
+    length[3] = sqrt(deltaXL[3] * deltaXL[3] + deltaYL[3] * deltaYL[3] + deltaZL[3] * deltaZL[3]);
+    
+    area = sqrt((deltaYL[0] * deltaZL[3] - deltaYL[3] * deltaZL[0])*(deltaYL[0] * deltaZL[3] - deltaYL[3] * deltaZL[0])
+            + (deltaXL[0] * deltaYL[3] - deltaXL[3] * deltaYL[0])*(deltaXL[0] * deltaYL[3] - deltaXL[3] * deltaYL[0])
+            + (deltaXL[0] * deltaZL[3] - deltaXL[3] * deltaZL[0])*(deltaXL[0] * deltaZL[3] - deltaXL[3] * deltaZL[0]));
+
+
+    center[0] = (N1->x + N2->x + N3->x + N4->x) / 4;
+    center[1] = (N1->y + N2->y + N3->y + N4->y) / 4;
+    center[2] = (N1->z + N2->z + N3->z + N4->z) / 4;
+
+    deltaXl[0] = (N1->x + N2->x) / 2 - center[0];
+    deltaYl[0] = (N1->y + N2->y) / 2 - center[1];
+    deltaZl[0] = (N1->z + N2->z) / 2 - center[2];
+    deltal[0] = sqrt(deltaXl[0] * deltaXl[0] + deltaYl[0] * deltaYl[0] + deltaZl[0] * deltaZl[0]);
+
+    deltaXl[1] = (N2->x + N3->x) / 2 - center[0];
+    deltaYl[1] = (N2->y + N3->y) / 2 - center[1];
+    deltaZl[1] = (N2->z + N3->z) / 2 - center[2];
+    deltal[1] = sqrt(deltaXl[1] * deltaXl[1] + deltaYl[1] * deltaYl[1] + deltaZl[1] * deltaZl[1]);
+
+    deltaXl[2] = (N3->x + N4->x) / 2 - center[0];
+    deltaYl[2] = (N3->y + N4->y) / 2 - center[1];
+    deltaZl[2] = (N3->z + N4->z) / 2 - center[2];
+    deltal[2] = sqrt(deltaXl[2] * deltaXl[2] + deltaYl[2] * deltaYl[2] + deltaZl[2] * deltaZl[2]);
+
+    deltaXl[3] = (N1->x + N4->x) / 2 - center[0];
+    deltaYl[3] = (N1->y + N4->y) / 2 - center[1];
+    deltaZl[3] = (N1->z + N4->z) / 2 - center[2];
+    deltal[3] = sqrt(deltaXl[3] * deltaXl[3] + deltaYl[3] * deltaYl[3] + deltaZl[3] * deltaZl[3]);
+
+    output[0] = deltal[0];
+    output[1] = deltal[1];
+    output[2] = deltal[2];
+    output[3] = deltal[3];
+    output[4] = area;
+    output[5] = length[0];
+    output[6] = length[1];
+    output[7] = length[2];
+    output[8] = length[3];
+    output[9] = center[0];
+    output[10] = center[1];
+    output[11] = center[2];
+
+    return 0;
+}
+
+/*
  * getGeometricalVariablesTLMtetrahedron: Receives the x, y, z from the nodes and
  * calculates the geometrical characteristics of the tetrahedron. Pointwise validated.
  */
@@ -1215,6 +1319,114 @@ end_for_j_and_for_k_line:
 
                         break;
                     case 3: // 4 nodes quadrangle
+                        switch (input->equationInput[id].dimen) {
+                            case ONE:
+                                // not defined?
+
+                                break;
+                            case TWO:
+                                // the ports start at 1 because 0 is my flag
+                                // to indicate that this is a boundary
+                                // temp[0] is my offset that will give me the
+                                // abstract number of the node at that interface
+                                if (flag == 2)
+                                    temp[0] = numbers->abstractPortsToReal[l].previousMaximumAbstractPort +
+                                        4 * i;
+                                // numbers->abstractPortsToReal[l].portsPerNode * i;
+
+                                // DEBUG: Show the value of temp[0]
+                                // printf("Element code %d, element, %lld, temp[0] "
+                                //        "%lld, flag %d\n", l, i, temp[0], flag);
+
+                                points[0] = 2;
+                                points[1] = input->mesh.elements.Quadrangle[i].N1;
+                                points[2] = input->mesh.elements.Quadrangle[i].N2;
+                                if ((errorTLMnumber = allocatePointsPort(points, intersections,
+                                        quantityOfPortsToAdd, temp)) != 0) {
+                                    if (errorTLMnumber == 1) {
+                                        numbers->Intersections++;
+                                        errorTLMnumber = 0;
+                                    } else {
+                                        return errorTLMnumber;
+                                    }
+                                }
+
+                                // temp[0] is my offset that will give me the
+                                // abstract number of the node at that interface
+                                if (flag == 2)
+                                    temp[0]++;
+                                points[1] = input->mesh.elements.Quadrangle[i].N2;
+                                points[2] = input->mesh.elements.Quadrangle[i].N3;
+                                if ((errorTLMnumber = allocatePointsPort(points, intersections,
+                                        quantityOfPortsToAdd, temp)) != 0) {
+                                    if (errorTLMnumber == 1) {
+                                        numbers->Intersections++;
+                                        errorTLMnumber = 0;
+                                    } else {
+                                        return errorTLMnumber;
+                                    }
+                                }
+
+                                // temp[0] is my offset that will give me the
+                                // abstract number of the node at that interface
+                                if (flag == 2)
+                                    temp[0]++;
+                                points[1] = input->mesh.elements.Quadrangle[i].N3;
+                                points[2] = input->mesh.elements.Quadrangle[i].N4;
+                                if ((errorTLMnumber = allocatePointsPort(points, intersections,
+                                        quantityOfPortsToAdd, temp)) != 0) {
+                                    if (errorTLMnumber == 1) {
+                                        numbers->Intersections++;
+                                        errorTLMnumber = 0;
+                                    } else {
+                                        return errorTLMnumber;
+                                    }
+                                }
+                                
+                                // temp[0] is my offset that will give me the
+                                // abstract number of the node at that interface
+                                if (flag == 2)
+                                    temp[0]++;
+                                points[1] = input->mesh.elements.Quadrangle[i].N1;
+                                points[2] = input->mesh.elements.Quadrangle[i].N4;
+                                if ((errorTLMnumber = allocatePointsPort(points, intersections,
+                                        quantityOfPortsToAdd, temp)) != 0) {
+                                    if (errorTLMnumber == 1) {
+                                        numbers->Intersections++;
+                                        errorTLMnumber = 0;
+                                    } else {
+                                        return errorTLMnumber;
+                                    }
+                                }
+
+                                break;
+                            case THREE:
+                                // the ports start at 1 because 0 is my flag
+                                // to indicate that this is a boundary
+                                // temp[0] is my offset that will give me the
+                                // abstract number of the node at that interface
+                                if (flag == 2)
+                                    temp[0] = numbers->abstractPortsToReal[l].previousMaximumAbstractPort +
+                                        3 * i;
+                                // numbers->abstractPortsToReal[l].portsPerNode * i;
+
+                                points[0] = 3;
+                                points[1] = input->mesh.elements.Triangle[i].N1;
+                                points[2] = input->mesh.elements.Triangle[i].N2;
+                                points[3] = input->mesh.elements.Triangle[i].N3;
+                                if ((errorTLMnumber = allocatePointsPort(points, intersections,
+                                        quantityOfPortsToAdd, temp)) != 0) {
+                                    if (errorTLMnumber == 1) {
+                                        numbers->Intersections++;
+                                        errorTLMnumber = 0;
+                                    } else {
+                                        return errorTLMnumber;
+                                    }
+                                }
+
+                                break;
+                        }
+                        
                         break;
                     case 4: // 4 nodes tetrahedron
                         // I do the calculation depending on the dimension
@@ -1301,10 +1513,16 @@ end_for_j_and_for_k_line:
                         }
                         break;
                     case 5: // 8 nodes hexahedron
+                        printf("Projection was not implemented yet\n");
+                        
                         break;
                     case 6: // 6 nodes prism
+                        printf("Projection was not implemented yet\n");
+                        
                         break;
                     case 7: // 5 nodes pyramid
+                        printf("Projection was not implemented yet\n");
+                        
                         break;
                     case 15: // 1 node point
                         // I do the calculation depending on the dimension
@@ -2645,20 +2863,32 @@ unsigned int getBetweenPointFromRealPortNumber(struct aPortToRealPort *Ports,
 
             break;
         case 3: // 4 nodes quadrangle
+            getBetweenForQuadrangle(input, nodeNumber, portOrder, x, y, z);
+            
             break;
         case 4: // 4 nodes tetrahedron
             getBetweenForTetrahedron(input, nodeNumber, portOrder, x, y, z);
 
             break;
         case 5: // 8 nodes hexahedron
+            printf("Get between was not implemented yet\n");
+            
             break;
         case 6: // 6 nodes prism
+            printf("Get between was not implemented yet\n");
+            
             break;
         case 7: // 5 nodes pyramid
+            printf("Get between was not implemented yet\n");
+            
             break;
         case 15: // 1 node point
+            printf("Get between was not implemented yet\n");
+            
             break;
         default:
+            printf("Get between was not implemented yet\n");
+            
             return 0;
     }
 
@@ -2718,6 +2948,46 @@ unsigned int getBetweenForTriangle(const struct dataForSimulation * input,
         case 2:
             P1 = input->mesh.elements.Triangle[nodeNumber].N2 - 1;
             P2 = input->mesh.elements.Triangle[nodeNumber].N3 - 1;
+
+            break;
+    }
+
+    *x = (input->mesh.nodes[P1].x + input->mesh.nodes[P2].x) / 2;
+    *y = (input->mesh.nodes[P1].y + input->mesh.nodes[P2].y) / 2;
+    *z = (input->mesh.nodes[P1].z + input->mesh.nodes[P2].z) / 2;
+
+    return 0;
+}
+
+/*
+ * getBetweenForQuadrangle: return the position of the middle of the quadrangle
+ * face.
+ */
+unsigned int getBetweenForQuadrangle(const struct dataForSimulation * input,
+        const unsigned long long nodeNumber, const unsigned long long portOrder,
+        double *x, double *y, double *z) {
+
+    unsigned long long P1, P2;
+
+    switch (portOrder) {
+        case 0:
+            P1 = input->mesh.elements.Quadrangle[nodeNumber].N1 - 1;
+            P2 = input->mesh.elements.Quadrangle[nodeNumber].N2 - 1;
+
+            break;
+        case 1:
+            P1 = input->mesh.elements.Quadrangle[nodeNumber].N2 - 1;
+            P2 = input->mesh.elements.Quadrangle[nodeNumber].N3 - 1;
+
+            break;
+        case 2:
+            P1 = input->mesh.elements.Quadrangle[nodeNumber].N3 - 1;
+            P2 = input->mesh.elements.Quadrangle[nodeNumber].N4 - 1;
+
+            break;
+        case 3:
+            P1 = input->mesh.elements.Quadrangle[nodeNumber].N1 - 1;
+            P2 = input->mesh.elements.Quadrangle[nodeNumber].N4 - 1;
 
             break;
     }
@@ -2818,18 +3088,28 @@ unsigned int getProjectionFromRealPortNumber(struct aPortToRealPort *Ports,
 
             break;
         case 3: // 4 nodes quadrangle
+            getOutsideProjectionQuadrangle(input, nodeNumber, portOrder, x, y, z);
+            
             break;
         case 4: // 4 nodes tetrahedron
             getOutsideProjectionTetrahedron(input, nodeNumber, portOrder, x, y, z);
 
             break;
         case 5: // 8 nodes hexahedron
+            printf("Get projection was not implemented yet\n");
+            
             break;
         case 6: // 6 nodes prism
+            printf("Get projection was not implemented yet\n");
+            
             break;
         case 7: // 5 nodes pyramid
+            printf("Get projection was not implemented yet\n");
+            
             break;
         case 15: // 1 node point
+            printf("Get projection was not implemented yet\n");
+            
             break;
         default:
             return 0;
@@ -2914,17 +3194,6 @@ unsigned int getOutsideProjectionTriangle(const struct dataForSimulation * input
 
     double Lx[2], Ly[2], Lz[2], L, lx, ly, lz, l, A, B, a, b;
 
-
-    // DEBUG: this is from the center of the face to the center of the triangle
-    //    Lx = (input->mesh.nodes[P1].x + input->mesh.nodes[P2].x)/2 - 
-    //            (input->mesh.nodes[P1].x + input->mesh.nodes[P2].x + input->mesh.nodes[P3].x)/3;
-    //    
-    //    Ly = (input->mesh.nodes[P1].y + input->mesh.nodes[P2].y)/2 - 
-    //            (input->mesh.nodes[P1].y + input->mesh.nodes[P2].y + input->mesh.nodes[P3].y)/3;
-    //    
-    //    Lz = (input->mesh.nodes[P1].z + input->mesh.nodes[P2].z)/2 - 
-    //            (input->mesh.nodes[P1].z + input->mesh.nodes[P2].z + input->mesh.nodes[P3].z)/3;
-
     // this vector points on the direction of the triangular face. I wanna
     // a vector that is perpendicular to it
     // This vector has to be parallel to the area vector and must be going
@@ -2945,6 +3214,178 @@ unsigned int getOutsideProjectionTriangle(const struct dataForSimulation * input
 
     lz = (input->mesh.nodes[P1].z + input->mesh.nodes[P2].z) / 2 -
             (input->mesh.nodes[P1].z + input->mesh.nodes[P2].z + input->mesh.nodes[P3].z) / 3;
+
+
+
+    // Here, I satisfy the requirement that the vector LT is perpendicular to
+    // the area vector
+    if (input->mesh.nodes[P1].z != 0 || input->mesh.nodes[P2].z != 0 || input->mesh.nodes[P3].z != 0) {
+        Lx[1] = input->mesh.nodes[P1].x - input->mesh.nodes[P3].x;
+        Ly[1] = input->mesh.nodes[P1].y - input->mesh.nodes[P3].y;
+        Lz[1] = input->mesh.nodes[P1].z - input->mesh.nodes[P3].z;
+
+        // first definition to make the equation-writing easier
+        A = Ly[0]*(Ly[0] * Lz[1] - Lz[0] * Ly[1]) - Lx[0]*(Lz[0] * Lx[1] - Lx[0] * Lz[1]);
+
+        B = -Lz[0]*(Ly[0] * Lz[1] - Lz[0] * Ly[1]) + Lx[0]*(Lx[0] * Ly[1] - Ly[0] * Lx[1]);
+
+        if (B == 0 && A == 0) { // this is not expected to happen
+            // the values of 'a' and 'b' don't matter. I can choose anything
+            // to satisfy the requirement that the vector will be perpendicular 
+            // to the area vector
+
+            if ((lx * Lz[0] - Lx[0] * lz) == 0 && (lx * Ly[0] - Lx[0] * ly) == 0) {
+                // the values of 'a' and 'b' don't influence because the vectors
+                // are parallel
+                l = sqrt(lx * lx + ly * ly + lz * lz);
+                *x = lx / l;
+                *y = ly / l;
+                *z = lz / l;
+
+                return 0;
+
+            } else if ((lx * Lz[0] - Lx[0] * lz) == 0) {
+                // the value of 'a' doesn't influence
+                a = 1;
+                b = 1;
+                if ((lx * Lz[0] - Lx[0] * lz) < 0) {
+                    b = -1;
+                }
+            } else if ((lx * Ly[0] - Lx[0] * ly) == 0) {
+                // the value of 'b' doesn't influence
+                a = 1;
+                b = 1;
+                if ((lx * Ly[0] - Lx[0] * ly) < 0) {
+                    a = -1;
+                }
+            } else {
+                // the value of both 'a' and 'b' influence
+                b = 1;
+                a = -0.9 * b * (lx * Lz[0] - Lx[0] * lz) / (lx * Ly[0] - Lx[0] * ly);
+            }
+
+        } else if (A == 0) {
+            // the value of 'a' will not influence the perpendicularity with
+            // the area vector, however, b = 0 to ensure that
+            b = 0;
+            a = 1;
+
+            if ((lx * Ly[0] - Lx[0] * ly) < 0) {
+                a = -1;
+            }
+
+        } else if (B == 0) {
+            // the value of 'b' will not influence the perpendicularity with
+            // the area vector, however, a = 0 to ensure that
+            a = 0;
+            b = 1;
+
+            if ((lx * Lz[0] - Lx[0] * lz) < 0) {
+                b = -1;
+            }
+
+        } else {
+            // here we have to have a balance between 'a' and 'b' to ensure the
+            // perpendicularity with the area vector
+            b = 1;
+            B = B / A; // then a = b*B
+            if ((B * lx * Ly[0] + lx * Lz[0] - B * Lx[0] * ly - Lx[0] * lz) < 0) {
+                b = -1;
+            }
+
+            a = b*B;
+        }
+
+    } else {
+        // if all the z's are zero, then the area vector simply points towards z.
+        // In this case, b = 0 is the requirement and 'a' can assume any value
+        b = 0;
+        a = 1;
+
+        if ((lx * Ly[0] - Lx[0] * ly) < 0) {
+            a = -1;
+        }
+    }
+
+    // recycling variables lx, ly, lz
+    lx = a * Ly[0] + b * Lz[0];
+    ly = -a * Lx[0];
+    lz = -b * Lx[0];
+    l = sqrt(lx * lx + ly * ly + lz * lz);
+    *x = lx / l;
+    *y = ly / l;
+    *z = lz / l;
+
+
+    return 0;
+}
+
+/*
+ * getOutsideProjectionQuadrangle: return the unitary vector going outside the 
+ * quadrangle element from the port given.
+ */
+unsigned int getOutsideProjectionQuadrangle(const struct dataForSimulation * input,
+        const unsigned long long nodeNumber, const unsigned long long portOrder,
+        double *x, double *y, double *z) {
+
+    unsigned long long P1, P2, P3, P4;
+
+    switch (portOrder) {
+        case 0:
+            P1 = input->mesh.elements.Quadrangle[nodeNumber].N1 - 1;
+            P2 = input->mesh.elements.Quadrangle[nodeNumber].N2 - 1;
+            P3 = input->mesh.elements.Quadrangle[nodeNumber].N4 - 1;
+            P4 = input->mesh.elements.Quadrangle[nodeNumber].N3 - 1;
+
+            break;
+        case 1:
+            P1 = input->mesh.elements.Quadrangle[nodeNumber].N2 - 1;
+            P2 = input->mesh.elements.Quadrangle[nodeNumber].N3 - 1;
+            P3 = input->mesh.elements.Quadrangle[nodeNumber].N1 - 1;
+            P4 = input->mesh.elements.Quadrangle[nodeNumber].N4 - 1;
+
+            break;
+        case 2:
+            P1 = input->mesh.elements.Quadrangle[nodeNumber].N3 - 1;
+            P2 = input->mesh.elements.Quadrangle[nodeNumber].N4 - 1;
+            P3 = input->mesh.elements.Quadrangle[nodeNumber].N2 - 1;
+            P4 = input->mesh.elements.Quadrangle[nodeNumber].N1 - 1;
+
+            break;
+        case 3:
+            P1 = input->mesh.elements.Quadrangle[nodeNumber].N1 - 1;
+            P2 = input->mesh.elements.Quadrangle[nodeNumber].N4 - 1;
+            P3 = input->mesh.elements.Quadrangle[nodeNumber].N2 - 1;
+            P4 = input->mesh.elements.Quadrangle[nodeNumber].N3 - 1;
+
+            break;
+    }
+
+    double Lx[2], Ly[2], Lz[2], L, lx, ly, lz, l, A, B, a, b;
+
+
+    // DEBUG: this is from the center of the face to the center of the triangle
+
+    // this vector points on the direction of the triangular face. I wanna
+    // a vector that is perpendicular to it
+    // This vector has to be parallel to the area vector and must be going
+    // inward the triangle.
+    Lx[0] = input->mesh.nodes[P1].x - input->mesh.nodes[P2].x;
+    Ly[0] = input->mesh.nodes[P1].y - input->mesh.nodes[P2].y;
+    Lz[0] = input->mesh.nodes[P1].z - input->mesh.nodes[P2].z;
+    // LT_x = a*Ly[0] + b*Lz[0]
+    // LT_y = - a*Lx[0]
+    // LT_z = - b*Lx[0]
+    // Now I have to find 'a' and 'b'
+
+    lx = (input->mesh.nodes[P1].x + input->mesh.nodes[P2].x) / 2 -
+            (input->mesh.nodes[P1].x + input->mesh.nodes[P2].x + input->mesh.nodes[P3].x + input->mesh.nodes[P4].x) / 4;
+
+    ly = (input->mesh.nodes[P1].y + input->mesh.nodes[P2].y) / 2 -
+            (input->mesh.nodes[P1].y + input->mesh.nodes[P2].y + input->mesh.nodes[P3].y + input->mesh.nodes[P4].y) / 4;
+
+    lz = (input->mesh.nodes[P1].z + input->mesh.nodes[P2].z) / 2 -
+            (input->mesh.nodes[P1].z + input->mesh.nodes[P2].z + input->mesh.nodes[P3].z + input->mesh.nodes[P4].z) / 4;
 
 
 

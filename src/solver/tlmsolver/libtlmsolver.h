@@ -277,6 +277,8 @@ extern "C" {
             const struct node*, double*);
     unsigned int getGeometricalVariablesTLMtriangle(const struct node *,
             const struct node *, const struct node *, double*);
+    unsigned int getGeometricalVariablesTLMquadrangle(const struct node *,
+            const struct node *, const struct node *, const struct node *, double*);
     unsigned int getGeometricalVariablesTLMtetrahedron(const struct node *,
             const struct node *, const struct node *, const struct node *, double*);
 
@@ -321,6 +323,9 @@ extern "C" {
     unsigned int getBetweenForTriangle(const struct dataForSimulation *,
             const unsigned long long, const unsigned long long,
             double *, double *, double *);
+    unsigned int getBetweenForQuadrangle(const struct dataForSimulation *,
+            const unsigned long long, const unsigned long long,
+            double *, double *, double *);
     unsigned int getBetweenForTetrahedron(const struct dataForSimulation *,
             const unsigned long long, const unsigned long long,
             double *, double *, double *);
@@ -335,7 +340,9 @@ extern "C" {
     unsigned int getOutsideProjectionTriangle(const struct dataForSimulation *,
             const unsigned long long, const unsigned long long,
             double *, double *, double *);
-
+    unsigned int getOutsideProjectionQuadrangle(const struct dataForSimulation *,
+            const unsigned long long, const unsigned long long,
+            double *, double *, double *);
     unsigned int getOutsideProjectionTetrahedron(const struct dataForSimulation *,
             const unsigned long long, const unsigned long long,
             double *, double *, double *);

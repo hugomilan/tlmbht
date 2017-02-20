@@ -265,6 +265,33 @@ unsigned int calculateMatricesPennesEigen(struct dataForSimulation *input,
                         time_spent_Triangle * 1e3, time_spent_Triangle, time_spent_Triangle / 60.0, time_spent_Triangle / (60 * 60));
             }
         }
+    }  
+    
+    // calculating the matrices for material quadrangle elements
+    if (input->simulationInput.verboseMode == 1) {
+        printf("Quantity of material quadrangle nodes found: %llu\n", matrices->numbers.MaterialElements[3]);
+        if (input->equationInput[id].dimen != TWO) {
+            printf("Material quadrangle nodes are not considered outside the two-dimensional problems. They will not be considered here.\n");
+        }
+    }
+    if (matrices->numbers.MaterialElements[3] && input->equationInput[id].dimen == TWO) {
+        if (input->simulationInput.verboseMode == 1) {
+            printf("Calculating the matrix for the quadrangle nodes...\n");
+        }
+        clock_t begin_Quadrangle = clock();
+        if ((errorTLMnumber = MaterialQuadranglePennesEigen(input, matrices, id)) != 0) {
+            sendErrorCodeAndMessage(errorTLMnumber, NULL, NULL, NULL, NULL);
+            return errorTLMnumber;
+        }
+        clock_t end_Quadrangle = clock();
+        if (input->simulationInput.verboseMode == 1) {
+            printf("Done calculating the matrix for the quadrangle nodes.\n");
+            if (input->simulationInput.timingMode == 1) {
+                double time_spent_Quadrangle = (double) (end_Quadrangle - begin_Quadrangle) / CLOCKS_PER_SEC;
+                printf("Time to calculate the matrices for the quadrangle nodes %g ms (or %g s, or %g min, or %g hours).\n",
+                        time_spent_Quadrangle * 1e3, time_spent_Quadrangle, time_spent_Quadrangle / 60.0, time_spent_Quadrangle / (60 * 60));
+            }
+        }
     }
 
     // calculating the matrices for material tetrahedron elements
@@ -290,6 +317,91 @@ unsigned int calculateMatricesPennesEigen(struct dataForSimulation *input,
                 double time_spent_Tetrahedron = (double) (end_Tetrahedron - begin_Tetrahedron) / CLOCKS_PER_SEC;
                 printf("Time to calculate the matrices for the tetrahedral nodes %g ms (or %g s, or %g min, or %g hours).\n",
                         time_spent_Tetrahedron * 1e3, time_spent_Tetrahedron, time_spent_Tetrahedron / 60.0, time_spent_Tetrahedron / (60 * 60));
+            }
+        }
+    }
+    
+    // calculating the matrices for material hexahedron elements
+    if (input->simulationInput.verboseMode == 1) {
+        printf("Quantity of material hexahedron nodes found: %llu\n", matrices->numbers.MaterialElements[5]);
+        if (input->equationInput[id].dimen != THREE) {
+            printf("Material hexahedron nodes are not considered outside the three-dimensional problems. They will not be considered here.\n");
+        }
+    }
+    if (matrices->numbers.MaterialElements[5] && input->equationInput[id].dimen == THREE) {
+        if (input->simulationInput.verboseMode == 1) {
+            printf("Calculating the matrix for the tetrahedron nodes...\n");
+        }
+        clock_t begin_Hexahedron = clock();
+        printf("\n\nHexahedron node was not implemented yet\n\n");
+//        if ((errorTLMnumber = MaterialHexahedronPennesEigen(input, matrices, id)) != 0) {
+//            sendErrorCodeAndMessage(errorTLMnumber, NULL, NULL, NULL, NULL);
+//            return errorTLMnumber;
+//        }
+        clock_t end_Hexahedron = clock();
+        if (input->simulationInput.verboseMode == 1) {
+            printf("Done calculating the matrix for the hexahedron nodes.\n");
+            if (input->simulationInput.timingMode == 1) {
+                double time_spent_Hexahedron = (double) (end_Hexahedron - begin_Hexahedron) / CLOCKS_PER_SEC;
+                printf("Time to calculate the matrices for the hexahedron nodes %g ms (or %g s, or %g min, or %g hours).\n",
+                        time_spent_Hexahedron * 1e3, time_spent_Hexahedron, time_spent_Hexahedron / 60.0, time_spent_Hexahedron / (60 * 60));
+            }
+        }
+    }
+    
+    // calculating the matrices for material prism elements
+    if (input->simulationInput.verboseMode == 1) {
+        printf("Quantity of material prism nodes found: %llu\n", matrices->numbers.MaterialElements[6]);
+        if (input->equationInput[id].dimen != THREE) {
+            printf("Material prism nodes are not considered outside the three-dimensional problems. They will not be considered here.\n");
+        }
+    }
+    if (matrices->numbers.MaterialElements[6] && input->equationInput[id].dimen == THREE) {
+        if (input->simulationInput.verboseMode == 1) {
+            printf("Calculating the matrix for the prism nodes...\n");
+        }
+        clock_t begin_Prism = clock();
+        printf("\n\nPrism node was not implemented yet\n\n");
+//        if ((errorTLMnumber = MaterialPrismPennesEigen(input, matrices, id)) != 0) {
+//            sendErrorCodeAndMessage(errorTLMnumber, NULL, NULL, NULL, NULL);
+//            return errorTLMnumber;
+//        }
+        clock_t end_Prism = clock();
+        if (input->simulationInput.verboseMode == 1) {
+            printf("Done calculating the matrix for the prism nodes.\n");
+            if (input->simulationInput.timingMode == 1) {
+                double time_spent_Prism = (double) (end_Prism - begin_Prism) / CLOCKS_PER_SEC;
+                printf("Time to calculate the matrices for the prism nodes %g ms (or %g s, or %g min, or %g hours).\n",
+                        time_spent_Prism * 1e3, time_spent_Prism, time_spent_Prism / 60.0, time_spent_Prism / (60 * 60));
+            }
+        }
+    }
+    
+    
+    // calculating the matrices for material pyramid elements
+    if (input->simulationInput.verboseMode == 1) {
+        printf("Quantity of material pyramid nodes found: %llu\n", matrices->numbers.MaterialElements[7]);
+        if (input->equationInput[id].dimen != THREE) {
+            printf("Material pyramid nodes are not considered outside the three-dimensional problems. They will not be considered here.\n");
+        }
+    }
+    if (matrices->numbers.MaterialElements[7] && input->equationInput[id].dimen == THREE) {
+        if (input->simulationInput.verboseMode == 1) {
+            printf("Calculating the matrix for the pyramid nodes...\n");
+        }
+        clock_t begin_Pyramid = clock();
+        printf("\n\nPyramid node was not implemented yet\n\n");
+//        if ((errorTLMnumber = MaterialTetrahedronPennesEigen(input, matrices, id)) != 0) {
+//            sendErrorCodeAndMessage(errorTLMnumber, NULL, NULL, NULL, NULL);
+//            return errorTLMnumber;
+//        }
+        clock_t end_Pyramid = clock();
+        if (input->simulationInput.verboseMode == 1) {
+            printf("Done calculating the matrix for the pyramid nodes.\n");
+            if (input->simulationInput.timingMode == 1) {
+                double time_spent_Pyramid = (double) (end_Pyramid - begin_Pyramid) / CLOCKS_PER_SEC;
+                printf("Time to calculate the matrices for the pyramid nodes %g ms (or %g s, or %g min, or %g hours).\n",
+                        time_spent_Pyramid * 1e3, time_spent_Pyramid, time_spent_Pyramid / 60.0, time_spent_Pyramid / (60 * 60));
             }
         }
     }
@@ -661,7 +773,7 @@ unsigned int MaterialTrianglePennesEigen(struct dataForSimulation *input, struct
     // 2D: Mediums; Maybe boundary conditions (?)
     // 3D: Boundary Condition (treated elsewhere).
     //
-    // element code 3: 3 nodes triangle.
+    // element code 2: 3 nodes triangle.
     double *tempVar = NULL;
     tempVar = (double *) realloc(tempVar, sizeof (double)*10);
     // 0 - length of port 1 (from center of triangle to center of face 1)
@@ -802,6 +914,220 @@ unsigned int MaterialTrianglePennesEigen(struct dataForSimulation *input, struct
                     goto end_for_j_and_for_k_triangle;
                 }
 end_for_j_and_for_k_triangle:
+        ;
+    }
+    return 0;
+}
+
+
+/*
+ * MaterialQuadrangleEigen: Calculates the parameters to set the quadrangle as material
+ * or as boundary in a 2D simulation.
+ * Quadrangle as a boundary was not implemented yet.
+ */
+unsigned int MaterialQuadranglePennesEigen(struct dataForSimulation *input, struct calculationTLMEigen *matrices, int id) {
+    unsigned int errorTLMnumber;
+    unsigned long long numbersNodeAndPort[] = {0, 0};
+    // 0 - number of node
+    // 1 - number of port 0
+    unsigned int j2;
+    double Cd, Z[4], R[4], G, Is, Zhat, tau[4];
+
+
+
+    // triangular nomenclature.
+    //                        face 1   
+    //     vertex 1  _______________________ vertex 2
+    //              /                      / 
+    //             /                      / 
+    //    face 4  /                      / face 2
+    //           /                      /
+    // vertex 4 /______________________/ vertex 3
+    //                  face 3
+    //
+    // port 1: N1 and N2
+    // port 2: N2 and N3
+    // port 3: N3 and N4
+    // port 4: N1 and N4
+
+
+    // quadrangles can be boundary conditions and mediums.
+    // 1D: Not defined;
+    // 2D: Mediums; Maybe boundary conditions (?)
+    // 3D: Boundary Condition (treated elsewhere).
+    //
+    // element code 3: 4 nodes triangle.
+    double *tempVar = NULL;
+    tempVar = (double *) realloc(tempVar, sizeof (double)*12);
+    // 0 - length of port 1 (from center of quadrangle to center of face 1)
+    // 1 - length of port 2 (from center of quadrangle to center of face 2)
+    // 2 - length of port 3 (from center of quadrangle to center of face 3)
+    // 3 - length of port 4 (from center of quadrangle to center of face 4)
+    // 4 - quadrangle area
+    // 5 - length of face 1
+    // 6 - length of face 2
+    // 7 - length of face 3
+    // 8 - length of face 4
+    // 9 - Quadrangle's center x
+    // 10 - Quadrangle's center y
+    // 11 - Quadrangle's center z
+
+    for (unsigned long long i = 0; i < input->mesh.quantityOfSpecificElement[3]; i++) {
+        // i: element level
+        // j: boundary type level
+        // k: different tag numbers for the same boundary type
+        for (unsigned int j = 0; j < input->equationInput[id].numberOfMaterials; j++)
+            for (unsigned int k = 0; k < input->materialInput[ input->equationInput[id].materialNumbers[j] ].quantityOfNumberInput; k++)
+                if (input->mesh.elements.Quadrangle[i].tag == input->materialInput[ input->equationInput[id].materialNumbers[j] ].numberInput[k]) {
+                    j2 = input->equationInput[id].materialNumbers[j];
+                    // I will use goto to get out of these two inner 'for' loops. Bare in mind
+                    // that I'm just getting out the loops. You can also think that 
+                    // I'm going to the next 'i', that is, incrementing i by 1 and going
+                    // to the next value of i (if any).
+
+                    getRealNodeAndPort_fromAbstractNode(3, // element code
+                            i, // element number
+                            matrices->numbers.abstractPortsToReal,
+                            numbersNodeAndPort);
+
+                    // the -1 is necessary because the C indexing starts at zero
+                    // and my number of node starts at 1
+                    getGeometricalVariablesTLMquadrangle(&input->mesh.nodes[input->mesh.elements.Quadrangle[i].N1 - 1],
+                            &input->mesh.nodes[input->mesh.elements.Quadrangle[i].N2 - 1],
+                            &input->mesh.nodes[input->mesh.elements.Quadrangle[i].N3 - 1],
+                            &input->mesh.nodes[input->mesh.elements.Quadrangle[i].N4 - 1], tempVar);
+
+                    matrices->L[numbersNodeAndPort[1] + 0] = tempVar[5]; // length of face 1
+                    matrices->L[numbersNodeAndPort[1] + 1] = tempVar[6]; // length of face 2
+                    matrices->L[numbersNodeAndPort[1] + 2] = tempVar[7]; // length of face 3
+                    matrices->L[numbersNodeAndPort[1] + 3] = tempVar[8]; // length of face 4
+
+                    matrices->deltal[numbersNodeAndPort[1] + 0] = tempVar[0]; // length of port 1
+                    matrices->deltal[numbersNodeAndPort[1] + 1] = tempVar[1]; // length of port 2
+                    matrices->deltal[numbersNodeAndPort[1] + 2] = tempVar[2]; // length of port 3
+                    matrices->deltal[numbersNodeAndPort[1] + 3] = tempVar[3]; // length of port 4
+
+                    // generalization of Cd
+                    Cd = tempVar[4] * input->materialInput[j2].generalized_coefficient_b /
+                            (tempVar[0] + tempVar[1] + tempVar[2] + tempVar[3]);
+
+                    // generalization of R
+                    R[0] = tempVar[0] / (input->materialInput[j2].generalized_diffusionCoeff * tempVar[5]);
+                    R[1] = tempVar[1] / (input->materialInput[j2].generalized_diffusionCoeff * tempVar[6]);
+                    R[2] = tempVar[2] / (input->materialInput[j2].generalized_diffusionCoeff * tempVar[7]);
+                    R[3] = tempVar[3] / (input->materialInput[j2].generalized_diffusionCoeff * tempVar[8]);
+
+                    // generalization of G
+                    G = tempVar[4] * input->materialInput[j2].generalized_sink_a;
+
+                    // generalization of Is
+                    Is = tempVar[4] * input->materialInput[j2].generalized_source;
+
+                    // Z = dt/(2*Cd*deltal). Manually validated
+                    Z[0] = input->equationInput[id].timeStep / (2 * Cd);
+                    Z[1] = Z[0] / tempVar[1];
+                    Z[2] = Z[0] / tempVar[2];
+                    Z[3] = Z[0] / tempVar[3];
+                    Z[0] = Z[0] / tempVar[0];
+
+                    // all the impedances
+                    matrices->Z[numbersNodeAndPort[1] + 0] = Z[0];
+                    matrices->Z[numbersNodeAndPort[1] + 1] = Z[1];
+                    matrices->Z[numbersNodeAndPort[1] + 2] = Z[2];
+                    matrices->Z[numbersNodeAndPort[1] + 3] = Z[3];
+
+                    // all the resistances
+                    matrices->R[numbersNodeAndPort[1] + 0] = R[0];
+                    matrices->R[numbersNodeAndPort[1] + 1] = R[1];
+                    matrices->R[numbersNodeAndPort[1] + 2] = R[2];
+                    matrices->R[numbersNodeAndPort[1] + 3] = R[3];
+
+                    // Manually validated
+                    Zhat = Z[0] * Z[1] * Z[2] * Z[3] / (Z[0] * Z[1] * Z[2]
+                            + Z[0] * Z[1] * Z[3] + Z[0] * Z[2] * Z[3]
+                            + Z[1] * Z[2] * Z[3] + Z[0] * Z[1] * Z[2] * Z[3] * G);
+
+                    // Manually validated
+                    tau[0] = 2 * Zhat / Z[0];
+                    tau[1] = 2 * Zhat / Z[1];
+                    tau[2] = 2 * Zhat / Z[2];
+                    tau[3] = 2 * Zhat / Z[3];
+                    
+                    // this is actually matrix S.
+                    // M = C*S
+                    // this matrix is M[line][column].
+                    matrices->M.insert(numbersNodeAndPort[1] + 0,
+                            numbersNodeAndPort[1] + 0) = tau[0] - 1;
+                    matrices->M.insert(numbersNodeAndPort[1] + 0,
+                            numbersNodeAndPort[1] + 1) = tau[1];
+                    matrices->M.insert(numbersNodeAndPort[1] + 0,
+                            numbersNodeAndPort[1] + 2) = tau[2];
+                    matrices->M.insert(numbersNodeAndPort[1] + 0,
+                            numbersNodeAndPort[1] + 3) = tau[3];
+
+                    matrices->M.insert(numbersNodeAndPort[1] + 1,
+                            numbersNodeAndPort[1] + 0) = tau[0];
+                    matrices->M.insert(numbersNodeAndPort[1] + 1,
+                            numbersNodeAndPort[1] + 1) = tau[1] - 1;
+                    matrices->M.insert(numbersNodeAndPort[1] + 1,
+                            numbersNodeAndPort[1] + 2) = tau[2];
+                    matrices->M.insert(numbersNodeAndPort[1] + 1,
+                            numbersNodeAndPort[1] + 3) = tau[3];
+
+                    matrices->M.insert(numbersNodeAndPort[1] + 2,
+                            numbersNodeAndPort[1] + 0) = tau[0];
+                    matrices->M.insert(numbersNodeAndPort[1] + 2,
+                            numbersNodeAndPort[1] + 1) = tau[1];
+                    matrices->M.insert(numbersNodeAndPort[1] + 2,
+                            numbersNodeAndPort[1] + 2) = tau[2] - 1;
+                    matrices->M.insert(numbersNodeAndPort[1] + 2,
+                            numbersNodeAndPort[1] + 3) = tau[3];
+
+                    matrices->M.insert(numbersNodeAndPort[1] + 3,
+                            numbersNodeAndPort[1] + 0) = tau[0];
+                    matrices->M.insert(numbersNodeAndPort[1] + 3,
+                            numbersNodeAndPort[1] + 1) = tau[1];
+                    matrices->M.insert(numbersNodeAndPort[1] + 3,
+                            numbersNodeAndPort[1] + 2) = tau[2];
+                    matrices->M.insert(numbersNodeAndPort[1] + 3,
+                            numbersNodeAndPort[1] + 3) = tau[3] - 1;
+
+                    // matrix tau
+                    matrices->tau.insert(numbersNodeAndPort[0],
+                            numbersNodeAndPort[1] + 0) = tau[0];
+                    matrices->tau.insert(numbersNodeAndPort[0],
+                            numbersNodeAndPort[1] + 1) = tau[1];
+                    matrices->tau.insert(numbersNodeAndPort[0],
+                            numbersNodeAndPort[1] + 2) = tau[2];
+                    matrices->tau.insert(numbersNodeAndPort[0],
+                            numbersNodeAndPort[1] + 3) = tau[3];
+
+                    // this is actually matrix ZIS.
+                    // E = C*ZIS + B
+                    matrices->E(numbersNodeAndPort[1] + 0) = Zhat*Is;
+                    matrices->E(numbersNodeAndPort[1] + 1) = Zhat*Is;
+                    matrices->E(numbersNodeAndPort[1] + 2) = Zhat*Is;
+                    matrices->E(numbersNodeAndPort[1] + 3) = Zhat*Is;
+
+                    // matrix E_output
+                    matrices->E_output(numbersNodeAndPort[0]) = Zhat*Is;
+
+                    // the center of the tetrahedron
+                    matrices->Points_output[numbersNodeAndPort[0]].x = tempVar[9];
+                    matrices->Points_output[numbersNodeAndPort[0]].y = tempVar[10];
+                    matrices->Points_output[numbersNodeAndPort[0]].z = tempVar[11];
+
+                    // Vi0 = (Ti - ZIS)/sum(tau)
+                    // generalization of the initial value
+                    matrices->Vi(numbersNodeAndPort[1]) = (input->materialInput[j2].generalized_initialScalar
+                            - matrices->E(numbersNodeAndPort[1])) / (tau[0] + tau[1] + tau[2] + tau[3]);
+                    matrices->Vi(numbersNodeAndPort[1] + 1) = matrices->Vi(numbersNodeAndPort[1]);
+                    matrices->Vi(numbersNodeAndPort[1] + 2) = matrices->Vi(numbersNodeAndPort[1]);
+                    matrices->Vi(numbersNodeAndPort[1] + 3) = matrices->Vi(numbersNodeAndPort[1]);
+
+                    goto end_for_j_and_for_k_quadrangle;
+                }
+end_for_j_and_for_k_quadrangle:
         ;
     }
     return 0;

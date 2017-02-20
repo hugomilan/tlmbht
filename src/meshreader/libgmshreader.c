@@ -311,8 +311,25 @@ unsigned int gmshReader(struct MeshConfig * input, struct tlmInternalMesh * outp
 
                             break;
                         case 3: // 4 nodes quadrangle
-                            errorTLMnumber = 6510;
-                            continue;
+                            codeForReading = (char *) realloc(codeForReading,
+                                    sizeof (char)*(3 + numberOfTags)*4 + 1 + 5 * 3);
+
+                            strcat(codeForReading, "%llu %llu %llu %llu");
+
+                            inputGmsh.saveElement
+                                    [inputGmsh.numberOfElementReads].elementCode = 3;
+                            inputGmsh.saveElement
+                                    [inputGmsh.numberOfElementReads].tag = tagNumber;
+
+                            sscanf(pline, codeForReading, &inputGmsh.saveElement
+                                    [inputGmsh.numberOfElementReads].N1,
+                                    &inputGmsh.saveElement
+                                    [inputGmsh.numberOfElementReads].N2,
+                                    &inputGmsh.saveElement
+                                    [inputGmsh.numberOfElementReads].N3,
+                                    &inputGmsh.saveElement
+                                    [inputGmsh.numberOfElementReads].N4);
+                            
                             break;
                         case 4: // 4 nodes tetrahedron
                             codeForReading = (char *) realloc(codeForReading,

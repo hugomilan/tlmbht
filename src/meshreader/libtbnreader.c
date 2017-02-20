@@ -253,8 +253,12 @@ unsigned int tbnReader(struct MeshConfig * input, struct tlmInternalMesh * outpu
 
                         break;
                     case 3: // 4 nodes quadrangle
-                        errorTLMnumber = 6510;
-                        continue;
+                        sscanf(pline, "%lu %llu %llu %llu %llu",
+                                &output->elements.Quadrangle[numberOfElementsRead].tag,
+                                &output->elements.Quadrangle[numberOfElementsRead].N1,
+                                &output->elements.Quadrangle[numberOfElementsRead].N2,
+                                &output->elements.Quadrangle[numberOfElementsRead].N3,
+                                &output->elements.Quadrangle[numberOfElementsRead].N4);
                         break;
                     case 4: // 4 nodes tetrahedron
                         sscanf(pline, "%lu %llu %llu %llu %llu",
