@@ -4,7 +4,7 @@
 # See: https://jekyllrb.com/docs/themes/#overriding-theme-defaults
 layout: page_eqAMS_Disqus
 title: Validation of TLMBHT to solve the Heat equation in time-domain for two-dimensions using Triangular elements
-permalink: vte/heat-2D-Tr.html
+permalink: vte/validation/heat-2D-Tr.html
 ---
 
 <span style="color:#697473">Jan 31, 2017</span> by [**Hugo Milan**](https://hugomilan.github.io/)
@@ -17,7 +17,7 @@ In this validation, we will follow the 5 steps [showed here]({{ site.baseurl }}{
 
 ### 1) Create the geometry of the problem.
 
-We are building up from the problem description of the [validation for Heat 1D equation with line elements]{{ site.baseurl }}{% link vte/heat 1D line.md %}). Here, we will consider a simple two-dimensional problem that has [analytical solution]({{ site.baseurl }}{% link theory/ana/heat/heat 2D TTqq.md %}). In this problem, we will include heat source, two constant temperatures boundary conditions (constant core temperature T<sub>C</sub>, and constant surface temperature T<sub>S</sub>), one constant heat flux boundary condition (q<sub>x</sub>), and one adiabatic boundary condition. The problem geometry is shown below
+We are building up from the problem description of the [validation for Heat 1D equation with line elements]{{ site.baseurl }}{% link vte/validation/heat 1D line.md %}). Here, we will consider a simple two-dimensional problem that has [analytical solution]({{ site.baseurl }}{% link theory/ana/heat/heat 2D TTqq.md %}). In this problem, we will include heat source, two constant temperatures boundary conditions (constant core temperature T<sub>C</sub>, and constant surface temperature T<sub>S</sub>), one constant heat flux boundary condition (q<sub>x</sub>), and one adiabatic boundary condition. The problem geometry is shown below
 
 <img src="{{ site.baseurl }}/assets/images/vte/2D_Triangle_Heat_Problem.png" alt="Geometry of the problem used to validate the triangle element for the Heat equation in 2D" width="500">
 
@@ -51,7 +51,7 @@ The description of the problem is in the file cheat2Tr.tlm. Here, I will explain
 
 #### Explanation of this case file
 
-The case file is structured in headers and I will go over every header in the file cheat2Tr.tlm. This script file is similar to the script file for [validation for Heat 1D equation with line elements]({{ site.baseurl }}{% link vte/heat 1D line.md %}). The differences are the inclusion of one additional boundary condition and changing to two-dimensions.
+The case file is structured in headers and I will go over every header in the file cheat2Tr.tlm. This script file is similar to the script file for [validation for Heat 1D equation with line elements]({{ site.baseurl }}{% link vte/validation/heat 1D line.md %}). The differences are the inclusion of one additional boundary condition and changing to two-dimensions.
 
 The first header you see (Simulation), is used to configure parameters common to the equations of the problem. In this case, we are only configuring the output extension to the 'm' (Octave/Matlab m format) so that it is easier to run the validation algorithm.
 
@@ -84,7 +84,7 @@ The Equation header tells the software what equation it should solve and how. Yo
         save = vector;
     }
 
-The Material header defines the properties of the equation. You can have different Material headers for different properties in the same problem. We tell tlmbht to what equation this Material header is referred to by giving it the equation name ("heat_name"). In number, we give the Material header the Physical tag number that we gave to the line during the mesh generation. Therefore, the options we input here are going to be applied to the line with tag number 7. Finally, we defined density, specific heat, thermal conductivity, volumetric heat source, and initial temperature (required for time-domain simulations).
+The Material header defines the properties of the equation. You can have different Material headers for different properties in the same problem. We tell tlmbht to what equation this Material header is referred to by giving it the equation name ("heat_name"). In number, we give the Material header the Physical tag number that we gave to the elements during the mesh generation. Therefore, the options we input here are going to be applied to the elements with tag number 7. Finally, we defined density, specific heat, thermal conductivity, volumetric heat source, and initial temperature (required for time-domain simulations).
 
     Material
     {
@@ -124,6 +124,8 @@ The file cheat2Tr_full.tlm contains additional explanation about the input. If y
 
 ### 4) Solve the problem.
 
+#### [**Click here if you have Windows and need help to run tlmbht in your machine.**](https://github.com/hugomilan/tlmbht/wiki/Running-tlmbht-in-Windows)
+
 If you have the tlmbht binary in your path environment, simply type `tlmbht cheat2Tr.tlm`. If you don't have it in your path environment, you may copy the binary to the folder /vte/generalDiffusion/2D/TriangleNode/ and then type `./tlmbht cheat2Tr.tlm`. In some seconds, the calculation will be done.
 
 If you want to see what is going on internally, you may run tlmbht with --verbose. If you want to see how long does it take to run tlmbht, you may run it with --timing. The command to run with both is simply `tlmbht cheat2Tr.tlm --verbose --timing`.
@@ -146,7 +148,10 @@ I hope you have enjoyed this validation section! You may now try to change the c
 
 Remember: you are using a powerful numerical solver. You do not need to be constrained by solutions that can be solved analytically. Explore! Try different boundary conditions, include more materials, etc. Make this problem more realistic!
 
+You might be wondering **how does the tlmbht models for Triangle and Quadrangle elements change?** They don't change. These two validations solve the same problem. The only difference between them is that the mesh for the validation using Triangle elements has only triangles and the mesh for the validation using Quadrangle elements has only quadrangles. TLMBHT is capable of solving meshes that have any of these two elements.
+
 Now, you can go to:
 
 * [Tutorials, examples, and validations]({{ site.baseurl }}{% link vte/index.md %})
-* [Validation in three-dimensions of Heat equation using the element tetrahedron]({{ site.baseurl }}{% link vte/heat 3D tetrahedron.md %})
+* [Validation in two-dimensions of Heat equation using the element quadrangle]({{ site.baseurl }}{% link vte/validation/heat 2D quadrangle.md %})
+* [Validation in three-dimensions of Heat equation using the element tetrahedron]({{ site.baseurl }}{% link vte/validation/heat 3D tetrahedron.md %})

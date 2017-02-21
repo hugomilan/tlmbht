@@ -332,6 +332,6 @@ Now, you can go to:
 
 * [Analytical solutions menu]({{ site.baseurl }}{% link theory/ana/index.md %})
 * [Analytical solutions of Diffusion and Heat equations menu]({{ site.baseurl }}{% link theory/ana/heat/index.md %})
-* [TLM validation using this solution for diffusion equation]({{ site.baseurl }}{% link vte/diff 3D tetrahedron.md %})
-* [TLM validation using this solution for heat equation]({{ site.baseurl }}{% link vte/heat 3D tetrahedron.md %})
+* [TLM validation using this solution for diffusion equation]({{ site.baseurl }}{% link vte/validation/diff 3D tetrahedron.md %})
+* [TLM validation using this solution for heat equation]({{ site.baseurl }}{% link vte/validation/heat 3D tetrahedron.md %})
 

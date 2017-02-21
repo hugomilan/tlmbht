@@ -401,7 +401,7 @@ Now, you can go to:
 * [Analytical solutions menu]({{ site.baseurl }}{% link theory/ana/index.md %})
 * [Analytical solutions of Hyperbolic Diffusion and Heat equations menu]({{ site.baseurl }}{% link theory/ana/Hheat/index.md %})
 * [Analytical solution in two-dimensions]({{ site.baseurl }}{% link theory/ana/Hheat/Hheat 2D TTqq.md %})
-* [FIXME TLM validation using this solution for hyperbolic diffusion equation]({{ site.baseurl }}{% link vte/diff 1D line.md %})
-* [FIXME TLM validation using this solution for hyperbolic heat equation]({{ site.baseurl }}{% link vte/heat 1D line.md %})
+* [FIXME TLM validation using this solution for hyperbolic diffusion equation]({{ site.baseurl }}{% link vte/validation/diff 1D line.md %})
+* [FIXME TLM validation using this solution for hyperbolic heat equation]({{ site.baseurl }}{% link vte/validation/heat 1D line.md %})
 
 

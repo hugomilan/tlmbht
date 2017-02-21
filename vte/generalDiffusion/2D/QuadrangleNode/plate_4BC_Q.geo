@@ -1,10 +1,10 @@
 // This file is part of TLMBHT.
-// Copyright (C) 2016 Hugo Fernando Maia Milan
+// Copyright (C) 2016-2017 Hugo Fernando Maia Milan
 // 
 // Acknowledgment: Brazilian National Counsel of Technological and Scientific
 // Development (Proc. 203312/2014-7) for scholarship to HFMM
 //
-// Gmsh project created on Wed Nov  4 22:23:49 2015
+// Gmsh project created on Tue Feb 21 10:30:49 2017
 
 Point(1) = {0, 0, 0, 1.0};
 Point(2) = {0.75, 0, 0, 1.0};
@@ -21,3 +21,5 @@ Physical Line(8) = {2};
 Physical Line(9) = {4};
 Physical Line(10) = {1};
 Physical Line(11) = {3};
+
+Recombine Surface {6};

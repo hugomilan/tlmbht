@@ -327,4 +327,4 @@ Now, you can go to:
 
 * [Analytical solutions menu]({{ site.baseurl }}{% link theory/ana/index.md %})
 * [Analytical solutions of Pennes equations menu]({{ site.baseurl }}{% link theory/ana/pennes/index.md %})
-* [TLM validation using this solution]({{ site.baseurl }}{% link vte/pennes 3D tetrahedron.md %})
+* [TLM validation using this solution]({{ site.baseurl }}{% link vte/validation/pennes 3D tetrahedron.md %})

@@ -84,7 +84,7 @@ and the initial and boundary conditions for these problems are:
 
 $$
 \begin{matrix}
-    & T(x, y,t) & \phi_a(y) & \phi_b(y)\tau_b(t) & \phi_c(x,y) & \phi_d(x,y)\tau_d(t) & \phi_e(y,z) & \phi_f(y,z)\tau_f(t)\\
+    & T(x, y,z,t) & \phi_a(y) & \phi_b(y)\tau_b(t) & \phi_c(x,y) & \phi_d(x,y)\tau_d(t) & \phi_e(y,z) & \phi_f(y,z)\tau_f(t)\\
     t = 0 & T = T_c & - & \phi_b\tau_b = -\phi_a & - & \phi_d\tau_d = -\phi_c & - & \phi_f\tau_f = -\phi_d\\
     y = 0 & T = T_c & \phi_a = 0 & \phi_b\tau_b = 0 & \phi_c = 0 & \phi_d\tau_d = 0 & \phi_f = 0 & \phi_f\tau_f = 0\\
     y = H & T = T_s & \phi_a = T_s - T_c & \phi_b\tau_b = 0 & \phi_c = 0 & \phi_d\tau_d = 0 & \phi_f = 0 & \phi_f\tau_f = 0\\
@@ -332,6 +332,6 @@ Now, you can go to:
 
 * [Analytical solutions menu]({{ site.baseurl }}{% link theory/ana/index.md %})
 * [Analytical solutions of Diffusion and Heat equations menu]({{ site.baseurl }}{% link theory/ana/heat/index.md %})
-* [TLM validation using this solution for diffusion equation]({{ site.baseurl }}{% link vte/diff 3D tetrahedron.md %})
-* [TLM validation using this solution for heat equation]({{ site.baseurl }}{% link vte/heat 3D tetrahedron.md %})
+* [TLM validation using this solution for diffusion equation]({{ site.baseurl }}{% link vte/validation/diff 3D tetrahedron.md %})
+* [TLM validation using this solution for heat equation]({{ site.baseurl }}{% link vte/validation/heat 3D tetrahedron.md %})
 

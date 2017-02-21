@@ -28,24 +28,28 @@ Validations for the diffusion equation, heat equation, and Pennes equation are v
 
 #### Diffusion equation
 
-1. [One-dimension using the element line]({{ site.baseurl }}{% link vte/diff 1D line.md %})
+1. [One-dimension using the element line]({{ site.baseurl }}{% link vte/validation/diff 1D line.md %})
 
-2. [Two-dimensions using the element triangle]({{ site.baseurl }}{% link vte/diff 2D triangle.md %})
+1. [Two-dimensions using the element triangle]({{ site.baseurl }}{% link vte/validation/diff 2D triangle.md %})
 
-3. [Three-dimensions using the element tetrahedron]({{ site.baseurl }}{% link vte/diff 3D tetrahedron.md %})
+1. [Two-dimensions using the element quadrangle]({{ site.baseurl }}{% link vte/validation/diff 2D quadrangle.md %})
+
+1. [Three-dimensions using the element tetrahedron]({{ site.baseurl }}{% link vte/validation/diff 3D tetrahedron.md %})
 
 #### Heat equation
 
-1. [One-dimension using the element line]({{ site.baseurl }}{% link vte/heat 1D line.md %})
+1. [One-dimension using the element line]({{ site.baseurl }}{% link vte/validation/heat 1D line.md %})
 
-2. [Two-dimensions using the element triangle]({{ site.baseurl }}{% link vte/heat 2D triangle.md %})
+1. [Two-dimensions using the element triangle]({{ site.baseurl }}{% link vte/validation/heat 2D triangle.md %})
 
-3. [Three-dimensions using the element tetrahedron]({{ site.baseurl }}{% link vte/heat 3D tetrahedron.md %})
+1. [Two-dimensions using the element quadrangle]({{ site.baseurl }}{% link vte/validation/heat 2D quadrangle.md %})
+
+1. [Three-dimensions using the element tetrahedron]({{ site.baseurl }}{% link vte/validation/heat 3D tetrahedron.md %})
 
 #### Pennes bioheat equation
 
-1. [One-dimension using the element line]({{ site.baseurl }}{% link vte/pennes 1D line.md %})
+1. [One-dimension using the element line]({{ site.baseurl }}{% link vte/validation/pennes 1D line.md %})
 
-2. [Two-dimensions using the element triangle]({{ site.baseurl }}{% link vte/pennes 2D triangle.md %})
+1. [Two-dimensions using the element triangle]({{ site.baseurl }}{% link vte/validation/pennes 2D triangle.md %})
 
-3. [Three-dimensions using the element tetrahedron]({{ site.baseurl }}{% link vte/pennes 3D tetrahedron.md %})
+1. [Three-dimensions using the element tetrahedron]({{ site.baseurl }}{% link vte/validation/pennes 3D tetrahedron.md %})

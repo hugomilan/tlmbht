@@ -37,7 +37,7 @@ Lastly, you may try the shortcuts *Windows + X* then *C* to run the **Command Pr
 
 Here, I assume that you already know if you have **Command Prompt** or **PowerShell** and knows how to open it. To our purposes, the command we will use are similar in **Command Prompt** and **PowerShell**, then, I will refer to them as **terminal** and will show basic navigation commands.
 
-Let's suppose that you downloaded the binary (executable) file for Windows 64bits ([you can get it here](https://github.com/hugomilan/tlmbht/releases)), you are going through the [validation of the Pennes equation in 1D]({{ site.baseurl }}{% link vte/pennes 1D line.md %}) and downloaded the case file and the mesh file ([you can get them here](https://github.com/hugomilan/tlmbht/tree/master/vte/generalDiffusion/1D/LineNode)) in your Download folder. Simply type `cd downloads` in the terminal to get to the downloads folder.
+Let's suppose that you downloaded the binary (executable) file for Windows 64bits ([you can get it here](https://github.com/hugomilan/tlmbht/releases)), you are going through the [validation of the Pennes equation in 1D]({{ site.baseurl }}{% link vte/validation/pennes 1D line.md %}) and downloaded the case file and the mesh file ([you can get them here](https://github.com/hugomilan/tlmbht/tree/master/vte/generalDiffusion/1D/LineNode)) in your Download folder. Simply type `cd downloads` in the terminal to get to the downloads folder.
 
 ![PC with Command Prompt]({{ site.baseurl }}/assets/images/vte/Win_PS_cd.png "Going to the Downloads folder using PowerShell")
 

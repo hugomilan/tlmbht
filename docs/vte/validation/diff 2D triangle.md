@@ -4,7 +4,7 @@
 # See: https://jekyllrb.com/docs/themes/#overriding-theme-defaults
 layout: page_eqAMS_Disqus
 title: Validation of TLMBHT to solve the Diffusion equation in time-domain for two-dimensions using Triangular elements
-permalink: vte/diff-2D-Tr.html
+permalink: vte/validation/diff-2D-Tr.html
 ---
 
 <span style="color:#697473">Jan 31, 2017</span> by [**Hugo Milan**](https://hugomilan.github.io/)
@@ -17,7 +17,7 @@ In this validation, we will follow the 5 steps [showed here]({{ site.baseurl }}{
 
 ### 1) Create the geometry of the problem.
 
-We are building up from the problem description of the [validation for Diffusion 1D equation with line elements]({{ site.baseurl }}{% link vte/diff 1D line.md %}). Here, we will consider a simple two-dimensional problem that has analytical solution. In this problem, we will include source, two constant concentration boundary conditions (constant core concentration C<sub>C</sub>, and constant surface concentration C<sub>S</sub>), one constant flux boundary condition (q<sub>x</sub>), and one impermeable boundary condition. The problem geometry is shown below.
+We are building up from the problem description of the [validation for Diffusion 1D equation with line elements]({{ site.baseurl }}{% link vte/validation/diff 1D line.md %}). Here, we will consider a simple two-dimensional problem that has analytical solution. In this problem, we will include source, two constant concentration boundary conditions (constant core concentration C<sub>C</sub>, and constant surface concentration C<sub>S</sub>), one constant flux boundary condition (q<sub>x</sub>), and one impermeable boundary condition. The problem geometry is shown below.
 
 <img src="{{ site.baseurl }}/assets/images/vte/2D_Triangle_Diffusion_Problem.png" alt="Geometry of the problem used to validate the triangle element for the diffusion equation in 2D" width="500">
 
@@ -51,7 +51,7 @@ The description of the problem is in the file cdiff2Tr.tlm. Here, I will explain
 
 #### Explanation of this case file
 
-The case file is structured in headers and I will go over every header in the file cdiff2Tr.tlm. This script file is similar to the script file for [validation for Diffusion 1D equation with line elements]({{ site.baseurl }}{% link vte/diff 1D line.md %}). The differences are the inclusion of one additional boundary condition and changing to two-dimensions.
+The case file is structured in headers and I will go over every header in the file cdiff2Tr.tlm. This script file is similar to the script file for [validation for Diffusion 1D equation with line elements]({{ site.baseurl }}{% link vte/validation/diff 1D line.md %}). The differences are the inclusion of one additional boundary condition and changing to two-dimensions.
 
 The first header you see (Simulation), is used to configure parameters common to the equations of the problem. In this case, we are only configuring the output extension to the 'm' (Octave/Matlab m format) so that it is easier to run the validation algorithm.
 
@@ -84,7 +84,7 @@ The Equation header tells the software what equation it should solve and how. Yo
         save = vector;
     }
 
-The Material header defines the properties of the equation. You can have different Material headers for different properties in the same problem. We tell tlmbht to what equation this Material header is referred to by giving it the equation name ("diffusion_name"). In number, we give the Material header the Physical tag number that we gave to the surface during the mesh generation. Therefore, the options we input here are going to be applied to the triangles that belong to the surface with tag number 7. Finally, we defined diffusion coefficient, volumetric source, and initial value (required for time-domain simulations).
+The Material header defines the properties of the equation. You can have different Material headers for different properties in the same problem. We tell tlmbht to what equation this Material header is referred to by giving it the equation name ("diffusion_name"). In number, we give the Material header the Physical tag number that we gave to the elements during the mesh generation. Therefore, the options we input here are going to be applied to the elements that belong to the surface with tag number 7. Finally, we defined diffusion coefficient, volumetric source, and initial value (required for time-domain simulations).
 
     Material
     {
@@ -122,7 +122,7 @@ The file cdiff2Tr_full.tlm contains additional explanation about the input. If y
 
 ### 4) Solve the problem.
 
-#### [Click here if you have Windows and need help to run tlmbht in your machine.](https://github.com/hugomilan/tlmbht/wiki/Running-tlmbht-in-Windows)
+#### [**Click here if you have Windows and need help to run tlmbht in your machine.**](https://github.com/hugomilan/tlmbht/wiki/Running-tlmbht-in-Windows)
 
 If you have the tlmbht binary in your path environment, simply type `tlmbht cdiff2Tr.tlm`. If you don't have it in your path environment, you may copy the binary to the folder /vte/generalDiffusion/2D/TriangleNode/ and then type `./tlmbht cdiff2Tr.tlm`. In some seconds, the calculation will be done.
 If you want to see what is going on internally, you may run tlmbht with --verbose. If you want to see how long does it take to run tlmbht, you may run it with --timing. The command to run with both is simply `tlmbht cdiff2Tr.tlm --verbose --timing`.
@@ -133,9 +133,9 @@ Now we are ready to visualize the output and compare the TLM predictions with an
 
 After you have run tlmbht, it created the output file cdiff2Tr.m. In this tutorial, you do not need to worry about this file. We will run a script that automatically loads the data into Octave/Matlab. The script is in the file vdiff2Tr.m, which calls the analytical solver function D2_HEAT_f.m  ([click here to read more about the analytical solution and how to use this function]({{ site.baseurl }}{% link theory/ana/heat/heat 2D TTqq.md %})).
 
-This part should be as simple as opening vdiff2Tr.m in Octave/Matlab and running it (press key F5). It will show you two plots and textual information. The figure below shows the two plots and part of the textual information. Concentration is shown in the left figure and flux is shown on the right figure. The analytical predictions are shown in blue, the tlmbht predictions are shown in red, and the green shows the difference of the calculated fluxes. In the concentration plots, asterisks represent concentration calculated at the center of the TLM nodes and the circles represent the concentration calculated between nodes. You can see that the predictions are almost identical, which you can confirm by looking at the textual information that tells you that the mean concentration error was 0.28 % and the mean flux difference was 1.3e-+ m<sup>-2</sup> (which correspond to a fraction of 0.13 of the input flux). In this problem, we the mean flux error is not a viable validation variable because the flux is close to zero in some parts of the mesh and, hence, very small differences yields very large percentage errors. Moreover, concentration values close to zero inflated the percentage errors. However, we graphically observe that the tlmbht predictions match the analytical predictions very well.
+This part should be as simple as opening vdiff2Tr.m in Octave/Matlab and running it (press key F5). It will show you two plots and textual information. The figure below shows the two plots and part of the textual information. Concentration is shown in the left figure and flux is shown on the right figure. The analytical predictions are shown in blue, the tlmbht predictions are shown in red, and the green shows the difference of the calculated fluxes. In the concentration plots, asterisks represent concentration calculated at the center of the TLM nodes and the circles represent the concentration calculated between nodes. You can see that the predictions are almost identical, which you can confirm by looking at the textual information that tells you that the mean concentration error was 0.28 % and the mean flux difference was 1.3e-6 m<sup>-2</sup> (which correspond to a fraction of 0.13 of the input flux). In this problem, we the mean flux error is not a viable validation variable because the flux is close to zero in some parts of the mesh and, hence, very small differences yields very large percentage errors. Moreover, concentration values close to zero inflated the percentage errors. However, we graphically observe that the tlmbht predictions match the analytical predictions very well.
 
-![Predictions using tlmbht with triangles vs. predictions using analytical solution for the 2D problem]({{ site.baseurl }}/assets/images/vte/2D_Triangle_Heat_Result.png "Predictions using tlmbht with triangles vs. predictions using analytical solution for the 2D problem")
+![Predictions using tlmbht with triangles vs. predictions using analytical solution for the 2D problem]({{ site.baseurl }}/assets/images/vte/2D_Triangle_Diffusion_Result.png "Predictions using tlmbht with triangles vs. predictions using analytical solution for the 2D problem")
 
 You are not satisfied with this accuracy? Well... this is a numerical method; we will never get the same exact numbers as the analytical solution gives. Besides, this analytical solution is based on a infinity sum and, by default, the script vdiff2Tr.m only considers up to the first 100 terms. If you insist, you can try to increase the number of terms in the analytical solution. Then, as it is true for numerical methods, you can try to increase the number of elements and/or decrease the time-step. These changes will increase the computational time but also increase the accuracy.
 
@@ -145,7 +145,10 @@ I hope you have enjoyed this validation section! You may now try to change the c
 
 Remember: you are using a powerful numerical solver. You do not need to be constrained by solutions that can be solved analytically. Explore! Try different boundary conditions, include more materials, etc. Make this problem more realistic!
 
+You might be wondering **how does the tlmbht models for Triangle and Quadrangle elements change?** They don't change. These two validations solve the same problem. The only difference between them is that the mesh for the validation using Triangle elements has only triangles and the mesh for the validation using Quadrangle elements has only quadrangles. TLMBHT is capable of solving meshes that have any of these two elements.
+
 Now, you can go to:
 
 * [Tutorials, examples, and validations]({{ site.baseurl }}{% link vte/index.md %})
-* [Validation in three-dimensions of Diffusion equation using the element tetrahedron]({{ site.baseurl }}{% link vte/diff 3D tetrahedron.md %})
+* [Validation in two-dimensions of Diffusion equation using the element quadrangle]({{ site.baseurl }}{% link vte/validation/diff 2D quadrangle.md %})
+* [Validation in three-dimensions of Diffusion equation using the element tetrahedron]({{ site.baseurl }}{% link vte/validation/diff 3D tetrahedron.md %})

@@ -498,6 +498,6 @@ Now, you can go to:
 * [Analytical solutions menu]({{ site.baseurl }}{% link theory/ana/index.md %})
 * [Analytical solutions of Diffusion and Heat equations menu]({{ site.baseurl }}{% link theory/ana/heat/index.md %})
 * [Analytical solution in three-dimensions]({{ site.baseurl }}{% link theory/ana/heat/heat 3D TTqqqq.md %})
-* [TLM validation using this solution for diffusion equation]({{ site.baseurl }}{% link vte/diff 2D triangle.md %})
-* [TLM validation using this solution for heat equation]({{ site.baseurl }}{% link vte/heat 2D triangle.md %})
+* [TLM validation using this solution for diffusion equation]({{ site.baseurl }}{% link vte/validation/diff 2D triangle.md %})
+* [TLM validation using this solution for heat equation]({{ site.baseurl }}{% link vte/validation/heat 2D triangle.md %})
 

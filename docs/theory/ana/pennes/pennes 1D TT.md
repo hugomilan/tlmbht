@@ -342,6 +342,6 @@ Now, you can go to:
 * [Analytical solutions menu]({{ site.baseurl }}{% link theory/ana/index.md %})
 * [Analytical solutions of Pennes equations menu]({{ site.baseurl }}{% link theory/ana/pennes/index.md %})
 * [Analytical solution in two-dimensions]({{ site.baseurl }}{% link theory/ana/pennes/pennes 2D TTqq.md %})
-* [TLM validation using this solution]({{ site.baseurl }}{% link vte/pennes 1D line.md %})
+* [TLM validation using this solution]({{ site.baseurl }}{% link vte/validation/pennes 1D line.md %})
 
 

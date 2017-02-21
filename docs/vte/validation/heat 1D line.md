@@ -4,7 +4,7 @@
 # See: https://jekyllrb.com/docs/themes/#overriding-theme-defaults
 layout: page_eqAMS_Disqus
 title: Validation of TLMBHT to solve the Heat equation in time-domain for one-dimension using Line elements
-permalink: vte/heat-1D-line.html
+permalink: vte/validation/heat-1D-line.html
 ---
 
 <span style="color:#697473">Jan 31, 2017</span> by [**Hugo Milan**](https://hugomilan.github.io/)
@@ -72,7 +72,7 @@ The Equation header tells the software what equation it should solve and how. Yo
         save = vector;
     }
 
-The Material header defines the properties of the equation. You can have different Material headers for different properties in the same problem. We tell tlmbht to what equation this Material header is referred to by giving it the equation name ("heat_name"). In number, we give the Material header the Physical tag number that we gave to the line during the mesh generation. Therefore, the options we input here are going to be applied to the line with tag number 10. Finally, we defined density, specific heat, thermal conductivity, volumetric heat source, and initial temperature (required for time-domain simulations).
+The Material header defines the properties of the equation. You can have different Material headers for different properties in the same problem. We tell tlmbht to what equation this Material header is referred to by giving it the equation name ("heat_name"). In number, we give the Material header the Physical tag number that we gave to the elements during the mesh generation. Therefore, the options we input here are going to be applied to the elements with tag number 10. Finally, we defined density, specific heat, thermal conductivity, volumetric heat source, and initial temperature (required for time-domain simulations).
 
     Material
     {
@@ -105,7 +105,7 @@ The file cheat1Li_full.tlm contains additional explanation about the input. If y
 
 ### 4) Solve the problem.
 
-#### [Click here if you have Windows and need help to run tlmbht in your machine.]({{ site.baseurl }}{% link vte/run on windows.md %})
+#### [**Click here if you have Windows and need help to run tlmbht in your machine.**](https://github.com/hugomilan/tlmbht/wiki/Running-tlmbht-in-Windows)
 
 If you have the tlmbht binary in your path environment, simply type `tlmbht cheat1Li.tlm`. If you don't have it in your path environment, you may copy the binary to the folder /vte/generalDiffusion/1D/LineNode/ and then type `./tlmbht cheat1Li.tlm`. In some seconds, the calculation will be done.
 
@@ -135,4 +135,5 @@ Remember: you are using a powerful numerical solver. You do not need to be const
 Now, you can go to:
 
 * [Tutorials, examples, and validations]({{ site.baseurl }}{% link vte/index.md %})
-* [Validation in two-dimensions of Heat equation using the element triangle]({{ site.baseurl }}{% link vte/heat 2D triangle.md %})
+* [Validation in two-dimensions of Heat equation using the element triangle]({{ site.baseurl }}{% link vte/validation/heat 2D triangle.md %})
+* [Validation in two-dimensions of Heat equation using the element quadrangle]({{ site.baseurl }}{% link vte/validation/heat 2D quadrangle.md %})

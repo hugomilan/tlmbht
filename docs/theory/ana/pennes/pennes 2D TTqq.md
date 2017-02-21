@@ -496,5 +496,5 @@ Now, you can go to:
 * [Analytical solutions menu]({{ site.baseurl }}{% link theory/ana/index.md %})
 * [Analytical solutions of Pennes equations menu]({{ site.baseurl }}{% link theory/ana/pennes/index.md %})
 * [Analytical solution in three-dimensions]({{ site.baseurl }}{% link theory/ana/pennes/pennes 3D TTqqqq.md %})
-* [TLM validation using this solution]({{ site.baseurl }}{% link vte/pennes 2D triangle.md %})
+* [TLM validation using this solution]({{ site.baseurl }}{% link vte/validation/pennes 2D triangle.md %})
 

@@ -2,14 +2,14 @@
 # You don't need to edit this file, it's empty on purpose.
 # Edit theme's home layout instead if you wanna make some changes
 # See: https://jekyllrb.com/docs/themes/#overriding-theme-defaults
-layout: page
+layout: page_eqAMS_Disqus
 ---
 
 [![DOI](https://zenodo.org/badge/61003231.svg)](https://zenodo.org/badge/latestdoi/61003231)
 
 
 ## Welcome to the TLMBHT website!
-<span style="color:#697473">Jan 30, 2017</span> by [**Hugo Milan**](https://hugomilan.github.io/)
+by [**Hugo Milan**](https://hugomilan.github.io/)
 
 TLMBHT is an open-source solver of partial differential equations in space and time based on the Transmission-Line Modeling (TLM) theory. You can [download the latest release here](https://github.com/hugomilan/tlmbht/releases). If you want to compile the code yourself, see [more instructions here](https://github.com/hugomilan/tlmbht/blob/master/README.md).
 

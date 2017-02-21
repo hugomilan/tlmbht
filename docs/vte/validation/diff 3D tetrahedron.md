@@ -4,7 +4,7 @@
 # See: https://jekyllrb.com/docs/themes/#overriding-theme-defaults
 layout: page_eqAMS_Disqus
 title: Validation of TLMBHT to solve the Diffusion equation in time-domain for three-dimensions using Tetrahedral elements
-permalink: vte/diff-3D-Te.html
+permalink: vte/validation/diff-3D-Te.html
 ---
 
 <span style="color:#697473">Jan 31, 2017</span> by [**Hugo Milan**](https://hugomilan.github.io/)
@@ -17,7 +17,7 @@ In this validation, we will follow the 5 steps [showed here]({{ site.baseurl }}{
 
 ### 1) Create the geometry of the problem.
 
-We are building up from the problem description of the [validation for Diffusion 2D equation with Triangle elements]({{ site.baseurl }}{% link vte/diff 2D triangle.md %}). Here, we will consider a simple three-dimensional problem that has analytical solution. In this problem, we will include source, two constant concentration boundary conditions (constant core concentration C<sub>C</sub>, and constant surface concentration C<sub>S</sub>), two constant flux boundary condition (q<sub>x</sub> and q<sub>z</sub>), and one impermeable boundary condition. The problem geometry is shown below.
+We are building up from the problem description of the [validation for Diffusion 2D equation with Triangle elements]({{ site.baseurl }}{% link vte/validation/diff 2D triangle.md %}). Here, we will consider a simple three-dimensional problem that has analytical solution. In this problem, we will include source, two constant concentration boundary conditions (constant core concentration C<sub>C</sub>, and constant surface concentration C<sub>S</sub>), two constant flux boundary condition (q<sub>x</sub> and q<sub>z</sub>), and one impermeable boundary condition. The problem geometry is shown below.
 
 <img src="{{ site.baseurl }}/assets/images/vte/3D_Tetrahedron_Diffusion_Problem.png" alt="Geometry of the problem used to validate the tetrahedron element for the diffusion equation in 3D" width="500">
 
@@ -50,7 +50,7 @@ The description of the problem is in the file cdiff3Te.tlm. Here, I will explain
 
 #### Explanation of this case file
 
-The case file is structured in headers and I will go over every header in the file cdiff3Te.tlm. This script file is similar to the script file for [validation for Diffusion 2D equation with triangles elements]({{ site.baseurl }}{% link vte/diff 2D triangle.md %}). The differences are the inclusion of one additional boundary condition and changing to two-dimensions.
+The case file is structured in headers and I will go over every header in the file cdiff3Te.tlm. This script file is similar to the script file for [validation for Diffusion 2D equation with triangles elements]({{ site.baseurl }}{% link vte/validation/diff 2D triangle.md %}). The differences are the inclusion of one additional boundary condition and changing to two-dimensions.
 
 The first header you see (Simulation), is used to configure parameters common to the equations of the problem. In this case, we are only configuring the output extension to the 'm' (Octave/Matlab m format) so that it is easier to run the validation algorithm.
 
@@ -83,7 +83,7 @@ The Equation header tells the software what equation it should solve and how. Yo
         save = vector;
     }
 
-The Material header defines the properties of the equation. You can have different Material headers for different properties in the same problem. We tell tlmbht to what equation this Material header is referred to by giving it the equation name ("diffusion_name"). In number, we give the Material header the Physical tag number that we gave to the surface during the mesh generation. Therefore, the options we input here are going to be applied to the triangles that belong to the surface with tag number 33. Finally, we defined diffusion coefficient, volumetric source, and initial value (required for time-domain simulations).
+The Material header defines the properties of the equation. You can have different Material headers for different properties in the same problem. We tell tlmbht to what equation this Material header is referred to by giving it the equation name ("diffusion_name"). In number, we give the Material header the Physical tag number that we gave to the elements during the mesh generation. Therefore, the options we input here are going to be applied to the elements that belong to the surface with tag number 33. Finally, we defined diffusion coefficient, volumetric source, and initial value (required for time-domain simulations).
 
     Material
     {
@@ -129,7 +129,7 @@ The file cdiff3Te_full.tlm contains additional explanation about the input. If y
 
 ### 4) Solve the problem.
 
-#### [Click here if you have Windows and need help to run tlmbht in your machine.](https://github.com/hugomilan/tlmbht/wiki/Running-tlmbht-in-Windows)
+#### [**Click here if you have Windows and need help to run tlmbht in your machine.**](https://github.com/hugomilan/tlmbht/wiki/Running-tlmbht-in-Windows)
 
 If you have the tlmbht binary in your path environment, simply type `tlmbht cdiff3Te.tlm`. If you don't have it in your path environment, you may copy the binary to the folder /vte/generalDiffusion/3D/TetrahedronNode/ and then type `./tlmbht cdiff3Te.tlm`. In some seconds, the calculation will be done.
 
