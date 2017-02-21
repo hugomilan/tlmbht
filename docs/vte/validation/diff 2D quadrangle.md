@@ -139,6 +139,8 @@ This part should be as simple as opening vdiff2Qu.m in Octave/Matlab and running
 
 You are not satisfied with this accuracy? Well... this is a numerical method; we will never get the same exact numbers as the analytical solution gives. Besides, this analytical solution is based on a infinity sum and, by default, the script vdiff2Qu.m only considers up to the first 100 terms. If you insist, you can try to increase the number of terms in the analytical solution. Then, as it is true for numerical methods, you can try to increase the number of elements and/or decrease the time-step. These changes will increase the computational time but also increase the accuracy.
 
+**What if the mesh was structured?** The TLM theory works better with structured meshes. The file `cdiff2Qu_S.tlm` uses the structured mesh `plate_4BC_Q_S_1024e.tbn` and the predictions using this mesh had mean concentration error of 0.02 % and mean flux difference of 2.6e-8 m<sup>-2</sup> (which corresponds to a fraction of 0.003 of the input flux).
+
 
 ### Done!
 

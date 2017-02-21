@@ -353,8 +353,33 @@ unsigned int gmshReader(struct MeshConfig * input, struct tlmInternalMesh * outp
 
                             break;
                         case 5: // 8 nodes hexahedron
-                            errorTLMnumber = 6511;
-                            continue;
+                            codeForReading = (char *) realloc(codeForReading,
+                                    sizeof (char)*(3 + numberOfTags)*4 + 1 + 5 * 8);
+
+                            strcat(codeForReading, "%llu %llu %llu %llu %llu %llu %llu %llu");
+
+                            inputGmsh.saveElement
+                                    [inputGmsh.numberOfElementReads].elementCode = 5;
+                            inputGmsh.saveElement
+                                    [inputGmsh.numberOfElementReads].tag = tagNumber;
+
+                            sscanf(pline, codeForReading, &inputGmsh.saveElement
+                                    [inputGmsh.numberOfElementReads].N1,
+                                    &inputGmsh.saveElement
+                                    [inputGmsh.numberOfElementReads].N2,
+                                    &inputGmsh.saveElement
+                                    [inputGmsh.numberOfElementReads].N3,
+                                    &inputGmsh.saveElement
+                                    [inputGmsh.numberOfElementReads].N4,
+                                    &inputGmsh.saveElement
+                                    [inputGmsh.numberOfElementReads].N5,
+                                    &inputGmsh.saveElement
+                                    [inputGmsh.numberOfElementReads].N6,
+                                    &inputGmsh.saveElement
+                                    [inputGmsh.numberOfElementReads].N7,
+                                    &inputGmsh.saveElement
+                                    [inputGmsh.numberOfElementReads].N8);
+                            
                             break;
                         case 6: // 6 nodes prism
                             errorTLMnumber = 6512;
@@ -387,18 +412,6 @@ unsigned int gmshReader(struct MeshConfig * input, struct tlmInternalMesh * outp
 
                     inputGmsh.quantityOfSpecificElement[elementCode] =
                             inputGmsh.quantityOfSpecificElement[elementCode] + 1;
-
-                    // DEBUG: Shows a lot of things
-                    // printf("Element specific %d and count %llu. Node %llu code (%s)."
-                    //          " tag %lu, code %u\n", elementCode,
-                    //          inputGmsh.quantityOfSpecificElement[elementCode],
-                    //          inputGmsh.saveElement
-                    //          [inputGmsh.numberOfElementReads].N1, codeForReading,
-                    //          inputGmsh.saveElement
-                    //          [inputGmsh.numberOfElementReads].tag,
-                    //          inputGmsh.saveElement
-                    //          [inputGmsh.numberOfElementReads].elementCode);
-
                     inputGmsh.numberOfElementReads++;
                 }
                 break;

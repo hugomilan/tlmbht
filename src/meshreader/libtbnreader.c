@@ -270,8 +270,17 @@ unsigned int tbnReader(struct MeshConfig * input, struct tlmInternalMesh * outpu
 
                         break;
                     case 5: // 8 nodes hexahedron
-                        errorTLMnumber = 6511;
-                        continue;
+                        sscanf(pline, "%lu %llu %llu %llu %llu %llu %llu %llu %llu",
+                                &output->elements.Hexahedron[numberOfElementsRead].tag,
+                                &output->elements.Hexahedron[numberOfElementsRead].N1,
+                                &output->elements.Hexahedron[numberOfElementsRead].N2,
+                                &output->elements.Hexahedron[numberOfElementsRead].N3,
+                                &output->elements.Hexahedron[numberOfElementsRead].N4,
+                                &output->elements.Hexahedron[numberOfElementsRead].N5,
+                                &output->elements.Hexahedron[numberOfElementsRead].N6,
+                                &output->elements.Hexahedron[numberOfElementsRead].N7,
+                                &output->elements.Hexahedron[numberOfElementsRead].N8);
+                        
                         break;
                     case 6: // 6 nodes prism
                         errorTLMnumber = 6512;

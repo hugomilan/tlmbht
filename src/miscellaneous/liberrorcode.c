@@ -409,16 +409,6 @@ void sendErrorCodeAndMessage(unsigned int errorCode, void *input1v, void *input2
             fprintf(stderr, "Not enough memory to allocate the 1 node point elements during reading.");
             break;
 
-        case 6510:
-            // Unknown element number
-            fprintf(stderr, "Element quadrangle found at line %04u: %s. Not implemented yet", *input1ui, input2c);
-            break;
-
-        case 6511:
-            // Unknown element number
-            fprintf(stderr, "Element hexahedron found at line %04u: %s. Not implemented yet", *input1ui, input2c);
-            break;
-
         case 6512:
             // Unknown element number
             fprintf(stderr, "Element prism found at line %04u: %s. Not implemented yet", *input1ui, input2c);

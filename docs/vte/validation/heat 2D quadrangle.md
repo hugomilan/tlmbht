@@ -142,6 +142,8 @@ This part should be as simple as opening vheat2Qu.m in Octave/Matlab and running
 
 You are not satisfied with this accuracy? Well... this is a numerical method; we will never get the same exact numbers as the analytical solution gives. Besides, this analytical solution is based on a infinity sum and, by default, the script vheat2Tr.m only considers up to the first 100 terms. If you insist, you can try to increase the number of terms in the analytical solution. Then, as it is true for numerical methods, you can try to increase the number of elements and/or decrease the time-step. These changes will increase the computational time but also increase the accuracy.
 
+**What if the mesh was structured?** The TLM theory works better with structured meshes. The file `cheat2Qu_S.tlm` uses the structured mesh `plate_4BC_Q_S_1024e.tbn` and the predictions using this mesh had mean temperature error of 0.01 % and mean heat flux difference of 14.5 m<sup>-2</sup> (which corresponds to a fraction of 0.002 of the input flux).
+
 ### Done!
 
 I hope you have enjoyed this validation section! You may now try to change the case file (cheat2Qu.tlm) and see what happens. Remember that if you change any parameter in the cheat2Qu.tlm file you will need to do the same in the vheat2Qu.m file. Except for time and space positions, they are not linked.

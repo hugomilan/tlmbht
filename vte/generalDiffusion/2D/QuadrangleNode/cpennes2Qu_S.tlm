@@ -1,19 +1,19 @@
 Simulation
 {
     output extension = m;
-        output name = cdiff2Qu;
+    output name = cpennes2Qu;
 }
 
 Mesh
 {
-    file name = plate_4BC_Q_1195e;
+    file name = plate_4BC_Q_S_1024e;
     input format = tlmtbn;
 }
 
 Equation
 {
-    type = heat;
-    equation name = heat_name;
+    type = pennes;
+    equation name = BHE;
     dimensions = 2;
     Solve = dynamic;
     time-step = 1e-3;
@@ -26,32 +26,36 @@ Equation
 
 Material
 {
-    equation = heat_name;
+    equation = BHE;
     number =  7;
     density = 1200;
     specific heat = 3200;
     thermal conductivity = 0.3;
-    source = 5000;
-    initial temperature = 100;
+    blood perfusion = 1e-4;
+    blood density = 1052;
+    blood specific heat = 3600;
+    blood temperature = 37;
+    internal heat generation = 500;
+    initial temperature = 37;
 }
 
 Boundary
 {
-    equation = heat_name;
+    equation = BHE;
     number = 10;
+    Temperature = 37;
+}
+
+Boundary
+{
+    equation = BHE;
+    number = 11;
     Temperature = 100;
 }
 
 Boundary
 {
-    equation = heat_name;
-    number = 11;
-    Temperature = 200;
-}
-
-Boundary
-{
-    equation = heat_name;
+    equation = BHE;
     number = 8;
     Heat flux = 1e4;
 }

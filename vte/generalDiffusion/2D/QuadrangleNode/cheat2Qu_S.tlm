@@ -1,12 +1,12 @@
 Simulation
 {
     output extension = m;
-        output name = cdiff2Qu;
+    output name = cheat2Qu;
 }
 
 Mesh
 {
-    file name = plate_4BC_Q_1195e;
+    file name = plate_4BC_Q_S_1024e;
     input format = tlmtbn;
 }
 
