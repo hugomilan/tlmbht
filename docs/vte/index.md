@@ -52,4 +52,6 @@ Validations for the diffusion equation, heat equation, and Pennes equation are v
 
 1. [Two-dimensions using the element triangle]({{ site.baseurl }}{% link vte/validation/pennes 2D triangle.md %})
 
+1. [Two-dimensions using the element quadrangle]({{ site.baseurl }}{% link vte/validation/pennes 2D quadrangle.md %})
+
 1. [Three-dimensions using the element tetrahedron]({{ site.baseurl }}{% link vte/validation/pennes 3D tetrahedron.md %})
