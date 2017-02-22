@@ -409,16 +409,6 @@ void sendErrorCodeAndMessage(unsigned int errorCode, void *input1v, void *input2
             fprintf(stderr, "Not enough memory to allocate the 1 node point elements during reading.");
             break;
 
-        case 6512:
-            // Unknown element number
-            fprintf(stderr, "Element prism found at line %04u: %s. Not implemented yet", *input1ui, input2c);
-            break;
-
-        case 6513:
-            // Unknown element number
-            fprintf(stderr, "Element pyramid found at line %04u: %s. Not implemented yet", *input1ui, input2c);
-            break;
-
         case 6514:
             // Unknown element number
             fprintf(stderr, "Unknown element number in line %04u: %s. The known elements "

@@ -334,10 +334,10 @@ unsigned int calculateMatricesPennesEigen(struct dataForSimulation *input,
         }
         clock_t begin_Hexahedron = clock();
         printf("\n\nHexahedron node was not implemented yet\n\n");
-//        if ((errorTLMnumber = MaterialHexahedronPennesEigen(input, matrices, id)) != 0) {
-//            sendErrorCodeAndMessage(errorTLMnumber, NULL, NULL, NULL, NULL);
-//            return errorTLMnumber;
-//        }
+        if ((errorTLMnumber = MaterialHexahedronPennesEigen(input, matrices, id)) != 0) {
+            sendErrorCodeAndMessage(errorTLMnumber, NULL, NULL, NULL, NULL);
+            return errorTLMnumber;
+        }
         clock_t end_Hexahedron = clock();
         if (input->simulationInput.verboseMode == 1) {
             printf("Done calculating the matrix for the hexahedron nodes.\n");
@@ -1135,7 +1135,7 @@ end_for_j_and_for_k_quadrangle:
 
 /*
  * MaterialTetrahedronPennesEigen: Calculates the parameters to set the tetrahedron
- * as material in a 2D simulation.
+ * as material in a 3D simulation.
  * Tetrahedron as a boundary was not implemented yet.
  */
 unsigned int MaterialTetrahedronPennesEigen(struct dataForSimulation *input, struct calculationTLMEigen *matrices, int id) {
@@ -1169,9 +1169,9 @@ unsigned int MaterialTetrahedronPennesEigen(struct dataForSimulation *input, str
      * vertex 2 //_____________________________\/ vertex 3
      *                      edge 4
      */
-    // triangles can be boundary conditions and mediums. The boundary conditions
+    // tetrahedrons can be boundary conditions and mediums. The boundary conditions
     // version was not implemented yet.   
-    // element code 3: 3 nodes triangle. Used only for medium only. The boundary
+    // element code 4: 4 nodes tetrahedron. Used only for medium only. The boundary
     // condition version was not implemented yet
     double *tempVar = NULL;
     tempVar = (double *) realloc(tempVar, sizeof (double)*12);
@@ -1184,9 +1184,9 @@ unsigned int MaterialTetrahedronPennesEigen(struct dataForSimulation *input, str
     // 6 - area of triangle 3
     // 7 - area of triangle 4
     // 8 - volume of the tetrahedron
-    // 9 - tetrahedron' center x
-    // 10 - tetrahedron' center y
-    // 11 - tetrahedron' center z
+    // 9 - tetrahedron's center x
+    // 10 - tetrahedron's center y
+    // 11 - tetrahedron's center z
     for (unsigned long long i = 0; i < input->mesh.quantityOfSpecificElement[4]; i++) {
         // i: element level
         // j: material (of equation id) type level
@@ -1344,6 +1344,298 @@ unsigned int MaterialTetrahedronPennesEigen(struct dataForSimulation *input, str
                     goto end_for_j_and_for_k_triangle;
                 }
 end_for_j_and_for_k_triangle:
+        ;
+    }
+    return 0;
+}
+
+
+/*
+ * MaterialHexahedronPennesEigen: Calculates the parameters to set the hexahedron
+ * as material in a 3D simulation.
+ * hexahedron as a boundary was not implemented yet.
+ */
+unsigned int MaterialHexahedronPennesEigen(struct dataForSimulation *input, struct calculationTLMEigen *matrices, int id) {
+    unsigned int errorTLMnumber;
+    unsigned long long numbersNodeAndPort[] = {0, 0};
+    // 0 - number of node
+    // 1 - number of port 0
+    unsigned int j2;
+    double Cd, Z[6], R[6], G, Is, Zhat, tau[6];
+
+
+
+    /* hexahedral nomenclature. We assume an irregular hexahedron
+     * 
+     * 
+     *            vertex 4____________________________ vertex 3
+     *                   /|                          /|
+     *                  / .                         / |
+     *                 /  .      5                 /  |
+     *                /   |                       /   |
+     *               /    .    a                 /    |
+     *              /     .   e                 /     |
+     *             /      |  r     area 1      /      |
+     *            /       . a                 /       |
+     *  vertex 8 /___________________________/vertex 7|
+     *          |         | vertex 1         |        |
+     *          |        , _.._.._.._.._.._..|_.._ .._| vertex 2
+     *          |     3 ,                    |     4 /
+     *          |      /   2                 |      /
+     *          |   a ,                      |   a /
+     *          |  e ,   a                   |  e /
+     *          | r /   e       area 6       | r /
+     *          |a ,   r                     |a /
+     *          | ,   a                      | /
+     *          |/___________________________|/
+     *      vertex 5                        vertex 6
+     * 
+     */
+    // hexahedrons can be boundary conditions and mediums. The boundary conditions
+    // version was not implemented yet.   
+    // element code 5: 8 nodes hexahedron. Used only for medium only. The boundary
+    // condition version was not implemented yet
+    double *tempVar = NULL;
+    tempVar = (double *) realloc(tempVar, sizeof (double)*16);
+    // 0 - length of port 1 (from center of tetrahedron to center of area 1)
+    // 1 - length of port 2 (from center of tetrahedron to center of area 2)
+    // 2 - length of port 3 (from center of tetrahedron to center of area 3)
+    // 3 - length of port 4 (from center of tetrahedron to center of area 4)
+    // 4 - length of port 5 (from center of tetrahedron to center of area 5)
+    // 5 - length of port 6 (from center of tetrahedron to center of area 6)
+    // 6 - area of quadrangle 1
+    // 7 - area of quadrangle 2
+    // 8 - area of quadrangle 3
+    // 9 - area of quadrangle 4
+    // 10 - area of quadrangle 5
+    // 11 - area of quadrangle 6
+    // 12 - volume of the hexahedron
+    // 13 - hexahedron's center x
+    // 14 - hexahedron's center y
+    // 15 - hexahedron's center z
+    for (unsigned long long i = 0; i < input->mesh.quantityOfSpecificElement[5]; i++) {
+        // i: element level
+        // j: material (of equation id) type level
+        // k: different tag numbers for the same material type
+        // j2: the material number from equation. Used to reduce the access to input->equationInput[id].materialNumbers[j]
+        for (unsigned int j = 0; j < input->equationInput[id].numberOfMaterials; j++)
+            for (unsigned int k = 0; k < input->materialInput[ input->equationInput[id].materialNumbers[j] ].quantityOfNumberInput; k++)
+                if (input->mesh.elements.Hexahedron[i].tag == input->materialInput[ input->equationInput[id].materialNumbers[j] ].numberInput[k]) {
+                    j2 = input->equationInput[id].materialNumbers[j];
+                    // I will use goto to get out of these two inner 'for' loops. Bare in mind
+                    // that I'm just getting out the loops. You can also think that 
+                    // I'm going to the next 'i', that is, incrementing i by 1 and going
+                    // to the next value of i (if any).
+                    getRealNodeAndPort_fromAbstractNode(4, // element code
+                            i, // element number
+                            matrices->numbers.abstractPortsToReal,
+                            numbersNodeAndPort);
+
+                    // the -1 is necessary because the C indexing starts at zero
+                    // and my number of node starts at 1
+                    getGeometricalVariablesTLMhexahedron(&input->mesh.nodes[input->mesh.elements.Hexahedron[i].N1 - 1],
+                            &input->mesh.nodes[input->mesh.elements.Hexahedron[i].N2 - 1],
+                            &input->mesh.nodes[input->mesh.elements.Hexahedron[i].N3 - 1],
+                            &input->mesh.nodes[input->mesh.elements.Hexahedron[i].N4 - 1],
+                            &input->mesh.nodes[input->mesh.elements.Hexahedron[i].N5 - 1],
+                            &input->mesh.nodes[input->mesh.elements.Hexahedron[i].N6 - 1],
+                            &input->mesh.nodes[input->mesh.elements.Hexahedron[i].N7 - 1],
+                            &input->mesh.nodes[input->mesh.elements.Hexahedron[i].N8 - 1],tempVar);
+
+                    matrices->L[numbersNodeAndPort[1] + 0] = tempVar[6]; // area of face 1
+                    matrices->L[numbersNodeAndPort[1] + 1] = tempVar[7]; // area of face 2
+                    matrices->L[numbersNodeAndPort[1] + 2] = tempVar[8]; // area of face 3
+                    matrices->L[numbersNodeAndPort[1] + 3] = tempVar[9]; // area of face 4
+                    matrices->L[numbersNodeAndPort[1] + 4] = tempVar[10]; // area of face 5
+                    matrices->L[numbersNodeAndPort[1] + 5] = tempVar[11]; // area of face 6
+
+                    matrices->deltal[numbersNodeAndPort[1] + 0] = tempVar[0]; // length of port 1
+                    matrices->deltal[numbersNodeAndPort[1] + 1] = tempVar[1]; // length of port 2
+                    matrices->deltal[numbersNodeAndPort[1] + 2] = tempVar[2]; // length of port 3
+                    matrices->deltal[numbersNodeAndPort[1] + 3] = tempVar[3]; // length of port 4
+                    matrices->deltal[numbersNodeAndPort[1] + 4] = tempVar[4]; // length of port 5
+                    matrices->deltal[numbersNodeAndPort[1] + 5] = tempVar[5]; // length of port 6
+
+                    // generalization of Cd
+                    Cd = tempVar[12] * input->materialInput[j2].generalized_coefficient_b /
+                            (tempVar[0] + tempVar[1] + tempVar[2] + tempVar[3] + tempVar[4] + tempVar[5]);
+
+                    // generalization of R
+                    R[0] = tempVar[0] / (input->materialInput[j2].generalized_diffusionCoeff * tempVar[6]);
+                    R[1] = tempVar[1] / (input->materialInput[j2].generalized_diffusionCoeff * tempVar[7]);
+                    R[2] = tempVar[2] / (input->materialInput[j2].generalized_diffusionCoeff * tempVar[8]);
+                    R[3] = tempVar[3] / (input->materialInput[j2].generalized_diffusionCoeff * tempVar[9]);
+                    R[4] = tempVar[4] / (input->materialInput[j2].generalized_diffusionCoeff * tempVar[10]);
+                    R[5] = tempVar[5] / (input->materialInput[j2].generalized_diffusionCoeff * tempVar[11]);
+
+                    // generalization of G
+                    G = tempVar[12] * input->materialInput[j2].generalized_sink_a;
+
+                    // generalization of Is
+                    Is = tempVar[12] * input->materialInput[j2].generalized_source;
+
+                    // Z = dt/(2*C*deltal).
+                    Z[0] = input->equationInput[id].timeStep / (2 * Cd);
+                    Z[1] = Z[0] / tempVar[1];
+                    Z[2] = Z[0] / tempVar[2];
+                    Z[3] = Z[0] / tempVar[3];
+                    Z[4] = Z[0] / tempVar[4];
+                    Z[5] = Z[0] / tempVar[5];
+                    Z[0] = Z[0] / tempVar[0];
+
+                    // all the impedances
+                    matrices->Z[numbersNodeAndPort[1] + 0] = Z[0];
+                    matrices->Z[numbersNodeAndPort[1] + 1] = Z[1];
+                    matrices->Z[numbersNodeAndPort[1] + 2] = Z[2];
+                    matrices->Z[numbersNodeAndPort[1] + 3] = Z[3];
+                    matrices->Z[numbersNodeAndPort[1] + 4] = Z[4];
+                    matrices->Z[numbersNodeAndPort[1] + 5] = Z[5];
+
+                    // all the resistances
+                    matrices->R[numbersNodeAndPort[1] + 0] = R[0];
+                    matrices->R[numbersNodeAndPort[1] + 1] = R[1];
+                    matrices->R[numbersNodeAndPort[1] + 2] = R[2];
+                    matrices->R[numbersNodeAndPort[1] + 3] = R[3];
+                    matrices->R[numbersNodeAndPort[1] + 4] = R[4];
+                    matrices->R[numbersNodeAndPort[1] + 5] = R[5];
+
+
+                    // Manually validated
+                    Zhat = 1/(1/Z[0] + 1/Z[1] + 1/Z[2] + 1/Z[3] +1/Z[4] + 1/Z[5] + G);
+
+                    // Manually validated
+                    tau[0] = 2 * Zhat / Z[0];
+                    tau[1] = 2 * Zhat / Z[1];
+                    tau[2] = 2 * Zhat / Z[2];
+                    tau[3] = 2 * Zhat / Z[3];
+                    tau[4] = 2 * Zhat / Z[4];
+                    tau[5] = 2 * Zhat / Z[5];
+
+                    // this is actually matrix S.
+                    // M = C*S
+                    // this matrix is M[line][column].
+                    matrices->M.insert(numbersNodeAndPort[1] + 0,
+                            numbersNodeAndPort[1] + 0) = tau[0] - 1;
+                    matrices->M.insert(numbersNodeAndPort[1] + 0,
+                            numbersNodeAndPort[1] + 1) = tau[1];
+                    matrices->M.insert(numbersNodeAndPort[1] + 0,
+                            numbersNodeAndPort[1] + 2) = tau[2];
+                    matrices->M.insert(numbersNodeAndPort[1] + 0,
+                            numbersNodeAndPort[1] + 3) = tau[3];
+                    matrices->M.insert(numbersNodeAndPort[1] + 0,
+                            numbersNodeAndPort[1] + 4) = tau[4];
+                    matrices->M.insert(numbersNodeAndPort[1] + 0,
+                            numbersNodeAndPort[1] + 5) = tau[5];
+
+                    matrices->M.insert(numbersNodeAndPort[1] + 1,
+                            numbersNodeAndPort[1] + 0) = tau[0];
+                    matrices->M.insert(numbersNodeAndPort[1] + 1,
+                            numbersNodeAndPort[1] + 1) = tau[1] - 1;
+                    matrices->M.insert(numbersNodeAndPort[1] + 1,
+                            numbersNodeAndPort[1] + 2) = tau[2];
+                    matrices->M.insert(numbersNodeAndPort[1] + 1,
+                            numbersNodeAndPort[1] + 3) = tau[3];
+                    matrices->M.insert(numbersNodeAndPort[1] + 1,
+                            numbersNodeAndPort[1] + 4) = tau[4];
+                    matrices->M.insert(numbersNodeAndPort[1] + 1,
+                            numbersNodeAndPort[1] + 5) = tau[5];
+
+                    matrices->M.insert(numbersNodeAndPort[1] + 2,
+                            numbersNodeAndPort[1] + 0) = tau[0];
+                    matrices->M.insert(numbersNodeAndPort[1] + 2,
+                            numbersNodeAndPort[1] + 1) = tau[1];
+                    matrices->M.insert(numbersNodeAndPort[1] + 2,
+                            numbersNodeAndPort[1] + 2) = tau[2] - 1;
+                    matrices->M.insert(numbersNodeAndPort[1] + 2,
+                            numbersNodeAndPort[1] + 3) = tau[3];
+                    matrices->M.insert(numbersNodeAndPort[1] + 2,
+                            numbersNodeAndPort[1] + 4) = tau[4];
+                    matrices->M.insert(numbersNodeAndPort[1] + 2,
+                            numbersNodeAndPort[1] + 5) = tau[5];
+
+                    matrices->M.insert(numbersNodeAndPort[1] + 3,
+                            numbersNodeAndPort[1] + 0) = tau[0];
+                    matrices->M.insert(numbersNodeAndPort[1] + 3,
+                            numbersNodeAndPort[1] + 1) = tau[1];
+                    matrices->M.insert(numbersNodeAndPort[1] + 3,
+                            numbersNodeAndPort[1] + 2) = tau[2];
+                    matrices->M.insert(numbersNodeAndPort[1] + 3,
+                            numbersNodeAndPort[1] + 3) = tau[3] - 1;
+                    matrices->M.insert(numbersNodeAndPort[1] + 3,
+                            numbersNodeAndPort[1] + 4) = tau[4];
+                    matrices->M.insert(numbersNodeAndPort[1] + 3,
+                            numbersNodeAndPort[1] + 5) = tau[5];
+                    
+                    matrices->M.insert(numbersNodeAndPort[1] + 4,
+                            numbersNodeAndPort[1] + 0) = tau[0];
+                    matrices->M.insert(numbersNodeAndPort[1] + 4,
+                            numbersNodeAndPort[1] + 1) = tau[1];
+                    matrices->M.insert(numbersNodeAndPort[1] + 4,
+                            numbersNodeAndPort[1] + 2) = tau[2];
+                    matrices->M.insert(numbersNodeAndPort[1] + 4,
+                            numbersNodeAndPort[1] + 3) = tau[3];
+                    matrices->M.insert(numbersNodeAndPort[1] + 4,
+                            numbersNodeAndPort[1] + 4) = tau[4] - 1;
+                    matrices->M.insert(numbersNodeAndPort[1] + 4,
+                            numbersNodeAndPort[1] + 5) = tau[5];
+                    
+                    matrices->M.insert(numbersNodeAndPort[1] + 5,
+                            numbersNodeAndPort[1] + 0) = tau[0];
+                    matrices->M.insert(numbersNodeAndPort[1] + 5,
+                            numbersNodeAndPort[1] + 1) = tau[1];
+                    matrices->M.insert(numbersNodeAndPort[1] + 5,
+                            numbersNodeAndPort[1] + 2) = tau[2];
+                    matrices->M.insert(numbersNodeAndPort[1] + 5,
+                            numbersNodeAndPort[1] + 3) = tau[3];
+                    matrices->M.insert(numbersNodeAndPort[1] + 5,
+                            numbersNodeAndPort[1] + 4) = tau[4];
+                    matrices->M.insert(numbersNodeAndPort[1] + 5,
+                            numbersNodeAndPort[1] + 5) = tau[5] - 1;
+
+                    // matrix tau
+                    matrices->tau.insert(numbersNodeAndPort[0],
+                            numbersNodeAndPort[1] + 0) = tau[0];
+                    matrices->tau.insert(numbersNodeAndPort[0],
+                            numbersNodeAndPort[1] + 1) = tau[1];
+                    matrices->tau.insert(numbersNodeAndPort[0],
+                            numbersNodeAndPort[1] + 2) = tau[2];
+                    matrices->tau.insert(numbersNodeAndPort[0],
+                            numbersNodeAndPort[1] + 3) = tau[3];
+                    matrices->tau.insert(numbersNodeAndPort[0],
+                            numbersNodeAndPort[1] + 4) = tau[4];
+                    matrices->tau.insert(numbersNodeAndPort[0],
+                            numbersNodeAndPort[1] + 5) = tau[5];
+
+                    // this is actually matrix ZIS.
+                    // E = C*ZIS + B
+                    matrices->E(numbersNodeAndPort[1] + 0) = Zhat*Is;
+                    matrices->E(numbersNodeAndPort[1] + 1) = Zhat*Is;
+                    matrices->E(numbersNodeAndPort[1] + 2) = Zhat*Is;
+                    matrices->E(numbersNodeAndPort[1] + 3) = Zhat*Is;
+                    matrices->E(numbersNodeAndPort[1] + 4) = Zhat*Is;
+                    matrices->E(numbersNodeAndPort[1] + 5) = Zhat*Is;
+
+                    // matrix E_output
+                    matrices->E_output(numbersNodeAndPort[0]) = Zhat*Is;
+
+                    // the center of the tetrahedron
+                    matrices->Points_output[numbersNodeAndPort[0]].x = tempVar[13];
+                    matrices->Points_output[numbersNodeAndPort[0]].y = tempVar[14];
+                    matrices->Points_output[numbersNodeAndPort[0]].z = tempVar[15];
+
+                    // Vi0 = (Ti - ZIS)/sum(tau)
+                    // generalization of the initial value
+                    matrices->Vi(numbersNodeAndPort[1]) = (input->materialInput[j2].generalized_initialScalar
+                            - matrices->E(numbersNodeAndPort[1])) / (tau[0] + tau[1] + tau[2] + tau[3] + tau[4] + tau[5]);
+                    matrices->Vi(numbersNodeAndPort[1] + 1) = matrices->Vi(numbersNodeAndPort[1]);
+                    matrices->Vi(numbersNodeAndPort[1] + 2) = matrices->Vi(numbersNodeAndPort[1]);
+                    matrices->Vi(numbersNodeAndPort[1] + 3) = matrices->Vi(numbersNodeAndPort[1]);
+                    matrices->Vi(numbersNodeAndPort[1] + 4) = matrices->Vi(numbersNodeAndPort[1]);
+                    matrices->Vi(numbersNodeAndPort[1] + 5) = matrices->Vi(numbersNodeAndPort[1]);
+
+                    goto end_for_j_and_for_k_hexadron;
+                }
+end_for_j_and_for_k_hexadron:
         ;
     }
     return 0;

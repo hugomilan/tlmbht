@@ -776,10 +776,14 @@ unsigned int getGeometricalVariablesTLMquadrangle(const struct node *N1,
     deltaYL[3] = N4->y - N1->y;
     deltaZL[3] = N4->z - N1->z;
     length[3] = sqrt(deltaXL[3] * deltaXL[3] + deltaYL[3] * deltaYL[3] + deltaZL[3] * deltaZL[3]);
-    
+    // divide the area of the quadrangle in 2 triangles and sum them
     area = sqrt((deltaYL[0] * deltaZL[3] - deltaYL[3] * deltaZL[0])*(deltaYL[0] * deltaZL[3] - deltaYL[3] * deltaZL[0])
             + (deltaXL[0] * deltaYL[3] - deltaXL[3] * deltaYL[0])*(deltaXL[0] * deltaYL[3] - deltaXL[3] * deltaYL[0])
-            + (deltaXL[0] * deltaZL[3] - deltaXL[3] * deltaZL[0])*(deltaXL[0] * deltaZL[3] - deltaXL[3] * deltaZL[0]));
+            + (deltaXL[0] * deltaZL[3] - deltaXL[3] * deltaZL[0])*(deltaXL[0] * deltaZL[3] - deltaXL[3] * deltaZL[0]))/2;
+    
+    area = area + sqrt((deltaYL[1] * deltaZL[2] - deltaYL[2] * deltaZL[1])*(deltaYL[1] * deltaZL[2] - deltaYL[2] * deltaZL[1])
+            + (deltaXL[1] * deltaYL[2] - deltaXL[2] * deltaYL[1])*(deltaXL[1] * deltaYL[2] - deltaXL[2] * deltaYL[1])
+            + (deltaXL[1] * deltaZL[2] - deltaXL[2] * deltaZL[1])*(deltaXL[1] * deltaZL[2] - deltaXL[2] * deltaZL[1]))/2;
 
 
     center[0] = (N1->x + N2->x + N3->x + N4->x) / 4;
@@ -871,6 +875,161 @@ unsigned int getGeometricalVariablesTLMtetrahedron(const struct node *N1,
     double deltaXL[6], deltaYL[6], deltaZL[6], length[6];
     double volume, area[4], areaX[4], areaY[4], areaZ[4], center[3];
     double deltaXl[4], deltaYl[4], deltaZl[4], deltal[4];
+
+    deltaXL[0] = N2->x - N1->x;
+    deltaYL[0] = N2->y - N1->y;
+    deltaZL[0] = N2->z - N1->z;
+    length[0] = sqrt(deltaXL[0] * deltaXL[0] + deltaYL[0] * deltaYL[0] + deltaZL[0] * deltaZL[0]);
+
+    deltaXL[1] = N3->x - N1->x;
+    deltaYL[1] = N3->y - N1->y;
+    deltaZL[1] = N3->z - N1->z;
+    length[1] = sqrt(deltaXL[1] * deltaXL[1] + deltaYL[1] * deltaYL[1] + deltaZL[1] * deltaZL[1]);
+
+    deltaXL[2] = N4->x - N1->x;
+    deltaYL[2] = N4->y - N1->y;
+    deltaZL[2] = N4->z - N1->z;
+    length[2] = sqrt(deltaXL[2] * deltaXL[2] + deltaYL[2] * deltaYL[2] + deltaZL[2] * deltaZL[2]);
+
+    deltaXL[3] = N3->x - N2->x;
+    deltaYL[3] = N3->y - N2->y;
+    deltaZL[3] = N3->z - N2->z;
+    length[3] = sqrt(deltaXL[3] * deltaXL[3] + deltaYL[3] * deltaYL[3] + deltaZL[3] * deltaZL[3]);
+
+    deltaXL[4] = N4->x - N2->x;
+    deltaYL[4] = N4->y - N2->y;
+    deltaZL[4] = N4->z - N2->z;
+    length[4] = sqrt(deltaXL[4] * deltaXL[4] + deltaYL[4] * deltaYL[4] + deltaZL[4] * deltaZL[4]);
+
+    deltaXL[5] = N4->x - N3->x;
+    deltaYL[5] = N4->y - N3->y;
+    deltaZL[5] = N4->z - N3->z;
+    length[5] = sqrt(deltaXL[5] * deltaXL[5] + deltaYL[5] * deltaYL[5] + deltaZL[5] * deltaZL[5]);
+
+    areaX[0] = deltaYL[0] * deltaZL[1] - deltaYL[1] * deltaZL[0];
+    areaY[0] = deltaXL[1] * deltaZL[0] - deltaXL[0] * deltaZL[1];
+    areaZ[0] = deltaXL[0] * deltaYL[1] - deltaXL[1] * deltaYL[0];
+    area[0] = sqrt(areaX[0] * areaX[0] + areaY[0] * areaY[0] + areaZ[0] * areaZ[0]) / 2;
+
+    areaX[1] = deltaYL[0] * deltaZL[2] - deltaYL[2] * deltaZL[0];
+    areaY[1] = deltaXL[2] * deltaZL[0] - deltaXL[0] * deltaZL[2];
+    areaZ[1] = deltaXL[0] * deltaYL[2] - deltaXL[2] * deltaYL[0];
+    area[1] = sqrt(areaX[1] * areaX[1] + areaY[1] * areaY[1] + areaZ[1] * areaZ[1]) / 2;
+
+    areaX[2] = deltaYL[1] * deltaZL[2] - deltaYL[2] * deltaZL[1];
+    areaY[2] = deltaXL[2] * deltaZL[1] - deltaXL[1] * deltaZL[2];
+    areaZ[2] = deltaXL[1] * deltaYL[2] - deltaXL[2] * deltaYL[1];
+    area[2] = sqrt(areaX[2] * areaX[2] + areaY[2] * areaY[2] + areaZ[2] * areaZ[2]) / 2;
+
+    areaX[3] = deltaYL[3] * deltaZL[4] - deltaYL[4] * deltaZL[3];
+    areaY[3] = deltaXL[4] * deltaZL[3] - deltaXL[3] * deltaZL[4];
+    areaZ[3] = deltaXL[3] * deltaYL[4] - deltaXL[4] * deltaYL[3];
+    area[3] = sqrt(areaX[3] * areaX[3] + areaY[3] * areaY[3] + areaZ[3] * areaZ[3]) / 2;
+
+    volume = fabs(areaX[2] * deltaXL[0] + areaY[2] * deltaYL[0] + areaZ[2] * deltaZL[0]) / 6;
+
+
+    center[0] = (N1->x + N2->x + N3->x + N4->x) / 4;
+    center[1] = (N1->y + N2->y + N3->y + N4->y) / 4;
+    center[2] = (N1->z + N2->z + N3->z + N4->z) / 4;
+
+    deltaXl[0] = (N1->x + N2->x + N3->x) / 3 - center[0];
+    deltaYl[0] = (N1->y + N2->y + N3->y) / 3 - center[1];
+    deltaZl[0] = (N1->z + N2->z + N3->z) / 3 - center[2];
+    deltal[0] = sqrt(deltaXl[0] * deltaXl[0] + deltaYl[0] * deltaYl[0] + deltaZl[0] * deltaZl[0]);
+
+    deltaXl[1] = (N1->x + N2->x + N4->x) / 3 - center[0];
+    deltaYl[1] = (N1->y + N2->y + N4->y) / 3 - center[1];
+    deltaZl[1] = (N1->z + N2->z + N4->z) / 3 - center[2];
+    deltal[1] = sqrt(deltaXl[1] * deltaXl[1] + deltaYl[1] * deltaYl[1] + deltaZl[1] * deltaZl[1]);
+
+    deltaXl[2] = (N1->x + N3->x + N4->x) / 3 - center[0];
+    deltaYl[2] = (N1->y + N3->y + N4->y) / 3 - center[1];
+    deltaZl[2] = (N1->z + N3->z + N4->z) / 3 - center[2];
+    deltal[2] = sqrt(deltaXl[2] * deltaXl[2] + deltaYl[2] * deltaYl[2] + deltaZl[2] * deltaZl[2]);
+
+    deltaXl[3] = (N2->x + N3->x + N4->x) / 3 - center[0];
+    deltaYl[3] = (N2->y + N3->y + N4->y) / 3 - center[1];
+    deltaZl[3] = (N2->z + N3->z + N4->z) / 3 - center[2];
+    deltal[3] = sqrt(deltaXl[3] * deltaXl[3] + deltaYl[3] * deltaYl[3] + deltaZl[3] * deltaZl[3]);
+
+    output[0] = deltal[0];
+    output[1] = deltal[1];
+    output[2] = deltal[2];
+    output[3] = deltal[3];
+    output[4] = area[0];
+    output[5] = area[1];
+    output[6] = area[2];
+    output[7] = area[3];
+    output[8] = volume;
+    output[9] = center[0];
+    output[10] = center[1];
+    output[11] = center[2];
+
+    return 0;
+}
+
+/*
+ * getGeometricalVariablesTLMhexahedron: Receives the x, y, z from the nodes and
+ * calculates the geometrical characteristics of the hexahedron. Pointwise validated.
+ */
+unsigned int getGeometricalVariablesTLMhexahedron(const struct node *N1,
+        const struct node *N2, const struct node *N3, const struct node *N4, const struct node *N5,
+        const struct node *N6, const struct node *N7, const struct node *N8, double *output) {
+    // 0 - length of port 1 (from center of tetrahedron to center of area 1)
+    // 1 - length of port 2 (from center of tetrahedron to center of area 2)
+    // 2 - length of port 3 (from center of tetrahedron to center of area 3)
+    // 3 - length of port 4 (from center of tetrahedron to center of area 4)
+    // 4 - length of port 5 (from center of tetrahedron to center of area 5)
+    // 5 - length of port 6 (from center of tetrahedron to center of area 6)
+    // 6 - area of quadrangle 1
+    // 7 - area of quadrangle 2
+    // 8 - area of quadrangle 3
+    // 9 - area of quadrangle 4
+    // 10 - area of quadrangle 5
+    // 11 - area of quadrangle 6
+    // 12 - volume of the hexahedron
+    // 13 - hexahedron's center x
+    // 14 - hexahedron's center y
+    // 15 - hexahedron's center z
+
+    // port 1: N1, N2, N3, and N4
+    // port 2: N1, N2, N5, and N6
+    // port 3: N1, N4, N5, and N8
+    // port 4: N2, N3, N6, and N8
+    // port 5: N3, N4, N7, and N8
+    // port 6: N5, N6, N7, and N8
+
+    /* hexahedral nomenclature.
+     * 
+     * 
+     *            vertex 4____________________________ vertex 3
+     *                   /|                          /|
+     *                  / .                         / |
+     *                 /  .      5                 /  |
+     *                /   |                       /   |
+     *               /    .    a                 /    |
+     *              /     .   e                 /     |
+     *             /      |  r     area 1      /      |
+     *            /       . a                 /       |
+     *  vertex 8 /___________________________/vertex 7|
+     *          |         | vertex 1         |        |
+     *          |        , _.._.._.._.._.._..|_.._ .._| vertex 2
+     *          |     3 ,                    |     4 /
+     *          |      /   2                 |      /
+     *          |   a ,                      |   a /
+     *          |  e ,   a                   |  e /
+     *          | r /   e       area 6       | r /
+     *          |a ,   r                     |a /
+     *          | ,   a                      | /
+     *          |/___________________________|/
+     *      vertex 5                        vertex 6
+     * 
+     */
+    // lengths of the edges
+    double deltaXL[6], deltaYL[6], deltaZL[6], length[6];
+    double volume, area[4], areaX[6], areaY[6], areaZ[6], center[3];
+    double deltaXl[6], deltaYl[6], deltaZl[6], deltal[6];
 
     deltaXL[0] = N2->x - N1->x;
     deltaYL[0] = N2->y - N1->y;

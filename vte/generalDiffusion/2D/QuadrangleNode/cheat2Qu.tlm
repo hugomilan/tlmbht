@@ -1,7 +1,6 @@
 Simulation
 {
     output extension = m;
-        output name = cdiff2Qu;
 }
 
 Mesh

@@ -382,12 +382,52 @@ unsigned int gmshReader(struct MeshConfig * input, struct tlmInternalMesh * outp
                             
                             break;
                         case 6: // 6 nodes prism
-                            errorTLMnumber = 6512;
-                            continue;
+                            codeForReading = (char *) realloc(codeForReading,
+                                    sizeof (char)*(3 + numberOfTags)*4 + 1 + 5 * 6);
+
+                            strcat(codeForReading, "%llu %llu %llu %llu %llu %llu");
+
+                            inputGmsh.saveElement
+                                    [inputGmsh.numberOfElementReads].elementCode = 6;
+                            inputGmsh.saveElement
+                                    [inputGmsh.numberOfElementReads].tag = tagNumber;
+
+                            sscanf(pline, codeForReading, &inputGmsh.saveElement
+                                    [inputGmsh.numberOfElementReads].N1,
+                                    &inputGmsh.saveElement
+                                    [inputGmsh.numberOfElementReads].N2,
+                                    &inputGmsh.saveElement
+                                    [inputGmsh.numberOfElementReads].N3,
+                                    &inputGmsh.saveElement
+                                    [inputGmsh.numberOfElementReads].N4,
+                                    &inputGmsh.saveElement
+                                    [inputGmsh.numberOfElementReads].N5,
+                                    &inputGmsh.saveElement
+                                    [inputGmsh.numberOfElementReads].N6);
+                            
                             break;
                         case 7: // 5 nodes pyramid
-                            errorTLMnumber = 6513;
-                            continue;
+                            codeForReading = (char *) realloc(codeForReading,
+                                    sizeof (char)*(3 + numberOfTags)*4 + 1 + 5 * 5);
+
+                            strcat(codeForReading, "%llu %llu %llu %llu %llu");
+
+                            inputGmsh.saveElement
+                                    [inputGmsh.numberOfElementReads].elementCode = 5;
+                            inputGmsh.saveElement
+                                    [inputGmsh.numberOfElementReads].tag = tagNumber;
+
+                            sscanf(pline, codeForReading, &inputGmsh.saveElement
+                                    [inputGmsh.numberOfElementReads].N1,
+                                    &inputGmsh.saveElement
+                                    [inputGmsh.numberOfElementReads].N2,
+                                    &inputGmsh.saveElement
+                                    [inputGmsh.numberOfElementReads].N3,
+                                    &inputGmsh.saveElement
+                                    [inputGmsh.numberOfElementReads].N4,
+                                    &inputGmsh.saveElement
+                                    [inputGmsh.numberOfElementReads].N5);
+                            
                             break;
                         case 15: // 1 node point
                             codeForReading = (char *) realloc(codeForReading,

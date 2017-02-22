@@ -283,12 +283,24 @@ unsigned int tbnReader(struct MeshConfig * input, struct tlmInternalMesh * outpu
                         
                         break;
                     case 6: // 6 nodes prism
-                        errorTLMnumber = 6512;
-                        continue;
+                        sscanf(pline, "%lu %llu %llu %llu %llu %llu %llu %llu %llu",
+                                &output->elements.Prism[numberOfElementsRead].tag,
+                                &output->elements.Prism[numberOfElementsRead].N1,
+                                &output->elements.Prism[numberOfElementsRead].N2,
+                                &output->elements.Prism[numberOfElementsRead].N3,
+                                &output->elements.Prism[numberOfElementsRead].N4,
+                                &output->elements.Prism[numberOfElementsRead].N5,
+                                &output->elements.Prism[numberOfElementsRead].N6);
+                        
                         break;
                     case 7: // 5 nodes pyramid
-                        errorTLMnumber = 6513;
-                        continue;
+                        sscanf(pline, "%lu %llu %llu %llu %llu %llu %llu %llu %llu",
+                                &output->elements.Pyramid[numberOfElementsRead].tag,
+                                &output->elements.Pyramid[numberOfElementsRead].N1,
+                                &output->elements.Pyramid[numberOfElementsRead].N2,
+                                &output->elements.Pyramid[numberOfElementsRead].N3,
+                                &output->elements.Pyramid[numberOfElementsRead].N4,
+                                &output->elements.Pyramid[numberOfElementsRead].N5);
                         break;
                     case 15: // 1 node point
                         sscanf(pline, "%lu %llu",

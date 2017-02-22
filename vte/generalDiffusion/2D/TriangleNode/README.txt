@@ -1,5 +1,3 @@
-The Diffusion, Heat, and Pennes equations have similar form (also called isomorphic). We explore the isomorphism of these equations to use analytical solutions (D2_BHE_f.m) to validate these three equations.
-
 Here is how you can run the validation for the different equations:
 
 1) Firstly, run the solver in the terminal with the following case files to get the results.
@@ -12,6 +10,6 @@ Here is how you can run the validation for the different equations:
     2.2) Heat equation validation: vheat2Tr.m
     2.3) Pennes equation validation: vpennes2Tr.m
 
-Obs.: If you want to test different mesh sizes, you can create meshes using the file plate_4BC_10766e.geo in gmsh.
+Obs.: If you want to test different mesh sizes, you can create meshes using the file plate_4BC.geo in gmsh.
 
 Obs.2: You can also test different parameters in the case.tlm files. However, the changes made in the case are not linked to the Octave/Matlab script. If you do make any changes, remember to do the same in the Octave/Matlab script.
