@@ -1,12 +1,13 @@
 Simulation
 {
     output extension = m;
+    output name = cdiff2Qu;
 }
 
 Mesh
 {
     file name = plate_4BC_Q_S_1024e;
-    input format = tlmbht;
+    input format = tlmtbn;
 }
 
 Equation
