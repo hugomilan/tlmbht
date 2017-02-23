@@ -451,6 +451,8 @@
         </logicalFolder>
         <itemPath>src/miscellaneous/liberrorcode.c</itemPath>
         <itemPath>src/miscellaneous/liberrorcode.h</itemPath>
+        <itemPath>src/miscellaneous/liblinalg.c</itemPath>
+        <itemPath>src/miscellaneous/liblinalg.h</itemPath>
         <itemPath>src/miscellaneous/libmiscellaneous.c</itemPath>
         <itemPath>src/miscellaneous/libmiscellaneous.h</itemPath>
         <itemPath>src/miscellaneous/libstringtlmbht.c</itemPath>
@@ -1912,6 +1914,10 @@
       <item path="src/miscellaneous/liberrorcode.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="src/miscellaneous/liberrorcode.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/miscellaneous/liblinalg.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="src/miscellaneous/liblinalg.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/miscellaneous/libmiscellaneous.c"
             ex="false"
@@ -3428,6 +3434,10 @@
       </item>
       <item path="src/miscellaneous/liberrorcode.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="src/miscellaneous/liblinalg.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="src/miscellaneous/liblinalg.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="src/miscellaneous/libmiscellaneous.c"
             ex="false"
             tool="0"
@@ -4942,6 +4952,10 @@
       <item path="src/miscellaneous/liberrorcode.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="src/miscellaneous/liberrorcode.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/miscellaneous/liblinalg.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="src/miscellaneous/liblinalg.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/miscellaneous/libmiscellaneous.c"
             ex="false"
@@ -6463,6 +6477,10 @@
       </item>
       <item path="src/miscellaneous/liberrorcode.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="src/miscellaneous/liblinalg.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="src/miscellaneous/liblinalg.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="src/miscellaneous/libmiscellaneous.c"
             ex="false"
             tool="0"
@@ -7977,6 +7995,10 @@
       <item path="src/miscellaneous/liberrorcode.c" ex="false" tool="0" flavor2="9">
       </item>
       <item path="src/miscellaneous/liberrorcode.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/miscellaneous/liblinalg.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="src/miscellaneous/liblinalg.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/miscellaneous/libmiscellaneous.c"
             ex="false"
@@ -9503,6 +9525,10 @@
       </item>
       <item path="src/miscellaneous/liberrorcode.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="src/miscellaneous/liblinalg.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="src/miscellaneous/liblinalg.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="src/miscellaneous/libmiscellaneous.c"
             ex="false"
             tool="0"
@@ -11027,6 +11053,10 @@
       <item path="src/miscellaneous/liberrorcode.c" ex="false" tool="0" flavor2="9">
       </item>
       <item path="src/miscellaneous/liberrorcode.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/miscellaneous/liblinalg.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="src/miscellaneous/liblinalg.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/miscellaneous/libmiscellaneous.c"
             ex="false"
@@ -12553,6 +12583,10 @@
       </item>
       <item path="src/miscellaneous/liberrorcode.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="src/miscellaneous/liblinalg.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="src/miscellaneous/liblinalg.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="src/miscellaneous/libmiscellaneous.c"
             ex="false"
             tool="0"
@@ -14075,6 +14109,10 @@
       <item path="src/miscellaneous/liberrorcode.c" ex="false" tool="0" flavor2="9">
       </item>
       <item path="src/miscellaneous/liberrorcode.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/miscellaneous/liblinalg.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="src/miscellaneous/liblinalg.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/miscellaneous/libmiscellaneous.c"
             ex="false"

@@ -5,7 +5,7 @@ Simulation
 
 Mesh
 {
-    file name = parallelepiped_6BC_1572e;
+    file name = parallelepiped_6BC_H_2560e;
     input format = tlmtbn;
 }
 

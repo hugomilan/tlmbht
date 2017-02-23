@@ -61,7 +61,10 @@
  * parallelization overhead; it should get better as the file size increases though).
  * However, this is not priority. These functions consume so little computational time.
  * 9) Make the software international--i.e., outputs in languages other than English.
- * 10) Simulation header input is not required.
+ * 10) Inline functions: have to create the prototype and the full declartion in the
+ * header file. Exemple:
+ *          inline function(void);
+            inline function(void){ definition}
  * 
  * 
  *  List of possible improvements:

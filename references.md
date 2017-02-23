@@ -10,6 +10,8 @@
 
 [Geuzaine C, Remacle JF. A three-dimensional finite element mesh generator with built-in pre- and post-processing facilities. Int J Numer Model 79, 1309-1331, 2009.](http://onlinelibrary.wiley.com/doi/10.1002/nme.2579/full)
 
+[Grandy, J. Efficient computation of volume of hexahedral cells. No. UCRL-ID--128886. Lawrence Livermore National Lab., CA (United States), 1997.](https://www.osti.gov/scitech/servlets/purl/632793/)
+
 [Johns PB, Beurle RL. Numerical solution of 2-dimensional scattering problems using a transmission-line matrix. Proc IEE 118(9):1203-1208, 1971.](http://ieeexplore.ieee.org/document/5251453/)
 
 [Maia ASC, Milan HFM, Gebremedhin KG. Analytical and numerical modeling of skin surface temperature in livestock. 20th International Congress of Biometeorology, Cleveland - OH, 2014.](https://ams.confex.com/ams/ICB2014/webprogram/Paper253481.html)

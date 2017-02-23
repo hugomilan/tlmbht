@@ -283,7 +283,7 @@ unsigned int tbnReader(struct MeshConfig * input, struct tlmInternalMesh * outpu
                         
                         break;
                     case 6: // 6 nodes prism
-                        sscanf(pline, "%lu %llu %llu %llu %llu %llu %llu %llu %llu",
+                        sscanf(pline, "%lu %llu %llu %llu %llu %llu %llu",
                                 &output->elements.Prism[numberOfElementsRead].tag,
                                 &output->elements.Prism[numberOfElementsRead].N1,
                                 &output->elements.Prism[numberOfElementsRead].N2,
@@ -294,7 +294,7 @@ unsigned int tbnReader(struct MeshConfig * input, struct tlmInternalMesh * outpu
                         
                         break;
                     case 7: // 5 nodes pyramid
-                        sscanf(pline, "%lu %llu %llu %llu %llu %llu %llu %llu %llu",
+                        sscanf(pline, "%lu %llu %llu %llu %llu %llu",
                                 &output->elements.Pyramid[numberOfElementsRead].tag,
                                 &output->elements.Pyramid[numberOfElementsRead].N1,
                                 &output->elements.Pyramid[numberOfElementsRead].N2,

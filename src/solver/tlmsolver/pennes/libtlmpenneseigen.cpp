@@ -330,10 +330,9 @@ unsigned int calculateMatricesPennesEigen(struct dataForSimulation *input,
     }
     if (matrices->numbers.MaterialElements[5] && input->equationInput[id].dimen == THREE) {
         if (input->simulationInput.verboseMode == 1) {
-            printf("Calculating the matrix for the tetrahedron nodes...\n");
+            printf("Calculating the matrix for the hexahedron nodes...\n");
         }
         clock_t begin_Hexahedron = clock();
-        printf("\n\nHexahedron node was not implemented yet\n\n");
         if ((errorTLMnumber = MaterialHexahedronPennesEigen(input, matrices, id)) != 0) {
             sendErrorCodeAndMessage(errorTLMnumber, NULL, NULL, NULL, NULL);
             return errorTLMnumber;
@@ -851,8 +850,9 @@ unsigned int MaterialTrianglePennesEigen(struct dataForSimulation *input, struct
                     matrices->R[numbersNodeAndPort[1] + 2] = R[2];
 
                     // Manually validated
-                    Zhat = Z[0] * Z[1] * Z[2] / (Z[0] * Z[1] + Z[0] * Z[2] + Z[1] * Z[2]
-                            + Z[0] * Z[1] * Z[2] * G);
+                    Zhat = 1/(1/Z[0] + 1/Z[1] + 1/Z[2] + G);
+//                    Zhat = Z[0] * Z[1] * Z[2] / (Z[0] * Z[1] + Z[0] * Z[2] + Z[1] * Z[2]
+//                            + Z[0] * Z[1] * Z[2] * G);
 
                     // Manually validated
                     tau[0] = 2 * Zhat / Z[0];
@@ -1043,9 +1043,10 @@ unsigned int MaterialQuadranglePennesEigen(struct dataForSimulation *input, stru
                     matrices->R[numbersNodeAndPort[1] + 3] = R[3];
 
                     // Manually validated
-                    Zhat = Z[0] * Z[1] * Z[2] * Z[3] / (Z[0] * Z[1] * Z[2]
-                            + Z[0] * Z[1] * Z[3] + Z[0] * Z[2] * Z[3]
-                            + Z[1] * Z[2] * Z[3] + Z[0] * Z[1] * Z[2] * Z[3] * G);
+                    Zhat = 1/(1/Z[0] + 1/Z[1] + 1/Z[2] + 1/Z[3] + G);
+//                    Zhat = Z[0] * Z[1] * Z[2] * Z[3] / (Z[0] * Z[1] * Z[2]
+//                            + Z[0] * Z[1] * Z[3] + Z[0] * Z[2] * Z[3]
+//                            + Z[1] * Z[2] * Z[3] + Z[0] * Z[1] * Z[2] * Z[3] * G);
 
                     // Manually validated
                     tau[0] = 2 * Zhat / Z[0];
@@ -1259,9 +1260,10 @@ unsigned int MaterialTetrahedronPennesEigen(struct dataForSimulation *input, str
 
 
                     // Manually validated
-                    Zhat = Z[0] * Z[1] * Z[2] * Z[3] / (Z[0] * Z[1] * Z[2]
-                            + Z[0] * Z[1] * Z[3] + Z[0] * Z[2] * Z[3]
-                            + Z[1] * Z[2] * Z[3] + Z[0] * Z[1] * Z[2] * Z[3] * G);
+                    Zhat = 1/(1/Z[0] + 1/Z[1] + 1/Z[2] + 1/Z[3] + G);
+//                    Zhat = Z[0] * Z[1] * Z[2] * Z[3] / (Z[0] * Z[1] * Z[2]
+//                            + Z[0] * Z[1] * Z[3] + Z[0] * Z[2] * Z[3]
+//                            + Z[1] * Z[2] * Z[3] + Z[0] * Z[1] * Z[2] * Z[3] * G);
 
                     // Manually validated
                     tau[0] = 2 * Zhat / Z[0];
@@ -1365,6 +1367,8 @@ unsigned int MaterialHexahedronPennesEigen(struct dataForSimulation *input, stru
 
 
 
+    // the model for the hexahedron depends upon its irregularities. Here, I assume
+    // that the hexahedron is regular.
     /* hexahedral nomenclature. We assume an irregular hexahedron
      * 
      * 
@@ -1426,7 +1430,7 @@ unsigned int MaterialHexahedronPennesEigen(struct dataForSimulation *input, stru
                     // that I'm just getting out the loops. You can also think that 
                     // I'm going to the next 'i', that is, incrementing i by 1 and going
                     // to the next value of i (if any).
-                    getRealNodeAndPort_fromAbstractNode(4, // element code
+                    getRealNodeAndPort_fromAbstractNode(5, // element code
                             i, // element number
                             matrices->numbers.abstractPortsToReal,
                             numbersNodeAndPort);
@@ -1500,7 +1504,7 @@ unsigned int MaterialHexahedronPennesEigen(struct dataForSimulation *input, stru
                     matrices->R[numbersNodeAndPort[1] + 5] = R[5];
 
 
-                    // Manually validated
+                    // impedance
                     Zhat = 1/(1/Z[0] + 1/Z[1] + 1/Z[2] + 1/Z[3] +1/Z[4] + 1/Z[5] + G);
 
                     // Manually validated

@@ -41,6 +41,7 @@
 #include "libtlmsolver.h"
 #include "../../miscellaneous/liberrorcode.h"
 #include "../../miscellaneous/libmiscellaneous.h"
+#include "../../miscellaneous/liblinalg.h"
 
 /*
  * solverTLM: redirects the flow of the algorithm to the adequate function call
@@ -604,24 +605,12 @@ unsigned int getGeometricalVariablesTLMline(const struct node *N1,
     //                 \  vertex 2
     //
 
-    double deltaXL, deltaYL, deltaZL; // temporary for calculating the lengths and area
-    double length;
-    double center[3];
-
-    deltaXL = N1->x - N2->x;
-    deltaYL = N1->y - N2->y;
-    deltaZL = N1->z - N2->z;
-    length = sqrt(deltaXL * deltaXL + deltaYL * deltaYL + deltaZL * deltaZL);
-
-    center[0] = (N1->x + N2->x) / 2;
-    center[1] = (N1->y + N2->y) / 2;
-    center[2] = (N1->z + N2->z) / 2;
-
-
-    output[0] = length / 2;
-    output[1] = center[0];
-    output[2] = center[1];
-    output[3] = center[2];
+    // obtains the norm of the vector defined between the two nodes
+    nodesNorm(N1, N2, &output[0]);
+    output[0] = output[0] / 2;
+    output[1] = (N1->x + N2->x) / 2; // center_x;
+    output[2] = (N1->y + N2->y) / 2; // center_y;
+    output[3] = (N1->z + N2->z) / 2; // center_z
 
     return 0;
 }
@@ -658,31 +647,10 @@ unsigned int getGeometricalVariablesTLMtriangle(const struct node *N1,
     //           /      \
     // vertex 2 /________\ vertex 3
     //            face 3
-
-    double deltaXL[3], deltaYL[3], deltaZL[3]; // temporary for calculating the lengths and area
-    double length[3];
-    double area, center[3];
+    
+    
+    double center[3];
     double deltaXl[3], deltaYl[3], deltaZl[3], deltal[3];
-
-    deltaXL[0] = N1->x - N2->x;
-    deltaYL[0] = N1->y - N2->y;
-    deltaZL[0] = N1->z - N2->z;
-    length[0] = sqrt(deltaXL[0] * deltaXL[0] + deltaYL[0] * deltaYL[0] + deltaZL[0] * deltaZL[0]);
-
-    deltaXL[1] = N1->x - N3->x;
-    deltaYL[1] = N1->y - N3->y;
-    deltaZL[1] = N1->z - N3->z;
-    length[1] = sqrt(deltaXL[1] * deltaXL[1] + deltaYL[1] * deltaYL[1] + deltaZL[1] * deltaZL[1]);
-
-    deltaXL[2] = N2->x - N3->x;
-    deltaYL[2] = N2->y - N3->y;
-    deltaZL[2] = N2->z - N3->z;
-    length[2] = sqrt(deltaXL[2] * deltaXL[2] + deltaYL[2] * deltaYL[2] + deltaZL[2] * deltaZL[2]);
-
-    area = sqrt((deltaYL[0] * deltaZL[1] - deltaYL[1] * deltaZL[0])*(deltaYL[0] * deltaZL[1] - deltaYL[1] * deltaZL[0])
-            + (deltaXL[0] * deltaYL[1] - deltaXL[1] * deltaYL[0])*(deltaXL[0] * deltaYL[1] - deltaXL[1] * deltaYL[0])
-            + (deltaXL[0] * deltaZL[1] - deltaXL[1] * deltaZL[0])*(deltaXL[0] * deltaZL[1] - deltaXL[1] * deltaZL[0])
-            ) / 2;
 
     center[0] = (N1->x + N2->x + N3->x) / 3;
     center[1] = (N1->y + N2->y + N3->y) / 3;
@@ -707,10 +675,10 @@ unsigned int getGeometricalVariablesTLMtriangle(const struct node *N1,
     output[0] = deltal[0];
     output[1] = deltal[1];
     output[2] = deltal[2];
-    output[3] = area;
-    output[4] = length[0];
-    output[5] = length[1];
-    output[6] = length[2];
+    triangleArea(N1, N2, N3, &output[3]);
+    nodesNorm(N1, N2, &output[4]);
+    nodesNorm(N1, N3, &output[5]);
+    nodesNorm(N2, N3, &output[6]);
     output[7] = center[0];
     output[8] = center[1];
     output[9] = center[2];
@@ -753,37 +721,8 @@ unsigned int getGeometricalVariablesTLMquadrangle(const struct node *N1,
     //                  face 3
     
     // lengths of the edges
-    double deltaXL[4], deltaYL[4], deltaZL[4], length[4];
-    double area, center[3];
+    double center[3];
     double deltaXl[4], deltaYl[4], deltaZl[4], deltal[4];
-
-    deltaXL[0] = N2->x - N1->x;
-    deltaYL[0] = N2->y - N1->y;
-    deltaZL[0] = N2->z - N1->z;
-    length[0] = sqrt(deltaXL[0] * deltaXL[0] + deltaYL[0] * deltaYL[0] + deltaZL[0] * deltaZL[0]);
-
-    deltaXL[1] = N3->x - N2->x;
-    deltaYL[1] = N3->y - N2->y;
-    deltaZL[1] = N3->z - N2->z;
-    length[1] = sqrt(deltaXL[1] * deltaXL[1] + deltaYL[1] * deltaYL[1] + deltaZL[1] * deltaZL[1]);
-
-    deltaXL[2] = N4->x - N3->x;
-    deltaYL[2] = N4->y - N3->y;
-    deltaZL[2] = N4->z - N3->z;
-    length[2] = sqrt(deltaXL[2] * deltaXL[2] + deltaYL[2] * deltaYL[2] + deltaZL[2] * deltaZL[2]);
-
-    deltaXL[3] = N4->x - N1->x;
-    deltaYL[3] = N4->y - N1->y;
-    deltaZL[3] = N4->z - N1->z;
-    length[3] = sqrt(deltaXL[3] * deltaXL[3] + deltaYL[3] * deltaYL[3] + deltaZL[3] * deltaZL[3]);
-    // divide the area of the quadrangle in 2 triangles and sum them
-    area = sqrt((deltaYL[0] * deltaZL[3] - deltaYL[3] * deltaZL[0])*(deltaYL[0] * deltaZL[3] - deltaYL[3] * deltaZL[0])
-            + (deltaXL[0] * deltaYL[3] - deltaXL[3] * deltaYL[0])*(deltaXL[0] * deltaYL[3] - deltaXL[3] * deltaYL[0])
-            + (deltaXL[0] * deltaZL[3] - deltaXL[3] * deltaZL[0])*(deltaXL[0] * deltaZL[3] - deltaXL[3] * deltaZL[0]))/2;
-    
-    area = area + sqrt((deltaYL[1] * deltaZL[2] - deltaYL[2] * deltaZL[1])*(deltaYL[1] * deltaZL[2] - deltaYL[2] * deltaZL[1])
-            + (deltaXL[1] * deltaYL[2] - deltaXL[2] * deltaYL[1])*(deltaXL[1] * deltaYL[2] - deltaXL[2] * deltaYL[1])
-            + (deltaXL[1] * deltaZL[2] - deltaXL[2] * deltaZL[1])*(deltaXL[1] * deltaZL[2] - deltaXL[2] * deltaZL[1]))/2;
 
 
     center[0] = (N1->x + N2->x + N3->x + N4->x) / 4;
@@ -814,11 +753,11 @@ unsigned int getGeometricalVariablesTLMquadrangle(const struct node *N1,
     output[1] = deltal[1];
     output[2] = deltal[2];
     output[3] = deltal[3];
-    output[4] = area;
-    output[5] = length[0];
-    output[6] = length[1];
-    output[7] = length[2];
-    output[8] = length[3];
+    quadrangleArea(N1, N2, N3, N4, &output[4]);
+    nodesNorm(N1, N2, &output[5]);
+    nodesNorm(N2, N3, &output[6]);
+    nodesNorm(N3, N4, &output[7]);
+    nodesNorm(N1, N4, &output[8]);
     output[9] = center[0];
     output[10] = center[1];
     output[11] = center[2];
@@ -957,11 +896,11 @@ unsigned int getGeometricalVariablesTLMtetrahedron(const struct node *N1,
     output[1] = deltal[1];
     output[2] = deltal[2];
     output[3] = deltal[3];
-    output[4] = area[0];
-    output[5] = area[1];
-    output[6] = area[2];
-    output[7] = area[3];
-    output[8] = volume;
+    triangleArea(N1, N2, N3, &output[4]);
+    triangleArea(N1, N2, N4, &output[5]);
+    triangleArea(N1, N3, N4, &output[6]);
+    triangleArea(N2, N3, N4, &output[7]);
+    tetrahedronVolume(N1, N2, N3, N4, &output[8]);
     output[9] = center[0];
     output[10] = center[1];
     output[11] = center[2];
@@ -1027,99 +966,72 @@ unsigned int getGeometricalVariablesTLMhexahedron(const struct node *N1,
      * 
      */
     // lengths of the edges
-    double deltaXL[6], deltaYL[6], deltaZL[6], length[6];
-    double volume, area[4], areaX[6], areaY[6], areaZ[6], center[3];
+    double center[3];
     double deltaXl[6], deltaYl[6], deltaZl[6], deltal[6];
 
-    deltaXL[0] = N2->x - N1->x;
-    deltaYL[0] = N2->y - N1->y;
-    deltaZL[0] = N2->z - N1->z;
-    length[0] = sqrt(deltaXL[0] * deltaXL[0] + deltaYL[0] * deltaYL[0] + deltaZL[0] * deltaZL[0]);
-
-    deltaXL[1] = N3->x - N1->x;
-    deltaYL[1] = N3->y - N1->y;
-    deltaZL[1] = N3->z - N1->z;
-    length[1] = sqrt(deltaXL[1] * deltaXL[1] + deltaYL[1] * deltaYL[1] + deltaZL[1] * deltaZL[1]);
-
-    deltaXL[2] = N4->x - N1->x;
-    deltaYL[2] = N4->y - N1->y;
-    deltaZL[2] = N4->z - N1->z;
-    length[2] = sqrt(deltaXL[2] * deltaXL[2] + deltaYL[2] * deltaYL[2] + deltaZL[2] * deltaZL[2]);
-
-    deltaXL[3] = N3->x - N2->x;
-    deltaYL[3] = N3->y - N2->y;
-    deltaZL[3] = N3->z - N2->z;
-    length[3] = sqrt(deltaXL[3] * deltaXL[3] + deltaYL[3] * deltaYL[3] + deltaZL[3] * deltaZL[3]);
-
-    deltaXL[4] = N4->x - N2->x;
-    deltaYL[4] = N4->y - N2->y;
-    deltaZL[4] = N4->z - N2->z;
-    length[4] = sqrt(deltaXL[4] * deltaXL[4] + deltaYL[4] * deltaYL[4] + deltaZL[4] * deltaZL[4]);
-
-    deltaXL[5] = N4->x - N3->x;
-    deltaYL[5] = N4->y - N3->y;
-    deltaZL[5] = N4->z - N3->z;
-    length[5] = sqrt(deltaXL[5] * deltaXL[5] + deltaYL[5] * deltaYL[5] + deltaZL[5] * deltaZL[5]);
-
-    areaX[0] = deltaYL[0] * deltaZL[1] - deltaYL[1] * deltaZL[0];
-    areaY[0] = deltaXL[1] * deltaZL[0] - deltaXL[0] * deltaZL[1];
-    areaZ[0] = deltaXL[0] * deltaYL[1] - deltaXL[1] * deltaYL[0];
-    area[0] = sqrt(areaX[0] * areaX[0] + areaY[0] * areaY[0] + areaZ[0] * areaZ[0]) / 2;
-
-    areaX[1] = deltaYL[0] * deltaZL[2] - deltaYL[2] * deltaZL[0];
-    areaY[1] = deltaXL[2] * deltaZL[0] - deltaXL[0] * deltaZL[2];
-    areaZ[1] = deltaXL[0] * deltaYL[2] - deltaXL[2] * deltaYL[0];
-    area[1] = sqrt(areaX[1] * areaX[1] + areaY[1] * areaY[1] + areaZ[1] * areaZ[1]) / 2;
-
-    areaX[2] = deltaYL[1] * deltaZL[2] - deltaYL[2] * deltaZL[1];
-    areaY[2] = deltaXL[2] * deltaZL[1] - deltaXL[1] * deltaZL[2];
-    areaZ[2] = deltaXL[1] * deltaYL[2] - deltaXL[2] * deltaYL[1];
-    area[2] = sqrt(areaX[2] * areaX[2] + areaY[2] * areaY[2] + areaZ[2] * areaZ[2]) / 2;
-
-    areaX[3] = deltaYL[3] * deltaZL[4] - deltaYL[4] * deltaZL[3];
-    areaY[3] = deltaXL[4] * deltaZL[3] - deltaXL[3] * deltaZL[4];
-    areaZ[3] = deltaXL[3] * deltaYL[4] - deltaXL[4] * deltaYL[3];
-    area[3] = sqrt(areaX[3] * areaX[3] + areaY[3] * areaY[3] + areaZ[3] * areaZ[3]) / 2;
-
-    volume = fabs(areaX[2] * deltaXL[0] + areaY[2] * deltaYL[0] + areaZ[2] * deltaZL[0]) / 6;
+    // volume of the hexahedron calculated following eq. 14 in 
+    // Grandy, J. Efficient computation of volume of hexahedral cells. No. UCRL-ID--128886. Lawrence Livermore National Lab., CA (United States), 1997.
+    // nomenclature in Grandy (1997) and mine:
+    // 0 -> 1
+    // 1 -> 2
+    // 2 -> 4
+    // 3 -> 3
+    // 4 -> 5
+    // 5 -> 6
+    // 6 -> 8
+    // 7 -> 7
 
 
-    center[0] = (N1->x + N2->x + N3->x + N4->x) / 4;
-    center[1] = (N1->y + N2->y + N3->y + N4->y) / 4;
-    center[2] = (N1->z + N2->z + N3->z + N4->z) / 4;
+    center[0] = (N1->x + N2->x + N3->x + N4->x + N5->x + N6->x + N7->x + N8->x) / 8;
+    center[1] = (N1->y + N2->y + N3->y + N4->y + N5->y + N6->y + N7->y + N8->y) / 8;
+    center[2] = (N1->z + N2->z + N3->z + N4->z + N5->z + N6->z + N7->z + N8->z) / 8;
 
-    deltaXl[0] = (N1->x + N2->x + N3->x) / 3 - center[0];
-    deltaYl[0] = (N1->y + N2->y + N3->y) / 3 - center[1];
-    deltaZl[0] = (N1->z + N2->z + N3->z) / 3 - center[2];
+    deltaXl[0] = (N1->x + N2->x + N3->x + N4->x) / 4 - center[0];
+    deltaYl[0] = (N1->y + N2->y + N3->y + N4->y) / 4 - center[1];
+    deltaZl[0] = (N1->z + N2->z + N3->z + N4->z) / 4 - center[2];
     deltal[0] = sqrt(deltaXl[0] * deltaXl[0] + deltaYl[0] * deltaYl[0] + deltaZl[0] * deltaZl[0]);
 
-    deltaXl[1] = (N1->x + N2->x + N4->x) / 3 - center[0];
-    deltaYl[1] = (N1->y + N2->y + N4->y) / 3 - center[1];
-    deltaZl[1] = (N1->z + N2->z + N4->z) / 3 - center[2];
+    deltaXl[1] = (N1->x + N2->x + N5->x + N6->x) / 4 - center[0];
+    deltaYl[1] = (N1->y + N2->y + N5->y + N6->y) / 4 - center[1];
+    deltaZl[1] = (N1->z + N2->z + N5->z + N6->z) / 4 - center[2];
     deltal[1] = sqrt(deltaXl[1] * deltaXl[1] + deltaYl[1] * deltaYl[1] + deltaZl[1] * deltaZl[1]);
 
-    deltaXl[2] = (N1->x + N3->x + N4->x) / 3 - center[0];
-    deltaYl[2] = (N1->y + N3->y + N4->y) / 3 - center[1];
-    deltaZl[2] = (N1->z + N3->z + N4->z) / 3 - center[2];
+    deltaXl[2] = (N1->x + N4->x + N5->x + N8->x) / 4 - center[0];
+    deltaYl[2] = (N1->y + N4->y + N5->y + N8->y) / 4 - center[1];
+    deltaZl[2] = (N1->z + N4->z + N5->z + N8->z) / 4 - center[2];
     deltal[2] = sqrt(deltaXl[2] * deltaXl[2] + deltaYl[2] * deltaYl[2] + deltaZl[2] * deltaZl[2]);
 
-    deltaXl[3] = (N2->x + N3->x + N4->x) / 3 - center[0];
-    deltaYl[3] = (N2->y + N3->y + N4->y) / 3 - center[1];
-    deltaZl[3] = (N2->z + N3->z + N4->z) / 3 - center[2];
+    deltaXl[3] = (N2->x + N3->x + N6->x + N7->x) / 4 - center[0];
+    deltaYl[3] = (N2->y + N3->y + N6->y + N7->y) / 4 - center[1];
+    deltaZl[3] = (N2->z + N3->z + N6->z + N7->z) / 4 - center[2];
     deltal[3] = sqrt(deltaXl[3] * deltaXl[3] + deltaYl[3] * deltaYl[3] + deltaZl[3] * deltaZl[3]);
+    
+    deltaXl[4] = (N3->x + N4->x + N7->x + N8->x) / 4 - center[0];
+    deltaYl[4] = (N3->y + N4->y + N7->y + N8->y) / 4 - center[1];
+    deltaZl[4] = (N3->z + N4->z + N7->z + N8->z) / 4 - center[2];
+    deltal[4] = sqrt(deltaXl[4] * deltaXl[4] + deltaYl[4] * deltaYl[4] + deltaZl[4] * deltaZl[4]);
+    
+    deltaXl[5] = (N5->x + N6->x + N7->x + N8->x) / 4 - center[0];
+    deltaYl[5] = (N5->y + N6->y + N7->y + N8->y) / 4 - center[1];
+    deltaZl[5] = (N5->z + N6->z + N7->z + N8->z) / 4 - center[2];
+    deltal[5] = sqrt(deltaXl[5] * deltaXl[5] + deltaYl[5] * deltaYl[5] + deltaZl[5] * deltaZl[5]);
 
     output[0] = deltal[0];
     output[1] = deltal[1];
     output[2] = deltal[2];
     output[3] = deltal[3];
-    output[4] = area[0];
-    output[5] = area[1];
-    output[6] = area[2];
-    output[7] = area[3];
-    output[8] = volume;
-    output[9] = center[0];
-    output[10] = center[1];
-    output[11] = center[2];
+    output[4] = deltal[4];
+    output[5] = deltal[5];
+    quadrangleArea(N1, N2, N3, N4, &output[6]);
+    quadrangleArea(N1, N2, N5, N6, &output[7]);
+    quadrangleArea(N1, N4, N5, N8, &output[8]);
+    quadrangleArea(N2, N3, N6, N7, &output[9]);
+    quadrangleArea(N3, N4, N7, N8, &output[10]);
+    quadrangleArea(N5, N6, N7, N8, &output[11]);
+    hexahedronVolume(N1, N2, N3, N4, N5, N6, N7, N8, &output[12]);
+    output[13] = center[0];
+    output[14] = center[1];
+    output[15] = center[2];
 
     return 0;
 }
@@ -1566,13 +1478,14 @@ end_for_j_and_for_k_line:
                                 // abstract number of the node at that interface
                                 if (flag == 2)
                                     temp[0] = numbers->abstractPortsToReal[l].previousMaximumAbstractPort +
-                                        3 * i;
+                                        4 * i;
                                 // numbers->abstractPortsToReal[l].portsPerNode * i;
 
-                                points[0] = 3;
-                                points[1] = input->mesh.elements.Triangle[i].N1;
-                                points[2] = input->mesh.elements.Triangle[i].N2;
-                                points[3] = input->mesh.elements.Triangle[i].N3;
+                                points[0] = 4;
+                                points[1] = input->mesh.elements.Quadrangle[i].N1;
+                                points[2] = input->mesh.elements.Quadrangle[i].N2;
+                                points[3] = input->mesh.elements.Quadrangle[i].N3;
+                                points[4] = input->mesh.elements.Quadrangle[i].N4;
                                 if ((errorTLMnumber = allocatePointsPort(points, intersections,
                                         quantityOfPortsToAdd, temp)) != 0) {
                                     if (errorTLMnumber == 1) {
@@ -1670,9 +1583,131 @@ end_for_j_and_for_k_line:
                                 }
                                 break;
                         }
+                        
                         break;
                     case 5: // 8 nodes hexahedron
-                        printf("Projection was not implemented yet\n");
+                        // I do the calculation depending on the dimension
+                        switch (input->equationInput[id].dimen) {
+                            case ONE:
+                                // not defined?
+                                break;
+                            case TWO:
+                                // not defined?
+                                break;
+                            case THREE:
+                                // the ports start at 1 because 0 is my flag
+                                // to indicate that this is a boundary
+                                // temp[0] is my offset that will give me the
+                                // abstract number of the node at that interface
+                                if (flag == 2)
+                                    temp[0] = numbers->abstractPortsToReal[l].previousMaximumAbstractPort +
+                                        6 * i;
+                                points[0] = 4;
+                                points[1] = input->mesh.elements.Hexahedron[i].N1;
+                                points[2] = input->mesh.elements.Hexahedron[i].N2;
+                                points[3] = input->mesh.elements.Hexahedron[i].N3;
+                                points[4] = input->mesh.elements.Hexahedron[i].N4;
+                                if ((errorTLMnumber = allocatePointsPort(points, intersections,
+                                        quantityOfPortsToAdd, temp)) != 0) {
+                                    if (errorTLMnumber == 1) {
+                                        numbers->Intersections++;
+                                        errorTLMnumber = 0;
+                                    } else {
+                                        return errorTLMnumber;
+                                    }
+                                }
+
+                                // temp[0] is my offset that will give me the
+                                // abstract number of the node at that interface
+                                if (flag == 2)
+                                    temp[0]++;
+                                points[1] = input->mesh.elements.Hexahedron[i].N1;
+                                points[2] = input->mesh.elements.Hexahedron[i].N2;
+                                points[3] = input->mesh.elements.Hexahedron[i].N5;
+                                points[4] = input->mesh.elements.Hexahedron[i].N6;
+                                if ((errorTLMnumber = allocatePointsPort(points, intersections,
+                                        quantityOfPortsToAdd, temp)) != 0) {
+                                    if (errorTLMnumber == 1) {
+                                        numbers->Intersections++;
+                                        errorTLMnumber = 0;
+                                    } else {
+                                        return errorTLMnumber;
+                                    }
+                                }
+
+                                // temp[0] is my offset that will give me the
+                                // abstract number of the node at that interface
+                                if (flag == 2)
+                                    temp[0]++;
+                                points[1] = input->mesh.elements.Hexahedron[i].N1;
+                                points[2] = input->mesh.elements.Hexahedron[i].N4;
+                                points[3] = input->mesh.elements.Hexahedron[i].N5;
+                                points[4] = input->mesh.elements.Hexahedron[i].N8;
+                                if ((errorTLMnumber = allocatePointsPort(points, intersections,
+                                        quantityOfPortsToAdd, temp)) != 0) {
+                                    if (errorTLMnumber == 1) {
+                                        numbers->Intersections++;
+                                        errorTLMnumber = 0;
+                                    } else {
+                                        return errorTLMnumber;
+                                    }
+                                }
+
+                                // temp[0] is my offset that will give me the
+                                // abstract number of the node at that interface
+                                if (flag == 2)
+                                    temp[0]++;
+                                points[1] = input->mesh.elements.Hexahedron[i].N2;
+                                points[2] = input->mesh.elements.Hexahedron[i].N3;
+                                points[3] = input->mesh.elements.Hexahedron[i].N6;
+                                points[4] = input->mesh.elements.Hexahedron[i].N7;
+                                if ((errorTLMnumber = allocatePointsPort(points, intersections,
+                                        quantityOfPortsToAdd, temp)) != 0) {
+                                    if (errorTLMnumber == 1) {
+                                        numbers->Intersections++;
+                                        errorTLMnumber = 0;
+                                    } else {
+                                        return errorTLMnumber;
+                                    }
+                                }
+                                
+                                // temp[0] is my offset that will give me the
+                                // abstract number of the node at that interface
+                                if (flag == 2)
+                                    temp[0]++;
+                                points[1] = input->mesh.elements.Hexahedron[i].N3;
+                                points[2] = input->mesh.elements.Hexahedron[i].N4;
+                                points[3] = input->mesh.elements.Hexahedron[i].N7;
+                                points[4] = input->mesh.elements.Hexahedron[i].N8;
+                                if ((errorTLMnumber = allocatePointsPort(points, intersections,
+                                        quantityOfPortsToAdd, temp)) != 0) {
+                                    if (errorTLMnumber == 1) {
+                                        numbers->Intersections++;
+                                        errorTLMnumber = 0;
+                                    } else {
+                                        return errorTLMnumber;
+                                    }
+                                }
+
+                                // temp[0] is my offset that will give me the
+                                // abstract number of the node at that interface
+                                if (flag == 2)
+                                    temp[0]++;
+                                points[1] = input->mesh.elements.Hexahedron[i].N5;
+                                points[2] = input->mesh.elements.Hexahedron[i].N6;
+                                points[3] = input->mesh.elements.Hexahedron[i].N7;
+                                points[4] = input->mesh.elements.Hexahedron[i].N8;
+                                if ((errorTLMnumber = allocatePointsPort(points, intersections,
+                                        quantityOfPortsToAdd, temp)) != 0) {
+                                    if (errorTLMnumber == 1) {
+                                        numbers->Intersections++;
+                                        errorTLMnumber = 0;
+                                    } else {
+                                        return errorTLMnumber;
+                                    }
+                                }
+                                break;
+                        }
                         
                         break;
                     case 6: // 6 nodes prism
@@ -2622,7 +2657,6 @@ unsigned int getNumberOfPortsGivenElement(unsigned int elementCode,
                     return 1;
 
                 case THREE:
-                    // this model was not made yet
                     return 6;
             }
 
@@ -3030,7 +3064,7 @@ unsigned int getBetweenPointFromRealPortNumber(struct aPortToRealPort *Ports,
 
             break;
         case 5: // 8 nodes hexahedron
-            printf("Get between was not implemented yet\n");
+            getBetweenForHexahedron(input, nodeNumber, portOrder, x, y, z);
             
             break;
         case 6: // 6 nodes prism
@@ -3202,6 +3236,70 @@ unsigned int getBetweenForTetrahedron(const struct dataForSimulation * input,
 }
 
 /*
+ * getBetweenForHexahedron: return the position of the middle of the quadrangle
+ */
+unsigned int getBetweenForHexahedron(const struct dataForSimulation * input,
+        const unsigned long long nodeNumber, const unsigned long long portOrder,
+        double *x, double *y, double *z) {
+
+    unsigned long long P1, P2, P3, P4;
+
+    switch (portOrder) {
+        case 0:
+            P1 = input->mesh.elements.Hexahedron[nodeNumber].N1 - 1;
+            P2 = input->mesh.elements.Hexahedron[nodeNumber].N2 - 1;
+            P3 = input->mesh.elements.Hexahedron[nodeNumber].N3 - 1;
+            P4 = input->mesh.elements.Hexahedron[nodeNumber].N4 - 1;
+
+            break;
+        case 1:
+            P1 = input->mesh.elements.Hexahedron[nodeNumber].N1 - 1;
+            P2 = input->mesh.elements.Hexahedron[nodeNumber].N2 - 1;
+            P3 = input->mesh.elements.Hexahedron[nodeNumber].N5 - 1;
+            P4 = input->mesh.elements.Hexahedron[nodeNumber].N6 - 1;
+
+            break;
+        case 2:
+            P1 = input->mesh.elements.Hexahedron[nodeNumber].N1 - 1;
+            P2 = input->mesh.elements.Hexahedron[nodeNumber].N4 - 1;
+            P3 = input->mesh.elements.Hexahedron[nodeNumber].N5 - 1;
+            P4 = input->mesh.elements.Hexahedron[nodeNumber].N8 - 1;
+
+            break;
+        case 3:
+            P1 = input->mesh.elements.Hexahedron[nodeNumber].N2 - 1;
+            P2 = input->mesh.elements.Hexahedron[nodeNumber].N3 - 1;
+            P3 = input->mesh.elements.Hexahedron[nodeNumber].N6 - 1;
+            P4 = input->mesh.elements.Hexahedron[nodeNumber].N7 - 1;
+
+            break;
+        case 4:
+            P1 = input->mesh.elements.Hexahedron[nodeNumber].N3 - 1;
+            P2 = input->mesh.elements.Hexahedron[nodeNumber].N4 - 1;
+            P3 = input->mesh.elements.Hexahedron[nodeNumber].N7 - 1;
+            P4 = input->mesh.elements.Hexahedron[nodeNumber].N8 - 1;
+
+            break;
+        case 5:
+            P1 = input->mesh.elements.Hexahedron[nodeNumber].N5 - 1;
+            P2 = input->mesh.elements.Hexahedron[nodeNumber].N6 - 1;
+            P3 = input->mesh.elements.Hexahedron[nodeNumber].N7 - 1;
+            P4 = input->mesh.elements.Hexahedron[nodeNumber].N8 - 1;
+
+            break;
+    }
+
+    *x = (input->mesh.nodes[P1].x + input->mesh.nodes[P2].x
+            + input->mesh.nodes[P3].x + input->mesh.nodes[P4].x) / 4;
+    *y = (input->mesh.nodes[P1].y + input->mesh.nodes[P2].y
+            + input->mesh.nodes[P3].y + input->mesh.nodes[P4].y) / 4;
+    *z = (input->mesh.nodes[P1].z + input->mesh.nodes[P2].z
+            + input->mesh.nodes[P3].z + input->mesh.nodes[P4].z) / 4;
+
+    return 0;
+}
+
+/*
  * getProjectionFromRealPortNumber: return the unitary vector going outside the 
  * geometrical element from the port given.
  */
@@ -3255,7 +3353,7 @@ unsigned int getProjectionFromRealPortNumber(struct aPortToRealPort *Ports,
 
             break;
         case 5: // 8 nodes hexahedron
-            printf("Get projection was not implemented yet\n");
+            getOutsideProjectionHexahedron(input, nodeNumber, portOrder, x, y, z);
             
             break;
         case 6: // 6 nodes prism
@@ -3713,19 +3811,6 @@ unsigned int getOutsideProjectionTetrahedron(const struct dataForSimulation * in
             break;
     }
 
-    // DEBUG: Testing this algorithm
-    //    struct node N1, N2, N3, N4;
-    //    N1.x = 0; N1.y = 0; N1.z = 0;
-    //    N2.x = 1; N2.y = 0; N2.z = 0;
-    //    N3.x = 0; N3.y = 1; N3.z = 0;
-    //    N4.x = 0; N4.y = 0; N4.z = 1;
-    //    
-    //    input->mesh.nodes[P1] = N1;
-    //    input->mesh.nodes[P2] = N2;
-    //    input->mesh.nodes[P3] = N3;
-    //    input->mesh.nodes[P4] = N4;
-
-
     // lengths of the edges
     double deltaXL[2], deltaYL[2], deltaZL[2];
     double area, areaX, areaY, areaZ;
@@ -3766,16 +3851,162 @@ unsigned int getOutsideProjectionTetrahedron(const struct dataForSimulation * in
         *y = areaY / area;
         *z = areaZ / area;
     }
+    return 0;
+}
 
 
+/*
+ * getOutsideProjectionHexahedron: return the unitary vector going outside the 
+ * hexahedron element from the port given. I'M ASSUMING THAT THE QUADRANGLES
+ * THAT FORM THE FACE OF THE HEXAHEDRON FORM A UNIQUE PLAN. Then, any three
+ * points of the quadrangle define the plan.
+ */
+unsigned int getOutsideProjectionHexahedron(const struct dataForSimulation * input,
+        const unsigned long long nodeNumber, const unsigned long long portOrder,
+        double *x, double *y, double *z) {
 
-    //    printf("The output: %f\n", (*x)*(*x) + (*y)*(*y) + (*z)*(*z) );
+    
+    /* hexahedral nomenclature.
+     * 
+     * 
+     *            vertex 4____________________________ vertex 3
+     *                   /|                          /|
+     *                  / .                         / |
+     *                 /  .      5                 /  |
+     *                /   |                       /   |
+     *               /    .    a                 /    |
+     *              /     .   e                 /     |
+     *             /      |  r     area 1      /      |
+     *            /       . a                 /       |
+     *  vertex 8 /___________________________/vertex 7|
+     *          |         | vertex 1         |        |
+     *          |        , _.._.._.._.._.._..|_.._ .._| vertex 2
+     *          |     3 ,                    |     4 /
+     *          |      /   2                 |      /
+     *          |   a ,                      |   a /
+     *          |  e ,   a                   |  e /
+     *          | r /   e       area 6       | r /
+     *          |a ,   r                     |a /
+     *          | ,   a                      | /
+     *          |/___________________________|/
+     *      vertex 5                        vertex 6
+     * 
+     */
+    unsigned long long P1, P2, P3, P4, P5, P6, P7, P8;
 
+    switch (portOrder) {
+        case 0:
+            P1 = input->mesh.elements.Hexahedron[nodeNumber].N1 - 1;
+            P2 = input->mesh.elements.Hexahedron[nodeNumber].N2 - 1;
+            P3 = input->mesh.elements.Hexahedron[nodeNumber].N3 - 1;
+            P4 = input->mesh.elements.Hexahedron[nodeNumber].N4 - 1;
+            P5 = input->mesh.elements.Hexahedron[nodeNumber].N5 - 1;
+            P6 = input->mesh.elements.Hexahedron[nodeNumber].N6 - 1;
+            P7 = input->mesh.elements.Hexahedron[nodeNumber].N7 - 1;
+            P8 = input->mesh.elements.Hexahedron[nodeNumber].N8 - 1;
 
-    //    *x = deltaXl / deltal;
-    //    *y = deltaYl / deltal;
-    //    *z = deltaZl / deltal;
+            break;
+        case 1:
+            P1 = input->mesh.elements.Hexahedron[nodeNumber].N1 - 1;
+            P2 = input->mesh.elements.Hexahedron[nodeNumber].N2 - 1;
+            P3 = input->mesh.elements.Hexahedron[nodeNumber].N5 - 1;
+            P4 = input->mesh.elements.Hexahedron[nodeNumber].N6 - 1;
+            P5 = input->mesh.elements.Hexahedron[nodeNumber].N3 - 1;
+            P6 = input->mesh.elements.Hexahedron[nodeNumber].N4 - 1;
+            P7 = input->mesh.elements.Hexahedron[nodeNumber].N7 - 1;
+            P8 = input->mesh.elements.Hexahedron[nodeNumber].N8 - 1;
+            
+            break;
+        case 2:
+            P1 = input->mesh.elements.Hexahedron[nodeNumber].N1 - 1;
+            P2 = input->mesh.elements.Hexahedron[nodeNumber].N4 - 1;
+            P3 = input->mesh.elements.Hexahedron[nodeNumber].N5 - 1;
+            P4 = input->mesh.elements.Hexahedron[nodeNumber].N8 - 1;
+            P5 = input->mesh.elements.Hexahedron[nodeNumber].N2 - 1;
+            P6 = input->mesh.elements.Hexahedron[nodeNumber].N3 - 1;
+            P7 = input->mesh.elements.Hexahedron[nodeNumber].N6 - 1;
+            P8 = input->mesh.elements.Hexahedron[nodeNumber].N7 - 1;
 
+            break;
+        case 3:
+            P1 = input->mesh.elements.Hexahedron[nodeNumber].N2 - 1;
+            P2 = input->mesh.elements.Hexahedron[nodeNumber].N3 - 1;
+            P3 = input->mesh.elements.Hexahedron[nodeNumber].N6 - 1;
+            P4 = input->mesh.elements.Hexahedron[nodeNumber].N7 - 1;
+            P5 = input->mesh.elements.Hexahedron[nodeNumber].N1 - 1;
+            P6 = input->mesh.elements.Hexahedron[nodeNumber].N4 - 1;
+            P7 = input->mesh.elements.Hexahedron[nodeNumber].N5 - 1;
+            P8 = input->mesh.elements.Hexahedron[nodeNumber].N8 - 1;
+
+            break;
+        case 4:
+            P1 = input->mesh.elements.Hexahedron[nodeNumber].N3 - 1;
+            P2 = input->mesh.elements.Hexahedron[nodeNumber].N4 - 1;
+            P3 = input->mesh.elements.Hexahedron[nodeNumber].N7 - 1;
+            P4 = input->mesh.elements.Hexahedron[nodeNumber].N8 - 1;
+            P5 = input->mesh.elements.Hexahedron[nodeNumber].N1 - 1;
+            P6 = input->mesh.elements.Hexahedron[nodeNumber].N2 - 1;
+            P7 = input->mesh.elements.Hexahedron[nodeNumber].N5 - 1;
+            P8 = input->mesh.elements.Hexahedron[nodeNumber].N6 - 1;
+
+            break;
+        case 5:
+            P1 = input->mesh.elements.Hexahedron[nodeNumber].N5 - 1;
+            P2 = input->mesh.elements.Hexahedron[nodeNumber].N6 - 1;
+            P3 = input->mesh.elements.Hexahedron[nodeNumber].N7 - 1;
+            P4 = input->mesh.elements.Hexahedron[nodeNumber].N8 - 1;
+            P5 = input->mesh.elements.Hexahedron[nodeNumber].N1 - 1;
+            P6 = input->mesh.elements.Hexahedron[nodeNumber].N2 - 1;
+            P7 = input->mesh.elements.Hexahedron[nodeNumber].N3 - 1;
+            P8 = input->mesh.elements.Hexahedron[nodeNumber].N4 - 1;
+
+            break;
+    }
+
+    // BASED ON MY ASSUMPTION THAT THE POINTS OF THE QUADRANGLE FORM A PLAN
+    // lengths of the edges
+    double deltaXL[2], deltaYL[2], deltaZL[2];
+    double area, areaX, areaY, areaZ;
+    double deltaXl, deltaYl, deltaZl, deltal;
+
+    deltaXL[0] = input->mesh.nodes[P1].x - input->mesh.nodes[P2].x;
+    deltaYL[0] = input->mesh.nodes[P1].y - input->mesh.nodes[P2].y;
+    deltaZL[0] = input->mesh.nodes[P1].z - input->mesh.nodes[P2].z;
+
+    deltaXL[1] = input->mesh.nodes[P1].x - input->mesh.nodes[P3].x;
+    deltaYL[1] = input->mesh.nodes[P1].y - input->mesh.nodes[P3].y;
+    deltaZL[1] = input->mesh.nodes[P1].z - input->mesh.nodes[P3].z;
+
+    // vector of the triangle (P1, P2, P3)
+    areaX = deltaYL[0] * deltaZL[1] - deltaYL[1] * deltaZL[0];
+    areaY = deltaXL[1] * deltaZL[0] - deltaXL[0] * deltaZL[1];
+    areaZ = deltaXL[0] * deltaYL[1] - deltaXL[1] * deltaYL[0];
+    area = sqrt(areaX * areaX + areaY * areaY + areaZ * areaZ); // Twice the real area of the triangle. That is, this is the area of a parallelogram
+
+    // vector from the center of the Hexahedron towards the center of the triangle
+    deltaXl = (input->mesh.nodes[P1].x + input->mesh.nodes[P2].x + input->mesh.nodes[P3].x) / 3
+            - (input->mesh.nodes[P1].x + input->mesh.nodes[P2].x + input->mesh.nodes[P3].x + input->mesh.nodes[P4].x
+            + input->mesh.nodes[P5].x + input->mesh.nodes[P6].x + input->mesh.nodes[P7].x + input->mesh.nodes[P8].x) / 8;
+
+    deltaYl = (input->mesh.nodes[P1].y + input->mesh.nodes[P2].y + input->mesh.nodes[P3].y) / 3
+            - (input->mesh.nodes[P1].y + input->mesh.nodes[P2].y + input->mesh.nodes[P3].y + input->mesh.nodes[P4].y
+            + input->mesh.nodes[P5].y + input->mesh.nodes[P6].y + input->mesh.nodes[P7].y + input->mesh.nodes[P8].y) / 8;
+
+    deltaZl = (input->mesh.nodes[P1].z + input->mesh.nodes[P2].z + input->mesh.nodes[P3].z) / 3
+            - (input->mesh.nodes[P1].z + input->mesh.nodes[P2].z + input->mesh.nodes[P3].z + input->mesh.nodes[P4].z
+            + input->mesh.nodes[P5].z + input->mesh.nodes[P6].z + input->mesh.nodes[P7].z + input->mesh.nodes[P8].z) / 8;
+
+    deltal = sqrt(deltaXl * deltaXl + deltaYl * deltaYl + deltaZl * deltaZl);
+
+    if (deltaXl * areaX + deltaYl * areaY + deltaZl * areaZ < 0) {
+        *x = -areaX / area;
+        *y = -areaY / area;
+        *z = -areaZ / area;
+    } else {
+        *x = areaX / area;
+        *y = areaY / area;
+        *z = areaZ / area;
+    }
     return 0;
 }
 

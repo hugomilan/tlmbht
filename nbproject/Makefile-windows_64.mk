@@ -51,6 +51,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/src/miscellaneous/benchmark/libbenchmarkeigen.o \
 	${OBJECTDIR}/src/miscellaneous/benchmark/libbenchmatmult.o \
 	${OBJECTDIR}/src/miscellaneous/liberrorcode.o \
+	${OBJECTDIR}/src/miscellaneous/liblinalg.o \
 	${OBJECTDIR}/src/miscellaneous/libmiscellaneous.o \
 	${OBJECTDIR}/src/miscellaneous/libstringtlmbht.o \
 	${OBJECTDIR}/src/miscellaneous/libwritetofiletlmbht.o \
@@ -152,6 +153,10 @@ ${OBJECTDIR}/src/miscellaneous/benchmark/libbenchmatmult.o: src/miscellaneous/be
 ${OBJECTDIR}/src/miscellaneous/liberrorcode.o: src/miscellaneous/liberrorcode.c
 	${MKDIR} -p ${OBJECTDIR}/src/miscellaneous
 	$(COMPILE.c) -O3 -Iinclude -o ${OBJECTDIR}/src/miscellaneous/liberrorcode.o src/miscellaneous/liberrorcode.c
+
+${OBJECTDIR}/src/miscellaneous/liblinalg.o: src/miscellaneous/liblinalg.c
+	${MKDIR} -p ${OBJECTDIR}/src/miscellaneous
+	$(COMPILE.c) -O3 -Iinclude -o ${OBJECTDIR}/src/miscellaneous/liblinalg.o src/miscellaneous/liblinalg.c
 
 ${OBJECTDIR}/src/miscellaneous/libmiscellaneous.o: src/miscellaneous/libmiscellaneous.c
 	${MKDIR} -p ${OBJECTDIR}/src/miscellaneous
