@@ -3840,8 +3840,6 @@ unsigned int getOutsideProjectionTetrahedron(const struct dataForSimulation * in
     deltaZl = (input->mesh.nodes[P1].z + input->mesh.nodes[P2].z + input->mesh.nodes[P3].z) / 3
             - (input->mesh.nodes[P1].z + input->mesh.nodes[P2].z + input->mesh.nodes[P3].z + input->mesh.nodes[P4].z) / 4;
 
-    deltal = sqrt(deltaXl * deltaXl + deltaYl * deltaYl + deltaZl * deltaZl);
-
     if (deltaXl * areaX + deltaYl * areaY + deltaZl * areaZ < 0) {
         *x = -areaX / area;
         *y = -areaY / area;
@@ -3967,7 +3965,7 @@ unsigned int getOutsideProjectionHexahedron(const struct dataForSimulation * inp
     // lengths of the edges
     double deltaXL[2], deltaYL[2], deltaZL[2];
     double area, areaX, areaY, areaZ;
-    double deltaXl, deltaYl, deltaZl, deltal;
+    double deltaXl, deltaYl, deltaZl;
 
     deltaXL[0] = input->mesh.nodes[P1].x - input->mesh.nodes[P2].x;
     deltaYL[0] = input->mesh.nodes[P1].y - input->mesh.nodes[P2].y;
@@ -3977,26 +3975,26 @@ unsigned int getOutsideProjectionHexahedron(const struct dataForSimulation * inp
     deltaYL[1] = input->mesh.nodes[P1].y - input->mesh.nodes[P3].y;
     deltaZL[1] = input->mesh.nodes[P1].z - input->mesh.nodes[P3].z;
 
-    // vector of the triangle (P1, P2, P3)
+    // vector of the triangle (P1, P2, P3). Based on my assumption that the four points
+    // of the quadrangle are in the same plan, this is the vector perpendicular to the
+    // quadrangle plane.
     areaX = deltaYL[0] * deltaZL[1] - deltaYL[1] * deltaZL[0];
     areaY = deltaXL[1] * deltaZL[0] - deltaXL[0] * deltaZL[1];
     areaZ = deltaXL[0] * deltaYL[1] - deltaXL[1] * deltaYL[0];
     area = sqrt(areaX * areaX + areaY * areaY + areaZ * areaZ); // Twice the real area of the triangle. That is, this is the area of a parallelogram
 
     // vector from the center of the Hexahedron towards the center of the triangle
-    deltaXl = (input->mesh.nodes[P1].x + input->mesh.nodes[P2].x + input->mesh.nodes[P3].x) / 3
+    deltaXl = (input->mesh.nodes[P1].x + input->mesh.nodes[P2].x + input->mesh.nodes[P3].x + input->mesh.nodes[P4].x) / 4
             - (input->mesh.nodes[P1].x + input->mesh.nodes[P2].x + input->mesh.nodes[P3].x + input->mesh.nodes[P4].x
             + input->mesh.nodes[P5].x + input->mesh.nodes[P6].x + input->mesh.nodes[P7].x + input->mesh.nodes[P8].x) / 8;
 
-    deltaYl = (input->mesh.nodes[P1].y + input->mesh.nodes[P2].y + input->mesh.nodes[P3].y) / 3
+    deltaYl = (input->mesh.nodes[P1].y + input->mesh.nodes[P2].y + input->mesh.nodes[P3].y + input->mesh.nodes[P4].y) / 4
             - (input->mesh.nodes[P1].y + input->mesh.nodes[P2].y + input->mesh.nodes[P3].y + input->mesh.nodes[P4].y
             + input->mesh.nodes[P5].y + input->mesh.nodes[P6].y + input->mesh.nodes[P7].y + input->mesh.nodes[P8].y) / 8;
 
-    deltaZl = (input->mesh.nodes[P1].z + input->mesh.nodes[P2].z + input->mesh.nodes[P3].z) / 3
+    deltaZl = (input->mesh.nodes[P1].z + input->mesh.nodes[P2].z + input->mesh.nodes[P3].z + input->mesh.nodes[P4].z) / 4
             - (input->mesh.nodes[P1].z + input->mesh.nodes[P2].z + input->mesh.nodes[P3].z + input->mesh.nodes[P4].z
             + input->mesh.nodes[P5].z + input->mesh.nodes[P6].z + input->mesh.nodes[P7].z + input->mesh.nodes[P8].z) / 8;
-
-    deltal = sqrt(deltaXl * deltaXl + deltaYl * deltaYl + deltaZl * deltaZl);
 
     if (deltaXl * areaX + deltaYl * areaY + deltaZl * areaZ < 0) {
         *x = -areaX / area;
