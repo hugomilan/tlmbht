@@ -102,13 +102,38 @@ void triangleArea(const struct node *N1, const struct node *N2, const struct nod
 
 /*
  * quadrangleArea: Calculates the area of the quadrangle defined by N1, N2, N3, N4.
- * Divide the quadrangle in two triangles and then sum up their areas
+ * Divide the quadrangle in two triangles and then sum up their areas. ATTENTION:
+ * THE NUMBER OF THE QUADRANGLE SHOULD FOLLOW THE DEFINITION BELOW. THAT IS, THE
+ * POINTS N1, N2, N3, N4 SHOULD BE CLOCKWISE (COUNTERCLOCKWISE WILL ALSO WORK).
+ * triangular nomenclature.
+ * 
+ * Take the quadrangle
+ * 
+ *                   face 1   
+ *       vertex 1  __________ vertex 2
+ *                /         / 
+ *               /         / 
+ *      face 4  /         / face 2
+ *             /         /
+ *   vertex 4 /_________/ vertex 3
+ *              face 3
+ * 
+ * Divide into two triangles
+ * 
+ *                   face 1   
+ *       vertex 1  __________ vertex 2
+ *                /\        / 
+ *               /  \      / 
+ *      face 4  /    \    / face 2
+ *             /      \  /
+ *   vertex 4 /________\/ vertex 3
+ *              face 3
  */
 void quadrangleArea(const struct node *N1, const struct node *N2, const struct node *N3,
          const struct node *N4, double *out){
     double temp;
     triangleArea(N1, N2, N3, &temp);
-    triangleArea(N2, N3, N4, out);
+    triangleArea(N1, N3, N4, out);
     *out = *out + temp;
     
 }

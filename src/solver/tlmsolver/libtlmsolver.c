@@ -1023,10 +1023,10 @@ unsigned int getGeometricalVariablesTLMhexahedron(const struct node *N1,
     output[4] = deltal[4];
     output[5] = deltal[5];
     quadrangleArea(N1, N2, N3, N4, &output[6]);
-    quadrangleArea(N1, N2, N5, N6, &output[7]);
-    quadrangleArea(N1, N4, N5, N8, &output[8]);
-    quadrangleArea(N2, N3, N6, N7, &output[9]);
-    quadrangleArea(N3, N4, N7, N8, &output[10]);
+    quadrangleArea(N1, N2, N6, N5, &output[7]);
+    quadrangleArea(N1, N4, N8, N5, &output[8]);
+    quadrangleArea(N2, N3, N7, N6, &output[9]);
+    quadrangleArea(N3, N4, N8, N7, &output[10]);
     quadrangleArea(N5, N6, N7, N8, &output[11]);
     hexahedronVolume(N1, N2, N3, N4, N5, N6, N7, N8, &output[12]);
     output[13] = center[0];
@@ -3907,8 +3907,8 @@ unsigned int getOutsideProjectionHexahedron(const struct dataForSimulation * inp
         case 1:
             P1 = input->mesh.elements.Hexahedron[nodeNumber].N1 - 1;
             P2 = input->mesh.elements.Hexahedron[nodeNumber].N2 - 1;
-            P3 = input->mesh.elements.Hexahedron[nodeNumber].N5 - 1;
-            P4 = input->mesh.elements.Hexahedron[nodeNumber].N6 - 1;
+            P3 = input->mesh.elements.Hexahedron[nodeNumber].N6 - 1;
+            P4 = input->mesh.elements.Hexahedron[nodeNumber].N5 - 1;
             P5 = input->mesh.elements.Hexahedron[nodeNumber].N3 - 1;
             P6 = input->mesh.elements.Hexahedron[nodeNumber].N4 - 1;
             P7 = input->mesh.elements.Hexahedron[nodeNumber].N7 - 1;
@@ -3918,8 +3918,8 @@ unsigned int getOutsideProjectionHexahedron(const struct dataForSimulation * inp
         case 2:
             P1 = input->mesh.elements.Hexahedron[nodeNumber].N1 - 1;
             P2 = input->mesh.elements.Hexahedron[nodeNumber].N4 - 1;
-            P3 = input->mesh.elements.Hexahedron[nodeNumber].N5 - 1;
-            P4 = input->mesh.elements.Hexahedron[nodeNumber].N8 - 1;
+            P3 = input->mesh.elements.Hexahedron[nodeNumber].N8 - 1;
+            P4 = input->mesh.elements.Hexahedron[nodeNumber].N5 - 1;
             P5 = input->mesh.elements.Hexahedron[nodeNumber].N2 - 1;
             P6 = input->mesh.elements.Hexahedron[nodeNumber].N3 - 1;
             P7 = input->mesh.elements.Hexahedron[nodeNumber].N6 - 1;
@@ -3929,8 +3929,8 @@ unsigned int getOutsideProjectionHexahedron(const struct dataForSimulation * inp
         case 3:
             P1 = input->mesh.elements.Hexahedron[nodeNumber].N2 - 1;
             P2 = input->mesh.elements.Hexahedron[nodeNumber].N3 - 1;
-            P3 = input->mesh.elements.Hexahedron[nodeNumber].N6 - 1;
-            P4 = input->mesh.elements.Hexahedron[nodeNumber].N7 - 1;
+            P3 = input->mesh.elements.Hexahedron[nodeNumber].N7 - 1;
+            P4 = input->mesh.elements.Hexahedron[nodeNumber].N6 - 1;
             P5 = input->mesh.elements.Hexahedron[nodeNumber].N1 - 1;
             P6 = input->mesh.elements.Hexahedron[nodeNumber].N4 - 1;
             P7 = input->mesh.elements.Hexahedron[nodeNumber].N5 - 1;
@@ -3940,8 +3940,8 @@ unsigned int getOutsideProjectionHexahedron(const struct dataForSimulation * inp
         case 4:
             P1 = input->mesh.elements.Hexahedron[nodeNumber].N3 - 1;
             P2 = input->mesh.elements.Hexahedron[nodeNumber].N4 - 1;
-            P3 = input->mesh.elements.Hexahedron[nodeNumber].N7 - 1;
-            P4 = input->mesh.elements.Hexahedron[nodeNumber].N8 - 1;
+            P3 = input->mesh.elements.Hexahedron[nodeNumber].N8 - 1;
+            P4 = input->mesh.elements.Hexahedron[nodeNumber].N7 - 1;
             P5 = input->mesh.elements.Hexahedron[nodeNumber].N1 - 1;
             P6 = input->mesh.elements.Hexahedron[nodeNumber].N2 - 1;
             P7 = input->mesh.elements.Hexahedron[nodeNumber].N5 - 1;
