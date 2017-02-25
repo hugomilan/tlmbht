@@ -1,0 +1,64 @@
+Simulation
+{
+    output extension = m;
+    output name = cdiff3He;
+}
+
+Mesh
+{
+    file name = parallelepiped_6BC_H_R_2394e;
+    input format = tlmbht;
+}
+
+Equation
+{
+    type = diffusion;
+    equation name = diffusion_name;
+    dimensions = 3;
+    Solve = dynamic;
+    time-step = 1e-2;
+    time-jump = 500;
+    final time = 50;
+    save = scalar;
+    save = scalar between;
+    save = vector;
+}
+
+Material
+{
+    equation = diffusion_name;
+    number =  33;
+    diffusion coefficient = 1e-9;
+    source = 0.1;
+    initial scalar = 20;
+}
+
+
+Boundary
+{
+    equation = diffusion_name;
+    number = 27;
+    scalar = 20;
+}
+
+
+Boundary
+{
+    equation = diffusion_name;
+    number = 30;
+    scalar = 50;
+}
+
+Boundary
+{
+    equation = diffusion_name;
+    number = 18;
+    flux = 2e-5;
+}
+
+Boundary
+{
+    equation = diffusion_name;
+    number = 24;
+    flux = 1e-5;
+}

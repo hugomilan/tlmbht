@@ -51,15 +51,23 @@ extern "C" {
     
     void triangleArea(const struct node *, const struct node *, const struct node *, double*);
     
+    void quadranglePlaneArea(const struct node *, const struct node *, const struct node *,
+            const struct node *, double*);
+    
     void quadrangleArea(const struct node *, const struct node *, const struct node *,
             const struct node *, double*);
     
     void tetrahedronVolume(const struct node *, const struct node *, const struct node *,
             const struct node *, double*);
     
-    void hexahedronVolume(const struct node *, const struct node *, const struct node *,
+    void hexahedronLDVolume(const struct node *, const struct node *, const struct node *,
             const struct node *, const struct node *, const struct node *, const struct node *,
             const struct node *, double*);
+    
+    void hexahedronTHVolume(const struct node *, const struct node *, const struct node *,
+            const struct node *, const struct node *, const struct node *, const struct node *,
+            const struct node *, double*);
+    
     
     
 

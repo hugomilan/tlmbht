@@ -72,7 +72,12 @@ Volume(32) = {31};
 Physical Volume(33) = {32};
 
 // Defining that we want hexahedrons
-//Transfinite Line "*" = N+1;
+// in x
+Transfinite Line{7,3,-5,-1} = 15 Using Progression 1.1;
+// in y
+Transfinite Line{6,2,8,4} = 20 Using Progression 1.1;
+// in z
+Transfinite Line{-10,-12,-11,-9} = 10 Using Progression 1.1;
 Transfinite Surface "*";
 Transfinite Volume "*";
 Recombine Surface "*";

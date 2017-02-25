@@ -754,6 +754,7 @@ unsigned int getGeometricalVariablesTLMquadrangle(const struct node *N1,
     output[2] = deltal[2];
     output[3] = deltal[3];
     quadrangleArea(N1, N2, N3, N4, &output[4]);
+    // maybe quadranglePlaneArea(N1, N2, N3, N4, &output[4]);
     nodesNorm(N1, N2, &output[5]);
     nodesNorm(N2, N3, &output[6]);
     nodesNorm(N3, N4, &output[7]);
@@ -969,8 +970,6 @@ unsigned int getGeometricalVariablesTLMhexahedron(const struct node *N1,
     double center[3];
     double deltaXl[6], deltaYl[6], deltaZl[6], deltal[6];
 
-    // volume of the hexahedron calculated following eq. 14 in 
-    // Grandy, J. Efficient computation of volume of hexahedral cells. No. UCRL-ID--128886. Lawrence Livermore National Lab., CA (United States), 1997.
     // nomenclature in Grandy (1997) and mine:
     // 0 -> 1
     // 1 -> 2
@@ -1028,7 +1027,7 @@ unsigned int getGeometricalVariablesTLMhexahedron(const struct node *N1,
     quadrangleArea(N2, N3, N7, N6, &output[9]);
     quadrangleArea(N3, N4, N8, N7, &output[10]);
     quadrangleArea(N5, N6, N7, N8, &output[11]);
-    hexahedronVolume(N1, N2, N3, N4, N5, N6, N7, N8, &output[12]);
+    hexahedronTHVolume(N1, N2, N3, N4, N5, N6, N7, N8, &output[12]);
     output[13] = center[0];
     output[14] = center[1];
     output[15] = center[2];
@@ -3255,29 +3254,29 @@ unsigned int getBetweenForHexahedron(const struct dataForSimulation * input,
         case 1:
             P1 = input->mesh.elements.Hexahedron[nodeNumber].N1 - 1;
             P2 = input->mesh.elements.Hexahedron[nodeNumber].N2 - 1;
-            P3 = input->mesh.elements.Hexahedron[nodeNumber].N5 - 1;
-            P4 = input->mesh.elements.Hexahedron[nodeNumber].N6 - 1;
+            P3 = input->mesh.elements.Hexahedron[nodeNumber].N6 - 1;
+            P4 = input->mesh.elements.Hexahedron[nodeNumber].N5 - 1;
 
             break;
         case 2:
             P1 = input->mesh.elements.Hexahedron[nodeNumber].N1 - 1;
             P2 = input->mesh.elements.Hexahedron[nodeNumber].N4 - 1;
-            P3 = input->mesh.elements.Hexahedron[nodeNumber].N5 - 1;
-            P4 = input->mesh.elements.Hexahedron[nodeNumber].N8 - 1;
+            P3 = input->mesh.elements.Hexahedron[nodeNumber].N8 - 1;
+            P4 = input->mesh.elements.Hexahedron[nodeNumber].N5 - 1;
 
             break;
         case 3:
             P1 = input->mesh.elements.Hexahedron[nodeNumber].N2 - 1;
             P2 = input->mesh.elements.Hexahedron[nodeNumber].N3 - 1;
-            P3 = input->mesh.elements.Hexahedron[nodeNumber].N6 - 1;
-            P4 = input->mesh.elements.Hexahedron[nodeNumber].N7 - 1;
+            P3 = input->mesh.elements.Hexahedron[nodeNumber].N7 - 1;
+            P4 = input->mesh.elements.Hexahedron[nodeNumber].N6 - 1;
 
             break;
         case 4:
             P1 = input->mesh.elements.Hexahedron[nodeNumber].N3 - 1;
             P2 = input->mesh.elements.Hexahedron[nodeNumber].N4 - 1;
-            P3 = input->mesh.elements.Hexahedron[nodeNumber].N7 - 1;
-            P4 = input->mesh.elements.Hexahedron[nodeNumber].N8 - 1;
+            P3 = input->mesh.elements.Hexahedron[nodeNumber].N8 - 1;
+            P4 = input->mesh.elements.Hexahedron[nodeNumber].N7 - 1;
 
             break;
         case 5:
@@ -3290,11 +3289,11 @@ unsigned int getBetweenForHexahedron(const struct dataForSimulation * input,
     }
 
     *x = (input->mesh.nodes[P1].x + input->mesh.nodes[P2].x
-            + input->mesh.nodes[P3].x + input->mesh.nodes[P4].x) / 4;
+            + input->mesh.nodes[P3].x + input->mesh.nodes[P4].x) / 4.0;
     *y = (input->mesh.nodes[P1].y + input->mesh.nodes[P2].y
-            + input->mesh.nodes[P3].y + input->mesh.nodes[P4].y) / 4;
+            + input->mesh.nodes[P3].y + input->mesh.nodes[P4].y) / 4.0;
     *z = (input->mesh.nodes[P1].z + input->mesh.nodes[P2].z
-            + input->mesh.nodes[P3].z + input->mesh.nodes[P4].z) / 4;
+            + input->mesh.nodes[P3].z + input->mesh.nodes[P4].z) / 4.0;
 
     return 0;
 }
@@ -3971,11 +3970,11 @@ unsigned int getOutsideProjectionHexahedron(const struct dataForSimulation * inp
     deltaYL[0] = input->mesh.nodes[P1].y - input->mesh.nodes[P2].y;
     deltaZL[0] = input->mesh.nodes[P1].z - input->mesh.nodes[P2].z;
 
-    deltaXL[1] = input->mesh.nodes[P1].x - input->mesh.nodes[P3].x;
-    deltaYL[1] = input->mesh.nodes[P1].y - input->mesh.nodes[P3].y;
-    deltaZL[1] = input->mesh.nodes[P1].z - input->mesh.nodes[P3].z;
+    deltaXL[1] = input->mesh.nodes[P1].x - input->mesh.nodes[P4].x;
+    deltaYL[1] = input->mesh.nodes[P1].y - input->mesh.nodes[P4].y;
+    deltaZL[1] = input->mesh.nodes[P1].z - input->mesh.nodes[P4].z;
 
-    // vector of the triangle (P1, P2, P3). Based on my assumption that the four points
+    // vector of the triangle (P1, P2, P4). Based on my assumption that the four points
     // of the quadrangle are in the same plan, this is the vector perpendicular to the
     // quadrangle plane.
     areaX = deltaYL[0] * deltaZL[1] - deltaYL[1] * deltaZL[0];
