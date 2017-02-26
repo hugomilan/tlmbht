@@ -1,0 +1,67 @@
+Simulation
+{
+    output extension = m;
+}
+
+Mesh
+{   
+    file name = parallelepiped_6BC_H_2394e;
+    input format = tlmtbn;
+}
+
+Equation
+{
+    type = pennes;
+    equation name = BHE;
+    dimensions = 3;
+    Solve = dynamic;
+    time-step = 1e-3;
+    time-jump = 100;
+    final time = 1;
+    save = scalar;
+    save = scalar between;
+    save = vector;
+}
+
+Material
+{
+    equation = BHE;
+    number =  33;
+     density = 1200;
+     specific heat = 3200;
+     thermal conductivity = 0.3;
+     blood perfusion = 1e-4;
+     blood density = 1052;
+     blood specific heat = 3600;
+     blood temperature = 37;
+     internal heat generation = 500;
+     initial temperature = 37;
+}
+
+Boundary
+{
+    equation = BHE;
+    number = 27;
+    Temperature = 37;
+}
+
+Boundary
+{
+    equation = BHE;
+    number = 30;
+    Temperature = 100;
+}
+
+Boundary
+{
+    equation = BHE;
+    number = 18;
+    Heat flux = 2e4;
+}
+
+Boundary
+{
+    equation = BHE;
+    number = 24;
+    Heat flux = 1e4;
+}

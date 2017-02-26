@@ -100,7 +100,7 @@ Mesh
     // Cylindrical coordinates: [z, r, theta];
     // Spherical coordinates: [r, theta, phi];
 
-    file name = parallelepiped_6BC_1572e; // required.
+    file name = parallelepiped_6BC_H_2394e; // required.
     // The name of the file without the extension.
     // This is, if the name of your file is "problem.tbn", then you should input only
     // "problem". The extension is defined on the "input format" variable below.

@@ -155,3 +155,4 @@ Now, you can go to:
 * [Tutorials, examples, and validations]({{ site.baseurl }}{% link vte/index.md %})
 * [Validation in two-dimensions of Diffusion equation using the element triangle]({{ site.baseurl }}{% link vte/validation/diff 2D triangle.md %})
 * [Validation in three-dimensions of Diffusion equation using the element tetrahedron]({{ site.baseurl }}{% link vte/validation/diff 3D tetrahedron.md %})
+* [Validation in three-dimensions of Diffusion equation using the element hexahedron]({{ site.baseurl }}{% link vte/validation/diff 3D hexahedron.md %})

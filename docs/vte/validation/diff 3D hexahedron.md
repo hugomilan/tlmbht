@@ -19,7 +19,7 @@ In this validation, we will follow the 5 steps [showed here]({{ site.baseurl }}{
 
 We are building up from the problem description of the [validation for Diffusion 2D equation with Quadrangle elements]({{ site.baseurl }}{% link vte/validation/diff 2D quadrangle.md %}). Here, we will consider a simple three-dimensional problem that has analytical solution. In this problem, we will include source, two constant concentration boundary conditions (constant core concentration C<sub>C</sub>, and constant surface concentration C<sub>S</sub>), two constant flux boundary condition (q<sub>x</sub> and q<sub>z</sub>), and one impermeable boundary condition. The problem geometry is shown below.
 
-<img src="{{ site.baseurl }}/assets/images/vte/3D_Tetrahedron_Diffusion_Problem.png" alt="Geometry of the problem used to validate the tetrahedron element for the diffusion equation in 3D" width="500">
+<img src="{{ site.baseurl }}/assets/images/vte/3D_Tetrahedron_Diffusion_Problem.png" alt="Geometry of the problem used to validate the hexahedron element for the diffusion equation in 3D" width="500">
 
 This geometry is a parallelepiped in a three-dimensional space, as you can see in the three-dimensional model below.
 <div class="sketchfab-embed-wrapper"><iframe width="640" height="480" src="https://sketchfab.com/models/0ec8af1e3cc6475192fd38a75d4be8e7/embed" frameborder="0" allowvr allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" onmousewheel=""></iframe>
@@ -40,7 +40,7 @@ Now that we defined the problem, we need to draw the problem geometry using a fo
 
 The mesh was easily created using gmsh/Mesh/3D. The mesh file (already converted to tlmbht native mesh format) is parallelepiped_6BC_H_2394e.tbn. It contains 3000 points (vertices), 1126 quadrangles, and 2394 hexahedrons.
 
-![Tetrahedron mesh of the problem geometry]({{ site.baseurl }}/assets/images/vte/3D_Hexahedron_Mesh.png "Tetrahedron mesh of the problem geometry")
+![Hexahedron mesh of the problem geometry]({{ site.baseurl }}/assets/images/vte/3D_Hexahedron_Mesh.png "Hexahedron mesh of the problem geometry")
 
 Now we are ready to create the description of the problem
 
@@ -131,28 +131,33 @@ The file cdiff3He_full.tlm contains additional explanation about the input. If y
 
 #### [**Click here if you have Windows and need help to run tlmbht in your machine.**](https://github.com/hugomilan/tlmbht/wiki/Running-tlmbht-in-Windows)
 
-If you have the tlmbht binary in your path environment, simply type `tlmbht cdiff3Te.tlm`. If you don't have it in your path environment, you may copy the binary to the folder /vte/generalDiffusion/3D/TetrahedronNode/ and then type `./tlmbht cdiff3Te.tlm`. In some seconds, the calculation will be done.
+If you have the tlmbht binary in your path environment, simply type `tlmbht cdiff3He.tlm`. If you don't have it in your path environment, you may copy the binary to the folder /vte/generalDiffusion/3D/HexahedronNode/ and then type `./tlmbht cdiff3He.tlm`. In some seconds, the calculation will be done.
 
-If you want to see what is going on internally, you may run tlmbht with --verbose. If you want to see how long does it take to run tlmbht, you may run it with --timing. The command to run with both is simply `tlmbht cdiff3Te.tlm --verbose --timing`.
+If you want to see what is going on internally, you may run tlmbht with --verbose. If you want to see how long does it take to run tlmbht, you may run it with --timing. The command to run with both is simply `tlmbht cdiff3He.tlm --verbose --timing`.
 
 Now we are ready to visualize the output and compare the TLM predictions with an analytical prediction.
 
 ### 5) Visualize the output.
 
-After you have run tlmbht, it created the output file cdiff3Te.m. In this tutorial, you do not need to worry about this file. We will run a script that automatically loads the data into Octave/Matlab. The script is in the file vdiff3Te.m, which calls the analytical solver function D3_HEAT_f.m ([click here to read more about the analytical solution and how to use this function]({{ site.baseurl }}{% link theory/ana/heat/heat 3D TTqqqq.md %})).
+After you have run tlmbht, it created the output file cdiff3He.m. In this tutorial, you do not need to worry about this file. We will run a script that automatically loads the data into Octave/Matlab. The script is in the file vdiff3He.m, which calls the analytical solver function D3_HEAT_f.m ([click here to read more about the analytical solution and how to use this function]({{ site.baseurl }}{% link theory/ana/heat/heat 3D TTqqqq.md %})).
 
-This part should be as simple as opening vdiff3Te.m in Octave/Matlab and running it (press key F5). It will show you two plots and textual information. The figure below shows the two plots and part of the textual information. Concentration is shown in the left figure and flux is shown on the right figure. The analytical predictions are shown in blue, the tlmbht predictions are shown in red, and the green shows the difference of the calculated fluxes. In the concentration plots, asterisks represent concentration calculated at the center of the TLM nodes and the circles represent the concentration calculated between nodes. You can see that the predictions are almost identical, which you can confirm by looking at the textual information that tells you that the mean concentration error was 1.39 % and the mean flux difference was 2.6e-5 m<sup>-2</sup> (which correspond to a fraction of 0.13 of the input flux). In this problem, we the mean flux error is not a viable validation variable because the flux is close to zero in some parts of the mesh and, hence, very small differences yields very large percentage errors. Moreover, concentration values close to zero inflated the percentage errors. However, we graphically observe that the tlmbht predictions match the analytical predictions very well.
+This part should be as simple as opening vdiff3He.m in Octave/Matlab and running it (press key F5). It will show you two plots and textual information. The figure below shows the two plots and part of the textual information. Concentration is shown in the left figure and flux is shown on the right figure. The analytical predictions are shown in blue, the tlmbht predictions are shown in red, and the green shows the difference of the calculated fluxes. In the concentration plots, asterisks represent concentration calculated at the center of the TLM nodes and the circles represent the concentration calculated between nodes. You can see that the predictions are almost identical, which you can confirm by looking at the textual information that tells you that the mean concentration error was 1.78 % and the mean flux difference was 2.6e-6 m<sup>-2</sup> (which correspond to a fraction of 0.13 of the input flux). In this problem, we the mean flux error is not a viable validation variable because the flux is close to zero in some parts of the mesh and, hence, very small differences yields very large percentage errors. Moreover, concentration values close to zero inflated the percentage errors. However, we graphically observe that the tlmbht predictions match the analytical predictions very well.
 
-![Predictions using tlmbht with triangles vs. predictions using analytical solution for the 2D problem]({{ site.baseurl }}/assets/images/vte/3D_Tetrahedron_Diffusion_Result.png "Predictions using tlmbht with tetrahedrons vs. predictions using analytical solution for the 3D problem")
+![Predictions using tlmbht with hexahedrons vs. predictions using analytical solution for the 3D problem]({{ site.baseurl }}/assets/images/vte/3D_Hexahedron_Diffusion_Result.png "Predictions using tlmbht with hexahedrons vs. predictions using analytical solution for the 3D problem")
 
-You are not satisfied with this accuracy? Well... this is a numerical method; we will never get the same exact numbers as the analytical solution gives. Besides, this analytical solution is based on a infinity sum and, by default, the script vdiff3Te.m only considers up to the first 100 terms. If you insist, you can try to increase the number of terms in the analytical solution. Then, as it is true for numerical methods, you can try to increase the number of elements and/or decrease the time-step. These changes will increase the computational time but also increase the accuracy.
+You are not satisfied with this accuracy? Well... this is a numerical method; we will never get the same exact numbers as the analytical solution gives. Besides, this analytical solution is based on a infinity sum and, by default, the script vdiff3He.m only considers up to the first 100 terms. If you insist, you can try to increase the number of terms in the analytical solution. Then, as it is true for numerical methods, you can try to increase the number of elements and/or decrease the time-step. These changes will increase the computational time but also increase the accuracy.
+
+**What if the mesh was regular?** The TLM theory works better with regular meshes. The file `cdiff3He_R.tlm` uses the graded mesh `parallelepiped_6BC_H_R_2394e.tbn` and the predictions using this mesh had mean concentration error of 0.11 % and mean flux difference of 1.3e-7 m<sup>-2</sup> (which corresponds to a fraction of 0.007 of the input flux).
 
 ### Done!
 
-I hope you have enjoyed this validation section! You may now try to change the case file (cdiff3Te.tlm) and see what happens. Remember that if you change any parameter in the cdiff3Te.tlm file you will need to do the same in the vdiff3Te.m file. Except for time and space positions, they are not linked.
+I hope you have enjoyed this validation section! You may now try to change the case file (cdiff3He.tlm) and see what happens. Remember that if you change any parameter in the cdiff3He.tlm file you will need to do the same in the vdiff3He.m file. Except for time and space positions, they are not linked.
 
 Remember: you are using a powerful numerical solver. You do not need to be constrained by solutions that can be solved analytically. Explore! Try different boundary conditions, include more materials, etc. Make this problem more realistic!
+
+You might be wondering **how does the tlmbht models for Tetrahedron and Hexahedron elements change?** They don't change. These two validations solve the same problem. The only difference between them is that the mesh for the validation using Tetrahedron elements has only tetrahedrons and the mesh for the validation using Hexahedron elements has only hexahedrons. TLMBHT is capable of solving meshes that have any of these two elements.
 
 Now, you can go to:
 
 * [Tutorials, examples, and validations]({{ site.baseurl }}{% link vte/index.md %})
+* [Validation in three-dimensions of Diffusion equation using the element tetrahedron]({{ site.baseurl }}{% link vte/validation/diff 3D tetrahedron.md %})

@@ -3,7 +3,7 @@
 % Configuration for Octave:
 more off %turns pagination off
 
-cpennes3Te
+cpennes3He
 
 Tc = 37;
 Ts = 100;

@@ -36,6 +36,8 @@ Validations for the diffusion equation, heat equation, and Pennes equation are v
 
 1. [Three-dimensions using the element tetrahedron]({{ site.baseurl }}{% link vte/validation/diff 3D tetrahedron.md %})
 
+1. [Three-dimensions using the element hexahedron]({{ site.baseurl }}{% link vte/validation/diff 3D hexahedron.md %})
+
 #### Heat equation
 
 1. [One-dimension using the element line]({{ site.baseurl }}{% link vte/validation/heat 1D line.md %})
@@ -46,6 +48,8 @@ Validations for the diffusion equation, heat equation, and Pennes equation are v
 
 1. [Three-dimensions using the element tetrahedron]({{ site.baseurl }}{% link vte/validation/heat 3D tetrahedron.md %})
 
+1. [Three-dimensions using the element hexahedron]({{ site.baseurl }}{% link vte/validation/heat 3D hexahedron.md %})
+
 #### Pennes bioheat equation
 
 1. [One-dimension using the element line]({{ site.baseurl }}{% link vte/validation/pennes 1D line.md %})
@@ -55,3 +59,5 @@ Validations for the diffusion equation, heat equation, and Pennes equation are v
 1. [Two-dimensions using the element quadrangle]({{ site.baseurl }}{% link vte/validation/pennes 2D quadrangle.md %})
 
 1. [Three-dimensions using the element tetrahedron]({{ site.baseurl }}{% link vte/validation/pennes 3D tetrahedron.md %})
+
+1. [Three-dimensions using the element hexahedron]({{ site.baseurl }}{% link vte/validation/pennes 3D hexahedron.md %})

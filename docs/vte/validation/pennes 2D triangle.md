@@ -160,3 +160,4 @@ Now, you can go to:
 * [Tutorials, examples, and validations]({{ site.baseurl }}{% link vte/index.md %})
 * [Validation in two-dimensions of Pennes equation using the element quadrangle]({{ site.baseurl }}{% link vte/validation/pennes 2D quadrangle.md %})
 * [Validation in three-dimensions of Pennes equation using the element tetrahedron]({{ site.baseurl }}{% link vte/validation/pennes 3D tetrahedron.md %})
+* [Validation in three-dimensions of Pennes equation using the element hexahedron]({{ site.baseurl }}{% link vte/validation/pennes 3D hexahedron.md %})

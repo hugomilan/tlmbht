@@ -1,11 +1,12 @@
 Simulation
 {
     output extension = m;
+    output name = cpennes3He;
 }
 
 Mesh
 {   
-    file name = parallelepiped_6BC_1572e;
+    file name = parallelepiped_6BC_H_R_2394e;
     input format = tlmtbn;
 }
 

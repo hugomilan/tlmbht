@@ -155,3 +155,4 @@ Now, you can go to:
 * [Tutorials, examples, and validations]({{ site.baseurl }}{% link vte/index.md %})
 * [Validation in two-dimensions of Heat equation using the element quadrangle]({{ site.baseurl }}{% link vte/validation/heat 2D quadrangle.md %})
 * [Validation in three-dimensions of Heat equation using the element tetrahedron]({{ site.baseurl }}{% link vte/validation/heat 3D tetrahedron.md %})
+* [Validation in three-dimensions of Heat equation using the element hexahedron]({{ site.baseurl }}{% link vte/validation/heat 3D hexahedron.md %})

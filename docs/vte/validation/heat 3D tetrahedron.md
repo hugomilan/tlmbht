@@ -51,7 +51,7 @@ The description of the problem is in the file cheat3Te.tlm. Here, I will explain
 
 #### Explanation of this case file
 
-The case file is structured in headers and I will go over every header in the file cpennes3Te.tlm. This script file is similar to the script file for [validation for Heat equation in 2D with Triangular elements]({{ site.baseurl }}{% link vte/validation/heat 2D triangle.md %}). The differences are the inclusion of one additional boundary condition and changing to three-dimensions.
+The case file is structured in headers and I will go over every header in the file cheat3Te.tlm. This script file is similar to the script file for [validation for Heat equation in 2D with Triangular elements]({{ site.baseurl }}{% link vte/validation/heat 2D triangle.md %}). The differences are the inclusion of one additional boundary condition and changing to three-dimensions.
 
 The first header you see (Simulation), is used to configure parameters common to the equations of the problem. In this case, we are only configuring the output extension to the 'm' (Octave/Matlab m format) so that it is easier to run the validation algorithm.
 
@@ -72,7 +72,7 @@ The Equation header tells the software what equation it should solve and how. Yo
 
     Equation
     {
-        type = pennes;
+        type = heat;
         equation name = heat_name;
         dimensions = 2;
         Solve = dynamic;
@@ -84,7 +84,7 @@ The Equation header tells the software what equation it should solve and how. Yo
         save = vector;
     }
 
-The Material header defines the properties of the equation. You can have different Material headers for different properties in the same problem. We tell tlmbht to what equation this Material header is referred to by giving it the equation name ("BHE"). In number, we give the Material header the Physical tag number that we gave to the elements during the mesh generation. Therefore, the options we input here are going to be applied to the elements with tag number 33. Finally, we defined density, specific heat, thermal conductivity, blood perfusion, blood density, blood specific heat, blood temperature, internal heat generation, and initial temperature (required for time-domain simulations).
+The Material header defines the properties of the equation. You can have different Material headers for different properties in the same problem. We tell tlmbht to what equation this Material header is referred to by giving it the equation name ("heat_name"). In number, we give the Material header the Physical tag number that we gave to the elements during the mesh generation. Therefore, the options we input here are going to be applied to the elements with tag number 33. Finally, we defined density, specific heat, thermal conductivity, blood perfusion, blood density, blood specific heat, blood temperature, internal heat generation, and initial temperature (required for time-domain simulations).
 
     Material
     {
@@ -115,14 +115,14 @@ The Boundary header defines the boundary conditions. You can have different Boun
 
     Boundary
     {
-        equation = BHE;
+        equation = heat_name;
         number = 18;
         Heat flux = 2e4;
     }
 
     Boundary
     {
-        equation = BHE;
+        equation = heat_name;
         number = 24;
         Heat flux = 1e4;
     }
@@ -155,7 +155,10 @@ I hope you have enjoyed this validation section! You may now try to change the c
 
 Remember: you are using a powerful numerical solver. You do not need to be constrained by solutions that can be solved analytically. Explore! Try different boundary conditions, include more materials, etc. Make this problem more realistic!
 
+You might be wondering **how does the tlmbht models for Tetrahedron and Hexahedron elements change?** They don't change. These two validations solve the same problem. The only difference between them is that the mesh for the validation using Tetrahedron elements has only tetrahedrons and the mesh for the validation using Hexahedron elements has only hexahedrons. TLMBHT is capable of solving meshes that have any of these two elements.
+
 
 Now, you can go to:
 
 * [Tutorials, examples, and validations]({{ site.baseurl }}{% link vte/index.md %})
+* [Validation in three-dimensions of Heat equation using the element hexahedron]({{ site.baseurl }}{% link vte/validation/heat 3D hexahedron.md %})
