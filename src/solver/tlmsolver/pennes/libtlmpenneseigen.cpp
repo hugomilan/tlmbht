@@ -1261,9 +1261,6 @@ unsigned int MaterialTetrahedronPennesEigen(struct dataForSimulation *input, str
 
                     // Manually validated
                     Zhat = 1/(1/Z[0] + 1/Z[1] + 1/Z[2] + 1/Z[3] + G);
-//                    Zhat = Z[0] * Z[1] * Z[2] * Z[3] / (Z[0] * Z[1] * Z[2]
-//                            + Z[0] * Z[1] * Z[3] + Z[0] * Z[2] * Z[3]
-//                            + Z[1] * Z[2] * Z[3] + Z[0] * Z[1] * Z[2] * Z[3] * G);
 
                     // Manually validated
                     tau[0] = 2 * Zhat / Z[0];
@@ -1636,6 +1633,7 @@ unsigned int MaterialHexahedronPennesEigen(struct dataForSimulation *input, stru
                     matrices->Vi(numbersNodeAndPort[1] + 3) = matrices->Vi(numbersNodeAndPort[1]);
                     matrices->Vi(numbersNodeAndPort[1] + 4) = matrices->Vi(numbersNodeAndPort[1]);
                     matrices->Vi(numbersNodeAndPort[1] + 5) = matrices->Vi(numbersNodeAndPort[1]);
+                    printf("%g\n%g\n",matrices->E(numbersNodeAndPort[1]), matrices->Vi(numbersNodeAndPort[1]));
 
                     goto end_for_j_and_for_k_hexadron;
                 }

@@ -1031,7 +1031,6 @@ unsigned int getGeometricalVariablesTLMhexahedron(const struct node *N1,
     output[13] = center[0];
     output[14] = center[1];
     output[15] = center[2];
-
     return 0;
 }
 

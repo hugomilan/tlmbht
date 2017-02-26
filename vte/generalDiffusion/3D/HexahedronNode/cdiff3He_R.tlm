@@ -7,7 +7,7 @@ Simulation
 Mesh
 {
     file name = parallelepiped_6BC_H_R_2394e;
-    input format = tlmbht;
+    input format = tlmtbn;
 }
 
 Equation

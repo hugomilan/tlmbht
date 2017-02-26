@@ -5,11 +5,8 @@ Simulation
 
 Mesh
 {
-    //file name = parallelepiped_6BC_H_2394e;
-    //input format = tlmbht;
-    file name = parallelepiped_6BC_H;
-    input format = gmsh;
-    scale = 1e-3;
+    file name = parallelepiped_6BC_H_2394e;
+    input format = tlmtbn;
 }
 
 Equation
