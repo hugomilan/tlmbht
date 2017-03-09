@@ -366,47 +366,47 @@ void sendErrorCodeAndMessage(unsigned int errorCode, void *input1v, void *input2
 
         case 5499:
             // Not enough memory
-            fprintf(stderr, "Not enough memory to allocate the nodes during reading.");
+            fprintf(stderr, "Not enough memory to allocate the nodes during reading");
             break;
 
         case 5501:
             // Not enough memory
-            fprintf(stderr, "Not enough memory to allocate the 2 nodes line elements during reading.");
+            fprintf(stderr, "Not enough memory to allocate the 2 nodes line elements during reading");
             break;
 
         case 5502:
             // Not enough memory
-            fprintf(stderr, "Not enough memory to allocate the 3 nodes triangle elements during reading.");
+            fprintf(stderr, "Not enough memory to allocate the 3 nodes triangle elements during reading");
             break;
 
         case 5503:
             // Not enough memory
-            fprintf(stderr, "Not enough memory to allocate the 4 nodes quadrangle elements during reading.");
+            fprintf(stderr, "Not enough memory to allocate the 4 nodes quadrangle elements during reading");
             break;
 
         case 5504:
             // Not enough memory
-            fprintf(stderr, "Not enough memory to allocate the 4 nodes tetrahedron elements during reading.");
+            fprintf(stderr, "Not enough memory to allocate the 4 nodes tetrahedron elements during reading");
             break;
 
         case 5505:
             // Not enough memory
-            fprintf(stderr, "Not enough memory to allocate the 8 nodes hexahedron elements during reading.");
+            fprintf(stderr, "Not enough memory to allocate the 8 nodes hexahedron elements during reading");
             break;
 
         case 5506:
             // Not enough memory
-            fprintf(stderr, "Not enough memory to allocate the 6 nodes prism elements during reading.");
+            fprintf(stderr, "Not enough memory to allocate the 6 nodes prism elements during reading");
             break;
 
         case 5507:
             // Not enough memory
-            fprintf(stderr, "Not enough memory to allocate the 5 nodes pyramid elements during reading.");
+            fprintf(stderr, "Not enough memory to allocate the 5 nodes pyramid elements during reading");
             break;
 
         case 5515:
             // Not enough memory
-            fprintf(stderr, "Not enough memory to allocate the 1 node point elements during reading.");
+            fprintf(stderr, "Not enough memory to allocate the 1 node point elements during reading");
             break;
 
         case 6514:

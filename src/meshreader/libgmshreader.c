@@ -413,7 +413,7 @@ unsigned int gmshReader(struct MeshConfig * input, struct tlmInternalMesh * outp
                             strcat(codeForReading, "%llu %llu %llu %llu %llu");
 
                             inputGmsh.saveElement
-                                    [inputGmsh.numberOfElementReads].elementCode = 5;
+                                    [inputGmsh.numberOfElementReads].elementCode = 7;
                             inputGmsh.saveElement
                                     [inputGmsh.numberOfElementReads].tag = tagNumber;
 
@@ -520,7 +520,7 @@ unsigned int gmshReader(struct MeshConfig * input, struct tlmInternalMesh * outp
         }
     }
 
-    // converting the TLM codes from the safe values to zero if no error was detected
+    // converting the TLM error codes from the safe values to zero if no error was detected
     // and sending an error message if it happened
     if (errorTLMnumber >= 7652 && errorTLMnumber <= 7658) {
         // this is not an error, just an warning
@@ -582,8 +582,8 @@ unsigned int gmshReader(struct MeshConfig * input, struct tlmInternalMesh * outp
         // 9999 = no memory. Try the other approach
         // trying to save the file, deallocate from the memory, and then read
         if (errorTLMnumber != 9999 ||
-                (errorTLMnumber = writeThenReadGmsh(output, &inputGmsh, pfileWrite, input)) != 0)
-            sendErrorCodeAndMessage(errorTLMnumber, NULL, NULL, NULL, NULL);
+                (errorTLMnumber = writeThenReadGmsh(output, &inputGmsh, &pfileWrite, input)) != 0)
+            ;// not needed because the functions in writeThenReadGmsh already call this function. sendErrorCodeAndMessage(errorTLMnumber, NULL, NULL, NULL, NULL);
     }
 
 
@@ -598,8 +598,9 @@ unsigned int gmshReader(struct MeshConfig * input, struct tlmInternalMesh * outp
     free(nameOfFile);
     nameOfFile = NULL;
 
-    if ((errorTLMnumber = terminateDataGmsh2_2(&inputGmsh)) != 0)
-        sendErrorCodeAndMessage(errorTLMnumber, NULL, NULL, NULL, NULL);
+    unsigned int errorTLMnumber2;
+    if ((errorTLMnumber2 = terminateDataGmsh2_2(&inputGmsh)) != 0)
+        sendErrorCodeAndMessage(errorTLMnumber2, NULL, NULL, NULL, NULL);
 
     return errorTLMnumber;
 }
@@ -891,7 +892,7 @@ unsigned int readAndWriteGmsh(struct tlmInternalMesh * output,
  * the internal mesh
  */
 unsigned int writeThenReadGmsh(struct tlmInternalMesh * output,
-        struct dataGmsh2_2 * inputGmsh, FILE * saveFile, struct MeshConfig * input) {
+        struct dataGmsh2_2 * inputGmsh, FILE ** saveFile, struct MeshConfig * input) {
     unsigned int errorTLMnumber;
 
     fprintf(stderr, "WARNING: Not enough memory to open and save the mesh at the same time. "
@@ -904,7 +905,7 @@ unsigned int writeThenReadGmsh(struct tlmInternalMesh * output,
 
 
     // only save the file, that is, do not save anything to output
-    if ((errorTLMnumber = onlyWriteGmsh2_2(inputGmsh, saveFile)) != 0) {
+    if ((errorTLMnumber = onlyWriteGmsh2_2(inputGmsh, *saveFile)) != 0) {
         // error here. Treat it
         sendErrorCodeAndMessage(errorTLMnumber, NULL, NULL, NULL, NULL);
         return errorTLMnumber;
@@ -912,8 +913,8 @@ unsigned int writeThenReadGmsh(struct tlmInternalMesh * output,
 
 
     // closing the file to be read by the functions below
-    fclose(saveFile);
-    saveFile = NULL;
+    fclose(*saveFile);
+    *saveFile = NULL;
 
     // now deallocate what we have read from Gmsh
     if ((errorTLMnumber = terminateDataGmsh2_2(inputGmsh)) != 0) {
@@ -930,10 +931,18 @@ unsigned int writeThenReadGmsh(struct tlmInternalMesh * output,
     input->scale[1] = 1;
     scale_temp[2] = input->scale[2];
     input->scale[2] = 1;
+    
+    // change the number of the input mesh file to the output mesh file
+    input->nameOfInputFile = realloc(input->nameOfInputFile, (strlen(input->nameOfOutputFile) + 1)*sizeof(char));
+    strcpy(input->nameOfInputFile, input->nameOfOutputFile);
 
+    // initiate the internal mesh
+    if ((errorTLMnumber = initiateTlmInternalMesh(output)) != 0) {
+        return errorTLMnumber;
+    }
+    
     // call the function that reads the tlm native format
     if ((errorTLMnumber = tbnReader(input, output)) != 0) {
-        sendErrorCodeAndMessage(errorTLMnumber, NULL, NULL, NULL, NULL);
         return errorTLMnumber;
     }
     

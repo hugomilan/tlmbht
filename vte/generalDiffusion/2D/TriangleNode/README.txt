@@ -5,7 +5,7 @@ Here is how you can run the validation for the different equations:
     1.2) Heat equation validation: ./tlmbht cheat2Tr.tlm
     1.3) Pennes equation validation: ./tlmbht cpennes2Tr.tlm
 
-2) Open and run the Octave/Matlab script. The script will load the results, plots numerical and analytical results, and show differences and percentage errors. Open and run the following scripts accordingly to what you want to validate (if you script does not run, try 'clear all' to delete everything from your environment):
+2) Open and run the Octave/Matlab script. The script will load the results, plots numerical and analytical results, and show differences and percentage errors. Open and run the following scripts accordingly to what you want to validate (if the script does not run, try 'clear all' to delete everything from your environment):
     2.1) Diffusion equation validation: vdiff2Tr.m
     2.2) Heat equation validation: vheat2Tr.m
     2.3) Pennes equation validation: vpennes2Tr.m

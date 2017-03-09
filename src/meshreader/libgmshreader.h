@@ -96,7 +96,7 @@ extern "C" {
     // save the text file
     unsigned int readAndWriteGmsh(struct tlmInternalMesh *, struct dataGmsh2_2 *, FILE *);
     unsigned int onlyWriteGmsh2_2(struct dataGmsh2_2 *, FILE *);
-    unsigned int writeThenReadGmsh(struct tlmInternalMesh *, struct dataGmsh2_2 *, FILE *,
+    unsigned int writeThenReadGmsh(struct tlmInternalMesh *, struct dataGmsh2_2 *, FILE **,
             struct MeshConfig *);
 
 

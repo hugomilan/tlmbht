@@ -281,6 +281,9 @@ extern "C" {
             const struct node *, const struct node *, const struct node *, double*);
     unsigned int getGeometricalVariablesTLMtetrahedron(const struct node *,
             const struct node *, const struct node *, const struct node *, double*);
+    unsigned int getGeometricalVariablesTLMpyramid(const struct node *,
+            const struct node *, const struct node *, const struct node *,
+            const struct node *, double*);
     unsigned int getGeometricalVariablesTLMhexahedron(const struct node *,
             const struct node *, const struct node *, const struct node *, const struct node *,
             const struct node *, const struct node *, const struct node *, double*);

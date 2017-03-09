@@ -137,56 +137,56 @@ unsigned int allocateTLMInternalMeshNodesAndElements(struct tlmInternalMesh *inp
 unsigned int allocateTLMInternalMeshElementsOnly(struct tlmInternalMesh *input, const int *i) {
     switch (*i) {
         case 1: // 2 nodes line
-            if ((input->elements.Line = (struct elementLine*)
+            if ((input->elements.Line =
                     realloc(input->elements.Line, sizeof (struct elementLine)*
                     input->quantityOfSpecificElement[*i])) == NULL)
                 return 5501; // this means that the computer does not have memory for this.
             break;
 
         case 2: // 3 nodes triangle
-            if ((input->elements.Triangle = (struct elementTriangle*)
+            if ((input->elements.Triangle =
                     realloc(input->elements.Triangle, sizeof (struct elementTriangle)*
                     input->quantityOfSpecificElement[*i])) == NULL)
                 return 5502; // this means that the computer does not have memory for this.
             break;
 
         case 3: // 4 nodes quadrangle
-            if ((input->elements.Quadrangle = (struct elementQuadrangle*)
+            if ((input->elements.Quadrangle =
                     realloc(input->elements.Quadrangle, sizeof (struct elementQuadrangle)*
                     input->quantityOfSpecificElement[*i])) == NULL)
                 return 5503; // this means that the computer does not have memory for this.
             break;
 
         case 4: // 4 nodes tetrahedron
-            if ((input->elements.Tetrahedron = (struct elementTetrahedron*)
+            if ((input->elements.Tetrahedron =
                     realloc(input->elements.Tetrahedron, sizeof (struct elementTetrahedron)*
                     input->quantityOfSpecificElement[*i])) == NULL)
                 return 5504; // this means that the computer does not have memory for this.
             break;
 
         case 5: // 8 nodes hexahedron
-            if ((input->elements.Hexahedron = (struct elementHexahedron*)
+            if ((input->elements.Hexahedron =
                     realloc(input->elements.Hexahedron, sizeof (struct elementHexahedron)*
                     input->quantityOfSpecificElement[*i])) == NULL)
                 return 5505; // this means that the computer does not have memory for this.
             break;
 
         case 6: // 6 nodes prism
-            if ((input->elements.Prism = (struct elementPrism*)
+            if ((input->elements.Prism =
                     realloc(input->elements.Prism, sizeof (struct elementPrism)*
                     input->quantityOfSpecificElement[*i])) == NULL)
                 return 5506; // this means that the computer does not have memory for this.
             break;
 
         case 7: // 5 nodes pyramid
-            if ((input->elements.Pyramid = (struct elementPyramid*)
+            if ((input->elements.Pyramid =
                     realloc(input->elements.Pyramid, sizeof (struct elementPyramid)*
-                    input->quantityOfSpecificElement[*i])) == NULL);
-            return 5507; // this means that the computer does not have memory for this.
+                    input->quantityOfSpecificElement[*i])) == NULL)
+                return 5507; // this means that the computer does not have memory for this.
             break;
 
         case 15: // 1 node point
-            if ((input->elements.Point = (struct elementPoint*)
+            if ((input->elements.Point =
                     realloc(input->elements.Point, sizeof (struct elementPoint)*
                     input->quantityOfSpecificElement[*i])) == NULL)
                 return 5515; // this means that the computer does not have memory for this.

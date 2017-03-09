@@ -58,6 +58,8 @@ unsigned int MaterialTetrahedronPennesEigen(struct dataForSimulation *, struct c
 
 unsigned int MaterialHexahedronPennesEigen(struct dataForSimulation *, struct calculationTLMEigen *, int);
 
+unsigned int MaterialPyramidPennesEigen(struct dataForSimulation *, struct calculationTLMEigen *, int);
+
 unsigned int connectionsAndBoundariesPennesEigen(struct calculationTLMEigen *, struct boundaryData *,
         struct connectionLeveln *, struct dataForSimulation *, int id);
 

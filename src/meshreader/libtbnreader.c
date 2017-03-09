@@ -76,14 +76,6 @@ unsigned int tbnReader(struct MeshConfig * input, struct tlmInternalMesh * outpu
         return 764;
     }
 
-    // initiating the mesh
-    if ((errorTLMnumber = initiateTlmInternalMesh(output)) != 0) {
-        free(nameOfFile);
-        nameOfFile = NULL;
-        return errorTLMnumber;
-    }
-
-
     // reads until we find the end-of-file character
     while (getlineTlmbht(&pline, &lenLine, pfile) != 1) {
         // I start the loop checking the variable for error.
@@ -226,7 +218,7 @@ unsigned int tbnReader(struct MeshConfig * input, struct tlmInternalMesh * outpu
                         output->quantityOfSpecificElement[elementCode] = quantityOfElements;
 
                         if ((errorTLMnumber = allocateTLMInternalMeshElementsOnly(output, &elementCode)) != 0) {
-                            continue;
+                            break;
                         }
                     }
 
@@ -336,7 +328,7 @@ unsigned int tbnReader(struct MeshConfig * input, struct tlmInternalMesh * outpu
         sendErrorCodeAndMessage(errorTLMnumber, &lineNumber, lineOriginal, NULL, NULL);
 
     // testing the output variable
-    if (errorTLMnumber != 0 && (errorTLMnumber = testTlmInternalMesh(output)) != 0)
+    if (errorTLMnumber == 0 && (errorTLMnumber = testTlmInternalMesh(output)) != 0)
         sendErrorCodeAndMessage(errorTLMnumber, NULL, NULL, NULL, NULL);
 
     if (errorTLMnumber == 0)

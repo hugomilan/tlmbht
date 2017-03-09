@@ -812,61 +812,7 @@ unsigned int getGeometricalVariablesTLMtetrahedron(const struct node *N1,
      *                      edge 4
      */
     // lengths of the edges
-    double deltaXL[6], deltaYL[6], deltaZL[6], length[6];
-    double volume, area[4], areaX[4], areaY[4], areaZ[4], center[3];
-    double deltaXl[4], deltaYl[4], deltaZl[4], deltal[4];
-
-    deltaXL[0] = N2->x - N1->x;
-    deltaYL[0] = N2->y - N1->y;
-    deltaZL[0] = N2->z - N1->z;
-    length[0] = sqrt(deltaXL[0] * deltaXL[0] + deltaYL[0] * deltaYL[0] + deltaZL[0] * deltaZL[0]);
-
-    deltaXL[1] = N3->x - N1->x;
-    deltaYL[1] = N3->y - N1->y;
-    deltaZL[1] = N3->z - N1->z;
-    length[1] = sqrt(deltaXL[1] * deltaXL[1] + deltaYL[1] * deltaYL[1] + deltaZL[1] * deltaZL[1]);
-
-    deltaXL[2] = N4->x - N1->x;
-    deltaYL[2] = N4->y - N1->y;
-    deltaZL[2] = N4->z - N1->z;
-    length[2] = sqrt(deltaXL[2] * deltaXL[2] + deltaYL[2] * deltaYL[2] + deltaZL[2] * deltaZL[2]);
-
-    deltaXL[3] = N3->x - N2->x;
-    deltaYL[3] = N3->y - N2->y;
-    deltaZL[3] = N3->z - N2->z;
-    length[3] = sqrt(deltaXL[3] * deltaXL[3] + deltaYL[3] * deltaYL[3] + deltaZL[3] * deltaZL[3]);
-
-    deltaXL[4] = N4->x - N2->x;
-    deltaYL[4] = N4->y - N2->y;
-    deltaZL[4] = N4->z - N2->z;
-    length[4] = sqrt(deltaXL[4] * deltaXL[4] + deltaYL[4] * deltaYL[4] + deltaZL[4] * deltaZL[4]);
-
-    deltaXL[5] = N4->x - N3->x;
-    deltaYL[5] = N4->y - N3->y;
-    deltaZL[5] = N4->z - N3->z;
-    length[5] = sqrt(deltaXL[5] * deltaXL[5] + deltaYL[5] * deltaYL[5] + deltaZL[5] * deltaZL[5]);
-
-    areaX[0] = deltaYL[0] * deltaZL[1] - deltaYL[1] * deltaZL[0];
-    areaY[0] = deltaXL[1] * deltaZL[0] - deltaXL[0] * deltaZL[1];
-    areaZ[0] = deltaXL[0] * deltaYL[1] - deltaXL[1] * deltaYL[0];
-    area[0] = sqrt(areaX[0] * areaX[0] + areaY[0] * areaY[0] + areaZ[0] * areaZ[0]) / 2;
-
-    areaX[1] = deltaYL[0] * deltaZL[2] - deltaYL[2] * deltaZL[0];
-    areaY[1] = deltaXL[2] * deltaZL[0] - deltaXL[0] * deltaZL[2];
-    areaZ[1] = deltaXL[0] * deltaYL[2] - deltaXL[2] * deltaYL[0];
-    area[1] = sqrt(areaX[1] * areaX[1] + areaY[1] * areaY[1] + areaZ[1] * areaZ[1]) / 2;
-
-    areaX[2] = deltaYL[1] * deltaZL[2] - deltaYL[2] * deltaZL[1];
-    areaY[2] = deltaXL[2] * deltaZL[1] - deltaXL[1] * deltaZL[2];
-    areaZ[2] = deltaXL[1] * deltaYL[2] - deltaXL[2] * deltaYL[1];
-    area[2] = sqrt(areaX[2] * areaX[2] + areaY[2] * areaY[2] + areaZ[2] * areaZ[2]) / 2;
-
-    areaX[3] = deltaYL[3] * deltaZL[4] - deltaYL[4] * deltaZL[3];
-    areaY[3] = deltaXL[4] * deltaZL[3] - deltaXL[3] * deltaZL[4];
-    areaZ[3] = deltaXL[3] * deltaYL[4] - deltaXL[4] * deltaYL[3];
-    area[3] = sqrt(areaX[3] * areaX[3] + areaY[3] * areaY[3] + areaZ[3] * areaZ[3]) / 2;
-
-    volume = fabs(areaX[2] * deltaXL[0] + areaY[2] * deltaYL[0] + areaZ[2] * deltaZL[0]) / 6;
+    double center[3], deltaXl[4], deltaYl[4], deltaZl[4], deltal[4];
 
 
     center[0] = (N1->x + N2->x + N3->x + N4->x) / 4;
@@ -908,6 +854,104 @@ unsigned int getGeometricalVariablesTLMtetrahedron(const struct node *N1,
 
     return 0;
 }
+
+
+
+/*
+ * getGeometricalVariablesTLMpyramid: Receives the x, y, z from the nodes and
+ * calculates the geometrical characteristics of the pyramid. Pointwise validated.
+ */
+unsigned int getGeometricalVariablesTLMpyramid(const struct node *N1,
+        const struct node *N2, const struct node *N3, const struct node *N4,
+        const struct node *N5, double *output) {
+    // 0 - length of port 1 (from center of pyramid to center of area 1)
+    // 1 - length of port 2 (from center of pyramid to center of area 2)
+    // 2 - length of port 3 (from center of pyramid to center of area 3)
+    // 3 - length of port 4 (from center of pyramid to center of area 4)
+    // 4 - length of port 4 (from center of pyramid to center of area 5)
+    // 5 - area of quadrangle 1
+    // 6 - area of triangle 2
+    // 7 - area of triangle 3
+    // 8 - area of triangle 4
+    // 9 - area of triangle 5
+    // 10 - volume of the pyramid
+    // 11 - pyramid's center x
+    // 12 - pyramid's center y
+    // 13 - pyramid's center z
+
+    // port 1: N1, N2, N3, and N4
+    // port 2: N1, N2, and N5
+    // port 3: N1, N4, and N5
+    // port 4: N2, N3, and N5
+    // port 5: N3, N4, and N5
+
+    /* pyramid nomenclature.
+     *                                  
+     *         vertex 4  ________________________________ vertex 3
+     *                  /\___    area 5        _________/|           
+     *                 /3    \____  __________/         /         
+     *                /           \/vertex 5   1       4|            
+     *               /a         __/\__                 /   
+     *              /e       __/      \__    a        a|  
+     *             /r     __/            \__e        e/      
+     *            /a   __/                 r\__      r|
+     *           /  __/       area 2      a    \__  a/ 
+     * vertex 1 /__/______________________________\__| vertex 2
+     *      
+     *                            
+     */
+    // lengths of the edges
+    double center[3], deltaXl[5], deltaYl[5], deltaZl[5], deltal[5],temp;
+
+
+    center[0] = (N1->x + N2->x + N3->x + N4->x + N5->x) / 5;
+    center[1] = (N1->y + N2->y + N3->y + N4->y + N5->y) / 5;
+    center[2] = (N1->z + N2->z + N3->z + N4->z + N5->z) / 5;
+
+    deltaXl[0] = (N1->x + N2->x + N3->x + N4->x) / 4 - center[0];
+    deltaYl[0] = (N1->y + N2->y + N3->y + N4->y) / 4 - center[1];
+    deltaZl[0] = (N1->z + N2->z + N3->z + N4->z) / 4 - center[2];
+    deltal[0] = sqrt(deltaXl[0] * deltaXl[0] + deltaYl[0] * deltaYl[0] + deltaZl[0] * deltaZl[0]);
+
+    deltaXl[1] = (N1->x + N2->x + N5->x) / 3 - center[0];
+    deltaYl[1] = (N1->y + N2->y + N5->y) / 3 - center[1];
+    deltaZl[1] = (N1->z + N2->z + N5->z) / 3 - center[2];
+    deltal[1] = sqrt(deltaXl[1] * deltaXl[1] + deltaYl[1] * deltaYl[1] + deltaZl[1] * deltaZl[1]);
+
+    deltaXl[2] = (N1->x + N4->x + N5->x) / 3 - center[0];
+    deltaYl[2] = (N1->y + N4->y + N5->y) / 3 - center[1];
+    deltaZl[2] = (N1->z + N4->z + N5->z) / 3 - center[2];
+    deltal[2] = sqrt(deltaXl[2] * deltaXl[2] + deltaYl[2] * deltaYl[2] + deltaZl[2] * deltaZl[2]);
+
+    deltaXl[3] = (N2->x + N3->x + N5->x) / 3 - center[0];
+    deltaYl[3] = (N2->y + N3->y + N5->y) / 3 - center[1];
+    deltaZl[3] = (N2->z + N3->z + N5->z) / 3 - center[2];
+    deltal[3] = sqrt(deltaXl[3] * deltaXl[3] + deltaYl[3] * deltaYl[3] + deltaZl[3] * deltaZl[3]);
+    
+    deltaXl[4] = (N3->x + N4->x + N5->x) / 3 - center[0];
+    deltaYl[4] = (N3->y + N4->y + N5->y) / 3 - center[1];
+    deltaZl[4] = (N3->z + N4->z + N5->z) / 3 - center[2];
+    deltal[4] = sqrt(deltaXl[4] * deltaXl[4] + deltaYl[4] * deltaYl[4] + deltaZl[4] * deltaZl[4]);
+
+    output[0] = deltal[0];
+    output[1] = deltal[1];
+    output[2] = deltal[2];
+    output[3] = deltal[3];
+    output[4] = deltal[4];
+    triangleArea(N1, N2, N5, &output[6]);
+    triangleArea(N1, N4, N5, &output[7]);
+    triangleArea(N2, N3, N5, &output[8]);
+    triangleArea(N3, N4, N5, &output[9]);
+    tetrahedronVolume(N1, N2, N3, N5, &temp);
+    tetrahedronVolume(N1, N2, N4, N5, &output[10]);
+    output[10] = output[10] + temp;
+    output[11] = center[0];
+    output[12] = center[1];
+    output[13] = center[2];
+
+    return 0;
+}
+
 
 /*
  * getGeometricalVariablesTLMhexahedron: Receives the x, y, z from the nodes and

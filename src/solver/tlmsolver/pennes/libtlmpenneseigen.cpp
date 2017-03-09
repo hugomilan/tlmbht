@@ -389,11 +389,10 @@ unsigned int calculateMatricesPennesEigen(struct dataForSimulation *input,
             printf("Calculating the matrix for the pyramid nodes...\n");
         }
         clock_t begin_Pyramid = clock();
-        printf("\n\nPyramid node was not implemented yet\n\n");
-//        if ((errorTLMnumber = MaterialTetrahedronPennesEigen(input, matrices, id)) != 0) {
-//            sendErrorCodeAndMessage(errorTLMnumber, NULL, NULL, NULL, NULL);
-//            return errorTLMnumber;
-//        }
+        if ((errorTLMnumber = MaterialPyramidPennesEigen(input, matrices, id)) != 0) {
+            sendErrorCodeAndMessage(errorTLMnumber, NULL, NULL, NULL, NULL);
+            return errorTLMnumber;
+        }
         clock_t end_Pyramid = clock();
         if (input->simulationInput.verboseMode == 1) {
             printf("Done calculating the matrix for the pyramid nodes.\n");
@@ -1340,9 +1339,9 @@ unsigned int MaterialTetrahedronPennesEigen(struct dataForSimulation *input, str
                     matrices->Vi(numbersNodeAndPort[1] + 2) = matrices->Vi(numbersNodeAndPort[1]);
                     matrices->Vi(numbersNodeAndPort[1] + 3) = matrices->Vi(numbersNodeAndPort[1]);
 
-                    goto end_for_j_and_for_k_triangle;
+                    goto end_for_j_and_for_k_tetrahedron;
                 }
-end_for_j_and_for_k_triangle:
+end_for_j_and_for_k_tetrahedron:
         ;
     }
     return 0;
@@ -1638,6 +1637,250 @@ unsigned int MaterialHexahedronPennesEigen(struct dataForSimulation *input, stru
                     goto end_for_j_and_for_k_hexadron;
                 }
 end_for_j_and_for_k_hexadron:
+        ;
+    }
+    return 0;
+}
+
+
+
+
+/*
+ * MaterialPyramidPennesEigen: Calculates the parameters to set the pyramid
+ * as material in a 3D simulation.
+ * hexahedron as a boundary was not implemented yet.
+ */
+unsigned int MaterialPyramidPennesEigen(struct dataForSimulation *input, struct calculationTLMEigen *matrices, int id) {
+    unsigned int errorTLMnumber;
+    unsigned long long numbersNodeAndPort[] = {0, 0};
+    // 0 - number of node
+    // 1 - number of port 0
+    unsigned int j2;
+    double Cd, Z[5], R[5], G, Is, Zhat, tau[5];
+
+
+
+    /* pyramid nomenclature.
+     *                                  
+     *         vertex 4  ________________________________ vertex 3
+     *                  /\___    area 5        _________/|           
+     *                 /3    \____  __________/         /         
+     *                /           \/vertex 5   1       4|            
+     *               /a         __/\__                 /   
+     *              /e       __/      \__    a        a|  
+     *             /r     __/            \__e        e/      
+     *            /a   __/                 r\__      r|
+     *           /  __/       area 2      a    \__  a/ 
+     * vertex 1 /__/______________________________\__| vertex 2
+     *      
+     *                            
+     */
+    // pyramids can be boundary conditions and mediums. The boundary conditions
+    // version was not implemented yet.   
+    // element code 7: 5 nodes pyramid. Used only for medium only. The boundary
+    // condition version was not implemented yet
+    double *tempVar = NULL;
+    tempVar = (double *) realloc(tempVar, sizeof (double)*14);
+    // 0 - length of port 1 (from center of pyramid to center of area 1)
+    // 1 - length of port 2 (from center of pyramid to center of area 2)
+    // 2 - length of port 3 (from center of pyramid to center of area 3)
+    // 3 - length of port 4 (from center of pyramid to center of area 4)
+    // 4 - length of port 4 (from center of pyramid to center of area 5)
+    // 5 - area of quadrangle 1
+    // 6 - area of triangle 2
+    // 7 - area of triangle 3
+    // 8 - area of triangle 4
+    // 9 - area of triangle 5
+    // 10 - volume of the pyramid
+    // 11 - pyramid's center x
+    // 12 - pyramid's center y
+    // 13 - pyramid's center z
+    for (unsigned long long i = 0; i < input->mesh.quantityOfSpecificElement[7]; i++) {
+        // i: element level
+        // j: material (of equation id) type level
+        // k: different tag numbers for the same material type
+        // j2: the material number from equation. Used to reduce the access to input->equationInput[id].materialNumbers[j]
+        for (unsigned int j = 0; j < input->equationInput[id].numberOfMaterials; j++)
+            for (unsigned int k = 0; k < input->materialInput[ input->equationInput[id].materialNumbers[j] ].quantityOfNumberInput; k++)
+                if (input->mesh.elements.Pyramid[i].tag == input->materialInput[ input->equationInput[id].materialNumbers[j] ].numberInput[k]) {
+                    j2 = input->equationInput[id].materialNumbers[j];
+                    // I will use goto to get out of these two inner 'for' loops. Bare in mind
+                    // that I'm just getting out the loops. You can also think that 
+                    // I'm going to the next 'i', that is, incrementing i by 1 and going
+                    // to the next value of i (if any).
+                    getRealNodeAndPort_fromAbstractNode(7, // element code
+                            i, // element number
+                            matrices->numbers.abstractPortsToReal,
+                            numbersNodeAndPort);
+
+                    // the -1 is necessary because the C indexing starts at zero
+                    // and my number of node starts at 1
+                    getGeometricalVariablesTLMpyramid(&input->mesh.nodes[input->mesh.elements.Pyramid[i].N1 - 1],
+                            &input->mesh.nodes[input->mesh.elements.Pyramid[i].N2 - 1],
+                            &input->mesh.nodes[input->mesh.elements.Pyramid[i].N3 - 1],
+                            &input->mesh.nodes[input->mesh.elements.Pyramid[i].N4 - 1],
+                            &input->mesh.nodes[input->mesh.elements.Pyramid[i].N5 - 1], tempVar);
+
+                    matrices->L[numbersNodeAndPort[1] + 0] = tempVar[5]; // area of face 1
+                    matrices->L[numbersNodeAndPort[1] + 1] = tempVar[6]; // area of face 2
+                    matrices->L[numbersNodeAndPort[1] + 2] = tempVar[7]; // area of face 3
+                    matrices->L[numbersNodeAndPort[1] + 3] = tempVar[8]; // area of face 4
+                    matrices->L[numbersNodeAndPort[1] + 4] = tempVar[9]; // area of face 5
+
+                    matrices->deltal[numbersNodeAndPort[1] + 0] = tempVar[0]; // length of port 1
+                    matrices->deltal[numbersNodeAndPort[1] + 1] = tempVar[1]; // length of port 2
+                    matrices->deltal[numbersNodeAndPort[1] + 2] = tempVar[2]; // length of port 3
+                    matrices->deltal[numbersNodeAndPort[1] + 3] = tempVar[3]; // length of port 4
+                    matrices->deltal[numbersNodeAndPort[1] + 4] = tempVar[4]; // length of port 5
+
+                    // generalization of Cd
+                    Cd = tempVar[10] * input->materialInput[j2].generalized_coefficient_b /
+                            (tempVar[0] + tempVar[1] + tempVar[2] + tempVar[3] + tempVar[4]);
+
+                    // generalization of R
+                    R[0] = tempVar[0] / (input->materialInput[j2].generalized_diffusionCoeff * tempVar[5]);
+                    R[1] = tempVar[1] / (input->materialInput[j2].generalized_diffusionCoeff * tempVar[6]);
+                    R[2] = tempVar[2] / (input->materialInput[j2].generalized_diffusionCoeff * tempVar[7]);
+                    R[3] = tempVar[3] / (input->materialInput[j2].generalized_diffusionCoeff * tempVar[8]);
+                    R[4] = tempVar[4] / (input->materialInput[j2].generalized_diffusionCoeff * tempVar[9]);
+
+                    // generalization of G
+                    G = tempVar[10] * input->materialInput[j2].generalized_sink_a;
+
+                    // generalization of Is
+                    Is = tempVar[10] * input->materialInput[j2].generalized_source;
+
+                    // Z = dt/(2*C*deltal).
+                    Z[0] = input->equationInput[id].timeStep / (2 * Cd);
+                    Z[1] = Z[0] / tempVar[1];
+                    Z[2] = Z[0] / tempVar[2];
+                    Z[3] = Z[0] / tempVar[3];
+                    Z[4] = Z[0] / tempVar[4];
+                    Z[0] = Z[0] / tempVar[0];
+
+                    // all the impedances
+                    matrices->Z[numbersNodeAndPort[1] + 0] = Z[0];
+                    matrices->Z[numbersNodeAndPort[1] + 1] = Z[1];
+                    matrices->Z[numbersNodeAndPort[1] + 2] = Z[2];
+                    matrices->Z[numbersNodeAndPort[1] + 3] = Z[3];
+                    matrices->Z[numbersNodeAndPort[1] + 4] = Z[4];
+
+                    // all the resistances
+                    matrices->R[numbersNodeAndPort[1] + 0] = R[0];
+                    matrices->R[numbersNodeAndPort[1] + 1] = R[1];
+                    matrices->R[numbersNodeAndPort[1] + 2] = R[2];
+                    matrices->R[numbersNodeAndPort[1] + 3] = R[3];
+                    matrices->R[numbersNodeAndPort[1] + 4] = R[4];
+
+
+                    // Manually validated
+                    Zhat = 1/(1/Z[0] + 1/Z[1] + 1/Z[2] + 1/Z[3] + 1/Z[4] + G);
+
+                    // Manually validated
+                    tau[0] = 2 * Zhat / Z[0];
+                    tau[1] = 2 * Zhat / Z[1];
+                    tau[2] = 2 * Zhat / Z[2];
+                    tau[3] = 2 * Zhat / Z[3];
+                    tau[4] = 2 * Zhat / Z[4];
+
+                    // this is actually matrix S.
+                    // M = C*S
+                    // this matrix is M[line][column].
+                    matrices->M.insert(numbersNodeAndPort[1] + 0,
+                            numbersNodeAndPort[1] + 0) = tau[0] - 1;
+                    matrices->M.insert(numbersNodeAndPort[1] + 0,
+                            numbersNodeAndPort[1] + 1) = tau[1];
+                    matrices->M.insert(numbersNodeAndPort[1] + 0,
+                            numbersNodeAndPort[1] + 2) = tau[2];
+                    matrices->M.insert(numbersNodeAndPort[1] + 0,
+                            numbersNodeAndPort[1] + 3) = tau[3];
+                    matrices->M.insert(numbersNodeAndPort[1] + 0,
+                            numbersNodeAndPort[1] + 4) = tau[4];
+
+                    matrices->M.insert(numbersNodeAndPort[1] + 1,
+                            numbersNodeAndPort[1] + 0) = tau[0];
+                    matrices->M.insert(numbersNodeAndPort[1] + 1,
+                            numbersNodeAndPort[1] + 1) = tau[1] - 1;
+                    matrices->M.insert(numbersNodeAndPort[1] + 1,
+                            numbersNodeAndPort[1] + 2) = tau[2];
+                    matrices->M.insert(numbersNodeAndPort[1] + 1,
+                            numbersNodeAndPort[1] + 3) = tau[3];
+                    matrices->M.insert(numbersNodeAndPort[1] + 1,
+                            numbersNodeAndPort[1] + 4) = tau[4];
+
+                    matrices->M.insert(numbersNodeAndPort[1] + 2,
+                            numbersNodeAndPort[1] + 0) = tau[0];
+                    matrices->M.insert(numbersNodeAndPort[1] + 2,
+                            numbersNodeAndPort[1] + 1) = tau[1];
+                    matrices->M.insert(numbersNodeAndPort[1] + 2,
+                            numbersNodeAndPort[1] + 2) = tau[2] - 1;
+                    matrices->M.insert(numbersNodeAndPort[1] + 2,
+                            numbersNodeAndPort[1] + 3) = tau[3];
+                    matrices->M.insert(numbersNodeAndPort[1] + 2,
+                            numbersNodeAndPort[1] + 4) = tau[4];
+
+                    matrices->M.insert(numbersNodeAndPort[1] + 3,
+                            numbersNodeAndPort[1] + 0) = tau[0];
+                    matrices->M.insert(numbersNodeAndPort[1] + 3,
+                            numbersNodeAndPort[1] + 1) = tau[1];
+                    matrices->M.insert(numbersNodeAndPort[1] + 3,
+                            numbersNodeAndPort[1] + 2) = tau[2];
+                    matrices->M.insert(numbersNodeAndPort[1] + 3,
+                            numbersNodeAndPort[1] + 3) = tau[3] - 1;
+                    matrices->M.insert(numbersNodeAndPort[1] + 3,
+                            numbersNodeAndPort[1] + 4) = tau[4];
+                    
+                    matrices->M.insert(numbersNodeAndPort[1] + 4,
+                            numbersNodeAndPort[1] + 0) = tau[0];
+                    matrices->M.insert(numbersNodeAndPort[1] + 4,
+                            numbersNodeAndPort[1] + 1) = tau[1];
+                    matrices->M.insert(numbersNodeAndPort[1] + 4,
+                            numbersNodeAndPort[1] + 2) = tau[2];
+                    matrices->M.insert(numbersNodeAndPort[1] + 4,
+                            numbersNodeAndPort[1] + 3) = tau[3];
+                    matrices->M.insert(numbersNodeAndPort[1] + 4,
+                            numbersNodeAndPort[1] + 4) = tau[4] - 1;
+
+                    // matrix tau
+                    matrices->tau.insert(numbersNodeAndPort[0],
+                            numbersNodeAndPort[1] + 0) = tau[0];
+                    matrices->tau.insert(numbersNodeAndPort[0],
+                            numbersNodeAndPort[1] + 1) = tau[1];
+                    matrices->tau.insert(numbersNodeAndPort[0],
+                            numbersNodeAndPort[1] + 2) = tau[2];
+                    matrices->tau.insert(numbersNodeAndPort[0],
+                            numbersNodeAndPort[1] + 3) = tau[3];
+                    matrices->tau.insert(numbersNodeAndPort[0],
+                            numbersNodeAndPort[1] + 3) = tau[4];
+
+                    // this is actually matrix ZIS.
+                    // E = C*ZIS + B
+                    matrices->E(numbersNodeAndPort[1] + 0) = Zhat*Is;
+                    matrices->E(numbersNodeAndPort[1] + 1) = Zhat*Is;
+                    matrices->E(numbersNodeAndPort[1] + 2) = Zhat*Is;
+                    matrices->E(numbersNodeAndPort[1] + 3) = Zhat*Is;
+                    matrices->E(numbersNodeAndPort[1] + 4) = Zhat*Is;
+
+                    // matrix E_output
+                    matrices->E_output(numbersNodeAndPort[0]) = Zhat*Is;
+
+                    // the center of the tetrahedron
+                    matrices->Points_output[numbersNodeAndPort[0]].x = tempVar[11];
+                    matrices->Points_output[numbersNodeAndPort[0]].y = tempVar[12];
+                    matrices->Points_output[numbersNodeAndPort[0]].z = tempVar[13];
+
+                    // Vi0 = (Ti - ZIS)/sum(tau)
+                    // generalization of the initial value
+                    matrices->Vi(numbersNodeAndPort[1]) = (input->materialInput[j2].generalized_initialScalar
+                            - matrices->E(numbersNodeAndPort[1])) / (tau[0] + tau[1] + tau[2] + tau[3] + tau[4]);
+                    matrices->Vi(numbersNodeAndPort[1] + 1) = matrices->Vi(numbersNodeAndPort[1]);
+                    matrices->Vi(numbersNodeAndPort[1] + 2) = matrices->Vi(numbersNodeAndPort[1]);
+                    matrices->Vi(numbersNodeAndPort[1] + 3) = matrices->Vi(numbersNodeAndPort[1]);
+                    matrices->Vi(numbersNodeAndPort[1] + 4) = matrices->Vi(numbersNodeAndPort[1]);
+
+                    goto end_for_j_and_for_k_pyramid;
+                }
+end_for_j_and_for_k_pyramid:
         ;
     }
     return 0;
