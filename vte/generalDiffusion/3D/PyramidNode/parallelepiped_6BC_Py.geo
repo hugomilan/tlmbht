@@ -6,7 +6,7 @@
 //
 // Gmsh project created on Tue Mar  7 08:39:49 2017
 
-size = 0.05;
+size = 0.1;
 // points at z = 0
 Point(1) = {0, 0, 0, size};
 Point(2) = {0.75, 0, 0, size};
