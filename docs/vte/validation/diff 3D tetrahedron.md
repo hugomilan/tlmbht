@@ -153,9 +153,10 @@ I hope you have enjoyed this validation section! You may now try to change the c
 
 Remember: you are using a powerful numerical solver. You do not need to be constrained by solutions that can be solved analytically. Explore! Try different boundary conditions, include more materials, etc. Make this problem more realistic!
 
-You might be wondering **how does the tlmbht models for Tetrahedron and Hexahedron elements change?** They don't change. These two validations solve the same problem. The only difference between them is that the mesh for the validation using Tetrahedron elements has only tetrahedrons and the mesh for the validation using Hexahedron elements has only hexahedrons. TLMBHT is capable of solving meshes that have any of these two elements.
+You might be wondering **how does the tlmbht models for Pyramid, Tetrahedron and Hexahedron elements change?** They don't change. These three validations solve the same problem. The only difference between them is that the mesh for validaiton using Pyramid elements has Pyramid and Tetrahedron elements only, the mesh for the validation using Tetrahedron elements has only tetrahedrons, the mesh for the validation using Hexahedron elements has only hexahedrons. TLMBHT is capable of solving meshes that have any of these elements.
 
 Now, you can go to:
 
 * [Tutorials, examples, and validations]({{ site.baseurl }}{% link vte/index.md %})
 * [Validation in three-dimensions of Diffusion equation using the element hexahedron]({{ site.baseurl }}{% link vte/validation/diff 3D hexahedron.md %})
+* [Validation in three-dimensions of Diffusion equation using the element pyramid]({{ site.baseurl }}{% link vte/validation/diff 3D pyramid.md %})

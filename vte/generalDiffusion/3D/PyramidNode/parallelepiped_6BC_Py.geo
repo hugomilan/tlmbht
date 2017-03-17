@@ -1,5 +1,5 @@
 // This file is part of TLMBHT.
-// Copyright (C) 2016 Hugo Fernando Maia Milan
+// Copyright (C) 2017 Hugo Fernando Maia Milan
 // 
 // Acknowledgment: Brazilian National Counsel of Technological and Scientific
 // Development (Proc. 203312/2014-7) for scholarship to HFMM
