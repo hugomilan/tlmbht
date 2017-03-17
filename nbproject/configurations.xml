@@ -512,6 +512,9 @@
     </logicalFolder>
     <itemPath>CMakeLists.txt</itemPath>
   </logicalFolder>
+  <sourceRootList>
+    <Elem>src/solver/geometry</Elem>
+  </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
     <conf name="release" type="1">

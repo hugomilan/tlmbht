@@ -225,26 +225,16 @@ unsigned int add_to_connectionLeveln(struct connectionLeveln * con,
     unsigned int errorTLMnumber = 0, newInterception = 0;
     unsigned long long PointToSave = 0, i;
     // if the quantity of points is less than the level that we are, then, we
-    // access an special point number, which is number zero. Point number zero
+    // access an special point number, which is number zero (initial value). Point number zero
     // indicates the intersections that do not involve those levels.
     // Points[0] = quantity of points to save
     if (con->level > 0 && Points[0] >= con->level) {
         PointToSave = Points[Points[0] + 1 - con->level];
     }
 
-    // DEBUG: show where we are
-    //    printf(". Level %u, saved %llu, allocated %llu, points (or ports) saved",
-    //            con->level, con->quantitySaved, con->quantityAllocated);
-    //    for (i = 0; i < con->quantitySaved; i++)
-    //        printf(" %llu", con->portsOrPoints[i]);
-    //    printf(", points to save");
-    //    for (i = 1; i < Points[0] + 1; i++)
-    //        printf(" %llu", Points[i]);
-
 
     // here, I have to match the number of the points
     if (con->level > 0) {
-        //        printf(", point to save here %llu", PointToSave);
 
         // did I find matching points? If I find a matching point, then, I call
         // this function recursively. If I did not find a matching point, then,
@@ -261,12 +251,9 @@ unsigned int add_to_connectionLeveln(struct connectionLeveln * con,
 
         // If I'm at the threshold of buffer overflow, I allocate more space for it
         if (con->quantitySaved == con->quantityAllocated) {
-            //            printf(", reallocating... ");
             if ((errorTLMnumber = reallocate_connectionLeveln(con, 1)) != 0) {
                 return errorTLMnumber;
             }
-            // DEBUG: show where we are
-            //            printf(", reallocated to %llu/%llu", con->quantitySaved, con->quantityAllocated);
         }
 
         i = con->quantitySaved;
@@ -277,9 +264,6 @@ unsigned int add_to_connectionLeveln(struct connectionLeveln * con,
         newInterception = 1;
 
 get_out_if:
-
-        // DEBUG: show where we are
-        //        printf(", this point will be saved at %llu", i);
 
         errorTLMnumber = add_to_connectionLeveln(&(con->innerLevel[i]), Points,
                 quantityOfPortsToAdd, numberOfPortsToAdd);
@@ -293,16 +277,11 @@ get_out_if:
             if ((errorTLMnumber = reallocate_connectionLeveln(con, quantityOfPortsToAdd)) != 0)
                 return errorTLMnumber;
         }
-
-        // DEBUG: Show where we are
-        //        printf(", points saved ");
-        // saving the ports
+        
+        // saving the ports' number
         for (i = con->quantitySaved; i < (con->quantitySaved + quantityOfPortsToAdd); i++) {
             con->portsOrPoints[i] = numberOfPortsToAdd[i - con->quantitySaved];
-            // DEBUG: show were we are
-            //            printf(" %llu",con->portsOrPoints[i]);
         }
-        //        printf("\n");
 
         con->quantitySaved = con->quantitySaved + quantityOfPortsToAdd;
     }
@@ -310,7 +289,7 @@ get_out_if:
 
 
     // return = 1 is my flag that this is a new interception.
-    // I can get a new interception recursivelly with the errorTLMnumber = 1
+    // I can get a new interception recursively with the errorTLMnumber = 1
     // or with newInterception = 1. I will only send this flag when
     // errorTLMnumber = 1 OR when newInterception = 1 && errorTLMnumber = 0
     if (errorTLMnumber == 1 || (newInterception == 1 && errorTLMnumber == 0)) {
@@ -328,21 +307,10 @@ unsigned int wrap_size_connectionLeveln(struct connectionLeveln *con) {
     unsigned int errorTLMnumber;
     unsigned long long i;
 
-
-    // DEBUG: show where we are
-    //    printf(". Inside\n");
-    //    printf(". Level %u, saved %llu, allocated %llu, points (or ports) saved",
-    //            con->level, con->quantitySaved, con->quantityAllocated);
-    //    for (i = 0; i < con->quantitySaved; i++)
-    //        printf(" %llu", con->portsOrPoints[i]);
-
     // if quantity saved = 0, then I deallocate everything. Otherwise, only
     // deallocate what was not used
     if (con->quantitySaved != 0) {
-
-        // DEBUG: show where we are
-        //        printf(", reallocating the portsOrPoints");
-        // reallocating the portsOrPoints variable
+        
         if ((con->portsOrPoints = (unsigned long long*) realloc(con->portsOrPoints,
                 sizeof (unsigned long long)*con->quantitySaved)) == NULL) {
             errorTLMnumber = 8694;
@@ -354,24 +322,15 @@ unsigned int wrap_size_connectionLeveln(struct connectionLeveln *con) {
         // recursively terminating and reallocating
         if (con->level > 0) {
             for (i = 0; i < con->quantitySaved; i++) {
-                //                printf(", calling wrap %llu, Level %u, saved %llu, allocated %llu",
-                //                        i, con->level, con->quantitySaved, con->quantityAllocated);
                 wrap_size_connectionLeveln(&(con->innerLevel[i]));
-                //                printf(", exit wrap %llu, Level %u, saved %llu, allocated %llu",
-                //                        i, con->level, con->quantitySaved, con->quantityAllocated);
             }
 
             // deallocating the positions that were not used
             for (i = con->quantitySaved; i < con->quantityAllocated; i++) {
-                // DEBUG: show what is being deallocated
-                //                printf(", calling terminate %llu", i);
                 terminate_connectionLeveln(&(con->innerLevel[i]));
-                //                printf(", exit terminate %llu", i);
 
             }
-
-            // DEBUG: show where we are
-            //            printf(", reallocating the innerLevel");
+            
             if ((con->innerLevel = (struct connectionLeveln*) realloc(con->innerLevel,
                     sizeof (struct connectionLeveln)*con->quantitySaved)) == NULL) {
                 errorTLMnumber = 8693;
@@ -416,13 +375,9 @@ unsigned int wrap_size_connectionLeveln(struct connectionLeveln *con) {
 
         // now that we terminated the excess allocated, we reduce it to quantitySaved
         con->quantityAllocated = con->quantitySaved;
-
-
-
+        
         // if there is nothing saved here, I just free it
     } else {
-        // DEBUG: show where we are
-        //        printf(", terminating the variables");
 
         // deallocating the portsOrPoints variable
         free(con->portsOrPoints);
@@ -430,11 +385,7 @@ unsigned int wrap_size_connectionLeveln(struct connectionLeveln *con) {
 
         // deallocating the positions that were not used
         for (i = 0; i < con->quantityAllocated; i++) {
-            // DEBUG: show what is being deallocated
-            //                printf(", calling terminate %llu", i);
             terminate_connectionLeveln(&(con->innerLevel[i]));
-            //                printf(", exit terminate %llu", i);
-
         }
 
         free(con->innerLevel);
@@ -443,11 +394,6 @@ unsigned int wrap_size_connectionLeveln(struct connectionLeveln *con) {
         free(con->accumulatedIntersections);
         con->accumulatedIntersections = NULL;
     }
-
-
-
-    // DEBUG: show where we are
-    //    printf(", returning");
 
     return 0;
 }
@@ -462,7 +408,6 @@ unsigned int terminate_connectionLeveln(struct connectionLeveln *con) {
             for (unsigned long long i = 0; i < con->quantityAllocated; i++) {
                 terminate_connectionLeveln(con->innerLevel + i);
             }
-
 
         free(con->portsOrPoints);
         con->portsOrPoints = NULL;
@@ -518,14 +463,10 @@ unsigned int getPortsOrPoints(struct connectionLeveln *con,
             }
         }
 
-        // DEBUG: show where we are
-        //                printf(", quantity saved %llu, ports", con->quantitySaved);
         // saving the variables in the pointer output
         (*output)[1] = con->quantitySaved;
         for (unsigned long long i = 0; i < con->quantitySaved; i++) {
             (*output)[i + 2] = con->portsOrPoints[i];
-            // DEBUG: show where we are
-            //                        printf(" %llu", con->portsOrPoints[i]);
         }
         return 0;
     }
@@ -540,15 +481,7 @@ unsigned int getPortsOrPoints(struct connectionLeveln *con,
             // value of the anterior position
             if (i > 0)
                 position = position - con->accumulatedIntersections[i];
-
-            // DEBUG: show where we are
-            //            printf(", level %u, accumulated on this level %llu, position to go %llu, "
-            //                    "accumulated on the position to go %llu, new value of position %llu, "
-            //                    "POINT number at position to go (%llu)",
-            //                    con->level, con->accumulatedIntersections[0], i,
-            //                    con->accumulatedIntersections[i+1], position,
-            //                    con->portsOrPoints[i]);
-
+            
             return getPortsOrPoints(&(con->innerLevel[i]), position,
                     output);
         }
@@ -571,9 +504,6 @@ unsigned int allocatePointsPort(unsigned long long *Points,
 
     if ((errorTLMnumber = add_to_connectionLeveln(input, Points,
             quantityOfPortsToAdd, numberOfPortsToAdd)) != 0) {
-        // DEBUG: show that got a new intersection
-        //        if (errorTLMnumber == 1)
-        //            printf("That was a new intersection\n");
         return errorTLMnumber;
     }
 
@@ -647,8 +577,8 @@ unsigned int getGeometricalVariablesTLMtriangle(const struct node *N1,
     //           /      \
     // vertex 2 /________\ vertex 3
     //            face 3
-    
-    
+
+
     double center[3];
     double deltaXl[3], deltaYl[3], deltaZl[3], deltal[3];
 
@@ -719,7 +649,7 @@ unsigned int getGeometricalVariablesTLMquadrangle(const struct node *N1,
     //           /                      /
     // vertex 4 /______________________/ vertex 3
     //                  face 3
-    
+
     // lengths of the edges
     double center[3];
     double deltaXl[4], deltaYl[4], deltaZl[4], deltal[4];
@@ -855,8 +785,6 @@ unsigned int getGeometricalVariablesTLMtetrahedron(const struct node *N1,
     return 0;
 }
 
-
-
 /*
  * getGeometricalVariablesTLMpyramid: Receives the x, y, z from the nodes and
  * calculates the geometrical characteristics of the pyramid. Pointwise validated.
@@ -901,7 +829,7 @@ unsigned int getGeometricalVariablesTLMpyramid(const struct node *N1,
      *                            
      */
     // lengths of the edges
-    double center[3], deltaXl[5], deltaYl[5], deltaZl[5], deltal[5],temp;
+    double center[3], deltaXl[5], deltaYl[5], deltaZl[5], deltal[5], temp;
 
 
     center[0] = (N1->x + N2->x + N3->x + N4->x + N5->x) / 5;
@@ -927,7 +855,7 @@ unsigned int getGeometricalVariablesTLMpyramid(const struct node *N1,
     deltaYl[3] = (N2->y + N3->y + N5->y) / 3 - center[1];
     deltaZl[3] = (N2->z + N3->z + N5->z) / 3 - center[2];
     deltal[3] = sqrt(deltaXl[3] * deltaXl[3] + deltaYl[3] * deltaYl[3] + deltaZl[3] * deltaZl[3]);
-    
+
     deltaXl[4] = (N3->x + N4->x + N5->x) / 3 - center[0];
     deltaYl[4] = (N3->y + N4->y + N5->y) / 3 - center[1];
     deltaZl[4] = (N3->z + N4->z + N5->z) / 3 - center[2];
@@ -938,6 +866,7 @@ unsigned int getGeometricalVariablesTLMpyramid(const struct node *N1,
     output[2] = deltal[2];
     output[3] = deltal[3];
     output[4] = deltal[4];
+    quadrangleArea(N1, N2, N3, N4, &output[5]);
     triangleArea(N1, N2, N5, &output[6]);
     triangleArea(N1, N4, N5, &output[7]);
     triangleArea(N2, N3, N5, &output[8]);
@@ -951,7 +880,6 @@ unsigned int getGeometricalVariablesTLMpyramid(const struct node *N1,
 
     return 0;
 }
-
 
 /*
  * getGeometricalVariablesTLMhexahedron: Receives the x, y, z from the nodes and
@@ -1048,12 +976,12 @@ unsigned int getGeometricalVariablesTLMhexahedron(const struct node *N1,
     deltaYl[3] = (N2->y + N3->y + N6->y + N7->y) / 4 - center[1];
     deltaZl[3] = (N2->z + N3->z + N6->z + N7->z) / 4 - center[2];
     deltal[3] = sqrt(deltaXl[3] * deltaXl[3] + deltaYl[3] * deltaYl[3] + deltaZl[3] * deltaZl[3]);
-    
+
     deltaXl[4] = (N3->x + N4->x + N7->x + N8->x) / 4 - center[0];
     deltaYl[4] = (N3->y + N4->y + N7->y + N8->y) / 4 - center[1];
     deltaZl[4] = (N3->z + N4->z + N7->z + N8->z) / 4 - center[2];
     deltal[4] = sqrt(deltaXl[4] * deltaXl[4] + deltaYl[4] * deltaYl[4] + deltaZl[4] * deltaZl[4]);
-    
+
     deltaXl[5] = (N5->x + N6->x + N7->x + N8->x) / 4 - center[0];
     deltaYl[5] = (N5->y + N6->y + N7->y + N8->y) / 4 - center[1];
     deltaZl[5] = (N5->z + N6->z + N7->z + N8->z) / 4 - center[2];
@@ -1263,20 +1191,19 @@ unsigned int getTLMnumbers(const struct dataForSimulation * input,
 
 end_for_j_and_for_k_line:
             // we only get here if the node was detected as boundary or material.
-            if (flag != 0)
+            // Otherwise, flag = 0;
+            if (flag != 0) {
                 switch (l) {
                     case 1: // 2 nodes line
                         switch (input->equationInput[id].dimen) {
                             case ONE:
-                                // the ports start at 1 because 0 is my flag
-                                // to indicate that this is a boundary
                                 // temp[0] is my offset that will give me the
                                 // abstract number of the node at that interface
                                 if (flag == 2)
                                     temp[0] = numbers->abstractPortsToReal[l].previousMaximumAbstractPort +
-                                        2 * i;
+                                        2 * i; // numbers->abstractPortsToReal[l].portsPerNode * i;
 
-                                points[0] = 1;
+                                points[0] = 1; // number of points to add
                                 points[1] = input->mesh.elements.Line[i].N1;
                                 if ((errorTLMnumber = allocatePointsPort(points, intersections,
                                         quantityOfPortsToAdd, temp)) != 0) {
@@ -1307,21 +1234,13 @@ end_for_j_and_for_k_line:
                                 /* FALLTHRU */
                                 // break;
                             case THREE:
-                                // the ports start at 1 because 0 is my flag
-                                // to indicate that this is a boundary
                                 // temp[0] is my offset that will give me the
                                 // abstract number of the node at that interface
                                 if (flag == 2)
                                     temp[0] = numbers->abstractPortsToReal[l].previousMaximumAbstractPort +
-                                        2 * i;
-                                // numbers->abstractPortsToReal[l].portsPerNode * i;
+                                        2 * i; // numbers->abstractPortsToReal[l].portsPerNode * i;
 
-                                // DEBUG: Show the value of temp[0]
-                                // printf("Element code %d, element, %lld, temp[0] "
-                                //        "%lld, flag %d, quantityOfPortsToAdd %d\n",
-                                // l, i, temp[0], flag, quantityOfPortsToAdd);
-
-                                points[0] = 2;
+                                points[0] = 2; // number of points to add
                                 points[1] = input->mesh.elements.Line[i].N1;
                                 points[2] = input->mesh.elements.Line[i].N2;
                                 if ((errorTLMnumber = allocatePointsPort(points, intersections,
@@ -1344,20 +1263,13 @@ end_for_j_and_for_k_line:
 
                                 break;
                             case TWO:
-                                // the ports start at 1 because 0 is my flag
-                                // to indicate that this is a boundary
                                 // temp[0] is my offset that will give me the
                                 // abstract number of the node at that interface
                                 if (flag == 2)
                                     temp[0] = numbers->abstractPortsToReal[l].previousMaximumAbstractPort +
-                                        3 * i;
-                                // numbers->abstractPortsToReal[l].portsPerNode * i;
+                                        3 * i; // numbers->abstractPortsToReal[l].portsPerNode * i;
 
-                                // DEBUG: Show the value of temp[0]
-                                // printf("Element code %d, element, %lld, temp[0] "
-                                //        "%lld, flag %d\n", l, i, temp[0], flag);
-
-                                points[0] = 2;
+                                points[0] = 2; // number of points to add
                                 points[1] = input->mesh.elements.Triangle[i].N1;
                                 points[2] = input->mesh.elements.Triangle[i].N2;
                                 if ((errorTLMnumber = allocatePointsPort(points, intersections,
@@ -1410,10 +1322,9 @@ end_for_j_and_for_k_line:
                                 // abstract number of the node at that interface
                                 if (flag == 2)
                                     temp[0] = numbers->abstractPortsToReal[l].previousMaximumAbstractPort +
-                                        3 * i;
-                                // numbers->abstractPortsToReal[l].portsPerNode * i;
+                                        3 * i; // numbers->abstractPortsToReal[l].portsPerNode * i;
 
-                                points[0] = 3;
+                                points[0] = 3; // number of points to add
                                 points[1] = input->mesh.elements.Triangle[i].N1;
                                 points[2] = input->mesh.elements.Triangle[i].N2;
                                 points[3] = input->mesh.elements.Triangle[i].N3;
@@ -1444,14 +1355,9 @@ end_for_j_and_for_k_line:
                                 // abstract number of the node at that interface
                                 if (flag == 2)
                                     temp[0] = numbers->abstractPortsToReal[l].previousMaximumAbstractPort +
-                                        4 * i;
-                                // numbers->abstractPortsToReal[l].portsPerNode * i;
+                                        4 * i; // numbers->abstractPortsToReal[l].portsPerNode * i;
 
-                                // DEBUG: Show the value of temp[0]
-                                // printf("Element code %d, element, %lld, temp[0] "
-                                //        "%lld, flag %d\n", l, i, temp[0], flag);
-
-                                points[0] = 2;
+                                points[0] = 2; // number of points to add
                                 points[1] = input->mesh.elements.Quadrangle[i].N1;
                                 points[2] = input->mesh.elements.Quadrangle[i].N2;
                                 if ((errorTLMnumber = allocatePointsPort(points, intersections,
@@ -1495,7 +1401,7 @@ end_for_j_and_for_k_line:
                                         return errorTLMnumber;
                                     }
                                 }
-                                
+
                                 // temp[0] is my offset that will give me the
                                 // abstract number of the node at that interface
                                 if (flag == 2)
@@ -1523,7 +1429,7 @@ end_for_j_and_for_k_line:
                                         4 * i;
                                 // numbers->abstractPortsToReal[l].portsPerNode * i;
 
-                                points[0] = 4;
+                                points[0] = 4; // number of ports to add
                                 points[1] = input->mesh.elements.Quadrangle[i].N1;
                                 points[2] = input->mesh.elements.Quadrangle[i].N2;
                                 points[3] = input->mesh.elements.Quadrangle[i].N3;
@@ -1540,7 +1446,7 @@ end_for_j_and_for_k_line:
 
                                 break;
                         }
-                        
+
                         break;
                     case 4: // 4 nodes tetrahedron
                         // I do the calculation depending on the dimension
@@ -1552,14 +1458,12 @@ end_for_j_and_for_k_line:
                                 // not defined?
                                 break;
                             case THREE:
-                                // the ports start at 1 because 0 is my flag
-                                // to indicate that this is a boundary
                                 // temp[0] is my offset that will give me the
                                 // abstract number of the node at that interface
                                 if (flag == 2)
                                     temp[0] = numbers->abstractPortsToReal[l].previousMaximumAbstractPort +
-                                        4 * i;
-                                points[0] = 3;
+                                        4 * i; // numbers->abstractPortsToReal[l].portsPerNode * i;
+                                points[0] = 3; // number of ports to add
                                 points[1] = input->mesh.elements.Tetrahedron[i].N1;
                                 points[2] = input->mesh.elements.Tetrahedron[i].N2;
                                 points[3] = input->mesh.elements.Tetrahedron[i].N3;
@@ -1625,7 +1529,7 @@ end_for_j_and_for_k_line:
                                 }
                                 break;
                         }
-                        
+
                         break;
                     case 5: // 8 nodes hexahedron
                         // I do the calculation depending on the dimension
@@ -1637,14 +1541,12 @@ end_for_j_and_for_k_line:
                                 // not defined?
                                 break;
                             case THREE:
-                                // the ports start at 1 because 0 is my flag
-                                // to indicate that this is a boundary
                                 // temp[0] is my offset that will give me the
                                 // abstract number of the node at that interface
                                 if (flag == 2)
                                     temp[0] = numbers->abstractPortsToReal[l].previousMaximumAbstractPort +
-                                        6 * i;
-                                points[0] = 4;
+                                        6 * i; // numbers->abstractPortsToReal[l].portsPerNode * i;
+                                points[0] = 4; // number of points to add
                                 points[1] = input->mesh.elements.Hexahedron[i].N1;
                                 points[2] = input->mesh.elements.Hexahedron[i].N2;
                                 points[3] = input->mesh.elements.Hexahedron[i].N3;
@@ -1712,7 +1614,7 @@ end_for_j_and_for_k_line:
                                         return errorTLMnumber;
                                     }
                                 }
-                                
+
                                 // temp[0] is my offset that will give me the
                                 // abstract number of the node at that interface
                                 if (flag == 2)
@@ -1750,15 +1652,115 @@ end_for_j_and_for_k_line:
                                 }
                                 break;
                         }
-                        
+
                         break;
                     case 6: // 6 nodes prism
                         printf("Projection was not implemented yet\n");
-                        
+
                         break;
                     case 7: // 5 nodes pyramid
-                        printf("Projection was not implemented yet\n");
-                        
+                        // I do the calculation depending on the dimension
+                        switch (input->equationInput[id].dimen) {
+                            case ONE:
+                                // not defined?
+                                break;
+                            case TWO:
+                                // not defined?
+                                break;
+                            case THREE:
+                                // the ports start at 1 because 0 is my flag
+                                // to indicate that this is a boundary
+                                // temp[0] is my offset that will give me the
+                                // abstract number of the node at that interface
+                                if (flag == 2)
+                                    temp[0] = numbers->abstractPortsToReal[l].previousMaximumAbstractPort +
+                                        5 * i; // numbers->abstractPortsToReal[l].portsPerNode * i;
+                                points[0] = 4; // number of points to add
+                                points[1] = input->mesh.elements.Pyramid[i].N1;
+                                points[2] = input->mesh.elements.Pyramid[i].N2;
+                                points[3] = input->mesh.elements.Pyramid[i].N3;
+                                points[4] = input->mesh.elements.Pyramid[i].N4;
+                                if ((errorTLMnumber = allocatePointsPort(points, intersections,
+                                        quantityOfPortsToAdd, temp)) != 0) {
+                                    if (errorTLMnumber == 1) {
+                                        numbers->Intersections++;
+                                        errorTLMnumber = 0;
+                                    } else {
+                                        return errorTLMnumber;
+                                    }
+                                }
+
+                                // temp[0] is my offset that will give me the
+                                // abstract number of the node at that interface
+                                if (flag == 2)
+                                    temp[0]++;
+                                points[0] = 3; // number of points to add
+                                points[1] = input->mesh.elements.Pyramid[i].N1;
+                                points[2] = input->mesh.elements.Pyramid[i].N2;
+                                points[3] = input->mesh.elements.Pyramid[i].N5;
+                                if ((errorTLMnumber = allocatePointsPort(points, intersections,
+                                        quantityOfPortsToAdd, temp)) != 0) {
+                                    if (errorTLMnumber == 1) {
+                                        numbers->Intersections++;
+                                        errorTLMnumber = 0;
+                                    } else {
+                                        return errorTLMnumber;
+                                    }
+                                }
+
+                                // temp[0] is my offset that will give me the
+                                // abstract number of the node at that interface
+                                if (flag == 2)
+                                    temp[0]++;
+                                points[1] = input->mesh.elements.Pyramid[i].N1;
+                                points[2] = input->mesh.elements.Pyramid[i].N4;
+                                points[3] = input->mesh.elements.Pyramid[i].N5;
+                                if ((errorTLMnumber = allocatePointsPort(points, intersections,
+                                        quantityOfPortsToAdd, temp)) != 0) {
+                                    if (errorTLMnumber == 1) {
+                                        numbers->Intersections++;
+                                        errorTLMnumber = 0;
+                                    } else {
+                                        return errorTLMnumber;
+                                    }
+                                }
+
+                                // temp[0] is my offset that will give me the
+                                // abstract number of the node at that interface
+                                if (flag == 2)
+                                    temp[0]++;
+                                points[1] = input->mesh.elements.Pyramid[i].N2;
+                                points[2] = input->mesh.elements.Pyramid[i].N3;
+                                points[3] = input->mesh.elements.Pyramid[i].N5;
+                                if ((errorTLMnumber = allocatePointsPort(points, intersections,
+                                        quantityOfPortsToAdd, temp)) != 0) {
+                                    if (errorTLMnumber == 1) {
+                                        numbers->Intersections++;
+                                        errorTLMnumber = 0;
+                                    } else {
+                                        return errorTLMnumber;
+                                    }
+                                }
+
+                                // temp[0] is my offset that will give me the
+                                // abstract number of the node at that interface
+                                if (flag == 2)
+                                    temp[0]++;
+                                points[1] = input->mesh.elements.Pyramid[i].N3;
+                                points[2] = input->mesh.elements.Pyramid[i].N4;
+                                points[3] = input->mesh.elements.Pyramid[i].N5;
+                                if ((errorTLMnumber = allocatePointsPort(points, intersections,
+                                        quantityOfPortsToAdd, temp)) != 0) {
+                                    if (errorTLMnumber == 1) {
+                                        numbers->Intersections++;
+                                        errorTLMnumber = 0;
+                                    } else {
+                                        return errorTLMnumber;
+                                    }
+                                }
+                                break;
+                        }
+
                         break;
                     case 15: // 1 node point
                         // I do the calculation depending on the dimension
@@ -1768,18 +1770,16 @@ end_for_j_and_for_k_line:
                                 // is how to include this boundary in the 2D and
                                 // 3D calculations?
                                 // 
-                                // the ports start at 1 because 0 is my flag
-                                // to indicate that this is a boundary
                                 // temp[0] is my offset that will give me the
                                 // abstract number of the node at that interface
                                 //
                                 // I don't expect flag == 2 for the point.
                                 if (flag == 2)
                                     temp[0] = numbers->abstractPortsToReal[l].previousMaximumAbstractPort +
-                                        i;
-                                // numbers->abstractPortsToReal[l].portsPerNode * i;
+                                        i; // numbers->abstractPortsToReal[l].portsPerNode * i;
 
-                                points[0] = 1;
+
+                                points[0] = 1; // number of points to add
                                 points[1] = input->mesh.elements.Point[i].N1;
                                 if ((errorTLMnumber = allocatePointsPort(points, intersections,
                                         quantityOfPortsToAdd, temp)) != 0) {
@@ -1801,16 +1801,14 @@ end_for_j_and_for_k_line:
                         }
                         break;
                 }
-
+            } else { //if (flag == 0) {
+                numbers->NotDefinedElements[l]++;
+            }
 
             if ((errorTLMnumber =
                     add_to_aPortToRealPort(flag, flagStub, j, &(numbers->abstractPortsToReal[l]))) != 0)
                 // add_to_a[bstract]PortToRealPort. I add the number of the node
                 return errorTLMnumber;
-
-            if (flag == 0) {
-                numbers->NotDefinedElements[l]++;
-            }
         }
     }
 
@@ -1853,8 +1851,6 @@ end_for_j_and_for_k_line:
         printf("Wrapping the connection variable...\n");
     }
     clock_t begin_wC = clock();
-    // DEBUG: show where we are
-    //    printf("Wrapping the connection variable.\n");
     // now that we have the connections, we can wrap the intersection variable
     if ((errorTLMnumber = wrap_size_connectionLeveln(intersections)) != 0)
         return errorTLMnumber;
@@ -2126,7 +2122,7 @@ unsigned int initiate_aPortToRealPort(const struct dataForSimulation * input,
             // the number of the node shall start at 0
             (*Ports)[i].previousMaximumAbstractNode = 0;
 
-            // I've to start with 1 because 0 is my code to when an intersection
+            // I've to start at 1 because 0 is my code to when an intersection
             // has a boundary
             (*Ports)[i].previousMaximumAbstractPort = 1;
 
@@ -2343,8 +2339,7 @@ unsigned int wrapTLMnumbers(const struct dataForSimulation * input,
         if (i == 0) {
             numbers->abstractPortsToReal[i].previousMaximumRealNode = 0;
 
-            numbers->abstractPortsToReal[i].previousMaximumRealPort = 1;
-            // I start with 1 because 0 is my flag for boundary condition
+            numbers->abstractPortsToReal[i].previousMaximumRealPort = 0;
 
             numbers->abstractPortsToReal[i].previousMaximumRealStubPort = 0;
 
@@ -2457,7 +2452,7 @@ unsigned int wrapTLMnumbers(const struct dataForSimulation * input,
         // or a mixture of both
         if (numbers->MaterialElements[i] == 0
                 // this element is all boundary so we don't have stubs here
-                || (numbers->abstractPortsToReal[i].pointerTypeStub == 3 && 
+                || (numbers->abstractPortsToReal[i].pointerTypeStub == 3 &&
                 numbers->abstractPortsToReal[i].quantitySavedStub == 0) ||
                 // we were allocating the number of nodes that DO have stub and
                 // we didn't find any stub. I don't need to include a check that
@@ -2468,21 +2463,21 @@ unsigned int wrapTLMnumbers(const struct dataForSimulation * input,
                 // we were allocating the number of nodes that DO NOT have stub and
                 // we find that all the nodes of this material element have stub.
                 ) {
-            
+
             numbers->abstractPortsToReal[i].pointerTypeStub = 0;
             numbers->abstractPortsToReal[i].quantitySavedStub = 0;
 
             free(numbers->abstractPortsToReal[i].nodesNumbersStub);
             numbers->abstractPortsToReal[i].nodesNumbersStub = NULL;
 
-        } else if ( (numbers->abstractPortsToReal[i].pointerTypeStub == 3 && numbers->MaterialElements[i] == numbers->abstractPortsToReal[i].quantitySavedStub) ||
+        } else if ((numbers->abstractPortsToReal[i].pointerTypeStub == 3 && numbers->MaterialElements[i] == numbers->abstractPortsToReal[i].quantitySavedStub) ||
                 // we were allocating the number of nodes that DO have stub and
                 // we find that all the nodes of this material element have stub.
                 (numbers->abstractPortsToReal[i].pointerTypeStub == 2 && numbers->abstractPortsToReal[i].quantitySavedStub == 0 && numbers->MaterialElements[i] > 0)) {
             // we were allocating the number of nodes that DO NOT have not stub and we 
             // didn't find any even though we found material nodes. So, we 
             // conclude that the elements of these nodes all have stub
-            
+
             numbers->abstractPortsToReal[i].pointerTypeStub = 1;
             numbers->abstractPortsToReal[i].quantitySavedStub = 0;
 
@@ -2732,7 +2727,6 @@ unsigned int getNumberOfPortsGivenElement(unsigned int elementCode,
                     return 1;
 
                 case THREE:
-                    // this model was not made yet
                     return 5;
             }
 
@@ -2789,12 +2783,10 @@ void getRealPortNumber_fromAbstractPortNumber(
         }
         // if I don't get into the 'if', then, the number of the element that has
         // this port number shall be the element 100.
-
     }
 
-    // the -1 is used to convert from numbering 1 to N to 0 to N-1. I need this 
-    // because that's how matrices are accessed in C
-    offset = Ports[i].previousMaximumAbstractPort + 1 -
+    // difference between the number of abstract ports and real ports
+    offset = Ports[i].previousMaximumAbstractPort -
             Ports[i].previousMaximumRealPort; // this is the minimum value of the offset
 
 
@@ -2946,16 +2938,15 @@ void getRealNodeAndPort_fromAbstractNode(unsigned int elementCode,
     // Hence, I can safely do abstractNodeNumber + previousMaximumRealNode.
     // Also note that previousMaximumRealPort has + 1 offset. What I mean by offset?
     // when abastractNodenumber = 0, previousMaximumRealNode = realNumber of this node
-    // and previousMaximumRealPort - 1 = firstRealPortNumber of this node. I do -1
-    // for the realPort number because it has an offset + 1. The +1 offset is used
-    // elsewhere in the code to distinguish boundaries (value 0) from ports (value > 0).
+    // and previousMaximumRealPort = firstRealPortNumber of this node. I do -1
+    // for the realPort number because it has an offset + 1.
 
     // all nodes of this boundary are material.
     if (Ports[elementCode].pointerType == 1) {
         output[0] = abstractNodeNumber + Ports[elementCode].previousMaximumRealNode;
 
         output[1] = Ports[elementCode].portsPerNode * abstractNodeNumber +
-                Ports[elementCode].previousMaximumRealPort - 1;
+                Ports[elementCode].previousMaximumRealPort;
 
         // this contains the number of the nodes that are boundary or undefined
     } else if (Ports[elementCode].pointerType == 2) {
@@ -2975,7 +2966,7 @@ void getRealNodeAndPort_fromAbstractNode(unsigned int elementCode,
                 + Ports[elementCode].previousMaximumRealNode;
 
         output[1] = Ports[elementCode].portsPerNode * (abstractNodeNumber - j)
-                + Ports[elementCode].previousMaximumRealPort - 1;
+                + Ports[elementCode].previousMaximumRealPort;
 
         // this contains the number of the nodes that are material
     } else if (Ports[elementCode].pointerType == 3) {
@@ -2990,12 +2981,12 @@ void getRealNodeAndPort_fromAbstractNode(unsigned int elementCode,
         }
         // j represents the position of the abstractNodeNumber in the vector
         // nodesNumbers. That is, j represents the number of nodes that are
-        // material - 1. I'm OK with - 1 because previousMaximumRealNode has + 1 offset.
+        // material - 1.
         output[0] = j
                 + Ports[elementCode].previousMaximumRealNode;
 
         output[1] = Ports[elementCode].portsPerNode * j
-                + Ports[elementCode].previousMaximumRealPort - 1;
+                + Ports[elementCode].previousMaximumRealPort;
     }
 
     // considering the effect of stub in the numbering
@@ -3059,34 +3050,13 @@ unsigned int getBetweenPointFromRealPortNumber(struct aPortToRealPort *Ports,
         unsigned long long realPort, double *x, double *y, double *z,
         const struct dataForSimulation * input) {
 
-    // 0 - position of the Real port
-    // 1 - first real port number of the node that contains the port at 0
-    // 2 - last real port number of the node that contains the port at 0
-
-    unsigned long long j, offset, nodeNumber, portOrder;
-    unsigned int i;
-
-    // the element type of the realPort is the type that has at most
-    // the number of the real port number.
-    for (i = 0; i < 99; i++) {
-        // I will only see this if this element code has any real node allocated
-        if ((Ports[i + 1].previousMaximumRealPort - Ports[i].previousMaximumRealPort) > 0 &&
-                Ports[i + 1].previousMaximumRealPort > realPort) {
-
-            break;
-        }
-        // if I don't get into the 'if', then, the number of the element that has
-        // this port number shall be the element 100.
-    }
-
-    nodeNumber = (unsigned long long) ((realPort
-            - Ports[i].previousMaximumRealNode) / Ports[i].portsPerNode);
-
-    // this is the number of the port.
-    // 0, 1, 2, ... , or n-1
-    portOrder = (realPort - Ports[i].previousMaximumRealNode) % Ports[i].portsPerNode;
-
-
+    unsigned long long nodeNumber, portOrder;
+    unsigned int i, errorTLMnumber;
+    
+    if ( (errorTLMnumber = 
+             getNodeNumberAndPortOrderFromRealPortNumber(Ports, realPort, &i, &nodeNumber, &portOrder)) != 0){
+         return errorTLMnumber;
+     }
 
     switch (i) {
         case 1: // 2 nodes line
@@ -3099,7 +3069,7 @@ unsigned int getBetweenPointFromRealPortNumber(struct aPortToRealPort *Ports,
             break;
         case 3: // 4 nodes quadrangle
             getBetweenForQuadrangle(input, nodeNumber, portOrder, x, y, z);
-            
+
             break;
         case 4: // 4 nodes tetrahedron
             getBetweenForTetrahedron(input, nodeNumber, portOrder, x, y, z);
@@ -3107,23 +3077,23 @@ unsigned int getBetweenPointFromRealPortNumber(struct aPortToRealPort *Ports,
             break;
         case 5: // 8 nodes hexahedron
             getBetweenForHexahedron(input, nodeNumber, portOrder, x, y, z);
-            
+
             break;
         case 6: // 6 nodes prism
-            printf("Get between was not implemented yet\n");
-            
+            printf("Get between prism was not implemented yet\n");
+
             break;
         case 7: // 5 nodes pyramid
-            printf("Get between was not implemented yet\n");
-            
+            getBetweenForPyramid(input, nodeNumber, portOrder, x, y, z);
+
             break;
         case 15: // 1 node point
-            printf("Get between was not implemented yet\n");
-            
+            printf("Get between point was not implemented yet\n");
+
             break;
         default:
-            printf("Get between was not implemented yet\n");
-            
+            printf("Get between default was not implemented yet\n");
+
             return 0;
     }
 
@@ -3278,6 +3248,63 @@ unsigned int getBetweenForTetrahedron(const struct dataForSimulation * input,
 }
 
 /*
+ * getBetweenForPyramid: return the position of the middle of the quadrangle/triangle.
+ */
+unsigned int getBetweenForPyramid(const struct dataForSimulation * input,
+        const unsigned long long nodeNumber, const unsigned long long portOrder,
+        double *x, double *y, double *z) {
+
+    unsigned long long P1, P2, P3, P4;
+
+    switch (portOrder) {
+        case 0:
+            P1 = input->mesh.elements.Pyramid[nodeNumber].N1 - 1;
+            P2 = input->mesh.elements.Pyramid[nodeNumber].N2 - 1;
+            P3 = input->mesh.elements.Pyramid[nodeNumber].N3 - 1;
+            P4 = input->mesh.elements.Pyramid[nodeNumber].N4 - 1;
+            *x = (input->mesh.nodes[P1].x + input->mesh.nodes[P2].x 
+                    + input->mesh.nodes[P3].x + input->mesh.nodes[P4].x) / 4;
+            *y = (input->mesh.nodes[P1].y + input->mesh.nodes[P2].y 
+                    + input->mesh.nodes[P3].y + input->mesh.nodes[P4].y) / 4;
+            *z = (input->mesh.nodes[P1].z + input->mesh.nodes[P2].z 
+                    + input->mesh.nodes[P3].z + input->mesh.nodes[P4].z) / 4;
+            
+            return 0;
+        case 1:
+            P1 = input->mesh.elements.Pyramid[nodeNumber].N1 - 1;
+            P2 = input->mesh.elements.Pyramid[nodeNumber].N2 - 1;
+            P3 = input->mesh.elements.Pyramid[nodeNumber].N5 - 1;
+
+            break;
+        case 2:
+            P1 = input->mesh.elements.Pyramid[nodeNumber].N1 - 1;
+            P2 = input->mesh.elements.Pyramid[nodeNumber].N4 - 1;
+            P3 = input->mesh.elements.Pyramid[nodeNumber].N5 - 1;
+
+            break;
+        case 3:
+            P1 = input->mesh.elements.Pyramid[nodeNumber].N2 - 1;
+            P2 = input->mesh.elements.Pyramid[nodeNumber].N3 - 1;
+            P3 = input->mesh.elements.Pyramid[nodeNumber].N5 - 1;
+
+            break;
+        case 4:
+            P1 = input->mesh.elements.Pyramid[nodeNumber].N3 - 1;
+            P2 = input->mesh.elements.Pyramid[nodeNumber].N4 - 1;
+            P3 = input->mesh.elements.Pyramid[nodeNumber].N5 - 1;
+            
+            break;
+    }
+            
+
+    *x = (input->mesh.nodes[P1].x + input->mesh.nodes[P2].x + input->mesh.nodes[P3].x) / 3;
+    *y = (input->mesh.nodes[P1].y + input->mesh.nodes[P2].y + input->mesh.nodes[P3].y) / 3;
+    *z = (input->mesh.nodes[P1].z + input->mesh.nodes[P2].z + input->mesh.nodes[P3].z) / 3;
+
+    return 0;
+}
+
+/*
  * getBetweenForHexahedron: return the position of the middle of the quadrangle
  */
 unsigned int getBetweenForHexahedron(const struct dataForSimulation * input,
@@ -3348,33 +3375,14 @@ unsigned int getBetweenForHexahedron(const struct dataForSimulation * input,
 unsigned int getProjectionFromRealPortNumber(struct aPortToRealPort *Ports,
         unsigned long long realPort, double *x, double *y, double *z,
         const struct dataForSimulation * input) {
-
-    // 0 - position of the Real port
-    // 1 - first real port number of the node that contains the port at 0
-    // 2 - last real port number of the node that contains the port at 0
-
+    
     unsigned long long nodeNumber, portOrder;
-    unsigned int i;
-
-    // the element type of the realPort is the type that has at most
-    // the number of the real port number.
-    for (i = 0; i < 99; i++) {
-        // I will only see this if this element code has any real node allocated
-        if ((Ports[i + 1].previousMaximumRealPort - Ports[i].previousMaximumRealPort) > 0 &&
-                Ports[i + 1].previousMaximumRealPort > realPort) {
-
-            break;
-        }
-        // if I don't get into the 'if', then, the number of the element that has
-        // this port number shall be the element 100.
-    }
-
-    nodeNumber = (unsigned long long) ((realPort
-            - Ports[i].previousMaximumRealNode) / Ports[i].portsPerNode);
-
-    // 0, 1, 2, ... , or n-1
-    portOrder = (realPort - Ports[i].previousMaximumRealNode) % Ports[i].portsPerNode;
-
+    unsigned int i, errorTLMnumber;
+    
+     if ( (errorTLMnumber = 
+             getNodeNumberAndPortOrderFromRealPortNumber(Ports, realPort, &i, &nodeNumber, &portOrder)) != 0){
+         return errorTLMnumber;
+     }
 
 
     switch (i) {
@@ -3388,7 +3396,7 @@ unsigned int getProjectionFromRealPortNumber(struct aPortToRealPort *Ports,
             break;
         case 3: // 4 nodes quadrangle
             getOutsideProjectionQuadrangle(input, nodeNumber, portOrder, x, y, z);
-            
+
             break;
         case 4: // 4 nodes tetrahedron
             getOutsideProjectionTetrahedron(input, nodeNumber, portOrder, x, y, z);
@@ -3396,19 +3404,19 @@ unsigned int getProjectionFromRealPortNumber(struct aPortToRealPort *Ports,
             break;
         case 5: // 8 nodes hexahedron
             getOutsideProjectionHexahedron(input, nodeNumber, portOrder, x, y, z);
-            
+
             break;
         case 6: // 6 nodes prism
             printf("Get projection was not implemented yet\n");
-            
+
             break;
         case 7: // 5 nodes pyramid
-            printf("Get projection was not implemented yet\n");
-            
+            getOutsideProjectionPyramid(input, nodeNumber, portOrder, x, y, z);
+
             break;
         case 15: // 1 node point
             printf("Get projection was not implemented yet\n");
-            
+
             break;
         default:
             return 0;
@@ -3856,7 +3864,7 @@ unsigned int getOutsideProjectionTetrahedron(const struct dataForSimulation * in
     // lengths of the edges
     double deltaXL[2], deltaYL[2], deltaZL[2];
     double area, areaX, areaY, areaZ;
-    double deltaXl, deltaYl, deltaZl, deltal;
+    double deltaXl, deltaYl, deltaZl;
 
     deltaXL[0] = input->mesh.nodes[P1].x - input->mesh.nodes[P2].x;
     deltaYL[0] = input->mesh.nodes[P1].y - input->mesh.nodes[P2].y;
@@ -3894,18 +3902,150 @@ unsigned int getOutsideProjectionTetrahedron(const struct dataForSimulation * in
     return 0;
 }
 
+/*
+ * getOutsideProjectionPyramid: return the unitary vector going outside the 
+ * pyramid element from the port given.
+ */
+unsigned int getOutsideProjectionPyramid(const struct dataForSimulation * input,
+        const unsigned long long nodeNumber, const unsigned long long portOrder,
+        double *x, double *y, double *z) {
+
+    /* pyramid nomenclature.
+     *                                  
+     *         vertex 4  ________________________________ vertex 3
+     *                  /\___    area 5        _________/|           
+     *                 /3    \____  __________/         /         
+     *                /           \/vertex 5   1       4|            
+     *               /a         __/\__                 /   
+     *              /e       __/      \__    a        a|  
+     *             /r     __/            \__e        e/      
+     *            /a   __/                 r\__      r|
+     *           /  __/       area 2      a    \__  a/ 
+     * vertex 1 /__/______________________________\__| vertex 2
+     *      
+     *                            
+     */
+    unsigned long long P1, P2, P3, P4, P5;
+
+    switch (portOrder) {
+        case 0:
+            P1 = input->mesh.elements.Pyramid[nodeNumber].N1 - 1;
+            P2 = input->mesh.elements.Pyramid[nodeNumber].N2 - 1;
+            P3 = input->mesh.elements.Pyramid[nodeNumber].N3 - 1;
+            P4 = input->mesh.elements.Pyramid[nodeNumber].N4 - 1;
+            P5 = input->mesh.elements.Pyramid[nodeNumber].N5 - 1;
+
+            break;
+        case 1:
+            P1 = input->mesh.elements.Pyramid[nodeNumber].N1 - 1;
+            P2 = input->mesh.elements.Pyramid[nodeNumber].N2 - 1;
+            P3 = input->mesh.elements.Pyramid[nodeNumber].N3 - 1;
+            P4 = input->mesh.elements.Pyramid[nodeNumber].N4 - 1;
+            P5 = input->mesh.elements.Pyramid[nodeNumber].N5 - 1;
+
+            break;
+        case 2:
+            P1 = input->mesh.elements.Pyramid[nodeNumber].N4 - 1;
+            P2 = input->mesh.elements.Pyramid[nodeNumber].N1 - 1;
+            P3 = input->mesh.elements.Pyramid[nodeNumber].N2 - 1;
+            P4 = input->mesh.elements.Pyramid[nodeNumber].N3 - 1;
+            P5 = input->mesh.elements.Pyramid[nodeNumber].N5 - 1;
+
+            break;
+        case 3:
+            P1 = input->mesh.elements.Pyramid[nodeNumber].N2 - 1;
+            P2 = input->mesh.elements.Pyramid[nodeNumber].N3 - 1;
+            P3 = input->mesh.elements.Pyramid[nodeNumber].N4 - 1;
+            P4 = input->mesh.elements.Pyramid[nodeNumber].N1 - 1;
+            P5 = input->mesh.elements.Pyramid[nodeNumber].N5 - 1;
+
+            break;
+        case 4:
+            P1 = input->mesh.elements.Pyramid[nodeNumber].N3 - 1;
+            P2 = input->mesh.elements.Pyramid[nodeNumber].N4 - 1;
+            P3 = input->mesh.elements.Pyramid[nodeNumber].N1 - 1;
+            P4 = input->mesh.elements.Pyramid[nodeNumber].N2 - 1;
+            P5 = input->mesh.elements.Pyramid[nodeNumber].N5 - 1;
+
+            break;
+    }
+
+    // lengths of the edges
+    double deltaXL[2], deltaYL[2], deltaZL[2];
+    double area, areaX, areaY, areaZ;
+    double deltaXl, deltaYl, deltaZl;
+
+    deltaXL[0] = input->mesh.nodes[P1].x - input->mesh.nodes[P2].x;
+    deltaYL[0] = input->mesh.nodes[P1].y - input->mesh.nodes[P2].y;
+    deltaZL[0] = input->mesh.nodes[P1].z - input->mesh.nodes[P2].z;
+
+    // quadrangle
+    if (portOrder == 0) {
+        // BASED ON MY ASSUMPTION THAT THE POINTS OF THE QUADRANGLE FORM A PLAN
+        deltaXL[1] = input->mesh.nodes[P1].x - input->mesh.nodes[P4].x;
+        deltaYL[1] = input->mesh.nodes[P1].y - input->mesh.nodes[P4].y;
+        deltaZL[1] = input->mesh.nodes[P1].z - input->mesh.nodes[P4].z;
+
+        // triangles
+    } else {
+        deltaXL[1] = input->mesh.nodes[P1].x - input->mesh.nodes[P5].x;
+        deltaYL[1] = input->mesh.nodes[P1].y - input->mesh.nodes[P5].y;
+        deltaZL[1] = input->mesh.nodes[P1].z - input->mesh.nodes[P5].z;
+    }
+
+
+    // vector of the triangle|quadrangle (P1, P2, P3|P5)
+    areaX = deltaYL[0] * deltaZL[1] - deltaYL[1] * deltaZL[0];
+    areaY = deltaXL[1] * deltaZL[0] - deltaXL[0] * deltaZL[1];
+    areaZ = deltaXL[0] * deltaYL[1] - deltaXL[1] * deltaYL[0];
+    area = sqrt(areaX * areaX + areaY * areaY + areaZ * areaZ); // Twice the real area of the triangle. That is, this is the area of a parallelogram
+
+    // vector from the center of the pyramid towards the center of the triangle|quadrangle
+    if (portOrder == 0) {
+        deltaXl = (input->mesh.nodes[P1].x + input->mesh.nodes[P2].x + input->mesh.nodes[P3].x + input->mesh.nodes[P4].x) / 4
+                - (input->mesh.nodes[P1].x + input->mesh.nodes[P2].x + input->mesh.nodes[P3].x + input->mesh.nodes[P4].x + input->mesh.nodes[P5].x) / 5;
+
+        deltaYl = (input->mesh.nodes[P1].y + input->mesh.nodes[P2].y + input->mesh.nodes[P3].y + input->mesh.nodes[P4].y) / 4
+                - (input->mesh.nodes[P1].y + input->mesh.nodes[P2].y + input->mesh.nodes[P3].y + input->mesh.nodes[P4].y + input->mesh.nodes[P5].y) / 5;
+
+        deltaZl = (input->mesh.nodes[P1].z + input->mesh.nodes[P2].z + input->mesh.nodes[P3].z + input->mesh.nodes[P4].z) / 4
+                - (input->mesh.nodes[P1].z + input->mesh.nodes[P2].z + input->mesh.nodes[P3].z + input->mesh.nodes[P4].z + input->mesh.nodes[P5].z) / 5;
+
+    } else {
+        deltaXl = (input->mesh.nodes[P1].x + input->mesh.nodes[P2].x + input->mesh.nodes[P5].x) / 3
+                - (input->mesh.nodes[P1].x + input->mesh.nodes[P2].x + input->mesh.nodes[P3].x + input->mesh.nodes[P4].x + input->mesh.nodes[P5].x) / 5;
+
+        deltaYl = (input->mesh.nodes[P1].y + input->mesh.nodes[P2].y + input->mesh.nodes[P5].y) / 3
+                - (input->mesh.nodes[P1].y + input->mesh.nodes[P2].y + input->mesh.nodes[P3].y + input->mesh.nodes[P4].y + input->mesh.nodes[P5].y) / 5;
+
+        deltaZl = (input->mesh.nodes[P1].z + input->mesh.nodes[P2].z + input->mesh.nodes[P5].z) / 3
+                - (input->mesh.nodes[P1].z + input->mesh.nodes[P2].z + input->mesh.nodes[P3].z + input->mesh.nodes[P4].z + input->mesh.nodes[P5].z) / 5;
+    }
+
+
+    if (deltaXl * areaX + deltaYl * areaY + deltaZl * areaZ < 0) {
+        *x = -areaX / area;
+        *y = -areaY / area;
+        *z = -areaZ / area;
+    } else {
+        *x = areaX / area;
+        *y = areaY / area;
+        *z = areaZ / area;
+    }
+    return 0;
+}
 
 /*
  * getOutsideProjectionHexahedron: return the unitary vector going outside the 
  * hexahedron element from the port given. I'M ASSUMING THAT THE QUADRANGLES
- * THAT FORM THE FACE OF THE HEXAHEDRON FORM A UNIQUE PLAN. Then, any three
+ * THAT FORM THE FACE OF THE HEXAHEDRON FORM AN UNIQUE PLAN. Then, any three
  * points of the quadrangle define the plan.
  */
 unsigned int getOutsideProjectionHexahedron(const struct dataForSimulation * input,
         const unsigned long long nodeNumber, const unsigned long long portOrder,
         double *x, double *y, double *z) {
 
-    
+
     /* hexahedral nomenclature.
      * 
      * 
@@ -3955,7 +4095,7 @@ unsigned int getOutsideProjectionHexahedron(const struct dataForSimulation * inp
             P6 = input->mesh.elements.Hexahedron[nodeNumber].N4 - 1;
             P7 = input->mesh.elements.Hexahedron[nodeNumber].N7 - 1;
             P8 = input->mesh.elements.Hexahedron[nodeNumber].N8 - 1;
-            
+
             break;
         case 2:
             P1 = input->mesh.elements.Hexahedron[nodeNumber].N1 - 1;
@@ -4052,10 +4192,43 @@ unsigned int getOutsideProjectionHexahedron(const struct dataForSimulation * inp
 
 
 /*
+ * getNodeNumberAndPortOrderFromRealPortNumber: return the number of the node and
+ * the order of the port given the real number of the node.
+ */
+unsigned int getNodeNumberAndPortOrderFromRealPortNumber(struct aPortToRealPort *Ports,
+        unsigned long long realPort, unsigned int *i_out, unsigned long long *nodeNumber,
+        unsigned long long *portOrder) {
+    
+    unsigned int i;
+    // the element type of the realPort is the type that has at most
+    // the number of the real port number.
+    for (i = 0; i < 99; i++) {
+        // I will only see this if this element code has any real node allocated
+        if ((Ports[i + 1].previousMaximumRealPort - Ports[i].previousMaximumRealPort) > 0 &&
+                Ports[i + 1].previousMaximumRealPort > realPort) {
+
+            break;
+        }
+        // if I don't get into the 'if', then, the number of the element that has
+        // this port number shall be the element 100.
+    }
+
+    *nodeNumber = (unsigned long long) ((realPort
+            - Ports[i].previousMaximumRealPort) / Ports[i].portsPerNode);
+
+    // 0, 1, 2, ... , or n-1
+    *portOrder = (realPort - Ports[i].previousMaximumRealPort) % Ports[i].portsPerNode;
+    
+    // easy way of getting i out.
+    *i_out = i;
+    return 0;
+}
+
+/*
  * initiateConnectionAndBoundaryCoefficients: initiate the variable connectionAndBoundaryCoefficients.
  * This variable is used during the connection & boundary process
  */
-unsigned int initiateConnectionAndBoundaryCoefficients(struct connectionAndBoundaryCoefficients *input){
+unsigned int initiateConnectionAndBoundaryCoefficients(struct connectionAndBoundaryCoefficients *input) {
     // I will know how many ports by reading startEnd[0]. I might end up reallocating
     // these vectors in future implementations.
     input->reflection = (double *) malloc(sizeof (double)*2);
@@ -4065,11 +4238,11 @@ unsigned int initiateConnectionAndBoundaryCoefficients(struct connectionAndBound
     input->B_out = (double *) malloc(sizeof (double)*2);
     input->transmission_out_flux = (double *) malloc(sizeof (double)*2);
     input->B_out_flux = (double *) malloc(sizeof (double)*2);
-    
-    
+
+
     input->startEnd = (unsigned long long *) malloc(sizeof (unsigned long long)*14);
-    input->startEnd[1] = 14;  
-    
+    input->startEnd[1] = 14;
+
     input->distanceBetweenPorts = 6;
     input->offsetRealPort = 2;
     input->offsetStubPort = 5;
@@ -4079,20 +4252,20 @@ unsigned int initiateConnectionAndBoundaryCoefficients(struct connectionAndBound
     input->offsetStubPort0 = 5;
     input->offsetRealPort1 = 8;
     input->offsetStubPort1 = 11;
-    
+
     input->portsNumbers = (unsigned long long*) malloc(
             sizeof (unsigned long long)*7);
     input->portsNumbers[0] = 7;
-    
+
     // I will do only one check in to see if everything was allocated because they
     // use such small amount of memory spaces that it shouldn't be a problem
     if (input->reflection == NULL || input->transmission == NULL || input->B == NULL ||
-            input->transmission_out == NULL || input->B_out == NULL || 
+            input->transmission_out == NULL || input->B_out == NULL ||
             input->transmission_out_flux == NULL || input->B_out_flux == NULL ||
-            input->startEnd == NULL || input->portsNumbers == NULL){
+            input->startEnd == NULL || input->portsNumbers == NULL) {
         return 8745;
     }
-    
+
     return 0;
 }
 
@@ -4100,33 +4273,33 @@ unsigned int initiateConnectionAndBoundaryCoefficients(struct connectionAndBound
  * terminateConnectionAndBoundaryCoefficients: terminate the variable connectionAndBoundaryCoefficients.
  * This variable is used during the connection & boundary process
  */
-    unsigned int terminateConnectionAndBoundaryCoefficients(struct connectionAndBoundaryCoefficients *input){
-        free(input->reflection);
-        input->reflection = NULL;
-        
-        free(input->transmission);
-        input->transmission = NULL;
-        
-        free(input->B);
-        input->B = NULL;
-        
-        free(input->transmission_out);
-        input->transmission_out = NULL;
-        
-        free(input->B_out);
-        input->B_out = NULL;
-        
-        free(input->transmission_out_flux);
-        input->transmission_out_flux = NULL;
-        
-        free(input->B_out_flux);
-        input->B_out_flux = NULL;
-        
-        free(input->startEnd);
-        input->startEnd = NULL;
-        
-        free(input->portsNumbers);
-        input->portsNumbers = NULL;
-        
-        return 0;
-    }
+unsigned int terminateConnectionAndBoundaryCoefficients(struct connectionAndBoundaryCoefficients *input) {
+    free(input->reflection);
+    input->reflection = NULL;
+
+    free(input->transmission);
+    input->transmission = NULL;
+
+    free(input->B);
+    input->B = NULL;
+
+    free(input->transmission_out);
+    input->transmission_out = NULL;
+
+    free(input->B_out);
+    input->B_out = NULL;
+
+    free(input->transmission_out_flux);
+    input->transmission_out_flux = NULL;
+
+    free(input->B_out_flux);
+    input->B_out_flux = NULL;
+
+    free(input->startEnd);
+    input->startEnd = NULL;
+
+    free(input->portsNumbers);
+    input->portsNumbers = NULL;
+
+    return 0;
+}

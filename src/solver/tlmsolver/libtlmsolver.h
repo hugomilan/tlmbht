@@ -336,6 +336,9 @@ extern "C" {
     unsigned int getBetweenForTetrahedron(const struct dataForSimulation *,
             const unsigned long long, const unsigned long long,
             double *, double *, double *);
+    unsigned int getBetweenForPyramid(const struct dataForSimulation *,
+            const unsigned long long, const unsigned long long,
+            double *, double *, double *);
     unsigned int getBetweenForHexahedron(const struct dataForSimulation *,
             const unsigned long long, const unsigned long long,
             double *, double *, double *);
@@ -356,9 +359,15 @@ extern "C" {
     unsigned int getOutsideProjectionTetrahedron(const struct dataForSimulation *,
             const unsigned long long, const unsigned long long,
             double *, double *, double *);
+    unsigned int getOutsideProjectionPyramid(const struct dataForSimulation *,
+            const unsigned long long, const unsigned long long,
+            double *, double *, double *);
     unsigned int getOutsideProjectionHexahedron(const struct dataForSimulation *,
             const unsigned long long, const unsigned long long,
             double *, double *, double *);
+    
+    unsigned int getNodeNumberAndPortOrderFromRealPortNumber(struct aPortToRealPort*,
+            unsigned long long realPort, unsigned int*, unsigned long long*, unsigned long long*);
     
 
     unsigned int initiateConnectionAndBoundaryCoefficients(struct connectionAndBoundaryCoefficients *);

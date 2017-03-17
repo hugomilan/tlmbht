@@ -7,7 +7,7 @@ title: Validation of TLMBHT to solve the Diffusion equation in time-domain for t
 permalink: vte/validation/diff-3D-Py.html
 ---
 
-<span style="color:#697473">Jan 31, 2017</span> by [**Hugo Milan**](https://hugomilan.github.io/)
+<span style="color:#697473">Mar 17, 2017</span> by [**Hugo Milan**](https://hugomilan.github.io/)
 
 Here, I will walk you through in how to use the TLM method to solve the Diffusion equation in 3D with the element Tetrahedron by comparing the tlmbht predictions with [analytical solution]({{ site.baseurl }}{% link theory/ana/heat/heat 3D TTqqqq.md %}) predictions. 
 
@@ -129,7 +129,9 @@ The file cdiff3Te_full.tlm contains additional explanation about the input. If y
 
 ### 4) Solve the problem.
 
-#### [**Click here if you have Windows and need help to run tlmbht in your machine.**](https://github.com/hugomilan/tlmbht/wiki/Running-tlmbht-in-Windows)
+#### [**Click here if you have Windows and need help to run tlmbht in your machine.**]({{ site.baseurl }}{% link vte/run on windows.md %})
+
+
 
 If you have the tlmbht binary in your path environment, simply type `tlmbht cdiff3Te.tlm`. If you don't have it in your path environment, you may copy the binary to the folder /vte/generalDiffusion/3D/TetrahedronNode/ and then type `./tlmbht cdiff3Te.tlm`. In some seconds, the calculation will be done.
 

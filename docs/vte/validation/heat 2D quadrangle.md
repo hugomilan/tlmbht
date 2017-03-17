@@ -124,7 +124,7 @@ The file cheat2Qu_full.tlm contains additional explanation about the input. If y
 
 ### 4) Solve the problem.
 
-#### [**Click here if you have Windows and need help to run tlmbht in your machine.**](https://github.com/hugomilan/tlmbht/wiki/Running-tlmbht-in-Windows)
+#### [**Click here if you have Windows and need help to run tlmbht in your machine.**]({{ site.baseurl }}{% link vte/run on windows.md %})
 
 If you have the tlmbht binary in your path environment, simply type `tlmbht cheat2Qu.tlm`. If you don't have it in your path environment, you may copy the binary to the folder /vte/generalDiffusion/2D/QuadrangleNode/ and then type `./tlmbht cheat2Qu.tlm`. In some seconds, the calculation will be done.
 

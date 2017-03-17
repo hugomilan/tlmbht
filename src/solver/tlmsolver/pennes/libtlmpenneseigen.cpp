@@ -1851,7 +1851,7 @@ unsigned int MaterialPyramidPennesEigen(struct dataForSimulation *input, struct 
                     matrices->tau.insert(numbersNodeAndPort[0],
                             numbersNodeAndPort[1] + 3) = tau[3];
                     matrices->tau.insert(numbersNodeAndPort[0],
-                            numbersNodeAndPort[1] + 3) = tau[4];
+                            numbersNodeAndPort[1] + 4) = tau[4];
 
                     // this is actually matrix ZIS.
                     // E = C*ZIS + B
@@ -1900,24 +1900,6 @@ unsigned int connectionsAndBoundariesPennesEigen(struct calculationTLMEigen *mat
     unsigned errorTLMnumber = 0;
 
     unsigned long long i, j1, offset, j2, j3, offset_TB, offset_heat_flux;
-    
-    // this is what we got for the scattering matrix
-//    for (j3 = 0; j3 < matrices->numbers.Ports + matrices->numbers.StubPorts; j3++){
-//            for (j1 = 0; j1 < matrices->numbers.Ports + matrices->numbers.StubPorts; j1++){
-//                printf("%0.17g ", matrices->M.coeff(j3, j1));
-//            }
-//            printf("\n");
-//            printf("%0.17g\n", matrices->E.coeff(j3));
-//        }
-//        
-//        
-//        for (j3 = 0; j3 < matrices->numbers.Output; j3++){
-//            for (j1 = 0; j1 < matrices->numbers.Ports + matrices->numbers.StubPorts; j1++){
-//                printf("%0.17g ", matrices->tau.coeff(j3, j1));
-//            }
-//            printf("\n");
-//            printf("%0.17g\n", matrices->E_output.coeff(j3));
-//        }
 
     offset_TB = matrices->numbers.Nodes * input->equationInput[id].saveScalar;
     // starting position to calculate the temperature between nodes
@@ -1933,6 +1915,10 @@ unsigned int connectionsAndBoundariesPennesEigen(struct calculationTLMEigen *mat
 
 
     for (i = 0; i < connection->accumulatedIntersections[0]; i++) {
+        if (i == 1014){
+            // something bad is happening at this connection
+            int atest = 1;
+        }
         getPortsOrPoints(connection, i, &(coeff.portsNumbers));
 
         // getting reflection and transmission coefficients, and effects on calculating
