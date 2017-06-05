@@ -63,21 +63,21 @@ CND_PACKAGE_DIR_linux_64=dist/linux_64/GNU-Linux/package
 CND_PACKAGE_NAME_linux_64=tlmbht.tar
 CND_PACKAGE_PATH_linux_64=dist/linux_64/GNU-Linux/package/tlmbht.tar
 # windows_32 configuration
-CND_PLATFORM_windows_32=MINGW32-Linux
-CND_ARTIFACT_DIR_windows_32=dist/windows_32/MINGW32-Linux
+CND_PLATFORM_windows_32=MINGW-Linux
+CND_ARTIFACT_DIR_windows_32=dist/windows_32/MINGW-Linux
 CND_ARTIFACT_NAME_windows_32=tlmbhtWin32.exe
-CND_ARTIFACT_PATH_windows_32=dist/windows_32/MINGW32-Linux/tlmbhtWin32.exe
-CND_PACKAGE_DIR_windows_32=dist/windows_32/MINGW32-Linux/package
+CND_ARTIFACT_PATH_windows_32=dist/windows_32/MINGW-Linux/tlmbhtWin32.exe
+CND_PACKAGE_DIR_windows_32=dist/windows_32/MINGW-Linux/package
 CND_PACKAGE_NAME_windows_32=tlmbht.tar
-CND_PACKAGE_PATH_windows_32=dist/windows_32/MINGW32-Linux/package/tlmbht.tar
+CND_PACKAGE_PATH_windows_32=dist/windows_32/MINGW-Linux/package/tlmbht.tar
 # windows_64 configuration
-CND_PLATFORM_windows_64=MINGW64-Linux
-CND_ARTIFACT_DIR_windows_64=dist/windows_64/MINGW64-Linux
+CND_PLATFORM_windows_64=MINGW-Linux
+CND_ARTIFACT_DIR_windows_64=dist/windows_64/MINGW-Linux
 CND_ARTIFACT_NAME_windows_64=tlmbhtWin64.exe
-CND_ARTIFACT_PATH_windows_64=dist/windows_64/MINGW64-Linux/tlmbhtWin64.exe
-CND_PACKAGE_DIR_windows_64=dist/windows_64/MINGW64-Linux/package
+CND_ARTIFACT_PATH_windows_64=dist/windows_64/MINGW-Linux/tlmbhtWin64.exe
+CND_PACKAGE_DIR_windows_64=dist/windows_64/MINGW-Linux/package
 CND_PACKAGE_NAME_windows_64=tlmbht.tar
-CND_PACKAGE_PATH_windows_64=dist/windows_64/MINGW64-Linux/package/tlmbht.tar
+CND_PACKAGE_PATH_windows_64=dist/windows_64/MINGW-Linux/package/tlmbht.tar
 #
 # include compiler specific variables
 #

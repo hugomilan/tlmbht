@@ -11182,7 +11182,7 @@
     </conf>
     <conf name="windows_32" type="1">
       <toolsSet>
-        <compilerSet>MINGW32|GNU</compilerSet>
+        <compilerSet>MINGW|GNU</compilerSet>
         <dependencyChecking>false</dependencyChecking>
         <rebuildPropChanged>false</rebuildPropChanged>
       </toolsSet>
@@ -11190,6 +11190,7 @@
         <cTool>
           <developmentMode>6</developmentMode>
           <architecture>1</architecture>
+          <commandlineTool>i686-w64-mingw32-gcc</commandlineTool>
           <incDir>
             <pElem>include</pElem>
           </incDir>
@@ -11198,6 +11199,7 @@
         <ccTool>
           <developmentMode>6</developmentMode>
           <architecture>1</architecture>
+          <commandlineTool>i686-w64-mingw32-g++</commandlineTool>
           <incDir>
             <pElem>include</pElem>
           </incDir>
@@ -11205,12 +11207,16 @@
         </ccTool>
         <fortranCompilerTool>
           <developmentMode>0</developmentMode>
+          <commandlineTool>i686-w64-mingw32-gfortran</commandlineTool>
         </fortranCompilerTool>
         <asmTool>
           <developmentMode>5</developmentMode>
+          <commandlineTool>i686-w64-mingw32-as</commandlineTool>
         </asmTool>
         <linkerTool>
           <output>${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/tlmbhtWin32.exe</output>
+          <commandlineTool>i686-w64-mingw32-g++</commandlineTool>
+          <commandLine>-fopenmp</commandLine>
         </linkerTool>
       </compileType>
       <item path="CMakeLists.txt" ex="false" tool="3" flavor2="0">
@@ -12711,7 +12717,7 @@
     </conf>
     <conf name="windows_64" type="1">
       <toolsSet>
-        <compilerSet>MINGW64|GNU</compilerSet>
+        <compilerSet>MINGW|GNU</compilerSet>
         <dependencyChecking>false</dependencyChecking>
         <rebuildPropChanged>false</rebuildPropChanged>
       </toolsSet>

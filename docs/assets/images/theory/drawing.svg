@@ -7,6 +7,7 @@
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    width="210mm"
@@ -15,9 +16,57 @@
    id="svg15326"
    version="1.1"
    inkscape:version="0.91 r13725"
-   sodipodi:docname="drawing.svg">
+   sodipodi:docname="drawing.svg"
+   inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 1D TT Sph.png"
+   inkscape:export-xdpi="300"
+   inkscape:export-ydpi="300">
   <defs
      id="defs15328">
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="marker10572"
+       style="overflow:visible;"
+       inkscape:isstock="true">
+      <path
+         id="path10574"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1;fill:#000000;fill-opacity:1"
+         transform="scale(0.8) rotate(180) translate(12.5,0)" />
+    </marker>
+    <linearGradient
+       id="linearGradient6490-6"
+       inkscape:collect="always">
+      <stop
+         id="stop6480"
+         offset="0"
+         style="stop-color:#000000;stop-opacity:0" />
+      <stop
+         id="stop6482"
+         offset="1"
+         style="stop-color:#383480;stop-opacity:0.815" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient6490">
+      <stop
+         style="stop-color:#000000;stop-opacity:0"
+         offset="0"
+         id="stop6492" />
+      <stop
+         style="stop-color:#383480;stop-opacity:0.815"
+         offset="1"
+         id="stop6494" />
+    </linearGradient>
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 526.1811 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="744.09449 : 526.1811 : 1"
+       inkscape:persp3d-origin="372.04724 : 350.7874 : 1"
+       id="perspective5635" />
     <marker
        inkscape:isstock="true"
        style="overflow:visible"
@@ -55,7 +104,8 @@
        refX="0.0"
        refY="0.0"
        orient="auto"
-       inkscape:stockid="Arrow1Lend">
+       inkscape:stockid="Arrow1Lend"
+       inkscape:collect="always">
       <path
          transform="scale(0.8) rotate(180) translate(12.5,0)"
          style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1;fill:#000000;fill-opacity:1"
@@ -1970,6 +2020,69 @@
          d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
          transform="scale(-0.6,-0.6)" />
     </marker>
+    <radialGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient6490"
+       id="radialGradient6496"
+       cx="377"
+       cy="-876.63782"
+       fx="377"
+       fy="-876.63782"
+       r="431"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.78961099,-0.59904346,0.60061973,0.79168871,505.84261,117.2258)" />
+    <radialGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient6490-6"
+       id="radialGradient5678"
+       cx="-2832"
+       cy="-3083.6377"
+       fx="-2832"
+       fy="-3083.6377"
+       r="993.5"
+       gradientTransform="matrix(1.3191042,2.5094294e-8,0,0.34285911,5636.2877,274.33769)"
+       gradientUnits="userSpaceOnUse" />
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker18249-5"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lend">
+      <path
+         inkscape:connector-curvature="0"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 Z"
+         id="path18251-6" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker18249-5-0"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lend">
+      <path
+         inkscape:connector-curvature="0"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 Z"
+         id="path18251-6-2" />
+    </marker>
+    <radialGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient6490-6"
+       id="radialGradient5678-3"
+       cx="-2832"
+       cy="-3083.6377"
+       fx="-2832"
+       fy="-3083.6377"
+       r="993.5"
+       gradientTransform="matrix(1.3191042,2.5094294e-8,0,0.34285911,5643.4771,1280.8151)"
+       gradientUnits="userSpaceOnUse" />
   </defs>
   <sodipodi:namedview
      id="base"
@@ -1978,18 +2091,27 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.5"
-     inkscape:cx="-4615.9439"
-     inkscape:cy="200.88332"
+     inkscape:zoom="0.70710678"
+     inkscape:cx="1882.7471"
+     inkscape:cy="1721.4308"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
      showguides="false"
      inkscape:window-width="1855"
      inkscape:window-height="1056"
-     inkscape:window-x="1345"
+     inkscape:window-x="65"
      inkscape:window-y="24"
-     inkscape:window-maximized="1" />
+     inkscape:window-maximized="1"
+     inkscape:snap-bbox="true"
+     inkscape:bbox-paths="true"
+     inkscape:bbox-nodes="true"
+     inkscape:snap-bbox-midpoints="true"
+     inkscape:snap-intersection-paths="true"
+     inkscape:object-nodes="true"
+     inkscape:snap-smooth-nodes="true"
+     inkscape:snap-object-midpoints="true"
+     inkscape:snap-center="true" />
   <metadata
      id="metadata15331">
     <rdf:RDF>
@@ -5434,5 +5556,365 @@
    style="font-size:64.99999762%;baseline-shift:sub"> z</tspan><tspan
    id="tspan20917"
    style="font-size:64.99999762%;baseline-shift:super" /></tspan></text>
+    <circle
+       style="fill:url(#radialGradient6496);fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2.52999997;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="path6460"
+       r="431"
+       cy="-802.63782"
+       cx="277"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 1D TT Sph.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:6;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 277,-802.63782 556.48866,-1130.6862"
+       id="path6498"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 1D TT Sph.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <text
+       transform="matrix(0.99985332,-0.01712714,0.01712714,0.99985332,0,0)"
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:44.28239822px;line-height:125%;font-family:sans-serif;-inkscape-font-specification:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="455.92517"
+       y="-933.05609"
+       id="text19223-41-0-4-2-5-5-4-0-2-8-6-3"
+       sodipodi:linespacing="125%"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 1D TT Sph.png"><tspan
+         sodipodi:role="line"
+         id="tspan19225-6-4-1-2-7-00-9-55-0-9-9-6"
+         x="455.92517"
+         y="-933.05609"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:50px;font-family:sans-serif;-inkscape-font-specification:sans-serif">R</tspan></text>
+    <circle
+       style="fill:#000000;stroke:#000000;stroke-width:6.80000019;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="path3216-3-7"
+       cx="556.48865"
+       cy="-1130.6862"
+       r="11.035823"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 1D TT Sph.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <circle
+       style="fill:#000000;stroke:#000000;stroke-width:6.80000019;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="path3216-5"
+       cx="277"
+       cy="-802.63782"
+       r="11.035823"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 1D TT Sph.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="304.98804"
+       y="-771.5321"
+       id="text3233-6-3"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 1D TT Sph.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300"><tspan
+         sodipodi:role="line"
+         id="tspan3235-7-5"
+         x="304.98804"
+         y="-771.5321"
+         style="font-size:50px">T<tspan
+   style="font-size:65%;baseline-shift:sub"
+   id="tspan6977">C</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="585.00702"
+       y="-1126.2148"
+       id="text3233-2"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 1D TT Sph.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300"><tspan
+         sodipodi:role="line"
+         id="tspan3235-9"
+         x="585.00702"
+         y="-1126.2148"><tspan
+           style="font-size:50px"
+           id="tspan6971">T</tspan><tspan
+           id="tspan6975"
+           style="font-size:65%;baseline-shift:sub">S</tspan></tspan></text>
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker18249)"
+       d="M 277,-802.63782 147.5225,-925.3909"
+       id="path6498-2"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 1D TT Sph.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <text
+       transform="matrix(0.99985332,-0.01712714,0.01712714,0.99985332,0,0)"
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:44.28239822px;line-height:125%;font-family:sans-serif;-inkscape-font-specification:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="233.58554"
+       y="-868.82532"
+       id="text19223-41-0-4-2-5-5-4-0-2-8-6-3-7"
+       sodipodi:linespacing="125%"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 1D TT Sph.png"><tspan
+         sodipodi:role="line"
+         id="tspan19225-6-4-1-2-7-00-9-55-0-9-9-6-0"
+         x="233.58554"
+         y="-868.82532"
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:50px;font-family:sans-serif;-inkscape-font-specification:sans-serif">r</tspan></text>
+    <rect
+       style="opacity:1;fill:url(#radialGradient5678);fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2.48582077;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect5670"
+       width="489.99997"
+       height="834.67651"
+       x="1655.5847"
+       y="-1200.254"
+       rx="0"
+       ry="0"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 1D TT Cyl.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker18249-5)"
+       d="m 1903.5847,-782.91576 0,-213.83824"
+       id="path6498-2-2"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 1D TT Cyl.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <text
+       transform="matrix(0.99985332,-0.01712714,0.01712714,0.99985332,0,0)"
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:44.28239822px;line-height:125%;font-family:sans-serif;-inkscape-font-specification:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="1931.2991"
+       y="-798.52747"
+       id="text19223-41-0-4-2-5-5-4-0-2-8-6-3-7-9"
+       sodipodi:linespacing="125%"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 1D TT Cyl.png"><tspan
+         sodipodi:role="line"
+         id="tspan19225-6-4-1-2-7-00-9-55-0-9-9-6-0-1"
+         x="1931.2991"
+         y="-798.52747"
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:50px;font-family:sans-serif;-inkscape-font-specification:sans-serif">r</tspan></text>
+    <text
+       transform="matrix(0.99985332,-0.01712714,0.01712714,0.99985332,0,0)"
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:44.28239822px;line-height:125%;font-family:sans-serif;-inkscape-font-specification:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="2004.0903"
+       y="-958.81726"
+       id="text19223-41-0-4-2-5-5-4-0-2-8-6-3-2"
+       sodipodi:linespacing="125%"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 1D TT Cyl.png"><tspan
+         sodipodi:role="line"
+         id="tspan19225-6-4-1-2-7-00-9-55-0-9-9-6-7"
+         x="2004.0903"
+         y="-958.81726"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:50px;font-family:sans-serif;-inkscape-font-specification:sans-serif">R</tspan></text>
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:6;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:18,18;stroke-opacity:1;stroke-dashoffset:19.2"
+       d="m 2145.5847,-782.91576 -489.4874,0"
+       id="path6498-7-0"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 1D TT Cyl.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:6;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 1975.6564,-785.91576 0,-414.33824"
+       id="path6498-7-9"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 1D TT Cyl.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <circle
+       style="fill:#000000;stroke:#000000;stroke-width:6.80000019;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="path3216-3-7-3"
+       cx="1975.6564"
+       cy="-1200.254"
+       r="11.035823"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 1D TT Cyl.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <circle
+       style="fill:#000000;stroke:#000000;stroke-width:6.80000019;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="path3216-3-7-6"
+       cx="1975.6564"
+       cy="-785.91577"
+       r="11.035823"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 1D TT Cyl.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="1990.2386"
+       y="-735.02972"
+       id="text3233-6-3-2"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 1D TT Cyl.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300"><tspan
+         sodipodi:role="line"
+         id="tspan3235-7-5-6"
+         x="1990.2386"
+         y="-735.02972"
+         style="font-size:50px">T<tspan
+   style="font-size:64.99999762%;baseline-shift:sub"
+   id="tspan6977-1">C</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="1990.2386"
+       y="-1223.058"
+       id="text3233-2-8"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/heat 1D TT Cyl.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300"><tspan
+         sodipodi:role="line"
+         id="tspan3235-9-7"
+         x="1990.2386"
+         y="-1223.058"><tspan
+           style="font-size:50px"
+           id="tspan6971-9">T</tspan><tspan
+           id="tspan6975-2"
+           style="font-size:64.99999762%;baseline-shift:sub">S</tspan></tspan></text>
+    <rect
+       style="opacity:1;fill:url(#radialGradient5678-3);fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2.48582077;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect5670-9"
+       width="489.99997"
+       height="834.67651"
+       x="1662.7742"
+       y="-193.77663"
+       rx="0"
+       ry="0"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 1D TT Cyl.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker10572)"
+       d="m 1910.7741,223.56166 0,-213.8382368"
+       id="path6498-2-2-2"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 1D TT Cyl.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <text
+       transform="matrix(0.99985332,-0.01712714,0.01712714,0.99985332,0,0)"
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:44.28239822px;line-height:125%;font-family:sans-serif;-inkscape-font-specification:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="1921.2493"
+       y="207.92548"
+       id="text19223-41-0-4-2-5-5-4-0-2-8-6-3-7-9-2"
+       sodipodi:linespacing="125%"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 1D TT Cyl.png"><tspan
+         sodipodi:role="line"
+         id="tspan19225-6-4-1-2-7-00-9-55-0-9-9-6-0-1-8"
+         x="1921.2493"
+         y="207.92548"
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:50px;font-family:sans-serif;-inkscape-font-specification:sans-serif">r</tspan></text>
+    <text
+       transform="matrix(0.99985332,-0.01712714,0.01712714,0.99985332,0,0)"
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:44.28239822px;line-height:125%;font-family:sans-serif;-inkscape-font-specification:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="1994.0405"
+       y="47.635689"
+       id="text19223-41-0-4-2-5-5-4-0-2-8-6-3-2-9"
+       sodipodi:linespacing="125%"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 1D TT Cyl.png"><tspan
+         sodipodi:role="line"
+         id="tspan19225-6-4-1-2-7-00-9-55-0-9-9-6-7-7"
+         x="1994.0405"
+         y="47.635689"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:50px;font-family:sans-serif;-inkscape-font-specification:sans-serif">R</tspan></text>
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:6;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:18, 18;stroke-dashoffset:19.20000076;stroke-opacity:1"
+       d="m 2152.7741,223.56166 -489.4874,0"
+       id="path6498-7-0-3"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 1D TT Cyl.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:6;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 1982.8458,220.56166 0,-414.33824"
+       id="path6498-7-9-6"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 1D TT Cyl.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <circle
+       style="fill:#000000;stroke:#000000;stroke-width:6.80000019;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="path3216-3-7-3-1"
+       cx="1982.8457"
+       cy="-193.77663"
+       r="11.035823"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 1D TT Cyl.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <circle
+       style="fill:#000000;stroke:#000000;stroke-width:6.80000019;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="path3216-3-7-6-2"
+       cx="1982.8457"
+       cy="220.56165"
+       r="11.035823"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 1D TT Cyl.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="1997.428"
+       y="271.44769"
+       id="text3233-6-3-2-9"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 1D TT Cyl.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300"><tspan
+         sodipodi:role="line"
+         id="tspan3235-7-5-6-3"
+         x="1997.428"
+         y="271.44769"
+         style="font-size:50px">C<tspan
+   style="font-size:64.99999762%;baseline-shift:sub"
+   id="tspan6977-1-1">C</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="1997.428"
+       y="-216.58058"
+       id="text3233-2-8-9"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/home/hugomilan/OneDrive/Cornell/Project/TLM/Netbeans/V03/tlmbht/docs/assets/images/theory/ana/diff 1D TT Cyl.png"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300"><tspan
+         sodipodi:role="line"
+         id="tspan3235-9-7-4"
+         x="1997.428"
+         y="-216.58058"><tspan
+           style="font-size:50px"
+           id="tspan6971-9-7">C</tspan><tspan
+           id="tspan6975-2-8"
+           style="font-size:64.99999762%;baseline-shift:sub">S</tspan></tspan></text>
   </g>
 </svg>

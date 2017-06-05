@@ -23,6 +23,8 @@ with the following definition of flux
 
 where \\(T\\) is temperature, \\(t\\) is time, \\(\rho\\) is density, \\(c_{p}\\) is specific heat, \\(k\\) is heat conductivity, \\(S\\) is source, \\(Q_m\\) is metabolic heat generation, \\(\omega_b\\) is blood perfusion, \\(\rho_b\\) is blodd density, \\(c_{b}\\) is blood specific heat, and \\(T_b\\) is blood temperature.
 
+### Cartesian coordinates
+
 #### **1) One-dimension**
 
 [Click here to see how to solve the problem with the following initial condition and boundary conditions:]({{ site.baseurl }}{% link theory/ana/pennes/pennes 1D TT.md %})
@@ -66,6 +68,22 @@ $$
 \end{matrix}
 $$
 
+
+### Cylindrical coordinates
+something.
+
+### Spherical coordinates
+#### **1) One-dimension**
+
+[Click here to see how to solve the problem with the following initial condition and boundary conditions:]({{ site.baseurl }}{% link theory/ana/pennes/pennes 1D TT Sph.md %})
+
+$$
+\begin{matrix}
+    T(r, t = 0) = T_{c}\\
+    T(r = 0, t) = T_{c}\\
+    T(r = R, t) = T_{s}
+\end{matrix}
+$$
 
 You can go to:
 

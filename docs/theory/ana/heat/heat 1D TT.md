@@ -13,13 +13,11 @@ You can download the algorithm `D1_HEAT_f.m` for Octave/Matlab that can solve th
 
 In this page, we will solve the dynamic diffusion/heat equation in one-dimension using the principles of superposition and separation of variables. The problem we will solve is restricted to the following initial and boundary conditions:
 
-$$
 \begin{matrix}
     C(y, t = 0) = C_{c} & \text{ or } & T(y, t = 0) = T_{c}\\
     C(y = 0, t) = C_{c} & \text{ or } & T(y = 0, t) = T_{c}\\
     C(y = H, t) = C_{s} & \text{ or } & T(y = H, t) = T_{s}
 \end{matrix}
-$$
 
 The problem geometry for the diffusion equation can be represented as shown below.
 <img src="{{ site.baseurl }}/assets/images/theory/ana/diff 1D TT.png" alt="Geometry of the one-dimensional problem for diffusion equation" width="300">

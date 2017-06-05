@@ -551,8 +551,8 @@ unsigned int initiateAllConfigurationVarialbes(struct dataForSimulation *input) 
     // initializing who am I
     input->myName = malloc((strlen("tlmbht") + 1) * sizeof (char));
     strcpy(input->myName, "tlmbht");
-    input->myVersion = malloc((strlen("0.2.0-alpha") + 1) * sizeof (char));
-    strcpy(input->myVersion, "0.2.0-alpha");
+    input->myVersion = malloc((strlen("0.2.0-beta") + 1) * sizeof (char));
+    strcpy(input->myVersion, "0.2.0-beta");
 
     // initializing simulation variables used for configuration
     if ((errorTLMnumber = initiateSimulationVariable(&input->simulationInput)) != 0)

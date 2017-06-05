@@ -1632,7 +1632,6 @@ unsigned int MaterialHexahedronPennesEigen(struct dataForSimulation *input, stru
                     matrices->Vi(numbersNodeAndPort[1] + 3) = matrices->Vi(numbersNodeAndPort[1]);
                     matrices->Vi(numbersNodeAndPort[1] + 4) = matrices->Vi(numbersNodeAndPort[1]);
                     matrices->Vi(numbersNodeAndPort[1] + 5) = matrices->Vi(numbersNodeAndPort[1]);
-                    printf("%g\n%g\n",matrices->E(numbersNodeAndPort[1]), matrices->Vi(numbersNodeAndPort[1]));
 
                     goto end_for_j_and_for_k_hexadron;
                 }

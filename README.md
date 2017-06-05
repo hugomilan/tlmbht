@@ -1,6 +1,6 @@
 [![DOI](https://zenodo.org/badge/61003231.svg)](https://zenodo.org/badge/latestdoi/61003231)
 
-# tlmbht 0.2.0-alpha (work in progress)
+# tlmbht 0.2.0-beta (work in progress)
  TLMBHT - Transmission-line Modeling Method applied to BioHeat Transfer Problems.
   
  Copyright (C) 2015 to 2017 by Cornell University. All Rights Reserved.

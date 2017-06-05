@@ -41,6 +41,8 @@ where \\(T\\) is temperature, \\(\bar{q}\\) is heat flux, \\(t\\) is time, \\(\r
 
 Note that the diffusion equation and the heat equation have the same form when \\(\rho c_{p} = 1\\).
 
+### Cartesian coordinates
+
 #### **1) One-dimension**
 
 [Click here to see how to solve the problem with the following initial condition and boundary conditions:]({{ site.baseurl }}{% link theory/ana/heat/heat 1D TT.md %})
@@ -85,6 +87,23 @@ $$
 \end{matrix}
 $$
 
+
+### Cylindrical coordinates
+#### **1) One-dimension**
+[Click here to see how to solve the problem with the following initial condition and boundary conditions:]({{ site.baseurl }}{% link theory/ana/heat/heat 1D TT Cyl.md %})
+
+
+$$
+\begin{matrix}
+    C(r, t = 0) = C_{c} & \text{ or } & T(r, t = 0) = T_{c}\\
+    C(r = 0, t) = C_{c} & \text{ or } & T(r = 0, t) = T_{c}\\
+    C(r = R, t) = C_{s} & \text{ or } & T(r = R, t) = T_{s}
+\end{matrix}
+$$
+
+### Spherical coordinates
+#### **1) One-dimension**
+Something.
 
 You can go to:
 

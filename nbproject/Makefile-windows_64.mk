@@ -21,7 +21,7 @@ FC=x86_64-w64-mingw32-gfortran
 AS=x86_64-w64-mingw32-as
 
 # Macros
-CND_PLATFORM=MINGW64-Linux
+CND_PLATFORM=MINGW-Linux
 CND_DLIB_EXT=so
 CND_CONF=windows_64
 CND_DISTDIR=dist
