@@ -69,7 +69,7 @@ $$
 $$
 
 
-### Cylindrical coordinates
+[comment]: <> (### Cylindrical coordinates
 something.
 
 ### Spherical coordinates
@@ -83,7 +83,7 @@ $$
     T(r = 0, t) = T_{c}\\
     T(r = R, t) = T_{s}
 \end{matrix}
-$$
+$$)
 
 You can go to:
 
