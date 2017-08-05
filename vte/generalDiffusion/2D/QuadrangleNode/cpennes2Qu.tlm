@@ -16,7 +16,7 @@ Equation
     dimensions = 2;
     Solve = dynamic;
     time-step = 1e-3;
-    time-jump = 10z0;
+    time-jump = 100;
     final time = 1;
     save = scalar;
     save = scalar between;
