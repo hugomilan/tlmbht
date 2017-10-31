@@ -796,7 +796,7 @@ unsigned int getGeometricalVariablesTLMpyramid(const struct node *N1,
     // 1 - length of port 2 (from center of pyramid to center of area 2)
     // 2 - length of port 3 (from center of pyramid to center of area 3)
     // 3 - length of port 4 (from center of pyramid to center of area 4)
-    // 4 - length of port 4 (from center of pyramid to center of area 5)
+    // 4 - length of port 5 (from center of pyramid to center of area 5)
     // 5 - area of quadrangle 1
     // 6 - area of triangle 2
     // 7 - area of triangle 3
@@ -872,7 +872,7 @@ unsigned int getGeometricalVariablesTLMpyramid(const struct node *N1,
     triangleArea(N2, N3, N5, &output[8]);
     triangleArea(N3, N4, N5, &output[9]);
     tetrahedronVolume(N1, N2, N3, N5, &temp);
-    tetrahedronVolume(N1, N2, N4, N5, &output[10]);
+    tetrahedronVolume(N1, N3, N4, N5, &output[10]);
     output[10] = output[10] + temp;
     output[11] = center[0];
     output[12] = center[1];

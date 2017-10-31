@@ -13,6 +13,8 @@
         <gdb_interceptlist>
           <gdbinterceptoptions gdb_all="false" gdb_unhandled="true" gdb_unexpected="true"/>
         </gdb_interceptlist>
+        <gdb_signals>
+        </gdb_signals>
         <gdb_options>
           <DebugOptions>
           </DebugOptions>
@@ -96,6 +98,8 @@
         <gdb_interceptlist>
           <gdbinterceptoptions gdb_all="false" gdb_unhandled="true" gdb_unexpected="true"/>
         </gdb_interceptlist>
+        <gdb_signals>
+        </gdb_signals>
         <gdb_options>
           <DebugOptions>
           </DebugOptions>
@@ -107,7 +111,6 @@
       </nativedebugger>
       <runprofile version="9">
         <runcommandpicklist>
-          <runcommandpicklistitem>"${OUTPUT_PATH}" cHheat1Li.tlm</runcommandpicklistitem>
           <runcommandpicklistitem>"${OUTPUT_PATH}" cHheat1Li.tlm --verbose --timing</runcommandpicklistitem>
           <runcommandpicklistitem>"${OUTPUT_PATH}" cdiff3He.tlm --verbose --timing</runcommandpicklistitem>
           <runcommandpicklistitem>"${OUTPUT_PATH}" cheat1Li.tlm --verbose --timing</runcommandpicklistitem>
@@ -117,8 +120,9 @@
           <runcommandpicklistitem>"${OUTPUT_PATH}" cdiff3He.tlm --verbose</runcommandpicklistitem>
           <runcommandpicklistitem>"${OUTPUT_PATH}" cdiff3He_R.tlm --verbose</runcommandpicklistitem>
           <runcommandpicklistitem>"${OUTPUT_PATH}" cdiff3Py.tlm --verbose</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" cpennes3Py.tlm --verbose --timing</runcommandpicklistitem>
         </runcommandpicklist>
-        <runcommand>"${OUTPUT_PATH}" cdiff3Py.tlm --verbose</runcommand>
+        <runcommand>"${OUTPUT_PATH}" cpennes3Py.tlm --verbose --timing</runcommand>
         <rundir>test</rundir>
         <buildfirst>true</buildfirst>
         <terminal-type>0</terminal-type>

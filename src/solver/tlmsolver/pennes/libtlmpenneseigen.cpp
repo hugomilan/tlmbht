@@ -1684,7 +1684,7 @@ unsigned int MaterialPyramidPennesEigen(struct dataForSimulation *input, struct 
     // 1 - length of port 2 (from center of pyramid to center of area 2)
     // 2 - length of port 3 (from center of pyramid to center of area 3)
     // 3 - length of port 4 (from center of pyramid to center of area 4)
-    // 4 - length of port 4 (from center of pyramid to center of area 5)
+    // 4 - length of port 5 (from center of pyramid to center of area 5)
     // 5 - area of quadrangle 1
     // 6 - area of triangle 2
     // 7 - area of triangle 3
@@ -1742,7 +1742,7 @@ unsigned int MaterialPyramidPennesEigen(struct dataForSimulation *input, struct 
                     R[2] = tempVar[2] / (input->materialInput[j2].generalized_diffusionCoeff * tempVar[7]);
                     R[3] = tempVar[3] / (input->materialInput[j2].generalized_diffusionCoeff * tempVar[8]);
                     R[4] = tempVar[4] / (input->materialInput[j2].generalized_diffusionCoeff * tempVar[9]);
-
+                    
                     // generalization of G
                     G = tempVar[10] * input->materialInput[j2].generalized_sink_a;
 
@@ -1781,7 +1781,7 @@ unsigned int MaterialPyramidPennesEigen(struct dataForSimulation *input, struct 
                     tau[2] = 2 * Zhat / Z[2];
                     tau[3] = 2 * Zhat / Z[3];
                     tau[4] = 2 * Zhat / Z[4];
-
+                    
                     // this is actually matrix S.
                     // M = C*S
                     // this matrix is M[line][column].
@@ -1863,7 +1863,7 @@ unsigned int MaterialPyramidPennesEigen(struct dataForSimulation *input, struct 
                     // matrix E_output
                     matrices->E_output(numbersNodeAndPort[0]) = Zhat*Is;
 
-                    // the center of the tetrahedron
+                    // the center of the pyramid
                     matrices->Points_output[numbersNodeAndPort[0]].x = tempVar[11];
                     matrices->Points_output[numbersNodeAndPort[0]].y = tempVar[12];
                     matrices->Points_output[numbersNodeAndPort[0]].z = tempVar[13];
@@ -1876,6 +1876,7 @@ unsigned int MaterialPyramidPennesEigen(struct dataForSimulation *input, struct 
                     matrices->Vi(numbersNodeAndPort[1] + 2) = matrices->Vi(numbersNodeAndPort[1]);
                     matrices->Vi(numbersNodeAndPort[1] + 3) = matrices->Vi(numbersNodeAndPort[1]);
                     matrices->Vi(numbersNodeAndPort[1] + 4) = matrices->Vi(numbersNodeAndPort[1]);
+                    
 
                     goto end_for_j_and_for_k_pyramid;
                 }
