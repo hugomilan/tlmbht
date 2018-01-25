@@ -53,6 +53,9 @@ unsigned int intializeMaterialConfig(struct MaterialConfig * mat) {
     mat->equationNameDefined = 0;
 
     mat->equationNumber = -1;
+    
+    mat->materialName = NULL;
+    mat->materialNameDefined = 0;
 
     mat->typeOfEquation = PENNES;
 
@@ -132,6 +135,9 @@ unsigned int intializeMaterialConfig(struct MaterialConfig * mat) {
 unsigned int terminateMaterialConfig(struct MaterialConfig * mat) {
     free(mat->equationName);
     mat->equationName = NULL;
+    
+    free(mat->materialName);
+    mat->materialName = NULL;
 
     free(mat->numberInput);
     mat->numberInput = NULL;
@@ -167,6 +173,18 @@ unsigned int setConfigurationMaterial(char * input, struct MaterialConfig * matI
         strcpy(matInput->equationName, input);
 
         matInput->equationNameDefined = 1;
+
+    } else if (compareCaseInsensitive(input, "name") == 0) {
+        if ((errorTLMnumber = getBetweenEqualAndSemicolon(input)) != 0)
+            return errorTLMnumber;
+
+        removeBlankSpacesBeforeAndAfter(input);
+
+        // the input is the name
+        matInput->materialName = (char*) malloc(sizeof (char)*(strlen(input) + 1));
+        strcpy(matInput->materialName, input);
+
+        matInput->materialNameDefined = 1;
 
     } else if (compareCaseInsensitive(input, "number") == 0) {
         if ((errorTLMnumber = readVectorIntInputs(input,

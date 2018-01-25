@@ -63,7 +63,7 @@ unsigned int initiateSimulationVariable(struct Simulation* simu) {
 #endif
 
     simu->AbsoluteZero = -273.15;
-    simu->StefanBoltzmann = 5.6704e-8;
+    simu->StefanBoltzmann = 5.670367e-8;
 
     simu->nameOfInputFile = NULL;
     simu->nameOfOutputFile = malloc( ( strlen("--case")  + 1 )*sizeof(char));

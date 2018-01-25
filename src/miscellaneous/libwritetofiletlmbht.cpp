@@ -151,7 +151,7 @@ unsigned int writeFirstDataToFile(struct dataForSimulation *input,
                     break;
                 case STEADY:
                     fprintf(input->simulationInput.outputFileHandler,
-                            "%s Steady-State Solution for equation group %d",
+                            "%s Steady-State Solution for equation group %d\n",
                             input->simulationInput.comentary_string, id + 1);
 
                     break;

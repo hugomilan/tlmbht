@@ -49,6 +49,7 @@ void sendErrorCodeAndMessage(unsigned int errorCode, void *input1v, void *input2
     unsigned long long *input2llui = (unsigned long long *) input2v;
     char *input1c = (char*) input1v;
     char *input2c = (char*) input2v;
+    char *input3c = (char*) input3v;
 
     unsigned int *input3ui = (unsigned int *) input3v;
     char *input4c = (char*) input4v;
@@ -134,7 +135,32 @@ void sendErrorCodeAndMessage(unsigned int errorCode, void *input1v, void *input2
             // error when choosing the configuration (SIMULATION, MESH, etc.)
             fprintf(stderr, "Unknown command in line %04u: %s", *input1ui, input2c);
             break;
-
+            
+        case 500:
+            // error when creating the variable name table
+            fprintf(stderr, "Could not find \"::\" in the variable \"%s\"", input1c);
+            break;
+            
+        case 501:
+            // error when reading variable name for simulation
+            fprintf(stderr, "the input \"%s\" was identified as from STD (standard for simulation) but the variable name \"%s\" was not identified as an acceptable input. The acceptable input names are: \nabsolute_zero \nStefan_Boltzmann_constant \nx \ny \nz \n", input1c, input2c);
+            break;
+            
+        case 511:
+            // error when reading variable name for equation
+            fprintf(stderr, "the input \"%s\" was identified as from the equation \"%s\" but the variable name \"%s\" was not identified as an acceptable input. The acceptable input names are: \ntime \ntime-step \ntime-jump \nfinal_time \nscalar or the scalar variable name \n flux or the flux variable name", input1c, input2c, input3c);
+            break;
+            
+        case 521:
+            // error when reading variable name for equation
+            fprintf(stderr, "the input \"%s\" was identified as from the material \"%s\" but the variable name \"%s\" was not identified as an acceptable input. The acceptable input names are: \ndiffusion_coefficient \ncoefficient_b \nrelaxation_time \nsink_a \nsource \nvectorial_source[0] \nvectorial_source[1] \nvectorial_source[2] \ninitial_scalar \ndensity \nspecific_heat \nthermal_conductivity \nblood_perfusion \nblood_density \nblood_specific_heat \nblood_temperature \ninternal_heat_generation \ninitial_temperature", input1c, input2c, input3c);
+            break;
+            
+        case 531:
+            // error when reading variable name for equation
+            fprintf(stderr, "the input \"%s\" was identified as from the boundary \"%s\" but the variable name \"%s\" was not identified as an acceptable input. The acceptable input names are: \nscalar \nflux \nconvection_scalar \nconvection_coefficient \ntemperature \nheat_flux \nconvection_temperature \nradiation_temperature \nradiation_emissivity", input1c, input2c, input3c);
+            break;
+            
         case 764:
             //We couldn't find the input file
             fprintf(stderr, "Could not open file %s", input1c);

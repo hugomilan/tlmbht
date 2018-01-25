@@ -612,6 +612,33 @@ unsigned int getGeometricalVariablesTLMtriangle(const struct node *N1,
     output[7] = center[0];
     output[8] = center[1];
     output[9] = center[2];
+    
+    // DEBUG: calculates the vector perpendicular to the triangular faces
+    // and then calculates the angle between this vector and the transmission-line
+    // vector that goes between the triangle center and the face center
+/*    double deltaXL[3], deltaYL[3], deltaZL[3], deltaL[3], theta[3];
+    deltaXL[0] = N1->x - N2->x;
+    deltaYL[0] = N1->y - N2->y;
+    deltaZL[0] = N1->z - N2->z;
+    deltaL[0] = sqrt(deltaXL[0] * deltaXL[0] + deltaYL[0] * deltaYL[0] + deltaZL[0] * deltaZL[0]);
+    theta[0] = acos( fabs(deltaXL[0]*deltaXl[0] + deltaYL[0]*deltaYl[0] + deltaZL[0]*deltaZl[0])/(deltaL[0]*deltal[0]) )*180/M_PI; // M_PI may not be defined in all C implementations
+    
+    deltaXL[1] = N1->x - N3->x;
+    deltaYL[1] = N1->y - N3->y;
+    deltaZL[1] = N1->z - N3->z;
+    deltaL[1] = sqrt(deltaXL[1] * deltaXL[1] + deltaYL[1] * deltaYL[1] + deltaZL[1] * deltaZL[1]);
+    theta[1] = acos( fabs(deltaXL[1]*deltaXl[1] + deltaYL[1]*deltaYl[1] + deltaZL[1]*deltaZl[1])/(deltaL[1]*deltal[1]) )*180/M_PI; // M_PI may not be defined in all C implementations
+    
+    deltaXL[2] = N3->x - N2->x;
+    deltaYL[2] = N3->y - N2->y;
+    deltaZL[2] = N3->z - N2->z;
+    deltaL[2] = sqrt(deltaXL[2] * deltaXL[2] + deltaYL[2] * deltaYL[2] + deltaZL[2] * deltaZL[2]);
+    theta[2] = acos( fabs(deltaXL[2]*deltaXl[2] + deltaYL[2]*deltaYl[2] + deltaZL[2]*deltaZl[2])/(deltaL[2]*deltal[2]) )*180/M_PI; // M_PI may not be defined in all C implementations
+    
+    // I'll print theta to stderr
+    fprintf(stderr, "%0.17g\n%0.17g\n%0.17g\n", theta[0], theta[1], theta[2]);
+ */   
+    
 
     return 0;
 }
@@ -692,6 +719,38 @@ unsigned int getGeometricalVariablesTLMquadrangle(const struct node *N1,
     output[9] = center[0];
     output[10] = center[1];
     output[11] = center[2];
+    
+    // DEBUG: calculates the vector perpendicular to the quadrangle faces
+    // and then calculates the angle between this vector and the transmission-line
+    // vector that goes between the quadrangle center and the face center
+    /*double deltaXL[4], deltaYL[4], deltaZL[4], deltaL[4], theta[4];
+    deltaXL[0] = N1->x - N2->x;
+    deltaYL[0] = N1->y - N2->y;
+    deltaZL[0] = N1->z - N2->z;
+    deltaL[0] = sqrt(deltaXL[0] * deltaXL[0] + deltaYL[0] * deltaYL[0] + deltaZL[0] * deltaZL[0]);
+    theta[0] = 90 - acos( fabs(deltaXL[0]*deltaXl[0] + deltaYL[0]*deltaYl[0] + deltaZL[0]*deltaZl[0])/(deltaL[0]*deltal[0]) )*180/M_PI; // M_PI may not be defined in all C implementations
+    
+    deltaXL[1] = N2->x - N3->x;
+    deltaYL[1] = N2->y - N3->y;
+    deltaZL[1] = N2->z - N3->z;
+    deltaL[1] = sqrt(deltaXL[1] * deltaXL[1] + deltaYL[1] * deltaYL[1] + deltaZL[1] * deltaZL[1]);
+    theta[1] = 90 - acos( fabs(deltaXL[1]*deltaXl[1] + deltaYL[1]*deltaYl[1] + deltaZL[1]*deltaZl[1])/(deltaL[1]*deltal[1]) )*180/M_PI; // M_PI may not be defined in all C implementations
+    
+    deltaXL[2] = N3->x - N4->x;
+    deltaYL[2] = N3->y - N4->y;
+    deltaZL[2] = N3->z - N4->z;
+    deltaL[2] = sqrt(deltaXL[2] * deltaXL[2] + deltaYL[2] * deltaYL[2] + deltaZL[2] * deltaZL[2]);
+    theta[2] = 90 - acos( fabs(deltaXL[2]*deltaXl[2] + deltaYL[2]*deltaYl[2] + deltaZL[2]*deltaZl[2])/(deltaL[2]*deltal[2]) )*180/M_PI; // M_PI may not be defined in all C implementations
+    
+    deltaXL[3] = N1->x - N4->x;
+    deltaYL[3] = N1->y - N4->y;
+    deltaZL[3] = N1->z - N4->z;
+    deltaL[3] = sqrt(deltaXL[3] * deltaXL[3] + deltaYL[3] * deltaYL[3] + deltaZL[3] * deltaZL[3]);
+    theta[3] = 90 - acos( fabs(deltaXL[3]*deltaXl[3] + deltaYL[3]*deltaYl[3] + deltaZL[3]*deltaZl[3])/(deltaL[3]*deltal[3]) )*180/M_PI; // M_PI may not be defined in all C implementations
+    
+    // I'll print theta to stderr
+    fprintf(stderr, "%0.17g\n%0.17g\n%0.17g\n%0.17g\n", theta[0], theta[1], theta[2], theta[3]);
+    */
 
     return 0;
 }
@@ -781,6 +840,76 @@ unsigned int getGeometricalVariablesTLMtetrahedron(const struct node *N1,
     output[9] = center[0];
     output[10] = center[1];
     output[11] = center[2];
+    
+    
+    // DEBUG: calculates the vector perpendicular to the triangles 
+    // and then calculates the angle between this vector and the transmission-line
+    // vector that goes between the tetrahedron center and the face center
+    /*double deltaXL[4], deltaYL[4], deltaZL[4], deltaL[4], theta[4];
+    double deltaXLtemp[8], deltaYLtemp[8], deltaZLtemp[8]; // temporary vectors
+    // for vector L1
+    deltaXLtemp[0] = N1->x - N2->x;
+    deltaYLtemp[0] = N1->y - N2->y;
+    deltaZLtemp[0] = N1->z - N2->z;
+    
+    deltaXLtemp[1] = N1->x - N3->x;
+    deltaYLtemp[1] = N1->y - N3->y;
+    deltaZLtemp[1] = N1->z - N3->z;
+    
+    deltaXL[0] = deltaYLtemp[0]*deltaZLtemp[1] - deltaZLtemp[0]*deltaYLtemp[1];
+    deltaYL[0] = deltaZLtemp[0]*deltaXLtemp[1] - deltaXLtemp[0]*deltaZLtemp[1];
+    deltaZL[0] = deltaXLtemp[0]*deltaYLtemp[1] - deltaYLtemp[0]*deltaXLtemp[1];
+    deltaL[0] = sqrt(deltaXL[0] * deltaXL[0] + deltaYL[0] * deltaYL[0] + deltaZL[0] * deltaZL[0]);
+    theta[0] = acos( fabs(deltaXL[0]*deltaXl[0] + deltaYL[0]*deltaYl[0] + deltaZL[0]*deltaZl[0])/(deltaL[0]*deltal[0]) )*180/M_PI; // M_PI may not be defined in all C implementations
+    
+    // for vector L2
+    deltaXLtemp[2] = N1->x - N2->x;
+    deltaYLtemp[2] = N1->y - N2->y;
+    deltaZLtemp[2] = N1->z - N2->z;
+    
+    deltaXLtemp[3] = N1->x - N4->x;
+    deltaYLtemp[3] = N1->y - N4->y;
+    deltaZLtemp[3] = N1->z - N4->z;
+    
+    deltaXL[1] = deltaYLtemp[2]*deltaZLtemp[3] - deltaZLtemp[2]*deltaYLtemp[3];
+    deltaYL[1] = deltaZLtemp[2]*deltaXLtemp[3] - deltaXLtemp[2]*deltaZLtemp[3];
+    deltaZL[1] = deltaXLtemp[2]*deltaYLtemp[3] - deltaYLtemp[2]*deltaXLtemp[3];
+    deltaL[1] = sqrt(deltaXL[1] * deltaXL[1] + deltaYL[1] * deltaYL[1] + deltaZL[1] * deltaZL[1]);
+    theta[1] = acos( fabs(deltaXL[1]*deltaXl[1] + deltaYL[1]*deltaYl[1] + deltaZL[1]*deltaZl[1])/(deltaL[1]*deltal[1]) )*180/M_PI; // M_PI may not be defined in all C implementations
+    
+    // for vector L3
+    deltaXLtemp[4] = N1->x - N3->x;
+    deltaYLtemp[4] = N1->y - N3->y;
+    deltaZLtemp[4] = N1->z - N3->z;
+    
+    deltaXLtemp[5] = N1->x - N4->x;
+    deltaYLtemp[5] = N1->y - N4->y;
+    deltaZLtemp[5] = N1->z - N4->z;
+    
+    deltaXL[2] = deltaYLtemp[4]*deltaZLtemp[5] - deltaZLtemp[4]*deltaYLtemp[5];
+    deltaYL[2] = deltaZLtemp[4]*deltaXLtemp[5] - deltaXLtemp[4]*deltaZLtemp[5];
+    deltaZL[2] = deltaXLtemp[4]*deltaYLtemp[5] - deltaYLtemp[4]*deltaXLtemp[5];
+    deltaL[2] = sqrt(deltaXL[2] * deltaXL[2] + deltaYL[2] * deltaYL[2] + deltaZL[2] * deltaZL[2]);
+    theta[2] = acos( fabs(deltaXL[2]*deltaXl[2] + deltaYL[2]*deltaYl[2] + deltaZL[2]*deltaZl[2])/(deltaL[2]*deltal[2]) )*180/M_PI; // M_PI may not be defined in all C implementations
+    
+    // for vector L4
+    deltaXLtemp[6] = N4->x - N2->x;
+    deltaYLtemp[6] = N4->y - N2->y;
+    deltaZLtemp[6] = N4->z - N2->z;
+    
+    deltaXLtemp[7] = N4->x - N3->x;
+    deltaYLtemp[7] = N4->y - N3->y;
+    deltaZLtemp[7] = N4->z - N3->z;
+    
+    deltaXL[3] = deltaYLtemp[6]*deltaZLtemp[7] - deltaZLtemp[6]*deltaYLtemp[7];
+    deltaYL[3] = deltaZLtemp[6]*deltaXLtemp[7] - deltaXLtemp[6]*deltaZLtemp[7];
+    deltaZL[3] = deltaXLtemp[6]*deltaYLtemp[7] - deltaYLtemp[6]*deltaXLtemp[7];
+    deltaL[3] = sqrt(deltaXL[3] * deltaXL[3] + deltaYL[3] * deltaYL[3] + deltaZL[3] * deltaZL[3]);
+    theta[3] = acos( fabs(deltaXL[3]*deltaXl[3] + deltaYL[3]*deltaYl[3] + deltaZL[3]*deltaZl[3])/(deltaL[3]*deltal[3]) )*180/M_PI; // M_PI may not be defined in all C implementations
+    
+    // I'll print theta to stderr
+    fprintf(stderr, "%0.17g\n%0.17g\n%0.17g\n%0.17g\n", theta[0], theta[1], theta[2], theta[3]);
+    */
 
     return 0;
 }
@@ -877,6 +1006,92 @@ unsigned int getGeometricalVariablesTLMpyramid(const struct node *N1,
     output[11] = center[0];
     output[12] = center[1];
     output[13] = center[2];
+    
+    // DEBUG: calculates the vector perpendicular to the triangles and quadrangle
+    // assuming that the four points of the quadrangle lie in the same plane
+    // and then calculates the angle between this vector and the transmission-line
+    // vector that goes between the pyramid center and the face center
+    /*double deltaXL[5], deltaYL[5], deltaZL[5], deltaL[5], theta[5];
+    double deltaXLtemp[10], deltaYLtemp[10], deltaZLtemp[10]; // temporary vectors
+    // for vector L1
+    deltaXLtemp[0] = N1->x - N2->x;
+    deltaYLtemp[0] = N1->y - N2->y;
+    deltaZLtemp[0] = N1->z - N2->z;
+    
+    deltaXLtemp[1] = N1->x - N4->x;
+    deltaYLtemp[1] = N1->y - N4->y;
+    deltaZLtemp[1] = N1->z - N4->z;
+    
+    deltaXL[0] = deltaYLtemp[0]*deltaZLtemp[1] - deltaZLtemp[0]*deltaYLtemp[1];
+    deltaYL[0] = deltaZLtemp[0]*deltaXLtemp[1] - deltaXLtemp[0]*deltaZLtemp[1];
+    deltaZL[0] = deltaXLtemp[0]*deltaYLtemp[1] - deltaYLtemp[0]*deltaXLtemp[1];
+    deltaL[0] = sqrt(deltaXL[0] * deltaXL[0] + deltaYL[0] * deltaYL[0] + deltaZL[0] * deltaZL[0]);
+    theta[0] = acos( fabs(deltaXL[0]*deltaXl[0] + deltaYL[0]*deltaYl[0] + deltaZL[0]*deltaZl[0])/(deltaL[0]*deltal[0]) )*180/M_PI; // M_PI may not be defined in all C implementations
+    
+    // for vector L2
+    deltaXLtemp[2] = N5->x - N2->x;
+    deltaYLtemp[2] = N5->y - N2->y;
+    deltaZLtemp[2] = N5->z - N2->z;
+    
+    deltaXLtemp[3] = N5->x - N1->x;
+    deltaYLtemp[3] = N5->y - N1->y;
+    deltaZLtemp[3] = N5->z - N1->z;
+    
+    deltaXL[1] = deltaYLtemp[2]*deltaZLtemp[3] - deltaZLtemp[2]*deltaYLtemp[3];
+    deltaYL[1] = deltaZLtemp[2]*deltaXLtemp[3] - deltaXLtemp[2]*deltaZLtemp[3];
+    deltaZL[1] = deltaXLtemp[2]*deltaYLtemp[3] - deltaYLtemp[2]*deltaXLtemp[3];
+    deltaL[1] = sqrt(deltaXL[1] * deltaXL[1] + deltaYL[1] * deltaYL[1] + deltaZL[1] * deltaZL[1]);
+    theta[1] = acos( fabs(deltaXL[1]*deltaXl[1] + deltaYL[1]*deltaYl[1] + deltaZL[1]*deltaZl[1])/(deltaL[1]*deltal[1]) )*180/M_PI; // M_PI may not be defined in all C implementations
+    
+    // for vector L3
+    deltaXLtemp[4] = N5->x - N4->x;
+    deltaYLtemp[4] = N5->y - N4->y;
+    deltaZLtemp[4] = N5->z - N4->z;
+    
+    deltaXLtemp[5] = N5->x - N1->x;
+    deltaYLtemp[5] = N5->y - N1->y;
+    deltaZLtemp[5] = N5->z - N1->z;
+    
+    deltaXL[2] = deltaYLtemp[4]*deltaZLtemp[5] - deltaZLtemp[4]*deltaYLtemp[5];
+    deltaYL[2] = deltaZLtemp[4]*deltaXLtemp[5] - deltaXLtemp[4]*deltaZLtemp[5];
+    deltaZL[2] = deltaXLtemp[4]*deltaYLtemp[5] - deltaYLtemp[4]*deltaXLtemp[5];
+    deltaL[2] = sqrt(deltaXL[2] * deltaXL[2] + deltaYL[2] * deltaYL[2] + deltaZL[2] * deltaZL[2]);
+    theta[2] = acos( fabs(deltaXL[2]*deltaXl[2] + deltaYL[2]*deltaYl[2] + deltaZL[2]*deltaZl[2])/(deltaL[2]*deltal[2]) )*180/M_PI; // M_PI may not be defined in all C implementations
+    
+    // for vector L4
+    deltaXLtemp[6] = N5->x - N2->x;
+    deltaYLtemp[6] = N5->y - N2->y;
+    deltaZLtemp[6] = N5->z - N2->z;
+    
+    deltaXLtemp[7] = N5->x - N3->x;
+    deltaYLtemp[7] = N5->y - N3->y;
+    deltaZLtemp[7] = N5->z - N3->z;
+    
+    deltaXL[3] = deltaYLtemp[6]*deltaZLtemp[7] - deltaZLtemp[6]*deltaYLtemp[7];
+    deltaYL[3] = deltaZLtemp[6]*deltaXLtemp[7] - deltaXLtemp[6]*deltaZLtemp[7];
+    deltaZL[3] = deltaXLtemp[6]*deltaYLtemp[7] - deltaYLtemp[6]*deltaXLtemp[7];
+    deltaL[3] = sqrt(deltaXL[3] * deltaXL[3] + deltaYL[3] * deltaYL[3] + deltaZL[3] * deltaZL[3]);
+    theta[3] = acos( fabs(deltaXL[3]*deltaXl[3] + deltaYL[3]*deltaYl[3] + deltaZL[3]*deltaZl[3])/(deltaL[3]*deltal[3]) )*180/M_PI; // M_PI may not be defined in all C implementations
+    
+    // for vector L5
+    deltaXLtemp[8] = N5->x - N4->x;
+    deltaYLtemp[8] = N5->y - N4->y;
+    deltaZLtemp[8] = N5->z - N4->z;
+    
+    deltaXLtemp[9] = N5->x - N3->x;
+    deltaYLtemp[9] = N5->y - N3->y;
+    deltaZLtemp[9] = N5->z - N3->z;
+    
+    deltaXL[4] = deltaYLtemp[8]*deltaZLtemp[9] - deltaZLtemp[8]*deltaYLtemp[9];
+    deltaYL[4] = deltaZLtemp[8]*deltaXLtemp[9] - deltaXLtemp[8]*deltaZLtemp[9];
+    deltaZL[4] = deltaXLtemp[8]*deltaYLtemp[9] - deltaYLtemp[8]*deltaXLtemp[9];
+    deltaL[4] = sqrt(deltaXL[4] * deltaXL[4] + deltaYL[4] * deltaYL[4] + deltaZL[4] * deltaZL[4]);
+    theta[4] = acos( fabs(deltaXL[4]*deltaXl[4] + deltaYL[4]*deltaYl[4] + deltaZL[4]*deltaZl[4])/(deltaL[4]*deltal[4]) )*180/M_PI; // M_PI may not be defined in all C implementations
+    
+    // I'll print theta to stderr
+    //fprintf(stderr, "%0.17g, %0.17g, %0.17g, %0.17g, %0.17g\n", theta[0], theta[1], theta[2], theta[3], theta[4]);
+    fprintf(stderr, "%0.17g\n%0.17g\n%0.17g\n%0.17g\n%0.17g\n", theta[0], theta[1], theta[2], theta[3], theta[4]);
+    */
 
     return 0;
 }
@@ -888,12 +1103,12 @@ unsigned int getGeometricalVariablesTLMpyramid(const struct node *N1,
 unsigned int getGeometricalVariablesTLMhexahedron(const struct node *N1,
         const struct node *N2, const struct node *N3, const struct node *N4, const struct node *N5,
         const struct node *N6, const struct node *N7, const struct node *N8, double *output) {
-    // 0 - length of port 1 (from center of tetrahedron to center of area 1)
-    // 1 - length of port 2 (from center of tetrahedron to center of area 2)
-    // 2 - length of port 3 (from center of tetrahedron to center of area 3)
-    // 3 - length of port 4 (from center of tetrahedron to center of area 4)
-    // 4 - length of port 5 (from center of tetrahedron to center of area 5)
-    // 5 - length of port 6 (from center of tetrahedron to center of area 6)
+    // 0 - length of port 1 (from center of hexahedron to center of area 1)
+    // 1 - length of port 2 (from center of hexahedron to center of area 2)
+    // 2 - length of port 3 (from center of hexahedron to center of area 3)
+    // 3 - length of port 4 (from center of hexahedron to center of area 4)
+    // 4 - length of port 5 (from center of hexahedron to center of area 5)
+    // 5 - length of port 6 (from center of hexahedron to center of area 6)
     // 6 - area of quadrangle 1
     // 7 - area of quadrangle 2
     // 8 - area of quadrangle 3
@@ -1003,6 +1218,110 @@ unsigned int getGeometricalVariablesTLMhexahedron(const struct node *N1,
     output[13] = center[0];
     output[14] = center[1];
     output[15] = center[2];
+    
+    
+    /*// DEBUG: calculates the vector perpendicular to the quadrangles
+    // assuming that the four points of the quadrangle lie in the same plane
+    // and then calculates the angle between this vector and the transmission-line
+    // vector that goes between the hexahedron center and the face center
+    double deltaXL[6], deltaYL[6], deltaZL[6], deltaL[6], theta[6];
+    double deltaXLtemp[12], deltaYLtemp[12], deltaZLtemp[12]; // temporary vectors
+    // for vector L1
+    deltaXLtemp[0] = N1->x - N2->x;
+    deltaYLtemp[0] = N1->y - N2->y;
+    deltaZLtemp[0] = N1->z - N2->z;
+    
+    deltaXLtemp[1] = N1->x - N4->x;
+    deltaYLtemp[1] = N1->y - N4->y;
+    deltaZLtemp[1] = N1->z - N4->z;
+    
+    deltaXL[0] = deltaYLtemp[0]*deltaZLtemp[1] - deltaZLtemp[0]*deltaYLtemp[1];
+    deltaYL[0] = deltaZLtemp[0]*deltaXLtemp[1] - deltaXLtemp[0]*deltaZLtemp[1];
+    deltaZL[0] = deltaXLtemp[0]*deltaYLtemp[1] - deltaYLtemp[0]*deltaXLtemp[1];
+    deltaL[0] = sqrt(deltaXL[0] * deltaXL[0] + deltaYL[0] * deltaYL[0] + deltaZL[0] * deltaZL[0]);
+    theta[0] = acos( fabs(deltaXL[0]*deltaXl[0] + deltaYL[0]*deltaYl[0] + deltaZL[0]*deltaZl[0])/(deltaL[0]*deltal[0]) )*180/M_PI; // M_PI may not be defined in all C implementations
+    
+    // for vector L2
+    deltaXLtemp[2] = N1->x - N2->x;
+    deltaYLtemp[2] = N1->y - N2->y;
+    deltaZLtemp[2] = N1->z - N2->z;
+    
+    deltaXLtemp[3] = N1->x - N5->x;
+    deltaYLtemp[3] = N1->y - N5->y;
+    deltaZLtemp[3] = N1->z - N5->z;
+    
+    deltaXL[1] = deltaYLtemp[2]*deltaZLtemp[3] - deltaZLtemp[2]*deltaYLtemp[3];
+    deltaYL[1] = deltaZLtemp[2]*deltaXLtemp[3] - deltaXLtemp[2]*deltaZLtemp[3];
+    deltaZL[1] = deltaXLtemp[2]*deltaYLtemp[3] - deltaYLtemp[2]*deltaXLtemp[3];
+    deltaL[1] = sqrt(deltaXL[1] * deltaXL[1] + deltaYL[1] * deltaYL[1] + deltaZL[1] * deltaZL[1]);
+    theta[1] = acos( fabs(deltaXL[1]*deltaXl[1] + deltaYL[1]*deltaYl[1] + deltaZL[1]*deltaZl[1])/(deltaL[1]*deltal[1]) )*180/M_PI; // M_PI may not be defined in all C implementations
+    
+    // for vector L3
+    deltaXLtemp[4] = N1->x - N4->x;
+    deltaYLtemp[4] = N1->y - N4->y;
+    deltaZLtemp[4] = N1->z - N4->z;
+    
+    deltaXLtemp[5] = N1->x - N5->x;
+    deltaYLtemp[5] = N1->y - N5->y;
+    deltaZLtemp[5] = N1->z - N5->z;
+    
+    deltaXL[2] = deltaYLtemp[4]*deltaZLtemp[5] - deltaZLtemp[4]*deltaYLtemp[5];
+    deltaYL[2] = deltaZLtemp[4]*deltaXLtemp[5] - deltaXLtemp[4]*deltaZLtemp[5];
+    deltaZL[2] = deltaXLtemp[4]*deltaYLtemp[5] - deltaYLtemp[4]*deltaXLtemp[5];
+    deltaL[2] = sqrt(deltaXL[2] * deltaXL[2] + deltaYL[2] * deltaYL[2] + deltaZL[2] * deltaZL[2]);
+    theta[2] = acos( fabs(deltaXL[2]*deltaXl[2] + deltaYL[2]*deltaYl[2] + deltaZL[2]*deltaZl[2])/(deltaL[2]*deltal[2]) )*180/M_PI; // M_PI may not be defined in all C implementations
+    
+    // for vector L4
+    deltaXLtemp[6] = N2->x - N3->x;
+    deltaYLtemp[6] = N2->y - N3->y;
+    deltaZLtemp[6] = N2->z - N3->z;
+    
+    deltaXLtemp[7] = N2->x - N6->x;
+    deltaYLtemp[7] = N2->y - N6->y;
+    deltaZLtemp[7] = N2->z - N6->z;
+    
+    deltaXL[3] = deltaYLtemp[6]*deltaZLtemp[7] - deltaZLtemp[6]*deltaYLtemp[7];
+    deltaYL[3] = deltaZLtemp[6]*deltaXLtemp[7] - deltaXLtemp[6]*deltaZLtemp[7];
+    deltaZL[3] = deltaXLtemp[6]*deltaYLtemp[7] - deltaYLtemp[6]*deltaXLtemp[7];
+    deltaL[3] = sqrt(deltaXL[3] * deltaXL[3] + deltaYL[3] * deltaYL[3] + deltaZL[3] * deltaZL[3]);
+    theta[3] = acos( fabs(deltaXL[3]*deltaXl[3] + deltaYL[3]*deltaYl[3] + deltaZL[3]*deltaZl[3])/(deltaL[3]*deltal[3]) )*180/M_PI; // M_PI may not be defined in all C implementations
+    
+    // for vector L5
+    deltaXLtemp[8] = N3->x - N4->x;
+    deltaYLtemp[8] = N3->y - N4->y;
+    deltaZLtemp[8] = N3->z - N4->z;
+    
+    deltaXLtemp[9] = N3->x - N7->x;
+    deltaYLtemp[9] = N3->y - N7->y;
+    deltaZLtemp[9] = N3->z - N7->z;
+    
+    deltaXL[4] = deltaYLtemp[8]*deltaZLtemp[9] - deltaZLtemp[8]*deltaYLtemp[9];
+    deltaYL[4] = deltaZLtemp[8]*deltaXLtemp[9] - deltaXLtemp[8]*deltaZLtemp[9];
+    deltaZL[4] = deltaXLtemp[8]*deltaYLtemp[9] - deltaYLtemp[8]*deltaXLtemp[9];
+    deltaL[4] = sqrt(deltaXL[4] * deltaXL[4] + deltaYL[4] * deltaYL[4] + deltaZL[4] * deltaZL[4]);
+    theta[4] = acos( fabs(deltaXL[4]*deltaXl[4] + deltaYL[4]*deltaYl[4] + deltaZL[4]*deltaZl[4])/(deltaL[4]*deltal[4]) )*180/M_PI; // M_PI may not be defined in all C implementations
+    
+    // for vector L6
+    deltaXLtemp[10] = N5->x - N6->x;
+    deltaYLtemp[10] = N5->y - N6->y;
+    deltaZLtemp[10] = N5->z - N6->z;
+    
+    deltaXLtemp[11] = N5->x - N8->x;
+    deltaYLtemp[11] = N5->y - N8->y;
+    deltaZLtemp[11] = N5->z - N8->z;
+    
+    deltaXL[5] = deltaYLtemp[10]*deltaZLtemp[11] - deltaZLtemp[10]*deltaYLtemp[11];
+    deltaYL[5] = deltaZLtemp[10]*deltaXLtemp[11] - deltaXLtemp[10]*deltaZLtemp[11];
+    deltaZL[5] = deltaXLtemp[10]*deltaYLtemp[11] - deltaYLtemp[10]*deltaXLtemp[11];
+    deltaL[5] = sqrt(deltaXL[5] * deltaXL[5] + deltaYL[5] * deltaYL[5] + deltaZL[5] * deltaZL[5]);
+    theta[5] = acos( fabs(deltaXL[5]*deltaXl[5] + deltaYL[5]*deltaYl[5] + deltaZL[5]*deltaZl[5])/(deltaL[5]*deltal[5]) )*180/M_PI; // M_PI may not be defined in all C implementations
+    
+    // I'll print theta to stderr
+    fprintf(stderr, "%0.17g\n%0.17g\n%0.17g\n%0.17g\n%0.17g\n%0.17g\n", theta[0], theta[1], theta[2], theta[3], theta[4], theta[5]);*/
+    
+    
+    
+    
     return 0;
 }
 
@@ -4212,6 +4531,7 @@ unsigned int getNodeNumberAndPortOrderFromRealPortNumber(struct aPortToRealPort 
         // if I don't get into the 'if', then, the number of the element that has
         // this port number shall be the element 100.
     }
+
 
     *nodeNumber = (unsigned long long) ((realPort
             - Ports[i].previousMaximumRealPort) / Ports[i].portsPerNode);

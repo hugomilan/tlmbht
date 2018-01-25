@@ -32,7 +32,7 @@
  * Main file for the TLMBHT Version 0.2.0-beta
  * 
  * This function receives a script file as input and performs the operations requested
- * by the script file. See the README file to know my features.
+ * by the script file. See the README file to know what this software does.
  * 
  * In this software, the functions will return zero when they work correctly.
  * 
@@ -41,12 +41,12 @@
 
 /*
  * Acknowledgment: Brazilian National Counsel of Technological and Scientific
- * Development (Proc. 203312/2014-7) for scholarship to HFMM (2015-2016).
+ * Development (CNPq, Proc. 203312/2014-7) for scholarship to HFMM (2015-2016).
  */
 
 
 /*
- * TODO (hugomilan#1#):
+ * TODO (hugomilan):
  * 1) radiation boundary condition. More specifically, non-linear BC and sources. 
  * 2) Create --help and --version.
  * 3) Find a best way to initiate the number of levels in 'allocateForEachLevel'
@@ -61,16 +61,12 @@
  * parallelization overhead; it should get better as the file size increases though).
  * However, this is not priority. These functions consume so little computational time.
  * 9) Make the software international--i.e., outputs in languages other than English.
- * 10) Inline functions: have to create the prototype and the full declartion in the
- * header file. Exemple:
- *          inline function(void);
-            inline function(void){ definition}
  * 
  * 
  *  List of possible improvements:
  * 1) Do we need a better algorithm to sort the number of ports in the
  * allocatePointsPort function? The sorting function is in libmiscellaneous.h
- * 2) I'm using qsort() in the function wrapTLMnumbers(). Should I change to a better
+ * I'm using qsort() in the function wrapTLMnumbers(). Should I change to a better
  * algorithm?
  * 3) test different libraries for solving sparse matrix equations.
  * 
@@ -91,16 +87,16 @@
 /*
  * Including a new geometry for TLM? What functions should you see:
  * #) go to the function getTLMnumbers in the file libtlmsolver.c, see switch(l)
- * and define how ports and points will be allocated
+ * and define how many ports and points will be allocated
  * 
  * #) file libtlmpenneseigen.cpp, function calculateMatricesPennesEigen. Create
- * a function material. Inside the newly created function, you have to  create
+ * a function material. Inside the newly created function, you have to create
  * getGeometricalVariablesTLM inside the file tlmsolver.c
  * 
  * #) file tlmsolver.c, function getBetweenPointFromRealPortNumber. Create
  * a function getBetween.
  * 
- * #)  file tlmsolver.c, function getProjectionFromRealPortNumber. Create
+ * #) file tlmsolver.c, function getProjectionFromRealPortNumber. Create
  * a function getOutsideProjection.
  */
 
@@ -126,9 +122,9 @@
  * Consider the tetrahedral geometry:
  * I call its whole geometry as element. I can also refer to it as node but,
  * in this case, node refers to the TLM mathematical model.
- * Sometimes, I rever to the vertex as point or node but, in these cases, they
- * refer to the geometrical element. If you want to remove this ambiguity referring
- * to 'node', you have to revise the whole code...
+ * Sometimes, I refer to the vertex as point or node but, in these cases, they
+ * refer to the geometrical element. The meaning should be clear in the context.
+ * If you want to remove the ambiguities, you have to revise the whole code.
  * 
  *                      vertex 1
  *                          __

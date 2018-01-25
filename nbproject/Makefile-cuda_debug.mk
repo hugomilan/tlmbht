@@ -39,10 +39,12 @@ OBJECTFILES= \
 	${OBJECTDIR}/src/configs/libboundconfig.o \
 	${OBJECTDIR}/src/configs/libconfig.o \
 	${OBJECTDIR}/src/configs/libequationconfig.o \
+	${OBJECTDIR}/src/configs/libfunctionconfig.o \
 	${OBJECTDIR}/src/configs/libmatconfig.o \
 	${OBJECTDIR}/src/configs/libmeshconfig.o \
 	${OBJECTDIR}/src/configs/libsimuconfig.o \
 	${OBJECTDIR}/src/configs/libsourceconfig.o \
+	${OBJECTDIR}/src/configs/libvariablename.o \
 	${OBJECTDIR}/src/meshreader/libgmshreader.o \
 	${OBJECTDIR}/src/meshreader/libmeshreader.o \
 	${OBJECTDIR}/src/meshreader/libmeshtlmbht.o \
@@ -106,6 +108,10 @@ ${OBJECTDIR}/src/configs/libequationconfig.o: src/configs/libequationconfig.c
 	${MKDIR} -p ${OBJECTDIR}/src/configs
 	$(COMPILE.c) -g -Iinclude -o ${OBJECTDIR}/src/configs/libequationconfig.o src/configs/libequationconfig.c
 
+${OBJECTDIR}/src/configs/libfunctionconfig.o: src/configs/libfunctionconfig.c
+	${MKDIR} -p ${OBJECTDIR}/src/configs
+	$(COMPILE.c) -g -Iinclude -o ${OBJECTDIR}/src/configs/libfunctionconfig.o src/configs/libfunctionconfig.c
+
 ${OBJECTDIR}/src/configs/libmatconfig.o: src/configs/libmatconfig.c
 	${MKDIR} -p ${OBJECTDIR}/src/configs
 	$(COMPILE.c) -g -Iinclude -o ${OBJECTDIR}/src/configs/libmatconfig.o src/configs/libmatconfig.c
@@ -121,6 +127,10 @@ ${OBJECTDIR}/src/configs/libsimuconfig.o: src/configs/libsimuconfig.c
 ${OBJECTDIR}/src/configs/libsourceconfig.o: src/configs/libsourceconfig.c
 	${MKDIR} -p ${OBJECTDIR}/src/configs
 	$(COMPILE.c) -g -Iinclude -o ${OBJECTDIR}/src/configs/libsourceconfig.o src/configs/libsourceconfig.c
+
+${OBJECTDIR}/src/configs/libvariablename.o: src/configs/libvariablename.c
+	${MKDIR} -p ${OBJECTDIR}/src/configs
+	$(COMPILE.c) -g -Iinclude -o ${OBJECTDIR}/src/configs/libvariablename.o src/configs/libvariablename.c
 
 ${OBJECTDIR}/src/meshreader/libgmshreader.o: src/meshreader/libgmshreader.c
 	${MKDIR} -p ${OBJECTDIR}/src/meshreader

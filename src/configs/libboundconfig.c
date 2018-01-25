@@ -52,7 +52,10 @@ unsigned int initializeBoundaryConfig(struct BoundaryConfig * bound) {
     bound->equationName = NULL;
     bound->equationNameDefined = 0;
 
-    bound->equationNumber = 0;
+    bound->equationNumber = -1;
+    
+    bound->boundaryName = NULL;
+    bound->boundaryNameDefined = 0;
 
     bound->typeOfEquation = PENNES;
 
@@ -62,11 +65,17 @@ unsigned int initializeBoundaryConfig(struct BoundaryConfig * bound) {
     // Inputs associated with diffusion and hyperbolic diffusion
     bound->scalarBoundary = 0;
     bound->scalarBoundaryDefined = 0;
+    bound->scalarBoundaryFromFunc = NULL;
+    bound->scalarBoundaryType = 1;
 
     bound->fluxBoundary = 0;
     bound->fluxBoundaryDefined = 0;
+    bound->fluxBoundaryFromFunc = NULL;
+    bound->fluxBoundaryType = 1;
 
     bound->convectionCoefficient = 0;
+    bound->convectionCoefficientFromFunc = NULL;
+    bound->convectionCoefficientType = 1;
     bound->convectionCoefficientDefined = 0;
     bound->convectionDefined = 0;
 
@@ -75,16 +84,24 @@ unsigned int initializeBoundaryConfig(struct BoundaryConfig * bound) {
     // Inputs associated with heat, hyperbolic heat, pennes, and hyperbolic pennes
     bound->temperatureBoundary = 0;
     bound->temperatureDefined = 0;
+    bound->temperatureBoundaryFromFunc = NULL;
+    bound->temperatureBoundaryType = 1;
 
     bound->heatFluxBoundary = 0;
     bound->heatFluxDefined = 0;
+    bound->heatFluxBoundaryFromFunc = NULL;
+    bound->heatFluxBoundaryType = 1;
 
     bound->radiationTemperature = 0;
     bound->radiationTemperatureDefined = 0;
+    bound->radiationTemperatureFromFunc = NULL;
+    bound->radiationTemperatureType = 1;
 
     bound->radiationEmissivity = 0;
     bound->radiationEmissivityDefined = 0;
     bound->radiationDefined = 0;
+    bound->radiationEmissivityFromFunc = NULL;
+    bound->radiationEmissivityType = 1;
 
     // these are the same defiend for diffusion and hyperbolic diffusion
     //    bound->convectionCoefficient = 0;
@@ -103,6 +120,9 @@ unsigned int initializeBoundaryConfig(struct BoundaryConfig * bound) {
 unsigned int terminateBoundaryConfig(struct BoundaryConfig * bound) {
     free(bound->equationName);
     bound->equationName = NULL;
+    
+    free(bound->boundaryName);
+    bound->boundaryName = NULL;
 
     free(bound->numberInput);
     bound->numberInput = NULL;
@@ -134,6 +154,18 @@ unsigned int setConfigurationBoundary(char *input, struct BoundaryConfig *boundI
         strcpy(boundInput->equationName, input);
 
         boundInput->equationNameDefined = 1;
+
+    } else if (compareCaseInsensitive(input, "name") == 0) {
+        if ((errorTLMnumber = getBetweenEqualAndSemicolon(input)) != 0)
+            return errorTLMnumber;
+
+        removeBlankSpacesBeforeAndAfter(input);
+
+        // the input is the name
+        boundInput->boundaryName = (char*) malloc(sizeof (char)*(strlen(input) + 1));
+        strcpy(boundInput->boundaryName, input);
+
+        boundInput->boundaryNameDefined = 1;
 
     } else if (compareCaseInsensitive(input, "number") == 0) {
         if ((errorTLMnumber = readVectorIntInputs(input,

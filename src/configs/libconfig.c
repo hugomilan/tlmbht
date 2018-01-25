@@ -227,7 +227,8 @@ unsigned int readFileTLM(FILE * f, struct dataForSimulation *newDataForSimu) {
 
 
     int startEndBrackets = 0; // 0 - not started or finalized; 1 - started;
-    enum configuringInside ConfigPoint = NOTHING;
+    enum configName ConfigPoint = NOTHING;
+    int previousReadingCode = 0;
 
     // reading line-by-line until we get to the end-of-file character
     while (getlineTlmbht(&pline, &lenLine, f) != 1) {
@@ -257,8 +258,19 @@ unsigned int readFileTLM(FILE * f, struct dataForSimulation *newDataForSimu) {
         // It returns 0 if it got some useful content on that line.
         // it returns 9998 if it got nothing useful
         // if there's nothing useful or an error, we should go to the next loop iteration.
-        if ((errorTLMnumber = getUsefulContent(pline)) != 0)
-            continue; // go to next iteration
+        if ((errorTLMnumber = getUsefulContent(pline)) != 0){
+            
+            if (errorTLMnumber == 9998 && lenLine == -1){
+                // we didn't get anything useful and this is the last line, so we break
+                // the while loop
+                break;
+            }
+            else {
+                continue; // go to next iteration
+            }
+                
+        }
+            
 
 
         if (newDataForSimu->simulationInput.verboseMode == 1) {
@@ -311,10 +323,16 @@ unsigned int readFileTLM(FILE * f, struct dataForSimulation *newDataForSimu) {
                             printf("Changing to configure BOUNDARY\n");
                         }
                         break;
-                    case SOURCES:
+                    case SOURCE:
                         if (newDataForSimu->simulationInput.verboseMode == 1) {
                             // VERBOSE: Shown what is being configured
-                            printf("Changing to configure SOURCES\n");
+                            printf("Changing to configure SOURCE\n");
+                        }
+                        break;
+                    case FUNCTION:
+                        if (newDataForSimu->simulationInput.verboseMode == 1) {
+                            // VERBOSE: Shown what is being configured
+                            printf("Changing to configure FUNCTION\n");
                         }
                         break;
                         // this is not expected to happen
@@ -382,15 +400,27 @@ unsigned int readFileTLM(FILE * f, struct dataForSimulation *newDataForSimu) {
                         &startEndBrackets);
 
                 break;
-            case SOURCES:
+            case SOURCE:
                 if (newDataForSimu->simulationInput.verboseMode == 1) {
                     // VERBOSE: Shown what is being configured
-                    printf("Configuring SOURCES\n");
+                    printf("Configuring SOURCE\n");
                 }
 
                 // call the function responsible for configuring the source parameters
                 errorTLMnumber = setConfigurationSource(pline,
                         &newDataForSimu->sourceInput[newDataForSimu->quantityOfSourcesRead],
+                        &startEndBrackets);
+
+                break;
+            case FUNCTION:
+                if (newDataForSimu->simulationInput.verboseMode == 1) {
+                    // VERBOSE: Shown what is being configured
+                    printf("Configuring FUNCTION\n");
+                }
+
+                // call the function responsible for configuring the source parameters
+                errorTLMnumber = setConfigurationFunction(pline,
+                        &newDataForSimu->functionInput[newDataForSimu->quantityOfFunctionsRead],
                         &startEndBrackets);
 
                 break;
@@ -402,7 +432,7 @@ unsigned int readFileTLM(FILE * f, struct dataForSimulation *newDataForSimu) {
                 break;
         }
         
-        // Here I check if I the reading of the header as finilized and I move to the next
+        // Here I check if I the reading of the header as finalized and I move to the next
         // header.
         if (errorTLMnumber == 9999) {
             // this is not an error. This is just how I make the flag to indicate
@@ -440,6 +470,14 @@ unsigned int readFileTLM(FILE * f, struct dataForSimulation *newDataForSimu) {
                             realloc(newDataForSimu->equationInput,
                             sizeof (struct Equation)*
                             (newDataForSimu->quantityOfEquationsRead + 1));
+                    
+                    // initiating the new equation
+                    previousReadingCode = errorTLMnumber;
+                    if ((errorTLMnumber = 
+                            initiateEquationVariable(&newDataForSimu->equationInput[
+                            newDataForSimu->quantityOfEquationsRead])) != 0)
+                        return errorTLMnumber;
+                    errorTLMnumber = previousReadingCode;
                     break;
 
                     // Reallocate the variable that has the data for the materials
@@ -450,6 +488,13 @@ unsigned int readFileTLM(FILE * f, struct dataForSimulation *newDataForSimu) {
                             realloc(newDataForSimu->materialInput,
                             sizeof (struct MaterialConfig)*
                             (newDataForSimu->quantityOfMaterialsRead + 1));
+                    // initiating the new material
+                    previousReadingCode = errorTLMnumber;
+                    if ((errorTLMnumber = 
+                            intializeMaterialConfig(&newDataForSimu->materialInput[
+                            newDataForSimu->quantityOfMaterialsRead])) != 0)
+                        return errorTLMnumber;
+                    errorTLMnumber = previousReadingCode;
                     break;
 
                     // Reallocate the variable that has the data for the boundaries
@@ -460,17 +505,48 @@ unsigned int readFileTLM(FILE * f, struct dataForSimulation *newDataForSimu) {
                             realloc(newDataForSimu->boundaryInput,
                             sizeof (struct BoundaryConfig)*
                             (newDataForSimu->quantityOfBoundariesRead + 1));
+                    // initiating the new boundary
+                    previousReadingCode = errorTLMnumber;
+                    if ((errorTLMnumber = 
+                            initializeBoundaryConfig(&newDataForSimu->boundaryInput[
+                            newDataForSimu->quantityOfBoundariesRead])) != 0)
+                        return errorTLMnumber;
+                    errorTLMnumber = previousReadingCode;
                     break;
 
                     // Reallocate the variable that has the data for the sources
                     // with one extra space.
                     //////// future implementation //////
-                case SOURCES:
+                case SOURCE:
                     newDataForSimu->quantityOfSourcesRead++;
                     newDataForSimu->sourceInput = (struct SourceConfig*)
                             realloc(newDataForSimu->sourceInput,
                             sizeof (struct SourceConfig)*
                             (newDataForSimu->quantityOfSourcesRead + 1));
+                    // initiating the new boundary
+                    previousReadingCode = errorTLMnumber;
+                    if ((errorTLMnumber = 
+                            initializeSourceConfig(&newDataForSimu->sourceInput[
+                            newDataForSimu->quantityOfSourcesRead])) != 0)
+                        return errorTLMnumber;
+                    errorTLMnumber = previousReadingCode;
+                    break;
+                    
+                    // Reallocate the variable that has the data for the functions
+                    // with one extra space.
+                case FUNCTION:
+                    newDataForSimu->quantityOfFunctionsRead++;
+                    newDataForSimu->functionInput = (struct FunctionConfig*)
+                            realloc(newDataForSimu->functionInput,
+                            sizeof (struct FunctionConfig)*
+                            (newDataForSimu->quantityOfSourcesRead + 1));
+                    // initiating the new boundary
+                    previousReadingCode = errorTLMnumber;
+                    if ((errorTLMnumber = 
+                            initializeFunctionConfig(&newDataForSimu->functionInput[
+                            newDataForSimu->quantityOfFunctionsRead])) != 0)
+                        return errorTLMnumber;
+                    errorTLMnumber = previousReadingCode;
                     break;
 
                     // this is not expected to happen
@@ -486,6 +562,12 @@ unsigned int readFileTLM(FILE * f, struct dataForSimulation *newDataForSimu) {
             // change to nothing being configured, so that the algorithm can look for
             // another configuration header
             ConfigPoint = NOTHING;
+        }
+        
+        // this is the flag that indicates the last line was read and it had content.
+        // Hence, the content was analyzed first and now we can go.
+        if (lenLine == -1){
+            break;
         }
     }
 
@@ -511,7 +593,7 @@ unsigned int readFileTLM(FILE * f, struct dataForSimulation *newDataForSimu) {
  * setConfigurationTo: compare the string of the input to standardized texts.
  * The comparison is case insensitive.
  */
-unsigned int setConfigurationTo(char *input, enum configuringInside * config) {
+unsigned int setConfigurationTo(char *input, enum configName * config) {
     if (compareCaseInsensitive(input, "simulation") == 0) {
         *config = SIMULATION;
     } else if (compareCaseInsensitive(input, "mesh") == 0) {
@@ -523,7 +605,9 @@ unsigned int setConfigurationTo(char *input, enum configuringInside * config) {
     } else if (compareCaseInsensitive(input, "boundary") == 0) {
         *config = BOUNDARY;
     } else if (compareCaseInsensitive(input, "sources") == 0) {
-        *config = SOURCES;
+        *config = SOURCE;
+    } else if (compareCaseInsensitive(input, "function") == 0) {
+        *config = FUNCTION;
     } else {
         // what we found out is not equal to nothing above
         return 365;
@@ -547,6 +631,14 @@ unsigned int initiateAllConfigurationVarialbes(struct dataForSimulation *input) 
     input->quantityOfMaterialsRead = 0;
     input->quantityOfBoundariesRead = 0;
     input->quantityOfSourcesRead = 0;
+    input->numberOfAllocationsForVariables = 50;
+    input->numberOfVariablesRead = 0;
+    input->variableTable = (struct variableID*) malloc(input->numberOfAllocationsForVariables * sizeof (struct variableID));
+    // initializing the variablesID
+    for (int i = 0; i < input->numberOfAllocationsForVariables; i++){
+        if ((errorTLMnumber = initializeVariableID(input->variableTable[i])) != 0)
+            return errorTLMnumber;
+    }
 
     // initializing who am I
     input->myName = malloc((strlen("tlmbht") + 1) * sizeof (char));
@@ -585,6 +677,12 @@ unsigned int initiateAllConfigurationVarialbes(struct dataForSimulation *input) 
     input->sourceInput = (struct SourceConfig*) malloc(sizeof (struct SourceConfig));
     // initializing the source variables used for configuration.
     if ((errorTLMnumber = initializeSourceConfig(&input->sourceInput[0])) != 0)
+        return errorTLMnumber;
+    
+    // we can have more than one functionInput. Here we initialize the first
+    input->functionInput = (struct FunctionConfig*) malloc(sizeof (struct FunctionConfig));
+    // initializing the source variables used for configuration.
+    if ((errorTLMnumber = initializeFunctionConfig(&input->functionInput[0])) != 0)
         return errorTLMnumber;
 
     return 0;
@@ -667,6 +765,21 @@ unsigned int terminateAllConfigurationVarialbes(struct dataForSimulation *input)
     // now, the sourceInput itself is being freed.
     free(input->sourceInput);
     input->sourceInput = NULL;
+    
+    
+    // terminating the source variables when the quantity of sources read was
+    // greater than zero. If it was zero, we won't get this loop initialized.
+    for (i = 0; i < input->quantityOfFunctionsRead; i++)
+        if ((errorTLMnumber = terminateFunctionConfig(&input->functionInput[i])) != 0)
+            return errorTLMnumber;
+    // this is the case that no one function was read. In this case, we only have to 
+    // terminate the functionInput[0].
+    if (input->quantityOfFunctionsRead == 0)
+        if ((errorTLMnumber = terminateFunctionConfig(&input->functionInput[0])) != 0)
+            return errorTLMnumber;
+    // now, the functionInput itself is being freed.
+    free(input->functionInput);
+    input->functionInput = NULL;
 
     return 0;
 }
@@ -738,6 +851,8 @@ void printfMyNameAndVersion(struct dataForSimulation * input) {
 unsigned int testAllConfigurationVarialbes(struct dataForSimulation *input) {
     unsigned int errorFound = 0;
     int i, j;
+    
+    // TODO: check if the variables' names are unique
 
     // tests some variables that dictates if we are going to run the simulation or not. FUTURE IMPLEMENTATION
     if ((errorFound = testRunSimulation(input)) != 0) {
@@ -909,8 +1024,268 @@ unsigned int testAllConfigurationVarialbes(struct dataForSimulation *input) {
             errorFound = 1;
         }
     }
+    
+    
+    // testing for the Function configuration field
+    //
+    // There is no error in not reading any function header.
+    //
+    // testing the function configurations read.
+    for (i = 1; i <= input->quantityOfBoundariesRead; i++) {
+
+        // We check if the name of the equation defined in the Material are found in the Equation configuration
+        if (input->boundaryInput[i - 1].equationNameDefined == 0) {
+            sendErrorCodeAndMessage(4443, &i, NULL, NULL, NULL);
+            errorFound = 1;
+            // if we did not find matching equation names we move to the next material number
+            continue;
+        }
+
+        // We check if the name of the equation defined in the Boundary was found in the Equation configuration
+        if (input->boundaryInput[i - 1].equationNumber == -1) {
+            sendErrorCodeAndMessage(4442, &i, input->boundaryInput[i - 1].equationName, NULL, NULL);
+            errorFound = 1;
+            continue;
+        }
+
+        if (testInputBoundary(&input->boundaryInput[i - 1],
+                &input->equationInput[input->boundaryInput[i - 1].equationNumber], i,
+                &input->simulationInput) != 0) {
+            sendErrorCodeAndMessage(1873, &i, NULL, NULL, NULL);
+            errorFound = 1;
+        }
+    }
 
     return errorFound;
+}
+
+
+
+
+/*
+ * createVariableNamesTable: given a character name inputed on a FUNCTION, it finds
+ * what variable it is. Assumes input is "FIELDNAME::VARIABLENAME"
+ */
+unsigned int createVariableNamesTable(char* input, struct dataForSimulation* simuData, struct variableID* output) {
+    // steps:
+    // 3) find what field FIELDNAME refers to
+    // 4) save field in output->fieldLocation
+    // 5) find the id of this FIELDNAME
+    // 6) save id in output->fieldId
+    // 8) given the field, find what variable VARIABLENAME refers to
+    // 9) save the variable id on output->fieldVariableID
+    // 10) done
+
+    char* variableName, *foundColon;
+    int lengthFieldName, lengthVariableName;
+
+    // searchers for "::" in input
+    foundColon = strstr(input, "::");
+
+    // if we didn't find ::, we should get out of here and issue an error
+    if (foundColon == NULL) {
+        sendErrorCodeAndMessage(500, input, NULL, NULL, NULL);
+        return 500;
+    }
+
+    lengthVariableName = strlen(foundColon) - 2; // -2 for "::"
+    lengthFieldName = strlen(input) - strlen(foundColon);
+
+    output->fieldName = (char*) malloc(sizeof (char)*lengthFieldName);
+    output->name = (char*) malloc(sizeof (char)*lengthVariableName);
+
+    strncpy(output->fieldName, input, lengthFieldName);
+    strcpy(output->name, foundColon + 2);
+
+    // now its time to go over all possible configuration to identify what 
+    // fieldName is referring to
+    enum configName config = NOTHING;
+    // switch is not needed here but it makes coding easier
+    switch (config) {
+        case NOTHING:
+            // config = SIMULATION;
+            /* FALLTHRU */
+            // break;
+
+        case SIMULATION:
+            // checking if the input is "STD", which makes it the simulation itself
+            if (compareCaseInsensitive(output->fieldName, "STD") == 0) {
+                output->fieldLocation = SIMULATION;
+                output->fieldId = 0;
+
+                // we found the field now we will look for the variable
+                if (compareCaseInsensitive(output->name, "absolute_zero") == 0) {
+                    output->fieldVariableId = 0;
+                } else if (compareCaseInsensitive(output->name, "Stefan_Boltzmann_constant") == 0) {
+                    output->fieldVariableId = 1;
+                } else if (compareCaseInsensitive(output->name, "x") == 0) {
+                    output->fieldVariableId = 2;
+                } else if (compareCaseInsensitive(output->name, "y") == 0) {
+                    output->fieldVariableId = 3;
+                } else if (compareCaseInsensitive(output->name, "z") == 0) {
+                    output->fieldVariableId = 4;
+                } else {
+                    sendErrorCodeAndMessage(501, input, output->name, NULL, NULL);
+                    return 501;
+                }
+                
+                break;
+            }
+
+            // config = MESH;
+            /* FALLTHRU */
+            // break;
+
+        case MESH:
+            // nothing is expected to happen here
+            //config = EQUATION;
+            /* FALLTHRU */
+            // break;
+
+        case EQUATION:
+            // looking if the name refers to an equation name
+            for (int i = 0; i < simuData->quantityOfEquationsRead; i++) {
+                if (compareCaseInsensitive(output->fieldName, simuData->equationInput[i].equationName) == 0) {
+
+                    // the name refers to an equation. Looking for what variable
+                    // it refers to
+                    output->fieldLocation = EQUATION;
+                    output->fieldId = i;
+
+                    if (compareCaseInsensitive(output->name, "time") == 0) {
+                        output->fieldVariableId = 0;
+                    } else if (compareCaseInsensitive(output->name, "time-step") == 0) {
+                        output->fieldVariableId = 1;
+                    } else if (compareCaseInsensitive(output->name, "time-jump") == 0) {
+                        output->fieldVariableId = 2;
+                    } else if (compareCaseInsensitive(output->name, "final_time") == 0) {
+                        output->fieldVariableId = 3;
+                    } else if (compareCaseInsensitive(output->name, "scalar") == 0 || compareCaseInsensitive(output->name, simuData->equationInput[i].nameScalar) == 0) {
+                        output->fieldVariableId = 4;
+                    } else if (compareCaseInsensitive(output->name, "flux") == 0 || compareCaseInsensitive(output->name, simuData->equationInput[i].nameVector) == 0) {
+                        output->fieldVariableId = 5;
+                    } else {
+                        sendErrorCodeAndMessage(511, input, output->fieldName, output->name, NULL);
+                        return 511;
+                    }
+                    break;
+                }
+            }
+            
+            // config = MATERIAL;
+            /* FALLTHRU */
+            // break;
+            
+        case MATERIAL:
+            // looking if the name refers to a material name
+            for (int i = 0; i < simuData->quantityOfMaterialsRead; i++) {
+                if (compareCaseInsensitive(output->fieldName, simuData->materialInput[i].materialName) == 0) {
+
+                    // the name refers to a material. Looking for what variable
+                    // it refers to
+                    output->fieldLocation = MATERIAL;
+                    output->fieldId = i;
+
+                    if (compareCaseInsensitive(output->name, "diffusion_coefficient") == 0) {
+                        output->fieldVariableId = 0;
+                    } else if (compareCaseInsensitive(output->name, "coefficient_b") == 0) {
+                        output->fieldVariableId = 1;
+                    } else if (compareCaseInsensitive(output->name, "relaxation_time") == 0) {
+                        output->fieldVariableId = 2;
+                    } else if (compareCaseInsensitive(output->name, "sink_a") == 0) {
+                        output->fieldVariableId = 3;
+                    } else if (compareCaseInsensitive(output->name, "source") == 0) {
+                        output->fieldVariableId = 4;
+                    } else if (compareCaseInsensitive(output->name, "vectorial_source[0]") == 0) {
+                        output->fieldVariableId = 5;
+                    } else if (compareCaseInsensitive(output->name, "vectorial_source[1]") == 0) {
+                        output->fieldVariableId = 6;
+                    } else if (compareCaseInsensitive(output->name, "vectorial_source[2]") == 0) {
+                        output->fieldVariableId = 7;
+                    } else if (compareCaseInsensitive(output->name, "initial_scalar") == 0) {
+                        output->fieldVariableId = 8;
+                    } else if (compareCaseInsensitive(output->name, "density") == 0) {
+                        output->fieldVariableId = 9;
+                    } else if (compareCaseInsensitive(output->name, "specific_heat") == 0) {
+                        output->fieldVariableId = 10;
+                    } else if (compareCaseInsensitive(output->name, "thermal_conductivity") == 0) {
+                        output->fieldVariableId = 11;
+                    } else if (compareCaseInsensitive(output->name, "blood_perfusion") == 0) {
+                        output->fieldVariableId = 12;
+                    } else if (compareCaseInsensitive(output->name, "blood_density") == 0) {
+                        output->fieldVariableId = 13;
+                    } else if (compareCaseInsensitive(output->name, "blood_specific_heat") == 0) {
+                        output->fieldVariableId = 14;
+                    } else if (compareCaseInsensitive(output->name, "blood_temperature") == 0) {
+                        output->fieldVariableId = 15;
+                    } else if (compareCaseInsensitive(output->name, "internal_heat_generation") == 0) {
+                        output->fieldVariableId = 16;
+                    } else if (compareCaseInsensitive(output->name, "initial_temperature") == 0) {
+                        output->fieldVariableId = 17;
+                    } else {
+                        sendErrorCodeAndMessage(521, input, output->fieldName, output->name, NULL);
+                        return 521;
+                    }
+                    break;
+                }
+            }
+            
+            // config = BOUNDARY;
+            /* FALLTHRU */
+            // break;
+            
+        case BOUNDARY:
+            // looking if the name refers to a boundary name
+            for (int i = 0; i < simuData->quantityOfMaterialsRead; i++) {
+                if (compareCaseInsensitive(output->fieldName, simuData->boundaryInput[i].boundaryName) == 0) {
+
+                    // the name refers to a boundary. Looking for what variable
+                    // it refers to
+                    output->fieldLocation = BOUNDARY;
+                    output->fieldId = i;
+
+                    if (compareCaseInsensitive(output->name, "scalar") == 0) {
+                        output->fieldVariableId = 0;
+                    } else if (compareCaseInsensitive(output->name, "flux") == 0) {
+                        output->fieldVariableId = 1;
+                    } else if (compareCaseInsensitive(output->name, "convection_scalar") == 0) {
+                        output->fieldVariableId = 2;
+                    } else if (compareCaseInsensitive(output->name, "convection_coefficient") == 0) {
+                        output->fieldVariableId = 3;
+                    } else if (compareCaseInsensitive(output->name, "temperature") == 0) {
+                        output->fieldVariableId = 4;
+                    } else if (compareCaseInsensitive(output->name, "heat_flux") == 0) {
+                        output->fieldVariableId = 5;
+                    } else if (compareCaseInsensitive(output->name, "convection_temperature") == 0) {
+                        output->fieldVariableId = 6;
+                    } else if (compareCaseInsensitive(output->name, "radiation_temperature") == 0) {
+                        output->fieldVariableId = 7;
+                    } else if (compareCaseInsensitive(output->name, "radiation_emissivity") == 0) {
+                        output->fieldVariableId = 8;
+                    } else {
+                        sendErrorCodeAndMessage(531, input, output->fieldName, output->name, NULL);
+                        return 531;
+                    }
+                    break;
+                }
+            }
+            
+            // config = SOURCE;
+            /* FALLTHRU */
+            // break;
+            
+        case SOURCE:
+            // config = FUNCTION;
+            /* FALLTHRU */
+            // break;
+            
+        case FUNCTION:
+            break;
+    }
+
+
+    return 0;
+
 }
 
 /*

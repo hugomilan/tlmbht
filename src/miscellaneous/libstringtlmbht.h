@@ -62,10 +62,14 @@ extern "C" {
     unsigned int getlineTlmbht(char**, long*, FILE*);
 
     unsigned int readVectorIntInputs(char *, int *, int **);
+    
+    unsigned int readVectorStrInputs(char *, int *, char ***);
 
     unsigned int readVectorDoubleLengthThreeInputs(char *, double *);
 
     unsigned int getQuantityOfBlankSpaces(char *, int *);
+    
+    unsigned int getQuantityOfCommas(char *, int *);
 
     unsigned int testStartBrackets(char *);
 

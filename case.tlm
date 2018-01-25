@@ -95,17 +95,17 @@ Simulation  // Configurations for the simulations
 Mesh
 {
 
-    // We assume that the directions [1, 2, 3] are:
+    // We assume that the directions [0, 1, 2] are:
     // Cartesian coordinates: [x, y, z];
     // Cylindrical coordinates: [z, r, theta];
     // Spherical coordinates: [r, theta, phi];
 
-    file name = parallelepiped_6BC_69941e; // required.
+    file name = test/parallelepiped_6BC; // required.
     // The name of the file without the extension.
     // This is, if the name of your file is "problem.tbn", then you should input only
     // "problem". The extension is defined on the "input format" variable below.
 
-    input format = tlmtbn; // required.
+    input format = gmsh; // required.
     // Options:
     // tlmtbn: .tbn, This is the native tlmbht input file. If you choose a different input
     // format, the software will convert it to .tbn.
@@ -198,6 +198,7 @@ Equation
     //              vectorial source = [1e-3 1e-3 1e-3];
     //      Use the first option when the vectorial source is the same for all directions.
     //      Use the second options when it has different values for different directions.
+    //      In Cartesian coordinates, they represent x, y, z.
     //
     // initial scalar = 1; // required if Solve = dynamic;
     // 
@@ -684,16 +685,16 @@ Equation
     //
     //         name scalar      |       type
     //__________________________|_____________________
-    //          scalar n        |       diffusion
-    //          scalar n        | hyperbolic diffusion
-    //          temperature n   |       heat
-    //          temperature n   |   hyperbolic heat
-    //          temperature n   |       pennes
-    //          temperature n   |   hyperbolic pennes
+    //          scalar_n        |       diffusion
+    //          scalar_n        | hyperbolic diffusion
+    //          temperature_n   |       heat
+    //          temperature_n   |   hyperbolic heat
+    //          temperature_n   |       pennes
+    //          temperature_n   |   hyperbolic pennes
 
 
 
-    vector name = heat flux; // not required (see default names below).
+    vector name = heat_flux; // not required (see default names below).
     // This parameter defines the name of the equation to be defined in the material
     // properties.
     //
@@ -706,12 +707,12 @@ Equation
     //
     //         name vector      |       type
     //__________________________|_____________________
-    //          flux n          |       diffusion
-    //          flux n          | hyperbolic diffusion
-    //       heat flux n        |       heat
-    //       heat flux n        |   hyperbolic heat
-    //       heat flux n        |       pennes
-    //       heat flux n        |   hyperbolic pennes
+    //          flux_n          |       diffusion
+    //          flux_n          | hyperbolic diffusion
+    //       heat_flux_n        |       heat
+    //       heat_flux_n        |   hyperbolic heat
+    //       heat_flux_n        |       pennes
+    //       heat_flux_n        |   hyperbolic pennes
 
 
 
@@ -767,7 +768,7 @@ Equation
     //
     //
     //
-    // THIS OPTION SHOULD BE DEPRECATED IN THE FUTURE (WHEN???). I think that 
+    // THIS OPTION SHOULD BE DEPRECATED IN THE FUTURE. I think that 
     // we should save what is necessary to calculate them and the user should 
     // give the position to calculate these variables. This might require the use
     // of interpolation. Moreover, it is not clear how it should be performed 
@@ -788,13 +789,16 @@ Material
     // It can be a vector (as [33 55 11]). If it is a vector, the parameters here
     // will be assigned to all the numbers.
 
-     density = 1200; // (kg/m3) required;
-     specific heat = 3200; // (J/(K-kg)) required;
-     thermal conductivity = 0.3; // (W/(K-m)) required;
+    name = tissue; // not required. This is required if you will need to use a 
+    // variable from this material.
+
+    density = 1200; // (kg/m3) required;
+    specific heat = 3200; // (J/(K-kg)) required;
+    thermal conductivity = 0.3; // (W/(K-m)) required;
     //
-     source = 0; // (W/m3) not required.
+    source = 0; // (W/m3) not required.
     //      The default value is 0.
-     vectorial source = 0; // (W/m2) not required.
+    vectorial source = 0; // (W/m2) not required.
     //      The default value is 0. Defines the value of the vectorial source.
     //      Since this is a vector, you have two options to input it:
     //              vectorial source = 1e-3;
@@ -802,19 +806,19 @@ Material
     //      Use the first option when the vectorial source is the same for all directions.
     //      Use the second options when it has different values for different directions.
     //
-     blood perfusion = 1e-4; // (m3/(m3-s)) not required.
+    blood perfusion = 1e-4; // (m3/(m3-s)) not required.
     //      The default value is 0.
-     blood density = 1052; // (kg/m3) not required.
+    blood density = 1052; // (kg/m3) not required.
     //      The default value is 0.
-     blood specific heat = 3600; // (J/(K-kg)) not required.
+    blood specific heat = 3600; // (J/(K-kg)) not required.
     //      The default value is 0.
-     blood temperature = 37; // (oC) not required.
-    //      The default value is 0.
-    //
-     internal heat generation = 500; // (W/m3) not required.
+    blood temperature = 37; // (oC) not required.
     //      The default value is 0.
     //
-     initial temperature = 37; // (oC) required if Solve = dynamic;
+    internal heat generation = 500; // (W/m3) not required.
+    //      The default value is 0.
+    //
+    initial temperature = 37; // (oC) required if Solve = dynamic;
     // future implementation: reload previous calculated data
 }
 
@@ -823,6 +827,9 @@ Boundary
 {
     equation = BHE; // required.
     // This is the name of the equation that this boundary condition is applied to
+
+    name = B1; // not required. This is required if you will need to use a 
+    // variable from this material.
 
     number = 18; // required;
     // this is the tag number of the boundary.
@@ -839,11 +846,14 @@ Boundary
     equation = BHE; // required.
     // This is the name of the equation that this boundary condition is applied to
 
+    name = B2; // not required. This is required if you will need to use a 
+    // variable from this material.
+
     number = 24; // this is the tag number of the boundary.
 // It can be a vector (like [33 55 11]). If it is a vector, the parameters here
 // will be assigned to all the numbers.
 
-           Heat flux = 5e5; // (W/m2)
+    Heat flux = 5e5; // (W/m2)
 }
 
 
@@ -851,12 +861,15 @@ Boundary
 {
     equation = BHE; // required.
     // This is the name of the equation that this boundary condition is applied to
+
+    name = B3; // not required. This is required if you will need to use a 
+    // variable from this material.
 
     number = 27; // this is the tag number of the boundary.
 // It can be a vector (like [33 55 11]). If it is a vector, the parameters here
 // will be assigned to all the numbers.
 
-           Temperature = 37; // (oC)
+    Temperature = 37; // (oC)
 }
 
 
@@ -866,11 +879,14 @@ Boundary
     equation = BHE; // required.
     // This is the name of the equation that this boundary condition is applied to
 
+    name = B4; // not required. This is required if you will need to use a 
+    // variable from this material.
+
     number = 30; // this is the tag number of the boundary.
 // It can be a vector (like [33 55 11]). If it is a vector, the parameters here
 // will be assigned to all the numbers.
 
-           Temperature = 150; // (oC)
+    Temperature = 150; // (oC)
 }
 
 
@@ -880,6 +896,129 @@ Boundary
 // {
 // }
 
-// Function  // used to model parameters that change. Future implementation
-// {
-// }
+Function  // used to model parameters that change.
+{
+    // functions are implemented as C functions that are called to give the 
+    // output values.
+
+    name = function_1; // name of the function
+
+    // These functions already have the libraries <math.h>,
+    // <stdio.h>, <stdlib.h>, and <string.h>. If you need more libraries,
+    // specify so using library below. If you need to include more than one
+    // library, separate them using comma ",". They will be included using
+    // #include library_inputs;
+    library = <time.h>, <omp.h>; // example of how to include more libraries.
+    
+    
+    input variables = BHE::temperature, BHE::heat_flux, STD::x, STD::y, STD::z, BHE::time, BHE::time-step, BHE::step;
+    // specify the name of the input variables. Separate variables using comma ","
+    // all input variables are considered as double. Input names cannot have blank spaces
+    // step can be used to input variables in previous time-steps. For example:
+    // "(BHE::heat_flux[step] - BHE::heat_flux[step-1])/STD::time_step" is a first order
+    // approximation of the heat flux derivate. Alternatively, you could specify
+    // "BHE::heat_flux" instead of "BHE::heat_flux[step]" for the current heat_flux value.
+    //
+    //
+    // How does the function knows which variable in space to use? For example,
+    // temperature is defined in every node and in boundaries.
+    // 
+    // If the output of function is assigned to a variable that characterizes the node
+    // (e.g., density), then temperature and heat flux are defined at the node center.
+    // 
+    // If the output of function is assigned to a variable that characterizes a boundary,
+    // then temperature and heat flux are defined at the boundary itself.
+
+    output name = output_f1; // name of the output variable. This could be used
+    // as an input to other fields.
+
+    // expression used to calculate the output variable. It must be written 
+    // in C style. You can include any C code if you use {}. If you don't use {},
+    // the output of the expression is allocated in "output name" variable. If you do use {},
+    // you have to assign what is saved in output_f1.
+    // Example without using brackets:
+    // expression = BHE::heat_flux*BHE::temperature;
+    //
+    // Example using brackets:
+
+    expression = {
+        double temp1, temp2, temp3;
+        temp1 = cos(pi*BHE::time)*exp(BHE::temperature);
+        temp2 = (BHE::heat_flux - BHE::heat_flux[BHE::step-1])/BHE::time_step;
+        temp3 = 50;
+        
+        output_f1 = temp1 + temp2 + temp3;
+    123}
+    // if needed, pi (3.14159...) is defined as "pi".
+
+}
+
+// Comments about variable names:
+//
+// Standard variable names: x, y, z, absolute_zero, Stefan_Boltzmann_constant.
+// These are universal variables. They can be accessed everywhere by using "STD::"
+// before their names
+// 
+// Variable names in the field Material, Boundary, Equations, and Function are local.
+// To obtain a local variable, you should write name::variable, where name is the name
+// of the field. Example for obtaining the temperature for an equation named BHE is
+// BHE::temperature
+//
+//
+//
+// Variable names for the fields:
+// Simulation:
+//      absolute_zero
+//      Stefan_Boltzmann_constant
+//      x
+//      y
+//      z
+//
+// Equation:
+//      time
+//      time-step
+//      time-jump
+//      final_time
+//      scalar      // use this or the scalar variable name
+//      flux        // use this or the flux variable name
+//      flux[0]     // use this or the flux variable name
+//      flux[1]     // use this or the flux variable name
+//      flux[2]     // use this or the flux variable name
+//
+// Material:
+//      diffusion_coefficient
+//      coefficient_b
+//      relaxation_time
+//      sink_a
+//      source
+//      vectorial_source // absolute value of vectorial_source
+//      vectorial_source[0]
+//      vectorial_source[1]
+//      vectorial_source[2]
+//      initial_scalar
+//      density
+//      specific_heat
+//      thermal_conductivity
+//      blood_perfusion
+//      blood_density
+//      blood_specific_heat
+//      blood_temperature
+//      internal_heat_generation
+//      initial_temperature
+//
+// Boundary:
+//      scalar
+//      flux
+//      convection_scalar
+//      convection_coefficient
+//      temperature
+//      heat_flux
+//      convection_temperature
+//      radiation_temperature
+//      radiation_emissivity
+//
+// Source:
+//      TODO
+//
+// Function:
+//      outputVariable  // use this or the output variable name

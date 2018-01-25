@@ -418,6 +418,67 @@ unsigned int readVectorIntInputs(char * input, int * quantity, int ** numberStor
     return 0;
 }
 
+
+/*
+ * readVectorStrInputs: read strings that are allocated as line vectors
+ */
+unsigned int readVectorStrInputs(char * input, int * quantity, char *** stringsStored) {
+    unsigned int errorTLMnumber, withBrackets = 1;
+
+    // get the text between equal and the semicolon
+    if ((errorTLMnumber = getBetweenEqualAndSemicolon(input)) != 0)
+        return errorTLMnumber;
+    
+    removeBlankSpacesBeforeAndAfter(input);
+
+    // get how many commas are there. More specifically, gets
+    // the quantity of strings' separations.
+    if ((errorTLMnumber = getQuantityOfCommas(input, quantity)) != 0)
+        return errorTLMnumber;
+    // DEBUG: testing how many commas did it find
+    // printf("We found %04d commas.\n", *quantity);
+    (*quantity)++;
+
+    // DEBUG: testing how many strings did it find
+    // printf("We found %04d strings.\n", *quantity);
+
+    // now I now exactly how many strings I shall get
+    *stringsStored = (char**) malloc(sizeof (char*)*(*quantity));
+
+    if (*quantity == 1) {// I just have one string
+        (*stringsStored)[0] = (char*) malloc(sizeof(char)*(strlen(input) + 1));
+        strcpy((*stringsStored)[0], input);
+    } else {
+        int j = 0, i_pos = 0;
+        for (int i = 1; i < strlen(input); i++) {
+            if (strncmp(input + i, ",", 1) == 0) {
+                // DEBUG: show details of what we got
+                // printf(";%s; %d", input + i_pos, i - i_pos);
+                (*stringsStored)[j] = (char*) malloc(sizeof(char)*(i - i_pos + 1));
+                strncpy((*stringsStored)[j], input + i_pos, i - i_pos);
+                (*stringsStored)[j][i - i_pos] = '\0';
+                removeBlankSpacesBeforeAndAfter((*stringsStored)[j]);
+                // DEBUG: show details of what we got
+                // printf(";%s;\n", (*stringsStored)[j]);
+                i_pos = i + 1;
+                j++;
+            }
+        }
+        
+        // copying the last one
+        // DEBUG: show details of what we got
+        // printf(";%s; %zu", input + i_pos, strlen(input) - i_pos);
+        (*stringsStored)[j] = (char*) malloc(sizeof(char)*(strlen(input) - i_pos + 1));
+        strncpy((*stringsStored)[j], input + i_pos, strlen(input) - i_pos);
+        (*stringsStored)[j][strlen(input) - i_pos] = '\0';
+        removeBlankSpacesBeforeAndAfter((*stringsStored)[j]);
+        // DEBUG: show details of what we got
+        // printf(";%s;\n", (*stringsStored)[j]);
+
+    }
+    return 0;
+}
+
 /*
  * readVectorDoubleLengthThreeInputs: read numbers that are allocated as line vectors
  */
@@ -500,8 +561,33 @@ unsigned int getQuantityOfBlankSpaces(char *input, int * quantity) {
     return 0;
 }
 
+
 /*
- * testStartBrackets: test the sintax for starting the brackets
+ * getQuantityOfCommas: get the quantity of commas in a string
+ */
+unsigned int getQuantityOfCommas(char *input, int * quantity) {
+
+    // DEBUG: inside the function
+    //    printf("Inside getQuantityOfCommas: '%s'\n",input);
+
+    for (int i = 0; i < strlen(input); i++) {
+        // DEBUG: shows what position are we reading
+        //        printf("Reading position %d\n",i);
+        if (strncmp(input + i, ",", 1) == 0) {
+            (*quantity)++;
+            // DEBUG: shows where commas were found
+            //             printf("Position with comma %d\n",i);
+        }
+    }
+
+    //DEBUG: testing how many number did it find
+    //        printf("We found %04d commas.\n", *quantity);
+
+    return 0;
+}
+
+/*
+ * testStartBrackets: test the syntax for starting the brackets
  */
 unsigned int testStartBrackets(char * input) {
 

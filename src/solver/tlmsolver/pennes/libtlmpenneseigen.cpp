@@ -265,8 +265,8 @@ unsigned int calculateMatricesPennesEigen(struct dataForSimulation *input,
                         time_spent_Triangle * 1e3, time_spent_Triangle, time_spent_Triangle / 60.0, time_spent_Triangle / (60 * 60));
             }
         }
-    }  
-    
+    }
+
     // calculating the matrices for material quadrangle elements
     if (input->simulationInput.verboseMode == 1) {
         printf("Quantity of material quadrangle nodes found: %llu\n", matrices->numbers.MaterialElements[3]);
@@ -320,7 +320,7 @@ unsigned int calculateMatricesPennesEigen(struct dataForSimulation *input,
             }
         }
     }
-    
+
     // calculating the matrices for material hexahedron elements
     if (input->simulationInput.verboseMode == 1) {
         printf("Quantity of material hexahedron nodes found: %llu\n", matrices->numbers.MaterialElements[5]);
@@ -347,7 +347,7 @@ unsigned int calculateMatricesPennesEigen(struct dataForSimulation *input,
             }
         }
     }
-    
+
     // calculating the matrices for material prism elements
     if (input->simulationInput.verboseMode == 1) {
         printf("Quantity of material prism nodes found: %llu\n", matrices->numbers.MaterialElements[6]);
@@ -361,10 +361,10 @@ unsigned int calculateMatricesPennesEigen(struct dataForSimulation *input,
         }
         clock_t begin_Prism = clock();
         printf("\n\nPrism node was not implemented yet\n\n");
-//        if ((errorTLMnumber = MaterialPrismPennesEigen(input, matrices, id)) != 0) {
-//            sendErrorCodeAndMessage(errorTLMnumber, NULL, NULL, NULL, NULL);
-//            return errorTLMnumber;
-//        }
+        //        if ((errorTLMnumber = MaterialPrismPennesEigen(input, matrices, id)) != 0) {
+        //            sendErrorCodeAndMessage(errorTLMnumber, NULL, NULL, NULL, NULL);
+        //            return errorTLMnumber;
+        //        }
         clock_t end_Prism = clock();
         if (input->simulationInput.verboseMode == 1) {
             printf("Done calculating the matrix for the prism nodes.\n");
@@ -375,8 +375,8 @@ unsigned int calculateMatricesPennesEigen(struct dataForSimulation *input,
             }
         }
     }
-    
-    
+
+
     // calculating the matrices for material pyramid elements
     if (input->simulationInput.verboseMode == 1) {
         printf("Quantity of material pyramid nodes found: %llu\n", matrices->numbers.MaterialElements[7]);
@@ -625,22 +625,22 @@ unsigned int MaterialLinePennesEigen(struct dataForSimulation *input, struct cal
                         // and one extra node is used to model the relaxation time
 
                         // generalization of Cd
-//                        Cd = input->materialInput[j2].generalized_diffusionCoeff *
-//                                input->equationInput[id].timeStep * input->equationInput[id].timeStep /
-//                                (4 * tempVar[0] * tempVar[0] * input->materialInput[j2].generalized_relaxationTime);
+                        //                        Cd = input->materialInput[j2].generalized_diffusionCoeff *
+                        //                                input->equationInput[id].timeStep * input->equationInput[id].timeStep /
+                        //                                (4 * tempVar[0] * tempVar[0] * input->materialInput[j2].generalized_relaxationTime);
 
                         // generalization of Cs
-//                        Cs = (input->materialInput[j2].generalized_coefficient_b - Cd)* 2 * tempVar[0];
+                        //                        Cs = (input->materialInput[j2].generalized_coefficient_b - Cd)* 2 * tempVar[0];
 
                         // Z = dt/(2*Cd*deltal). Manually validated
-//                        Z[0] = input->equationInput[id].timeStep / (tempVar[0] * 2 * Cd);
-                        
+                        //                        Z[0] = input->equationInput[id].timeStep / (tempVar[0] * 2 * Cd);
+
                         // trying new approach
                         double Ld;
-                        Ld = input->materialInput[j2].generalized_diffusionCoeff/input->materialInput[j2].generalized_relaxationTime;
+                        Ld = input->materialInput[j2].generalized_diffusionCoeff / input->materialInput[j2].generalized_relaxationTime;
                         Cd = input->materialInput[j2].generalized_coefficient_b;
-                        Cs = input->materialInput[j2].generalized_coefficient_b*(1 - 2 * tempVar[0]);
-                        Z[0] = sqrt(Ld/Cd);
+                        Cs = input->materialInput[j2].generalized_coefficient_b * (1 - 2 * tempVar[0]);
+                        Z[0] = sqrt(Ld / Cd);
 
                         // Zs = dt/(2*Cs)
                         if (Cs > 0) {
@@ -849,9 +849,9 @@ unsigned int MaterialTrianglePennesEigen(struct dataForSimulation *input, struct
                     matrices->R[numbersNodeAndPort[1] + 2] = R[2];
 
                     // Manually validated
-                    Zhat = 1/(1/Z[0] + 1/Z[1] + 1/Z[2] + G);
-//                    Zhat = Z[0] * Z[1] * Z[2] / (Z[0] * Z[1] + Z[0] * Z[2] + Z[1] * Z[2]
-//                            + Z[0] * Z[1] * Z[2] * G);
+                    Zhat = 1 / (1 / Z[0] + 1 / Z[1] + 1 / Z[2] + G);
+                    //                    Zhat = Z[0] * Z[1] * Z[2] / (Z[0] * Z[1] + Z[0] * Z[2] + Z[1] * Z[2]
+                    //                            + Z[0] * Z[1] * Z[2] * G);
 
                     // Manually validated
                     tau[0] = 2 * Zhat / Z[0];
@@ -917,7 +917,6 @@ end_for_j_and_for_k_triangle:
     }
     return 0;
 }
-
 
 /*
  * MaterialQuadrangleEigen: Calculates the parameters to set the quadrangle as material
@@ -1042,17 +1041,17 @@ unsigned int MaterialQuadranglePennesEigen(struct dataForSimulation *input, stru
                     matrices->R[numbersNodeAndPort[1] + 3] = R[3];
 
                     // Manually validated
-                    Zhat = 1/(1/Z[0] + 1/Z[1] + 1/Z[2] + 1/Z[3] + G);
-//                    Zhat = Z[0] * Z[1] * Z[2] * Z[3] / (Z[0] * Z[1] * Z[2]
-//                            + Z[0] * Z[1] * Z[3] + Z[0] * Z[2] * Z[3]
-//                            + Z[1] * Z[2] * Z[3] + Z[0] * Z[1] * Z[2] * Z[3] * G);
+                    Zhat = 1 / (1 / Z[0] + 1 / Z[1] + 1 / Z[2] + 1 / Z[3] + G);
+                    //                    Zhat = Z[0] * Z[1] * Z[2] * Z[3] / (Z[0] * Z[1] * Z[2]
+                    //                            + Z[0] * Z[1] * Z[3] + Z[0] * Z[2] * Z[3]
+                    //                            + Z[1] * Z[2] * Z[3] + Z[0] * Z[1] * Z[2] * Z[3] * G);
 
                     // Manually validated
                     tau[0] = 2 * Zhat / Z[0];
                     tau[1] = 2 * Zhat / Z[1];
                     tau[2] = 2 * Zhat / Z[2];
                     tau[3] = 2 * Zhat / Z[3];
-                    
+
                     // this is actually matrix S.
                     // M = C*S
                     // this matrix is M[line][column].
@@ -1259,7 +1258,7 @@ unsigned int MaterialTetrahedronPennesEigen(struct dataForSimulation *input, str
 
 
                     // Manually validated
-                    Zhat = 1/(1/Z[0] + 1/Z[1] + 1/Z[2] + 1/Z[3] + G);
+                    Zhat = 1 / (1 / Z[0] + 1 / Z[1] + 1 / Z[2] + 1 / Z[3] + G);
 
                     // Manually validated
                     tau[0] = 2 * Zhat / Z[0];
@@ -1346,7 +1345,6 @@ end_for_j_and_for_k_tetrahedron:
     }
     return 0;
 }
-
 
 /*
  * MaterialHexahedronPennesEigen: Calculates the parameters to set the hexahedron
@@ -1440,7 +1438,7 @@ unsigned int MaterialHexahedronPennesEigen(struct dataForSimulation *input, stru
                             &input->mesh.nodes[input->mesh.elements.Hexahedron[i].N5 - 1],
                             &input->mesh.nodes[input->mesh.elements.Hexahedron[i].N6 - 1],
                             &input->mesh.nodes[input->mesh.elements.Hexahedron[i].N7 - 1],
-                            &input->mesh.nodes[input->mesh.elements.Hexahedron[i].N8 - 1],tempVar);
+                            &input->mesh.nodes[input->mesh.elements.Hexahedron[i].N8 - 1], tempVar);
 
                     matrices->L[numbersNodeAndPort[1] + 0] = tempVar[6]; // area of face 1
                     matrices->L[numbersNodeAndPort[1] + 1] = tempVar[7]; // area of face 2
@@ -1459,6 +1457,9 @@ unsigned int MaterialHexahedronPennesEigen(struct dataForSimulation *input, stru
                     // generalization of Cd
                     Cd = tempVar[12] * input->materialInput[j2].generalized_coefficient_b /
                             (tempVar[0] + tempVar[1] + tempVar[2] + tempVar[3] + tempVar[4] + tempVar[5]);
+                    
+                    // debugging volume calculation:
+                    // fprintf(stderr, "%.17g\n", tempVar[12]);
 
                     // generalization of R
                     R[0] = tempVar[0] / (input->materialInput[j2].generalized_diffusionCoeff * tempVar[6]);
@@ -1501,7 +1502,7 @@ unsigned int MaterialHexahedronPennesEigen(struct dataForSimulation *input, stru
 
 
                     // impedance
-                    Zhat = 1/(1/Z[0] + 1/Z[1] + 1/Z[2] + 1/Z[3] +1/Z[4] + 1/Z[5] + G);
+                    Zhat = 1 / (1 / Z[0] + 1 / Z[1] + 1 / Z[2] + 1 / Z[3] + 1 / Z[4] + 1 / Z[5] + G);
 
                     // Manually validated
                     tau[0] = 2 * Zhat / Z[0];
@@ -1565,7 +1566,7 @@ unsigned int MaterialHexahedronPennesEigen(struct dataForSimulation *input, stru
                             numbersNodeAndPort[1] + 4) = tau[4];
                     matrices->M.insert(numbersNodeAndPort[1] + 3,
                             numbersNodeAndPort[1] + 5) = tau[5];
-                    
+
                     matrices->M.insert(numbersNodeAndPort[1] + 4,
                             numbersNodeAndPort[1] + 0) = tau[0];
                     matrices->M.insert(numbersNodeAndPort[1] + 4,
@@ -1578,7 +1579,7 @@ unsigned int MaterialHexahedronPennesEigen(struct dataForSimulation *input, stru
                             numbersNodeAndPort[1] + 4) = tau[4] - 1;
                     matrices->M.insert(numbersNodeAndPort[1] + 4,
                             numbersNodeAndPort[1] + 5) = tau[5];
-                    
+
                     matrices->M.insert(numbersNodeAndPort[1] + 5,
                             numbersNodeAndPort[1] + 0) = tau[0];
                     matrices->M.insert(numbersNodeAndPort[1] + 5,
@@ -1640,9 +1641,6 @@ end_for_j_and_for_k_hexadron:
     }
     return 0;
 }
-
-
-
 
 /*
  * MaterialPyramidPennesEigen: Calculates the parameters to set the pyramid
@@ -1742,7 +1740,7 @@ unsigned int MaterialPyramidPennesEigen(struct dataForSimulation *input, struct 
                     R[2] = tempVar[2] / (input->materialInput[j2].generalized_diffusionCoeff * tempVar[7]);
                     R[3] = tempVar[3] / (input->materialInput[j2].generalized_diffusionCoeff * tempVar[8]);
                     R[4] = tempVar[4] / (input->materialInput[j2].generalized_diffusionCoeff * tempVar[9]);
-                    
+
                     // generalization of G
                     G = tempVar[10] * input->materialInput[j2].generalized_sink_a;
 
@@ -1773,7 +1771,7 @@ unsigned int MaterialPyramidPennesEigen(struct dataForSimulation *input, struct 
 
 
                     // Manually validated
-                    Zhat = 1/(1/Z[0] + 1/Z[1] + 1/Z[2] + 1/Z[3] + 1/Z[4] + G);
+                    Zhat = 1 / (1 / Z[0] + 1 / Z[1] + 1 / Z[2] + 1 / Z[3] + 1 / Z[4] + G);
 
                     // Manually validated
                     tau[0] = 2 * Zhat / Z[0];
@@ -1781,7 +1779,7 @@ unsigned int MaterialPyramidPennesEigen(struct dataForSimulation *input, struct 
                     tau[2] = 2 * Zhat / Z[2];
                     tau[3] = 2 * Zhat / Z[3];
                     tau[4] = 2 * Zhat / Z[4];
-                    
+
                     // this is actually matrix S.
                     // M = C*S
                     // this matrix is M[line][column].
@@ -1828,7 +1826,7 @@ unsigned int MaterialPyramidPennesEigen(struct dataForSimulation *input, struct 
                             numbersNodeAndPort[1] + 3) = tau[3] - 1;
                     matrices->M.insert(numbersNodeAndPort[1] + 3,
                             numbersNodeAndPort[1] + 4) = tau[4];
-                    
+
                     matrices->M.insert(numbersNodeAndPort[1] + 4,
                             numbersNodeAndPort[1] + 0) = tau[0];
                     matrices->M.insert(numbersNodeAndPort[1] + 4,
@@ -1876,7 +1874,7 @@ unsigned int MaterialPyramidPennesEigen(struct dataForSimulation *input, struct 
                     matrices->Vi(numbersNodeAndPort[1] + 2) = matrices->Vi(numbersNodeAndPort[1]);
                     matrices->Vi(numbersNodeAndPort[1] + 3) = matrices->Vi(numbersNodeAndPort[1]);
                     matrices->Vi(numbersNodeAndPort[1] + 4) = matrices->Vi(numbersNodeAndPort[1]);
-                    
+
 
                     goto end_for_j_and_for_k_pyramid;
                 }
@@ -1915,10 +1913,6 @@ unsigned int connectionsAndBoundariesPennesEigen(struct calculationTLMEigen *mat
 
 
     for (i = 0; i < connection->accumulatedIntersections[0]; i++) {
-        if (i == 1014){
-            // something bad is happening at this connection
-            int atest = 1;
-        }
         getPortsOrPoints(connection, i, &(coeff.portsNumbers));
 
         // getting reflection and transmission coefficients, and effects on calculating
@@ -2044,29 +2038,29 @@ unsigned int connectionsAndBoundariesPennesEigen(struct calculationTLMEigen *mat
         return errorTLMnumber;
     }
 
-//        FILE *fM, *fTau, *fE, *fE_out;
-//        fM = fopen("matrixM.csv", "w");
-//        fE = fopen("matrixE.csv", "w");
-//        fE_out = fopen("matrixE_out.csv", "w");
-//        fTau = fopen("matrixTau.csv", "w");
-//        
-//        for (j3 = 0; j3 < matrices->numbers.Ports + matrices->numbers.StubPorts; j3++){
-//            for (j1 = 0; j1 < matrices->numbers.Ports + matrices->numbers.StubPorts; j1++){
-//                fprintf(fM, "%0.17g ", matrices->M.coeff(j3, j1));
-//            }
-//            fprintf(fM, "\n");
-//            fprintf(fE, "%0.17g\n", matrices->E.coeff(j3));
-//        }
-//        
-//        
-//        for (j3 = 0; j3 < matrices->numbers.Output; j3++){
-//            for (j1 = 0; j1 < matrices->numbers.Ports + matrices->numbers.StubPorts; j1++){
-//                fprintf(fTau, "%0.17g ", matrices->tau.coeff(j3, j1));
-//            }
-//            fprintf(fTau, "\n");
-//            fprintf(fE_out, "%0.17g\n", matrices->E_output.coeff(j3));
-//        }
+    // DEBUG: output the matrices
+    /*FILE *fM, *fTau, *fE, *fE_out;
+    fM = fopen("matrixM.csv", "w");
+    fE = fopen("matrixE.csv", "w");
+    fE_out = fopen("matrixE_out.csv", "w");
+    fTau = fopen("matrixTau.csv", "w");
 
+    for (j3 = 0; j3 < matrices->numbers.Ports + matrices->numbers.StubPorts; j3++) {
+        for (j1 = 0; j1 < matrices->numbers.Ports + matrices->numbers.StubPorts; j1++) {
+            fprintf(fM, "%0.17g ", matrices->M.coeff(j3, j1));
+        }
+        fprintf(fM, "\n");
+        fprintf(fE, "%0.17g\n", matrices->E.coeff(j3));
+    }
+
+
+    for (j3 = 0; j3 < matrices->numbers.Output; j3++) {
+        for (j1 = 0; j1 < matrices->numbers.Ports + matrices->numbers.StubPorts; j1++) {
+            fprintf(fTau, "%0.17g ", matrices->tau.coeff(j3, j1));
+        }
+        fprintf(fTau, "\n");
+        fprintf(fE_out, "%0.17g\n", matrices->E_output.coeff(j3));
+    }*/
 
     return 0;
 }

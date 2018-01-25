@@ -52,6 +52,9 @@ extern "C" {
         // libequationconfig->Equation.
         // This is an integer because -1 (initial value) indicates that we did
         // not find a match of the Equations names and the name given herein.
+        
+        char *materialName;
+        int materialNameDefined;
 
         enum typeSim typeOfEquation;
         // type of simulation
@@ -68,30 +71,53 @@ extern "C" {
         // Inputs associated with diffusion and hyperbolic diffusion
         double diffusionCoeff;
         int diffusionCoeffDefined;
+        char *diffusionCoeffFromFunc; // name of the function that will be used to calculate this value
+        int diffusionCoeffType; // 1: double; 2: from function
 
         // the default value of this coefficient is 1.
         double coefficient_b;
+        char *coefficient_bFromFunc; // name of the function that will be used to calculate this value
+        int coefficient_bType; // 1: double; 2: from function
 
         double relaxationTime;
         int relaxationTimeDefined;
+        char *relaxationTimeFromFunc; // name of the function that will be used to calculate this value
+        int relaxationTimeType; // 1: double; 2: from function
 
         double sink_a;
+        char *sink_aFromFunc; // name of the function that will be used to calculate this value
+        int sink_aType; // 1: double; 2: from function
+        
         double source;
+        char *sourceFromFunc; // name of the function that will be used to calculate this value
+        int sourceType; // 1: double; 2: from function
+        
         double *vectorialSource;
+        // one for each position of the vectorial source position
+        char **vectorialSourceFromFunc; // name of the function that will be used to calculate this value
+        int *vectorialSourceType; // 1: double; 2: from function
 
         double initialScalar; // initial condition
         int initialScalarDefined; // required if solve = dynamic
+        char *initialScalarFromFunc; // name of the function that will be used to calculate this value
+        int initialScalarType; // 1: double; 2: from function
 
 
         // Inputs associated with heat, hyperbolic heat, pennes, and hyperbolic pennes
         double matDensity;
         int matDensityDefined;
+        char *matDensityFromFunc; // name of the function that will be used to calculate this value
+        int matDensityType; // 1: double; 2: from function
 
         double matSpecificHeat;
         int matSpecificHeatDefined;
+        char *matSpecificHeatFromFunc; // name of the function that will be used to calculate this value
+        int matSpecificHeatType; // 1: double; 2: from function
 
         double matThermalConductivity;
         int matThermalConductivityDefined;
+        char *matThermalConductivityFromFunc; // name of the function that will be used to calculate this value
+        int matThermalConductivityType; // 1: double; 2: from function
 
         // these are the same defined for diffusion and hyperbolic diffusion
         //        double relaxationTime;
@@ -103,15 +129,30 @@ extern "C" {
 
         // data for the blood inside the material. Used in Pennes
         double bloodPerfusion;
+        char *bloodPerfusionFromFunc; // name of the function that will be used to calculate this value
+        int bloodPerfusionType; // 1: double; 2: from function
+        
         double bloodDensity;
+        char *bloodDensityFromFunc; // name of the function that will be used to calculate this value
+        int bloodDensityType; // 1: double; 2: from function
+        
         double bloodSpecificHeat;
+        char *bloodSpecificHeatFromFunc; // name of the function that will be used to calculate this value
+        int bloodSpecificHeatType; // 1: double; 2: from function
+        
         double bloodTemperature;
-
+        char *bloodTemperatureFromFunc; // name of the function that will be used to calculate this value
+        int bloodTemperatureType; // 1: double; 2: from function
+        
         // data for the internal heat generation.
         double internalHeatGeneration;
+        char *internalHeatGenerationFunc; // name of the function that will be used to calculate this value
+        int internalHeatGenerationType; // 1: double; 2: from function
 
         double initialTemperature; // initial condition
         int initialTemperatureDefined; // required if solve = dynamic
+        char *initialTemperatureFromFunc; // name of the function that will be used to calculate this value
+        int initialTemperatureType; // 1: double; 2: from function
 
         // general values used to generalize the following equations: diffusion,
         // hyperbolic diffusion, heat, hyperbolic heat, pennes, hyperbolic pennes.
@@ -140,9 +181,9 @@ extern "C" {
         // generalized_sink_a = sink_a;
         // generalized_source = source;
         // 
-        //
-        // The parameters for pennes and hyperbolic pennes are changed to:
-        /// generalized_coefficient_b = matDensity*matSpecificHeat;
+        // 
+        // The parameters for Pennes and hyperbolic Pennes are changed to:
+        // generalized_coefficient_b = matDensity*matSpecificHeat;
         // generalized_diffusionCoeff = matThermalConductivity;
         // generalized_relaxationTime = relaxationTime;
         // generalized_vectorialSource = vectorialSource;
@@ -154,12 +195,32 @@ extern "C" {
 
         // generalized inputs
         double generalized_coefficient_b;
+        char *generalized_coefficient_bFromFunc; // name of the function that will be used to calculate this value
+        int generalized_coefficient_bType; // 1: double; 2: from function
+        
         double generalized_diffusionCoeff;
+        char *generalized_diffusionCoeffFromFunc; // name of the function that will be used to calculate this value
+        int generalized_diffusionCoeffType; // 1: double; 2: from function
+        
         double generalized_relaxationTime;
+        char *generalized_relaxationTimeFromFunc; // name of the function that will be used to calculate this value
+        int generalized_relaxationTimeType; // 1: double; 2: from function
+        
         double *generalized_vectorialSource;
+        char *generalized_vectorialSourceFromFunc; // name of the function that will be used to calculate this value
+        int generalized_vectorialSourceType; // 1: double; 2: from function
+        
         double generalized_initialScalar;
+        char *generalized_initialScalarFromFunc; // name of the function that will be used to calculate this value
+        int generalized_initialScalarType; // 1: double; 2: from function
+        
         double generalized_sink_a;
+        char *generalized_sink_aFromFunc; // name of the function that will be used to calculate this value
+        int generalized_sink_aType; // 1: double; 2: from function
+        
         double generalized_source;
+        char *generalized_sourceFromFunc; // name of the function that will be used to calculate this value
+        int generalized_sourceType; // 1: double; 2: from function
         
         // These variables are flags used in the TLM model. They are set by
         // the code when testing the material's input.

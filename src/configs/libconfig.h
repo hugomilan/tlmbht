@@ -52,22 +52,12 @@ extern "C" {
 #include "libmatconfig.h"
 #include "libboundconfig.h"
 #include "libsourceconfig.h"
+#include "libvariablename.h"
+#include "libfunctionconfig.h"
+    
 #include "../meshreader/libmeshtlmbht.h"
 
-    enum configuringInside // Types of configurations
-    {
-        NOTHING,        // it is not inside any specific configuration group
-        SIMULATION,     // it is inside the SIMULATION configuration group
-        MESH,           // it is inside the MESH configuration group
-        EQUATION,       // it is inside the EQUATION configuration group
-        MATERIAL,       // it is inside the MATERIAL configuration group
-        BOUNDARY,       // it is inside the BOUNDARY configuration group
-        SOURCES         // it is inside the SOURCES configuration group
-    };
-
-
     // this variable contains all the informations for the data input
-
     struct dataForSimulation {
         struct Simulation simulationInput;
 
@@ -86,6 +76,13 @@ extern "C" {
 
         struct SourceConfig *sourceInput;
         int quantityOfSourcesRead;
+        
+        struct FunctionConfig *functionInput;
+        int quantityOfFunctionsRead;
+        
+        struct variableID *variableTable;
+        int numberOfVariablesRead;
+        int numberOfAllocationsForVariables;
 
         //flags
         int simulationRead;
@@ -110,7 +107,7 @@ extern "C" {
     unsigned int readFileTLM(FILE *, struct dataForSimulation *);
 
     // this function set the configuration type
-    unsigned int setConfigurationTo(char *, enum configuringInside *);
+    unsigned int setConfigurationTo(char *, enum configName *);
 
     // this function initiate all the configuration variables
     unsigned int initiateAllConfigurationVarialbes(struct dataForSimulation *);
@@ -120,6 +117,9 @@ extern "C" {
 
     // this function tests all the configuration variables
     unsigned int testAllConfigurationVarialbes(struct dataForSimulation *);
+    
+    // this function creates the variable names table
+    unsigned int createVariableNamesTable(char*, struct dataForSimulation*, struct variableID*);
 
     // this function tests if we are going to solve the problem or just do some testings
     unsigned int testRunSimulation(struct dataForSimulation *);

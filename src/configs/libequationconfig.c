@@ -44,7 +44,7 @@
 #include "../miscellaneous/liberrorcode.h"
 
 /*
- * initiateSimulationVariable: initialize the simulation variable used for configuration
+ * initiateEquationVariable: initialize the equation variable used for configuration
  * with standard values
  */
 unsigned int initiateEquationVariable(struct Equation* equation) {
