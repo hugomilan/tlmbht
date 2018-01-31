@@ -482,7 +482,7 @@ unsigned int readVectorStrInputs(char * input, int * quantity, char *** stringsS
 /*
  * readVectorDoubleLengthThreeInputs: read numbers that are allocated as line vectors
  */
-unsigned int readVectorDoubleLengthThreeInputs(char * input, double * numberStored) {
+unsigned int readVectorDoubleLengthThreeInputs(char * input, double * numberStored, char **stringStored, int *variableType) {
     unsigned int errorTLMnumber, withBrackets = 1;
     int quantity = 0;
 
@@ -521,13 +521,99 @@ unsigned int readVectorDoubleLengthThreeInputs(char * input, double * numberStor
     //    *numberStored = (double*) malloc(sizeof (double)*(*quantity));
 
     if (quantity == 1) {// I just have one number
-        sscanf(input, "%lf", &numberStored[0]);
-        numberStored[1] = numberStored[0];
-        numberStored[2] = numberStored[0];
+        if (sscanf(input, "%lf", &numberStored[0]) == 0){
+            // if sscanf returns zero, then it was not able to obtain the output
+            // testing if this input can be a string
+            if (variableType[0] == 200){
+                // inputs can't be strings
+                return 7156; 
+            }
+            
+            // OK this is a string and this input accepts strings
+            removeBlankSpacesBeforeAndAfter(input);
+            stringStored[0] = (char*) malloc(sizeof(char)*(strlen(input) + 1));
+            stringStored[1] = (char*) malloc(sizeof(char)*(strlen(input) + 1));
+            stringStored[2] = (char*) malloc(sizeof(char)*(strlen(input) + 1));
+            strcpy(stringStored[0], input);
+            strcpy(stringStored[1], input);
+            strcpy(stringStored[2], input);
+            
+            variableType[0] = 2;
+            variableType[1] = 2;
+            variableType[2] = 2;
+            
+        } else {
+            numberStored[1] = numberStored[0];
+            numberStored[2] = numberStored[0];
+            variableType[0] = 1;
+            variableType[1] = 1;
+            variableType[2] = 1;
+        }
+        
     } else if (quantity == 3) {
-        sscanf(input, "%lf", &numberStored[0]);
-        sscanf(input, "%lf", &numberStored[1]);
-        sscanf(input, "%lf", &numberStored[2]);
+        // we will test individually if each input is a function or a value
+        // position 0
+        if (sscanf(input, "%lf", &numberStored[0]) == 0){
+            // if sscanf returns zero, then it was not able to obtain the output
+            // testing if this input can be a string
+            if (variableType[0] == 200){
+                // inputs can't be strings
+                return 7157; 
+            }
+            
+            // OK this is a string and this input accepts strings
+            // we don't know for sure how long this input is so we will make it 
+            // as big as possible and shorten it later on
+            stringStored[0] = (char*) malloc(sizeof(char)*(strlen(input) + 1));
+            sscanf(input, "%s", stringStored[0]);
+            removeBlankSpacesBeforeAndAfter(stringStored[0]);
+            variableType[0] = 2;
+            
+        } else {
+            variableType[0] = 1;
+        }
+        
+        // position 1
+        if (sscanf(input, "%lf", &numberStored[1]) == 0){
+            // if sscanf returns zero, then it was not able to obtain the output
+            // testing if this input can be a string
+            if (variableType[1] == 200){
+                // inputs can't be strings
+                return 7157; 
+            }
+            
+            // OK this is a string and this input accepts strings
+            // we don't know for sure how long this input is so we will make it 
+            // as big as possible and shorten it later on
+            stringStored[1] = (char*) malloc(sizeof(char)*(strlen(input) + 1));
+            sscanf(input, "%s", stringStored[1]);
+            removeBlankSpacesBeforeAndAfter(stringStored[1]);
+            variableType[1] = 2;
+            
+        } else {
+            variableType[1] = 1;
+        }
+        
+        // position 2
+        if (sscanf(input, "%lf", &numberStored[2]) == 0){
+            // if sscanf returns zero, then it was not able to obtain the output
+            // testing if this input can be a string
+            if (variableType[2] == 200){
+                // inputs can't be strings
+                return 7157; 
+            }
+            
+            // OK this is a string and this input accepts strings
+            // we don't know for sure how long this input is so we will make it 
+            // as big as possible and shorten it later on
+            stringStored[2] = (char*) malloc(sizeof(char)*(strlen(input) + 1));
+            sscanf(input, "%s", stringStored[2]);
+            removeBlankSpacesBeforeAndAfter(stringStored[2]);
+            variableType[2] = 2;
+            
+        } else {
+            variableType[2] = 1;
+        }
     } else {
         return 7156;
     }

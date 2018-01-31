@@ -65,7 +65,7 @@ extern "C" {
     
     unsigned int readVectorStrInputs(char *, int *, char ***);
 
-    unsigned int readVectorDoubleLengthThreeInputs(char *, double *);
+    unsigned int readVectorDoubleLengthThreeInputs(char *, double *, char **, int *);
 
     unsigned int getQuantityOfBlankSpaces(char *, int *);
     

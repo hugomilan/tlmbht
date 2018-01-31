@@ -188,10 +188,11 @@ unsigned int setConfigurationMesh(char * input, struct MeshConfig * meshInput, i
 
 
     } else if (compareCaseInsensitive(input, "scale") == 0) {
-
-        if ((errorTLMnumber = readVectorDoubleLengthThreeInputs(input, meshInput->scale)) != 0)
+        char **tempChar;
+        int tempInt[] = {200, 200, 200};
+        if ((errorTLMnumber = readVectorDoubleLengthThreeInputs(input, meshInput->scale, tempChar, tempInt)) != 0)
             return errorTLMnumber;
-        printf("Scale %f, %f, %f\n", meshInput->scale[0], meshInput->scale[1], meshInput->scale[2]);
+        // printf("Scale %f, %f, %f\n", meshInput->scale[0], meshInput->scale[1], meshInput->scale[2]);
 
 
     } else if (input[0] == '}' && *startEndBrackets == 1) {

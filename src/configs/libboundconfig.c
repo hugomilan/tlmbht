@@ -126,7 +126,28 @@ unsigned int terminateBoundaryConfig(struct BoundaryConfig * bound) {
 
     free(bound->numberInput);
     bound->numberInput = NULL;
+    
+    free(bound->scalarBoundaryFromFunc);
+    bound->scalarBoundaryFromFunc = NULL;
 
+    free(bound->fluxBoundaryFromFunc);
+    bound->fluxBoundaryFromFunc = NULL;
+    
+    free(bound->convectionCoefficientFromFunc);
+    bound->convectionCoefficientFromFunc = NULL;
+    
+    free(bound->temperatureBoundaryFromFunc);
+    bound->temperatureBoundaryFromFunc = NULL;
+    
+    free(bound->heatFluxBoundaryFromFunc);
+    bound->heatFluxBoundaryFromFunc = NULL;
+    
+    free(bound->radiationTemperatureFromFunc);
+    bound->radiationTemperatureFromFunc = NULL;
+    
+    free(bound->radiationEmissivityFromFunc);
+    bound->radiationEmissivityFromFunc = NULL;
+    
     return 0;
 }
 
@@ -184,7 +205,17 @@ unsigned int setConfigurationBoundary(char *input, struct BoundaryConfig *boundI
         if ((errorTLMnumber = getBetweenEqualAndSemicolon(input)) != 0)
             return errorTLMnumber;
 
-        sscanf(input, "%lf", &boundInput->scalarBoundary);
+        if (sscanf(input, "%lf", &boundInput->scalarBoundary) == 0){
+            // if sscanf returns zero, then it was not able to obtain the 
+            // output. So, we assume that is a function
+            removeBlankSpacesBeforeAndAfter(input);
+            boundInput->scalarBoundaryFromFunc = (char*) malloc(sizeof(char)*(strlen(input) + 1));
+            strcpy(boundInput->scalarBoundaryFromFunc, input);
+            printf("%s\n", boundInput->scalarBoundaryFromFunc);
+            boundInput->scalarBoundaryType = 2;
+        } else {
+            boundInput->scalarBoundaryType = 1;
+        }
         boundInput->scalarBoundaryDefined = 1;
 
 
@@ -193,7 +224,17 @@ unsigned int setConfigurationBoundary(char *input, struct BoundaryConfig *boundI
         if ((errorTLMnumber = getBetweenEqualAndSemicolon(input)) != 0)
             return errorTLMnumber;
 
-        sscanf(input, "%lf", &boundInput->fluxBoundary);
+        if (sscanf(input, "%lf", &boundInput->fluxBoundary) == 0){
+            // if sscanf returns zero, then it was not able to obtain the 
+            // output. So, we assume that is a function
+            removeBlankSpacesBeforeAndAfter(input);
+            boundInput->fluxBoundaryFromFunc = (char*) malloc(sizeof(char)*(strlen(input) + 1));
+            strcpy(boundInput->fluxBoundaryFromFunc, input);
+            printf("%s\n", boundInput->fluxBoundaryFromFunc);
+            boundInput->fluxBoundaryType = 2;
+        } else {
+            boundInput->fluxBoundaryType = 1;
+        }
         boundInput->fluxBoundaryDefined = 1;
 
 
@@ -202,7 +243,17 @@ unsigned int setConfigurationBoundary(char *input, struct BoundaryConfig *boundI
         if ((errorTLMnumber = getBetweenEqualAndSemicolon(input)) != 0)
             return errorTLMnumber;
 
-        sscanf(input, "%lf", &boundInput->convectionScalar);
+        if (sscanf(input, "%lf", &boundInput->convectionScalar) == 0){
+            // if sscanf returns zero, then it was not able to obtain the 
+            // output. So, we assume that is a function
+            removeBlankSpacesBeforeAndAfter(input);
+            boundInput->convectionScalarFromFunc = (char*) malloc(sizeof(char)*(strlen(input) + 1));
+            strcpy(boundInput->convectionScalarFromFunc, input);
+            printf("%s\n", boundInput->convectionScalarFromFunc);
+            boundInput->convectionScalarType = 2;
+        } else {
+            boundInput->convectionScalarType = 1;
+        }
         boundInput->convectionDefined = 1;
         boundInput->convectionScalarDefined = 1;
 
@@ -228,7 +279,17 @@ unsigned int setConfigurationBoundary(char *input, struct BoundaryConfig *boundI
         if ((errorTLMnumber = getBetweenEqualAndSemicolon(input)) != 0)
             return errorTLMnumber;
 
-        sscanf(input, "%lf", &boundInput->temperatureBoundary);
+        if (sscanf(input, "%lf", &boundInput->temperatureBoundary) == 0){
+            // if sscanf returns zero, then it was not able to obtain the 
+            // output. So, we assume that is a function
+            removeBlankSpacesBeforeAndAfter(input);
+            boundInput->temperatureBoundaryFromFunc = (char*) malloc(sizeof(char)*(strlen(input) + 1));
+            strcpy(boundInput->temperatureBoundaryFromFunc, input);
+            printf("%s\n", boundInput->temperatureBoundaryFromFunc);
+            boundInput->temperatureBoundaryType = 2;
+        } else {
+            boundInput->temperatureBoundaryType = 1;
+        }
         boundInput->temperatureDefined = 1;
 
 
@@ -237,7 +298,17 @@ unsigned int setConfigurationBoundary(char *input, struct BoundaryConfig *boundI
         if ((errorTLMnumber = getBetweenEqualAndSemicolon(input)) != 0)
             return errorTLMnumber;
 
-        sscanf(input, "%lf", &boundInput->heatFluxBoundary);
+        if (sscanf(input, "%lf", &boundInput->heatFluxBoundary) == 0){
+            // if sscanf returns zero, then it was not able to obtain the 
+            // output. So, we assume that is a function
+            removeBlankSpacesBeforeAndAfter(input);
+            boundInput->heatFluxBoundaryFromFunc = (char*) malloc(sizeof(char)*(strlen(input) + 1));
+            strcpy(boundInput->heatFluxBoundaryFromFunc, input);
+            printf("%s\n", boundInput->heatFluxBoundaryFromFunc);
+            boundInput->heatFluxBoundaryType = 2;
+        } else {
+            boundInput->heatFluxBoundaryType = 1;
+        }
         boundInput->heatFluxDefined = 1;
 
 
@@ -246,7 +317,17 @@ unsigned int setConfigurationBoundary(char *input, struct BoundaryConfig *boundI
         if ((errorTLMnumber = getBetweenEqualAndSemicolon(input)) != 0)
             return errorTLMnumber;
 
-        sscanf(input, "%lf", &boundInput->convectionTemperature);
+        if (sscanf(input, "%lf", &boundInput->convectionTemperature) == 0){
+            // if sscanf returns zero, then it was not able to obtain the 
+            // output. So, we assume that is a function
+            removeBlankSpacesBeforeAndAfter(input);
+            boundInput->convectionTemperatureFromFunc = (char*) malloc(sizeof(char)*(strlen(input) + 1));
+            strcpy(boundInput->convectionTemperatureFromFunc, input);
+            printf("%s\n", boundInput->convectionTemperatureFromFunc);
+            boundInput->convectionTemperatureType = 2;
+        } else {
+            boundInput->convectionTemperatureType = 1;
+        }
         boundInput->convectionDefined = 1;
         boundInput->convectionTemperatureDefined = 1;
 
@@ -256,7 +337,17 @@ unsigned int setConfigurationBoundary(char *input, struct BoundaryConfig *boundI
         if ((errorTLMnumber = getBetweenEqualAndSemicolon(input)) != 0)
             return errorTLMnumber;
 
-        sscanf(input, "%lf", &boundInput->convectionCoefficient);
+        if (sscanf(input, "%lf", &boundInput->convectionCoefficient) == 0){
+            // if sscanf returns zero, then it was not able to obtain the 
+            // output. So, we assume that is a function
+            removeBlankSpacesBeforeAndAfter(input);
+            boundInput->convectionCoefficientFromFunc = (char*) malloc(sizeof(char)*(strlen(input) + 1));
+            strcpy(boundInput->convectionCoefficientFromFunc, input);
+            printf("%s\n", boundInput->convectionCoefficientFromFunc);
+            boundInput->convectionCoefficientType = 2;
+        } else {
+            boundInput->convectionCoefficientType = 1;
+        }
         boundInput->convectionDefined = 1;
         boundInput->convectionCoefficientDefined = 1;
 
@@ -266,7 +357,17 @@ unsigned int setConfigurationBoundary(char *input, struct BoundaryConfig *boundI
         if ((errorTLMnumber = getBetweenEqualAndSemicolon(input)) != 0)
             return errorTLMnumber;
 
-        sscanf(input, "%lf", &boundInput->radiationTemperature);
+        if (sscanf(input, "%lf", &boundInput->radiationTemperature) == 0){
+            // if sscanf returns zero, then it was not able to obtain the 
+            // output. So, we assume that is a function
+            removeBlankSpacesBeforeAndAfter(input);
+            boundInput->radiationTemperatureFromFunc = (char*) malloc(sizeof(char)*(strlen(input) + 1));
+            strcpy(boundInput->radiationTemperatureFromFunc, input);
+            printf("%s\n", boundInput->radiationTemperatureFromFunc);
+            boundInput->radiationTemperatureType = 2;
+        } else {
+            boundInput->radiationTemperatureType = 1;
+        }
         boundInput->radiationDefined = 1;
         boundInput->radiationTemperatureDefined = 1;
 
@@ -276,7 +377,17 @@ unsigned int setConfigurationBoundary(char *input, struct BoundaryConfig *boundI
         if ((errorTLMnumber = getBetweenEqualAndSemicolon(input)) != 0)
             return errorTLMnumber;
 
-        sscanf(input, "%lf", &boundInput->radiationEmissivity);
+        if (sscanf(input, "%lf", &boundInput->radiationEmissivity) == 0){
+            // if sscanf returns zero, then it was not able to obtain the 
+            // output. So, we assume that is a function
+            removeBlankSpacesBeforeAndAfter(input);
+            boundInput->radiationEmissivityFromFunc = (char*) malloc(sizeof(char)*(strlen(input) + 1));
+            strcpy(boundInput->radiationEmissivityFromFunc, input);
+            printf("%s\n", boundInput->radiationEmissivityFromFunc);
+            boundInput->radiationEmissivityType = 2;
+        } else {
+            boundInput->radiationEmissivityType = 1;
+        }
         boundInput->radiationDefined = 1;
         boundInput->radiationEmissivityDefined = 1;
 
@@ -347,13 +458,21 @@ unsigned int testInputBoundary(struct BoundaryConfig * input,
             
             // generalized inputs.
             input->generalized_scalar = input->scalarBoundary;
+            input->generalized_scalarFromFunc = input->scalarBoundaryFromFunc;
+            input->generalized_scalarType = input->scalarBoundaryType;
             input->generalized_scalarDefined = input->scalarBoundaryDefined;
             
             input->generalized_flux = input->fluxBoundary;
+            input->generalized_fluxFromFunc = input->fluxBoundaryFromFunc;
+            input->generalized_fluxType = input->fluxBoundaryType;
             input->generalized_fluxDefined = input->fluxBoundaryDefined;
             
             input->generalized_convectionScalar = input->convectionScalar;
+            input->generalized_convectionScalarFromFunc = input->convectionScalarFromFunc;
+            input->generalized_convectionScalarType = input->convectionScalarType;
             input->generalized_convectionCoefficient = input->convectionCoefficient;
+            input->generalized_convectionCoefficientFromFunc = input->convectionCoefficientFromFunc;
+            input->generalized_convectionCoefficientType = input->convectionCoefficientType;
             input->generalized_convectionDefined = input->convectionDefined;
             
             // these options are not defined for diffusion
@@ -428,18 +547,29 @@ unsigned int testInputBoundary(struct BoundaryConfig * input,
             
             // generalized inputs.
             input->generalized_scalar = input->temperatureBoundary;
+            input->generalized_scalarFromFunc = input->temperatureBoundaryFromFunc;
+            input->generalized_scalarType = input->temperatureBoundaryType;
             input->generalized_scalarDefined = input->temperatureDefined;
             
             input->generalized_flux = input->heatFluxBoundary;
+            input->generalized_fluxFromFunc = input->heatFluxBoundaryFromFunc;
+            input->generalized_fluxType = input->heatFluxBoundaryType;
             input->generalized_fluxDefined = input->heatFluxDefined;
             
             input->generalized_convectionScalar = input->convectionTemperature;
+            input->generalized_convectionScalarFromFunc = input->convectionTemperatureFromFunc;
+            input->generalized_convectionScalarType = input->convectionTemperatureType;
             input->generalized_convectionCoefficient = input->convectionCoefficient;
+            input->generalized_convectionCoefficientFromFunc = input->convectionCoefficientFromFunc;
+            input->generalized_convectionCoefficientType = input->convectionCoefficientType;
             input->generalized_convectionDefined = input->convectionDefined;
             
-            input->generalized_radiationScalar = input->radiationTemperature -
-                    inputSimu->AbsoluteZero;
+            input->generalized_radiationScalar = input->radiationTemperature;
+            input->generalized_radiationScalarFromFunc = input->radiationTemperatureFromFunc;
+            input->generalized_radiationScalarType = input->radiationTemperatureType;
             input->generalized_radiationCoefficient = input->radiationEmissivity;
+            input->generalized_radiationCoefficientFromFunc = input->radiationEmissivityFromFunc;
+            input->generalized_radiationCoefficientType = input->radiationEmissivityType;
             input->generalized_radiationDefined = input->radiationDefined;
             
             break;
@@ -475,11 +605,13 @@ void printfBoundConfig(struct BoundaryConfig *input, struct Equation *equation) 
                 printfAdiabatic();
             } else {
                 if (input->scalarBoundaryDefined == 1)
-                    printfScalarBoundary(input->scalarBoundary);
+                    printfScalarBoundary(input->scalarBoundary, input->scalarBoundaryFromFunc, input->scalarBoundaryType);
                 if (input->fluxBoundaryDefined == 1)
-                    printfFluxBoundary(input->fluxBoundary);
+                    printfFluxBoundary(input->fluxBoundary, input->fluxBoundaryFromFunc, input->fluxBoundaryType);
                 if (input->convectionDefined == 1)
-                    printfConvection(input->convectionCoefficient, input->convectionScalar);
+                    printfConvection(input->convectionCoefficient, input->convectionScalar,
+                            input->convectionCoefficientFromFunc, input->convectionScalarFromFunc,
+                            input->convectionCoefficientType, input->convectionScalarType);
             }
 
             break;
@@ -502,13 +634,17 @@ void printfBoundConfig(struct BoundaryConfig *input, struct Equation *equation) 
                 printfAdiabatic();
             } else {
                 if (input->temperatureDefined == 1)
-                    printfTemperature(input->temperatureBoundary);
+                    printfTemperature(input->temperatureBoundary, input->temperatureBoundaryFromFunc, input->temperatureBoundaryType);
                 if (input->heatFluxDefined == 1)
-                    printfHeatFlux(input->heatFluxBoundary);
+                    printfHeatFlux(input->heatFluxBoundary, input->heatFluxBoundaryFromFunc, input->heatFluxBoundaryType);
                 if (input->convectionDefined == 1)
-                    printfConvectionHeat(input->convectionCoefficient, input->convectionTemperature);
+                    printfConvectionHeat(input->convectionCoefficient, input->convectionScalar,
+                            input->convectionCoefficientFromFunc, input->convectionScalarFromFunc,
+                            input->convectionCoefficientType, input->convectionScalarType);
                 if (input->radiationDefined)
-                    printfRadiation(input->radiationEmissivity, input->radiationTemperature);
+                    printfRadiation(input->radiationEmissivity, input->radiationTemperature,
+                            input->radiationEmissivityFromFunc, input->radiationTemperatureFromFunc,
+                            input->radiationEmissivityType, input->radiationTemperatureType);
             }
             break;
         case EM:
@@ -547,50 +683,134 @@ void printfAdiabatic() {
 /*
  * printfScalarBoundary: prints for scalar boundary condition value
  */
-void printfScalarBoundary(double input) {
-    printf("Scalar value at the boundary with value of %9.4e .\n", input);
+void printfScalarBoundary(double inputDouble, char *inputChar, int inputType) {
+    if (inputType == 1){
+        printf("Scalar value at the boundary with value of %9.4e.\n", inputDouble);
+    }
+    else if (inputType == 2){
+        printf("Scalar value at the boundary calculated from function %s.\n", inputChar);
+    } else {
+        printf("BUG: Unexpected behavior\n");
+    }
 }
 
 /*
  * printfFluxBoundary: prints for flux boundary condition
  */
-void printfFluxBoundary(double input) {
-    printf("Flux boundary with value of %9.4e \n", input);
+void printfFluxBoundary(double inputDouble, char *inputChar, int inputType) {
+    if (inputType == 1){
+        printf("Flux boundary with value of %9.4e.\n", inputDouble);
+    }
+    else if (inputType == 2){
+        printf("Flux boundary with value calculated from function %s.\n", inputChar);
+    } else {
+        printf("BUG: Unexpected behavior\n");
+    }
+    
 }
 
 /*
  * printfConvection: prints for convection boundary condition
  */
-void printfConvection(double coeff, double scalar) {
-    printf("Convection boundary condition with convection "
-            "coefficient of %9.4e  and convective scalar value of %9.4e .\n", coeff, scalar);
+void printfConvection(double coeffDouble, double scalarDouble, char* coeffChar, char* scalarChar,
+        int coeffType, int scalarType) {
+    
+    if (coeffType == 1){
+        printf("Convection boundary condition with convection "
+            "coefficient of %9.4e ", coeffDouble);
+    }
+    else if (coeffType == 2){
+        printf("Convection boundary condition with convection "
+            "coefficient calculated from function %s ", coeffChar);
+    } else {
+        printf("BUG: Unexpected behavior\n");
+    }
+    
+    if (scalarType == 1){
+        printf("and convective scalar value of %9.4e.\n", scalarDouble);
+    }
+    else if (scalarType == 2){
+        printf("and convective scalar calculated from function %s.\n", scalarChar);
+    } else {
+        printf("BUG: Unexpected behavior\n");
+    }
 }
 
 /*
  * printfTemperature: prints for temperature boundary condition
  */
-void printfTemperature(double input) {
-    printf("Temperature at the boundary with value of %9.4e oC.\n", input);
+void printfTemperature(double inputDouble, char *inputChar, int inputType) {
+    if (inputType == 1){
+        printf("Temperature at the boundary with value of %9.4e.\n", inputDouble);
+    }
+    else if (inputType == 2){
+        printf("Temperature at the boundary calculated from function %s.\n", inputChar);
+    } else {
+        printf("BUG: Unexpected behavior\n");
+    }
 }
 
 /*
  * printfHeatFlux: prints for heat flux boundary condition
  */
-void printfHeatFlux(double input) {
-    printf("Heat flux at the boundary with value of %9.4e W/m2.\n", input);
+void printfHeatFlux(double inputDouble, char *inputChar, int inputType) {
+    if (inputType == 1){
+        printf("Heat flux boundary with value of %9.4e W/m2.\n", inputDouble);
+    }
+    else if (inputType == 2){
+        printf("Heat flux boundary with value calculated from function %s.\n", inputChar);
+    } else {
+        printf("BUG: Unexpected behavior\n");
+    }
 }
 
 /*
  * printfConvectionHeat: prints for convection heat transfer boundary condition
  */
-void printfConvectionHeat(double coeff, double temp) {
-    printf("Convection heat transfer (as Newton's cooling law) boundary condition with heat transfer "
-            "coefficient of %9.4e W/(K-m2) and convective temperature of %9.4e oC.\n", coeff, temp);
+void printfConvectionHeat(double coeffDouble, double scalarDouble, char* coeffChar, char* scalarChar,
+        int coeffType, int scalarType) {
+    if (coeffType == 1){
+        printf("Convection heat transfer (as Newton's cooling law) boundary condition with heat transfer "
+            "coefficient of %9.4e W/(K-m2)", coeffDouble);
+    }
+    else if (coeffType == 2){
+        printf("Convection heat transfer (as Newton's cooling law) boundary condition with heat transfer "
+            "coefficient calculated from function %s", coeffChar);
+    } else {
+        printf("BUG: Unexpected behavior\n");
+    }
+    
+    if (scalarType == 1){
+        printf("and convective temperature of %9.4e oC.\n", scalarDouble);
+    }
+    else if (scalarType == 2){
+        printf("and convective temperature calculated from function %s.\n", scalarChar);
+    } else {
+        printf("BUG: Unexpected behavior\n");
+    }
 }
 
 /*
  * printfRadiation: prints for radiation boundary condition
  */
-void printfRadiation(double emiss, double temp) {
-    printf("Radiation heat transfer with emissivity coefficient of %9.4e and radiative temperature of %9.4e oC.\n", emiss, temp);
+void printfRadiation(double emissDouble, double tempDouble, char *emissChar, char* tempChar,
+        int emissType, int tempType) {
+    
+    if (emissType == 1){
+        printf("Radiation heat transfer with emissivity coefficient of %9.4e ", emissDouble);
+    }
+    else if (emissType == 2){
+        printf("Radiation heat transfer with emissivity coefficient calculated from function %s", emissChar);
+    } else {
+        printf("BUG: Unexpected behavior\n");
+    }
+    
+    if (tempType == 1){
+        printf("and radiative temperature of %9.4e oC.\n", tempDouble);
+    }
+    else if (tempType == 2){
+        printf("and radiative temperature calculated from function %s.\n", tempChar);
+    } else {
+        printf("BUG: Unexpected behavior\n");
+    }
 }

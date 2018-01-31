@@ -595,7 +595,7 @@ Equation
     //      'sigma' is the Stefan-Boltzmann constant; 'epsilon' is the emissivity
     //      of the surface (value between 0 and 1).
     //      It is implemented with:
-    //          Radiation temperature = value; // (oC) this is T_rad
+    //          Radiation temperature = value; // (K) this is T_rad
     //          Radiation Emissivity = value;  // this is epsilon (value between 0 and 1).
     //
     // 5) Adiabatic (zero flux) Boundary Condition: This is the default boundary condition.
@@ -1013,8 +1013,8 @@ Function  // used to model parameters that change.
 //      convection_coefficient
 //      temperature
 //      heat_flux
-//      convection_temperature
-//      radiation_temperature
+//      convection_temperature      // in Celsius
+//      radiation_temperature       // in Kelvin
 //      radiation_emissivity
 //
 // Source:

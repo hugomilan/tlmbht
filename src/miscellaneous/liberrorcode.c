@@ -509,7 +509,12 @@ void sendErrorCodeAndMessage(unsigned int errorCode, void *input1v, void *input2
 
         case 7156:
             // Unknown number of inputs for scale
-            fprintf(stderr, "Wrong number of inputs to scale the mesh. It must be one or three. Line %04u: %s", *input1ui, input2c);
+            fprintf(stderr, "Wrong number of inputs. It must be one or three. Line %04u: %s", *input1ui, input2c);
+            break;
+            
+        case 7157:
+            // Unknown number of inputs for scale
+            fprintf(stderr, "Input should be numeric but received string input. Line %04u: %s", *input1ui, input2c);
             break;
 
         case 7410:

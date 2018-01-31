@@ -91,6 +91,7 @@ extern "C" {
         double source;
         char *sourceFromFunc; // name of the function that will be used to calculate this value
         int sourceType; // 1: double; 2: from function
+        int sourceGetFromFuncNumb; // Number of the function to get the variable from
         
         double *vectorialSource;
         // one for each position of the vectorial source position
@@ -108,11 +109,13 @@ extern "C" {
         int matDensityDefined;
         char *matDensityFromFunc; // name of the function that will be used to calculate this value
         int matDensityType; // 1: double; 2: from function
+        int matDensityGetFromFuncNumb; // Number of the function to get the variable from
 
         double matSpecificHeat;
         int matSpecificHeatDefined;
         char *matSpecificHeatFromFunc; // name of the function that will be used to calculate this value
         int matSpecificHeatType; // 1: double; 2: from function
+        int matSpecificHeatGetFromFuncNumb; // Number of the function to get the variable from
 
         double matThermalConductivity;
         int matThermalConductivityDefined;
@@ -131,23 +134,28 @@ extern "C" {
         double bloodPerfusion;
         char *bloodPerfusionFromFunc; // name of the function that will be used to calculate this value
         int bloodPerfusionType; // 1: double; 2: from function
+        int bloodPerfusionGetFromFuncNumb; // Number of the function to get the variable from
         
         double bloodDensity;
         char *bloodDensityFromFunc; // name of the function that will be used to calculate this value
         int bloodDensityType; // 1: double; 2: from function
+        int bloodDensityGetFromFuncNumb; // Number of the function to get the variable from
         
         double bloodSpecificHeat;
         char *bloodSpecificHeatFromFunc; // name of the function that will be used to calculate this value
         int bloodSpecificHeatType; // 1: double; 2: from function
+        int bloodSpecificHeatGetFromFuncNumb; // Number of the function to get the variable from
         
         double bloodTemperature;
         char *bloodTemperatureFromFunc; // name of the function that will be used to calculate this value
         int bloodTemperatureType; // 1: double; 2: from function
+        int bloodTemperatureGetFromFuncNumb; // Number of the function to get the variable from
         
         // data for the internal heat generation.
         double internalHeatGeneration;
-        char *internalHeatGenerationFunc; // name of the function that will be used to calculate this value
+        char *internalHeatGenerationFromFunc; // name of the function that will be used to calculate this value
         int internalHeatGenerationType; // 1: double; 2: from function
+        int internalHeatGenerationGetFromFuncNumb; // Number of the function to get the variable from
 
         double initialTemperature; // initial condition
         int initialTemperatureDefined; // required if solve = dynamic
@@ -197,30 +205,37 @@ extern "C" {
         double generalized_coefficient_b;
         char *generalized_coefficient_bFromFunc; // name of the function that will be used to calculate this value
         int generalized_coefficient_bType; // 1: double; 2: from function
+        int generalized_coefficient_bGetFromFuncNumb; // Number of the function to get the variable from; flags: -1: Doesn't use function; -2: Check other variables as well (e.g., w_b*rho_b*c_c)
         
         double generalized_diffusionCoeff;
         char *generalized_diffusionCoeffFromFunc; // name of the function that will be used to calculate this value
         int generalized_diffusionCoeffType; // 1: double; 2: from function
+        int generalized_diffusionCoeffGetFromFuncNumb; // Number of the function to get the variable from
         
         double generalized_relaxationTime;
         char *generalized_relaxationTimeFromFunc; // name of the function that will be used to calculate this value
         int generalized_relaxationTimeType; // 1: double; 2: from function
+        int generalized_relaxationTimeGetFromFuncNumb; // Number of the function to get the variable from
         
         double *generalized_vectorialSource;
-        char *generalized_vectorialSourceFromFunc; // name of the function that will be used to calculate this value
-        int generalized_vectorialSourceType; // 1: double; 2: from function
+        char **generalized_vectorialSourceFromFunc; // name of the function that will be used to calculate this value
+        int *generalized_vectorialSourceType; // 1: double; 2: from function
+        int *generalized_vectorialSourceGetFromFuncNumb; // Number of the function to get the variable from; flags: -1: Doesn't use function; -2: Check other variables as well (e.g., w_b*rho_b*c_c)
         
         double generalized_initialScalar;
         char *generalized_initialScalarFromFunc; // name of the function that will be used to calculate this value
         int generalized_initialScalarType; // 1: double; 2: from function
+        int generalized_initialGetFromFuncNumb; // Number of the function to get the variable from
         
         double generalized_sink_a;
         char *generalized_sink_aFromFunc; // name of the function that will be used to calculate this value
         int generalized_sink_aType; // 1: double; 2: from function
+        int generalized_sink_aGetFromFuncNumb; // Number of the function to get the variable from; flags: -1: Doesn't use function; -2: Check other variables as well (e.g., w_b*rho_b*c_c)
         
         double generalized_source;
         char *generalized_sourceFromFunc; // name of the function that will be used to calculate this value
         int generalized_sourceType; // 1: double; 2: from function
+        int generalized_sourceGetFromFuncNumb; // Number of the function to get the variable from; flags: -1: Doesn't use function; -2: Check other variables as well (e.g., w_b*rho_b*c_c)
         
         // These variables are flags used in the TLM model. They are set by
         // the code when testing the material's input.
@@ -249,28 +264,28 @@ extern "C" {
     void printfMatConfig(struct MaterialConfig *, struct Equation*);
     void printfNumberOfInputsMat(int **, int *);
 
-    void printfRelaxationTime(double *);
-    void printfCoefficient_b(double *);
-    void printfDiffusionCoeff(double *);
-    void printfSink_a(double *);
-    void printfSource(double*);
-    void printfVectorialSource(double*);
-    void printfInitialScalar(double*);
+    void printfRelaxationTime(double, char*, int);
+    void printfCoefficient_b(double, char*, int);
+    void printfDiffusionCoeff(double, char*, int);
+    void printfSink_a(double, char*, int);
+    void printfSource(double, char*, int);
+    void printfVectorialSource(double*, char**, int*);
+    void printfInitialScalar(double, char*, int);
 
-    void printfRelaxationTimeHeat(double *);
-    void printfMatDensity(double *);
-    void printfMatSpecificHeat(double *);
-    void printfMatThermalConductivity(double *);
-    void printfInitialTemperature(double *);
-    void printfSink_aHeat(double *);
-    void printfSourceHeat(double*);
-    void printfVectorialSourceHeat(double*);
+    void printfRelaxationTimeHeat(double, char*, int);
+    void printfMatDensity(double, char*, int);
+    void printfMatSpecificHeat(double, char*, int);
+    void printfMatThermalConductivity(double, char*, int);
+    void printfInitialTemperature(double, char*, int);
+    void printfSink_aHeat(double, char*, int);
+    void printfSourceHeat(double, char*, int);
+    void printfVectorialSourceHeat(double*, char**, int*);
 
-    void printfBloodPerfusion(double *);
-    void printfBloodDensity(double *);
-    void printfBloodSpecificHeat(double *);
-    void printfBloodTemperature(double *);
-    void printfInternalHeatGeneration(double *);
+    void printfBloodPerfusion(double, char*, int);
+    void printfBloodDensity(double, char*, int);
+    void printfBloodSpecificHeat(double, char*, int);
+    void printfBloodTemperature(double, char*, int);
+    void printfInternalHeatGeneration(double, char*, int);
 
 
 

@@ -143,26 +143,32 @@ extern "C" {
         int generalized_scalarDefined;
         char *generalized_scalarFromFunc; // name of the function that will be used to calculate this value
         int generalized_scalarType; // 1: double; 2: from function
+        int generalized_scalarGetFromFuncNumb; // Number of the function to get the variable from;
         
         double generalized_flux;
         int generalized_fluxDefined;
         char *generalized_fluxFromFunc; // name of the function that will be used to calculate this value
         int generalized_fluxType; // 1: double; 2: from function
+        int generalized_fluxGetFromFuncNumb; // Number of the function to get the variable from
         
         double generalized_convectionScalar;
         char *generalized_convectionScalarFromFunc; // name of the function that will be used to calculate this value
         int generalized_convectionScalarType; // 1: double; 2: from function
+        int generalized_convectionScalarGetFromFuncNumb; // Number of the function to get the variable from
         double generalized_convectionCoefficient;
         char *generalized_convectionCoefficientFromFunc; // name of the function that will be used to calculate this value
         int generalized_convectionCoefficientType; // 1: double; 2: from function
+        int generalized_convectionCoefficientGetFromFuncNumb; // Number of the function to get the variable from
         int generalized_convectionDefined;
         
         double generalized_radiationScalar;
         char *generalized_radiationScalarFromFunc; // name of the function that will be used to calculate this value
         int generalized_radiationScalarType; // 1: double; 2: from function
+        int generalized_radiationScalarGetFromFuncNumb; // Number of the function to get the variable from
         double generalized_radiationCoefficient;
         char *generalized_radiationCoefficientFromFunc; // name of the function that will be used to calculate this value
         int generalized_radiationCoefficientType; // 1: double; 2: from function
+        int generalized_radiationCoefficientGetFromFuncNumb; // Number of the function to get the variable from
         int generalized_radiationDefined;
     };
 
@@ -178,13 +184,13 @@ extern "C" {
     void printfBoundConfig(struct BoundaryConfig *, struct Equation *equation);
     void printfNumberOfInputsBound(int **, int *);
     void printfAdiabatic(void);
-    void printfScalarBoundary(double);
-    void printfFluxBoundary(double);
-    void printfConvection(double, double);
-    void printfTemperature(double);
-    void printfHeatFlux(double);
-    void printfConvectionHeat(double, double);
-    void printfRadiation(double, double);
+    void printfScalarBoundary(double, char*, int);
+    void printfFluxBoundary(double, char*, int);
+    void printfConvection(double, double, char*, char*, int, int);
+    void printfTemperature(double, char*, int);
+    void printfHeatFlux(double, char*, int);
+    void printfConvectionHeat(double, double, char*, char*, int, int);
+    void printfRadiation(double, double, char*, char*, int, int);
 
 
 #ifdef __cplusplus
