@@ -1064,7 +1064,7 @@ void printfInternalHeatGeneration(double inputDouble, char *inputChar, int input
  * testInputMaterial: tests if all the required inputs were read
  */
 unsigned int testInputMaterial(struct MaterialConfig * input,
-        struct Equation * equation, int id) {
+        struct Equation * equation, int id, struct FunctionConfig *Functions) {
 
     int errorFound = 0;
 
