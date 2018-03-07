@@ -40,6 +40,7 @@ extern "C" {
 #endif
 
 #include "libequationconfig.h"
+#include "libfunctionconfig.h"
 
     struct MaterialConfig // structure that contains the information for the material input
     {
@@ -225,7 +226,7 @@ extern "C" {
         double generalized_initialScalar;
         char *generalized_initialScalarFromFunc; // name of the function that will be used to calculate this value
         int generalized_initialScalarType; // 1: double; 2: from function
-        int generalized_initialGetFromFuncNumb; // Number of the function to get the variable from
+        int generalized_initialScalarGetFromFuncNumb; // Number of the function to get the variable from
         
         double generalized_sink_a;
         char *generalized_sink_aFromFunc; // name of the function that will be used to calculate this value
@@ -255,11 +256,11 @@ extern "C" {
 
     unsigned int setConfigurationMaterial(char *, struct MaterialConfig *, int *);
 
-    unsigned int testInputMaterial(struct MaterialConfig *, struct Equation *, int);
+    unsigned int testInputMaterial(struct MaterialConfig *, struct Equation *, int, struct FunctionConfig *, int);
 
-    void generalizeDiffusionInput(struct MaterialConfig *, enum solve);
-    void generalizeHeatInput(struct MaterialConfig *, enum solve);
-    void generalizePennesInput(struct MaterialConfig *, enum solve);
+    unsigned int generalizeDiffusionInput(struct MaterialConfig *, enum solve, struct FunctionConfig *, int, int);
+    unsigned int generalizeHeatInput(struct MaterialConfig *, enum solve, struct FunctionConfig *, int, int);
+    unsigned int generalizePennesInput(struct MaterialConfig *, enum solve, struct FunctionConfig *, int, int);
 
     void printfMatConfig(struct MaterialConfig *, struct Equation*);
     void printfNumberOfInputsMat(int **, int *);

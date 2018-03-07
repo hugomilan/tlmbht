@@ -539,7 +539,7 @@ unsigned int readFileTLM(FILE * f, struct dataForSimulation *newDataForSimu) {
                     newDataForSimu->functionInput = (struct FunctionConfig*)
                             realloc(newDataForSimu->functionInput,
                             sizeof (struct FunctionConfig)*
-                            (newDataForSimu->quantityOfSourcesRead + 1));
+                            (newDataForSimu->quantityOfFunctionsRead + 1));
                     // initiating the new boundary
                     previousReadingCode = errorTLMnumber;
                     if ((errorTLMnumber = 
@@ -631,6 +631,7 @@ unsigned int initiateAllConfigurationVarialbes(struct dataForSimulation *input) 
     input->quantityOfMaterialsRead = 0;
     input->quantityOfBoundariesRead = 0;
     input->quantityOfSourcesRead = 0;
+    input->quantityOfFunctionsRead = 0;
     input->numberOfAllocationsForVariables = 50;
     input->numberOfVariablesRead = 0;
     input->variableTable = (struct variableID*) malloc(input->numberOfAllocationsForVariables * sizeof (struct variableID));
@@ -834,6 +835,13 @@ void printfAllInputData(struct dataForSimulation * input) {
     //        printfSourceConfig(&input->sourceInput[i]);
     //        printf("\n");
     //    }
+    
+    printf("Input data for the Function configuration:\n");
+    for (int i = 0; i < input->quantityOfFunctionsRead; i++) {
+        printf("Function group %04d:\n", i + 1);
+        printfFuncConfig(&input->functionInput[i]);
+        printf("\n");
+    }
 
 }
 
@@ -974,7 +982,8 @@ unsigned int testAllConfigurationVarialbes(struct dataForSimulation *input) {
         }
 
         if (testInputMaterial(&input->materialInput[i - 1],
-                &input->equationInput[input->materialInput[i - 1].equationNumber], i) != 0) {
+                &input->equationInput[input->materialInput[i - 1].equationNumber], i,
+                input->functionInput, input->quantityOfFunctionsRead) != 0) {
             sendErrorCodeAndMessage(1872, &i, NULL, NULL, NULL);
             errorFound = 1;
         }
@@ -1005,7 +1014,8 @@ unsigned int testAllConfigurationVarialbes(struct dataForSimulation *input) {
 
         if (testInputBoundary(&input->boundaryInput[i - 1],
                 &input->equationInput[input->boundaryInput[i - 1].equationNumber], i,
-                &input->simulationInput) != 0) {
+                &input->simulationInput,
+                input->functionInput, input->quantityOfFunctionsRead) != 0) {
             sendErrorCodeAndMessage(1873, &i, NULL, NULL, NULL);
             errorFound = 1;
         }
@@ -1031,27 +1041,9 @@ unsigned int testAllConfigurationVarialbes(struct dataForSimulation *input) {
     // There is no error in not reading any function header.
     //
     // testing the function configurations read.
-    for (i = 1; i <= input->quantityOfBoundariesRead; i++) {
-
-        // We check if the name of the equation defined in the Material are found in the Equation configuration
-        if (input->boundaryInput[i - 1].equationNameDefined == 0) {
-            sendErrorCodeAndMessage(4443, &i, NULL, NULL, NULL);
-            errorFound = 1;
-            // if we did not find matching equation names we move to the next material number
-            continue;
-        }
-
-        // We check if the name of the equation defined in the Boundary was found in the Equation configuration
-        if (input->boundaryInput[i - 1].equationNumber == -1) {
-            sendErrorCodeAndMessage(4442, &i, input->boundaryInput[i - 1].equationName, NULL, NULL);
-            errorFound = 1;
-            continue;
-        }
-
-        if (testInputBoundary(&input->boundaryInput[i - 1],
-                &input->equationInput[input->boundaryInput[i - 1].equationNumber], i,
-                &input->simulationInput) != 0) {
-            sendErrorCodeAndMessage(1873, &i, NULL, NULL, NULL);
+    for (i = 1; i <= input->quantityOfFunctionsRead; i++) {
+        if (testInputFunction(input, i) != 0) {
+            sendErrorCodeAndMessage(1878, &i, NULL, NULL, NULL);
             errorFound = 1;
         }
     }
@@ -1061,6 +1053,157 @@ unsigned int testAllConfigurationVarialbes(struct dataForSimulation *input) {
 
 
 
+
+/*
+ * testInputFunction: tests if the function inputs are all OK
+ */
+unsigned int testInputFunction(struct dataForSimulation *input, int id) {
+    unsigned int errorTLMnumber = 0;
+    char *stringSearch = NULL, *stringSubstitute = NULL, *stringPointer = NULL;
+    int offset = 0;
+    
+
+    FILE *function;
+    char filename[] = "function00.c";
+    if (id > 9) {
+        filename[8] = (char) ((int) id / 10) + '0';
+        filename[9] = (char) id % 10 + '0';
+    } else {
+        filename[9] = (char) id + '0';
+    }
+    function = fopen(filename, "w");
+
+    // creating the file
+    // standard libraries
+    fprintf(function, "%s", input->functionInput[id - 1].filePart1);
+    // libraries from the user
+    for (int i = 0; i < input->functionInput[id - 1].quantityOfLibrariesInput; i++){
+        fprintf(function, "#include %s\n", input->functionInput[id - 1].library[i]);
+    }
+    fprintf(function, "%s", input->functionInput[id - 1].filePart2);
+    
+        
+    // allocating the variableID
+    input->functionInput[id - 1].inputVariables = (struct variableID*) malloc(
+            sizeof(struct variableID)*input->functionInput[id - 1].numberOfVariables );
+    
+    for (int i = 0; i < input->functionInput[id - 1].numberOfVariables; i++){
+        
+        if( (errorTLMnumber = createVariableNamesTable(
+                             input->functionInput[id - 1].inputVariablesName[i],
+                             input, &input->functionInput[id - 1].inputVariables[i])) != 0){
+            return errorTLMnumber;
+        }
+        
+        
+        
+        // DEBUG: show the name of the function
+//                printf("Variable name '%s', field name '%s', field ID %d, field variable ID %d, field location %d\n",
+//                        input->functionInput[id - 1].inputVariables[i].name,
+//                        input->functionInput[id - 1].inputVariables[i].fieldName,
+//                        input->functionInput[id - 1].inputVariables[i].fieldId,
+//                        input->functionInput[id - 1].inputVariables[i].fieldVariableId,
+//                        input->functionInput[id - 1].inputVariables[i].fieldLocation);
+        
+        
+        stringSearch = realloc(stringSearch, strlen(input->functionInput[id - 1].inputVariables[i].name)
+                                           + strlen(input->functionInput[id - 1].inputVariables[i].fieldName)
+                                           + 3);
+        strcpy(stringSearch, input->functionInput[id - 1].inputVariables[i].fieldName);
+        stringSearch[strlen(input->functionInput[id - 1].inputVariables[i].fieldName)] = ':';
+        stringSearch[strlen(input->functionInput[id - 1].inputVariables[i].fieldName) + 1] = ':';
+        strcpy(stringSearch + strlen(input->functionInput[id - 1].inputVariables[i].fieldName) + 2, input->functionInput[id - 1].inputVariables[i].name);
+        
+        
+        stringSubstitute = realloc(stringSubstitute, strlen(input->functionInput[id - 1].inputVariables[i].name)
+                                           + strlen(input->functionInput[id - 1].inputVariables[i].fieldName)
+                                           + 3);
+        strcpy(stringSubstitute, input->functionInput[id - 1].inputVariables[i].fieldName);
+        stringSubstitute[strlen(input->functionInput[id - 1].inputVariables[i].fieldName)] = '_';
+        stringSubstitute[strlen(input->functionInput[id - 1].inputVariables[i].fieldName) + 1] = '_';
+        strcpy(stringSubstitute + strlen(input->functionInput[id - 1].inputVariables[i].fieldName) + 2, input->functionInput[id - 1].inputVariables[i].name);
+        
+        
+        // DEBUG: show the names to search for and substitute
+        // printf("String search '%s'\n", stringSearch);
+        
+        // saving to file the part that reads inputs
+        fprintf(function, "double %s;\n", stringSubstitute);
+        fprintf(function, "sscanf(argv[%d], \"%%lf\", &%s);\n", i + 1, stringSubstitute);
+        
+        
+        // checking where this variable is in the expression
+        for (int j = 0; j < input->functionInput[id - 1].quantityOfLinesInExpression; j++){
+            offset = 0;
+            while((stringPointer = strstr(input->functionInput[id - 1].expression[j] + offset, stringSearch)) != NULL){
+                stringPointer[strlen(input->functionInput[id - 1].inputVariables[i].fieldName)] = '_';
+                stringPointer[strlen(input->functionInput[id - 1].inputVariables[i].fieldName) + 1] = '_';
+                
+                offset = strlen(input->functionInput[id - 1].expression[j]) - strlen(stringPointer) + strlen(stringSearch);
+                
+                // DEBUG: show the names to search for and substitute
+                printf("Show the changed expression '%s'\n", input->functionInput[id - 1].expression[j]);
+                
+                if (strlen(input->functionInput[id - 1].expression[j]) - offset < strlen(stringSearch)){
+                    break;
+                }
+            }
+        }
+    }
+    
+    // now that I have substituted all the input variables by their proper name, I can write
+    // the expression to file
+    if (input->functionInput[id - 1].quantityOfLinesInExpression == 1){
+        fprintf(function, "return %s;\n", input->functionInput[id - 1].expression[0]);
+    } else {
+        if (input->functionInput[id - 1].outputVariableNameDefined != 0){
+            fprintf(function, "double %s;\n", input->functionInput[id - 1].outputVariableName);
+            
+            for (int j = 0; j < input->functionInput[id - 1].quantityOfLinesInExpression; j++){
+                fprintf(function, "%s\n", input->functionInput[id - 1].expression[j]);
+            }
+            fprintf(function, "return %s;\n", input->functionInput[id - 1].outputVariableName);
+        } else {
+            errorTLMnumber = 540;
+            sendErrorCodeAndMessage(errorTLMnumber, &id, NULL, NULL, NULL);
+        }
+        
+    }
+    
+    // closing the file
+    fprintf(function, "%s", input->functionInput[id - 1].filePart_end1);
+    fclose(function);
+    
+    
+    // creating the command to compile the function
+    char *command;
+    command = (char*) malloc(sizeof(char)*( strlen(input->functionInput[id - 1].compileDirectives1)
+            + strlen(filename) + strlen(" -o \0") + strlen(filename) + 1  + 
+            strlen(input->functionInput[id - 1].compileDirectives2)) );
+    
+    strcpy(command, input->functionInput[id - 1].compileDirectives1);
+    strcpy(command + strlen(input->functionInput[id - 1].compileDirectives1), filename);
+    strcpy(command + strlen(input->functionInput[id - 1].compileDirectives1) + strlen(filename),
+            " -o \0");
+    strncpy(command + strlen(input->functionInput[id - 1].compileDirectives1) + strlen(filename) + 
+            strlen(" -o \0"), filename, 10);
+    strcpy(command + strlen(input->functionInput[id - 1].compileDirectives1) + strlen(filename) + 
+            strlen(" -o \0") + 10, input->functionInput[id - 1].compileDirectives2);
+            
+    system(command);
+    
+    free(stringSearch);
+    free(stringSubstitute);
+    
+    stringSearch = NULL;
+    stringSubstitute = NULL;
+
+    
+    
+    
+    
+    return errorTLMnumber;
+}
 
 /*
  * createVariableNamesTable: given a character name inputed on a FUNCTION, it finds
@@ -1076,7 +1219,7 @@ unsigned int createVariableNamesTable(char* input, struct dataForSimulation* sim
     // 9) save the variable id on output->fieldVariableID
     // 10) done
 
-    char* variableName, *foundColon;
+    char *foundColon;
     int lengthFieldName, lengthVariableName;
 
     // searchers for "::" in input
@@ -1091,10 +1234,11 @@ unsigned int createVariableNamesTable(char* input, struct dataForSimulation* sim
     lengthVariableName = strlen(foundColon) - 2; // -2 for "::"
     lengthFieldName = strlen(input) - strlen(foundColon);
 
-    output->fieldName = (char*) malloc(sizeof (char)*lengthFieldName);
-    output->name = (char*) malloc(sizeof (char)*lengthVariableName);
+    output->fieldName = (char*) malloc(sizeof (char)*(lengthFieldName + 1));
+    output->name = (char*) malloc(sizeof (char)*(lengthVariableName + 1));
 
     strncpy(output->fieldName, input, lengthFieldName);
+    output->fieldName[lengthFieldName] = '\0';
     strcpy(output->name, foundColon + 2);
 
     // now its time to go over all possible configuration to identify what 
@@ -1154,9 +1298,9 @@ unsigned int createVariableNamesTable(char* input, struct dataForSimulation* sim
 
                     if (compareCaseInsensitive(output->name, "time") == 0) {
                         output->fieldVariableId = 0;
-                    } else if (compareCaseInsensitive(output->name, "time-step") == 0) {
+                    } else if (compareCaseInsensitive(output->name, "time_step") == 0) {
                         output->fieldVariableId = 1;
-                    } else if (compareCaseInsensitive(output->name, "time-jump") == 0) {
+                    } else if (compareCaseInsensitive(output->name, "time_jump") == 0) {
                         output->fieldVariableId = 2;
                     } else if (compareCaseInsensitive(output->name, "final_time") == 0) {
                         output->fieldVariableId = 3;
@@ -1310,3 +1454,4 @@ unsigned int testRunSimulation(struct dataForSimulation *input) {
 
     return errorTLMnumber;
 }
+

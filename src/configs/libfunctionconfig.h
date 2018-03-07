@@ -64,7 +64,14 @@ struct FunctionConfig // structure that contains the information for the materia
         int bracketsUsed;
         int readingBrackets;
         
+        char *filePart1;
+        char *filePart2;
+        // file part that gets the inputs: sscanf(argv[i], "%lf", &variable_input);
+        char *filePart_end1;
         
+        char *compileDirectives1;
+        
+        char *compileDirectives2;
     };
 
 
@@ -73,6 +80,10 @@ struct FunctionConfig // structure that contains the information for the materia
     unsigned int terminateFunctionConfig(struct FunctionConfig *);
 
     unsigned int setConfigurationFunction(char *, struct FunctionConfig *, int *);
+    
+    unsigned int findFunctionName(char *, int *, struct FunctionConfig *, int);
+    
+    unsigned int printfFuncConfig(struct FunctionConfig *);
 
     //unsigned int testInputFunction(struct FunctionConfig *, struct Equation *, int);
 

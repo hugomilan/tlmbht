@@ -1894,7 +1894,7 @@ end_for_j_and_for_k_pyramid:
 unsigned int connectionsAndBoundariesPennesEigen(struct calculationTLMEigen *matrices,
         struct boundaryData* boundaries, struct connectionLeveln *connection,
         struct dataForSimulation *input, int id) {
-    // THIS IS A GOOD CANDIDATE FOR OPENMP PARALLELIZATION. ANALYSE AND DO IT
+    // TODO: THIS IS A GOOD CANDIDATE FOR OPENMP PARALLELIZATION. ANALYSE AND DO IT
     unsigned errorTLMnumber = 0;
 
     unsigned long long i, j1, offset, j2, j3, offset_TB, offset_heat_flux;

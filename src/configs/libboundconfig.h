@@ -42,6 +42,7 @@ extern "C" {
 
 #include "libequationconfig.h"
 #include "libsimuconfig.h"
+#include "libfunctionconfig.h"
 
     // structure that contains the information for the material input
 
@@ -179,7 +180,13 @@ extern "C" {
     unsigned int setConfigurationBoundary(char *, struct BoundaryConfig*, int*);
 
     unsigned int testInputBoundary(struct BoundaryConfig *, struct Equation *, int,
-            struct Simulation*);
+            struct Simulation*, struct FunctionConfig *, int);
+    
+    unsigned int generalizeDiffusionBoundary(struct BoundaryConfig *, struct FunctionConfig *, int, int);
+    unsigned int generalizeHeatBoundary(struct BoundaryConfig *, struct FunctionConfig *, int, int);
+    // unsigned int generalizePennesBoundary(struct BoundaryConfig *, enum solve, struct FunctionConfig *, int, int);
+    // types of boundaries for heat transfer and Pennes bioheat transfer are the same. Hence, we need only
+    // to test for heat transfer
 
     void printfBoundConfig(struct BoundaryConfig *, struct Equation *equation);
     void printfNumberOfInputsBound(int **, int *);

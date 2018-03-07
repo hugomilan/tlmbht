@@ -54,7 +54,7 @@ unsigned int intializeMaterialConfig(struct MaterialConfig * mat) {
     mat->equationNameDefined = 0;
 
     mat->equationNumber = -1;
-    
+
     mat->materialName = NULL;
     mat->materialNameDefined = 0;
 
@@ -82,11 +82,11 @@ unsigned int intializeMaterialConfig(struct MaterialConfig * mat) {
     mat->sink_a = 0;
     mat->sink_aFromFunc = NULL;
     mat->sink_aType = 1;
-    
+
     mat->source = 0;
     mat->sourceFromFunc = NULL;
     mat->sourceType = 1;
-    
+
     mat->vectorialSource = (double*) malloc(sizeof (double)*3);
     mat->vectorialSource[0] = 0;
     mat->vectorialSource[1] = 0;
@@ -103,7 +103,7 @@ unsigned int intializeMaterialConfig(struct MaterialConfig * mat) {
     mat->generalized_vectorialSourceGetFromFuncNumb[0] = -1;
     mat->generalized_vectorialSourceGetFromFuncNumb[1] = -1;
     mat->generalized_vectorialSourceGetFromFuncNumb[2] = -1;
-    
+
 
     mat->initialTemperature = 0;
     mat->initialTemperatureDefined = 0;
@@ -144,15 +144,15 @@ unsigned int intializeMaterialConfig(struct MaterialConfig * mat) {
     mat->bloodPerfusion = 0;
     mat->bloodPerfusionFromFunc = NULL;
     mat->bloodPerfusionType = 1;
-    
+
     mat->bloodDensity = 0;
     mat->bloodDensityFromFunc = NULL;
     mat->bloodDensityType = 1;
-    
+
     mat->bloodSpecificHeat = 0;
     mat->bloodSpecificHeatFromFunc = NULL;
     mat->bloodSpecificHeatType = 1;
-    
+
     mat->bloodTemperature = 0;
     mat->bloodTemperatureFromFunc = NULL;
     mat->bloodTemperatureType = 1;
@@ -179,10 +179,10 @@ unsigned int intializeMaterialConfig(struct MaterialConfig * mat) {
     mat->generalized_vectorialSourceType[0] = 1;
     mat->generalized_vectorialSourceType[1] = 1;
     mat->generalized_vectorialSourceType[2] = 1;
-    
+
     mat->generalized_coefficient_bFromFunc = NULL;
     mat->generalized_coefficient_bType = 1;
-        
+
     mat->generalized_diffusionCoeffFromFunc = NULL;
     mat->generalized_diffusionCoeffType = 1;
 
@@ -197,7 +197,7 @@ unsigned int intializeMaterialConfig(struct MaterialConfig * mat) {
 
     mat->generalized_sourceFromFunc = NULL;
     mat->generalized_sourceType = 1;
-    
+
     // TLM flags
     mat->numberOfStubs = 0;
 
@@ -210,7 +210,7 @@ unsigned int intializeMaterialConfig(struct MaterialConfig * mat) {
 unsigned int terminateMaterialConfig(struct MaterialConfig * mat) {
     free(mat->equationName);
     mat->equationName = NULL;
-    
+
     free(mat->materialName);
     mat->materialName = NULL;
 
@@ -219,101 +219,101 @@ unsigned int terminateMaterialConfig(struct MaterialConfig * mat) {
 
     free(mat->vectorialSource);
     mat->vectorialSource = NULL;
-    
+
     free(mat->diffusionCoeffFromFunc);
     mat->diffusionCoeffFromFunc = NULL;
-    
+
     free(mat->coefficient_bFromFunc);
     mat->coefficient_bFromFunc = NULL;
-    
+
     free(mat->relaxationTimeFromFunc);
     mat->relaxationTimeFromFunc = NULL;
-    
+
     free(mat->sink_aFromFunc);
     mat->sink_aFromFunc = NULL;
-    
+
     free(mat->sourceFromFunc);
     mat->sourceFromFunc = NULL;
-    
+
     free(mat->vectorialSourceFromFunc[0]);
     free(mat->vectorialSourceFromFunc[1]);
     free(mat->vectorialSourceFromFunc[2]);
-    
+
     mat->vectorialSourceFromFunc[0] = NULL;
     mat->vectorialSourceFromFunc[1] = NULL;
     mat->vectorialSourceFromFunc[2] = NULL;
-    
+
     free(mat->vectorialSourceFromFunc);
     mat->vectorialSourceFromFunc = NULL;
-    
+
     free(mat->vectorialSourceType);
     mat->vectorialSourceType = NULL;
-    
+
     free(mat->generalized_vectorialSourceGetFromFuncNumb);
     mat->generalized_vectorialSourceGetFromFuncNumb = NULL;
-    
+
     free(mat->initialTemperatureFromFunc);
     mat->initialTemperatureFromFunc = NULL;
-    
+
     free(mat->matDensityFromFunc);
     mat->matDensityFromFunc = NULL;
-    
+
     free(mat->matSpecificHeatFromFunc);
     mat->matSpecificHeatFromFunc = NULL;
-    
+
     free(mat->matThermalConductivityFromFunc);
     mat->matThermalConductivityFromFunc = NULL;
-    
+
     free(mat->bloodPerfusionFromFunc);
     mat->bloodPerfusionFromFunc = NULL;
-    
+
     free(mat->bloodDensityFromFunc);
     mat->bloodDensityFromFunc = NULL;
-    
+
     free(mat->bloodSpecificHeatFromFunc);
     mat->bloodSpecificHeatFromFunc = NULL;
-    
+
     free(mat->bloodTemperatureFromFunc);
     mat->bloodTemperatureFromFunc = NULL;
-    
+
     free(mat->internalHeatGenerationFromFunc);
     mat->internalHeatGenerationFromFunc = NULL;
-    
+
     free(mat->initialTemperatureFromFunc);
     mat->initialTemperatureFromFunc = NULL;
-    
+
     free(mat->generalized_vectorialSourceFromFunc[0]);
     free(mat->generalized_vectorialSourceFromFunc[1]);
     free(mat->generalized_vectorialSourceFromFunc[2]);
-    
+
     mat->generalized_vectorialSourceFromFunc[0] = NULL;
     mat->generalized_vectorialSourceFromFunc[1] = NULL;
     mat->generalized_vectorialSourceFromFunc[2] = NULL;
-    
+
     free(mat->generalized_vectorialSourceFromFunc);
     mat->generalized_vectorialSourceFromFunc = NULL;
-    
+
     free(mat->generalized_vectorialSourceType);
     mat->generalized_vectorialSourceType = NULL;
-    
+
     free(mat->generalized_coefficient_bFromFunc);
     mat->generalized_coefficient_bFromFunc = NULL;
-    
+
     free(mat->generalized_diffusionCoeffFromFunc);
     mat->generalized_diffusionCoeffFromFunc = NULL;
-    
+
     free(mat->generalized_relaxationTimeFromFunc);
     mat->generalized_relaxationTimeFromFunc = NULL;
-    
+
     free(mat->generalized_initialScalarFromFunc);
     mat->generalized_initialScalarFromFunc = NULL;
-    
+
     free(mat->generalized_sink_aFromFunc);
     mat->generalized_sink_aFromFunc = NULL;
-    
+
     free(mat->generalized_sourceFromFunc);
     mat->generalized_sourceFromFunc = NULL;
-    
+
     return 0;
 }
 
@@ -372,11 +372,11 @@ unsigned int setConfigurationMaterial(char * input, struct MaterialConfig * matI
         if ((errorTLMnumber = getBetweenEqualAndSemicolon(input)) != 0)
             return errorTLMnumber;
 
-        if (sscanf(input, "%lf", &matInput->diffusionCoeff) == 0){
+        if (sscanf(input, "%lf", &matInput->diffusionCoeff) == 0) {
             // if sscanf returns zero, then it was not able to obtain the 
             // output. So, we assume that is a function
             removeBlankSpacesBeforeAndAfter(input);
-            matInput->diffusionCoeffFromFunc = (char*) malloc(sizeof(char)*(strlen(input) + 1));
+            matInput->diffusionCoeffFromFunc = (char*) malloc(sizeof (char)*(strlen(input) + 1));
             strcpy(matInput->diffusionCoeffFromFunc, input);
             matInput->diffusionCoeffType = 2;
         } else {
@@ -388,27 +388,27 @@ unsigned int setConfigurationMaterial(char * input, struct MaterialConfig * matI
         if ((errorTLMnumber = getBetweenEqualAndSemicolon(input)) != 0)
             return errorTLMnumber;
 
-        if (sscanf(input, "%lf", &matInput->coefficient_b) == 0){
+        if (sscanf(input, "%lf", &matInput->coefficient_b) == 0) {
             // if sscanf returns zero, then it was not able to obtain the 
             // output. So, we assume that is a function
             removeBlankSpacesBeforeAndAfter(input);
-            matInput->coefficient_bFromFunc = (char*) malloc(sizeof(char)*(strlen(input) + 1));
+            matInput->coefficient_bFromFunc = (char*) malloc(sizeof (char)*(strlen(input) + 1));
             strcpy(matInput->coefficient_bFromFunc, input);
             matInput->coefficient_bType = 2;
         } else {
             matInput->coefficient_bType = 1;
         }
 
-    } else if (compareCaseInsensitive(input, "relaxation time") == 0 || 
+    } else if (compareCaseInsensitive(input, "relaxation time") == 0 ||
             compareCaseInsensitive(input, "thermal relaxation time") == 0) {
         if ((errorTLMnumber = getBetweenEqualAndSemicolon(input)) != 0)
             return errorTLMnumber;
 
-        if (sscanf(input, "%lf", &matInput->relaxationTime) == 0){
+        if (sscanf(input, "%lf", &matInput->relaxationTime) == 0) {
             // if sscanf returns zero, then it was not able to obtain the 
             // output. So, we assume that is a function
             removeBlankSpacesBeforeAndAfter(input);
-            matInput->relaxationTimeFromFunc = (char*) malloc(sizeof(char)*(strlen(input) + 1));
+            matInput->relaxationTimeFromFunc = (char*) malloc(sizeof (char)*(strlen(input) + 1));
             strcpy(matInput->relaxationTimeFromFunc, input);
             matInput->relaxationTimeType = 2;
         } else {
@@ -420,12 +420,12 @@ unsigned int setConfigurationMaterial(char * input, struct MaterialConfig * matI
         if ((errorTLMnumber = getBetweenEqualAndSemicolon(input)) != 0)
             return errorTLMnumber;
 
-        
-        if (sscanf(input, "%lf", &matInput->sink_a) == 0){
+
+        if (sscanf(input, "%lf", &matInput->sink_a) == 0) {
             // if sscanf returns zero, then it was not able to obtain the 
             // output. So, we assume that is a function
             removeBlankSpacesBeforeAndAfter(input);
-            matInput->sink_aFromFunc = (char*) malloc(sizeof(char)*(strlen(input) + 1));
+            matInput->sink_aFromFunc = (char*) malloc(sizeof (char)*(strlen(input) + 1));
             strcpy(matInput->sink_aFromFunc, input);
             matInput->sink_aType = 2;
         } else {
@@ -436,11 +436,11 @@ unsigned int setConfigurationMaterial(char * input, struct MaterialConfig * matI
         if ((errorTLMnumber = getBetweenEqualAndSemicolon(input)) != 0)
             return errorTLMnumber;
 
-        if (sscanf(input, "%lf", &matInput->source) == 0){
+        if (sscanf(input, "%lf", &matInput->source) == 0) {
             // if sscanf returns zero, then it was not able to obtain the 
             // output. So, we assume that is a function
             removeBlankSpacesBeforeAndAfter(input);
-            matInput->sourceFromFunc = (char*) malloc(sizeof(char)*(strlen(input) + 1));
+            matInput->sourceFromFunc = (char*) malloc(sizeof (char)*(strlen(input) + 1));
             strcpy(matInput->sourceFromFunc, input);
             matInput->sourceType = 2;
         } else {
@@ -455,12 +455,12 @@ unsigned int setConfigurationMaterial(char * input, struct MaterialConfig * matI
     } else if (compareCaseInsensitive(input, "initial scalar") == 0) {
         if ((errorTLMnumber = getBetweenEqualAndSemicolon(input)) != 0)
             return errorTLMnumber;
-        
-        if (sscanf(input, "%lf", &matInput->initialScalar) == 0){
+
+        if (sscanf(input, "%lf", &matInput->initialScalar) == 0) {
             // if sscanf returns zero, then it was not able to obtain the 
             // output. So, we assume that is a function
             removeBlankSpacesBeforeAndAfter(input);
-            matInput->initialScalarFromFunc = (char*) malloc(sizeof(char)*(strlen(input) + 1));
+            matInput->initialScalarFromFunc = (char*) malloc(sizeof (char)*(strlen(input) + 1));
             strcpy(matInput->initialScalarFromFunc, input);
             matInput->initialScalarType = 2;
         } else {
@@ -472,11 +472,11 @@ unsigned int setConfigurationMaterial(char * input, struct MaterialConfig * matI
         if ((errorTLMnumber = getBetweenEqualAndSemicolon(input)) != 0)
             return errorTLMnumber;
 
-        if (sscanf(input, "%lf", &matInput->matDensity) == 0){
+        if (sscanf(input, "%lf", &matInput->matDensity) == 0) {
             // if sscanf returns zero, then it was not able to obtain the 
             // output. So, we assume that is a function
             removeBlankSpacesBeforeAndAfter(input);
-            matInput->matDensityFromFunc = (char*) malloc(sizeof(char)*(strlen(input) + 1));
+            matInput->matDensityFromFunc = (char*) malloc(sizeof (char)*(strlen(input) + 1));
             strcpy(matInput->matDensityFromFunc, input);
             matInput->matDensityType = 2;
         } else {
@@ -488,11 +488,11 @@ unsigned int setConfigurationMaterial(char * input, struct MaterialConfig * matI
         if ((errorTLMnumber = getBetweenEqualAndSemicolon(input)) != 0)
             return errorTLMnumber;
 
-        if (sscanf(input, "%lf", &matInput->matSpecificHeat) == 0){
+        if (sscanf(input, "%lf", &matInput->matSpecificHeat) == 0) {
             // if sscanf returns zero, then it was not able to obtain the 
             // output. So, we assume that is a function
             removeBlankSpacesBeforeAndAfter(input);
-            matInput->matSpecificHeatFromFunc = (char*) malloc(sizeof(char)*(strlen(input) + 1));
+            matInput->matSpecificHeatFromFunc = (char*) malloc(sizeof (char)*(strlen(input) + 1));
             strcpy(matInput->matSpecificHeatFromFunc, input);
             matInput->matSpecificHeatType = 2;
         } else {
@@ -504,12 +504,12 @@ unsigned int setConfigurationMaterial(char * input, struct MaterialConfig * matI
         if ((errorTLMnumber = getBetweenEqualAndSemicolon(input)) != 0)
             return errorTLMnumber;
 
-       
-        if (sscanf(input, "%lf", &matInput->matThermalConductivity) == 0){
+
+        if (sscanf(input, "%lf", &matInput->matThermalConductivity) == 0) {
             // if sscanf returns zero, then it was not able to obtain the 
             // output. So, we assume that is a function
             removeBlankSpacesBeforeAndAfter(input);
-            matInput->matThermalConductivityFromFunc = (char*) malloc(sizeof(char)*(strlen(input) + 1));
+            matInput->matThermalConductivityFromFunc = (char*) malloc(sizeof (char)*(strlen(input) + 1));
             strcpy(matInput->matThermalConductivityFromFunc, input);
             matInput->matThermalConductivityType = 2;
         } else {
@@ -521,11 +521,11 @@ unsigned int setConfigurationMaterial(char * input, struct MaterialConfig * matI
         if ((errorTLMnumber = getBetweenEqualAndSemicolon(input)) != 0)
             return errorTLMnumber;
 
-        if (sscanf(input, "%lf", &matInput->initialTemperature) == 0){
+        if (sscanf(input, "%lf", &matInput->initialTemperature) == 0) {
             // if sscanf returns zero, then it was not able to obtain the 
             // output. So, we assume that is a function
             removeBlankSpacesBeforeAndAfter(input);
-            matInput->initialTemperatureFromFunc = (char*) malloc(sizeof(char)*(strlen(input) + 1));
+            matInput->initialTemperatureFromFunc = (char*) malloc(sizeof (char)*(strlen(input) + 1));
             strcpy(matInput->initialTemperatureFromFunc, input);
             matInput->initialTemperatureType = 2;
         } else {
@@ -537,11 +537,11 @@ unsigned int setConfigurationMaterial(char * input, struct MaterialConfig * matI
         if ((errorTLMnumber = getBetweenEqualAndSemicolon(input)) != 0)
             return errorTLMnumber;
 
-        if (sscanf(input, "%lf", &matInput->bloodPerfusion) == 0){
+        if (sscanf(input, "%lf", &matInput->bloodPerfusion) == 0) {
             // if sscanf returns zero, then it was not able to obtain the 
             // output. So, we assume that is a function
             removeBlankSpacesBeforeAndAfter(input);
-            matInput->bloodPerfusionFromFunc = (char*) malloc(sizeof(char)*(strlen(input) + 1));
+            matInput->bloodPerfusionFromFunc = (char*) malloc(sizeof (char)*(strlen(input) + 1));
             strcpy(matInput->bloodPerfusionFromFunc, input);
             matInput->bloodPerfusionType = 2;
         } else {
@@ -552,11 +552,11 @@ unsigned int setConfigurationMaterial(char * input, struct MaterialConfig * matI
         if ((errorTLMnumber = getBetweenEqualAndSemicolon(input)) != 0)
             return errorTLMnumber;
 
-        if (sscanf(input, "%lf", &matInput->bloodDensity) == 0){
+        if (sscanf(input, "%lf", &matInput->bloodDensity) == 0) {
             // if sscanf returns zero, then it was not able to obtain the 
             // output. So, we assume that is a function
             removeBlankSpacesBeforeAndAfter(input);
-            matInput->bloodDensityFromFunc = (char*) malloc(sizeof(char)*(strlen(input) + 1));
+            matInput->bloodDensityFromFunc = (char*) malloc(sizeof (char)*(strlen(input) + 1));
             strcpy(matInput->bloodDensityFromFunc, input);
             matInput->bloodDensityType = 2;
         } else {
@@ -567,11 +567,11 @@ unsigned int setConfigurationMaterial(char * input, struct MaterialConfig * matI
         if ((errorTLMnumber = getBetweenEqualAndSemicolon(input)) != 0)
             return errorTLMnumber;
 
-        if (sscanf(input, "%lf", &matInput->bloodSpecificHeat) == 0){
+        if (sscanf(input, "%lf", &matInput->bloodSpecificHeat) == 0) {
             // if sscanf returns zero, then it was not able to obtain the 
             // output. So, we assume that is a function
             removeBlankSpacesBeforeAndAfter(input);
-            matInput->bloodSpecificHeatFromFunc = (char*) malloc(sizeof(char)*(strlen(input) + 1));
+            matInput->bloodSpecificHeatFromFunc = (char*) malloc(sizeof (char)*(strlen(input) + 1));
             strcpy(matInput->bloodSpecificHeatFromFunc, input);
             matInput->bloodSpecificHeatType = 2;
         } else {
@@ -582,11 +582,11 @@ unsigned int setConfigurationMaterial(char * input, struct MaterialConfig * matI
         if ((errorTLMnumber = getBetweenEqualAndSemicolon(input)) != 0)
             return errorTLMnumber;
 
-        if (sscanf(input, "%lf", &matInput->bloodTemperature) == 0){
+        if (sscanf(input, "%lf", &matInput->bloodTemperature) == 0) {
             // if sscanf returns zero, then it was not able to obtain the 
             // output. So, we assume that is a function
             removeBlankSpacesBeforeAndAfter(input);
-            matInput->bloodTemperatureFromFunc = (char*) malloc(sizeof(char)*(strlen(input) + 1));
+            matInput->bloodTemperatureFromFunc = (char*) malloc(sizeof (char)*(strlen(input) + 1));
             strcpy(matInput->bloodTemperatureFromFunc, input);
             matInput->bloodTemperatureType = 2;
         } else {
@@ -597,11 +597,11 @@ unsigned int setConfigurationMaterial(char * input, struct MaterialConfig * matI
         if ((errorTLMnumber = getBetweenEqualAndSemicolon(input)) != 0)
             return errorTLMnumber;
 
-        if (sscanf(input, "%lf", &matInput->internalHeatGeneration) == 0){
+        if (sscanf(input, "%lf", &matInput->internalHeatGeneration) == 0) {
             // if sscanf returns zero, then it was not able to obtain the 
             // output. So, we assume that is a function
             removeBlankSpacesBeforeAndAfter(input);
-            matInput->internalHeatGenerationFromFunc = (char*) malloc(sizeof(char)*(strlen(input) + 1));
+            matInput->internalHeatGenerationFromFunc = (char*) malloc(sizeof (char)*(strlen(input) + 1));
             strcpy(matInput->internalHeatGenerationFromFunc, input);
             matInput->internalHeatGenerationType = 2;
         } else {
@@ -682,7 +682,7 @@ void printfMatConfig(struct MaterialConfig *input, struct Equation *equation) {
             printfMatSpecificHeat(input->matSpecificHeat, input->matSpecificHeatFromFunc, input->matSpecificHeatType);
             printfMatThermalConductivity(input->matThermalConductivity, input->matThermalConductivityFromFunc, input->matThermalConductivityType);
 
-            printfSourceHeat(input->source, input->sourceFromFunc, input->sourceType);            
+            printfSourceHeat(input->source, input->sourceFromFunc, input->sourceType);
             printfInternalHeatGeneration(input->internalHeatGeneration, input->internalHeatGenerationFromFunc, input->internalHeatGenerationType);
 
             printfVectorialSourceHeat(input->vectorialSource, input->vectorialSourceFromFunc, input->vectorialSourceType);
@@ -727,11 +727,10 @@ void printfNumberOfInputsMat(int ** input, int * number) {
  * printfRelaxationTime: prints the relaxation time value
  */
 void printfRelaxationTime(double inputDouble, char *inputChar, int inputType) {
-    
-    if (inputType == 1){
+
+    if (inputType == 1) {
         printf("Relaxation time with value of %9.4e.\n", inputDouble);
-    }
-    else if (inputType == 2){
+    } else if (inputType == 2) {
         printf("Relaxation time calculated from function %s.\n", inputChar);
     } else {
         printf("BUG: Unexpected behavior\n");
@@ -742,11 +741,10 @@ void printfRelaxationTime(double inputDouble, char *inputChar, int inputType) {
  * printfCoefficient_b: prints the coefficient b value
  */
 void printfCoefficient_b(double inputDouble, char *inputChar, int inputType) {
-    
-    if (inputType == 1){
+
+    if (inputType == 1) {
         printf("Coefficient b with value of %9.4e.\n", inputDouble);
-    }
-    else if (inputType == 2){
+    } else if (inputType == 2) {
         printf("Coefficient b calculated from function %s.\n", inputChar);
     } else {
         printf("BUG: Unexpected behavior\n");
@@ -757,11 +755,10 @@ void printfCoefficient_b(double inputDouble, char *inputChar, int inputType) {
  * printfDiffusionCoeff: prints the diffusion coefficient value
  */
 void printfDiffusionCoeff(double inputDouble, char *inputChar, int inputType) {
-    
-    if (inputType == 1){
+
+    if (inputType == 1) {
         printf("Diffusion coefficient with value of %9.4e.\n", inputDouble);
-    }
-    else if (inputType == 2){
+    } else if (inputType == 2) {
         printf("Diffusion coefficient calculated from function %s.\n", inputChar);
     } else {
         printf("BUG: Unexpected behavior\n");
@@ -772,11 +769,10 @@ void printfDiffusionCoeff(double inputDouble, char *inputChar, int inputType) {
  * printfSink_a: prints the sink 'a' value
  */
 void printfSink_a(double inputDouble, char *inputChar, int inputType) {
-    
-    if (inputType == 1){
+
+    if (inputType == 1) {
         printf("Sink 'a' with value of %9.4e.\n", inputDouble);
-    }
-    else if (inputType == 2){
+    } else if (inputType == 2) {
         printf("Sink 'a' calculated from function %s.\n", inputChar);
     } else {
         printf("BUG: Unexpected behavior\n");
@@ -787,11 +783,10 @@ void printfSink_a(double inputDouble, char *inputChar, int inputType) {
  * printfSource: prints the source value
  */
 void printfSource(double inputDouble, char *inputChar, int inputType) {
-    
-    if (inputType == 1){
+
+    if (inputType == 1) {
         printf("Source with value of %9.4e.\n", inputDouble);
-    }
-    else if (inputType == 2){
+    } else if (inputType == 2) {
         printf("Source calculated from function %s.\n", inputChar);
     } else {
         printf("BUG: Unexpected behavior\n");
@@ -803,28 +798,25 @@ void printfSource(double inputDouble, char *inputChar, int inputType) {
  */
 void printfVectorialSource(double *inputDouble, char **inputChar, int *inputType) {
     printf("Vectorial source: [");
-    if (inputType[0] == 1){
+    if (inputType[0] == 1) {
         printf("%9.4e, ", inputDouble[0]);
-    }
-    else if (inputType[0] == 2){
+    } else if (inputType[0] == 2) {
         printf("from function %s, ", inputChar[0]);
     } else {
         printf("BUG: Unexpected behavior\n");
     }
-    
-    if (inputType[1] == 1){
+
+    if (inputType[1] == 1) {
         printf("%9.4e, ", inputDouble[1]);
-    }
-    else if (inputType[1] == 2){
+    } else if (inputType[1] == 2) {
         printf("from function %s, ", inputChar[1]);
     } else {
         printf("BUG: Unexpected behavior\n");
     }
-    
-    if (inputType[2] == 1){
+
+    if (inputType[2] == 1) {
         printf("%9.4e\n", inputDouble[2]);
-    }
-    else if (inputType[2] == 2){
+    } else if (inputType[2] == 2) {
         printf("from function %s]\n", inputChar[2]);
     } else {
         printf("BUG: Unexpected behavior\n");
@@ -835,11 +827,10 @@ void printfVectorialSource(double *inputDouble, char **inputChar, int *inputType
  * printfInitialScalar: prints the initial scalar value
  */
 void printfInitialScalar(double inputDouble, char *inputChar, int inputType) {
-    
-    if (inputType == 1){
+
+    if (inputType == 1) {
         printf("Initial scalar with value of %9.4e.\n", inputDouble);
-    }
-    else if (inputType == 2){
+    } else if (inputType == 2) {
         printf("Initial scalar calculated from function %s.\n", inputChar);
     } else {
         printf("BUG: Unexpected behavior\n");
@@ -850,11 +841,10 @@ void printfInitialScalar(double inputDouble, char *inputChar, int inputType) {
  * printfRelaxationTimeHeat: prints the relaxation time value
  */
 void printfRelaxationTimeHeat(double inputDouble, char *inputChar, int inputType) {
-    
-    if (inputType == 1){
+
+    if (inputType == 1) {
         printf("Relaxation time with value of %9.4e s.\n", inputDouble);
-    }
-    else if (inputType == 2){
+    } else if (inputType == 2) {
         printf("Relaxation time calculated from function %s.\n", inputChar);
     } else {
         printf("BUG: Unexpected behavior\n");
@@ -865,11 +855,10 @@ void printfRelaxationTimeHeat(double inputDouble, char *inputChar, int inputType
  * printfMatDensity: prints the density value
  */
 void printfMatDensity(double inputDouble, char *inputChar, int inputType) {
-    
-    if (inputType == 1){
+
+    if (inputType == 1) {
         printf("Density with value of %9.4e kg/m3.\n", inputDouble);
-    }
-    else if (inputType == 2){
+    } else if (inputType == 2) {
         printf("Density calculated from function %s.\n", inputChar);
     } else {
         printf("BUG: Unexpected behavior\n");
@@ -880,11 +869,10 @@ void printfMatDensity(double inputDouble, char *inputChar, int inputType) {
  * printfMatSpecificHeat: prints the specific heat value
  */
 void printfMatSpecificHeat(double inputDouble, char *inputChar, int inputType) {
-    
-    if (inputType == 1){
+
+    if (inputType == 1) {
         printf("Specific heat with value of %9.4e J/(K-kg).\n", inputDouble);
-    }
-    else if (inputType == 2){
+    } else if (inputType == 2) {
         printf("Specific heat calculated from function %s.\n", inputChar);
     } else {
         printf("BUG: Unexpected behavior\n");
@@ -896,11 +884,10 @@ void printfMatSpecificHeat(double inputDouble, char *inputChar, int inputType) {
  * printfMatThermalConductivity: prints the thermal conductivity value
  */
 void printfMatThermalConductivity(double inputDouble, char *inputChar, int inputType) {
-    
-    if (inputType == 1){
+
+    if (inputType == 1) {
         printf("Thermal conductivity with value of %9.4e W/(K-m).\n", inputDouble);
-    }
-    else if (inputType == 2){
+    } else if (inputType == 2) {
         printf("Thermal conductivity calculated from function %s.\n", inputChar);
     } else {
         printf("BUG: Unexpected behavior\n");
@@ -911,11 +898,10 @@ void printfMatThermalConductivity(double inputDouble, char *inputChar, int input
  * printfInitialTemperature: prints the initial temperature value
  */
 void printfInitialTemperature(double inputDouble, char *inputChar, int inputType) {
-    
-    if (inputType == 1){
+
+    if (inputType == 1) {
         printf("Initial temperature with value of %9.4e oC.\n", inputDouble);
-    }
-    else if (inputType == 2){
+    } else if (inputType == 2) {
         printf("Initial temperature calculated from function %s.\n", inputChar);
     } else {
         printf("BUG: Unexpected behavior\n");
@@ -926,11 +912,10 @@ void printfInitialTemperature(double inputDouble, char *inputChar, int inputType
  * printfSink_aHeat: prints the sink 'a' value
  */
 void printfSink_aHeat(double inputDouble, char *inputChar, int inputType) {
-    
-    if (inputType == 1){
+
+    if (inputType == 1) {
         printf("Sink 'a' with value of %9.4e J/(m3-s-K).\n", inputDouble);
-    }
-    else if (inputType == 2){
+    } else if (inputType == 2) {
         printf("Sink 'a' calculated from function %s.\n", inputChar);
     } else {
         printf("BUG: Unexpected behavior\n");
@@ -941,11 +926,10 @@ void printfSink_aHeat(double inputDouble, char *inputChar, int inputType) {
  * printfSourceHeat: prints the heat source value
  */
 void printfSourceHeat(double inputDouble, char *inputChar, int inputType) {
-    
-    if (inputType == 1){
+
+    if (inputType == 1) {
         printf("Heat source with value of %9.4e W/m3.\n", inputDouble);
-    }
-    else if (inputType == 2){
+    } else if (inputType == 2) {
         printf("Heat source calculated from function %s.\n", inputChar);
     } else {
         printf("BUG: Unexpected behavior\n");
@@ -957,28 +941,25 @@ void printfSourceHeat(double inputDouble, char *inputChar, int inputType) {
  */
 void printfVectorialSourceHeat(double *inputDouble, char **inputChar, int *inputType) {
     printf("Vectorial source (W/m2): [");
-    if (inputType[0] == 1){
+    if (inputType[0] == 1) {
         printf("%9.4e, ", inputDouble[0]);
-    }
-    else if (inputType[0] == 2){
+    } else if (inputType[0] == 2) {
         printf("from function %s, ", inputChar[0]);
     } else {
         printf("BUG: Unexpected behavior\n");
     }
-    
-    if (inputType[1] == 1){
+
+    if (inputType[1] == 1) {
         printf("%9.4e, ", inputDouble[1]);
-    }
-    else if (inputType[1] == 2){
+    } else if (inputType[1] == 2) {
         printf("from function %s, ", inputChar[1]);
     } else {
         printf("BUG: Unexpected behavior\n");
     }
-    
-    if (inputType[2] == 1){
+
+    if (inputType[2] == 1) {
         printf("%9.4e\n", inputDouble[2]);
-    }
-    else if (inputType[2] == 2){
+    } else if (inputType[2] == 2) {
         printf("from function %s]\n", inputChar[2]);
     } else {
         printf("BUG: Unexpected behavior\n");
@@ -989,11 +970,10 @@ void printfVectorialSourceHeat(double *inputDouble, char **inputChar, int *input
  * printfBloodPerfusion: prints the blood perfusion value
  */
 void printfBloodPerfusion(double inputDouble, char *inputChar, int inputType) {
-    
-    if (inputType == 1){
+
+    if (inputType == 1) {
         printf("Blood perfusion with value of %9.4e m3/(m3-s).\n", inputDouble);
-    }
-    else if (inputType == 2){
+    } else if (inputType == 2) {
         printf("Blood perfusion calculated from function %s.\n", inputChar);
     } else {
         printf("BUG: Unexpected behavior\n");
@@ -1004,11 +984,10 @@ void printfBloodPerfusion(double inputDouble, char *inputChar, int inputType) {
  * printfBloodPerfusion: prints the blood perfusion value
  */
 void printfBloodDensity(double inputDouble, char *inputChar, int inputType) {
-    
-    if (inputType == 1){
+
+    if (inputType == 1) {
         printf("Blood density with value of %9.4e kg/m3.\n", inputDouble);
-    }
-    else if (inputType == 2){
+    } else if (inputType == 2) {
         printf("Blood density calculated from function %s.\n", inputChar);
     } else {
         printf("BUG: Unexpected behavior\n");
@@ -1019,11 +998,10 @@ void printfBloodDensity(double inputDouble, char *inputChar, int inputType) {
  * printfBloodPerfusion: prints the blood perfusion value
  */
 void printfBloodSpecificHeat(double inputDouble, char *inputChar, int inputType) {
-    
-    if (inputType == 1){
+
+    if (inputType == 1) {
         printf("Blood specific heat with value of %9.4e J/(K-kg).\n", inputDouble);
-    }
-    else if (inputType == 2){
+    } else if (inputType == 2) {
         printf("Blood specific heat calculated from function %s.\n", inputChar);
     } else {
         printf("BUG: Unexpected behavior\n");
@@ -1034,11 +1012,10 @@ void printfBloodSpecificHeat(double inputDouble, char *inputChar, int inputType)
  * printfBloodTemperature: prints the blood temperature value
  */
 void printfBloodTemperature(double inputDouble, char *inputChar, int inputType) {
-    
-    if (inputType == 1){
+
+    if (inputType == 1) {
         printf("Blood temperature with value of %9.4e oC.\n", inputDouble);
-    }
-    else if (inputType == 2){
+    } else if (inputType == 2) {
         printf("Blood temperature calculated from function %s.\n", inputChar);
     } else {
         printf("BUG: Unexpected behavior\n");
@@ -1049,11 +1026,10 @@ void printfBloodTemperature(double inputDouble, char *inputChar, int inputType) 
  * printfInternalHeatGeneration: prints the internal heat generation value
  */
 void printfInternalHeatGeneration(double inputDouble, char *inputChar, int inputType) {
-    
-    if (inputType == 1){
+
+    if (inputType == 1) {
         printf("Internal heat generation with value of %9.4e W/m3.\n", inputDouble);
-    }
-    else if (inputType == 2){
+    } else if (inputType == 2) {
         printf("Internal heat generation calculated from function %s.\n", inputChar);
     } else {
         printf("BUG: Unexpected behavior\n");
@@ -1064,7 +1040,7 @@ void printfInternalHeatGeneration(double inputDouble, char *inputChar, int input
  * testInputMaterial: tests if all the required inputs were read
  */
 unsigned int testInputMaterial(struct MaterialConfig * input,
-        struct Equation * equation, int id, struct FunctionConfig *Functions) {
+        struct Equation * equation, int id, struct FunctionConfig *Functions, int numberOfFunctions) {
 
     int errorFound = 0;
 
@@ -1087,7 +1063,10 @@ unsigned int testInputMaterial(struct MaterialConfig * input,
                 errorFound = 1;
             }
 
-            generalizeDiffusionInput(input, equation[input->equationNumber].Solv);
+            if (generalizeDiffusionInput(input, equation[input->equationNumber].Solv,
+                    Functions, numberOfFunctions, id) != 0) {
+                errorFound = 1;
+            }
 
             break;
         case HYPERBOLIC_PENNES:
@@ -1109,7 +1088,10 @@ unsigned int testInputMaterial(struct MaterialConfig * input,
             // I will apply the generalization of the input parameters to the pennes
             // type of equation
             if (equation->typeS != HYPERBOLIC_HEAT) {
-                generalizePennesInput(input, equation[input->equationNumber].Solv);
+                if (generalizePennesInput(input, equation[input->equationNumber].Solv,
+                        Functions, numberOfFunctions, id) != 0) {
+                    errorFound = 1;
+                }
             }
             //break;
             /* FALLTHRU */
@@ -1136,7 +1118,10 @@ unsigned int testInputMaterial(struct MaterialConfig * input,
             // I will apply the generalization of the input parameters to the heat
             // type of equation
             if (equation->typeS == HYPERBOLIC_HEAT || equation->typeS == HEAT) {
-                generalizeHeatInput(input, equation[input->equationNumber].Solv);
+                if (generalizeHeatInput(input, equation[input->equationNumber].Solv,
+                        Functions, numberOfFunctions, id) != 0) {
+                    errorFound = 1;
+                }
             }
 
 
@@ -1159,16 +1144,118 @@ unsigned int testInputMaterial(struct MaterialConfig * input,
  * generalized variables. I do this so that I can have only one solver for 
  * diffusion, heat, and pennes.
  */
-void generalizeDiffusionInput(struct MaterialConfig *input, enum solve Sol) {
+unsigned int generalizeDiffusionInput(struct MaterialConfig *input, enum solve Sol,
+        struct FunctionConfig * Functions, int numberOfFunctions, int id) {
+    int errorFound = 0;
     input->generalized_coefficient_b = input->coefficient_b;
+    input->generalized_coefficient_bType = input->coefficient_bType;
+    if (input->generalized_coefficient_bType == 2) {
+        // if this input is a function, we copy the rest of the variables into it
+        input->generalized_coefficient_bFromFunc = (char*) malloc(sizeof (char)*(strlen(input->coefficient_bFromFunc) + 1));
+        strcpy(input->generalized_coefficient_bFromFunc, input->coefficient_bFromFunc);
+        if (findFunctionName(input->generalized_coefficient_bFromFunc, &input->generalized_coefficient_bGetFromFuncNumb, Functions, numberOfFunctions) != 0) {
+            sendErrorCodeAndMessage(4601, input->generalized_coefficient_bFromFunc, &id, NULL, NULL);
+            errorFound = 1;
+        }
+    }
+
+
     input->generalized_diffusionCoeff = input->diffusionCoeff;
+    input->generalized_diffusionCoeffType = input->diffusionCoeffType;
+    if (input->generalized_diffusionCoeffType == 2) {
+        // if this input is a function, we copy the rest of the variables into it
+        input->generalized_diffusionCoeffFromFunc = (char*) malloc(sizeof (char)*(strlen(input->diffusionCoeffFromFunc) + 1));
+        strcpy(input->generalized_diffusionCoeffFromFunc, input->diffusionCoeffFromFunc);
+        if (findFunctionName(input->generalized_diffusionCoeffFromFunc, &input->generalized_diffusionCoeffGetFromFuncNumb, Functions, numberOfFunctions) != 0) {
+            sendErrorCodeAndMessage(4602, input->generalized_diffusionCoeffFromFunc, &id, NULL, NULL);
+            errorFound = 1;
+        }
+    }
+
     input->generalized_relaxationTime = input->relaxationTime;
+    input->generalized_relaxationTimeType = input->relaxationTimeType;
+    if (input->generalized_relaxationTimeType == 2) {
+        // if this input is a function, we copy the rest of the variables into it
+        input->generalized_relaxationTimeFromFunc = (char*) malloc(sizeof (char)*(strlen(input->relaxationTimeFromFunc) + 1));
+        strcpy(input->generalized_relaxationTimeFromFunc, input->relaxationTimeFromFunc);
+        if (findFunctionName(input->generalized_relaxationTimeFromFunc, &input->generalized_relaxationTimeGetFromFuncNumb, Functions, numberOfFunctions) != 0) {
+            sendErrorCodeAndMessage(4603, input->generalized_relaxationTimeFromFunc, &id, NULL, NULL);
+            errorFound = 1;
+        }
+    }
+
     input->generalized_vectorialSource[0] = input->vectorialSource[0];
+    input->generalized_vectorialSourceType[0] = input->vectorialSourceType[0];
+    if (input->generalized_vectorialSourceType[0] == 2) {
+        // if this input is a function, we copy the rest of the variables into it
+        input->generalized_vectorialSourceFromFunc[0] = (char*) malloc(sizeof (char)*(strlen(input->vectorialSourceFromFunc[0]) + 1));
+        strcpy(input->generalized_vectorialSourceFromFunc[0], input->vectorialSourceFromFunc[0]);
+        if (findFunctionName(input->generalized_vectorialSourceFromFunc[0], &input->generalized_vectorialSourceGetFromFuncNumb[0], Functions, numberOfFunctions) != 0) {
+            sendErrorCodeAndMessage(4604, input->generalized_vectorialSourceFromFunc[0], &id, NULL, NULL);
+            errorFound = 1;
+        }
+    }
     input->generalized_vectorialSource[1] = input->vectorialSource[1];
+    input->generalized_vectorialSourceType[1] = input->vectorialSourceType[1];
+    if (input->generalized_vectorialSourceType[1] == 2) {
+        // if this input is a function, we copy the rest of the variables into it
+        input->generalized_vectorialSourceFromFunc[1] = (char*) malloc(sizeof (char)*(strlen(input->vectorialSourceFromFunc[1]) + 1));
+        strcpy(input->generalized_vectorialSourceFromFunc[1], input->vectorialSourceFromFunc[1]);
+        if (findFunctionName(input->generalized_vectorialSourceFromFunc[1], &input->generalized_vectorialSourceGetFromFuncNumb[1], Functions, numberOfFunctions) != 0) {
+            sendErrorCodeAndMessage(4605, input->generalized_vectorialSourceFromFunc[1], &id, NULL, NULL);
+            errorFound = 1;
+        }
+    }
+
     input->generalized_vectorialSource[2] = input->vectorialSource[2];
+    input->generalized_vectorialSourceType[2] = input->vectorialSourceType[2];
+    if (input->generalized_vectorialSourceType[2] == 2) {
+        // if this input is a function, we copy the rest of the variables into it
+        input->generalized_vectorialSourceFromFunc[2] = (char*) malloc(sizeof (char)*(strlen(input->vectorialSourceFromFunc[2]) + 1));
+        strcpy(input->generalized_vectorialSourceFromFunc[2], input->vectorialSourceFromFunc[1]);
+        if (findFunctionName(input->generalized_vectorialSourceFromFunc[2], &input->generalized_vectorialSourceGetFromFuncNumb[2], Functions, numberOfFunctions) != 0) {
+            sendErrorCodeAndMessage(4606, input->generalized_vectorialSourceFromFunc[2], &id, NULL, NULL);
+            errorFound = 1;
+        }
+    }
+
     input->generalized_initialScalar = input->initialScalar;
+    input->generalized_initialScalarType = input->initialScalarType;
+    if (input->generalized_initialScalarType == 2) {
+        // if this input is a function, we copy the rest of the variables into it
+        input->generalized_initialScalarFromFunc = (char*) malloc(sizeof (char)*(strlen(input->initialScalarFromFunc) + 1));
+        strcpy(input->generalized_initialScalarFromFunc, input->initialScalarFromFunc);
+        if (findFunctionName(input->generalized_initialScalarFromFunc, &input->generalized_initialScalarGetFromFuncNumb, Functions, numberOfFunctions) != 0) {
+            sendErrorCodeAndMessage(4607, input->generalized_initialScalarFromFunc, &id, NULL, NULL);
+            errorFound = 1;
+        }
+    }
+
     input->generalized_sink_a = input->sink_a;
+    input->generalized_sink_aType = input->sink_aType;
+    if (input->generalized_initialScalarType == 2) {
+        // if this input is a function, we copy the rest of the variables into it
+        input->generalized_sink_aFromFunc = (char*) malloc(sizeof (char)*(strlen(input->sink_aFromFunc) + 1));
+        strcpy(input->generalized_sink_aFromFunc, input->sink_aFromFunc);
+        if (findFunctionName(input->generalized_sink_aFromFunc, &input->generalized_sink_aGetFromFuncNumb, Functions, numberOfFunctions) != 0) {
+            sendErrorCodeAndMessage(4608, input->generalized_sink_aFromFunc, &id, NULL, NULL);
+            errorFound = 1;
+        }
+    }
+
     input->generalized_source = input->source;
+    input->generalized_sourceType = input->sourceType;
+    if (input->generalized_sourceType == 2) {
+        // if this input is a function, we copy the rest of the variables into it
+        input->generalized_sourceFromFunc = (char*) malloc(sizeof (char)*(strlen(input->sourceFromFunc) + 1));
+        strcpy(input->generalized_sourceFromFunc, input->sourceFromFunc);
+        if (findFunctionName(input->generalized_sourceFromFunc, &input->generalized_sourceGetFromFuncNumb, Functions, numberOfFunctions) != 0) {
+            sendErrorCodeAndMessage(4609, input->generalized_sourceFromFunc, &id, NULL, NULL);
+            errorFound = 1;
+        }
+    }
+
+
 
     // if we are solving for steady-state, we need a value for the coefficient b
     // We do this because in the TLM formalism we need the coefficient b to calculate
@@ -1176,6 +1263,8 @@ void generalizeDiffusionInput(struct MaterialConfig *input, enum solve Sol) {
     if (Sol == STEADY && input->generalized_coefficient_b == 0) {
         input->generalized_coefficient_b = 1;
     }
+
+    return errorFound;
 }
 
 /*
@@ -1183,16 +1272,131 @@ void generalizeDiffusionInput(struct MaterialConfig *input, enum solve Sol) {
  * generalized variables. I do this so that I can have only one solver for 
  * diffusion, heat, and pennes.
  */
-void generalizeHeatInput(struct MaterialConfig *input, enum solve Sol) {
+unsigned int generalizeHeatInput(struct MaterialConfig *input, enum solve Sol,
+        struct FunctionConfig * Functions, int numberOfFunctions, int id) {
+    int errorFound = 0;
     input->generalized_coefficient_b = input->matDensity * input->matSpecificHeat;
+    if (input->matDensityType == 2 || input->matSpecificHeatType == 2) {
+        input->generalized_coefficient_bType = 2;
+        // This input is uses a function but we don't know from which variable this function is coming from
+        input->generalized_coefficient_bGetFromFuncNumb = -2; // -2: flag that tells we should look for inner functions
+        if (input->matDensityType == 2) {
+            if (findFunctionName(input->matDensityFromFunc, &input->matDensityGetFromFuncNumb, Functions, numberOfFunctions) != 0) {
+                sendErrorCodeAndMessage(4630, input->matDensityFromFunc, &id, NULL, NULL);
+                errorFound = 1;
+            }
+        } else {
+            input->matDensityGetFromFuncNumb = -1; // flag that tells it's not a function--use the numeric value input
+        }
+
+        if (input->matSpecificHeatType == 2) {
+            if (findFunctionName(input->matSpecificHeatFromFunc, &input->matSpecificHeatGetFromFuncNumb, Functions, numberOfFunctions) != 0) {
+                sendErrorCodeAndMessage(4631, input->matSpecificHeatFromFunc, &id, NULL, NULL);
+                errorFound = 1;
+            }
+        } else {
+            input->matSpecificHeatGetFromFuncNumb = -1; // flag that tells it's not a function--use the numeric value input
+        }
+
+    } else {
+        input->generalized_coefficient_bType = 1;
+    }
+
     input->generalized_diffusionCoeff = input->matThermalConductivity;
+    input->generalized_diffusionCoeffType = input->matThermalConductivityType;
+    if (input->generalized_diffusionCoeffType == 2) {
+        // if this input is a function, we copy the rest of the variables into it
+        input->generalized_diffusionCoeffFromFunc = (char*) malloc(sizeof (char)*(strlen(input->matThermalConductivityFromFunc) + 1));
+        strcpy(input->generalized_diffusionCoeffFromFunc, input->matThermalConductivityFromFunc);
+        if (findFunctionName(input->generalized_diffusionCoeffFromFunc, &input->generalized_diffusionCoeffGetFromFuncNumb, Functions, numberOfFunctions) != 0) {
+            sendErrorCodeAndMessage(4632, input->generalized_diffusionCoeffFromFunc, &id, NULL, NULL);
+            errorFound = 1;
+        }
+    }
+
     input->generalized_relaxationTime = input->relaxationTime;
+    input->generalized_relaxationTimeType = input->relaxationTimeType;
+    if (input->generalized_relaxationTimeType == 2) {
+        // if this input is a function, we copy the rest of the variables into it
+        input->generalized_relaxationTimeFromFunc = (char*) malloc(sizeof (char)*(strlen(input->relaxationTimeFromFunc) + 1));
+        strcpy(input->generalized_relaxationTimeFromFunc, input->relaxationTimeFromFunc);
+        if (findFunctionName(input->generalized_relaxationTimeFromFunc, &input->generalized_relaxationTimeGetFromFuncNumb, Functions, numberOfFunctions) != 0) {
+            sendErrorCodeAndMessage(4603, input->generalized_relaxationTimeFromFunc, &id, NULL, NULL);
+            errorFound = 1;
+        }
+    }
+
     input->generalized_vectorialSource[0] = input->vectorialSource[0];
+    input->generalized_vectorialSourceType[0] = input->vectorialSourceType[0];
+    if (input->generalized_vectorialSourceType[0] == 2) {
+        // if this input is a function, we copy the rest of the variables into it
+        input->generalized_vectorialSourceFromFunc[0] = (char*) malloc(sizeof (char)*(strlen(input->vectorialSourceFromFunc[0]) + 1));
+        strcpy(input->generalized_vectorialSourceFromFunc[0], input->vectorialSourceFromFunc[0]);
+        if (findFunctionName(input->generalized_vectorialSourceFromFunc[0], &input->generalized_vectorialSourceGetFromFuncNumb[0], Functions, numberOfFunctions) != 0) {
+            sendErrorCodeAndMessage(4604, input->generalized_vectorialSourceFromFunc[0], &id, NULL, NULL);
+            errorFound = 1;
+        }
+    }
     input->generalized_vectorialSource[1] = input->vectorialSource[1];
+    input->generalized_vectorialSourceType[1] = input->vectorialSourceType[1];
+    if (input->generalized_vectorialSourceType[1] == 2) {
+        // if this input is a function, we copy the rest of the variables into it
+        input->generalized_vectorialSourceFromFunc[1] = (char*) malloc(sizeof (char)*(strlen(input->vectorialSourceFromFunc[1]) + 1));
+        strcpy(input->generalized_vectorialSourceFromFunc[1], input->vectorialSourceFromFunc[1]);
+        if (findFunctionName(input->generalized_vectorialSourceFromFunc[1], &input->generalized_vectorialSourceGetFromFuncNumb[1], Functions, numberOfFunctions) != 0) {
+            sendErrorCodeAndMessage(4605, input->generalized_vectorialSourceFromFunc[1], &id, NULL, NULL);
+            errorFound = 1;
+        }
+    }
+
     input->generalized_vectorialSource[2] = input->vectorialSource[2];
+    input->generalized_vectorialSourceType[2] = input->vectorialSourceType[2];
+    if (input->generalized_vectorialSourceType[2] == 2) {
+        // if this input is a function, we copy the rest of the variables into it
+        input->generalized_vectorialSourceFromFunc[2] = (char*) malloc(sizeof (char)*(strlen(input->vectorialSourceFromFunc[2]) + 1));
+        strcpy(input->generalized_vectorialSourceFromFunc[2], input->vectorialSourceFromFunc[1]);
+        if (findFunctionName(input->generalized_vectorialSourceFromFunc[2], &input->generalized_vectorialSourceGetFromFuncNumb[2], Functions, numberOfFunctions) != 0) {
+            sendErrorCodeAndMessage(4606, input->generalized_vectorialSourceFromFunc[2], &id, NULL, NULL);
+            errorFound = 1;
+        }
+    }
+
     input->generalized_initialScalar = input->initialTemperature;
+    input->generalized_initialScalarType = input->initialTemperatureType;
+    if (input->generalized_initialScalarType == 2) {
+        // if this input is a function, we copy the rest of the variables into it
+        input->generalized_initialScalarFromFunc = (char*) malloc(sizeof (char)*(strlen(input->initialTemperatureFromFunc) + 1));
+        strcpy(input->generalized_initialScalarFromFunc, input->initialTemperatureFromFunc);
+        if (findFunctionName(input->generalized_initialScalarFromFunc, &input->generalized_initialScalarGetFromFuncNumb, Functions, numberOfFunctions) != 0) {
+            sendErrorCodeAndMessage(4633, input->generalized_initialScalarFromFunc, &id, NULL, NULL);
+            errorFound = 1;
+        }
+    }
+
+
     input->generalized_sink_a = input->sink_a;
+    input->generalized_sink_aType = input->sink_aType;
+    if (input->generalized_initialScalarType == 2) {
+        // if this input is a function, we copy the rest of the variables into it
+        input->generalized_sink_aFromFunc = (char*) malloc(sizeof (char)*(strlen(input->sink_aFromFunc) + 1));
+        strcpy(input->generalized_sink_aFromFunc, input->sink_aFromFunc);
+        if (findFunctionName(input->generalized_sink_aFromFunc, &input->generalized_sink_aGetFromFuncNumb, Functions, numberOfFunctions) != 0) {
+            sendErrorCodeAndMessage(4608, input->generalized_sink_aFromFunc, &id, NULL, NULL);
+            errorFound = 1;
+        }
+    }
+
     input->generalized_source = input->source;
+    input->generalized_sourceType = input->sourceType;
+    if (input->generalized_sourceType == 2) {
+        // if this input is a function, we copy the rest of the variables into it
+        input->generalized_sourceFromFunc = (char*) malloc(sizeof (char)*(strlen(input->sourceFromFunc) + 1));
+        strcpy(input->generalized_sourceFromFunc, input->sourceFromFunc);
+        if (findFunctionName(input->generalized_sourceFromFunc, &input->generalized_sourceGetFromFuncNumb, Functions, numberOfFunctions) != 0) {
+            sendErrorCodeAndMessage(4609, input->generalized_sourceFromFunc, &id, NULL, NULL);
+            errorFound = 1;
+        }
+    }
 
     // if we are solving for steady-state, we need a value for the coefficient b
     // We do this because in the TLM formalism we need the coefficient b to calculate
@@ -1200,6 +1404,8 @@ void generalizeHeatInput(struct MaterialConfig *input, enum solve Sol) {
     if (Sol == STEADY && input->generalized_coefficient_b == 0) {
         input->generalized_coefficient_b = 1;
     }
+
+    return errorFound;
 }
 
 /*
@@ -1207,17 +1413,186 @@ void generalizeHeatInput(struct MaterialConfig *input, enum solve Sol) {
  * generalized variables. I do this so that I can have only one solver for 
  * diffusion, heat, and pennes.
  */
-void generalizePennesInput(struct MaterialConfig *input, enum solve Sol) {
+unsigned int generalizePennesInput(struct MaterialConfig *input, enum solve Sol,
+        struct FunctionConfig * Functions, int numberOfFunctions, int id) {
+    int errorFound = 0;
+
     input->generalized_coefficient_b = input->matDensity * input->matSpecificHeat;
+    if (input->matDensityType == 2 || input->matSpecificHeatType == 2) {
+        input->generalized_coefficient_bType = 2;
+        // This input is uses a function but we don't know from which variable this function is coming from
+        input->generalized_coefficient_bGetFromFuncNumb = -2; // -2: flag that tells we should look for inner functions
+        if (input->matDensityType == 2) {
+            if (findFunctionName(input->matDensityFromFunc, &input->matDensityGetFromFuncNumb, Functions, numberOfFunctions) != 0) {
+                sendErrorCodeAndMessage(4630, input->matDensityFromFunc, &id, NULL, NULL);
+                errorFound = 1;
+            }
+        } else {
+            input->matDensityGetFromFuncNumb = -1; // flag that tells it's not a function--use the numeric value input
+        }
+
+        if (input->matSpecificHeatType == 2) {
+            if (findFunctionName(input->matSpecificHeatFromFunc, &input->matSpecificHeatGetFromFuncNumb, Functions, numberOfFunctions) != 0) {
+                sendErrorCodeAndMessage(4631, input->matSpecificHeatFromFunc, &id, NULL, NULL);
+                errorFound = 1;
+            }
+        } else {
+            input->matSpecificHeatGetFromFuncNumb = -1; // flag that tells it's not a function--use the numeric value input
+        }
+
+    } else {
+        input->generalized_coefficient_bType = 1;
+    }
+
     input->generalized_diffusionCoeff = input->matThermalConductivity;
+    input->generalized_diffusionCoeffType = input->matThermalConductivityType;
+    if (input->generalized_diffusionCoeffType == 2) {
+        // if this input is a function, we copy the rest of the variables into it
+        input->generalized_diffusionCoeffFromFunc = (char*) malloc(sizeof (char)*(strlen(input->matThermalConductivityFromFunc) + 1));
+        strcpy(input->generalized_diffusionCoeffFromFunc, input->matThermalConductivityFromFunc);
+        if (findFunctionName(input->generalized_diffusionCoeffFromFunc, &input->generalized_diffusionCoeffGetFromFuncNumb, Functions, numberOfFunctions) != 0) {
+            sendErrorCodeAndMessage(4632, input->generalized_diffusionCoeffFromFunc, &id, NULL, NULL);
+            errorFound = 1;
+        }
+    }
+
     input->generalized_relaxationTime = input->relaxationTime;
+    input->generalized_relaxationTimeType = input->relaxationTimeType;
+    if (input->generalized_relaxationTimeType == 2) {
+        // if this input is a function, we copy the rest of the variables into it
+        input->generalized_relaxationTimeFromFunc = (char*) malloc(sizeof (char)*(strlen(input->relaxationTimeFromFunc) + 1));
+        strcpy(input->generalized_relaxationTimeFromFunc, input->relaxationTimeFromFunc);
+        if (findFunctionName(input->generalized_relaxationTimeFromFunc, &input->generalized_relaxationTimeGetFromFuncNumb, Functions, numberOfFunctions) != 0) {
+            sendErrorCodeAndMessage(4603, input->generalized_relaxationTimeFromFunc, &id, NULL, NULL);
+            errorFound = 1;
+        }
+    }
+
     input->generalized_vectorialSource[0] = input->vectorialSource[0];
+    input->generalized_vectorialSourceType[0] = input->vectorialSourceType[0];
+    if (input->generalized_vectorialSourceType[0] == 2) {
+        // if this input is a function, we copy the rest of the variables into it
+        input->generalized_vectorialSourceFromFunc[0] = (char*) malloc(sizeof (char)*(strlen(input->vectorialSourceFromFunc[0]) + 1));
+        strcpy(input->generalized_vectorialSourceFromFunc[0], input->vectorialSourceFromFunc[0]);
+        if (findFunctionName(input->generalized_vectorialSourceFromFunc[0], &input->generalized_vectorialSourceGetFromFuncNumb[0], Functions, numberOfFunctions) != 0) {
+            sendErrorCodeAndMessage(4604, input->generalized_vectorialSourceFromFunc[0], &id, NULL, NULL);
+            errorFound = 1;
+        }
+    }
     input->generalized_vectorialSource[1] = input->vectorialSource[1];
+    input->generalized_vectorialSourceType[1] = input->vectorialSourceType[1];
+    if (input->generalized_vectorialSourceType[1] == 2) {
+        // if this input is a function, we copy the rest of the variables into it
+        input->generalized_vectorialSourceFromFunc[1] = (char*) malloc(sizeof (char)*(strlen(input->vectorialSourceFromFunc[1]) + 1));
+        strcpy(input->generalized_vectorialSourceFromFunc[1], input->vectorialSourceFromFunc[1]);
+        if (findFunctionName(input->generalized_vectorialSourceFromFunc[1], &input->generalized_vectorialSourceGetFromFuncNumb[1], Functions, numberOfFunctions) != 0) {
+            sendErrorCodeAndMessage(4605, input->generalized_vectorialSourceFromFunc[1], &id, NULL, NULL);
+            errorFound = 1;
+        }
+    }
+
     input->generalized_vectorialSource[2] = input->vectorialSource[2];
+    input->generalized_vectorialSourceType[2] = input->vectorialSourceType[2];
+    if (input->generalized_vectorialSourceType[2] == 2) {
+        // if this input is a function, we copy the rest of the variables into it
+        input->generalized_vectorialSourceFromFunc[2] = (char*) malloc(sizeof (char)*(strlen(input->vectorialSourceFromFunc[2]) + 1));
+        strcpy(input->generalized_vectorialSourceFromFunc[2], input->vectorialSourceFromFunc[1]);
+        if (findFunctionName(input->generalized_vectorialSourceFromFunc[2], &input->generalized_vectorialSourceGetFromFuncNumb[2], Functions, numberOfFunctions) != 0) {
+            sendErrorCodeAndMessage(4606, input->generalized_vectorialSourceFromFunc[2], &id, NULL, NULL);
+            errorFound = 1;
+        }
+    }
+
     input->generalized_initialScalar = input->initialTemperature;
+    input->generalized_initialScalarType = input->initialTemperatureType;
+    if (input->generalized_initialScalarType == 2) {
+        // if this input is a function, we copy the rest of the variables into it
+        input->generalized_initialScalarFromFunc = (char*) malloc(sizeof (char)*(strlen(input->initialTemperatureFromFunc) + 1));
+        strcpy(input->generalized_initialScalarFromFunc, input->initialTemperatureFromFunc);
+        if (findFunctionName(input->generalized_initialScalarFromFunc, &input->generalized_initialScalarGetFromFuncNumb, Functions, numberOfFunctions) != 0) {
+            sendErrorCodeAndMessage(4633, input->generalized_initialScalarFromFunc, &id, NULL, NULL);
+            errorFound = 1;
+        }
+    }
+
     input->generalized_sink_a = input->bloodPerfusion * input->bloodDensity * input->bloodSpecificHeat;
+    if (input->bloodPerfusionType == 2 || input->bloodDensityType == 2 || input->bloodSpecificHeatType == 2) {
+        input->generalized_sink_aType = 2;
+        // This input is uses a function but we don't know from which variable this function is coming from
+        input->generalized_coefficient_bGetFromFuncNumb = -2; // -2: flag that tells we should look for inner functions
+        if (input->bloodPerfusionType == 2) {
+            if (findFunctionName(input->bloodPerfusionFromFunc, &input->bloodPerfusionGetFromFuncNumb, Functions, numberOfFunctions) != 0) {
+                sendErrorCodeAndMessage(4634, input->bloodPerfusionFromFunc, &id, NULL, NULL);
+                errorFound = 1;
+            }
+        } else {
+            input->bloodPerfusionGetFromFuncNumb = -1; // flag that tells it's not a function--use the numeric value input
+        }
+
+        if (input->bloodDensityType == 2) {
+            if (findFunctionName(input->bloodDensityFromFunc, &input->bloodDensityGetFromFuncNumb, Functions, numberOfFunctions) != 0) {
+                sendErrorCodeAndMessage(4635, input->bloodDensityFromFunc, &id, NULL, NULL);
+                errorFound = 1;
+
+            }
+        } else {
+            input->bloodDensityGetFromFuncNumb = -1; // flag that tells it's not a function--use the numeric value input
+        }
+
+        if (input->bloodSpecificHeatType == 2) {
+            if (findFunctionName(input->bloodSpecificHeatFromFunc, &input->bloodSpecificHeatGetFromFuncNumb, Functions, numberOfFunctions) != 0) {
+                sendErrorCodeAndMessage(4636, input->bloodSpecificHeatFromFunc, &id, NULL, NULL);
+                errorFound = 1;
+            }
+        } else {
+            input->bloodSpecificHeatGetFromFuncNumb = -1; // flag that tells it's not a function--use the numeric value input
+        }
+
+    } else {
+        input->generalized_sink_aType = 1;
+    }
+
+
     input->generalized_source = input->source + input->internalHeatGeneration +
             input->bloodPerfusion * input->bloodDensity * input->bloodSpecificHeat * input->bloodTemperature;
+
+    if (input->sourceType == 2 || input->internalHeatGenerationType == 2 ||
+            input->bloodPerfusionType == 2 || input->bloodDensityType == 2 || input->bloodSpecificHeatType == 2 || input->bloodTemperatureType == 2) {
+        input->generalized_sourceType = 2;
+        // This input is uses a function but we don't know from which variable this function is coming from
+        input->generalized_coefficient_bGetFromFuncNumb = -2; // -2: flag that tells we should look for inner functions
+        // don't need to test for bloodPerfusion, bloodDensity, and bloodSpecificHeat because they were tested above for generalized_sink_a
+
+        if (input->sourceType == 2) {
+            if (findFunctionName(input->sourceFromFunc, &input->sourceGetFromFuncNumb, Functions, numberOfFunctions) != 0) {
+                sendErrorCodeAndMessage(4609, input->sourceFromFunc, &id, NULL, NULL);
+                errorFound = 1;
+            }
+        } else {
+            input->sourceGetFromFuncNumb = -1; // flag that tells it's not a function--use the numeric value input
+        }
+
+        if (input->internalHeatGenerationType == 2) {
+            if (findFunctionName(input->internalHeatGenerationFromFunc, &input->internalHeatGenerationGetFromFuncNumb, Functions, numberOfFunctions) != 0) {
+                sendErrorCodeAndMessage(4609, input->internalHeatGenerationFromFunc, &id, NULL, NULL);
+                errorFound = 1;
+            }
+        } else {
+            input->internalHeatGenerationGetFromFuncNumb = -1; // flag that tells it's not a function--use the numeric value input
+        }
+
+        if (input->bloodTemperatureType == 2) {
+            if (findFunctionName(input->bloodTemperatureFromFunc, &input->bloodTemperatureGetFromFuncNumb, Functions, numberOfFunctions) != 0) {
+                sendErrorCodeAndMessage(4637, input->bloodTemperatureFromFunc, &id, NULL, NULL);
+                errorFound = 1;
+            }
+        } else {
+            input->bloodTemperatureGetFromFuncNumb = -1; // flag that tells it's not a function--use the numeric value input
+        }
+
+    } else {
+        input->generalized_sourceType = 1;
+    }
 
     // if we are solving for steady-state, we need a value for the coefficient b
     // We do this because in the TLM formalism we need the coefficient b to calculate
@@ -1225,4 +1600,6 @@ void generalizePennesInput(struct MaterialConfig *input, enum solve Sol) {
     if (Sol == STEADY && input->generalized_coefficient_b == 0) {
         input->generalized_coefficient_b = 1;
     }
+
+    return errorFound;
 }

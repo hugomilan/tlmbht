@@ -46,6 +46,7 @@ void sendErrorCodeAndMessage(unsigned int errorCode, void *input1v, void *input2
     fprintf(stderr, "ERROR: ");
 
     unsigned int *input1ui = (unsigned int *) input1v;
+    unsigned int *input2ui = (unsigned int *) input2v;
     unsigned long long *input2llui = (unsigned long long *) input2v;
     char *input1c = (char*) input1v;
     char *input2c = (char*) input2v;
@@ -148,7 +149,7 @@ void sendErrorCodeAndMessage(unsigned int errorCode, void *input1v, void *input2
             
         case 511:
             // error when reading variable name for equation
-            fprintf(stderr, "the input \"%s\" was identified as from the equation \"%s\" but the variable name \"%s\" was not identified as an acceptable input. The acceptable input names are: \ntime \ntime-step \ntime-jump \nfinal_time \nscalar or the scalar variable name \n flux or the flux variable name", input1c, input2c, input3c);
+            fprintf(stderr, "the input \"%s\" was identified as from the equation \"%s\" but the variable name \"%s\" was not identified as an acceptable input. The acceptable input names are: \ntime \ntime-step \ntime-jump \nfinal_time \nscalar or the scalar variable name \nflux or the flux variable name", input1c, input2c, input3c);
             break;
             
         case 521:
@@ -159,6 +160,11 @@ void sendErrorCodeAndMessage(unsigned int errorCode, void *input1v, void *input2
         case 531:
             // error when reading variable name for equation
             fprintf(stderr, "the input \"%s\" was identified as from the boundary \"%s\" but the variable name \"%s\" was not identified as an acceptable input. The acceptable input names are: \nscalar \nflux \nconvection_scalar \nconvection_coefficient \ntemperature \nheat_flux \nconvection_temperature \nradiation_temperature \nradiation_emissivity", input1c, input2c, input3c);
+            break;
+            
+        case 540:
+            // error when reading variable name for equation
+            fprintf(stderr, "The expression for function %ls has more than one line but the output variable name was not defined", input1ui);
             break;
             
         case 764:
@@ -241,14 +247,19 @@ void sendErrorCodeAndMessage(unsigned int errorCode, void *input1v, void *input2
             fprintf(stderr, "The name of the input mesh was not given");
             break;
 
+        case 1876:
+            // error when reading the SIMULATION configurations
+            fprintf(stderr, "Error reading the equation configuration for group %04d", *input1ui);
+            break;
+
         case 1877:
             // error when reading the SIMULATION configurations
             fprintf(stderr, "Equation group %04d (name: %s) and equation group %04d (name: %s) have the same name", *input1ui, input2c, *input3ui, input4c);
             break;
 
-        case 1876:
+        case 1878:
             // error when reading the SIMULATION configurations
-            fprintf(stderr, "Error reading the equation configuration for group %04d", *input1ui);
+            fprintf(stderr, "Error reading the function configuration for group %04d", *input1ui);
             break;
 
         case 2314:
@@ -383,6 +394,141 @@ void sendErrorCodeAndMessage(unsigned int errorCode, void *input1v, void *input2
         case 4449:
             // error when reading the MATERIAL configurations
             fprintf(stderr, "Simulation was defined was dynamic but initial value of the scalar field for materials group %04d was not defined", *input1ui);
+            break;
+            
+        case 4601:
+            // error when reading the MATERIAL configurations
+            fprintf(stderr, "Could not find function '%s' assigned to coefficient b from material group %04d", input1c, *input2ui);
+            break;
+            
+        case 4602:
+            // error when reading the MATERIAL configurations
+            fprintf(stderr, "Could not find function '%s' assigned to diffusion coefficient from material group %04d", input1c, *input2ui);
+            break;
+            
+        case 4603:
+            // error when reading the MATERIAL configurations
+            fprintf(stderr, "Could not find function '%s' assigned to relaxation time from material group %04d", input1c, *input2ui);
+            break;
+            
+        case 4604:
+            // error when reading the MATERIAL configurations
+            fprintf(stderr, "Could not find function '%s' assigned to the first component of the vectorial source from material group %04d", input1c, *input2ui);
+            break;
+            
+        case 4605:
+            // error when reading the MATERIAL configurations
+            fprintf(stderr, "Could not find function '%s' assigned to the second component of the vectorial source from material group %04d", input1c, *input2ui);
+            break;
+            
+        case 4606:
+            // error when reading the MATERIAL configurations
+            fprintf(stderr, "Could not find function '%s' assigned to the third component of the vectorial source from material group %04d", input1c, *input2ui);
+            break;
+            
+        case 4607:
+            // error when reading the MATERIAL configurations
+            fprintf(stderr, "Could not find function '%s' assigned to initial scalar from material group %04d", input1c, *input2ui);
+            break;
+            
+        case 4608:
+            // error when reading the MATERIAL configurations
+            fprintf(stderr, "Could not find function '%s' assigned to sink a from material group %04d", input1c, *input2ui);
+            break;
+            
+        case 4609:
+            // error when reading the MATERIAL configurations
+            fprintf(stderr, "Could not find function '%s' assigned to source from material group %04d", input1c, *input2ui);
+            break;
+            
+        case 4630:
+            // error when reading the MATERIAL configurations
+            fprintf(stderr, "Could not find function '%s' assigned to density from material group %04d", input1c, *input2ui);
+            break;
+            
+        case 4631:
+            // error when reading the MATERIAL configurations
+            fprintf(stderr, "Could not find function '%s' assigned to specific heat from material group %04d", input1c, *input2ui);
+            break;
+            
+        case 4632:
+            // error when reading the MATERIAL configurations
+            fprintf(stderr, "Could not find function '%s' assigned to thermal conductivity from material group %04d", input1c, *input2ui);
+            break;
+            
+        case 4633:
+            // error when reading the MATERIAL configurations
+            fprintf(stderr, "Could not find function '%s' assigned to initial temperature from material group %04d", input1c, *input2ui);
+            break;
+            
+        case 4634:
+            // error when reading the MATERIAL configurations
+            fprintf(stderr, "Could not find function '%s' assigned to blood perfusion from material group %04d", input1c, *input2ui);
+            break;
+            
+        case 4635:
+            // error when reading the MATERIAL configurations
+            fprintf(stderr, "Could not find function '%s' assigned to blood density from material group %04d", input1c, *input2ui);
+            break;
+            
+        case 4636:
+            // error when reading the MATERIAL configurations
+            fprintf(stderr, "Could not find function '%s' assigned to blood specific heat from material group %04d", input1c, *input2ui);
+            break;
+            
+        case 4637:
+            // error when reading the MATERIAL configurations
+            fprintf(stderr, "Could not find function '%s' assigned to blood temperature from material group %04d", input1c, *input2ui);
+            break;
+            
+        case 4701:
+            // error when reading the BOUNDARY configurations
+            fprintf(stderr, "Could not find function '%s' assigned to scalar from boundary condition group %04d", input1c, *input2ui);
+            break;
+            
+        case 4702:
+            // error when reading the BOUNDARY configurations
+            fprintf(stderr, "Could not find function '%s' assigned to flux from boundary condition group %04d", input1c, *input2ui);
+            break;
+            
+        case 4703:
+            // error when reading the BOUNDARY configurations
+            fprintf(stderr, "Could not find function '%s' assigned to convection scalar from boundary condition group %04d", input1c, *input2ui);
+            break;
+            
+        case 4704:
+            // error when reading the BOUNDARY configurations
+            fprintf(stderr, "Could not find function '%s' assigned to convection coefficient from boundary condition group %04d", input1c, *input2ui);
+            break;
+            
+        case 4731:
+            // error when reading the BOUNDARY configurations
+            fprintf(stderr, "Could not find function '%s' assigned to temperature from boundary condition group %04d", input1c, *input2ui);
+            break;
+            
+        case 4732:
+            // error when reading the BOUNDARY configurations
+            fprintf(stderr, "Could not find function '%s' assigned to heat flux from boundary condition group %04d", input1c, *input2ui);
+            break;
+            
+        case 4733:
+            // error when reading the BOUNDARY configurations
+            fprintf(stderr, "Could not find function '%s' assigned to convection temperature from boundary condition group %04d", input1c, *input2ui);
+            break;
+            
+        case 4734:
+            // error when reading the BOUNDARY configurations
+            fprintf(stderr, "Could not find function '%s' assigned to radiation temperature from boundary condition group %04d", input1c, *input2ui);
+            break;
+            
+        case 4735:
+            // error when reading the BOUNDARY configurations
+            fprintf(stderr, "Could not find function '%s' assigned to radiation coefficient from boundary condition group %04d", input1c, *input2ui);
+            break;
+            
+        case 4900:
+            // error when reading the BOUNDARY configurations
+            fprintf(stderr, "Could not find '::' in '%s' from function %04d", input1c, *input2ui);
             break;
 
         case 5165:

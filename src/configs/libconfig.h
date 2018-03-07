@@ -117,6 +117,9 @@ extern "C" {
 
     // this function tests all the configuration variables
     unsigned int testAllConfigurationVarialbes(struct dataForSimulation *);
+
+    // this function tests the input of the function field
+    unsigned int testInputFunction(struct dataForSimulation *, int);
     
     // this function creates the variable names table
     unsigned int createVariableNamesTable(char*, struct dataForSimulation*, struct variableID*);

@@ -901,7 +901,7 @@ Function  // used to model parameters that change.
     // functions are implemented as C functions that are called to give the 
     // output values.
 
-    name = function_1; // name of the function
+    name = function_1; // name of the function. Required
 
     // These functions already have the libraries <math.h>,
     // <stdio.h>, <stdlib.h>, and <string.h>. If you need more libraries,
@@ -911,7 +911,7 @@ Function  // used to model parameters that change.
     library = <time.h>, <omp.h>; // example of how to include more libraries.
     
     
-    input variables = BHE::temperature, BHE::heat_flux, STD::x, STD::y, STD::z, BHE::time, BHE::time-step, BHE::step;
+    input variables = BHE::temperature, BHE::heat_flux, STD::x, STD::y, STD::z, BHE::time, BHE::time_step;
     // specify the name of the input variables. Separate variables using comma ","
     // all input variables are considered as double. Input names cannot have blank spaces
     // step can be used to input variables in previous time-steps. For example:
@@ -935,7 +935,7 @@ Function  // used to model parameters that change.
     // expression used to calculate the output variable. It must be written 
     // in C style. You can include any C code if you use {}. If you don't use {},
     // the output of the expression is allocated in "output name" variable. If you do use {},
-    // you have to assign what is saved in output_f1.
+    // you have to assign what is saved in the output variable name.
     // Example without using brackets:
     // expression = BHE::heat_flux*BHE::temperature;
     //
@@ -944,11 +944,11 @@ Function  // used to model parameters that change.
     expression = {
         double temp1, temp2, temp3;
         temp1 = cos(pi*BHE::time)*exp(BHE::temperature);
-        temp2 = (BHE::heat_flux - BHE::heat_flux[BHE::step-1])/BHE::time_step;
+        temp2 = BHE::heat_flux/BHE::time_step;
         temp3 = 50;
         
         output_f1 = temp1 + temp2 + temp3;
-    123}
+    }
     // if needed, pi (3.14159...) is defined as "pi".
 
 }
@@ -976,11 +976,11 @@ Function  // used to model parameters that change.
 //
 // Equation:
 //      time
-//      time-step
-//      time-jump
+//      time_step
+//      time_jump
 //      final_time
 //      scalar      // use this or the scalar variable name
-//      flux        // use this or the flux variable name
+//      flux        // Absolute value. Use this or the flux variable name
 //      flux[0]     // use this or the flux variable name
 //      flux[1]     // use this or the flux variable name
 //      flux[2]     // use this or the flux variable name

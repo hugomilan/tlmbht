@@ -69,6 +69,22 @@ unsigned int initializeFunctionConfig(struct FunctionConfig* function) {
     function->bracketsUsed = 0;
     function->readingBrackets = 0;
     
+    function->filePart1 = (char*) malloc(sizeof(char)*( strlen("#include <math.h> \n#include <stdio.h> \n#include <stdlib.h> \n#include <string.h>\n") + 1 ));
+    strcpy(function->filePart1, "#include <math.h> \n#include <stdio.h> \n#include <stdlib.h> \n#include <string.h>\n\0");
+    
+    function->filePart2 = (char*) malloc(sizeof(char)*( strlen("double main(int argc, char *argv[]) { \nconst double pi = 4. * atan(1.);\n") +  1) );
+    strcpy(function->filePart2, "double main(int argc, char *argv[]) { \nconst double pi = 4. * atan(1.);\n\0");
+    
+    function->filePart_end1 = (char*) malloc(sizeof(char)*( strlen("}\n") + 1) );
+    strcpy(function->filePart_end1, "}\n\0");
+    
+    function->compileDirectives1 = (char*) malloc(sizeof(char)*( strlen("gcc -O3 ") + 1) );
+    strcpy(function->compileDirectives1, "gcc -O3 \0");
+    
+    function->compileDirectives2 = (char*) malloc(sizeof(char)*( strlen(" -lm") + 1) );
+    strcpy(function->compileDirectives2, " -lm\0");
+    
+            
     return 0;
 }
 
@@ -93,6 +109,21 @@ unsigned int terminateFunctionConfig(struct FunctionConfig *function) {
 
     free(function->expression);
     function->expression = NULL;
+    
+    free(function->filePart1);
+    function->filePart1 = NULL;
+    
+    free(function->filePart2);
+    function->filePart2 = NULL;
+    
+    free(function->filePart_end1);
+    function->filePart_end1 = NULL;
+    
+    free(function->compileDirectives1);
+    function->compileDirectives1 = NULL;
+    
+    free(function->compileDirectives2);
+    function->compileDirectives2 = NULL;
 
     return 0;
 }
@@ -284,5 +315,60 @@ unsigned int setConfigurationFunction(char * input, struct FunctionConfig * conf
     } else {
         return 1147;
     }
+    return 0;
+}
+
+
+/*
+ * findFunctionName: reads the line and configures the required equation parameter
+ */
+unsigned int findFunctionName(char * inputName, int *outputFunctionNumber, struct FunctionConfig *Functions, int numberOfFunctions){
+    for (int i = 0; i < numberOfFunctions; i++){
+        if (compareCaseInsensitive(inputName, Functions[i].functionName) == 1){
+            *outputFunctionNumber = i;
+            return 0;
+        }
+    }
+    
+    // we didn't find a match between the input name and the function name
+    return 1;
+}
+
+
+/*
+ * printFuncConfig: prints the input parameters of the function
+ */
+unsigned int printfFuncConfig(struct FunctionConfig * input){
+    if (input->functionNameDefined == 1){
+        printf("Function name: %s\n", input->functionName);
+    }
+    
+    if (input->outputVariableNameDefined == 1){
+        printf("Output variable name: %s\n", input->outputVariableName);
+    }
+    
+        
+    if (input->libraryDefined == 1){
+        printf("Extra libraries: ");
+        for (int i = 0; i < input->quantityOfLibrariesInput; i++){
+            printf("%s; ", input->library[i]);
+        }
+        printf("\n");
+    }
+    
+    if (input->inputVariablesDefined && input->numberOfVariables > 0){
+        printf("Input variables: ");
+        for (int i = 0; i < input->numberOfVariables; i++){
+            printf("%s; ", input->inputVariablesName[i]);
+        }
+        printf("\n");
+    }
+    
+    printf("Expression:\n");
+    for (int i = 0; i < input->quantityOfLinesInExpression; i++){
+        printf("%s\n", input->expression[i]);
+    }
+    
+    
     return 0;
 }
