@@ -24,18 +24,18 @@
       </nativedebugger>
       <runprofile version="9">
         <runcommandpicklist>
-          <runcommandpicklistitem>"${OUTPUT_PATH}"/test cdiff1Li.tlm</runcommandpicklistitem>
           <runcommandpicklistitem>"${OUTPUT_PATH}" cpennes2Tr.tlm</runcommandpicklistitem>
           <runcommandpicklistitem>"${OUTPUT_PATH}" cdiff1Li.tlm</runcommandpicklistitem>
           <runcommandpicklistitem>"${OUTPUT_PATH}" cHheat1Li.tlm</runcommandpicklistitem>
-          <runcommandpicklistitem>"${OUTPUT_PATH}" cheat1Li.tlm</runcommandpicklistitem>
           <runcommandpicklistitem>"${OUTPUT_PATH}" cpennes2Qu.tlm</runcommandpicklistitem>
-          <runcommandpicklistitem>"${OUTPUT_PATH}" cpennes2Qu.tlm --verbose</runcommandpicklistitem>
-          <runcommandpicklistitem>"${OUTPUT_PATH}" case_Amri_brest_Hex_IR_175_d00_1cw.tlm --verbose --timing 2> vol.txt</runcommandpicklistitem>
           <runcommandpicklistitem>"${OUTPUT_PATH}" case_Amri_brest_Hex_IR_130_d30_1cw.tlm --verbose --timing 2> vol.txt</runcommandpicklistitem>
           <runcommandpicklistitem>"${OUTPUT_PATH}" case_Amri_brest_Hex_R_130_d30_1cw.tlm --verbose --timing 2> vol.txt</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" case_Amri_brest_Hex_IR_175_d00_1cw.tlm --verbose --timing 2> vol.txt</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" cheat1Li.tlm</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" cpennes2Qu.tlm --verbose</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" cpennes3He.tlm --verbose</runcommandpicklistitem>
         </runcommandpicklist>
-        <runcommand>"${OUTPUT_PATH}" case_Amri_brest_Hex_R_130_d30_1cw.tlm --verbose --timing 2> vol.txt</runcommand>
+        <runcommand>"${OUTPUT_PATH}" cpennes3He.tlm --verbose</runcommand>
         <rundir>test</rundir>
         <buildfirst>true</buildfirst>
         <terminal-type>0</terminal-type>
@@ -96,6 +96,8 @@
         <gdb_interceptlist>
           <gdbinterceptoptions gdb_all="false" gdb_unhandled="true" gdb_unexpected="true"/>
         </gdb_interceptlist>
+        <gdb_signals>
+        </gdb_signals>
         <gdb_options>
           <DebugOptions>
           </DebugOptions>
@@ -109,7 +111,6 @@
         <runcommandpicklist>
           <runcommandpicklistitem>"${OUTPUT_PATH}" cdiff3He_R.tlm --verbose</runcommandpicklistitem>
           <runcommandpicklistitem>"${OUTPUT_PATH}" cdiff3Py.tlm --verbose</runcommandpicklistitem>
-          <runcommandpicklistitem>"${OUTPUT_PATH}" cpennes3He.tlm --verbose --timing</runcommandpicklistitem>
           <runcommandpicklistitem>"${OUTPUT_PATH}" cpennes3Py.tlm --verbose --timing</runcommandpicklistitem>
           <runcommandpicklistitem>"${OUTPUT_PATH}" cpennes2Qu.tlm --verbose --timing</runcommandpicklistitem>
           <runcommandpicklistitem>"${OUTPUT_PATH}" case_mesh_045_30tumor_1cw .tlm --verbose --timing</runcommandpicklistitem>
@@ -117,9 +118,10 @@
           <runcommandpicklistitem>"${OUTPUT_PATH}" case_Amri_brest_Hex_IR_175_d00_1cw.tlm --verbose --timing 2> vol.txt</runcommandpicklistitem>
           <runcommandpicklistitem>"${OUTPUT_PATH}" case_Amri_brest_Hex_R_130_d30_1cw.tlm --verbose --timing 2> vol.txt</runcommandpicklistitem>
           <runcommandpicklistitem>"${OUTPUT_PATH}" case.tlm</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" cpennes3He.tlm --verbose --timing</runcommandpicklistitem>
         </runcommandpicklist>
-        <runcommand>"${OUTPUT_PATH}" case.tlm</runcommand>
-        <rundir></rundir>
+        <runcommand>"${OUTPUT_PATH}" cpennes3He.tlm --verbose --timing</runcommand>
+        <rundir>test</rundir>
         <buildfirst>true</buildfirst>
         <terminal-type>0</terminal-type>
         <remove-instrumentation>0</remove-instrumentation>
